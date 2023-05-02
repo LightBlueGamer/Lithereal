@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "lithereal:heated_litherite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "lithereal:heated_litherite_crystal"
+  }
+}

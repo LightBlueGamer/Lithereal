@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:ice"
+    },
+    "L": {
+      "item": "lithereal:litherite_block"
+    }
+  },
+  "pattern": [
+    "III",
+    "ILI",
+    "III"
+  ],
+  "result": {
+    "item": "lithereal:cooled_litherite_block"
+  },
+  "show_notification": true
+}

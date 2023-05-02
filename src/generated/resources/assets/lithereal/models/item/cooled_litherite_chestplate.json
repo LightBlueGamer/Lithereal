@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lithereal:item/cooled_litherite_chestplate"
+  }
+}

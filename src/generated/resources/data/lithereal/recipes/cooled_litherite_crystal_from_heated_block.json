@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blue_ice"
+    },
+    "L": {
+      "item": "lithereal:heated_litherite_block"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BLB",
+    "BBB"
+  ],
+  "result": {
+    "item": "lithereal:cooled_litherite_block"
+  },
+  "show_notification": true
+}

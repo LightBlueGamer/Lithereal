@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "lithereal:item/cooled_litherite_axe"
+  }
+}
