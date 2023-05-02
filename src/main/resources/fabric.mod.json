@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "lithereal",
+	"version": "${version}",
+	"name": "Lithereal",
+	"description": "",
+	"authors": [
+		""
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/lithereal/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"org.litecraft.lithereal.Lithereal"
+		],
+		"fabric-datagen": [
+          "org.litecraft.lithereal.LitherealDataGenerator"
+		]
+	},
+	"mixins": [
+		"lithereal.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.19",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

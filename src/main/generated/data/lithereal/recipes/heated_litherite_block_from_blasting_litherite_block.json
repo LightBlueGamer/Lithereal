@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 500,
+  "experience": 0.7,
+  "group": "burning_litherite_block",
+  "ingredient": {
+    "item": "lithereal:litherite_block"
+  },
+  "result": "lithereal:heated_litherite_block"
+}
