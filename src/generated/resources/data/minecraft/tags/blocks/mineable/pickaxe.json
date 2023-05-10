@@ -4,6 +4,8 @@
     "lithereal:deepslate_litherite_ore",
     "lithereal:litherite_block",
     "lithereal:cooled_litherite_block",
-    "lithereal:heated_litherite_block"
+    "lithereal:heated_litherite_block",
+    "lithereal:freezing_station_block",
+    "lithereal:fire_crucible_block"
   ]
 }

@@ -59,6 +59,9 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.COOLED_LITHERITE_BLOCK, "Frozen Litherite Block");
         addBlock(ModBlocks.HEATED_LITHERITE_BLOCK, "Burning Litherite Block");
 
+        addBlock(ModBlocks.FREEZING_STATION, "Freezing Station");
+        addBlock(ModBlocks.FIRE_CRUCIBLE, "Fire Crucible");
+
         add("creativemodetab.lithereal_tab", "Lithereal");
     }
 }

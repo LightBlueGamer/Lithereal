@@ -1,6 +1,8 @@
-// 1.19.4	2023-04-25T05:32:00.9628334	Loot Tables
+// 1.19.4	2023-05-10T16:32:42.6464369	Loot Tables
 bd4b00bf91b1fd2ce39462cf119893c0ca3184aa data/lithereal/loot_tables/blocks/cooled_litherite_block.json
 287ae0ff4fcafc2cd061922e68bc3364c28afe16 data/lithereal/loot_tables/blocks/deepslate_litherite_ore.json
+19442fad2d54bfb18d29f42b7c11694ae4b7baee data/lithereal/loot_tables/blocks/fire_crucible_block.json
+6b162982c78b7896a8c166273f868f24194aad1e data/lithereal/loot_tables/blocks/freezing_station_block.json
 0a7953824fdfe8ad0dd83ed4c6db936db15806a0 data/lithereal/loot_tables/blocks/heated_litherite_block.json
 d2beaebc5c92693d68b7493d94a0c92e134db7a1 data/lithereal/loot_tables/blocks/litherite_block.json
 56d74563e4320448d3b066efe9a88ffb5e4e7d90 data/lithereal/loot_tables/blocks/litherite_ore.json

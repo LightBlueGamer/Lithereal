@@ -1,6 +1,7 @@
 package org.litecraft.lithereal;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,8 +15,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.block.ModBlocks;
+import org.litecraft.lithereal.block.entity.ModBlockEntities;
 import org.litecraft.lithereal.item.ModCreativeModeTabs;
 import org.litecraft.lithereal.item.ModItems;
+import org.litecraft.lithereal.screen.FireCrucibleMenu;
+import org.litecraft.lithereal.screen.FireCrucibleScreen;
+import org.litecraft.lithereal.screen.FreezingStationScreen;
+import org.litecraft.lithereal.screen.ModMenuTypes;
 import org.slf4j.Logger;
 
 import java.util.Iterator;
@@ -30,6 +36,8 @@ public class Lithereal {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -79,6 +87,8 @@ public class Lithereal {
             event.accept(ModBlocks.LITHERITE_BLOCK);
             event.accept(ModBlocks.COOLED_LITHERITE_BLOCK);
             event.accept(ModBlocks.HEATED_LITHERITE_BLOCK);
+            event.accept(ModBlocks.FREEZING_STATION);
+            event.accept(ModBlocks.FIRE_CRUCIBLE);
         }
     }
 
@@ -86,6 +96,9 @@ public class Lithereal {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+
+            MenuScreens.register(ModMenuTypes.FREEZING_STATION_MENU.get(), FreezingStationScreen::new);
+            MenuScreens.register(ModMenuTypes.FIRE_CRUCIBLE_MENU.get(), FireCrucibleScreen::new);
 
         }
     }

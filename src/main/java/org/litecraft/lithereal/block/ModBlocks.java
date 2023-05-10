@@ -12,6 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.Lithereal;
+import org.litecraft.lithereal.block.custom.FireCrucibleBlock;
+import org.litecraft.lithereal.block.custom.FreezingStationBlock;
 import org.litecraft.lithereal.item.ModItems;
 
 import java.util.function.Supplier;
@@ -19,6 +21,14 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Lithereal.MOD_ID);
+
+    public static final RegistryObject<Block> FREEZING_STATION = registerBlock("freezing_station_block",
+            () -> new FreezingStationBlock(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> FIRE_CRUCIBLE = registerBlock("fire_crucible_block",
+            () -> new FireCrucibleBlock(BlockBehaviour.Properties.of(Material.METAL)
+                    .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final RegistryObject<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)

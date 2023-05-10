@@ -20,6 +20,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.COOLED_LITHERITE_BLOCK.get());
         dropSelf(ModBlocks.HEATED_LITHERITE_BLOCK.get());
 
+        dropSelf(ModBlocks.FREEZING_STATION.get());
+        dropSelf(ModBlocks.FIRE_CRUCIBLE.get());
+
         add(ModBlocks.LITHERITE_ORE.get(),
                 (block) -> createOreDrop(ModBlocks.LITHERITE_ORE.get(), ModItems.LITHERITE_CRYSTAL.get()));
         add(ModBlocks.DEEPSLATE_LITHERITE_ORE.get(),

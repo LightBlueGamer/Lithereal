@@ -28,6 +28,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         diamondPickTag(ModBlocks.LITHERITE_BLOCK.get());
         diamondPickTag(ModBlocks.COOLED_LITHERITE_BLOCK.get());
         diamondPickTag(ModBlocks.HEATED_LITHERITE_BLOCK.get());
+
+        diamondPickTag(ModBlocks.FREEZING_STATION.get());
+        diamondPickTag(ModBlocks.FIRE_CRUCIBLE.get());
     }
 
     private void diamondPickTag(Block block) {
