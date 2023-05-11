@@ -1,0 +1,11 @@
+{
+  "type": "lithereal:burning",
+  "ingredients": [
+    {
+      "item": "lithereal:cooled_litherite_crystal"
+    }
+  ],
+  "output": {
+    "item": "lithereal:litherite_crystal"
+  }
+}

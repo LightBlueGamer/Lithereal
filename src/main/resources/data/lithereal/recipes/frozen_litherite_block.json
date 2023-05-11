@@ -1,0 +1,15 @@
+{
+  "type": "lithereal:freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:ice",
+      "count": 9
+    },
+    {
+      "item": "lithereal:litherite_block"
+    }
+  ],
+  "output": {
+    "item": "lithereal:cooled_litherite_block"
+  }
+}

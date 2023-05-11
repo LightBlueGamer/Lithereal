@@ -18,12 +18,12 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public FireCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     public FireCrucibleMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.FIRE_CRUCIBLE_MENU.get(), id);
-        checkContainerSize(inv, 2);
+        checkContainerSize(inv, 3);
         blockEntity = (FireCrucibleBlockEntity) entity;
         this.level = inv.player.level;
         this.data = data;
@@ -32,8 +32,8 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 24));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 116, 36));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 22));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 116, 34));
         });
 
         addDataSlots(data);
@@ -41,6 +41,9 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
 
     public boolean isCrafting() {
         return data.get(0) > 0;
+    }
+    public int hasHeatSource() {
+        return data.get(2);
     }
 
     public int getScaledProgress() {
@@ -111,14 +114,14 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 }

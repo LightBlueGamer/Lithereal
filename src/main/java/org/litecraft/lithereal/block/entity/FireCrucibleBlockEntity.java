@@ -27,7 +27,11 @@ import org.jetbrains.annotations.Nullable;
 import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.ModItems;
+import org.litecraft.lithereal.recipe.FireCrucibleRecipe;
+import org.litecraft.lithereal.recipe.FreezingStationRecipe;
 import org.litecraft.lithereal.screen.FireCrucibleMenu;
+
+import java.util.Optional;
 
 public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
@@ -42,6 +46,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
+    private int hasHeat = 0;
 
     public FireCrucibleBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FIRE_CRUCIBLE.get(), pos, state);
@@ -51,6 +56,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
                 return switch (index) {
                     case 0 -> FireCrucibleBlockEntity.this.progress;
                     case 1 -> FireCrucibleBlockEntity.this.maxProgress;
+                    case 2 -> FireCrucibleBlockEntity.this.hasHeat;
                     default -> 0;
                 };
             }
@@ -60,12 +66,13 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
                 switch (index) {
                     case 0 -> FireCrucibleBlockEntity.this.progress = value;
                     case 1 -> FireCrucibleBlockEntity.this.maxProgress = value;
+                    case 2 -> FireCrucibleBlockEntity.this.hasHeat = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 3;
             }
         };
     }
@@ -125,8 +132,10 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FireCrucibleBlockEntity pEntity) {
         if(level.isClientSide()) return;
 
+        pEntity.hasHeat = hasFire(pEntity);
+
         if(hasRecipe(pEntity)) {
-            pEntity.progress++;
+            pEntity.progress += 1 * hasFire(pEntity);
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress) {
@@ -136,6 +145,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
             pEntity.resetProgress();
             setChanged(level, blockPos, blockState);
         }
+
     }
 
     private void resetProgress() {
@@ -143,34 +153,50 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private static void craftItem(FireCrucibleBlockEntity pEntity) {
+        Level level = pEntity.level;
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<FireCrucibleRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(FireCrucibleRecipe.Type.INSTANCE, inventory, level);
+
         if(hasRecipe(pEntity)) {
-            pEntity.itemHandler.extractItem(0, 1, false);
-            pEntity.itemHandler.setStackInSlot(1, new ItemStack(ModItems.HEATED_LITHERITE_CRYSTAL.get(),
-                    pEntity.itemHandler.getStackInSlot(1).getCount() + 1));
+            pEntity.itemHandler.extractItem(0, recipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
+            pEntity.itemHandler.setStackInSlot(1, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(),
+                    pEntity.itemHandler.getStackInSlot(1).getCount() + recipe.get().getResultItem(level.registryAccess()).getCount()));
 
             pEntity.resetProgress();
         }
     }
 
     private static boolean hasRecipe(FireCrucibleBlockEntity entity) {
+        Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasCrystalInFirstSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.LITHERITE_CRYSTAL.get();
-        boolean hasFire = entity.level.getBlockState(entity.worldPosition.below()) == Blocks.FIRE.defaultBlockState();
+        Optional<FireCrucibleRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(FireCrucibleRecipe.Type.INSTANCE, inventory, level);
 
-        return hasCrystalInFirstSlot && hasFire && canInsertAmountIntoOutput(inventory) &&
-                canInsertItemIntoOutput(inventory, new ItemStack(ModItems.HEATED_LITHERITE_CRYSTAL.get(), 1));
+        return hasFire(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
+                canInsertItemIntoOutput(inventory, recipe.get().getResultItem(level.registryAccess()));
+    }
+
+    private static int hasFire(FireCrucibleBlockEntity entity) {
+        if(entity.level.getBlockState(entity.worldPosition.below()).getBlock() == Blocks.FIRE) return 1;
+        else if(entity.level.getBlockState(entity.worldPosition.below()).getBlock() == ModBlocks.HEATED_LITHERITE_BLOCK.get()) return 2;
+        else return 0;
     }
 
     private static boolean canInsertItemIntoOutput(SimpleContainer inventory, ItemStack itemStack) {
-        return inventory.getItem(2).getItem() == itemStack.getItem() || inventory.getItem(2).isEmpty();
+        return inventory.getItem(1).getItem() == itemStack.getItem() || inventory.getItem(1).isEmpty();
     }
 
     private static boolean canInsertAmountIntoOutput(SimpleContainer inventory) {
-        return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
+        return inventory.getItem(1).getMaxStackSize() > inventory.getItem(1).getCount();
     }
 
 }

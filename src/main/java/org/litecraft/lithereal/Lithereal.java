@@ -15,9 +15,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.block.ModBlocks;
+import org.litecraft.lithereal.item.ModItems;
 import org.litecraft.lithereal.block.entity.ModBlockEntities;
 import org.litecraft.lithereal.item.ModCreativeModeTabs;
 import org.litecraft.lithereal.item.ModItems;
+import org.litecraft.lithereal.recipe.ModRecipes;
 import org.litecraft.lithereal.screen.FireCrucibleMenu;
 import org.litecraft.lithereal.screen.FireCrucibleScreen;
 import org.litecraft.lithereal.screen.FreezingStationScreen;
@@ -38,6 +40,7 @@ public class Lithereal {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);

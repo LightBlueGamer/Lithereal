@@ -27,11 +27,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        oreBlasting(consumer, List.of(ModItems.LITHERITE_CRYSTAL.get()), RecipeCategory.MISC,
-                ModItems.HEATED_LITHERITE_CRYSTAL.get(), .7f, 300, "heated_litherite_crystal");
-        oreBlasting(consumer, List.of(ModBlocks.LITHERITE_BLOCK.get()), RecipeCategory.MISC,
-                ModBlocks.HEATED_LITHERITE_BLOCK.get(), .7f, 500, "heated_litherite_block");
-
         oreSmelting(consumer, List.of(ModBlocks.LITHERITE_ORE.get()), RecipeCategory.MISC,
                 ModItems.LITHERITE_CRYSTAL.get(), .7f, 200, "litherite_crystal");
         oreSmelting(consumer, List.of(ModBlocks.DEEPSLATE_LITHERITE_ORE.get()), RecipeCategory.MISC,

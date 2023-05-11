@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T T",
+    "TCT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:terracotta"
+    },
+    "C": {
+      "item": "minecraft:cauldron"
+    }
+  },
+  "result": {
+    "item": "lithereal:fire_crucible"
+  }
+}

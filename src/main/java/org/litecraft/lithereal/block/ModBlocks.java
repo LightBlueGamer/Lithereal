@@ -22,11 +22,11 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Lithereal.MOD_ID);
 
-    public static final RegistryObject<Block> FREEZING_STATION = registerBlock("freezing_station_block",
+    public static final RegistryObject<Block> FREEZING_STATION = registerBlock("freezing_station",
             () -> new FreezingStationBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 
-    public static final RegistryObject<Block> FIRE_CRUCIBLE = registerBlock("fire_crucible_block",
+    public static final RegistryObject<Block> FIRE_CRUCIBLE = registerBlock("fire_crucible",
             () -> new FireCrucibleBlock(BlockBehaviour.Properties.of(Material.METAL)
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 

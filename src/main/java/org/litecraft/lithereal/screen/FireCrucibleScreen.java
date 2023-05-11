@@ -29,14 +29,23 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        this.blit(pPoseStack, x, y+2, 0, 0, imageWidth, imageHeight);
+        this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(pPoseStack, x, y);
+        renderHeatSource(pPoseStack, x, y);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
         if(menu.isCrafting()) {
-            blit(pPoseStack, x + 79, y + 35, 176, 14, menu.getScaledProgress(), 17);
+            blit(pPoseStack, x + 79, y + 35, 176, 14, menu.getScaledProgress(), 16);
+        }
+    }
+
+    private void renderHeatSource(PoseStack pPoseStack, int x, int y) {
+        if(menu.hasHeatSource() == 1) {
+            blit(pPoseStack, x + 57, y + 46, 176, 0, 14, 14);
+        } else if(menu.hasHeatSource() == 2) {
+            blit(pPoseStack, x + 57, y + 46, 190, 0, 14, 14);
         }
     }
 

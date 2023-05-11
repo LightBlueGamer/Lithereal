@@ -25,7 +25,10 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.litecraft.lithereal.item.ModItems;
+import org.litecraft.lithereal.recipe.FreezingStationRecipe;
 import org.litecraft.lithereal.screen.FreezingStationMenu;
+
+import java.util.Optional;
 
 public class FreezingStationBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -141,27 +144,37 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private static void craftItem(FreezingStationBlockEntity pEntity) {
+        Level level = pEntity.level;
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<FreezingStationRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
+
         if(hasRecipe(pEntity)) {
-            pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.extractItem(0, 1, false);
-            pEntity.itemHandler.setStackInSlot(2, new ItemStack(ModItems.COOLED_LITHERITE_CRYSTAL.get(),
-                    pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
+            pEntity.itemHandler.extractItem(0, recipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
+            pEntity.itemHandler.extractItem(1, recipe.get().recipeItems.get(1).getItems()[0].getCount(), false);
+            pEntity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(),
+                    pEntity.itemHandler.getStackInSlot(2).getCount() + recipe.get().getResultItem(level.registryAccess()).getCount()));
 
             pEntity.resetProgress();
         }
     }
 
     private static boolean hasRecipe(FreezingStationBlockEntity entity) {
+        Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasCrystalInFirstSlot = entity.itemHandler.getStackInSlot(1).getItem() == ModItems.LITHERITE_CRYSTAL.get();
-        boolean hasIceInSecondSlot = entity.itemHandler.getStackInSlot(0).getItem() == Items.ICE;
+        Optional<FreezingStationRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
 
-        return hasCrystalInFirstSlot && hasIceInSecondSlot && canInsertAmountIntoOutput(inventory) &&
-                canInsertItemIntoOutput(inventory, new ItemStack(ModItems.COOLED_LITHERITE_CRYSTAL.get(), 1));
+        return recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
+                canInsertItemIntoOutput(inventory, recipe.get().getResultItem(level.registryAccess()));
     }
 
     private static boolean canInsertItemIntoOutput(SimpleContainer inventory, ItemStack itemStack) {

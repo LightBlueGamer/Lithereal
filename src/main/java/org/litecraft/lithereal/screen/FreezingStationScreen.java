@@ -29,14 +29,14 @@ public class FreezingStationScreen extends AbstractContainerScreen<FreezingStati
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        this.blit(pPoseStack, x, y+2, 0, 0, imageWidth, imageHeight);
+        this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(pPoseStack, x, y);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
         if(menu.isCrafting()) {
-            blit(pPoseStack, x + 96, y + 36, 178, 1, menu.getScaledProgress(), 15);
+            blit(pPoseStack, x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
         }
     }
 
