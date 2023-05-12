@@ -14,6 +14,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,7 +25,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.ModItems;
+import org.litecraft.lithereal.recipe.FireCrucibleRecipe;
 import org.litecraft.lithereal.recipe.FreezingStationRecipe;
 import org.litecraft.lithereal.screen.FreezingStationMenu;
 
@@ -42,7 +45,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 200;
+    private int maxProgress = 30000;
 
     public FreezingStationBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FREEZING_STATION.get(), pos, state);
@@ -127,20 +130,58 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         if(level.isClientSide()) return;
 
         if(hasRecipe(pEntity)) {
-            pEntity.progress++;
+            pEntity.progress += getCoolingPower(pEntity);
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress) {
                 craftItem(pEntity);
             }
         } else {
-            pEntity.resetProgress();
+            pEntity.heat(750);
             setChanged(level, blockPos, blockState);
         }
     }
 
     private void resetProgress() {
         this.progress = 0;
+    }
+
+    private void heat(int multiplier) {
+        if(this.progress > 0) this.progress -= multiplier;
+    }
+
+    private static int getCoolingPower(FreezingStationBlockEntity entity) {
+        Level level = entity.level;
+        int cooling = 0;
+
+        Block above = level.getBlockState(entity.worldPosition.above()).getBlock();
+        Block below = level.getBlockState(entity.worldPosition.below()).getBlock();
+        Block north = level.getBlockState(entity.worldPosition.north()).getBlock();
+        Block east = level.getBlockState(entity.worldPosition.east()).getBlock();
+        Block south = level.getBlockState(entity.worldPosition.south()).getBlock();
+        Block west = level.getBlockState(entity.worldPosition.west()).getBlock();
+
+        if(level.isNight() || level.isRaining() || level.isThundering()) cooling += 25;
+
+        cooling += getBlockCoolingPower(entity, above);
+        cooling += getBlockCoolingPower(entity, below);
+        cooling += getBlockCoolingPower(entity, north);
+        cooling += getBlockCoolingPower(entity, east);
+        cooling += getBlockCoolingPower(entity, south);
+        cooling += getBlockCoolingPower(entity, west);
+
+        return cooling;
+    }
+
+    private static int getBlockCoolingPower(FreezingStationBlockEntity entity, Block block) {
+        Level level = entity.level;
+        int cooling = 0;
+        if(block == Blocks.ICE) cooling += 1;
+        if(block == Blocks.PACKED_ICE) cooling += 9;
+        if(block == Blocks.BLUE_ICE) cooling += 81;
+        if(block == ModBlocks.COOLED_LITHERITE_BLOCK.get()) cooling += 240;
+
+        return cooling;
     }
 
     private static void craftItem(FreezingStationBlockEntity pEntity) {
@@ -173,7 +214,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         Optional<FreezingStationRecipe> recipe = level.getRecipeManager()
                 .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
 
-        return recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
+        return getCoolingPower(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
                 canInsertItemIntoOutput(inventory, recipe.get().getResultItem(level.registryAccess()));
     }
 

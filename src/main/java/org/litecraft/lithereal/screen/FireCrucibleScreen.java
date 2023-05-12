@@ -42,11 +42,11 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
     }
 
     private void renderHeatSource(PoseStack pPoseStack, int x, int y) {
-        if(menu.hasHeatSource() == 1) {
+        if(menu.hasHeatSource() > 0) {
             blit(pPoseStack, x + 57, y + 46, 176, 0, 14, 14);
-        } else if(menu.hasHeatSource() == 2) {
-            blit(pPoseStack, x + 57, y + 46, 190, 0, 14, 14);
-        }
+        } //else if(menu.hasHeatSource() == 10 || menu.hasHeatSource() == 20) {
+            //blit(pPoseStack, x + 57, y + 46, 190, 0, 14, 14);
+        //}
     }
 
     @Override

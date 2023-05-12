@@ -14,6 +14,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,7 +46,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 100;
+    private int maxProgress = 30000;
     private int hasHeat = 0;
 
     public FireCrucibleBlockEntity(BlockPos pos, BlockState state) {
@@ -132,17 +133,17 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FireCrucibleBlockEntity pEntity) {
         if(level.isClientSide()) return;
 
-        pEntity.hasHeat = hasFire(pEntity);
+        pEntity.hasHeat = getHeatingPower(pEntity);
 
         if(hasRecipe(pEntity)) {
-            pEntity.progress += 1 * hasFire(pEntity);
+            pEntity.progress += getHeatingPower(pEntity);
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress) {
                 craftItem(pEntity);
             }
         } else {
-            pEntity.resetProgress();
+            pEntity.cooldown(750);
             setChanged(level, blockPos, blockState);
         }
 
@@ -150,6 +151,10 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
     private void resetProgress() {
         this.progress = 0;
+    }
+
+    private void cooldown(int multiplier) {
+        if(this.progress > 0) this.progress -= multiplier;
     }
 
     private static void craftItem(FireCrucibleBlockEntity pEntity) {
@@ -181,14 +186,42 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         Optional<FireCrucibleRecipe> recipe = level.getRecipeManager()
                 .getRecipeFor(FireCrucibleRecipe.Type.INSTANCE, inventory, level);
 
-        return hasFire(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
+        return getHeatingPower(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
                 canInsertItemIntoOutput(inventory, recipe.get().getResultItem(level.registryAccess()));
     }
 
-    private static int hasFire(FireCrucibleBlockEntity entity) {
-        if(entity.level.getBlockState(entity.worldPosition.below()).getBlock() == Blocks.FIRE) return 1;
-        else if(entity.level.getBlockState(entity.worldPosition.below()).getBlock() == ModBlocks.HEATED_LITHERITE_BLOCK.get()) return 2;
-        else return 0;
+    private static int getHeatingPower(FireCrucibleBlockEntity entity) {
+        Level level = entity.level;
+        int heating = 0;
+
+        Block above = level.getBlockState(entity.worldPosition.above()).getBlock();
+        Block below = level.getBlockState(entity.worldPosition.below()).getBlock();
+        Block north = level.getBlockState(entity.worldPosition.north()).getBlock();
+        Block east = level.getBlockState(entity.worldPosition.east()).getBlock();
+        Block south = level.getBlockState(entity.worldPosition.south()).getBlock();
+        Block west = level.getBlockState(entity.worldPosition.west()).getBlock();
+
+        if(level.isDay() && !level.isRaining() && !level.isThundering()) heating += 25;
+
+        heating += getBlockHeatingPower(entity, above);
+        heating += getBlockHeatingPower(entity, below);
+        heating += getBlockHeatingPower(entity, north);
+        heating += getBlockHeatingPower(entity, east);
+        heating += getBlockHeatingPower(entity, south);
+        heating += getBlockHeatingPower(entity, west);
+
+        return heating;
+    }
+
+    private static int getBlockHeatingPower(FireCrucibleBlockEntity entity, Block block) {
+        Level level = entity.level;
+        int heating = 0;
+        if(block == Blocks.FIRE) heating += 1;
+        if(block == Blocks.MAGMA_BLOCK) heating += 9;
+        if(block == Blocks.LAVA) heating += 81;
+        if(block == ModBlocks.HEATED_LITHERITE_BLOCK.get()) heating += 240;
+
+        return heating;
     }
 
     private static boolean canInsertItemIntoOutput(SimpleContainer inventory, ItemStack itemStack) {

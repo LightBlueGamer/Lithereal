@@ -58,6 +58,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
         addBlock(ModBlocks.COOLED_LITHERITE_BLOCK, "Frozen Litherite Block");
         addBlock(ModBlocks.HEATED_LITHERITE_BLOCK, "Burning Litherite Block");
+        addBlock(ModBlocks.WHITE_ROSE_BUSH, "Kyona's Rose Bush");
 
         addBlock(ModBlocks.FREEZING_STATION, "Freezing Station");
         addBlock(ModBlocks.FIRE_CRUCIBLE, "Fire Crucible");
