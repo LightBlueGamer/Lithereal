@@ -19,7 +19,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.LITHERITE_BLOCK.get());
         dropSelf(ModBlocks.COOLED_LITHERITE_BLOCK.get());
         dropSelf(ModBlocks.HEATED_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.WHITE_ROSE_BUSH.get());
 
         dropSelf(ModBlocks.FREEZING_STATION.get());
         dropSelf(ModBlocks.FIRE_CRUCIBLE.get());

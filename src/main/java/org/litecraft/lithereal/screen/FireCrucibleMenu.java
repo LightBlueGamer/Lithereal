@@ -42,7 +42,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
-    public int hasHeatSource() {
+    public int getHeatValue() {
         return data.get(2);
     }
 

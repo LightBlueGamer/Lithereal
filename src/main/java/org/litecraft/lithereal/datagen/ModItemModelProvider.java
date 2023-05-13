@@ -45,6 +45,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.HEATED_LITHERITE_PICKAXE);
         handheldItem(ModItems.COOLED_LITHERITE_PICKAXE);
 
+        handheldItem(ModItems.LITHERITE_HAMMER);
+        handheldItem(ModItems.BURNING_LITHERITE_HAMMER);
+        handheldItem(ModItems.FROZEN_LITHERITE_HAMMER);
+
         handheldItem(ModItems.LITHERITE_AXE);
         handheldItem(ModItems.HEATED_LITHERITE_AXE);
         handheldItem(ModItems.COOLED_LITHERITE_AXE);

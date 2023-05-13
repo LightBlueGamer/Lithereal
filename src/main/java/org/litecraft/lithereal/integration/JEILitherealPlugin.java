@@ -8,6 +8,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.recipe.FireCrucibleRecipe;
 import org.litecraft.lithereal.recipe.FreezingStationRecipe;
@@ -22,6 +23,7 @@ public class JEILitherealPlugin implements IModPlugin {
 
     public static RecipeType<FireCrucibleRecipe> BURNING_TYPE =
             new RecipeType<>(FireCrucibleRecipeCategory.UID, FireCrucibleRecipe.class);
+
     @Override
     public ResourceLocation getPluginUid() {
         return new ResourceLocation(Lithereal.MOD_ID, "jei_compat");
@@ -40,6 +42,7 @@ public class JEILitherealPlugin implements IModPlugin {
 
         List<FreezingStationRecipe> recipesInfusing = rm.getAllRecipesFor(FreezingStationRecipe.Type.INSTANCE);
         List<FireCrucibleRecipe> recipesBurning = rm.getAllRecipesFor(FireCrucibleRecipe.Type.INSTANCE);
+        List<SmeltingRecipe> recipesFurnace = rm.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
 
         registration.addRecipes(FREEZING_TYPE, recipesInfusing);
         registration.addRecipes(BURNING_TYPE, recipesBurning);

@@ -65,6 +65,9 @@ public class Lithereal {
             event.accept(ModItems.COOLED_LITHERITE_PICKAXE);
             event.accept(ModItems.HEATED_LITHERITE_PICKAXE);
             event.accept(ModItems.LITHERITE_PICKAXE);
+            event.accept(ModItems.FROZEN_LITHERITE_HAMMER);
+            event.accept(ModItems.BURNING_LITHERITE_HAMMER);
+            event.accept(ModItems.LITHERITE_HAMMER);
             event.accept(ModItems.COOLED_LITHERITE_AXE);
             event.accept(ModItems.HEATED_LITHERITE_AXE);
             event.accept(ModItems.LITHERITE_AXE);

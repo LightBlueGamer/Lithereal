@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "lithereal:item/burning_litherite_hammer"
+  }
+}

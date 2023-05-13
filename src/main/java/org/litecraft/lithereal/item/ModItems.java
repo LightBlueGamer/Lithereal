@@ -22,35 +22,42 @@ public class ModItems {
     public static final RegistryObject<Item> COOLED_LITHERITE_SWORD = ITEMS.register("cooled_litherite_sword",
             () -> new CooledLitheriteSword(Tiers.DIAMOND, 4, -1.6f, new Item.Properties().durability(1750)));
     public static final RegistryObject<Item> HEATED_LITHERITE_SWORD = ITEMS.register("heated_litherite_sword",
-            () -> new HeatedLitheriteSword(Tiers.DIAMOND, 4, -1.6f, new Item.Properties().durability(1750).fireResistant()));
+            () -> new BurningLitheriteSword(Tiers.DIAMOND, 4, -1.6f, new Item.Properties().durability(1750).fireResistant()));
     public static final RegistryObject<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword",
             () -> new SwordItem(Tiers.DIAMOND, 4, -1.6f, new Item.Properties().durability(1750)));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_PICKAXE = ITEMS.register("cooled_litherite_pickaxe",
             () -> new PickaxeItem(Tiers.DIAMOND, 2, -1.2f, new Item.Properties().durability(1750)));
     public static final RegistryObject<Item> HEATED_LITHERITE_PICKAXE = ITEMS.register("heated_litherite_pickaxe",
-            () -> new PickaxeItem(Tiers.DIAMOND, 2, -1.2f, new Item.Properties().durability(1750).fireResistant()));
+            () -> new BurningLitheritePickaxeItem(Tiers.DIAMOND, 2, -1.2f, new Item.Properties().durability(1750).fireResistant()));
     public static final RegistryObject<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe",
             () -> new PickaxeItem(Tiers.DIAMOND, 2, -1.2f, new Item.Properties().durability(1750)));
+
+    public static final RegistryObject<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer",
+            () -> new LitheriteHammerItem(Tiers.DIAMOND, 4, -2.4f, new Item.Properties().durability(15750)));
+    public static final RegistryObject<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("burning_litherite_hammer",
+            () -> new BurningLitheriteHammerItem(Tiers.DIAMOND, 4, -2.4f, new Item.Properties().durability(15750)));
+    public static final RegistryObject<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer",
+            () -> new LitheriteHammerItem(Tiers.DIAMOND, 4, -2.4f, new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_AXE = ITEMS.register("cooled_litherite_axe",
             () -> new AxeItem(Tiers.DIAMOND, 6, -0.6f, new Item.Properties().durability(1750)));
     public static final RegistryObject<Item> HEATED_LITHERITE_AXE = ITEMS.register("heated_litherite_axe",
-            () -> new AxeItem(Tiers.DIAMOND, 6, -0.6f, new Item.Properties().durability(1750).fireResistant()));
+            () -> new BurningLitheriteAxeItem(Tiers.DIAMOND, 6, -0.6f, new Item.Properties().durability(1750).fireResistant()));
     public static final RegistryObject<Item> LITHERITE_AXE = ITEMS.register("litherite_axe",
             () -> new AxeItem(Tiers.DIAMOND, 6, -0.6f, new Item.Properties().durability(1750)));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_SHOVEL = ITEMS.register("cooled_litherite_shovel",
             () -> new ShovelItem(Tiers.DIAMOND, 2.5f, -1f, new Item.Properties().durability(1750)));
     public static final RegistryObject<Item> HEATED_LITHERITE_SHOVEL = ITEMS.register("heated_litherite_shovel",
-            () -> new ShovelItem(Tiers.DIAMOND, 2.5f, -1f, new Item.Properties().durability(1750).fireResistant()));
+            () -> new BurningLitheriteShovelItem(Tiers.DIAMOND, 2.5f, -1f, new Item.Properties().durability(1750).fireResistant()));
     public static final RegistryObject<Item> LITHERITE_SHOVEL = ITEMS.register("litherite_shovel",
             () -> new ShovelItem(Tiers.DIAMOND, 2.5f, -1f, new Item.Properties().durability(1750)));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HOE = ITEMS.register("cooled_litherite_hoe",
             () -> new HoeItem(Tiers.DIAMOND, -2, 0.8f, new Item.Properties().durability(1750)));
     public static final RegistryObject<Item> HEATED_LITHERITE_HOE = ITEMS.register("heated_litherite_hoe",
-            () -> new HoeItem(Tiers.DIAMOND, -2, 0.8f, new Item.Properties().durability(1750).fireResistant()));
+            () -> new BurningLitheriteHoeItem(Tiers.DIAMOND, -2, 0.8f, new Item.Properties().durability(1750).fireResistant()));
     public static final RegistryObject<Item> LITHERITE_HOE = ITEMS.register("litherite_hoe",
             () -> new HoeItem(Tiers.DIAMOND, -2, 0.8f, new Item.Properties().durability(1750)));
 

@@ -1,0 +1,14 @@
+{
+  "type": "lithereal:freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "item": "lithereal:heated_litherite_block"
+    }
+  ],
+  "output": {
+    "item": "lithereal:litherite_block"
+  }
+}

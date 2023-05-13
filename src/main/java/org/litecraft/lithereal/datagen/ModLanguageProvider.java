@@ -29,6 +29,10 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.COOLED_LITHERITE_PICKAXE, "Frozen Litherite Crystal Pickaxe");
         addItem(ModItems.HEATED_LITHERITE_PICKAXE, "Burning Litherite Crystal Pickaxe");
 
+        addItem(ModItems.LITHERITE_HAMMER, "Litherite Crystal Hammer");
+        addItem(ModItems.FROZEN_LITHERITE_HAMMER, "Frozen Litherite Crystal Hammer");
+        addItem(ModItems.BURNING_LITHERITE_HAMMER, "Burning Litherite Crystal Hammer");
+
         addItem(ModItems.LITHERITE_AXE, "Litherite Crystal Axe");
         addItem(ModItems.COOLED_LITHERITE_AXE, "Frozen Litherite Crystal Axe");
         addItem(ModItems.HEATED_LITHERITE_AXE, "Burning Litherite Crystal Axe");
@@ -58,7 +62,6 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
         addBlock(ModBlocks.COOLED_LITHERITE_BLOCK, "Frozen Litherite Block");
         addBlock(ModBlocks.HEATED_LITHERITE_BLOCK, "Burning Litherite Block");
-        addBlock(ModBlocks.WHITE_ROSE_BUSH, "Kyona's Rose Bush");
 
         addBlock(ModBlocks.FREEZING_STATION, "Freezing Station");
         addBlock(ModBlocks.FIRE_CRUCIBLE, "Fire Crucible");

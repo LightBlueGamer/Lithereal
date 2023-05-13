@@ -1,5 +1,6 @@
 package org.litecraft.lithereal.block.entity;
 
+import mezz.jei.api.constants.RecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,10 +14,15 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -121,6 +127,8 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
     }
 
+    
+
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -133,10 +141,12 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FireCrucibleBlockEntity pEntity) {
         if(level.isClientSide()) return;
 
-        pEntity.hasHeat = getHeatingPower(pEntity);
+        int heat = getHeatingPower(pEntity);
+
+        pEntity.hasHeat = heat;
 
         if(hasRecipe(pEntity)) {
-            pEntity.progress += getHeatingPower(pEntity);
+            pEntity.progress += heat;
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress) {
@@ -164,57 +174,73 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
             inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<FireCrucibleRecipe> recipe = level.getRecipeManager()
+        Optional<FireCrucibleRecipe> crucibleRecipe = level.getRecipeManager()
                 .getRecipeFor(FireCrucibleRecipe.Type.INSTANCE, inventory, level);
 
-        if(hasRecipe(pEntity)) {
-            pEntity.itemHandler.extractItem(0, recipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
-            pEntity.itemHandler.setStackInSlot(1, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(),
-                    pEntity.itemHandler.getStackInSlot(1).getCount() + recipe.get().getResultItem(level.registryAccess()).getCount()));
+        Optional<SmeltingRecipe> furnaceRecipe = level.getRecipeManager()
+                .getRecipeFor(RecipeType.SMELTING, inventory, level);
 
-            pEntity.resetProgress();
+        if(hasRecipe(pEntity)) {
+            if(crucibleRecipe.isPresent()) {
+                pEntity.itemHandler.extractItem(0, crucibleRecipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
+                pEntity.itemHandler.setStackInSlot(1, new ItemStack(crucibleRecipe.get().getResultItem(level.registryAccess()).getItem(),
+                        pEntity.itemHandler.getStackInSlot(1).getCount() + crucibleRecipe.get().getResultItem(level.registryAccess()).getCount()));
+
+                pEntity.resetProgress();
+            } else if(furnaceRecipe.isPresent()) {
+                pEntity.itemHandler.extractItem(0, 1, false);
+                pEntity.itemHandler.setStackInSlot(1, new ItemStack(furnaceRecipe.get().getResultItem(level.registryAccess()).getItem(),
+                        pEntity.itemHandler.getStackInSlot(1).getCount() + furnaceRecipe.get().getResultItem(level.registryAccess()).getCount()));
+
+                pEntity.resetProgress();
+            }
         }
     }
 
     private static boolean hasRecipe(FireCrucibleBlockEntity entity) {
         Level level = entity.level;
+        Boolean hasRecipe = false;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<FireCrucibleRecipe> recipe = level.getRecipeManager()
+        Optional<FireCrucibleRecipe> crucibleRecipe = level.getRecipeManager()
                 .getRecipeFor(FireCrucibleRecipe.Type.INSTANCE, inventory, level);
 
-        return getHeatingPower(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
-                canInsertItemIntoOutput(inventory, recipe.get().getResultItem(level.registryAccess()));
+        Optional<SmeltingRecipe> furnaceRecipe = level.getRecipeManager()
+                .getRecipeFor(RecipeType.SMELTING, inventory, level);
+
+        if(getHeatingPower(entity) > 0) {
+            if(crucibleRecipe.isPresent()) {
+                if(canInsertAmountIntoOutput(inventory)) {
+                    if(canInsertItemIntoOutput(inventory, crucibleRecipe.get().getResultItem(level.registryAccess()))) hasRecipe = true;
+                }
+            } else if(furnaceRecipe.isPresent()) {
+                if(canInsertAmountIntoOutput(inventory)) {
+                    if(canInsertItemIntoOutput(inventory, furnaceRecipe.get().getResultItem(level.registryAccess()))) hasRecipe = true;
+                }
+            }
+        }
+
+        return hasRecipe;
     }
 
     private static int getHeatingPower(FireCrucibleBlockEntity entity) {
         Level level = entity.level;
         int heating = 0;
 
-        Block above = level.getBlockState(entity.worldPosition.above()).getBlock();
-        Block below = level.getBlockState(entity.worldPosition.below()).getBlock();
-        Block north = level.getBlockState(entity.worldPosition.north()).getBlock();
-        Block east = level.getBlockState(entity.worldPosition.east()).getBlock();
-        Block south = level.getBlockState(entity.worldPosition.south()).getBlock();
-        Block west = level.getBlockState(entity.worldPosition.west()).getBlock();
-
         if(level.isDay() && !level.isRaining() && !level.isThundering()) heating += 25;
 
-        heating += getBlockHeatingPower(entity, above);
-        heating += getBlockHeatingPower(entity, below);
-        heating += getBlockHeatingPower(entity, north);
-        heating += getBlockHeatingPower(entity, east);
-        heating += getBlockHeatingPower(entity, south);
-        heating += getBlockHeatingPower(entity, west);
+        for(Direction direction : Direction.values()) {
+            Block block = level.getBlockState(entity.worldPosition.relative(direction, 1)).getBlock();
+            heating += getBlockHeatingPower(entity, block);
+        }
 
         return heating;
     }
 
     private static int getBlockHeatingPower(FireCrucibleBlockEntity entity, Block block) {
-        Level level = entity.level;
         int heating = 0;
         if(block == Blocks.FIRE) heating += 1;
         if(block == Blocks.MAGMA_BLOCK) heating += 9;

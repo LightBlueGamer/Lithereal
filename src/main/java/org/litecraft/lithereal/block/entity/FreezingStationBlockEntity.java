@@ -154,27 +154,17 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         Level level = entity.level;
         int cooling = 0;
 
-        Block above = level.getBlockState(entity.worldPosition.above()).getBlock();
-        Block below = level.getBlockState(entity.worldPosition.below()).getBlock();
-        Block north = level.getBlockState(entity.worldPosition.north()).getBlock();
-        Block east = level.getBlockState(entity.worldPosition.east()).getBlock();
-        Block south = level.getBlockState(entity.worldPosition.south()).getBlock();
-        Block west = level.getBlockState(entity.worldPosition.west()).getBlock();
-
         if(level.isNight() || level.isRaining() || level.isThundering()) cooling += 25;
 
-        cooling += getBlockCoolingPower(entity, above);
-        cooling += getBlockCoolingPower(entity, below);
-        cooling += getBlockCoolingPower(entity, north);
-        cooling += getBlockCoolingPower(entity, east);
-        cooling += getBlockCoolingPower(entity, south);
-        cooling += getBlockCoolingPower(entity, west);
+        for(Direction direction : Direction.values()) {
+            Block block = level.getBlockState(entity.worldPosition.relative(direction, 1)).getBlock();
+            cooling += getBlockCoolingPower(entity, block);
+        }
 
         return cooling;
     }
 
     private static int getBlockCoolingPower(FreezingStationBlockEntity entity, Block block) {
-        Level level = entity.level;
         int cooling = 0;
         if(block == Blocks.ICE) cooling += 1;
         if(block == Blocks.PACKED_ICE) cooling += 9;

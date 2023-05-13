@@ -40,9 +40,6 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<Block> WHITE_ROSE_BUSH = registerBlock("white_rose_bush",
-            () -> new TallFlowerBlock(BlockBehaviour.Properties.copy(Blocks.ROSE_BUSH)));
-
     public static final RegistryObject<Block> HEATED_LITHERITE_BLOCK = registerHeatedBlock("heated_litherite_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
                     .strength(6f).requiresCorrectToolForDrops()));
