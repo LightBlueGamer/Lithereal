@@ -5,7 +5,10 @@
   "experience": 0.7,
   "group": "litherite_crystal",
   "ingredient": {
-    "item": "lithereal:deepslate_litherite_ore"
+    "item": "lithereal:litherite_ore"
   },
-  "result": "lithereal:litherite_crystal"
+  "result": {
+    "item": "lithereal:litherite_crystal",
+    "nbt": "{Purity:\"???\",Power:\"???\"}"
+  }
 }

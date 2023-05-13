@@ -185,10 +185,17 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
 
         if(hasRecipe(pEntity)) {
+            ItemStack resultItem = recipe.get().getResultItem(level.registryAccess());
+            ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
+
+            CompoundTag nbt = resultItem.getTag();
+            if(nbt != null) {
+                outputItem.setTag(nbt.copy());
+            }
+
             pEntity.itemHandler.extractItem(0, recipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
             pEntity.itemHandler.extractItem(1, recipe.get().recipeItems.get(1).getItems()[0].getCount(), false);
-            pEntity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(),
-                    pEntity.itemHandler.getStackInSlot(2).getCount() + recipe.get().getResultItem(level.registryAccess()).getCount()));
+            pEntity.itemHandler.setStackInSlot(2, outputItem);
 
             pEntity.resetProgress();
         }

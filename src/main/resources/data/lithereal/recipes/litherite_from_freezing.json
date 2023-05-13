@@ -9,6 +9,7 @@
     }
   ],
   "output": {
-    "item": "lithereal:litherite_crystal"
+    "item": "lithereal:litherite_crystal",
+    "nbt": "{Purity:\"???\",Power:\"???\"}"
   }
 }

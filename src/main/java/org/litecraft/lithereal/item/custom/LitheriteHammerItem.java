@@ -18,14 +18,10 @@ public class LitheriteHammerItem extends PickaxeItem {
 
     private int destroySurroundingBlocks(Level level, BlockPos pos) {
         int blocksBroken = 0;
-        blocksBroken += destroyIfNotBedrock(level, pos.north());
-        blocksBroken += destroyIfNotBedrock(level, pos.south());
-        blocksBroken += destroyIfNotBedrock(level, pos.east());
-        blocksBroken += destroyIfNotBedrock(level, pos.west());
-        blocksBroken += destroyIfNotBedrock(level, pos.offset(1, 0, 1));
-        blocksBroken += destroyIfNotBedrock(level, pos.offset(1, 0, -1));
-        blocksBroken += destroyIfNotBedrock(level, pos.offset(-1, 0, 1));
-        blocksBroken += destroyIfNotBedrock(level, pos.offset(-1, 0, -1));
+        for (BlockPos p : new BlockPos[]{pos.north(), pos.south(), pos.east(), pos.west(),
+                pos.offset(1, 0, 1), pos.offset(1, 0, -1), pos.offset(-1, 0, 1), pos.offset(-1, 0, -1)}) {
+            blocksBroken += destroyIfNotBedrock(level, p);
+        }
 
         return blocksBroken;
     }

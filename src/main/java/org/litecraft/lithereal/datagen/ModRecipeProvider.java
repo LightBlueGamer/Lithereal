@@ -3,8 +3,10 @@ package org.litecraft.lithereal.datagen;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -27,22 +29,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        oreSmelting(consumer, List.of(ModBlocks.LITHERITE_ORE.get()), RecipeCategory.MISC,
-                ModItems.LITHERITE_CRYSTAL.get(), .7f, 200, "litherite_crystal");
-        oreSmelting(consumer, List.of(ModBlocks.DEEPSLATE_LITHERITE_ORE.get()), RecipeCategory.MISC,
-                ModItems.LITHERITE_CRYSTAL.get(), .7f, 200, "litherite_crystal");
-
-        oreBlasting(consumer, List.of(ModBlocks.LITHERITE_ORE.get()), RecipeCategory.MISC,
-                ModItems.LITHERITE_CRYSTAL.get(), .7f, 100, "litherite_crystal");
-        oreBlasting(consumer, List.of(ModBlocks.DEEPSLATE_LITHERITE_ORE.get()), RecipeCategory.MISC,
-                ModItems.LITHERITE_CRYSTAL.get(), .7f, 100, "litherite_crystal");
-
-        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.LITHERITE_CRYSTAL.get(), RecipeCategory.MISC,
-                ModBlocks.LITHERITE_BLOCK.get());
-        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.COOLED_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC,
-                ModBlocks.COOLED_LITHERITE_BLOCK.get());
-        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.HEATED_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC,
-                ModBlocks.HEATED_LITHERITE_BLOCK.get());
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.LITHERITE_HELMET.get())
                 .define('L', ModItems.LITHERITE_CRYSTAL.get())

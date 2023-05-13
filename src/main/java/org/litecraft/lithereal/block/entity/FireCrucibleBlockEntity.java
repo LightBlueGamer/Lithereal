@@ -182,15 +182,29 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
         if(hasRecipe(pEntity)) {
             if(crucibleRecipe.isPresent()) {
-                pEntity.itemHandler.extractItem(0, crucibleRecipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
-                pEntity.itemHandler.setStackInSlot(1, new ItemStack(crucibleRecipe.get().getResultItem(level.registryAccess()).getItem(),
-                        pEntity.itemHandler.getStackInSlot(1).getCount() + crucibleRecipe.get().getResultItem(level.registryAccess()).getCount()));
+                ItemStack resultItem = crucibleRecipe.get().getResultItem(level.registryAccess());
+                ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(1).getCount() + resultItem.getCount());
+
+                CompoundTag nbt = resultItem.getTag();
+                if(nbt != null) {
+                    outputItem.setTag(nbt.copy());
+                }
+
+                pEntity.itemHandler.extractItem(0, 1, false);
+                pEntity.itemHandler.setStackInSlot(1, outputItem);
 
                 pEntity.resetProgress();
             } else if(furnaceRecipe.isPresent()) {
+                ItemStack resultItem = furnaceRecipe.get().getResultItem(level.registryAccess());
+                ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(1).getCount() + resultItem.getCount());
+
+                CompoundTag nbt = resultItem.getTag();
+                if(nbt != null) {
+                    outputItem.setTag(nbt.copy());
+                }
+
                 pEntity.itemHandler.extractItem(0, 1, false);
-                pEntity.itemHandler.setStackInSlot(1, new ItemStack(furnaceRecipe.get().getResultItem(level.registryAccess()).getItem(),
-                        pEntity.itemHandler.getStackInSlot(1).getCount() + furnaceRecipe.get().getResultItem(level.registryAccess()).getCount()));
+                pEntity.itemHandler.setStackInSlot(1, outputItem);
 
                 pEntity.resetProgress();
             }
