@@ -45,7 +45,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 30000;
+    private int maxProgress = 200;
 
     public FreezingStationBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FREEZING_STATION.get(), pos, state);
@@ -137,7 +137,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 craftItem(pEntity);
             }
         } else {
-            pEntity.heat(750);
+            pEntity.heat(1);
             setChanged(level, blockPos, blockState);
         }
     }
@@ -154,22 +154,16 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         Level level = entity.level;
         int cooling = 0;
 
-        if(level.isNight() || level.isRaining() || level.isThundering()) cooling += 25;
-
-        for(Direction direction : Direction.values()) {
-            Block block = level.getBlockState(entity.worldPosition.relative(direction, 1)).getBlock();
-            cooling += getBlockCoolingPower(entity, block);
-        }
+        Block block = level.getBlockState(entity.getBlockPos().below()).getBlock();
+        cooling += getBlockCoolingPower(entity, block);
 
         return cooling;
     }
 
     private static int getBlockCoolingPower(FreezingStationBlockEntity entity, Block block) {
         int cooling = 0;
-        if(block == Blocks.ICE) cooling += 1;
-        if(block == Blocks.PACKED_ICE) cooling += 9;
-        if(block == Blocks.BLUE_ICE) cooling += 81;
-        if(block == ModBlocks.COOLED_LITHERITE_BLOCK.get()) cooling += 240;
+        if(block == Blocks.PACKED_ICE) cooling += 1;
+        if(block == ModBlocks.COOLED_LITHERITE_BLOCK.get()) cooling += 2;
 
         return cooling;
     }

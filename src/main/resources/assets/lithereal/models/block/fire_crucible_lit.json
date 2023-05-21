@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "lithereal:block/fire_crucible_bottom",
+    "side": "lithereal:block/fire_crucible_side_lit",
+    "top": "lithereal:block/fire_crucible_top_lit"
+  }
+}

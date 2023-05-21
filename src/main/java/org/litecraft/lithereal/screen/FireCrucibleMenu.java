@@ -18,7 +18,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public FireCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
     }
 
     public FireCrucibleMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -32,8 +32,9 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 22));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 116, 34));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 140, 13));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 57));
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 80, 13));
         });
 
         addDataSlots(data);
@@ -42,16 +43,25 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
-    public int getHeatValue() {
-        return data.get(2);
-    }
 
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 24;
+        int progressArrowSize = 13;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getScaledProgressFuel() {
+        int progress = this.data.get(3);
+        int maxProgress = this.data.get(4);
+        int progressArrowSize = 34;
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getHeatLevel() {
+        return this.data.get(2);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -70,7 +80,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

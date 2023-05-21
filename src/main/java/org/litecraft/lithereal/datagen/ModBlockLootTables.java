@@ -4,7 +4,9 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.ModItems;
@@ -36,6 +38,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 (block) -> createOreDrop(ModBlocks.LITHERITE_ORE.get(), item.getItem()));
         add(ModBlocks.DEEPSLATE_LITHERITE_ORE.get(),
                 (block) -> createOreDrop(ModBlocks.DEEPSLATE_LITHERITE_ORE.get(), item.getItem()));
+
+        add(ModBlocks.BLUE_FIRE.get(),
+                (block) -> createOreDrop(ModBlocks.BLUE_FIRE.get(), Items.AIR));
+
     }
 
     @Override

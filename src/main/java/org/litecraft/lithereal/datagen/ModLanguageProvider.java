@@ -66,6 +66,8 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.FREEZING_STATION, "Freezing Station");
         addBlock(ModBlocks.FIRE_CRUCIBLE, "Fire Crucible");
 
+        addBlock(ModBlocks.BLUE_FIRE, "Blue Fire");
+
         add("creativemodetab.lithereal_tab", "Lithereal");
     }
 }

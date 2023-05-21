@@ -33,9 +33,9 @@ public class ModItems {
     public static final RegistryObject<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe",
             () -> new PickaxeItem(Tiers.DIAMOND, 2, -1.2f, new Item.Properties().durability(1750)));
 
-    public static final RegistryObject<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer",
+    public static final RegistryObject<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("cooled_litherite_hammer",
             () -> new LitheriteHammerItem(Tiers.DIAMOND, 4, -2.4f, new Item.Properties().durability(15750)));
-    public static final RegistryObject<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("burning_litherite_hammer",
+    public static final RegistryObject<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("heated_litherite_hammer",
             () -> new BurningLitheriteHammerItem(Tiers.DIAMOND, 4, -2.4f, new Item.Properties().durability(15750)));
     public static final RegistryObject<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer",
             () -> new LitheriteHammerItem(Tiers.DIAMOND, 4, -2.4f, new Item.Properties().durability(15750)));

@@ -262,46 +262,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_heated_litherite", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.HEATED_LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COOLED_LITHERITE_CRYSTAL.get())
-                .define('L', ModItems.LITHERITE_CRYSTAL.get())
-                .define('I', Items.ICE)
-                .pattern("III")
-                .pattern("ILI")
-                .pattern("III")
-                .unlockedBy("has_litherite", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItems.LITHERITE_CRYSTAL.get()).build()))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COOLED_LITHERITE_BLOCK.get())
-                .define('L', ModBlocks.LITHERITE_BLOCK.get())
-                .define('I', Items.ICE)
-                .pattern("III")
-                .pattern("ILI")
-                .pattern("III")
-                .unlockedBy("has_litherite_block", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModBlocks.LITHERITE_BLOCK.get()).build()))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COOLED_LITHERITE_CRYSTAL.get())
-                .define('L', ModItems.HEATED_LITHERITE_CRYSTAL.get())
-                .define('B', Items.BLUE_ICE)
-                .pattern("BBB")
-                .pattern("BLB")
-                .pattern("BBB")
-                .unlockedBy("has_heated_litherite", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItems.HEATED_LITHERITE_CRYSTAL.get()).build()))
-                .save(consumer, "lithereal:cooled_litherite_crystal_from_heated");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COOLED_LITHERITE_BLOCK.get())
-                .define('L', ModBlocks.HEATED_LITHERITE_BLOCK.get())
-                .define('B', Items.BLUE_ICE)
-                .pattern("BBB")
-                .pattern("BLB")
-                .pattern("BBB")
-                .unlockedBy("has_heated_litherite_block", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModBlocks.HEATED_LITHERITE_BLOCK.get()).build()))
-                .save(consumer, "lithereal:cooled_litherite_crystal_from_heated_block");
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> p_250654_, List<ItemLike> p_250172_, RecipeCategory p_250588_, ItemLike p_251868_, float p_250789_, int p_252144_, String p_251687_) {

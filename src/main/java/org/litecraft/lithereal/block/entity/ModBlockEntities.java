@@ -22,6 +22,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(FireCrucibleBlockEntity::new,
                             ModBlocks.FIRE_CRUCIBLE.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<BurningLitheriteBlockEntity>> BURNING_LITHERITE_BLOCK =
+            BLOCK_ENTITIES.register("burning_litherite_block", () ->
+                    BlockEntityType.Builder.of(BurningLitheriteBlockEntity::new,
+                            ModBlocks.HEATED_LITHERITE_BLOCK.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

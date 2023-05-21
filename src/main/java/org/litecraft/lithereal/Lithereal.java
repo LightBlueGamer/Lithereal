@@ -33,7 +33,7 @@ import java.util.Iterator;
 @Mod(Lithereal.MOD_ID)
 public class Lithereal {
     public static final String MOD_ID = "lithereal";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public Lithereal() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -108,4 +108,6 @@ public class Lithereal {
             MenuScreens.register(ModMenuTypes.FIRE_CRUCIBLE_MENU.get(), FireCrucibleScreen::new);
         }
     }
+
+
 }

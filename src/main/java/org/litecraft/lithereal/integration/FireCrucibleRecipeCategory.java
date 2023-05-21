@@ -50,8 +50,8 @@ public class FireCrucibleRecipeCategory implements IRecipeCategory<FireCrucibleR
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FireCrucibleRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 56, 22).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 80, 57).addIngredients(recipe.getIngredients().get(0));
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 34).addItemStack(recipe.output);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 13).addItemStack(recipe.output);
     }
 }

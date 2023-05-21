@@ -36,18 +36,20 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
-        if(menu.isCrafting()) {
-            blit(pPoseStack, x + 79, y + 35, 176, 14, menu.getScaledProgress(), 16);
+        if (menu.isCrafting()) {
+            int arrowHeight = 14;
+            int progressHeight = menu.getScaledProgress();
+            int yOffset = y + 37 + arrowHeight - progressHeight;
+            if(menu.getHeatLevel() == 1) blit(pPoseStack, x + 80, yOffset, 176, arrowHeight - progressHeight, 14, progressHeight);
+            else if(menu.getHeatLevel() == 2) blit(pPoseStack, x + 80, yOffset, 190, arrowHeight - progressHeight, 14, progressHeight);
         }
     }
 
     private void renderHeatSource(PoseStack pPoseStack, int x, int y) {
-        if(menu.getHeatValue() >= 1 && menu.getHeatValue() <= 80) {
-            blit(pPoseStack, x + 57, y + 46, 176, 0, 14, 14);
-        } else if(menu.getHeatValue() >= 81) {
-            blit(pPoseStack, x + 57, y + 46, 190, 0, 14, 14);
-        }
+        if(menu.getHeatLevel() == 2) blit(pPoseStack, x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
+        else if(menu.getHeatLevel() == 1) blit(pPoseStack, x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
     }
+
 
     @Override
     public void render(PoseStack pPoseStack, int mouseX, int mouseY, float delta) {

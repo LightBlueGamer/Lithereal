@@ -4,6 +4,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -12,6 +13,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.Lithereal;
+import org.litecraft.lithereal.block.custom.BlueFireBlock;
+import org.litecraft.lithereal.block.custom.BurningLitheriteBlock;
 import org.litecraft.lithereal.block.custom.FireCrucibleBlock;
 import org.litecraft.lithereal.block.custom.FreezingStationBlock;
 import org.litecraft.lithereal.item.ModItems;
@@ -39,7 +42,7 @@ public class ModBlocks {
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> HEATED_LITHERITE_BLOCK = registerHeatedBlock("heated_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
+            () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of(Material.AMETHYST)
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> LITHERITE_ORE = registerBlock("litherite_ore",
@@ -50,13 +53,18 @@ public class ModBlocks {
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f).requiresCorrectToolForDrops(), UniformInt.of(2, 6)));
 
-
-
+    public static final RegistryObject<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
+            () -> new BlueFireBlock(BlockBehaviour.Properties.copy(Blocks.SOUL_FIRE), 15));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
+        return toReturn;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerBlockOnly(String name, Supplier<T> block) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
     }
 
