@@ -1,11 +1,16 @@
 package org.litecraft.lithereal.item.custom;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import org.litecraft.lithereal.block.ModBlocks;
+import org.litecraft.lithereal.util.KeyBinding;
 
 public class CooledLitheriteArmorItem extends ArmorItem {
 
@@ -22,16 +27,17 @@ public class CooledLitheriteArmorItem extends ArmorItem {
                         player.setTicksFrozen(0);
                     }
                 }
+                if(KeyBinding.FREEZE_KEY.isDown()) {
+                    for (int x = -4; x <= 4; x++) {
+                        for (int z = -4; z <= 4; z++) {
+                            BlockPos checkPos = player.blockPosition().offset(x, -1, z);
+                            if (world.getBlockState(checkPos).getBlock() == Blocks.WATER) {
+                                world.setBlockAndUpdate(checkPos, Blocks.FROSTED_ICE.defaultBlockState());
+                            }
+                        }
+                    }
+                }
             }
-        }
-    }
-    private void addStatusEffectForMaterial(Player player, ArmorMaterial mapArmorMaterial,
-                                            MobEffectInstance mapStatusEffect) {
-        boolean hasPlayerEffect = player.hasEffect(mapStatusEffect.getEffect());
-
-        if(hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
-            player.addEffect(new MobEffectInstance(mapStatusEffect.getEffect(),
-                    mapStatusEffect.getDuration(), mapStatusEffect.getAmplifier()));
         }
     }
 

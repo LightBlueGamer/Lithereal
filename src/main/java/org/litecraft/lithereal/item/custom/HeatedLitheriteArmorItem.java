@@ -1,6 +1,8 @@
 package org.litecraft.lithereal.item.custom;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.litecraft.lithereal.block.ModBlocks;
+import org.litecraft.lithereal.util.KeyBinding;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -31,6 +34,12 @@ public class HeatedLitheriteArmorItem extends ArmorItem {
         if(!world.isClientSide()) {
             if(hasFullSuitOfArmorOn(player)) {
                 evaluateArmorEffects(player);
+                Block blockBelow = world.getBlockState(player.blockPosition().below()).getBlock();
+                if(KeyBinding.SCORCH_KEY.isDown()) {
+                    if(blockBelow == Blocks.NETHERRACK) world.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_NETHERRACK.get().defaultBlockState());
+                    else if(blockBelow == Blocks.CRIMSON_NYLIUM) world.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_CRIMSON_NYLIUM.get().defaultBlockState());
+                    else if(blockBelow == Blocks.WARPED_NYLIUM) world.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_WARPED_NYLIUM.get().defaultBlockState());
+                }
             }
         }
     }

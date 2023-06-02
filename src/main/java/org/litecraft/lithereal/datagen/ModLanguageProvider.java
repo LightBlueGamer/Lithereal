@@ -62,6 +62,9 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
         addBlock(ModBlocks.COOLED_LITHERITE_BLOCK, "Frozen Litherite Block");
         addBlock(ModBlocks.HEATED_LITHERITE_BLOCK, "Burning Litherite Block");
+        addBlock(ModBlocks.SCORCHED_CRIMSON_NYLIUM, "Scorched Crimson Nylium Block");
+        addBlock(ModBlocks.SCORCHED_WARPED_NYLIUM, "Scorched Warped Nylium Block");
+        addBlock(ModBlocks.SCORCHED_NETHERRACK, "Scorched Netherrack Block");
 
         addBlock(ModBlocks.FREEZING_STATION, "Freezing Station");
         addBlock(ModBlocks.FIRE_CRUCIBLE, "Fire Crucible");
@@ -69,5 +72,9 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.BLUE_FIRE, "Blue Fire");
 
         add("creativemodetab.lithereal_tab", "Lithereal");
+
+        add("key.lithereal.scorch_ground", "Scorch Ground");
+        add("key.lithereal.freeze_water", "Frost Walker");
+        add("key.category.lithereal.lithereal", "Lithereal");
     }
 }
