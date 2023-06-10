@@ -2,10 +2,6 @@ package org.litecraft.lithereal;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -15,20 +11,15 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.ModItems;
 import org.litecraft.lithereal.block.entity.ModBlockEntities;
 import org.litecraft.lithereal.item.ModCreativeModeTabs;
-import org.litecraft.lithereal.item.ModItems;
 import org.litecraft.lithereal.recipe.ModRecipes;
-import org.litecraft.lithereal.screen.FireCrucibleMenu;
 import org.litecraft.lithereal.screen.FireCrucibleScreen;
 import org.litecraft.lithereal.screen.FreezingStationScreen;
 import org.litecraft.lithereal.screen.ModMenuTypes;
 import org.slf4j.Logger;
-
-import java.util.Iterator;
 
 @Mod(Lithereal.MOD_ID)
 public class Lithereal {
@@ -89,8 +80,6 @@ public class Lithereal {
             event.accept(ModItems.HEATED_LITHERITE_CHESTPLATE);
             event.accept(ModItems.HEATED_LITHERITE_LEGGINGS);
             event.accept(ModItems.HEATED_LITHERITE_BOOTS);
-            event.accept(ModItems.BURNING_LITHERITE_BOW);
-            event.accept(ModItems.FREEZING_LITHERITE_BOW);
 
             event.accept(ModBlocks.LITHERITE_ORE);
             event.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE);

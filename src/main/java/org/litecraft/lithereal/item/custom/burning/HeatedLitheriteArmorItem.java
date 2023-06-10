@@ -1,9 +1,6 @@
 package org.litecraft.lithereal.item.custom.burning;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -13,12 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.custom.ModArmorMaterials;
 import org.litecraft.lithereal.util.KeyBinding;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class HeatedLitheriteArmorItem extends ArmorItem {
