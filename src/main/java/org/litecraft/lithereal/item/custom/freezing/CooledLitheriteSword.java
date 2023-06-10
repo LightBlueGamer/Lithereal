@@ -1,4 +1,4 @@
-package org.litecraft.lithereal.item.custom;
+package org.litecraft.lithereal.item.custom.freezing;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;

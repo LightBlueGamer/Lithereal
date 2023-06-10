@@ -7,6 +7,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.item.custom.*;
+import org.litecraft.lithereal.item.custom.burning.*;
+import org.litecraft.lithereal.item.custom.freezing.CooledLitheriteArmorItem;
+import org.litecraft.lithereal.item.custom.freezing.CooledLitheriteSword;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -14,6 +17,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> LITHERITE_CRYSTAL = ITEMS.register("litherite_crystal",
             () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> HEATED_LITHERITE_CRYSTAL = ITEMS.register("heated_litherite_crystal",
             () -> new Item(new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> COOLED_LITHERITE_CRYSTAL = ITEMS.register("cooled_litherite_crystal",

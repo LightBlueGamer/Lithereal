@@ -1,12 +1,13 @@
-package org.litecraft.lithereal.item.custom;
+package org.litecraft.lithereal.item.custom.burning;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
@@ -14,8 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BurningLitheriteAxeItem extends AxeItem {
-    public BurningLitheriteAxeItem(Tier tier, int damage, float attackSpeed, Properties properties) {
+public class BurningLitheriteShovelItem extends ShovelItem {
+    public BurningLitheriteShovelItem(Tier tier, float damage, float attackSpeed, Properties properties) {
         super(tier, damage, attackSpeed, properties);
     }
 

@@ -89,6 +89,8 @@ public class Lithereal {
             event.accept(ModItems.HEATED_LITHERITE_CHESTPLATE);
             event.accept(ModItems.HEATED_LITHERITE_LEGGINGS);
             event.accept(ModItems.HEATED_LITHERITE_BOOTS);
+            event.accept(ModItems.BURNING_LITHERITE_BOW);
+            event.accept(ModItems.FREEZING_LITHERITE_BOW);
 
             event.accept(ModBlocks.LITHERITE_ORE);
             event.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE);

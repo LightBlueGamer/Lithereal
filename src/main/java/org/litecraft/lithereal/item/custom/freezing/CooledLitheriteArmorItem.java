@@ -1,4 +1,4 @@
-package org.litecraft.lithereal.item.custom;
+package org.litecraft.lithereal.item.custom.freezing;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.litecraft.lithereal.block.ModBlocks;
+import org.litecraft.lithereal.item.custom.ModArmorMaterials;
 import org.litecraft.lithereal.util.KeyBinding;
 
 public class CooledLitheriteArmorItem extends ArmorItem {

@@ -1,4 +1,4 @@
-package org.litecraft.lithereal.item.custom;
+package org.litecraft.lithereal.item.custom.burning;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.Minecraft;
@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.litecraft.lithereal.block.ModBlocks;
+import org.litecraft.lithereal.item.custom.ModArmorMaterials;
 import org.litecraft.lithereal.util.KeyBinding;
 
 import java.util.Arrays;
