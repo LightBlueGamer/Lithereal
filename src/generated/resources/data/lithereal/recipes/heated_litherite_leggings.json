@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:heated_litherite_crystal"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "L L",
+    "L L"
+  ],
+  "result": {
+    "item": "lithereal:heated_litherite_leggings"
+  },
+  "show_notification": true
+}

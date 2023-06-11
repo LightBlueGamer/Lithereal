@@ -1,0 +1,15 @@
+{
+  "type": "lithereal:freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "lithereal:litherite_crystal"
+    }
+  ],
+  "output": {
+    "item": "lithereal:cooled_litherite_crystal",
+    "nbt": "{Purity:\"???\",Power:\"???\"}"
+  }
+}

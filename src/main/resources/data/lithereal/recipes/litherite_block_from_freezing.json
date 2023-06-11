@@ -1,0 +1,15 @@
+{
+  "type": "lithereal:freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:packed_ice",
+      "count": 9
+    },
+    {
+      "item": "lithereal:heated_litherite_block"
+    }
+  ],
+  "output": {
+    "item": "lithereal:litherite_block"
+  }
+}
