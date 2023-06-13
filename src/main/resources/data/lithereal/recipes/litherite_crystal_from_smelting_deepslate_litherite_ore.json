@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "litherite_crystal",
+  "ingredient": {
+    "item": "lithereal:deepslate_litherite_ore"
+  },
+  "result": {
+    "item": "lithereal:litherite_crystal",
+    "nbt": "{Purity:\"???\",Power:\"???\"}"
+  }
+}

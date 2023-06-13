@@ -1,0 +1,31 @@
+modLoader="javafml" 
+loaderVersion="[43,)"
+license="MIT License"
+
+[[mods]]
+modId="lithereal"
+version="1.2.0-1.19.2-FORGE"
+displayName="Lithereal"
+# A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
+#updateJSONURL="https://change.me.example.invalid/updates.json"
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" 
+logoFile="lithereal.png"
+credits="Haru for the 1.19.2 port"
+authors="Tim_, Haru"
+description='''
+Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.
+'''
+
+[[dependencies.lithereal]]
+    modId="forge" 
+    mandatory=true 
+    versionRange="[43,)" 
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.lithereal]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.2,1.20)"
+    ordering="NONE"
+    side="BOTH"

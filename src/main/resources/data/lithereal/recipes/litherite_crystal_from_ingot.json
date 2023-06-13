@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "lithereal:litherite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "lithereal:litherite_crystal",
+    "nbt": "{Purity:\"???\",Power:\"???\"}"
+  }
+}

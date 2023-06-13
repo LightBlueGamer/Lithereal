@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 180,
+  "experience": 90,
+  "group": "litherite_crystal",
+  "ingredient": {
+    "item": "lithereal:litherite_block"
+  },
+  "result": {
+    "count": 3,
+    "item": "lithereal:heated_litherite_block"
+  }
+}
