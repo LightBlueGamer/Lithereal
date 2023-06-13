@@ -46,6 +46,10 @@ public class ModBlocks {
             () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of(Material.AMETHYST)
                     .strength(6f).requiresCorrectToolForDrops()));
 
+    public static final RegistryObject<Block> WITHERING_LITHERITE_BLOCK = registerHeatedBlock("withering_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST)
+                    .strength(6f).requiresCorrectToolForDrops()));
+
     public static final RegistryObject<Block> LITHERITE_ORE = registerBlock("litherite_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(5f).requiresCorrectToolForDrops(), UniformInt.of(2, 6)));

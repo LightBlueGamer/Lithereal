@@ -47,45 +47,61 @@ public class Lithereal {
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if(event.getTab() == ModCreativeModeTabs.LITHEREAL_TAB) {
+            event.accept(ModBlocks.LITHERITE_BLOCK);
             event.accept(ModItems.LITHERITE_CRYSTAL);
-            event.accept(ModItems.HEATED_LITHERITE_CRYSTAL);
-            event.accept(ModItems.COOLED_LITHERITE_CRYSTAL);
-            event.accept(ModItems.COOLED_LITHERITE_SWORD);
-            event.accept(ModItems.HEATED_LITHERITE_SWORD);
             event.accept(ModItems.LITHERITE_SWORD);
-            event.accept(ModItems.COOLED_LITHERITE_PICKAXE);
-            event.accept(ModItems.HEATED_LITHERITE_PICKAXE);
-            event.accept(ModItems.LITHERITE_PICKAXE);
-            event.accept(ModItems.FROZEN_LITHERITE_HAMMER);
-            event.accept(ModItems.BURNING_LITHERITE_HAMMER);
-            event.accept(ModItems.LITHERITE_HAMMER);
-            event.accept(ModItems.COOLED_LITHERITE_AXE);
-            event.accept(ModItems.HEATED_LITHERITE_AXE);
-            event.accept(ModItems.LITHERITE_AXE);
-            event.accept(ModItems.COOLED_LITHERITE_SHOVEL);
-            event.accept(ModItems.HEATED_LITHERITE_SHOVEL);
             event.accept(ModItems.LITHERITE_SHOVEL);
-            event.accept(ModItems.COOLED_LITHERITE_HOE);
-            event.accept(ModItems.HEATED_LITHERITE_HOE);
+            event.accept(ModItems.LITHERITE_PICKAXE);
+            event.accept(ModItems.LITHERITE_AXE);
             event.accept(ModItems.LITHERITE_HOE);
+            event.accept(ModItems.LITHERITE_HAMMER);
             event.accept(ModItems.LITHERITE_HELMET);
             event.accept(ModItems.LITHERITE_CHESTPLATE);
             event.accept(ModItems.LITHERITE_LEGGINGS);
             event.accept(ModItems.LITHERITE_BOOTS);
-            event.accept(ModItems.COOLED_LITHERITE_HELMET);
-            event.accept(ModItems.COOLED_LITHERITE_CHESTPLATE);
-            event.accept(ModItems.COOLED_LITHERITE_LEGGINGS);
-            event.accept(ModItems.COOLED_LITHERITE_BOOTS);
+
+            event.accept(ModBlocks.HEATED_LITHERITE_BLOCK);
+            event.accept(ModItems.HEATED_LITHERITE_CRYSTAL);
+            event.accept(ModItems.HEATED_LITHERITE_SWORD);
+            event.accept(ModItems.HEATED_LITHERITE_SHOVEL);
+            event.accept(ModItems.HEATED_LITHERITE_PICKAXE);
+            event.accept(ModItems.HEATED_LITHERITE_AXE);
+            event.accept(ModItems.HEATED_LITHERITE_HOE);
+            event.accept(ModItems.BURNING_LITHERITE_HAMMER);
             event.accept(ModItems.HEATED_LITHERITE_HELMET);
             event.accept(ModItems.HEATED_LITHERITE_CHESTPLATE);
             event.accept(ModItems.HEATED_LITHERITE_LEGGINGS);
             event.accept(ModItems.HEATED_LITHERITE_BOOTS);
 
+            event.accept(ModBlocks.COOLED_LITHERITE_BLOCK);
+            event.accept(ModItems.COOLED_LITHERITE_CRYSTAL);
+            event.accept(ModItems.COOLED_LITHERITE_SWORD);
+            event.accept(ModItems.COOLED_LITHERITE_SHOVEL);
+            event.accept(ModItems.COOLED_LITHERITE_PICKAXE);
+            event.accept(ModItems.COOLED_LITHERITE_AXE);
+            event.accept(ModItems.COOLED_LITHERITE_HOE);
+            event.accept(ModItems.FROZEN_LITHERITE_HAMMER);
+            event.accept(ModItems.COOLED_LITHERITE_HELMET);
+            event.accept(ModItems.COOLED_LITHERITE_CHESTPLATE);
+            event.accept(ModItems.COOLED_LITHERITE_LEGGINGS);
+            event.accept(ModItems.COOLED_LITHERITE_BOOTS);
+
+            event.accept(ModBlocks.WITHERING_LITHERITE_BLOCK);
+            event.accept(ModItems.WITHERING_LITHERITE_CRYSTAL);
+            event.accept(ModItems.WITHERING_LITHERITE_SWORD);
+            event.accept(ModItems.WITHERING_LITHERITE_SHOVEL);
+            event.accept(ModItems.WITHERING_LITHERITE_PICKAXE);
+            event.accept(ModItems.WITHERING_LITHERITE_AXE);
+            event.accept(ModItems.WITHERING_LITHERITE_HOE);
+            event.accept(ModItems.WITHERING_LITHERITE_HAMMER);
+            event.accept(ModItems.WITHERING_LITHERITE_HELMET);
+            event.accept(ModItems.WITHERING_LITHERITE_CHESTPLATE);
+            event.accept(ModItems.WITHERING_LITHERITE_LEGGINGS);
+            event.accept(ModItems.WITHERING_LITHERITE_BOOTS);
+
             event.accept(ModBlocks.LITHERITE_ORE);
             event.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE);
-            event.accept(ModBlocks.LITHERITE_BLOCK);
-            event.accept(ModBlocks.COOLED_LITHERITE_BLOCK);
-            event.accept(ModBlocks.HEATED_LITHERITE_BLOCK);
+
             event.accept(ModBlocks.FREEZING_STATION);
             event.accept(ModBlocks.FIRE_CRUCIBLE);
         }

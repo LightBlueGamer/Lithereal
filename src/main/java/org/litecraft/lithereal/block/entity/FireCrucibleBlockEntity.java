@@ -205,6 +205,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private static void craftItem(FireCrucibleBlockEntity pEntity) {
+        Lithereal.LOGGER.debug("test");
         Level level = pEntity.level;
         SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
         for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
