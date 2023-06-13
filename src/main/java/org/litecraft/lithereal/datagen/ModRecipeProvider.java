@@ -61,6 +61,37 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         .of(ModItems.LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.WITHERING_LITHERITE_HELMET.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .pattern("LLL")
+                .pattern("L L")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.WITHERING_LITHERITE_CHESTPLATE.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .pattern("L L")
+                .pattern("LLL")
+                .pattern("LLL")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.WITHERING_LITHERITE_LEGGINGS.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .pattern("LLL")
+                .pattern("L L")
+                .pattern("L L")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.WITHERING_LITHERITE_BOOTS.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .pattern("L L")
+                .pattern("L L")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COOLED_LITHERITE_HELMET.get())
                 .define('L', ModItems.COOLED_LITHERITE_CRYSTAL.get())
                 .pattern("LLL")
@@ -132,6 +163,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_litherite", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.WITHERING_LITHERITE_SWORD.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("L")
+                .pattern("L")
+                .pattern("S")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COOLED_LITHERITE_SWORD.get())
                 .define('L', ModItems.COOLED_LITHERITE_CRYSTAL.get())
                 .define('S', Tags.Items.RODS_WOODEN)
@@ -159,6 +199,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" S ")
                 .unlockedBy("has_litherite", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WITHERING_LITHERITE_PICKAXE.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("LLL")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COOLED_LITHERITE_PICKAXE.get())
                 .define('L', ModItems.COOLED_LITHERITE_CRYSTAL.get())
@@ -188,6 +237,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_litherite", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WITHERING_LITHERITE_AXE.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("LL")
+                .pattern("LS")
+                .pattern(" S")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COOLED_LITHERITE_AXE.get())
                 .define('L', ModItems.COOLED_LITHERITE_CRYSTAL.get())
                 .define('S', Tags.Items.RODS_WOODEN)
@@ -216,6 +274,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_litherite", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WITHERING_LITHERITE_SHOVEL.get())
+                .define('L', ModItems.WITHERING_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("L")
+                .pattern("S")
+                .pattern("S")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COOLED_LITHERITE_SHOVEL.get())
                 .define('L', ModItems.COOLED_LITHERITE_CRYSTAL.get())
                 .define('S', Tags.Items.RODS_WOODEN)
@@ -243,6 +310,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" S")
                 .unlockedBy("has_litherite", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ModItems.LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WITHERING_LITHERITE_HOE.get())
+                .define('L', ModItems.LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("LL")
+                .pattern(" S")
+                .pattern(" S")
+                .unlockedBy("has_withering_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COOLED_LITHERITE_HOE.get())
                 .define('L', ModItems.COOLED_LITHERITE_CRYSTAL.get())

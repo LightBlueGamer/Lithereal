@@ -21,45 +21,61 @@ public class ModCreativeModeTabs {
             CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.LITHERITE_CRYSTAL.get()))
                     .title(Component.translatable("creativemodetab.lithereal_tab"))
                     .displayItems((displayParameters, output) -> {
+                        output.accept(ModBlocks.LITHERITE_BLOCK.get());
                         output.accept(ModItems.LITHERITE_CRYSTAL.get());
-                        output.accept(ModItems.HEATED_LITHERITE_CRYSTAL.get());
-                        output.accept(ModItems.COOLED_LITHERITE_CRYSTAL.get());
-                        output.accept(ModItems.COOLED_LITHERITE_SWORD.get());
-                        output.accept(ModItems.HEATED_LITHERITE_SWORD.get());
                         output.accept(ModItems.LITHERITE_SWORD.get());
-                        output.accept(ModItems.COOLED_LITHERITE_PICKAXE.get());
-                        output.accept(ModItems.HEATED_LITHERITE_PICKAXE.get());
-                        output.accept(ModItems.LITHERITE_PICKAXE.get());
-                        output.accept(ModItems.FROZEN_LITHERITE_HAMMER.get());
-                        output.accept(ModItems.BURNING_LITHERITE_HAMMER.get());
-                        output.accept(ModItems.LITHERITE_HAMMER.get());
-                        output.accept(ModItems.COOLED_LITHERITE_AXE.get());
-                        output.accept(ModItems.HEATED_LITHERITE_AXE.get());
-                        output.accept(ModItems.LITHERITE_AXE.get());
-                        output.accept(ModItems.COOLED_LITHERITE_SHOVEL.get());
-                        output.accept(ModItems.HEATED_LITHERITE_SHOVEL.get());
                         output.accept(ModItems.LITHERITE_SHOVEL.get());
-                        output.accept(ModItems.COOLED_LITHERITE_HOE.get());
-                        output.accept(ModItems.HEATED_LITHERITE_HOE.get());
+                        output.accept(ModItems.LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.LITHERITE_AXE.get());
                         output.accept(ModItems.LITHERITE_HOE.get());
+                        output.accept(ModItems.LITHERITE_HAMMER.get());
                         output.accept(ModItems.LITHERITE_HELMET.get());
                         output.accept(ModItems.LITHERITE_CHESTPLATE.get());
                         output.accept(ModItems.LITHERITE_LEGGINGS.get());
                         output.accept(ModItems.LITHERITE_BOOTS.get());
-                        output.accept(ModItems.COOLED_LITHERITE_HELMET.get());
-                        output.accept(ModItems.COOLED_LITHERITE_CHESTPLATE.get());
-                        output.accept(ModItems.COOLED_LITHERITE_LEGGINGS.get());
-                        output.accept(ModItems.COOLED_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.HEATED_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.HEATED_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.HEATED_LITHERITE_SWORD.get());
+                        output.accept(ModItems.HEATED_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.HEATED_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.HEATED_LITHERITE_AXE.get());
+                        output.accept(ModItems.HEATED_LITHERITE_HOE.get());
+                        output.accept(ModItems.BURNING_LITHERITE_HAMMER.get());
                         output.accept(ModItems.HEATED_LITHERITE_HELMET.get());
                         output.accept(ModItems.HEATED_LITHERITE_CHESTPLATE.get());
                         output.accept(ModItems.HEATED_LITHERITE_LEGGINGS.get());
                         output.accept(ModItems.HEATED_LITHERITE_BOOTS.get());
 
+                        output.accept(ModBlocks.COOLED_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.COOLED_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.COOLED_LITHERITE_SWORD.get());
+                        output.accept(ModItems.COOLED_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.COOLED_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.COOLED_LITHERITE_AXE.get());
+                        output.accept(ModItems.COOLED_LITHERITE_HOE.get());
+                        output.accept(ModItems.FROZEN_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.COOLED_LITHERITE_HELMET.get());
+                        output.accept(ModItems.COOLED_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.COOLED_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.COOLED_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.WITHERING_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_SWORD.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_AXE.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_HOE.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_HELMET.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.WITHERING_LITHERITE_BOOTS.get());
+
                         output.accept(ModBlocks.LITHERITE_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE.get());
-                        output.accept(ModBlocks.LITHERITE_BLOCK.get());
-                        output.accept(ModBlocks.COOLED_LITHERITE_BLOCK.get());
-                        output.accept(ModBlocks.HEATED_LITHERITE_BLOCK.get());
+
                         output.accept(ModBlocks.FREEZING_STATION.get());
                         output.accept(ModBlocks.FIRE_CRUCIBLE.get());
                     })

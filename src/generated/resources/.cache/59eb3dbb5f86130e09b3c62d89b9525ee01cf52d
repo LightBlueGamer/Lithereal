@@ -1,4 +1,4 @@
-// 1.20	2023-06-10T18:36:42.0657961	Loot Tables
+// 1.20	2023-06-13T16:33:41.4188296	Loot Tables
 df5d9d27a9faf33a992db7a6a1260cd5b038106a data/lithereal/loot_tables/blocks/blue_fire.json
 51c42e34d5d48c920ab146b569e433ab9c5b68c6 data/lithereal/loot_tables/blocks/cooled_litherite_block.json
 153579e92e37dcca4c78024d99a47572509c94a7 data/lithereal/loot_tables/blocks/deepslate_litherite_ore.json
@@ -10,3 +10,4 @@ df5d9d27a9faf33a992db7a6a1260cd5b038106a data/lithereal/loot_tables/blocks/blue_
 bb1bab0c4adfb303569baf8dc7568d68ba0961d6 data/lithereal/loot_tables/blocks/scorched_crimson_nylium.json
 b886ec8087df9f932abd7535ffbb65e5ea2057a6 data/lithereal/loot_tables/blocks/scorched_netherrack.json
 c942f92bda28905768580042e2147fc2d38448bb data/lithereal/loot_tables/blocks/scorched_warped_nylium.json
+aa3dcf23fe1e2bbf3c3be93187ffead7dc8ffc7a data/lithereal/loot_tables/blocks/withering_litherite_block.json

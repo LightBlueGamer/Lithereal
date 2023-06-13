@@ -1,4 +1,4 @@
-// 1.20	2023-06-10T18:36:42.068788	Item Models: lithereal
+// 1.20	2023-06-13T16:33:41.4213378	Item Models: lithereal
 40c21d40fd0a0fd3cba8c3881902903f51aaeb44 assets/lithereal/models/item/cooled_litherite_axe.json
 46d3f6270872a5f5816faf67eb36a820897943c5 assets/lithereal/models/item/cooled_litherite_boots.json
 cf62511bce269cb9023b3c66f131e10f1bb44f8f assets/lithereal/models/item/cooled_litherite_chestplate.json
@@ -32,3 +32,14 @@ e36296eb1cbf1828ba6cc4b52180a4286bfcf018 assets/lithereal/models/item/litherite_
 f5f77b281432b9941c9a38686b406a54531a6f63 assets/lithereal/models/item/litherite_pickaxe.json
 ed78fdcfa7d269784e57a24b5bfeeea47631c60f assets/lithereal/models/item/litherite_shovel.json
 57285c584f9fb64c65253b409f6f12aff205a42b assets/lithereal/models/item/litherite_sword.json
+71d1ff3240ed8152619efd3082dba73a6c3f8ee9 assets/lithereal/models/item/withering_litherite_axe.json
+0970dc0a3e591d4ae9a5adbb6d2aa410677db58c assets/lithereal/models/item/withering_litherite_boots.json
+5b6669f37e4020ceca0ea36887f456cbea9a1b85 assets/lithereal/models/item/withering_litherite_chestplate.json
+58543beb4aba751dde4dbcc0aa4c37d6bbafdec8 assets/lithereal/models/item/withering_litherite_crystal.json
+825fe4fd77b0a0fdc8a919f3c16ee7fd66b988ab assets/lithereal/models/item/withering_litherite_hammer.json
+efd9792d8adbb001e8d6f7826a201545024e689a assets/lithereal/models/item/withering_litherite_helmet.json
+7f896478dd00761cada69df921267e31dc0edc4b assets/lithereal/models/item/withering_litherite_hoe.json
+b8f50e6630f1fbd7e8a5487b71e10913bb7aca89 assets/lithereal/models/item/withering_litherite_leggings.json
+444dd861179a49f8e4507661464d9f95ecc36603 assets/lithereal/models/item/withering_litherite_pickaxe.json
+78497895d6f7bfd0ce29c15f9670983694539849 assets/lithereal/models/item/withering_litherite_shovel.json
+5b8143899655494983dadac6e99d4479e2773ac0 assets/lithereal/models/item/withering_litherite_sword.json
