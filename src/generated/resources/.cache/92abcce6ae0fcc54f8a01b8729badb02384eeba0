@@ -1,3 +1,3 @@
-// 1.19.4	2023-05-11T17:43:10.5798759	Tags for minecraft:block mod id lithereal
-7506b30483139215a0ed5b74e3ab4962bc9f258f data/minecraft/tags/blocks/mineable/pickaxe.json
-7506b30483139215a0ed5b74e3ab4962bc9f258f data/minecraft/tags/blocks/needs_diamond_tool.json
+// 1.19.4	2023-06-12T01:10:53.7876079	Tags for minecraft:block mod id lithereal
+d29a49d6e0f9634c56200487f93fb571a6db799a data/minecraft/tags/blocks/mineable/pickaxe.json
+07ec0ee0ac47229ebbbe952d8434b60c07cc60f6 data/minecraft/tags/blocks/needs_diamond_tool.json

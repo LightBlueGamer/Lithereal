@@ -4,9 +4,10 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = '1.2.0-1.19.2-FORGE'
-group = 'com.haru.lithereal'
+version = '1.3.0-1.19.2-FORGE'
+group = 'org.litecraft.lithereal'
 archivesBaseName = 'lithereal'
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -18,10 +19,10 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
+            property 'forge.enabledGameTestNamespaces', 'lithereal'
 
             mods {
-                examplemod {
+                lithereal {
                     source sourceSets.main
                 }
             }
@@ -31,10 +32,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-
+            property 'forge.enabledGameTestNamespaces', 'lithereal'
             mods {
-                examplemod {
+                lithereal {
                     source sourceSets.main
                 }
             }
@@ -44,10 +44,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-
+            property 'forge.enabledGameTestNamespaces', 'lithereal'
             mods {
-                examplemod {
+                lithereal {
                     source sourceSets.main
                 }
             }
@@ -57,10 +56,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
+            args '--mod', 'lithereal', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
-                examplemod {
+                lithereal {
                     source sourceSets.main
                 }
             }
@@ -86,7 +84,6 @@ repositories {
 }
 
 dependencies {
-
     minecraft 'net.minecraftforge:forge:1.19.2-43.2.14'
     compileOnly(fg.deobf("mezz.jei:jei-1.19.2-common-api:11.6.0.1015"))
     compileOnly(fg.deobf("mezz.jei:jei-1.19.2-forge-api:11.6.0.1015"))
@@ -97,11 +94,11 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "lithereal",
-                "Specification-Vendor"    : "Tim_, Haru",
-                "Specification-Version"   : "1.2.0-1.19.2-FORGE",
+                "Specification-Vendor"    : "litherealsareus, Haru",
+                "Specification-Version"   : "1.3.0",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "Tim_, Haru",
+                "Implementation-Vendor"   : "litherealsareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
