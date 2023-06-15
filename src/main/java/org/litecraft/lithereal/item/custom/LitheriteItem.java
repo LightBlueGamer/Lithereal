@@ -5,6 +5,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.ModItems;
 
 public class LitheriteItem extends Item {
@@ -15,15 +17,13 @@ public class LitheriteItem extends Item {
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
         Level level = entity.level();
-        if(!level.isClientSide()) {
-            if(level.getBlockState(entity.blockPosition()).getBlock() == Blocks.WITHER_ROSE) {
+        if (!level.isClientSide()) {
+            BlockState blockState = level.getBlockState(entity.blockPosition());
+            BlockState blockStateBelow = level.getBlockState(entity.blockPosition().below());
+
+            if (blockState.is(Blocks.WITHER_ROSE) || blockStateBelow.is(ModBlocks.WITHERING_LITHERITE_BLOCK.get())) {
                 ItemStack itemStack = new ItemStack(ModItems.WITHERING_LITHERITE_CRYSTAL.get(), stack.getCount());
-                ItemEntity item = new ItemEntity(
-                        level,
-                        entity.blockPosition().getX() + 0.5,
-                        entity.blockPosition().getY() + 1.0,
-                        entity.blockPosition().getZ() + 0.5,
-                        itemStack);
+                ItemEntity item = new ItemEntity(level, entity.getX() + 0.5, entity.getY() + 1.0, entity.getZ() + 0.5, itemStack);
                 level.addFreshEntity(item);
                 entity.kill();
             }
