@@ -73,6 +73,18 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.REGENERATING_LITHERITE_LEGGINGS, "Regenerating Litherite Crystal Leggings");
         addItem(ModItems.REGENERATING_LITHERITE_BOOTS, "Regenerating Litherite Crystal Boots");
 
+        addItem(ModItems.GLOWING_LITHERITE_CRYSTAL, "Glowing Litherite Crystal");
+        addItem(ModItems.GLOWING_LITHERITE_SWORD, "Glowing Litherite Crystal Sword");
+        addItem(ModItems.GLOWING_LITHERITE_HOE, "Glowing Litherite Crystal Hoe");
+        addItem(ModItems.GLOWING_LITHERITE_PICKAXE, "Glowing Litherite Crystal Pickaxe");
+        addItem(ModItems.GLOWING_LITHERITE_HAMMER, "Glowing Litherite Crystal Hammer");
+        addItem(ModItems.GLOWING_LITHERITE_AXE, "Glowing Litherite Crystal Axe");
+        addItem(ModItems.GLOWING_LITHERITE_SHOVEL, "Glowing Litherite Crystal Shovel");
+        addItem(ModItems.GLOWING_LITHERITE_HELMET, "Glowing Litherite Crystal Helmet");
+        addItem(ModItems.GLOWING_LITHERITE_CHESTPLATE, "Glowing Litherite Crystal Chestplate");
+        addItem(ModItems.GLOWING_LITHERITE_LEGGINGS, "Glowing Litherite Crystal Leggings");
+        addItem(ModItems.GLOWING_LITHERITE_BOOTS, "Glowing Litherite Crystal Boots");
+
         addBlock(ModBlocks.LITHERITE_ORE, "Litherite Ore");
         addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
 

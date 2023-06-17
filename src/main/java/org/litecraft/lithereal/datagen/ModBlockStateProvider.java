@@ -28,6 +28,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.HEATED_LITHERITE_BLOCK);
         blockWithItem(ModBlocks.WITHERING_LITHERITE_BLOCK);
         blockWithItem(ModBlocks.REGENERATING_LITHERITE_BLOCK);
+        blockWithItem(ModBlocks.GLOWING_LITHERITE_BLOCK);
 
         topSideBottomModelWithItem(ModBlocks.FREEZING_STATION);
     }
