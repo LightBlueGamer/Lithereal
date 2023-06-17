@@ -41,7 +41,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.HEATED_LITHERITE_PICKAXE.get());
                         output.accept(ModItems.HEATED_LITHERITE_AXE.get());
                         output.accept(ModItems.HEATED_LITHERITE_HOE.get());
-                        output.accept(ModItems.BURNING_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.HEATED_LITHERITE_HAMMER.get());
                         output.accept(ModItems.HEATED_LITHERITE_HELMET.get());
                         output.accept(ModItems.HEATED_LITHERITE_CHESTPLATE.get());
                         output.accept(ModItems.HEATED_LITHERITE_LEGGINGS.get());
@@ -54,7 +54,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COOLED_LITHERITE_PICKAXE.get());
                         output.accept(ModItems.COOLED_LITHERITE_AXE.get());
                         output.accept(ModItems.COOLED_LITHERITE_HOE.get());
-                        output.accept(ModItems.FROZEN_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.COOLED_LITHERITE_HAMMER.get());
                         output.accept(ModItems.COOLED_LITHERITE_HELMET.get());
                         output.accept(ModItems.COOLED_LITHERITE_CHESTPLATE.get());
                         output.accept(ModItems.COOLED_LITHERITE_LEGGINGS.get());
@@ -72,6 +72,19 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.WITHERING_LITHERITE_CHESTPLATE.get());
                         output.accept(ModItems.WITHERING_LITHERITE_LEGGINGS.get());
                         output.accept(ModItems.WITHERING_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.REGENERATING_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_SWORD.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_AXE.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_HOE.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_HELMET.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.REGENERATING_LITHERITE_BOOTS.get());
 
                         output.accept(ModBlocks.LITHERITE_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE.get());

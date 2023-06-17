@@ -45,7 +45,11 @@ public class ModBlocks {
             () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<Block> WITHERING_LITHERITE_BLOCK = registerHeatedBlock("withering_litherite_block",
+    public static final RegistryObject<Block> WITHERING_LITHERITE_BLOCK = registerBlock("withering_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> REGENERATING_LITHERITE_BLOCK = registerBlock("regenerating_litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 

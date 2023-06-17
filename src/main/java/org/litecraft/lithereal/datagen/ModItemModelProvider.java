@@ -18,59 +18,64 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleItem(ModItems.LITHERITE_CRYSTAL);
-        simpleItem(ModItems.HEATED_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.COOLED_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.WITHERING_LITHERITE_CRYSTAL);
-
         simpleItem(ModItems.LITHERITE_HELMET);
-        simpleItem(ModItems.HEATED_LITHERITE_HELMET);
-        simpleItem(ModItems.COOLED_LITHERITE_HELMET);
-        simpleItem(ModItems.WITHERING_LITHERITE_HELMET);
-
         simpleItem(ModItems.LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.HEATED_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.COOLED_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.WITHERING_LITHERITE_CHESTPLATE);
-
         simpleItem(ModItems.LITHERITE_LEGGINGS);
-        simpleItem(ModItems.HEATED_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.COOLED_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.WITHERING_LITHERITE_LEGGINGS);
-
         simpleItem(ModItems.LITHERITE_BOOTS);
-        simpleItem(ModItems.HEATED_LITHERITE_BOOTS);
-        simpleItem(ModItems.COOLED_LITHERITE_BOOTS);
-        simpleItem(ModItems.WITHERING_LITHERITE_BOOTS);
-
         handheldItem(ModItems.LITHERITE_SWORD);
-        handheldItem(ModItems.HEATED_LITHERITE_SWORD);
-        handheldItem(ModItems.COOLED_LITHERITE_SWORD);
-        handheldItem(ModItems.WITHERING_LITHERITE_SWORD);
-
         handheldItem(ModItems.LITHERITE_PICKAXE);
-        handheldItem(ModItems.HEATED_LITHERITE_PICKAXE);
-        handheldItem(ModItems.COOLED_LITHERITE_PICKAXE);
-        handheldItem(ModItems.WITHERING_LITHERITE_PICKAXE);
-
         handheldItem(ModItems.LITHERITE_HAMMER);
-        handheldItem(ModItems.BURNING_LITHERITE_HAMMER);
-        handheldItem(ModItems.FROZEN_LITHERITE_HAMMER);
-        handheldItem(ModItems.WITHERING_LITHERITE_HAMMER);
-
         handheldItem(ModItems.LITHERITE_AXE);
-        handheldItem(ModItems.HEATED_LITHERITE_AXE);
-        handheldItem(ModItems.COOLED_LITHERITE_AXE);
-        handheldItem(ModItems.WITHERING_LITHERITE_AXE);
-
         handheldItem(ModItems.LITHERITE_HOE);
-        handheldItem(ModItems.HEATED_LITHERITE_HOE);
-        handheldItem(ModItems.COOLED_LITHERITE_HOE);
-        handheldItem(ModItems.WITHERING_LITHERITE_HOE);
-
         handheldItem(ModItems.LITHERITE_SHOVEL);
+
+        simpleItem(ModItems.HEATED_LITHERITE_CRYSTAL);
+        simpleItem(ModItems.HEATED_LITHERITE_HELMET);
+        simpleItem(ModItems.HEATED_LITHERITE_CHESTPLATE);
+        simpleItem(ModItems.HEATED_LITHERITE_LEGGINGS);
+        simpleItem(ModItems.HEATED_LITHERITE_BOOTS);
+        handheldItem(ModItems.HEATED_LITHERITE_SWORD);
+        handheldItem(ModItems.HEATED_LITHERITE_PICKAXE);
+        handheldItem(ModItems.HEATED_LITHERITE_HAMMER);
+        handheldItem(ModItems.HEATED_LITHERITE_AXE);
+        handheldItem(ModItems.HEATED_LITHERITE_HOE);
         handheldItem(ModItems.HEATED_LITHERITE_SHOVEL);
+
+        simpleItem(ModItems.COOLED_LITHERITE_CRYSTAL);
+        simpleItem(ModItems.COOLED_LITHERITE_HELMET);
+        simpleItem(ModItems.COOLED_LITHERITE_CHESTPLATE);
+        simpleItem(ModItems.COOLED_LITHERITE_LEGGINGS);
+        simpleItem(ModItems.COOLED_LITHERITE_BOOTS);
+        handheldItem(ModItems.COOLED_LITHERITE_SWORD);
+        handheldItem(ModItems.COOLED_LITHERITE_PICKAXE);
+        handheldItem(ModItems.COOLED_LITHERITE_HAMMER);
+        handheldItem(ModItems.COOLED_LITHERITE_AXE);
+        handheldItem(ModItems.COOLED_LITHERITE_HOE);
         handheldItem(ModItems.COOLED_LITHERITE_SHOVEL);
+
+        simpleItem(ModItems.WITHERING_LITHERITE_CRYSTAL);
+        simpleItem(ModItems.WITHERING_LITHERITE_HELMET);
+        simpleItem(ModItems.WITHERING_LITHERITE_CHESTPLATE);
+        simpleItem(ModItems.WITHERING_LITHERITE_LEGGINGS);
+        simpleItem(ModItems.WITHERING_LITHERITE_BOOTS);
+        handheldItem(ModItems.WITHERING_LITHERITE_SWORD);
+        handheldItem(ModItems.WITHERING_LITHERITE_PICKAXE);
+        handheldItem(ModItems.WITHERING_LITHERITE_HAMMER);
+        handheldItem(ModItems.WITHERING_LITHERITE_AXE);
+        handheldItem(ModItems.WITHERING_LITHERITE_HOE);
         handheldItem(ModItems.WITHERING_LITHERITE_SHOVEL);
+
+        simpleItem(ModItems.REGENERATING_LITHERITE_CRYSTAL);
+        simpleItem(ModItems.REGENERATING_LITHERITE_HELMET);
+        simpleItem(ModItems.REGENERATING_LITHERITE_CHESTPLATE);
+        simpleItem(ModItems.REGENERATING_LITHERITE_LEGGINGS);
+        simpleItem(ModItems.REGENERATING_LITHERITE_BOOTS);
+        handheldItem(ModItems.REGENERATING_LITHERITE_SWORD);
+        handheldItem(ModItems.REGENERATING_LITHERITE_PICKAXE);
+        handheldItem(ModItems.REGENERATING_LITHERITE_HAMMER);
+        handheldItem(ModItems.REGENERATING_LITHERITE_AXE);
+        handheldItem(ModItems.REGENERATING_LITHERITE_HOE);
+        handheldItem(ModItems.REGENERATING_LITHERITE_SHOVEL);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

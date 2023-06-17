@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:regenerating_litherite_crystal"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "L L"
+  ],
+  "result": {
+    "item": "lithereal:regenerating_litherite_helmet"
+  },
+  "show_notification": true
+}
