@@ -17,7 +17,7 @@ public class RegeneratingLitheriteSword extends SwordItem {
     @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
         if(entity instanceof LivingEntity livingEntity) {
-            MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.REGENERATION, 200, 1);
+            MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.HEAL, 20, 3);
             livingEntity.addEffect(mobEffectInstance);
         }
         return super.onLeftClickEntity(stack, player, entity);

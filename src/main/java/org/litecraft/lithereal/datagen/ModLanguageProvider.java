@@ -61,17 +61,17 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.WITHERING_LITHERITE_LEGGINGS, "Withering Litherite Crystal Leggings");
         addItem(ModItems.WITHERING_LITHERITE_BOOTS, "Withering Litherite Crystal Boots");
 
-        addItem(ModItems.REGENERATING_LITHERITE_CRYSTAL, "Withering Litherite Crystal");
-        addItem(ModItems.REGENERATING_LITHERITE_SWORD, "Withering Litherite Crystal Sword");
-        addItem(ModItems.REGENERATING_LITHERITE_HOE, "Withering Litherite Crystal Hoe");
-        addItem(ModItems.REGENERATING_LITHERITE_PICKAXE, "Withering Litherite Crystal Pickaxe");
-        addItem(ModItems.REGENERATING_LITHERITE_HAMMER, "Withering Litherite Crystal Hammer");
-        addItem(ModItems.REGENERATING_LITHERITE_AXE, "Withering Litherite Crystal Axe");
-        addItem(ModItems.REGENERATING_LITHERITE_SHOVEL, "Withering Litherite Crystal Shovel");
-        addItem(ModItems.REGENERATING_LITHERITE_HELMET, "Withering Litherite Crystal Helmet");
-        addItem(ModItems.REGENERATING_LITHERITE_CHESTPLATE, "Withering Litherite Crystal Chestplate");
-        addItem(ModItems.REGENERATING_LITHERITE_LEGGINGS, "Withering Litherite Crystal Leggings");
-        addItem(ModItems.REGENERATING_LITHERITE_BOOTS, "Withering Litherite Crystal Boots");
+        addItem(ModItems.REGENERATING_LITHERITE_CRYSTAL, "Regenerating Litherite Crystal");
+        addItem(ModItems.REGENERATING_LITHERITE_SWORD, "Regenerating Litherite Crystal Sword");
+        addItem(ModItems.REGENERATING_LITHERITE_HOE, "Regenerating Litherite Crystal Hoe");
+        addItem(ModItems.REGENERATING_LITHERITE_PICKAXE, "Regenerating Litherite Crystal Pickaxe");
+        addItem(ModItems.REGENERATING_LITHERITE_HAMMER, "Regenerating Litherite Crystal Hammer");
+        addItem(ModItems.REGENERATING_LITHERITE_AXE, "Regenerating Litherite Crystal Axe");
+        addItem(ModItems.REGENERATING_LITHERITE_SHOVEL, "Regenerating Litherite Crystal Shovel");
+        addItem(ModItems.REGENERATING_LITHERITE_HELMET, "Regenerating Litherite Crystal Helmet");
+        addItem(ModItems.REGENERATING_LITHERITE_CHESTPLATE, "Regenerating Litherite Crystal Chestplate");
+        addItem(ModItems.REGENERATING_LITHERITE_LEGGINGS, "Regenerating Litherite Crystal Leggings");
+        addItem(ModItems.REGENERATING_LITHERITE_BOOTS, "Regenerating Litherite Crystal Boots");
 
         addBlock(ModBlocks.LITHERITE_ORE, "Litherite Ore");
         addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
