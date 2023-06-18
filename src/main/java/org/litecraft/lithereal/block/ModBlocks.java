@@ -57,6 +57,10 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
+    public static final RegistryObject<Block> INVISIBLE_LITHERITE_BLOCK = registerBlock("invisible_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
     public static final RegistryObject<Block> LITHERITE_ORE = registerBlock("litherite_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops(), UniformInt.of(2, 6)));

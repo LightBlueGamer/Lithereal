@@ -22,7 +22,7 @@ public class GlowingLitheriteArmorItem extends ArmorItem {
         if(!world.isClientSide()) {
             if(hasFullSuitOfArmorOn(player)) {
                 if(hasCorrectArmorOn(ModArmorMaterials.GLOWING_LITHERITE, player)) {
-                    MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.GLOWING, 200, 1);
+                    MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.GLOWING, 200, 1, true, false);
                     player.addEffect(mobEffectInstance);
                 }
             }
@@ -35,7 +35,7 @@ public class GlowingLitheriteArmorItem extends ArmorItem {
             if (player.hurtTime > 0 && !player.level().isClientSide) {
                 Entity attacker = player.getLastDamageSource().getEntity();
                 if (attacker instanceof LivingEntity) {
-                    ((LivingEntity) attacker).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200));
+                    ((LivingEntity) attacker).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 1, true, false));
                 }
             }
         }

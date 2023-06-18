@@ -85,14 +85,28 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.GLOWING_LITHERITE_LEGGINGS, "Glowing Litherite Crystal Leggings");
         addItem(ModItems.GLOWING_LITHERITE_BOOTS, "Glowing Litherite Crystal Boots");
 
-        addBlock(ModBlocks.LITHERITE_ORE, "Litherite Ore");
-        addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
+        addItem(ModItems.INVISIBLE_LITHERITE_CRYSTAL, "Invisible Litherite Crystal");
+        addItem(ModItems.INVISIBLE_LITHERITE_SWORD, "Invisible Litherite Crystal Sword");
+        addItem(ModItems.INVISIBLE_LITHERITE_HOE, "Invisible Litherite Crystal Hoe");
+        addItem(ModItems.INVISIBLE_LITHERITE_PICKAXE, "Invisible Litherite Crystal Pickaxe");
+        addItem(ModItems.INVISIBLE_LITHERITE_HAMMER, "Invisible Litherite Crystal Hammer");
+        addItem(ModItems.INVISIBLE_LITHERITE_AXE, "Invisible Litherite Crystal Axe");
+        addItem(ModItems.INVISIBLE_LITHERITE_SHOVEL, "Invisible Litherite Crystal Shovel");
+        addItem(ModItems.INVISIBLE_LITHERITE_HELMET, "Invisible Litherite Crystal Helmet");
+        addItem(ModItems.INVISIBLE_LITHERITE_CHESTPLATE, "Invisible Litherite Crystal Chestplate");
+        addItem(ModItems.INVISIBLE_LITHERITE_LEGGINGS, "Invisible Litherite Crystal Leggings");
+        addItem(ModItems.INVISIBLE_LITHERITE_BOOTS, "Invisible Litherite Crystal Boots");
 
         addBlock(ModBlocks.LITHERITE_BLOCK, "Litherite Block");
         addBlock(ModBlocks.COOLED_LITHERITE_BLOCK, "Frozen Litherite Block");
         addBlock(ModBlocks.HEATED_LITHERITE_BLOCK, "Burning Litherite Block");
         addBlock(ModBlocks.WITHERING_LITHERITE_BLOCK, "Withering Litherite Block");
         addBlock(ModBlocks.REGENERATING_LITHERITE_BLOCK, "Regenerating Litherite Block");
+        addBlock(ModBlocks.GLOWING_LITHERITE_BLOCK, "Glowing Litherite Block");
+        addBlock(ModBlocks.INVISIBLE_LITHERITE_BLOCK, "Invisible Litherite Block");
+
+        addBlock(ModBlocks.LITHERITE_ORE, "Litherite Ore");
+        addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
 
         addBlock(ModBlocks.SCORCHED_CRIMSON_NYLIUM, "Scorched Crimson Nylium Block");
         addBlock(ModBlocks.SCORCHED_WARPED_NYLIUM, "Scorched Warped Nylium Block");

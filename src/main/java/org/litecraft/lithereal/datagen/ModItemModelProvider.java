@@ -88,6 +88,18 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.GLOWING_LITHERITE_AXE);
         handheldItem(ModItems.GLOWING_LITHERITE_HOE);
         handheldItem(ModItems.GLOWING_LITHERITE_SHOVEL);
+
+        simpleItem(ModItems.INVISIBLE_LITHERITE_CRYSTAL);
+        simpleItem(ModItems.INVISIBLE_LITHERITE_HELMET);
+        simpleItem(ModItems.INVISIBLE_LITHERITE_CHESTPLATE);
+        simpleItem(ModItems.INVISIBLE_LITHERITE_LEGGINGS);
+        simpleItem(ModItems.INVISIBLE_LITHERITE_BOOTS);
+        handheldItem(ModItems.INVISIBLE_LITHERITE_SWORD);
+        handheldItem(ModItems.INVISIBLE_LITHERITE_PICKAXE);
+        handheldItem(ModItems.INVISIBLE_LITHERITE_HAMMER);
+        handheldItem(ModItems.INVISIBLE_LITHERITE_AXE);
+        handheldItem(ModItems.INVISIBLE_LITHERITE_HOE);
+        handheldItem(ModItems.INVISIBLE_LITHERITE_SHOVEL);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

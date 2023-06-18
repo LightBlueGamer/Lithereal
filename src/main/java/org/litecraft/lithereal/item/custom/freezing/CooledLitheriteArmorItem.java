@@ -1,6 +1,8 @@
 package org.litecraft.lithereal.item.custom.freezing;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -37,6 +39,19 @@ public class CooledLitheriteArmorItem extends ArmorItem {
                 }
             }
         }
+    }
+
+    @Override
+    public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (entity instanceof Player player) {
+            if (player.hurtTime > 0 && !player.level().isClientSide) {
+                Entity attacker = player.getLastDamageSource().getEntity();
+                if (attacker instanceof LivingEntity) {
+                    attacker.setTicksFrozen(1000);
+                }
+            }
+        }
+        super.inventoryTick(itemStack, level, entity, slot, isSelected);
     }
 
     private boolean hasFullSuitOfArmorOn(Player player) {

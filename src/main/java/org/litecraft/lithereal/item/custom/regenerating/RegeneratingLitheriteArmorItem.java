@@ -1,8 +1,11 @@
 package org.litecraft.lithereal.item.custom.regenerating;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -22,8 +25,8 @@ public class RegeneratingLitheriteArmorItem extends ArmorItem {
         if(!world.isClientSide()) {
             if(hasFullSuitOfArmorOn(player)) {
                 if(hasCorrectArmorOn(ModArmorMaterials.REGENERATING_LITHERITE, player)) {
-                    MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.REGENERATION, 200, 1);
-                    player.addEffect(mobEffectInstance);
+                    MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.REGENERATION, 200, 1, true, false);
+                    if(!player.hasEffect(MobEffects.REGENERATION)) player.addEffect(mobEffectInstance);
                 }
             }
         }

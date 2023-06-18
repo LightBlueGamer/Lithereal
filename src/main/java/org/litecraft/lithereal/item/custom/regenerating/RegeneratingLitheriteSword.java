@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import org.litecraft.lithereal.Lithereal;
 
 public class RegeneratingLitheriteSword extends SwordItem {
     public RegeneratingLitheriteSword(Tier tier, int damage, float attackSpeed, Properties properties) {
@@ -16,9 +17,10 @@ public class RegeneratingLitheriteSword extends SwordItem {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        if(entity instanceof LivingEntity livingEntity) {
-            MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.HEAL, 20, 3);
-            livingEntity.addEffect(mobEffectInstance);
+        if(entity instanceof LivingEntity) {
+            double damage = stack.getDamageValue() * 0.8;
+            Lithereal.LOGGER.debug(String.valueOf(damage));
+            player.heal((float) damage);
         }
         return super.onLeftClickEntity(stack, player, entity);
     }

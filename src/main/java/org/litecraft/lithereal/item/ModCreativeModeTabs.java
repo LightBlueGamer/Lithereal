@@ -99,6 +99,19 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.GLOWING_LITHERITE_LEGGINGS.get());
                         output.accept(ModItems.GLOWING_LITHERITE_BOOTS.get());
 
+                        output.accept(ModBlocks.INVISIBLE_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_SWORD.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_AXE.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_HOE.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_HELMET.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.INVISIBLE_LITHERITE_BOOTS.get());
+
                         output.accept(ModBlocks.LITHERITE_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE.get());
 

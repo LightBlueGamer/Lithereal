@@ -3,6 +3,8 @@ package org.litecraft.lithereal.item.custom.burning;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -38,6 +40,19 @@ public class HeatedLitheriteArmorItem extends ArmorItem {
                 }
             }
         }
+    }
+
+    @Override
+    public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (entity instanceof Player player) {
+            if (player.hurtTime > 0 && !player.level().isClientSide) {
+                Entity attacker = player.getLastDamageSource().getEntity();
+                if (attacker instanceof LivingEntity) {
+                    attacker.setSecondsOnFire(5);
+                }
+            }
+        }
+        super.inventoryTick(itemStack, level, entity, slot, isSelected);
     }
 
     private void evaluateArmorEffects(Player player) {

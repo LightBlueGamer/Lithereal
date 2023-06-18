@@ -12,6 +12,8 @@ import org.litecraft.lithereal.item.custom.freezing.CooledLitheriteArmorItem;
 import org.litecraft.lithereal.item.custom.freezing.CooledLitheriteSword;
 import org.litecraft.lithereal.item.custom.glowing.GlowingLitheriteArmorItem;
 import org.litecraft.lithereal.item.custom.glowing.GlowingLitheriteSword;
+import org.litecraft.lithereal.item.custom.invisible.InvisibleLitheriteArmorItem;
+import org.litecraft.lithereal.item.custom.invisible.InvisibleLitheriteSword;
 import org.litecraft.lithereal.item.custom.regenerating.RegeneratingLitheriteArmorItem;
 import org.litecraft.lithereal.item.custom.regenerating.RegeneratingLitheriteSword;
 import org.litecraft.lithereal.item.custom.withering.WitheringLitheriteArmorItem;
@@ -282,6 +284,50 @@ public class ModItems {
 
     public static final RegistryObject<Item> GLOWING_LITHERITE_BOOTS = ITEMS.register("glowing_litherite_boots",
             () -> new GlowingLitheriteArmorItem(ModArmorMaterials.GLOWING_LITHERITE, ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(550)));
+
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_CRYSTAL = ITEMS.register("invisible_litherite_crystal",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_SWORD = ITEMS.register("invisible_litherite_sword",
+            () -> new InvisibleLitheriteSword(Tiers.DIAMOND, 4, -1.6f,
+                    new Item.Properties().durability(1750)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_PICKAXE = ITEMS.register("invisible_litherite_pickaxe",
+            () -> new PickaxeItem(Tiers.DIAMOND, 2, -1.2f,
+                    new Item.Properties().durability(1750)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_HAMMER = ITEMS.register("invisible_litherite_hammer",
+            () -> new LitheriteHammerItem(Tiers.DIAMOND, 4, -2.4f,
+                    new Item.Properties().durability(15750)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_AXE = ITEMS.register("invisible_litherite_axe",
+            () -> new AxeItem(Tiers.DIAMOND, 6, -0.6f,
+                    new Item.Properties().durability(1750)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_SHOVEL = ITEMS.register("invisible_litherite_shovel",
+            () -> new ShovelItem(Tiers.DIAMOND, 2.5f, -1f,
+                    new Item.Properties().durability(1750)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_HOE = ITEMS.register("invisible_litherite_hoe",
+            () -> new HoeItem(Tiers.DIAMOND, -2, 0.8f,
+                    new Item.Properties().durability(1750)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_HELMET = ITEMS.register("invisible_litherite_helmet",
+            () -> new InvisibleLitheriteArmorItem(ModArmorMaterials.INVISIBLE_LITHERITE, ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(500)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_CHESTPLATE = ITEMS.register("invisible_litherite_chestplate",
+            () -> new InvisibleLitheriteArmorItem(ModArmorMaterials.INVISIBLE_LITHERITE, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().durability(750)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_LEGGINGS = ITEMS.register("invisible_litherite_leggings",
+            () -> new InvisibleLitheriteArmorItem(ModArmorMaterials.INVISIBLE_LITHERITE, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(700)));
+
+    public static final RegistryObject<Item> INVISIBLE_LITHERITE_BOOTS = ITEMS.register("invisible_litherite_boots",
+            () -> new InvisibleLitheriteArmorItem(ModArmorMaterials.INVISIBLE_LITHERITE, ArmorItem.Type.BOOTS,
                     new Item.Properties().durability(550)));
 
     public static void register(IEventBus eventBus) {
