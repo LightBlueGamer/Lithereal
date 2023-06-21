@@ -66,6 +66,9 @@ public class ModItems {
             () -> new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.BOOTS,
                     new Item.Properties().durability(550)));
 
+    public static final RegistryObject<Item> LITHERITE_WRENCH = ITEMS.register("litherite_wrench",
+            () -> new WrenchItem(new Item.Properties().durability(200)));
+
 
     public static final RegistryObject<Item> HEATED_LITHERITE_CRYSTAL = ITEMS.register("heated_litherite_crystal",
             () -> new Item(new Item.Properties().fireResistant()));

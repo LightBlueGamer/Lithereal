@@ -20,6 +20,9 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<FireCrucibleMenu>> FIRE_CRUCIBLE_MENU =
             registerMenuType(FireCrucibleMenu::new, "fire_crucible_menu");
 
+    public static final RegistryObject<MenuType<InfusementChamberControllerMenu>> INFUSEMENT_CHAMBER_CONTROLLER_MENU =
+            registerMenuType(InfusementChamberControllerMenu::new, "infusement_chamber_controller_menu");
+
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                   String name) {

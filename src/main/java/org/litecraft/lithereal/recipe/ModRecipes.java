@@ -17,6 +17,9 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<FireCrucibleRecipe>> BURNING_SERIALIZER =
             SERIALIZERS.register("burning", () -> FireCrucibleRecipe.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<InfusementChamberRecipe>> INFUSING_SERIALIZER =
+            SERIALIZERS.register("infusing", () -> InfusementChamberRecipe.Serializer.INSTANCE);
+
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
     }

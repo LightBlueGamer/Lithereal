@@ -60,6 +60,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         add(ModBlocks.BLUE_FIRE.get(),
                 (block) -> createOreDrop(ModBlocks.BLUE_FIRE.get(), Items.AIR));
 
+        add(ModBlocks.INFUSEMENT_CHAMBER.get(),
+                (block -> createOreDrop(ModBlocks.INFUSEMENT_CHAMBER.get(), ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER.get().asItem())));
+
         this.add(ModBlocks.SCORCHED_CRIMSON_NYLIUM.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(
                 LootItem.lootTableItem(ModBlocks.SCORCHED_CRIMSON_NYLIUM.get()).when(HAS_SILK_TOUCH)
                         .otherwise(LootItem.lootTableItem(ModBlocks.SCORCHED_NETHERRACK.get())))));

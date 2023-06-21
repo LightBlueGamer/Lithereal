@@ -38,7 +38,6 @@ public class BurningLitheriteBlockEntity extends BlockEntity {
         if (level.isClientSide()) return;
 
         if(level.getBlockState(blockPos.above()).getBlock() == Blocks.FIRE) {
-            Lithereal.LOGGER.debug(level.getBlockState(blockPos.above()).getBlock().toString());
             level.setBlockAndUpdate(blockPos.above(), ModBlocks.BLUE_FIRE.get().defaultBlockState());
         }
 

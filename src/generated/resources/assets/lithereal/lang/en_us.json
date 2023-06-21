@@ -6,6 +6,9 @@
   "block.lithereal.freezing_station": "Freezing Station",
   "block.lithereal.glowing_litherite_block": "Glowing Litherite Block",
   "block.lithereal.heated_litherite_block": "Burning Litherite Block",
+  "block.lithereal.infusement_chamber_casing": "Infusement Chamber Casing",
+  "block.lithereal.infusement_chamber_controller": "Infusement Chamber Controller",
+  "block.lithereal.infusement_chamber_core": "Infusement Chamber Core",
   "block.lithereal.invisible_litherite_block": "Invisible Litherite Block",
   "block.lithereal.litherite_block": "Litherite Block",
   "block.lithereal.litherite_ore": "Litherite Ore",
@@ -70,6 +73,7 @@
   "item.lithereal.litherite_pickaxe": "Litherite Crystal Pickaxe",
   "item.lithereal.litherite_shovel": "Litherite Crystal Shovel",
   "item.lithereal.litherite_sword": "Litherite Crystal Sword",
+  "item.lithereal.litherite_wrench": "Wrench",
   "item.lithereal.regenerating_litherite_axe": "Regenerating Litherite Crystal Axe",
   "item.lithereal.regenerating_litherite_boots": "Regenerating Litherite Crystal Boots",
   "item.lithereal.regenerating_litherite_chestplate": "Regenerating Litherite Crystal Chestplate",
@@ -94,5 +98,7 @@
   "item.lithereal.withering_litherite_sword": "Withering Litherite Crystal Sword",
   "key.category.lithereal.lithereal": "Lithereal",
   "key.lithereal.freeze_water": "Frost Walker",
-  "key.lithereal.scorch_ground": "Scorch Ground"
+  "key.lithereal.scorch_ground": "Scorch Ground",
+  "message.lithereal.missing_infusement_casing": "Missing Infusement Chamber Casing.",
+  "message.lithereal.missing_infusement_core": "Missing Infusement Chamber Core."
 }

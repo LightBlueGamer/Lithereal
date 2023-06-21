@@ -33,6 +33,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.LITHERITE_CHESTPLATE.get());
                         output.accept(ModItems.LITHERITE_LEGGINGS.get());
                         output.accept(ModItems.LITHERITE_BOOTS.get());
+                        output.accept(ModItems.LITHERITE_WRENCH.get());
 
                         output.accept(ModBlocks.HEATED_LITHERITE_BLOCK.get());
                         output.accept(ModItems.HEATED_LITHERITE_CRYSTAL.get());
@@ -114,6 +115,10 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.LITHERITE_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE.get());
+
+                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CASING.get());
+                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER.get());
+                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CORE.get());
 
                         output.accept(ModBlocks.FREEZING_STATION.get());
                         output.accept(ModBlocks.FIRE_CRUCIBLE.get());

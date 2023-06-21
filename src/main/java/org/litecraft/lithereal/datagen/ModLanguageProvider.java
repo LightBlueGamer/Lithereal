@@ -24,6 +24,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.LITHERITE_CHESTPLATE, "Litherite Crystal Chestplate");
         addItem(ModItems.LITHERITE_LEGGINGS, "Litherite Crystal Leggings");
         addItem(ModItems.LITHERITE_BOOTS, "Litherite Crystal Boots");
+        addItem(ModItems.LITHERITE_WRENCH, "Wrench");
 
         addItem(ModItems.COOLED_LITHERITE_CRYSTAL, "Frozen Litherite Crystal");
         addItem(ModItems.COOLED_LITHERITE_SWORD, "Frozen Litherite Crystal Sword");
@@ -115,6 +116,11 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.FREEZING_STATION, "Freezing Station");
         addBlock(ModBlocks.FIRE_CRUCIBLE, "Fire Crucible");
 
+        addBlock(ModBlocks.INFUSEMENT_CHAMBER_CASING, "Infusement Chamber Casing");
+        addBlock(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER, "Infusement Chamber Controller");
+        addBlock(ModBlocks.INFUSEMENT_CHAMBER, "Infusement Chamber");
+        addBlock(ModBlocks.INFUSEMENT_CHAMBER_CORE, "Infusement Chamber Core");
+
         addBlock(ModBlocks.BLUE_FIRE, "Blue Fire");
 
         add("creativemodetab.lithereal_tab", "Lithereal");
@@ -122,5 +128,8 @@ public class ModLanguageProvider extends LanguageProvider {
         add("key.lithereal.scorch_ground", "Scorch Ground");
         add("key.lithereal.freeze_water", "Frost Walker");
         add("key.category.lithereal.lithereal", "Lithereal");
+
+        add("message.lithereal.missing_infusement_core", "Missing Infusement Chamber Core.");
+        add("message.lithereal.missing_infusement_casing", "Missing Infusement Chamber Casing.");
     }
 }

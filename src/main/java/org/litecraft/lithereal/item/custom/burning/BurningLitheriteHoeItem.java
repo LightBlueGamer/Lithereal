@@ -26,7 +26,8 @@ public class BurningLitheriteHoeItem extends HoeItem {
 
         if (furnaceRecipe != null) {
             NonNullList<ItemStack> drops = NonNullList.create();
-            drops.add(furnaceRecipe.getResultItem(level.registryAccess()));
+            ItemStack dropStack = new ItemStack(furnaceRecipe.getResultItem(level.registryAccess()).getItem(), furnaceRecipe.getResultItem(level.registryAccess()).getCount());
+            drops.add(dropStack);
 
             for (ItemStack drop : drops) {
                 Block.popResource(level, blockPos, drop);

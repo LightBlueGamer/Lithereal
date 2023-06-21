@@ -13,10 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.Lithereal;
-import org.litecraft.lithereal.block.custom.BlueFireBlock;
-import org.litecraft.lithereal.block.custom.BurningLitheriteBlock;
-import org.litecraft.lithereal.block.custom.FireCrucibleBlock;
-import org.litecraft.lithereal.block.custom.FreezingStationBlock;
+import org.litecraft.lithereal.block.custom.*;
 import org.litecraft.lithereal.item.ModItems;
 
 import java.util.function.Supplier;
@@ -32,6 +29,14 @@ public class ModBlocks {
     public static final RegistryObject<Block> FIRE_CRUCIBLE = registerBlock("fire_crucible",
             () -> new FireCrucibleBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> INFUSEMENT_CHAMBER = registerBlockOnly("infusement_chamber",
+            () -> new InfusementChamberControllerBlock(BlockBehaviour.Properties.of()
+                    .strength(7f).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> INFUSEMENT_CHAMBER_CONTROLLER = registerBlock("infusement_chamber_controller",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(7f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
@@ -80,6 +85,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SCORCHED_WARPED_NYLIUM = registerBlock("scorched_warped_nylium",
             () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.MAGMA_BLOCK)));
+
+    public static final RegistryObject<Block> INFUSEMENT_CHAMBER_CASING = registerBlock("infusement_chamber_casing",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> INFUSEMENT_CHAMBER_CORE = registerBlock("infusement_chamber_core",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
