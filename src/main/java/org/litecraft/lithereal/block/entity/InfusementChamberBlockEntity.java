@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -22,13 +21,12 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.recipe.InfusementChamberRecipe;
-import org.litecraft.lithereal.screen.InfusementChamberControllerMenu;
+import org.litecraft.lithereal.screen.InfusementChamberMenu;
 
 import java.util.Optional;
 
-public class InfusementChamberControllerBlockEntity extends BlockEntity implements MenuProvider {
+public class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -42,14 +40,14 @@ public class InfusementChamberControllerBlockEntity extends BlockEntity implemen
     private int progress = 0;
     private int maxProgress = 200;
 
-    public InfusementChamberControllerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.INFUSEMENT_CHAMBER_CONTROLLER.get(), pos, state);
+    public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.INFUSEMENT_CHAMBER.get(), pos, state);
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> InfusementChamberControllerBlockEntity.this.progress;
-                    case 1 -> InfusementChamberControllerBlockEntity.this.maxProgress;
+                    case 0 -> InfusementChamberBlockEntity.this.progress;
+                    case 1 -> InfusementChamberBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -57,8 +55,8 @@ public class InfusementChamberControllerBlockEntity extends BlockEntity implemen
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> InfusementChamberControllerBlockEntity.this.progress = value;
-                    case 1 -> InfusementChamberControllerBlockEntity.this.maxProgress = value;
+                    case 0 -> InfusementChamberBlockEntity.this.progress = value;
+                    case 1 -> InfusementChamberBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -76,8 +74,8 @@ public class InfusementChamberControllerBlockEntity extends BlockEntity implemen
 
     @Nullable
     @Override
-    public InfusementChamberControllerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new InfusementChamberControllerMenu(id, inventory, this, this.data);
+    public InfusementChamberMenu createMenu(int id, Inventory inventory, Player player) {
+        return new InfusementChamberMenu(id, inventory, this, this.data);
     }
 
     @Override
@@ -123,7 +121,7 @@ public class InfusementChamberControllerBlockEntity extends BlockEntity implemen
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, InfusementChamberControllerBlockEntity pEntity) {
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, InfusementChamberBlockEntity pEntity) {
         if(level.isClientSide()) return;
 
         SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
@@ -148,7 +146,7 @@ public class InfusementChamberControllerBlockEntity extends BlockEntity implemen
         this.progress = 0;
     }
 
-    private static void craftItem(InfusementChamberControllerBlockEntity pEntity) {
+    private static void craftItem(InfusementChamberBlockEntity pEntity) {
         Level level = pEntity.level;
         SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
         for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
@@ -166,7 +164,7 @@ public class InfusementChamberControllerBlockEntity extends BlockEntity implemen
         }
     }
 
-    private static void craftItem(InfusementChamberControllerBlockEntity entity, ItemStack resultItem, ItemStack outputItem) {
+    private static void craftItem(InfusementChamberBlockEntity entity, ItemStack resultItem, ItemStack outputItem) {
         CompoundTag nbt = resultItem.getTag();
         if(nbt != null) {
             outputItem.setTag(nbt.copy());
@@ -179,7 +177,7 @@ public class InfusementChamberControllerBlockEntity extends BlockEntity implemen
         entity.resetProgress();
     }
 
-    private static boolean hasRecipe(InfusementChamberControllerBlockEntity entity) {
+    private static boolean hasRecipe(InfusementChamberBlockEntity entity) {
         Level level = entity.level;
         Boolean hasRecipe = false;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());

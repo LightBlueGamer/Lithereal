@@ -30,7 +30,7 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation("lithereal:fire_crucible_screen"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
         renderHeatSource(guiGraphics.pose(), x, y, guiGraphics);
@@ -41,14 +41,14 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
             int arrowHeight = 14;
             int progressHeight = menu.getScaledProgress();
             int yOffset = y + 37 + arrowHeight - progressHeight;
-            if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation("lithereal:fire_crucible_screen"), x + 80, yOffset, 176, arrowHeight - progressHeight, 14, progressHeight);
-            else if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation("lithereal:fire_crucible_screen"), x + 80, yOffset, 190, arrowHeight - progressHeight, 14, progressHeight);
+            if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 176, arrowHeight - progressHeight, 14, progressHeight);
+            else if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 190, arrowHeight - progressHeight, 14, progressHeight);
         }
     }
 
     private void renderHeatSource(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation("lithereal:fire_crucible_screen"), x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
-        else if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation("lithereal:fire_crucible_screen"), x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
+        if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
+        else if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
     }
 
 

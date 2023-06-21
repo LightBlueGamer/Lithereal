@@ -23,6 +23,7 @@ import org.litecraft.lithereal.item.ModItems;
 import org.litecraft.lithereal.recipe.ModRecipes;
 import org.litecraft.lithereal.screen.FireCrucibleScreen;
 import org.litecraft.lithereal.screen.FreezingStationScreen;
+import org.litecraft.lithereal.screen.InfusementChamberScreen;
 import org.litecraft.lithereal.screen.ModMenuTypes;
 import org.slf4j.Logger;
 
@@ -56,6 +57,7 @@ public class Lithereal {
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.FREEZING_STATION_MENU.get(), FreezingStationScreen::new);
             MenuScreens.register(ModMenuTypes.FIRE_CRUCIBLE_MENU.get(), FireCrucibleScreen::new);
+            MenuScreens.register(ModMenuTypes.INFUSEMENT_CHAMBER_MENU.get(), InfusementChamberScreen::new);
         }
     }
 

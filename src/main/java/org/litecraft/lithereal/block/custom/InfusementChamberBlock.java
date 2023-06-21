@@ -22,15 +22,14 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-import org.litecraft.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.litecraft.lithereal.block.entity.InfusementChamberControllerBlockEntity;
+import org.litecraft.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.litecraft.lithereal.block.entity.ModBlockEntities;
 
-public class InfusementChamberControllerBlock extends BaseEntityBlock {
+public class InfusementChamberBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
-    public InfusementChamberControllerBlock(Properties properties) {
+    public InfusementChamberBlock(Properties properties) {
         super(properties);
     }
 
@@ -75,8 +74,8 @@ public class InfusementChamberControllerBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof InfusementChamberControllerBlockEntity) {
-                ((InfusementChamberControllerBlockEntity) blockEntity).drops();
+            if (blockEntity instanceof InfusementChamberBlockEntity) {
+                ((InfusementChamberBlockEntity) blockEntity).drops();
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
@@ -87,8 +86,8 @@ public class InfusementChamberControllerBlock extends BaseEntityBlock {
                                  Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof InfusementChamberControllerBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (InfusementChamberControllerBlockEntity)entity, pPos);
+            if(entity instanceof InfusementChamberBlockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (InfusementChamberBlockEntity)entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -100,14 +99,14 @@ public class InfusementChamberControllerBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new InfusementChamberControllerBlockEntity(pos, state);
+        return new InfusementChamberBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntities.INFUSEMENT_CHAMBER_CONTROLLER.get(),
-                InfusementChamberControllerBlockEntity::tick);
+        return createTickerHelper(type, ModBlockEntities.INFUSEMENT_CHAMBER.get(),
+                InfusementChamberBlockEntity::tick);
     }
 }

@@ -10,10 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.litecraft.lithereal.Lithereal;
 
-public class InfusementChamberControllerScreen extends AbstractContainerScreen<InfusementChamberControllerMenu> {
+public class InfusementChamberScreen extends AbstractContainerScreen<InfusementChamberMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_controller_gui.png");
-    public InfusementChamberControllerScreen(InfusementChamberControllerMenu menu, Inventory inventory, Component component) {
+            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png");
+    public InfusementChamberScreen(InfusementChamberMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
@@ -30,17 +30,14 @@ public class InfusementChamberControllerScreen extends AbstractContainerScreen<I
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation("lithereal:infusement_chamber_controller_screen"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if (menu.isCrafting()) {
-            int arrowHeight = 14;
-            int progressHeight = menu.getScaledProgress();
-            int yOffset = y + 37 + arrowHeight - progressHeight;
-            guiGraphics.blit(new ResourceLocation("lithereal:infusement_chamber_controller_screen"), x + 80, yOffset, 176, arrowHeight - progressHeight, 14, progressHeight);
+        if(menu.isCrafting()) {
+            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
         }
     }
 

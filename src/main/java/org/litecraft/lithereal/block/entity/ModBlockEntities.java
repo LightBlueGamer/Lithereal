@@ -22,10 +22,10 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(FireCrucibleBlockEntity::new,
                             ModBlocks.FIRE_CRUCIBLE.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<InfusementChamberControllerBlockEntity>> INFUSEMENT_CHAMBER_CONTROLLER =
-            BLOCK_ENTITIES.register("infusement_chamber_controller", () ->
-                    BlockEntityType.Builder.of(InfusementChamberControllerBlockEntity::new,
-                            ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<InfusementChamberBlockEntity>> INFUSEMENT_CHAMBER =
+            BLOCK_ENTITIES.register("infusement_chamber", () ->
+                    BlockEntityType.Builder.of(InfusementChamberBlockEntity::new,
+                            ModBlocks.INFUSEMENT_CHAMBER.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<BurningLitheriteBlockEntity>> BURNING_LITHERITE_BLOCK =
             BLOCK_ENTITIES.register("burning_litherite_block", () ->

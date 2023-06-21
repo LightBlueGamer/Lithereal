@@ -96,12 +96,14 @@ public class WrenchItem extends Item {
                         break;
                     }
                 }
+
+                if(!validStructure) player.displayClientMessage(Component.translatable("message.lithereal.missing_infusement_casing"), true);
+                else {
+                    level.setBlockAndUpdate(pos, ModBlocks.INFUSEMENT_CHAMBER.get().defaultBlockState());
+                }
             }
 
-            if(!validStructure) player.displayClientMessage(Component.translatable("message.lithereal.missing_infusement_casing"), true);
-            else {
-                level.setBlockAndUpdate(pos, ModBlocks.INFUSEMENT_CHAMBER.get().defaultBlockState());
-            }
+
         }
 
         return super.onItemUseFirst(stack, context);

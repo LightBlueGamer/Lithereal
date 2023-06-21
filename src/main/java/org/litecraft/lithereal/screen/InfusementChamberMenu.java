@@ -10,22 +10,21 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import org.litecraft.lithereal.block.ModBlocks;
-import org.litecraft.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.litecraft.lithereal.block.entity.InfusementChamberControllerBlockEntity;
+import org.litecraft.lithereal.block.entity.InfusementChamberBlockEntity;
 
-public class InfusementChamberControllerMenu extends AbstractContainerMenu {
-    public final InfusementChamberControllerBlockEntity blockEntity;
+public class InfusementChamberMenu extends AbstractContainerMenu {
+    public final InfusementChamberBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public InfusementChamberControllerMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+    public InfusementChamberMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public InfusementChamberControllerMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.INFUSEMENT_CHAMBER_CONTROLLER_MENU.get(), id);
+    public InfusementChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.INFUSEMENT_CHAMBER_MENU.get(), id);
         checkContainerSize(inv, 3);
-        blockEntity = (InfusementChamberControllerBlockEntity) entity;
+        blockEntity = (InfusementChamberBlockEntity) entity;
         this.level = inv.player.level();
         this.data = data;
 
@@ -33,9 +32,9 @@ public class InfusementChamberControllerMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 140, 13));
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 57));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 80, 13));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 43, 34));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 68, 34));
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 129, 34));
         });
 
         addDataSlots(data);
@@ -48,11 +47,18 @@ public class InfusementChamberControllerMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 13;
+        int progressArrowSize = 22;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
+    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
+    // must assign a slot number to each of the slots used by the GUI.
+    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
+    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
+    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
+    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
+    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -100,7 +106,7 @@ public class InfusementChamberControllerMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER.get());
+                player, ModBlocks.INFUSEMENT_CHAMBER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

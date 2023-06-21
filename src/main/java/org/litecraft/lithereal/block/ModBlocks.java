@@ -31,7 +31,7 @@ public class ModBlocks {
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final RegistryObject<Block> INFUSEMENT_CHAMBER = registerBlockOnly("infusement_chamber",
-            () -> new InfusementChamberControllerBlock(BlockBehaviour.Properties.of()
+            () -> new InfusementChamberBlock(BlockBehaviour.Properties.of()
                     .strength(7f).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final RegistryObject<Block> INFUSEMENT_CHAMBER_CONTROLLER = registerBlock("infusement_chamber_controller",
