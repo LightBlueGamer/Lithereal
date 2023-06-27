@@ -21,6 +21,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.recipe.InfusementChamberRecipe;
 import org.litecraft.lithereal.screen.InfusementChamberMenu;
 
@@ -137,7 +138,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
                 craftItem(pEntity);
             }
         } else {
-            pEntity.progress--;
+            if(pEntity.progress > 0) pEntity.progress--;
             setChanged(level, blockPos, blockState);
         }
     }
@@ -171,7 +172,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         }
 
         entity.itemHandler.extractItem(0, 1, false);
-        entity.itemHandler.extractItem(0, 1, false);
+        entity.itemHandler.extractItem(1, 1, false);
         entity.itemHandler.setStackInSlot(2, outputItem);
 
         entity.resetProgress();

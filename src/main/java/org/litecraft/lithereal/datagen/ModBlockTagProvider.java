@@ -30,8 +30,16 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         diamondPickTag(ModBlocks.HEATED_LITHERITE_BLOCK.get());
         diamondPickTag(ModBlocks.WITHERING_LITHERITE_BLOCK.get());
         diamondPickTag(ModBlocks.REGENERATING_LITHERITE_BLOCK.get());
-        diamondPickTag(ModBlocks.GLOWING_LITHERITE_BLOCK.get());
         diamondPickTag(ModBlocks.INVISIBLE_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.NIGHT_VISION_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.LEAPING_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.SWIFT_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.SLOW_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.WATER_BREATHING_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.STRONG_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.WEAK_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.LUCKY_LITHERITE_BLOCK.get());
+        diamondPickTag(ModBlocks.SLOW_FALLING_LITHERITE_BLOCK.get());
 
         pickaxeTag(ModBlocks.SCORCHED_NETHERRACK.get());
         pickaxeTag(ModBlocks.SCORCHED_CRIMSON_NYLIUM.get());
@@ -39,6 +47,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
         diamondPickTag(ModBlocks.FREEZING_STATION.get());
         diamondPickTag(ModBlocks.FIRE_CRUCIBLE.get());
+        diamondPickTag(ModBlocks.INFUSEMENT_CHAMBER_CASING.get());
+        diamondPickTag(ModBlocks.INFUSEMENT_CHAMBER.get());
+        diamondPickTag(ModBlocks.INFUSEMENT_CHAMBER_CORE.get());
+        diamondPickTag(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER.get());
     }
 
     private void diamondPickTag(Block block) {

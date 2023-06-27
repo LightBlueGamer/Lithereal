@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.SmeltingRecipe;
 import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.recipe.FireCrucibleRecipe;
 import org.litecraft.lithereal.recipe.FreezingStationRecipe;
+import org.litecraft.lithereal.recipe.InfusementChamberRecipe;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +25,9 @@ public class JEILitherealPlugin implements IModPlugin {
     public static RecipeType<FireCrucibleRecipe> BURNING_TYPE =
             new RecipeType<>(FireCrucibleRecipeCategory.UID, FireCrucibleRecipe.class);
 
+    public static RecipeType<InfusementChamberRecipe> INFUSING_TYPE =
+            new RecipeType<>(InfusementChamberRecipeCategory.UID, InfusementChamberRecipe.class);
+
     @Override
     public ResourceLocation getPluginUid() {
         return new ResourceLocation(Lithereal.MOD_ID, "jei_compat");
@@ -33,6 +37,7 @@ public class JEILitherealPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(
                 new FireCrucibleRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
+                new InfusementChamberRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new FreezingStationRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
@@ -42,9 +47,11 @@ public class JEILitherealPlugin implements IModPlugin {
 
         List<FreezingStationRecipe> recipesInfusing = rm.getAllRecipesFor(FreezingStationRecipe.Type.INSTANCE);
         List<FireCrucibleRecipe> recipesBurning = rm.getAllRecipesFor(FireCrucibleRecipe.Type.INSTANCE);
+        List<InfusementChamberRecipe> recipesInfChamber = rm.getAllRecipesFor(InfusementChamberRecipe.Type.INSTANCE);
         List<SmeltingRecipe> recipesFurnace = rm.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
 
         registration.addRecipes(FREEZING_TYPE, recipesInfusing);
         registration.addRecipes(BURNING_TYPE, recipesBurning);
+        registration.addRecipes(INFUSING_TYPE, recipesInfChamber);
     }
 }

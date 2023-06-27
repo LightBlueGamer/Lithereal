@@ -58,11 +58,47 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<Block> GLOWING_LITHERITE_BLOCK = registerBlock("glowing_litherite_block",
+    public static final RegistryObject<Block> INVISIBLE_LITHERITE_BLOCK = registerBlock("invisible_litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<Block> INVISIBLE_LITHERITE_BLOCK = registerBlock("invisible_litherite_block",
+    public static final RegistryObject<Block> NIGHT_VISION_LITHERITE_BLOCK = registerBlock("night_vision_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> LEAPING_LITHERITE_BLOCK = registerBlock("leaping_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> SWIFT_LITHERITE_BLOCK = registerBlock("swift_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> SLOW_LITHERITE_BLOCK = registerBlock("slow_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> WATER_BREATHING_LITHERITE_BLOCK = registerBlock("water_breathing_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> POISON_LITHERITE_BLOCK = registerBlock("poison_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> STRONG_LITHERITE_BLOCK = registerBlock("strong_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> WEAK_LITHERITE_BLOCK = registerBlock("weak_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> LUCKY_LITHERITE_BLOCK = registerBlock("lucky_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> SLOW_FALLING_LITHERITE_BLOCK = registerBlock("slow_falling_litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 

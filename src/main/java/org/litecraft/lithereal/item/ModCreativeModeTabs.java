@@ -87,19 +87,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.REGENERATING_LITHERITE_LEGGINGS.get());
                         output.accept(ModItems.REGENERATING_LITHERITE_BOOTS.get());
 
-                        output.accept(ModBlocks.GLOWING_LITHERITE_BLOCK.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_CRYSTAL.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_SWORD.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_SHOVEL.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_PICKAXE.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_AXE.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_HOE.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_HAMMER.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_HELMET.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_CHESTPLATE.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_LEGGINGS.get());
-                        output.accept(ModItems.GLOWING_LITHERITE_BOOTS.get());
-
                         output.accept(ModBlocks.INVISIBLE_LITHERITE_BLOCK.get());
                         output.accept(ModItems.INVISIBLE_LITHERITE_CRYSTAL.get());
                         output.accept(ModItems.INVISIBLE_LITHERITE_SWORD.get());
@@ -112,6 +99,136 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.INVISIBLE_LITHERITE_CHESTPLATE.get());
                         output.accept(ModItems.INVISIBLE_LITHERITE_LEGGINGS.get());
                         output.accept(ModItems.INVISIBLE_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.NIGHT_VISION_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_SWORD.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_AXE.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_HOE.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_HELMET.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.NIGHT_VISION_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.LEAPING_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_SWORD.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_AXE.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_HOE.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_HELMET.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.LEAPING_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.SWIFT_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_SWORD.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_AXE.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_HOE.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_HELMET.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.SWIFT_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.SLOW_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.SLOW_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.SLOW_LITHERITE_SWORD.get());
+                        output.accept(ModItems.SLOW_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.SLOW_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.SLOW_LITHERITE_AXE.get());
+                        output.accept(ModItems.SLOW_LITHERITE_HOE.get());
+                        output.accept(ModItems.SLOW_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.SLOW_LITHERITE_HELMET.get());
+                        output.accept(ModItems.SLOW_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.SLOW_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.SLOW_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.WATER_BREATHING_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_SWORD.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_AXE.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_HOE.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_HELMET.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.WATER_BREATHING_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.POISON_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.POISON_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.POISON_LITHERITE_SWORD.get());
+                        output.accept(ModItems.POISON_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.POISON_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.POISON_LITHERITE_AXE.get());
+                        output.accept(ModItems.POISON_LITHERITE_HOE.get());
+                        output.accept(ModItems.POISON_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.POISON_LITHERITE_HELMET.get());
+                        output.accept(ModItems.POISON_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.POISON_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.POISON_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.STRONG_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.STRONG_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.STRONG_LITHERITE_SWORD.get());
+                        output.accept(ModItems.STRONG_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.STRONG_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.STRONG_LITHERITE_AXE.get());
+                        output.accept(ModItems.STRONG_LITHERITE_HOE.get());
+                        output.accept(ModItems.STRONG_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.STRONG_LITHERITE_HELMET.get());
+                        output.accept(ModItems.STRONG_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.STRONG_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.STRONG_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.WEAK_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.WEAK_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.WEAK_LITHERITE_SWORD.get());
+                        output.accept(ModItems.WEAK_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.WEAK_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.WEAK_LITHERITE_AXE.get());
+                        output.accept(ModItems.WEAK_LITHERITE_HOE.get());
+                        output.accept(ModItems.WEAK_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.WEAK_LITHERITE_HELMET.get());
+                        output.accept(ModItems.WEAK_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.WEAK_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.WEAK_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.LUCKY_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_SWORD.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_AXE.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_HOE.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_HELMET.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.LUCKY_LITHERITE_BOOTS.get());
+
+                        output.accept(ModBlocks.SLOW_FALLING_LITHERITE_BLOCK.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_CRYSTAL.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_SWORD.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_SHOVEL.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_PICKAXE.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_AXE.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_HOE.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_HAMMER.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_HELMET.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_CHESTPLATE.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_LEGGINGS.get());
+                        output.accept(ModItems.SLOW_FALLING_LITHERITE_BOOTS.get());
 
                         output.accept(ModBlocks.LITHERITE_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE.get());

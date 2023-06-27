@@ -178,7 +178,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
                 craftItem(pEntity);
             }
         } else {
-            pEntity.progress--;
+            if(pEntity.progress > 0) pEntity.progress--;
             setChanged(level, blockPos, blockState);
         }
     }

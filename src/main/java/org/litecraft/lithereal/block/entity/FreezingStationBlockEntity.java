@@ -137,7 +137,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 craftItem(pEntity);
             }
         } else {
-            pEntity.heat(1);
+            if(pEntity.progress > 0) pEntity.heat(1);
             setChanged(level, blockPos, blockState);
         }
     }

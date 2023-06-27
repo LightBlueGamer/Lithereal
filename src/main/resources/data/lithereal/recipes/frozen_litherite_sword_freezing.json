@@ -1,0 +1,14 @@
+{
+  "type": "lithereal:freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "lithereal:litherite_sword"
+    }
+  ],
+  "output": {
+    "item": "lithereal:cooled_litherite_sword"
+  }
+}

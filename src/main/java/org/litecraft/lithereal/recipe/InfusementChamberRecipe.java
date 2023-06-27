@@ -3,14 +3,18 @@ package org.litecraft.lithereal.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import org.litecraft.lithereal.Lithereal;
 
@@ -100,13 +104,23 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
         private Ingredient getIngredient(JsonObject json) {
             Ingredient ingredient = Ingredient.fromJson(json);
             int count = 1;
+            String nbtString = "";
 
             if (json.getAsJsonObject().has("count")) {
                 count = GsonHelper.getAsInt(json, "count");
             }
 
+            if (json.getAsJsonObject().has("effect")) {
+                nbtString = GsonHelper.getAsString(json, "effect");
+            }
+
             ItemStack itemStack = ingredient.getItems()[0];
             itemStack.setCount(count);
+
+            if (!nbtString.isEmpty()) {
+                Potion potion = ForgeRegistries.POTIONS.getValue(ResourceLocation.tryParse(nbtString));
+                PotionUtils.setPotion(itemStack, potion);
+            }
 
             return  ingredient;
         }

@@ -1,0 +1,11 @@
+{
+  "type": "lithereal:burning",
+  "ingredients": [
+    {
+      "item": "lithereal:litherite_boots"
+    }
+  ],
+  "output": {
+    "item": "lithereal:heated_litherite_boots"
+  }
+}

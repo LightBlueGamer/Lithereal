@@ -8,7 +8,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.litecraft.lithereal.item.ModItems;
 
@@ -61,13 +60,103 @@ public enum ModArmorMaterials implements ArmorMaterial {
         return Ingredient.of(ModItems.REGENERATING_LITHERITE_CRYSTAL.get());
     }),
 
-    GLOWING_LITHERITE("glowing_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+    NIGHT_VISION_LITHERITE("night_vision_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
         p_266655_.put(ArmorItem.Type.BOOTS, 4);
         p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
         p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
         p_266655_.put(ArmorItem.Type.HELMET, 4);
     }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
-        return Ingredient.of(ModItems.GLOWING_LITHERITE_CRYSTAL.get());
+        return Ingredient.of(ModItems.NIGHT_VISION_LITHERITE_CRYSTAL.get());
+    }),
+
+    LEAPING_LITHERITE("leaping_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.LEAPING_LITHERITE_CRYSTAL.get());
+    }),
+
+    SWIFT_LITHERITE("swift_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.SWIFT_LITHERITE_CRYSTAL.get());
+    }),
+
+    SLOW_LITHERITE("slow_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.SLOW_LITHERITE_CRYSTAL.get());
+    }),
+
+    WATER_BREATHING_LITHERITE("water_breathing_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.WATER_BREATHING_LITHERITE_CRYSTAL.get());
+    }),
+
+    POISON_LITHERITE("poison_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.POISON_LITHERITE_CRYSTAL.get());
+    }),
+
+    STRONG_LITHERITE("strong_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.STRONG_LITHERITE_CRYSTAL.get());
+    }),
+
+    WEAK_LITHERITE("weak_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.WEAK_LITHERITE_CRYSTAL.get());
+    }),
+
+    LUCKY_LITHERITE("lucky_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.LUCKY_LITHERITE_CRYSTAL.get());
+    }),
+
+    SLOW_FALLING_LITHERITE("slow_falling_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.SLOW_FALLING_LITHERITE_CRYSTAL.get());
+    }),
+
+    POTION_LITHERITE("potion_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> {
+        return Ingredient.of(ModItems.POTION_LITHERITE_CRYSTAL.get());
     }),
 
     INVISIBLE_LITHERITE("invisible_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
