@@ -17,6 +17,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.litecraft.lithereal.item.custom.LitheriteHammerItem;
+import org.litecraft.lithereal.util.CommonUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -34,7 +35,7 @@ public class InfusedLitheriteHammer extends LitheriteHammerItem {
                 boolean bl = effect.isBeneficial();
                 boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                 if(!bl || bl2) {
-                    livingEntity.addEffect(mobEffectInstance);
+                    livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                 } else {
                     if (livingEntity.hasEffect(effect))
                         livingEntity.removeEffect(effect);
@@ -43,13 +44,14 @@ public class InfusedLitheriteHammer extends LitheriteHammerItem {
         }
         return super.onLeftClickEntity(stack, player, entity);
     }
+
     @Override
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
-        if(entity instanceof LivingEntity livingEntity) {
+        if(entity instanceof LivingEntity livingEntity && isSelected) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
                 if(effect == MobEffects.MOVEMENT_SPEED) {
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier()));
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, mobEffectInstance.getAmplifier()));
                 }
             });
         }

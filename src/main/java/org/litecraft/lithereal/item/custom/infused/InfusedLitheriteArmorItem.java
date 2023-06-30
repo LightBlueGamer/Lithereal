@@ -16,6 +16,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.litecraft.lithereal.item.custom.ModArmorMaterials;
+import org.litecraft.lithereal.util.CommonUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -37,7 +38,7 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                     PotionUtils.getPotion(stack).getEffects().forEach((mobEffectInstance) -> {
                         boolean bl = mobEffectInstance.getEffect().isBeneficial();
                         if (bl) {
-                            player.addEffect(mobEffectInstance);
+                            player.addEffect(CommonUtils.clone(mobEffectInstance));
                         } else {
                             if (player.hasEffect(mobEffectInstance.getEffect())) player.removeEffect(mobEffectInstance.getEffect());
                         }
@@ -60,7 +61,7 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                         boolean bl = effect.isBeneficial();
                         boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                         if(!bl || bl2) {
-                            livingEntity.addEffect(mobEffectInstance);
+                            livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                         } else {
                             if (livingEntity.hasEffect(effect))
                                 livingEntity.removeEffect(effect);

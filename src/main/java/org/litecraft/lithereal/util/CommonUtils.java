@@ -1,5 +1,6 @@
 package org.litecraft.lithereal.util;
 
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -25,5 +26,8 @@ public class CommonUtils {
         }
 
         return bl;
+    }
+    public static MobEffectInstance clone(MobEffectInstance original) {
+        return new MobEffectInstance(original.getEffect(), original.getDuration(), original.getAmplifier());
     }
 }
