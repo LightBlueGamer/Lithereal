@@ -2,6 +2,12 @@ package org.litecraft.lithereal.item.custom.infused;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
@@ -39,6 +45,32 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                 }
             }
         }
+    }
+
+    @Override
+    public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+        if (entity instanceof Player player) {
+            if (player.hurtTime > 0 && !player.level().isClientSide) {
+                DamageSource source = player.getLastDamageSource();
+                if(source == null) return;
+                Entity attacker = source.getEntity();
+                if(attacker instanceof LivingEntity livingEntity) {
+                    PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
+                        MobEffect effect = mobEffectInstance.getEffect();
+                        boolean bl = effect.isBeneficial();
+                        boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
+                        if(!bl || bl2) {
+                            if (!livingEntity.hasEffect(effect))
+                                livingEntity.addEffect(mobEffectInstance);
+                        } else {
+                            if (livingEntity.hasEffect(effect))
+                                livingEntity.removeEffect(effect);
+                        }
+                    });
+                }
+            }
+        }
+        super.inventoryTick(itemStack, level, entity, slot, isSelected);
     }
 
     public ItemStack getDefaultInstance() {

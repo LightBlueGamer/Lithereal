@@ -1,6 +1,7 @@
 package org.litecraft.lithereal.item.custom.freezing;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -48,7 +49,9 @@ public class CooledLitheriteArmorItem extends ArmorItem {
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
         if (entity instanceof Player player) {
             if (player.hurtTime > 0 && !player.level().isClientSide) {
-                Entity attacker = player.getLastDamageSource().getEntity();
+                DamageSource source = player.getLastDamageSource();
+                if(source == null) return;
+                Entity attacker = source.getEntity();
                 if (attacker instanceof LivingEntity) {
                     attacker.setTicksFrozen(1000);
                 }
