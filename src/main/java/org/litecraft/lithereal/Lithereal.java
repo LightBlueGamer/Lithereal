@@ -73,7 +73,7 @@ public class Lithereal {
         }
         @SubscribeEvent
         public static void itemRenderer(RegisterColorHandlersEvent.Item event) {
-            event.register((itemStack, layer) -> layer == 0 ? PotionUtils.getColor(itemStack) : -1, ModItems.INFUSED_LITHERITE_CRYSTAL.get(), ModItems.INFUSED_LITHERITE_SWORD.get(), ModItems.INFUSED_LITHERITE_AXE.get(), ModItems.INFUSED_LITHERITE_PICKAXE.get(), ModItems.INFUSED_LITHERITE_SHOVEL.get(), ModItems.INFUSED_LITHERITE_HOE.get(), ModItems.INFUSED_LITHERITE_HAMMER.get(), ModItems.INFUSED_LITHERITE_HELMET.get(), ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModItems.INFUSED_LITHERITE_LEGGINGS.get(), ModItems.INFUSED_LITHERITE_BOOTS.get());
+            event.register((itemStack, layer) -> layer == 0 ? PotionUtils.getColor(itemStack) : -1, ModItems.INFUSED_LITHERITE_CRYSTAL.get(), ModItems.INFUSED_LITHERITE_SWORD.get(), ModItems.INFUSED_LITHERITE_AXE.get(), ModItems.INFUSED_LITHERITE_PICKAXE.get(), ModItems.INFUSED_LITHERITE_SHOVEL.get(), ModItems.INFUSED_LITHERITE_HOE.get(), ModItems.INFUSED_LITHERITE_HAMMER.get(), ModItems.INFUSED_LITHERITE_HELMET.get(), ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModItems.INFUSED_LITHERITE_LEGGINGS.get(), ModItems.INFUSED_LITHERITE_BOOTS.get(), ModBlocks.INFUSED_LITHERITE_BLOCK.get().asItem());
         }
         @SubscribeEvent
         public static void blockRenderer(RegisterColorHandlersEvent.Block event) {

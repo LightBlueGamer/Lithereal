@@ -3,11 +3,15 @@ package org.litecraft.lithereal.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.world.item.alchemy.PotionUtils.getPotion;
 
@@ -32,6 +36,7 @@ public class InfusedLitheriteBlockEntity extends BlockEntity {
 
     public void setPotion(Potion potion) {
         this.potion = potion;
+        setChanged();
     }
     public Potion getStoredPotion() {
         return this.potion;
@@ -45,5 +50,16 @@ public class InfusedLitheriteBlockEntity extends BlockEntity {
         }
 
         return nbt;
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
     }
 }
