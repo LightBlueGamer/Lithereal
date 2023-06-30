@@ -33,7 +33,8 @@ public class InfusedLitheriteAxe extends AxeItem {
                 boolean bl = effect.isBeneficial();
                 boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                 if(!bl || bl2) {
-                    livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
+                    if(!(livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HARM))
+                        livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                 } else {
                     if (livingEntity.hasEffect(effect))
                         livingEntity.removeEffect(effect);
