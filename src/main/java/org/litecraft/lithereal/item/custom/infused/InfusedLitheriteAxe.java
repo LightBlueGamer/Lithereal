@@ -32,8 +32,7 @@ public class InfusedLitheriteAxe extends AxeItem {
                 boolean bl = effect.isBeneficial();
                 boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                 if(!bl || bl2) {
-                    if (!livingEntity.hasEffect(effect))
-                        livingEntity.addEffect(mobEffectInstance);
+                    livingEntity.addEffect(mobEffectInstance);
                 } else {
                     if (livingEntity.hasEffect(effect))
                         livingEntity.removeEffect(effect);
@@ -48,8 +47,7 @@ public class InfusedLitheriteAxe extends AxeItem {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
                 if(effect == MobEffects.MOVEMENT_SPEED) {
-                    if (!livingEntity.hasEffect(MobEffects.DIG_SPEED))
-                        livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier()));
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier()));
                 }
             });
         }

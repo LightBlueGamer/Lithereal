@@ -37,7 +37,7 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                     PotionUtils.getPotion(stack).getEffects().forEach((mobEffectInstance) -> {
                         boolean bl = mobEffectInstance.getEffect().isBeneficial();
                         if (bl) {
-                            if (!player.hasEffect(mobEffectInstance.getEffect())) player.addEffect(mobEffectInstance);
+                            player.addEffect(mobEffectInstance);
                         } else {
                             if (player.hasEffect(mobEffectInstance.getEffect())) player.removeEffect(mobEffectInstance.getEffect());
                         }
@@ -60,8 +60,7 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                         boolean bl = effect.isBeneficial();
                         boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                         if(!bl || bl2) {
-                            if (!livingEntity.hasEffect(effect))
-                                livingEntity.addEffect(mobEffectInstance);
+                            livingEntity.addEffect(mobEffectInstance);
                         } else {
                             if (livingEntity.hasEffect(effect))
                                 livingEntity.removeEffect(effect);

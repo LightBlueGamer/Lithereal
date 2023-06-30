@@ -17,9 +17,7 @@ public class WitheringLitheriteSword extends SwordItem {
     @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
         if(entity instanceof LivingEntity livingEntity) {
-            MobEffectInstance mobEffectInstance = new MobEffectInstance(MobEffects.WITHER, 200, 1);
-            if (!livingEntity.hasEffect(mobEffectInstance.getEffect()))
-                livingEntity.addEffect(mobEffectInstance);
+           livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
         }
         return super.onLeftClickEntity(stack, player, entity);
     }
