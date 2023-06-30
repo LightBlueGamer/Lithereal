@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:heated_litherite_crystal"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "LLL",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "item": "lithereal:heated_litherite_pickaxe"
+  },
+  "show_notification": true
+}

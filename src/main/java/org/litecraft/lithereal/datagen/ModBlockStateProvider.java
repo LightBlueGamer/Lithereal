@@ -30,11 +30,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.INFUSED_LITHERITE_BLOCK);
 
         topSideBottomModelWithItem(ModBlocks.FREEZING_STATION);
-        topSideBottomModelWithItem(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER);
-        topSideBottomModelWithItem(ModBlocks.INFUSEMENT_CHAMBER);
+        //topSideBottomModelWithItem(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER);
+        //topSideBottomModelWithItem(ModBlocks.INFUSEMENT_CHAMBER);
 
-        cubeAll(ModBlocks.INFUSEMENT_CHAMBER_CASING.get());
-        cubeAll(ModBlocks.INFUSEMENT_CHAMBER_CORE.get());
+        //cubeAll(ModBlocks.INFUSEMENT_CHAMBER_CASING.get());
+        //cubeAll(ModBlocks.INFUSEMENT_CHAMBER_CORE.get());
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

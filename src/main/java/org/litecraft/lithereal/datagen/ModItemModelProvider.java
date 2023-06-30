@@ -94,16 +94,16 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder simplePotionItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                        new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "head"))
+                        new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "_head"))
                 .texture("layer1",
-                        new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "base"));
+                        new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "_base"));
     }
 
     private ItemModelBuilder handheldPotionItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
-                new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "head"))
+                new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "_head"))
                 .texture("layer1",
-                new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "base"));
+                new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "_base"));
     }
 }
