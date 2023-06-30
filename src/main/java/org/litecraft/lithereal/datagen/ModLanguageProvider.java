@@ -1,7 +1,15 @@
 package org.litecraft.lithereal.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.ModItems;
@@ -66,18 +74,18 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.WITHERING_LITHERITE_LEGGINGS, "Withering Litherite Crystal Leggings");
         addItem(ModItems.WITHERING_LITHERITE_BOOTS, "Withering Litherite Crystal Boots");
 
-        addBlock(ModBlocks.INFUSED_LITHERITE_BLOCK, "Infused Litherite Block");
-        addItem(ModItems.INFUSED_LITHERITE_CRYSTAL, "Infused Litherite Crystal");
-        addItem(ModItems.INFUSED_LITHERITE_SWORD, "Infused Litherite Crystal Sword");
-        addItem(ModItems.INFUSED_LITHERITE_HOE, "Infused Litherite Crystal Hoe");
-        addItem(ModItems.INFUSED_LITHERITE_PICKAXE, "Infused Litherite Crystal Pickaxe");
-        addItem(ModItems.INFUSED_LITHERITE_HAMMER, "Infused Litherite Crystal Hammer");
-        addItem(ModItems.INFUSED_LITHERITE_AXE, "Infused Litherite Crystal Axe");
-        addItem(ModItems.INFUSED_LITHERITE_SHOVEL, "Infused Litherite Crystal Shovel");
-        addItem(ModItems.INFUSED_LITHERITE_HELMET, "Infused Litherite Crystal Helmet");
-        addItem(ModItems.INFUSED_LITHERITE_CHESTPLATE, "Infused Litherite Crystal Chestplate");
-        addItem(ModItems.INFUSED_LITHERITE_LEGGINGS, "Infused Litherite Crystal Leggings");
-        addItem(ModItems.INFUSED_LITHERITE_BOOTS, "Infused Litherite Crystal Boots");
+        addPotion(ModBlocks.INFUSED_LITHERITE_BLOCK.get(), "Litherite Block");
+        addPotion(ModItems.INFUSED_LITHERITE_CRYSTAL.get(), "Litherite Crystal");
+        addPotion(ModItems.INFUSED_LITHERITE_SWORD.get(), "Litherite Crystal Sword");
+        addPotion(ModItems.INFUSED_LITHERITE_HOE.get(), "Litherite Crystal Hoe");
+        addPotion(ModItems.INFUSED_LITHERITE_PICKAXE.get(), "Litherite Crystal Pickaxe");
+        addPotion(ModItems.INFUSED_LITHERITE_HAMMER.get(), "Litherite Crystal Hammer");
+        addPotion(ModItems.INFUSED_LITHERITE_AXE.get(), "Litherite Crystal Axe");
+        addPotion(ModItems.INFUSED_LITHERITE_SHOVEL.get(), "Litherite Crystal Shovel");
+        addPotion(ModItems.INFUSED_LITHERITE_HELMET.get(), "Litherite Crystal Helmet");
+        addPotion(ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), "Litherite Crystal Chestplate");
+        addPotion(ModItems.INFUSED_LITHERITE_LEGGINGS.get(), "Litherite Crystal Leggings");
+        addPotion(ModItems.INFUSED_LITHERITE_BOOTS.get(), "Litherite Crystal Boots");
 
         addBlock(ModBlocks.LITHERITE_ORE, "Litherite Ore");
         addBlock(ModBlocks.DEEPSLATE_LITHERITE_ORE, "Deepslate Litherite Ore");
@@ -104,5 +112,45 @@ public class ModLanguageProvider extends LanguageProvider {
 
         add("message.lithereal.missing_infusement_core", "Missing Infusement Chamber Core.");
         add("message.lithereal.missing_infusement_casing", "Missing Infusement Chamber Casing.");
+    }
+
+    public void addPotion(Block key, String name) {
+        add(key, "Infused " + name);
+        for(Potion potion : ForgeRegistries.POTIONS) {
+            ItemStack stack = key.asItem().getDefaultInstance();
+            PotionUtils.setPotion(stack, potion);
+            ItemStack stack1 = Items.TIPPED_ARROW.getDefaultInstance();
+            PotionUtils.setPotion(stack1, potion);
+            String string = String.valueOf(Component.translatable(stack1.getItem().getDescriptionId()));
+            if (string.contains("Arrow of "))
+                string = string.replaceAll("Arrow of ", "");
+            if (string.contains("the "))
+                string = string.replaceAll("the ", "");
+            if (string.contains("Tipped Arrow"))
+                string = string.replaceAll("Tipped Arrow", "");
+            if(!string.isBlank())
+                name = string + " " + name;
+            add(key.asItem().getDescriptionId(stack), name);
+        }
+    }
+
+    public void addPotion(Item key, String name) {
+        add(key, "Infused " + name);
+        for(Potion potion : ForgeRegistries.POTIONS) {
+            ItemStack stack = key.getDefaultInstance();
+            PotionUtils.setPotion(stack, potion);
+            ItemStack stack1 = Items.TIPPED_ARROW.getDefaultInstance();
+            PotionUtils.setPotion(stack1, potion);
+            String string = String.valueOf(Component.translatable(stack1.getItem().getDescriptionId()));
+            if (string.contains("Arrow of "))
+                string = string.replaceAll("Arrow of ", "");
+            if (string.contains("the "))
+                string = string.replaceAll("the ", "");
+            if (string.contains("Tipped Arrow"))
+                string = string.replaceAll("Tipped Arrow", "");
+            if(!string.isBlank())
+                name = string + " " + name;
+            add(key.getDescriptionId(stack), name);
+        }
     }
 }

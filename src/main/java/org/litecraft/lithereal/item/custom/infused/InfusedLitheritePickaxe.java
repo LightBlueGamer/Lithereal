@@ -3,6 +3,7 @@ package org.litecraft.lithereal.item.custom.infused;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,6 +40,20 @@ public class InfusedLitheritePickaxe extends PickaxeItem {
             });
         }
         return super.onLeftClickEntity(stack, player, entity);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+        if(entity instanceof LivingEntity livingEntity) {
+            PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
+                MobEffect effect = mobEffectInstance.getEffect();
+                if(effect == MobEffects.MOVEMENT_SPEED) {
+                    if (!livingEntity.hasEffect(MobEffects.DIG_SPEED))
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier()));
+                }
+            });
+        }
+        super.inventoryTick(itemStack, level, entity, slot, isSelected);
     }
 
     public ItemStack getDefaultInstance() {
