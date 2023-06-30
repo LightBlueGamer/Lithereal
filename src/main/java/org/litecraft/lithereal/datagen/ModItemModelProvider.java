@@ -77,6 +77,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldPotionItem(ModItems.INFUSED_LITHERITE_HOE);
         handheldPotionItem(ModItems.INFUSED_LITHERITE_SHOVEL);
 
+        simpleItem(ModItems.LITHERITE_WRENCH);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
