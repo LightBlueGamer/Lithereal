@@ -27,17 +27,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.COOLED_LITHERITE_BLOCK);
         blockWithItem(ModBlocks.HEATED_LITHERITE_BLOCK);
         blockWithItem(ModBlocks.WITHERING_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.REGENERATING_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.INVISIBLE_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.NIGHT_VISION_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.LEAPING_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.SWIFT_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.SLOW_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.WATER_BREATHING_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.STRONG_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.WEAK_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.LUCKY_LITHERITE_BLOCK);
-        blockWithItem(ModBlocks.SLOW_FALLING_LITHERITE_BLOCK);
+        blockWithItem(ModBlocks.INFUSED_LITHERITE_BLOCK);
 
         topSideBottomModelWithItem(ModBlocks.FREEZING_STATION);
         topSideBottomModelWithItem(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER);

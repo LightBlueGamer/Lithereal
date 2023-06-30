@@ -332,6 +332,83 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         .of(ModItems.HEATED_LITHERITE_CRYSTAL.get()).build()))
                 .save(consumer);
 
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.INFUSED_LITHERITE_HELMET.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .pattern("LLL")
+                .pattern("L L")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.INFUSED_LITHERITE_CHESTPLATE.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .pattern("L L")
+                .pattern("LLL")
+                .pattern("LLL")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.INFUSED_LITHERITE_LEGGINGS.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .pattern("LLL")
+                .pattern("L L")
+                .pattern("L L")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.INFUSED_LITHERITE_BOOTS.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .pattern("L L")
+                .pattern("L L")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.INFUSED_LITHERITE_SWORD.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("L")
+                .pattern("L")
+                .pattern("S")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.INFUSED_LITHERITE_PICKAXE.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("LLL")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.INFUSED_LITHERITE_AXE.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("LL")
+                .pattern("LS")
+                .pattern(" S")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.INFUSED_LITHERITE_SHOVEL.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("L")
+                .pattern("S")
+                .pattern("S")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.INFUSED_LITHERITE_HOE.get())
+                .define('L', ModItems.INFUSED_LITHERITE_CRYSTAL.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("LL")
+                .pattern(" S")
+                .pattern(" S")
+                .unlockedBy("has_infused_litherite", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ModItems.INFUSED_LITHERITE_CRYSTAL.get()).build()))
+                .save(consumer);
+
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> p_250654_, List<ItemLike> p_250172_, RecipeCategory p_250588_, ItemLike p_251868_, float p_250789_, int p_252144_, String p_251687_) {

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "lithereal:block/freezing_station_bottom",
-    "side": "lithereal:block/freezing_station_side",
-    "top": "lithereal:block/freezing_station_top"
-  }
-}

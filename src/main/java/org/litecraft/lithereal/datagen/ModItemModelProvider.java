@@ -65,77 +65,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.WITHERING_LITHERITE_HOE);
         handheldItem(ModItems.WITHERING_LITHERITE_SHOVEL);
 
-        simpleItem(ModItems.REGENERATING_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.REGENERATING_LITHERITE_HELMET);
-        simpleItem(ModItems.REGENERATING_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.REGENERATING_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.REGENERATING_LITHERITE_BOOTS);
-        handheldItem(ModItems.REGENERATING_LITHERITE_SWORD);
-        handheldItem(ModItems.REGENERATING_LITHERITE_PICKAXE);
-        handheldItem(ModItems.REGENERATING_LITHERITE_HAMMER);
-        handheldItem(ModItems.REGENERATING_LITHERITE_AXE);
-        handheldItem(ModItems.REGENERATING_LITHERITE_HOE);
-        handheldItem(ModItems.REGENERATING_LITHERITE_SHOVEL);
-
-        simpleItem(ModItems.INVISIBLE_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.INVISIBLE_LITHERITE_HELMET);
-        simpleItem(ModItems.INVISIBLE_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.INVISIBLE_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.INVISIBLE_LITHERITE_BOOTS);
-        handheldItem(ModItems.INVISIBLE_LITHERITE_SWORD);
-        handheldItem(ModItems.INVISIBLE_LITHERITE_PICKAXE);
-        handheldItem(ModItems.INVISIBLE_LITHERITE_HAMMER);
-        handheldItem(ModItems.INVISIBLE_LITHERITE_AXE);
-        handheldItem(ModItems.INVISIBLE_LITHERITE_HOE);
-        handheldItem(ModItems.INVISIBLE_LITHERITE_SHOVEL);
-
-        simpleItem(ModItems.NIGHT_VISION_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.NIGHT_VISION_LITHERITE_HELMET);
-        simpleItem(ModItems.NIGHT_VISION_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.NIGHT_VISION_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.NIGHT_VISION_LITHERITE_BOOTS);
-        handheldItem(ModItems.NIGHT_VISION_LITHERITE_SWORD);
-        handheldItem(ModItems.NIGHT_VISION_LITHERITE_PICKAXE);
-        handheldItem(ModItems.NIGHT_VISION_LITHERITE_HAMMER);
-        handheldItem(ModItems.NIGHT_VISION_LITHERITE_AXE);
-        handheldItem(ModItems.NIGHT_VISION_LITHERITE_HOE);
-        handheldItem(ModItems.NIGHT_VISION_LITHERITE_SHOVEL);
-
-        simpleItem(ModItems.LEAPING_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.LEAPING_LITHERITE_HELMET);
-        simpleItem(ModItems.LEAPING_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.LEAPING_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.LEAPING_LITHERITE_BOOTS);
-        handheldItem(ModItems.LEAPING_LITHERITE_SWORD);
-        handheldItem(ModItems.LEAPING_LITHERITE_PICKAXE);
-        handheldItem(ModItems.LEAPING_LITHERITE_HAMMER);
-        handheldItem(ModItems.LEAPING_LITHERITE_AXE);
-        handheldItem(ModItems.LEAPING_LITHERITE_HOE);
-        handheldItem(ModItems.LEAPING_LITHERITE_SHOVEL);
-
-        simpleItem(ModItems.SWIFT_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.SWIFT_LITHERITE_HELMET);
-        simpleItem(ModItems.SWIFT_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.SWIFT_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.SWIFT_LITHERITE_BOOTS);
-        handheldItem(ModItems.SWIFT_LITHERITE_SWORD);
-        handheldItem(ModItems.SWIFT_LITHERITE_PICKAXE);
-        handheldItem(ModItems.SWIFT_LITHERITE_HAMMER);
-        handheldItem(ModItems.SWIFT_LITHERITE_AXE);
-        handheldItem(ModItems.SWIFT_LITHERITE_HOE);
-        handheldItem(ModItems.SWIFT_LITHERITE_SHOVEL);
-
-        simpleItem(ModItems.SLOW_LITHERITE_CRYSTAL);
-        simpleItem(ModItems.SLOW_LITHERITE_HELMET);
-        simpleItem(ModItems.SLOW_LITHERITE_CHESTPLATE);
-        simpleItem(ModItems.SLOW_LITHERITE_LEGGINGS);
-        simpleItem(ModItems.SLOW_LITHERITE_BOOTS);
-        handheldItem(ModItems.SLOW_LITHERITE_SWORD);
-        handheldItem(ModItems.SLOW_LITHERITE_PICKAXE);
-        handheldItem(ModItems.SLOW_LITHERITE_HAMMER);
-        handheldItem(ModItems.SLOW_LITHERITE_AXE);
-        handheldItem(ModItems.SLOW_LITHERITE_HOE);
-        handheldItem(ModItems.SLOW_LITHERITE_SHOVEL);
+        simpleItem(ModItems.INFUSED_LITHERITE_CRYSTAL);
+        simpleItem(ModItems.INFUSED_LITHERITE_HELMET);
+        simpleItem(ModItems.INFUSED_LITHERITE_CHESTPLATE);
+        simpleItem(ModItems.INFUSED_LITHERITE_LEGGINGS);
+        simpleItem(ModItems.INFUSED_LITHERITE_BOOTS);
+        handheldPotionItem(ModItems.INFUSED_LITHERITE_SWORD);
+        handheldPotionItem(ModItems.INFUSED_LITHERITE_PICKAXE);
+        handheldPotionItem(ModItems.INFUSED_LITHERITE_HAMMER);
+        handheldPotionItem(ModItems.INFUSED_LITHERITE_AXE);
+        handheldPotionItem(ModItems.INFUSED_LITHERITE_HOE);
+        handheldPotionItem(ModItems.INFUSED_LITHERITE_SHOVEL);
 
     }
 
@@ -149,5 +89,21 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder simplePotionItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                        new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "head"))
+                .texture("layer1",
+                        new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "base"));
+    }
+
+    private ItemModelBuilder handheldPotionItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/handheld")).texture("layer0",
+                new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "head"))
+                .texture("layer1",
+                new ResourceLocation(Lithereal.MOD_ID,"item/" + item.getId().getPath() + "base"));
     }
 }

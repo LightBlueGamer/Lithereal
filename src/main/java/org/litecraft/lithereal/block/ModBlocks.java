@@ -15,6 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.block.custom.*;
 import org.litecraft.lithereal.item.ModItems;
+import org.litecraft.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 
 import java.util.function.Supplier;
 
@@ -54,52 +55,8 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<Block> REGENERATING_LITHERITE_BLOCK = registerBlock("regenerating_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> INVISIBLE_LITHERITE_BLOCK = registerBlock("invisible_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> NIGHT_VISION_LITHERITE_BLOCK = registerBlock("night_vision_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> LEAPING_LITHERITE_BLOCK = registerBlock("leaping_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> SWIFT_LITHERITE_BLOCK = registerBlock("swift_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> SLOW_LITHERITE_BLOCK = registerBlock("slow_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> WATER_BREATHING_LITHERITE_BLOCK = registerBlock("water_breathing_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> POISON_LITHERITE_BLOCK = registerBlock("poison_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> STRONG_LITHERITE_BLOCK = registerBlock("strong_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> WEAK_LITHERITE_BLOCK = registerBlock("weak_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> LUCKY_LITHERITE_BLOCK = registerBlock("lucky_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Block> SLOW_FALLING_LITHERITE_BLOCK = registerBlock("slow_falling_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> INFUSED_LITHERITE_BLOCK = registerColouredBlock("infused_litherite_block",
+            () -> new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> LITHERITE_ORE = registerBlock("litherite_ore",
@@ -134,6 +91,11 @@ public class ModBlocks {
         registerBlockItem(name, toReturn);
         return toReturn;
     }
+    private static <T extends Block> RegistryObject<T> registerColouredBlock(String name, Supplier<T> block) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        registerColouredBlockItem(name, toReturn);
+        return toReturn;
+    }
 
     private static <T extends Block> RegistryObject<T> registerBlockOnly(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
@@ -142,6 +104,11 @@ public class ModBlocks {
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
+                new Item.Properties()));
+    }
+
+    private static <T extends Block> RegistryObject<Item> registerColouredBlockItem(String name, RegistryObject<T> block) {
+        return ModItems.ITEMS.register(name, () -> new InfusedLitheriteBlockItem(block.get(),
                 new Item.Properties()));
     }
 

@@ -38,17 +38,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.COOLED_LITHERITE_BLOCK.get());
         dropSelf(ModBlocks.HEATED_LITHERITE_BLOCK.get());
         dropSelf(ModBlocks.WITHERING_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.REGENERATING_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.INVISIBLE_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.NIGHT_VISION_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.LEAPING_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.SWIFT_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.SLOW_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.WATER_BREATHING_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.STRONG_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.WEAK_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.LUCKY_LITHERITE_BLOCK.get());
-        dropSelf(ModBlocks.SLOW_FALLING_LITHERITE_BLOCK.get());
+        dropSelf(ModBlocks.INFUSED_LITHERITE_BLOCK.get());
 
         dropSelf(ModBlocks.FREEZING_STATION.get());
         dropSelf(ModBlocks.FIRE_CRUCIBLE.get());
