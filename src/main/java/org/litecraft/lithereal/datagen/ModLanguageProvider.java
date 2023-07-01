@@ -127,7 +127,7 @@ public class ModLanguageProvider extends LanguageProvider {
                 String strippedPotionKnowledge = descID.replaceAll(key.getDescriptionId() + ".effect.", "");
                 switch (strippedPotionKnowledge) {
                     case "awkward", "mundane", "thick" -> name = "Infused " + name;
-                    case "empty" -> name = "Uncraftable " + "Infused " + name;
+                    case "empty" -> name = "Uncraftable Infused " + name;
                     case "water" -> name = "Splashing " + name;
                     case "night_vision" -> name = "Night Vision " + name;
                     case "invisibility" -> name = "Invisibility " + name;
