@@ -32,27 +32,27 @@ public class ModItems {
     public static final ForgeTier LITHERITE = new ForgeTier(4, 1750, 11.0F, 4.0F, 20, Tags.Blocks.NEEDS_NETHERITE_TOOL, () -> Ingredient.of(Items.DIAMOND));
     
     public static final RegistryObject<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword",
-            () -> new SwordItem(LITHERITE, 3, -1.6f,
+            () -> new SwordItem(LITHERITE, 3, -2.4f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe",
-            () -> new PickaxeItem(LITHERITE, 1, -1.2f,
+            () -> new PickaxeItem(LITHERITE, 1, -2.8f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 3, -2.4f,
+            () -> new LitheriteHammerItem(LITHERITE, 3, -3.4f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> LITHERITE_AXE = ITEMS.register("litherite_axe",
-            () -> new AxeItem(LITHERITE, 5, -0.6f,
+            () -> new AxeItem(LITHERITE, 5, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> LITHERITE_SHOVEL = ITEMS.register("litherite_shovel",
-            () -> new ShovelItem(LITHERITE, 1.5f, -1f,
+            () -> new ShovelItem(LITHERITE, 1.5f, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> LITHERITE_HOE = ITEMS.register("litherite_hoe",
-            () -> new HoeItem(LITHERITE, -3, 0.8f,
+            () -> new HoeItem(LITHERITE, -3, 0.0f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> LITHERITE_CHESTPLATE = ITEMS.register("litherite_chestplate",
@@ -79,27 +79,27 @@ public class ModItems {
             () -> new Item(new Item.Properties().fireResistant()));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_SWORD = ITEMS.register("heated_litherite_sword",
-            () -> new BurningLitheriteSword(LITHERITE, 3, -1.6f,
+            () -> new BurningLitheriteSword(LITHERITE, 3, -2.4f,
                     new Item.Properties().fireResistant()));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_PICKAXE = ITEMS.register("heated_litherite_pickaxe",
-            () -> new BurningLitheritePickaxeItem(LITHERITE, 1, -1.2f,
+            () -> new BurningLitheritePickaxeItem(LITHERITE, 1, -2.8f,
                     new Item.Properties().fireResistant()));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_HAMMER = ITEMS.register("heated_litherite_hammer",
-            () -> new BurningLitheriteHammerItem(LITHERITE, 3, -2.4f,
+            () -> new BurningLitheriteHammerItem(LITHERITE, 3, -3.4f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_AXE = ITEMS.register("heated_litherite_axe",
-            () -> new BurningLitheriteAxeItem(LITHERITE, 5, -0.6f,
+            () -> new BurningLitheriteAxeItem(LITHERITE, 5, -3f,
                     new Item.Properties().fireResistant()));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_SHOVEL = ITEMS.register("heated_litherite_shovel",
-            () -> new BurningLitheriteShovelItem(LITHERITE, 1.5f, -1f,
+            () -> new BurningLitheriteShovelItem(LITHERITE, 1.5f, -3f,
                     new Item.Properties().fireResistant()));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_HOE = ITEMS.register("heated_litherite_hoe",
-            () -> new BurningLitheriteHoeItem(LITHERITE, -3, 0.8f,
+            () -> new BurningLitheriteHoeItem(LITHERITE, -3, 0.0f,
                     new Item.Properties().fireResistant()));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_HELMET = ITEMS.register("heated_litherite_helmet",
@@ -123,27 +123,27 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_SWORD = ITEMS.register("cooled_litherite_sword",
-            () -> new CooledLitheriteSword(LITHERITE, 3, -1.6f,
+            () -> new CooledLitheriteSword(LITHERITE, 3, -2.4f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_PICKAXE = ITEMS.register("cooled_litherite_pickaxe",
-            () -> new PickaxeItem(LITHERITE, 1, -1.2f,
+            () -> new PickaxeItem(LITHERITE, 1, -2.8f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HAMMER = ITEMS.register("cooled_litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 3, -2.4f,
+            () -> new LitheriteHammerItem(LITHERITE, 3, -3.4f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_AXE = ITEMS.register("cooled_litherite_axe",
-            () -> new AxeItem(LITHERITE, 5, -0.6f,
+            () -> new AxeItem(LITHERITE, 5, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_SHOVEL = ITEMS.register("cooled_litherite_shovel",
-            () -> new ShovelItem(LITHERITE, 1.5f, -1f,
+            () -> new ShovelItem(LITHERITE, 1.5f, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HOE = ITEMS.register("cooled_litherite_hoe",
-            () -> new HoeItem(LITHERITE, -3, 0.8f,
+            () -> new HoeItem(LITHERITE, -3, 0.0f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HELMET = ITEMS.register("cooled_litherite_helmet",
@@ -167,27 +167,27 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_SWORD = ITEMS.register("withering_litherite_sword",
-            () -> new WitheringLitheriteSword(LITHERITE, 3, -1.6f,
+            () -> new WitheringLitheriteSword(LITHERITE, 3, -2.4f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_PICKAXE = ITEMS.register("withering_litherite_pickaxe",
-            () -> new PickaxeItem(LITHERITE, 1, -1.2f,
+            () -> new PickaxeItem(LITHERITE, 1, -2.8f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_HAMMER = ITEMS.register("withering_litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 3, -2.4f,
+            () -> new LitheriteHammerItem(LITHERITE, 3, -3.4f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_AXE = ITEMS.register("withering_litherite_axe",
-            () -> new AxeItem(LITHERITE, 5, -0.6f,
+            () -> new AxeItem(LITHERITE, 5, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_SHOVEL = ITEMS.register("withering_litherite_shovel",
-            () -> new ShovelItem(LITHERITE, 1.5f, -1f,
+            () -> new ShovelItem(LITHERITE, 1.5f, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_HOE = ITEMS.register("withering_litherite_hoe",
-            () -> new HoeItem(LITHERITE, -3, 0.8f,
+            () -> new HoeItem(LITHERITE, -3, 0.0f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_HELMET = ITEMS.register("withering_litherite_helmet",
@@ -211,27 +211,27 @@ public class ModItems {
             () -> new InfusedLitheriteItem(new Item.Properties()));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_SWORD = ITEMS.register("infused_litherite_sword",
-            () -> new InfusedLitheriteSword(LITHERITE, 3, -1.6f,
+            () -> new InfusedLitheriteSword(LITHERITE, 3, -2.4f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_PICKAXE = ITEMS.register("infused_litherite_pickaxe",
-            () -> new InfusedLitheritePickaxe(LITHERITE, 1, -1.2f,
+            () -> new InfusedLitheritePickaxe(LITHERITE, 1, -2.8f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_HAMMER = ITEMS.register("infused_litherite_hammer",
-            () -> new InfusedLitheriteHammer(LITHERITE, 3, -2.4f,
+            () -> new InfusedLitheriteHammer(LITHERITE, 3, -3.4f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_AXE = ITEMS.register("infused_litherite_axe",
-            () -> new InfusedLitheriteAxe(LITHERITE, 5, -0.6f,
+            () -> new InfusedLitheriteAxe(LITHERITE, 5, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_SHOVEL = ITEMS.register("infused_litherite_shovel",
-            () -> new InfusedLitheriteShovel(LITHERITE, 1.5f, -1f,
+            () -> new InfusedLitheriteShovel(LITHERITE, 1.5f, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_HOE = ITEMS.register("infused_litherite_hoe",
-            () -> new InfusedLitheriteHoe(LITHERITE, -3, 0.8f,
+            () -> new InfusedLitheriteHoe(LITHERITE, -3, 0.0f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_HELMET = ITEMS.register("infused_litherite_helmet",
