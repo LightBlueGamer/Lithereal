@@ -125,29 +125,30 @@ public class ModLanguageProvider extends LanguageProvider {
             String descID = key.asItem().getDescriptionId(stack);
             if(!descriptionIDs.contains(descID)) {
                 String strippedPotionKnowledge = descID.replaceAll(key.getDescriptionId() + ".effect.", "");
+                String nameForID = name;
                 switch (strippedPotionKnowledge) {
-                    case "awkward", "mundane", "thick" -> name = "Infused " + name;
-                    case "empty" -> name = "Uncraftable Infused " + name;
-                    case "water" -> name = "Splashing " + name;
-                    case "night_vision" -> name = "Night Vision " + name;
-                    case "invisibility" -> name = "Invisibility " + name;
-                    case "leaping" -> name = "Jump Boost " + name;
-                    case "fire_resistance" -> name = "Fire Resistance " + name;
-                    case "swiftness" -> name = "Swift " + name;
-                    case "slowness" -> name = "Slowed " + name;
-                    case "water_breathing" -> name = "Water Breathing " + name;
-                    case "healing" -> name = "Healing " + name;
-                    case "harming" -> name = "Harming " + name;
-                    case "poison" -> name = "Poisoned " + name;
-                    case "regeneration" -> name = "Regenerating " + name;
-                    case "strength" -> name = "Empowered " + name;
-                    case "weakness" -> name = "Weakening " + name;
-                    case "levitation" -> name = "Levitating " + name;
-                    case "luck" -> name = "Lucky " + name;
-                    case "turtle_master" -> name = "Turtle Master's " + name;
-                    case "slow_falling" -> name = "Slow Falling " + name;
+                    case "awkward", "mundane", "thick" -> nameForID = "Infused " + name;
+                    case "empty" -> nameForID = "Uncraftable Infused " + name;
+                    case "water" -> nameForID = "Splashing " + name;
+                    case "night_vision" -> nameForID = "Night Vision " + name;
+                    case "invisibility" -> nameForID = "Invisibility " + name;
+                    case "leaping" -> nameForID = "Jump Boost " + name;
+                    case "fire_resistance" -> nameForID = "Fire Resistance " + name;
+                    case "swiftness" -> nameForID = "Swift " + name;
+                    case "slowness" -> nameForID = "Slowed " + name;
+                    case "water_breathing" -> nameForID = "Water Breathing " + name;
+                    case "healing" -> nameForID = "Healing " + name;
+                    case "harming" -> nameForID = "Harming " + name;
+                    case "poison" -> nameForID = "Poisoned " + name;
+                    case "regeneration" -> nameForID = "Regenerating " + name;
+                    case "strength" -> nameForID = "Empowered " + name;
+                    case "weakness" -> nameForID = "Weakening " + name;
+                    case "levitation" -> nameForID = "Levitating " + name;
+                    case "luck" -> nameForID = "Lucky " + name;
+                    case "turtle_master" -> nameForID = "Turtle Master's " + name;
+                    case "slow_falling" -> nameForID = "Slow Falling " + name;
                 }
-                add(key.asItem().getDescriptionId(stack), name);
+                add(key.asItem().getDescriptionId(stack), nameForID);
                 descriptionIDs.add(descID);
             }
         }
@@ -160,31 +161,32 @@ public class ModLanguageProvider extends LanguageProvider {
             ItemStack stack = key.getDefaultInstance();
             PotionUtils.setPotion(stack, potion);
             String descID = key.asItem().getDescriptionId(stack);
-            if(!descriptionIDs.contains(descID)){
+            if(!descriptionIDs.contains(descID)) {
                 String strippedPotionKnowledge = descID.replaceAll(key.getDescriptionId() + ".effect.", "");
+                String nameForID = name;
                 switch (strippedPotionKnowledge) {
-                    case "awkward", "mundane", "thick" -> name = "Infused " + name;
-                    case "empty" -> name = "Uncraftable Infused " + name;
-                    case "water" -> name = "Splashing " + name;
-                    case "night_vision" -> name = "Night Vision " + name;
-                    case "invisibility" -> name = "Invisibility " + name;
-                    case "leaping" -> name = "Jump Boost " + name;
-                    case "fire_resistance" -> name = "Fire Resistance " + name;
-                    case "swiftness" -> name = "Swift " + name;
-                    case "slowness" -> name = "Slowed " + name;
-                    case "water_breathing" -> name = "Water Breathing " + name;
-                    case "healing" -> name = "Healing " + name;
-                    case "harming" -> name = "Harming " + name;
-                    case "poison" -> name = "Poisoned " + name;
-                    case "regeneration" -> name = "Regenerating " + name;
-                    case "strength" -> name = "Empowered " + name;
-                    case "weakness" -> name = "Weakening " + name;
-                    case "levitation" -> name = "Levitating " + name;
-                    case "luck" -> name = "Lucky " + name;
-                    case "turtle_master" -> name = "Turtle Master's " + name;
-                    case "slow_falling" -> name = "Slow Falling " + name;
+                    case "awkward", "mundane", "thick" -> nameForID = "Infused " + name;
+                    case "empty" -> nameForID = "Uncraftable Infused " + name;
+                    case "water" -> nameForID = "Splashing " + name;
+                    case "night_vision" -> nameForID = "Night Vision " + name;
+                    case "invisibility" -> nameForID = "Invisibility " + name;
+                    case "leaping" -> nameForID = "Jump Boost " + name;
+                    case "fire_resistance" -> nameForID = "Fire Resistance " + name;
+                    case "swiftness" -> nameForID = "Swift " + name;
+                    case "slowness" -> nameForID = "Slowed " + name;
+                    case "water_breathing" -> nameForID = "Water Breathing " + name;
+                    case "healing" -> nameForID = "Healing " + name;
+                    case "harming" -> nameForID = "Harming " + name;
+                    case "poison" -> nameForID = "Poisoned " + name;
+                    case "regeneration" -> nameForID = "Regenerating " + name;
+                    case "strength" -> nameForID = "Empowered " + name;
+                    case "weakness" -> nameForID = "Weakening " + name;
+                    case "levitation" -> nameForID = "Levitating " + name;
+                    case "luck" -> nameForID = "Lucky " + name;
+                    case "turtle_master" -> nameForID = "Turtle Master's " + name;
+                    case "slow_falling" -> nameForID = "Slow Falling " + name;
                 }
-                add(key.getDescriptionId(stack), name);
+                add(key.asItem().getDescriptionId(stack), nameForID);
                 descriptionIDs.add(descID);
             }
         }
