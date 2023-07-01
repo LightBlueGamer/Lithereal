@@ -59,8 +59,10 @@ public class InfusedLitheritePickaxe extends PickaxeItem {
         if(entity instanceof LivingEntity livingEntity && isSelected) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
-                if(!untilReady.containsKey(effect))
+                if(!untilReady.containsKey(effect)) {
+                    livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                     untilReady.put(effect, mobEffectInstance.getDuration() * 2);
+                }
                 if(effect == MobEffects.MOVEMENT_SPEED) {
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, mobEffectInstance.getAmplifier()));
                 }
