@@ -14,6 +14,8 @@ import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.block.ModBlocks;
 import org.litecraft.lithereal.item.ModItems;
 
+import java.util.ArrayList;
+
 public class ModLanguageProvider extends LanguageProvider {
     public ModLanguageProvider(PackOutput output, String locale) {
         super(output, Lithereal.MOD_ID, locale);
@@ -116,41 +118,51 @@ public class ModLanguageProvider extends LanguageProvider {
 
     public void addPotion(Block key, String name) {
         add(key, "Infused " + name);
+        ArrayList<String> descriptionIDs = new ArrayList<>();
         for(Potion potion : ForgeRegistries.POTIONS) {
             ItemStack stack = key.asItem().getDefaultInstance();
             PotionUtils.setPotion(stack, potion);
-            ItemStack stack1 = Items.TIPPED_ARROW.getDefaultInstance();
-            PotionUtils.setPotion(stack1, potion);
-            String string = String.valueOf(Component.translatable(stack1.getItem().getDescriptionId()));
-            if (string.contains("Arrow of "))
-                string = string.replaceAll("Arrow of ", "");
-            if (string.contains("the "))
-                string = string.replaceAll("the ", "");
-            if (string.contains("Tipped Arrow"))
-                string = string.replaceAll("Tipped Arrow", "");
-            if(!string.isBlank())
-                name = string + " " + name;
-            add(key.asItem().getDescriptionId(stack), name);
+            String descID = key.asItem().getDescriptionId(stack);
+            if(!descriptionIDs.contains(descID)) {
+                ItemStack stack1 = Items.TIPPED_ARROW.getDefaultInstance();
+                PotionUtils.setPotion(stack1, potion);
+                String string = String.valueOf(Component.translatable(stack1.getItem().getDescriptionId()));
+                if (string.contains("Arrow of "))
+                    string = string.replaceAll("Arrow of ", "");
+                if (string.contains("the "))
+                    string = string.replaceAll("the ", "");
+                if (string.contains("Tipped Arrow"))
+                    string = string.replaceAll("Tipped Arrow", "");
+                if (!string.isBlank())
+                    name = string + " " + name;
+                add(key.asItem().getDescriptionId(stack), name);
+                descriptionIDs.add(descID);
+            }
         }
     }
 
     public void addPotion(Item key, String name) {
         add(key, "Infused " + name);
+        ArrayList<String> descriptionIDs = new ArrayList<>();
         for(Potion potion : ForgeRegistries.POTIONS) {
             ItemStack stack = key.getDefaultInstance();
             PotionUtils.setPotion(stack, potion);
-            ItemStack stack1 = Items.TIPPED_ARROW.getDefaultInstance();
-            PotionUtils.setPotion(stack1, potion);
-            String string = String.valueOf(Component.translatable(stack1.getItem().getDescriptionId()));
-            if (string.contains("Arrow of "))
-                string = string.replaceAll("Arrow of ", "");
-            if (string.contains("the "))
-                string = string.replaceAll("the ", "");
-            if (string.contains("Tipped Arrow"))
-                string = string.replaceAll("Tipped Arrow", "");
-            if(!string.isBlank())
-                name = string + " " + name;
-            add(key.getDescriptionId(stack), name);
+            String descID = key.asItem().getDescriptionId(stack);
+            if(!descriptionIDs.contains(descID)){
+                ItemStack stack1 = Items.TIPPED_ARROW.getDefaultInstance();
+                PotionUtils.setPotion(stack1, potion);
+                String string = String.valueOf(Component.translatable(stack1.getItem().getDescriptionId()));
+                if (string.contains("Arrow of "))
+                    string = string.replaceAll("Arrow of ", "");
+                if (string.contains("the "))
+                    string = string.replaceAll("the ", "");
+                if (string.contains("Tipped Arrow"))
+                    string = string.replaceAll("Tipped Arrow", "");
+                if (!string.isBlank())
+                    name = string + " " + name;
+                add(key.getDescriptionId(stack), name);
+                descriptionIDs.add(descID);
+            }
         }
     }
 }
