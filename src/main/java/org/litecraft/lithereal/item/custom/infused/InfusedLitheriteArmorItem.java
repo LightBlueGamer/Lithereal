@@ -40,9 +40,8 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                     PotionUtils.getPotion(stack).getEffects().forEach((mobEffectInstance) -> {
                         boolean bl = mobEffectInstance.getEffect().isBeneficial();
                         if (bl) {
-                            if(mobEffectInstance.getEffect() == MobEffects.HEAL && healTicker < 30)
-                                return;
-                            player.addEffect(CommonUtils.clone(mobEffectInstance));
+                            if(mobEffectInstance.getEffect() != MobEffects.HEAL || healTicker >= 30)
+                                player.addEffect(CommonUtils.clone(mobEffectInstance));
                         } else {
                             if (player.hasEffect(mobEffectInstance.getEffect())) player.removeEffect(mobEffectInstance.getEffect());
                         }
@@ -75,11 +74,11 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                 }
             }
         }
-        if (itemStack.isDamaged() && regenTicker >= 20) {
+        if (itemStack.isDamaged() && regenTicker >= 10) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
                 if(effect == MobEffects.REGENERATION) {
-                    itemStack.setDamageValue(itemStack.getDamageValue() + mobEffectInstance.getAmplifier());
+                    itemStack.setDamageValue(itemStack.getDamageValue() - mobEffectInstance.getAmplifier());
                     regenTicker = 0;
                 }
             });

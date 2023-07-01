@@ -58,24 +58,24 @@ public class InfusedLitheriteShovel extends ShovelItem {
         if(entity instanceof LivingEntity livingEntity && isSelected) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
-                if(!untilReady.containsKey(effect)) {
+                if(!untilReady.containsKey(effect) && effect.isBeneficial() && !effect.isInstantenous()) {
                     livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                     untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 }
                 if(effect == MobEffects.MOVEMENT_SPEED) {
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, mobEffectInstance.getAmplifier()));
                 }
-                if(untilReady.get(effect) <= 0 && effect.isBeneficial() && !effect.isInstantenous()) {
+                if(untilReady.containsKey(effect) && untilReady.get(effect) <= 0) {
                     livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                     untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 }
             });
         }
-        if (itemStack.isDamaged() && regenTicker >= 20) {
+        if (itemStack.isDamaged() && regenTicker >= 10) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
                 if(effect == MobEffects.REGENERATION) {
-                    itemStack.setDamageValue(itemStack.getDamageValue() + mobEffectInstance.getAmplifier());
+                    itemStack.setDamageValue(itemStack.getDamageValue() - mobEffectInstance.getAmplifier());
                     regenTicker = 0;
                 }
             });
