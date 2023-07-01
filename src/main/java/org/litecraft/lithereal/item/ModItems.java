@@ -87,7 +87,7 @@ public class ModItems {
                     new Item.Properties().fireResistant()));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_HAMMER = ITEMS.register("heated_litherite_hammer",
-            () -> new BurningLitheriteHammerItem(LITHERITE, 3, -3.4f,
+            () -> new BurningLitheriteHammerItem(LITHERITE, 5, -3f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> HEATED_LITHERITE_AXE = ITEMS.register("heated_litherite_axe",
@@ -131,7 +131,7 @@ public class ModItems {
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HAMMER = ITEMS.register("cooled_litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 3, -3.4f,
+            () -> new LitheriteHammerItem(LITHERITE, 5, -3f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_AXE = ITEMS.register("cooled_litherite_axe",
@@ -175,7 +175,7 @@ public class ModItems {
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_HAMMER = ITEMS.register("withering_litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 3, -3.4f,
+            () -> new LitheriteHammerItem(LITHERITE, 5, -3f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_AXE = ITEMS.register("withering_litherite_axe",
@@ -219,7 +219,7 @@ public class ModItems {
                     new Item.Properties()));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_HAMMER = ITEMS.register("infused_litherite_hammer",
-            () -> new InfusedLitheriteHammer(LITHERITE, 3, -3.4f,
+            () -> new InfusedLitheriteHammer(LITHERITE, 5, -3f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> INFUSED_LITHERITE_AXE = ITEMS.register("infused_litherite_axe",
