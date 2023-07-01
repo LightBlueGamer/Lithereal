@@ -25,6 +25,8 @@ import static org.litecraft.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.litecraft.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
 public class InfusedLitheriteArmorItem extends ArmorItem {
+    public int regenTicker = 0;
+    public int healTicker = 0;
 
     public InfusedLitheriteArmorItem(ArmorMaterial armorMaterial, Type type, Properties properties) {
         super(armorMaterial, type, properties);
@@ -38,6 +40,8 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                     PotionUtils.getPotion(stack).getEffects().forEach((mobEffectInstance) -> {
                         boolean bl = mobEffectInstance.getEffect().isBeneficial();
                         if (bl) {
+                            if(mobEffectInstance.getEffect() == MobEffects.HEAL && healTicker < 30)
+                                return;
                             player.addEffect(CommonUtils.clone(mobEffectInstance));
                         } else {
                             if (player.hasEffect(mobEffectInstance.getEffect())) player.removeEffect(mobEffectInstance.getEffect());
@@ -71,6 +75,17 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                 }
             }
         }
+        if (itemStack.isDamaged() && regenTicker >= 20) {
+            PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
+                MobEffect effect = mobEffectInstance.getEffect();
+                if(effect == MobEffects.REGENERATION) {
+                    itemStack.setDamageValue(itemStack.getDamageValue() + mobEffectInstance.getAmplifier());
+                    regenTicker = 0;
+                }
+            });
+        }
+        regenTicker++;
+        healTicker++;
         super.inventoryTick(itemStack, level, entity, slot, isSelected);
     }
 

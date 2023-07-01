@@ -17,9 +17,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.litecraft.lithereal.util.CommonUtils;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InfusedLitheritePickaxe extends PickaxeItem {
+    public int regenTicker = 0;
+    public Map<MobEffect, Integer> untilReady = new HashMap<>();
+
     public InfusedLitheritePickaxe(Tier tier, int damage, float attackSpeed, Properties properties) {
         super(tier, damage, attackSpeed, properties);
     }
@@ -32,27 +37,50 @@ public class InfusedLitheritePickaxe extends PickaxeItem {
                 boolean bl = effect.isBeneficial();
                 boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                 if(!bl || bl2) {
-                    if(!(livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HARM))
+                    if(!(livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HARM)) {
+                        if(player.hasEffect(effect))
+                            player.removeEffect(effect);
                         livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
+                    }
                 } else {
-                    if (livingEntity.hasEffect(effect))
+                    if (livingEntity.hasEffect(effect)) {
                         livingEntity.removeEffect(effect);
+                        player.addEffect(CommonUtils.clone(mobEffectInstance));
+                    }
                 }
             });
         }
         return super.onLeftClickEntity(stack, player, entity);
     }
 
+
     @Override
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
         if(entity instanceof LivingEntity livingEntity && isSelected) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
+                if(!untilReady.containsKey(effect))
+                    untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 if(effect == MobEffects.MOVEMENT_SPEED) {
-                    livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, mobEffectInstance.getAmplifier()));
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, mobEffectInstance.getAmplifier()));
+                }
+                if(untilReady.get(effect) <= 0 && effect.isBeneficial() && !effect.isInstantenous()) {
+                    livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
+                    untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 }
             });
         }
+        if (itemStack.isDamaged() && regenTicker >= 20) {
+            PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
+                MobEffect effect = mobEffectInstance.getEffect();
+                if(effect == MobEffects.REGENERATION) {
+                    itemStack.setDamageValue(itemStack.getDamageValue() + mobEffectInstance.getAmplifier());
+                    regenTicker = 0;
+                }
+            });
+        }
+        regenTicker++;
+        untilReady.forEach(((mobEffect, integer) -> untilReady.put(mobEffect, integer - 1)));
         super.inventoryTick(itemStack, level, entity, slot, isSelected);
     }
 
