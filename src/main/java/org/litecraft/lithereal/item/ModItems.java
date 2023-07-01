@@ -40,7 +40,7 @@ public class ModItems {
                     new Item.Properties()));
 
     public static final RegistryObject<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 3, -3.4f,
+            () -> new LitheriteHammerItem(LITHERITE, 5, -3f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> LITHERITE_AXE = ITEMS.register("litherite_axe",
