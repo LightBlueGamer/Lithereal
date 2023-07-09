@@ -27,8 +27,10 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity livingEntity, ItemStack stack) {
         BlockEntity tileEntity = level.getBlockEntity(pos);
 
-        if (tileEntity instanceof InfusedLitheriteBlockEntity blockEntity)
+        if (tileEntity instanceof InfusedLitheriteBlockEntity blockEntity) {
             blockEntity.setPotion(PotionUtils.getPotion(stack));
+            blockEntity.setChanged();
+        }
         super.setPlacedBy(level, pos, state, livingEntity, stack);
     }
 
