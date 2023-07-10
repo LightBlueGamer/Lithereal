@@ -6,7 +6,7 @@
 		"1": "lithereal:block/fire_crucible_side_lit",
 		"2": "lithereal:block/fire_crucible_top_lit",
 		"3": "block/fire_0",
-		"4": "block/texture",
+		"4": "lithereal:block/lit_palette",
 		"particle": "lithereal:block/fire_crucible_bottom"
 	},
 	"elements": [
