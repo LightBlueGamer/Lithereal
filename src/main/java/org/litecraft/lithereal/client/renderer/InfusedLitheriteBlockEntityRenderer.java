@@ -2,6 +2,7 @@ package org.litecraft.lithereal.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -27,6 +28,8 @@ public class InfusedLitheriteBlockEntityRenderer implements BlockEntityRenderer<
     public void render(InfusedLitheriteBlockEntity blockEntity, float p_112308_, PoseStack matrixStack, MultiBufferSource multiBufferSource, int p_112311_, int p_112312_) {
         VertexConsumer builder = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(texture));
         matrixStack.pushPose();
+        matrixStack.translate(0.5f, 1.5f, 0.5f);
+        matrixStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
         int i = PotionUtils.getColor(blockEntity.getStoredPotion());
         float f = (float)(i >> 16 & 255) / 255.0F;
         float f1 = (float)(i >> 8 & 255) / 255.0F;
