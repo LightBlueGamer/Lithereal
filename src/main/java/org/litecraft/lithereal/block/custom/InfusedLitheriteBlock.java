@@ -37,7 +37,7 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState p_49232_) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
