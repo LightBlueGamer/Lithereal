@@ -34,7 +34,7 @@ public class InfusedLitheriteBlockEntityRenderer implements BlockEntityRenderer<
         float f = (float)(i >> 16 & 255) / 255.0F;
         float f1 = (float)(i >> 8 & 255) / 255.0F;
         float f2 = (float)(i & 255) / 255.0F;
-        model.renderToBuffer(matrixStack, builder, p_112311_, p_112312_, f,f1,f2,1);
+        model.renderToBuffer(matrixStack, builder, 15728880, p_112312_, f,f1,f2,1);
         matrixStack.popPose();
     }
 }
