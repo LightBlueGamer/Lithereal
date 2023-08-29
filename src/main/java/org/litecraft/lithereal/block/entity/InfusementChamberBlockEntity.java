@@ -11,6 +11,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -151,13 +153,17 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         Level level = pEntity.level;
         SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
         for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+            ItemStack item = pEntity.itemHandler.getStackInSlot(i);
+            inventory.setItem(i, item);
         }
+
+        Potion potion = PotionUtils.getPotion(pEntity.itemHandler.getStackInSlot(1));
 
         Optional<InfusementChamberRecipe> infusingRecipe = level.getRecipeManager()
                 .getRecipeFor(InfusementChamberRecipe.Type.INSTANCE, inventory, level);
 
         ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
+        PotionUtils.setPotion(resultItem, potion);
         ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
 
         if(hasRecipe(pEntity)) {
@@ -200,7 +206,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
     }
 
     private static boolean canInsertItemIntoOutput(SimpleContainer inventory, ItemStack itemStack) {
-        return inventory.getItem(2).getItem() == itemStack.getItem() || inventory.getItem(2).isEmpty();
+        return inventory.getItem(2) == itemStack || inventory.getItem(2).isEmpty();
     }
 
     private static boolean canInsertAmountIntoOutput(SimpleContainer inventory) {

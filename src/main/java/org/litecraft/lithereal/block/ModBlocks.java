@@ -31,7 +31,7 @@ public class ModBlocks {
             () -> new FireCrucibleBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 
-    public static final RegistryObject<Block> INFUSEMENT_CHAMBER = registerBlockOnly("infusement_chamber",
+    public static final RegistryObject<Block> INFUSEMENT_CHAMBER = registerBlock("infusement_chamber",
             () -> new InfusementChamberBlock(BlockBehaviour.Properties.of()
                     .strength(7f).requiresCorrectToolForDrops().noOcclusion()));
 

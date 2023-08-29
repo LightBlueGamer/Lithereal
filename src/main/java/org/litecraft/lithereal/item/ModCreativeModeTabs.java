@@ -96,9 +96,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.LITHERITE_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_LITHERITE_ORE.get());
 
-                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CASING.get());
-                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER.get());
-                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CORE.get());
+//                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CASING.get());
+//                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CONTROLLER.get());
+//                        output.accept(ModBlocks.INFUSEMENT_CHAMBER_CORE.get());
+                        output.accept(ModBlocks.INFUSEMENT_CHAMBER.get());
 
                         output.accept(ModBlocks.FREEZING_STATION.get());
                         output.accept(ModBlocks.FIRE_CRUCIBLE.get());

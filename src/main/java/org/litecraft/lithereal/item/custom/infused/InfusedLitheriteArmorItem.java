@@ -41,7 +41,8 @@ public class InfusedLitheriteArmorItem extends ArmorItem {
                         boolean bl = mobEffectInstance.getEffect().isBeneficial();
                         if (bl) {
                             if(mobEffectInstance.getEffect() != MobEffects.HEAL || healTicker >= 200) {
-                                player.addEffect(CommonUtils.clone(mobEffectInstance));
+                                MobEffectInstance mobEff = new MobEffectInstance(mobEffectInstance.getEffect(), 100, mobEffectInstance.getAmplifier());
+                                player.addEffect(mobEff);
                                 healTicker = 0;
                             }
                         } else {

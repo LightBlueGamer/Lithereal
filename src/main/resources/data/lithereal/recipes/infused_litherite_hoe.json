@@ -2,13 +2,13 @@
   "type": "lithereal:infusing",
   "ingredients": [
     {
-      "item": "lithereal:litherite_axe"
+      "item": "lithereal:litherite_hoe"
     },
     {
       "item": "minecraft:potion"
     }
   ],
   "output": {
-    "item": "lithereal:infused_litherite_axe"
+    "item": "lithereal:infused_litherite_hoe"
   }
 }

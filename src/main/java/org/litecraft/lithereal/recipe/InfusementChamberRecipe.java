@@ -107,23 +107,13 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
         private Ingredient getIngredient(JsonObject json) {
             Ingredient ingredient = Ingredient.fromJson(json);
             int count = 1;
-            String nbtString = "";
 
             if (json.getAsJsonObject().has("count")) {
                 count = GsonHelper.getAsInt(json, "count");
             }
 
-            if (json.getAsJsonObject().has("effect")) {
-                nbtString = GsonHelper.getAsString(json, "effect");
-            }
-
             ItemStack itemStack = ingredient.getItems()[0];
             itemStack.setCount(count);
-
-            if (!nbtString.isEmpty()) {
-                Potion potion = ForgeRegistries.POTIONS.getValue(ResourceLocation.tryParse(nbtString));
-                PotionUtils.setPotion(itemStack, potion);
-            }
 
             return  ingredient;
         }
