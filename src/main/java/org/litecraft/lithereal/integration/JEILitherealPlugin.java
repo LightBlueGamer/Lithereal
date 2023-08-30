@@ -2,23 +2,34 @@ package org.litecraft.lithereal.integration;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.ISubtypeRegistration;
+import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
+import org.jetbrains.annotations.Nullable;
 import org.litecraft.lithereal.Lithereal;
 import org.litecraft.lithereal.block.ModBlocks;
+import org.litecraft.lithereal.block.custom.InfusementChamberBlock;
+import org.litecraft.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.litecraft.lithereal.item.ModItems;
 import org.litecraft.lithereal.recipe.FireCrucibleRecipe;
 import org.litecraft.lithereal.recipe.FreezingStationRecipe;
 import org.litecraft.lithereal.recipe.InfusementChamberRecipe;
+import org.litecraft.lithereal.screen.FireCrucibleScreen;
+import org.litecraft.lithereal.screen.FreezingStationScreen;
+import org.litecraft.lithereal.screen.InfusementChamberMenu;
+import org.litecraft.lithereal.screen.InfusementChamberScreen;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @JeiPlugin
 public class JEILitherealPlugin implements IModPlugin {
@@ -72,7 +83,23 @@ public class JEILitherealPlugin implements IModPlugin {
                 ModItems.INFUSED_LITHERITE_HELMET.get(),
                 ModItems.INFUSED_LITHERITE_CHESTPLATE.get(),
                 ModItems.INFUSED_LITHERITE_LEGGINGS.get(),
-                ModItems.HEATED_LITHERITE_BOOTS.get());
+                ModItems.INFUSED_LITHERITE_BOOTS.get());
         IModPlugin.super.registerItemSubtypes(registration);
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addRecipeClickArea(InfusementChamberScreen.class, 96, 34, 21, 15, INFUSING_TYPE);
+        registration.addRecipeClickArea(FreezingStationScreen.class, 96, 34, 21, 15, FREEZING_TYPE);
+        registration.addRecipeClickArea(FireCrucibleScreen.class, 81, 38, 13, 13, BURNING_TYPE);
+        IModPlugin.super.registerGuiHandlers(registration);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.INFUSEMENT_CHAMBER.get()), INFUSING_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.FREEZING_STATION.get()), FREEZING_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.FIRE_CRUCIBLE.get()), BURNING_TYPE);
+        IModPlugin.super.registerRecipeCatalysts(registration);
     }
 }
