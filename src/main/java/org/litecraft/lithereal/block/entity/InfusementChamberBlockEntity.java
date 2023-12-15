@@ -42,7 +42,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 1200;
+    private int maxProgress = 600;
 
     public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.INFUSEMENT_CHAMBER.get(), pos, state);
