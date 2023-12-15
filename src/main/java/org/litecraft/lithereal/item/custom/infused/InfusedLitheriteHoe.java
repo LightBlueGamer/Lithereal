@@ -1,18 +1,26 @@
 package org.litecraft.lithereal.item.custom.infused;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.litecraft.lithereal.util.CommonUtils;
 
@@ -104,5 +112,22 @@ public class InfusedLitheriteHoe extends HoeItem {
             return resourceLocation.getNamespace();
         }
         return super.getCreatorModId(itemStack);
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos blockPos, LivingEntity livingEntity) {
+        if (blockState.getBlock().asItem() == Items.POTATO && PotionUtils.getPotion(itemStack) == Potions.POISON) {
+            NonNullList<ItemStack> drops = NonNullList.create();
+            ItemStack dropStack = Items.POISONOUS_POTATO.getDefaultInstance();
+            drops.add(dropStack);
+
+            for (ItemStack drop : drops) {
+                Block.popResource(level, blockPos, drop);
+            }
+            itemStack.hurtAndBreak(1, livingEntity, (p) -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            level.destroyBlock(blockPos, false);
+        }
+
+        return super.mineBlock(itemStack, level, blockState, blockPos, livingEntity);
     }
 }

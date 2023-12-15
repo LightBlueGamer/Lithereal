@@ -14,11 +14,9 @@ import org.litecraft.lithereal.item.custom.LitheriteItem;
 import org.litecraft.lithereal.item.custom.ModArmorMaterials;
 import org.litecraft.lithereal.item.custom.WrenchItem;
 import org.litecraft.lithereal.item.custom.burning.*;
-import org.litecraft.lithereal.item.custom.freezing.CooledLitheriteArmorItem;
-import org.litecraft.lithereal.item.custom.freezing.CooledLitheriteSword;
+import org.litecraft.lithereal.item.custom.freezing.*;
 import org.litecraft.lithereal.item.custom.infused.*;
-import org.litecraft.lithereal.item.custom.withering.WitheringLitheriteArmorItem;
-import org.litecraft.lithereal.item.custom.withering.WitheringLitheriteSword;
+import org.litecraft.lithereal.item.custom.withering.*;
 
 import java.util.function.Supplier;
 
@@ -127,23 +125,23 @@ public class ModItems {
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_PICKAXE = ITEMS.register("cooled_litherite_pickaxe",
-            () -> new PickaxeItem(LITHERITE, 1, -2.8f,
+            () -> new CooledLitheritePickaxeItem(LITHERITE, 1, -2.8f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HAMMER = ITEMS.register("cooled_litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 5, -3f,
+            () -> new CooledLitheriteHammerItem(LITHERITE, 5, -3f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_AXE = ITEMS.register("cooled_litherite_axe",
-            () -> new AxeItem(LITHERITE, 5, -3f,
+            () -> new CooledLitheriteAxeItem(LITHERITE, 5, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_SHOVEL = ITEMS.register("cooled_litherite_shovel",
-            () -> new ShovelItem(LITHERITE, 1.5f, -3f,
+            () -> new CooledLitheriteShovelItem(LITHERITE, 1.5f, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HOE = ITEMS.register("cooled_litherite_hoe",
-            () -> new HoeItem(LITHERITE, -3, 0.0f,
+            () -> new CooledLitheriteHoeItem(LITHERITE, -3, 0.0f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> COOLED_LITHERITE_HELMET = ITEMS.register("cooled_litherite_helmet",
@@ -171,23 +169,23 @@ public class ModItems {
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_PICKAXE = ITEMS.register("withering_litherite_pickaxe",
-            () -> new PickaxeItem(LITHERITE, 1, -2.8f,
+            () -> new WitheringLitheritePickaxeItem(LITHERITE, 1, -2.8f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_HAMMER = ITEMS.register("withering_litherite_hammer",
-            () -> new LitheriteHammerItem(LITHERITE, 5, -3f,
+            () -> new WitheringLitheriteHammerItem(LITHERITE, 5, -3f,
                     new Item.Properties().durability(15750)));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_AXE = ITEMS.register("withering_litherite_axe",
-            () -> new AxeItem(LITHERITE, 5, -3f,
+            () -> new WitheringLitheriteAxeItem(LITHERITE, 5, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_SHOVEL = ITEMS.register("withering_litherite_shovel",
-            () -> new ShovelItem(LITHERITE, 1.5f, -3f,
+            () -> new WitheringLitheriteShovelItem(LITHERITE, 1.5f, -3f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_HOE = ITEMS.register("withering_litherite_hoe",
-            () -> new HoeItem(LITHERITE, -3, 0.0f,
+            () -> new WitheringLitheriteHoeItem(LITHERITE, -3, 0.0f,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> WITHERING_LITHERITE_HELMET = ITEMS.register("withering_litherite_helmet",
