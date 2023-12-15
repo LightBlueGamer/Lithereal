@@ -1,4 +1,4 @@
-// 1.20.1	2023-06-30T05:19:19.0113156	Loot Tables
+// 1.20.1	2023-12-15T01:58:16.7232647	Loot Tables
 df5d9d27a9faf33a992db7a6a1260cd5b038106a data/lithereal/loot_tables/blocks/blue_fire.json
 51c42e34d5d48c920ab146b569e433ab9c5b68c6 data/lithereal/loot_tables/blocks/cooled_litherite_block.json
 153579e92e37dcca4c78024d99a47572509c94a7 data/lithereal/loot_tables/blocks/deepslate_litherite_ore.json
@@ -6,7 +6,7 @@ df5d9d27a9faf33a992db7a6a1260cd5b038106a data/lithereal/loot_tables/blocks/blue_
 3d3912c90bd456c82bda5585ea22b07227c32883 data/lithereal/loot_tables/blocks/freezing_station.json
 66bd6e2c76362ca20e84058c7fe4a4a1850e324c data/lithereal/loot_tables/blocks/heated_litherite_block.json
 67f9ee3195c582619802537cdcc6387cf849bd72 data/lithereal/loot_tables/blocks/infused_litherite_block.json
-0dc8b2f2988fb4aa6197508e2ac0813bb9b1a26b data/lithereal/loot_tables/blocks/infusement_chamber.json
+148eb7f69525bf22009c693a854235af7af6fa91 data/lithereal/loot_tables/blocks/infusement_chamber.json
 874affebad371d1821083eb658e46ca0f11a4ebf data/lithereal/loot_tables/blocks/infusement_chamber_casing.json
 31085419e4c7644daca116157cb7efe4ae24bd71 data/lithereal/loot_tables/blocks/infusement_chamber_controller.json
 7382b323acae68ff4899b5fff32e01e2fa8ff64a data/lithereal/loot_tables/blocks/infusement_chamber_core.json

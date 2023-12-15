@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "minecraft:air"
+              "name": "lithereal:infusement_chamber"
             },
             {
               "type": "minecraft:item",

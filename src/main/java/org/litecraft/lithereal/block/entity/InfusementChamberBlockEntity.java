@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
@@ -41,7 +42,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 200;
+    private int maxProgress = 1200;
 
     public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.INFUSEMENT_CHAMBER.get(), pos, state);
@@ -178,7 +179,8 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         }
 
         entity.itemHandler.extractItem(0, 1, false);
-        entity.itemHandler.extractItem(1, 1, false);
+        if(entity.itemHandler.getStackInSlot(1).is(Items.POTION)) entity.itemHandler.setStackInSlot(1, new ItemStack(Items.GLASS_BOTTLE));
+        else entity.itemHandler.extractItem(1, 1, false);
         entity.itemHandler.setStackInSlot(2, outputItem);
 
         entity.resetProgress();
