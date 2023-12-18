@@ -3,11 +3,13 @@ package org.lithereal.item;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
 import org.lithereal.item.custom.ArmorMaterials;
 import org.lithereal.item.custom.Hammer;
-import org.lithereal.item.custom.tiers.Tiers;
+import org.lithereal.item.custom.ModTier;
 
 public class Items {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
@@ -15,23 +17,24 @@ public class Items {
     public static final RegistrySupplier<Item> LITHERITE_CRYSTAL = ITEMS.register("litherite_crystal", () ->
             new Item(new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
 
+    public static final Tier LITHERITE = new ModTier(4, 1750, 11.0F, 4.0F, 20, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(Items.LITHERITE_CRYSTAL.get()));
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->
-            new SwordItem(Tiers.LITHERITE, 3, -2.4f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
+            new SwordItem(LITHERITE, 3, -2.4f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
 
     public static final RegistrySupplier<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe", () ->
-            new PickaxeItem(Tiers.LITHERITE, 1, -2.8f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
+            new PickaxeItem(LITHERITE, 1, -2.8f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
 
     public static final RegistrySupplier<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer", () ->
-            new Hammer(Tiers.LITHERITE, 5, -3f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB).durability(15750)));
+            new Hammer(LITHERITE, 5, -3f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB).durability(15750)));
 
     public static final RegistrySupplier<Item> LITHERITE_AXE = ITEMS.register("litherite_axe", () ->
-            new AxeItem(Tiers.LITHERITE, 5, -3f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
+            new AxeItem(LITHERITE, 5, -3f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
 
     public static final RegistrySupplier<Item> LITHERITE_SHOVEL = ITEMS.register("litherite_shovel", () ->
-            new ShovelItem(Tiers.LITHERITE, 1.5f, -3f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
+            new ShovelItem(LITHERITE, 1.5f, -3f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
 
     public static final RegistrySupplier<Item> LITHERITE_HOE = ITEMS.register("litherite_hoe", () ->
-            new HoeItem(Tiers.LITHERITE, -3, 0f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
+            new HoeItem(LITHERITE, -3, 0f, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
 
     public static final RegistrySupplier<Item> LITHERITE_HELMET = ITEMS.register("litherite_helmet", () ->
             new ArmorItem(ArmorMaterials.LITHERITE, ArmorItem.Type.HELMET, new Item.Properties().arch$tab(CreativeTabs.LITHEREAL_TAB)));
