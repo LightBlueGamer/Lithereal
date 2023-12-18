@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:litherite_crystal"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "LL",
+    " S",
+    " S"
+  ],
+  "result": {
+    "item": "lithereal:litherite_hoe"
+  },
+  "show_notification": true
+}

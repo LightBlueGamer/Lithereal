@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "mixin": [
+    "lithereal.mixins.json",
+    "lithereal-common.mixins.json"
+  ],
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "lithereal",
+    "version": "${version}",
+    "metadata": {
+      "name": "Lithereal",
+      "description": "Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.",
+      "contributors": {
+        "Light": "Creator & Developer",
+        "Alexandra": "Artist & Co-Dev"
+      },
+      "contact": {
+        "sources": "https://github.com/LightBlueGamer/Lithereal/tree/Forge-1.20"
+      },
+      "icon": "assets/lithereal/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "init": [
+        "org.lithereal.quilt.LitherealQuilt"
+      ]
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "version": "*"
+      },
+      {
+        "id": "quilt_base",
+        "version": "*"
+      },
+      {
+        "id": "minecraft",
+        "version": ">=1.20.1"
+      },
+      {
+        "id": "architectury",
+        "version": ">=9.1.12"
+      }
+    ]
+  },
+  "minecraft": {
+    "environment": "*"
+  }
+}

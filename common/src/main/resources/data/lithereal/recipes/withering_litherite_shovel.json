@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:withering_litherite_crystal"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "L",
+    "S",
+    "S"
+  ],
+  "result": {
+    "item": "lithereal:withering_litherite_shovel"
+  },
+  "show_notification": true
+}

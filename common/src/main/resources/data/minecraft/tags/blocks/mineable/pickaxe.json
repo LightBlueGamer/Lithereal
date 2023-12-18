@@ -1,0 +1,20 @@
+{
+  "values": [
+    "lithereal:litherite_ore",
+    "lithereal:deepslate_litherite_ore",
+    "lithereal:litherite_block",
+    "lithereal:cooled_litherite_block",
+    "lithereal:heated_litherite_block",
+    "lithereal:withering_litherite_block",
+    "lithereal:infused_litherite_block",
+    "lithereal:scorched_netherrack",
+    "lithereal:scorched_crimson_nylium",
+    "lithereal:scorched_warped_nylium",
+    "lithereal:freezing_station",
+    "lithereal:fire_crucible",
+    "lithereal:infusement_chamber_casing",
+    "lithereal:infusement_chamber",
+    "lithereal:infusement_chamber_core",
+    "lithereal:infusement_chamber_controller"
+  ]
+}

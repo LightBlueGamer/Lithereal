@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " LS",
+    " SL",
+    "S  "
+  ],
+  "key": {
+    "L": {
+      "item": "lithereal:litherite_crystal"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "lithereal:litherite_wrench"
+  }
+}

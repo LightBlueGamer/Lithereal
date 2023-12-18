@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "lithereal",
+  "version": "${version}",
+  "name": "Lithereal",
+  "description": "Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.",
+  "authors": [
+    "Light, Alexandra"
+  ],
+  "contact": {
+    "sources": "https://github.com/LightBlueGamer/Lithereal/tree/Forge-1.20"
+  },
+  "license": "MIT",
+  "icon": "assets/lithereal/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.lithereal.fabric.LitherealFabric"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20.1",
+    "architectury": ">=9.1.12"
+  }
+}

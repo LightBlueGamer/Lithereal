@@ -1,0 +1,14 @@
+{
+  "type": "lithereal:infusing",
+  "ingredients": [
+    {
+      "item": "lithereal:litherite_crystal"
+    },
+    {
+      "item": "minecraft:potion"
+    }
+  ],
+  "output": {
+    "item": "lithereal:infused_litherite_crystal"
+  }
+}

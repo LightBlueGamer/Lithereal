@@ -1,0 +1,14 @@
+{
+  "type": "lithereal:infusing",
+  "ingredients": [
+    {
+      "item": "lithereal:litherite_boots"
+    },
+    {
+      "item": "minecraft:potion"
+    }
+  ],
+  "output": {
+    "item": "lithereal:infused_litherite_boots"
+  }
+}

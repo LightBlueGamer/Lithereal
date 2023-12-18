@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ILI",
+    "LDL",
+    "ILI"
+  ],
+  "key": {
+    "L": {
+      "item": "lithereal:litherite_crystal"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "lithereal:infusement_chamber_core"
+  }
+}

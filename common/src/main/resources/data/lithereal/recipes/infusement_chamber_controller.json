@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ILI",
+    "LOL",
+    "ILI"
+  ],
+  "key": {
+    "L": {
+      "item": "lithereal:litherite_crystal"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "O": {
+      "item": "minecraft:observer"
+    }
+  },
+  "result": {
+    "item": "lithereal:infusement_chamber"
+  }
+}

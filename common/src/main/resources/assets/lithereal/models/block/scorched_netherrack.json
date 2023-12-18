@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "lithereal:block/scorched_netherrack",
+    "side": "lithereal:block/scorched_netherrack"
+  }
+}
