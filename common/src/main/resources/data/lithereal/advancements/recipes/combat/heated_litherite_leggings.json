@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_heated_litherite": {
+    "has_burning_litherite": {
       "conditions": {
         "items": [
           {
             "items": [
-              "lithereal:heated_litherite_crystal"
+              "lithereal:burning_litherite_crystal"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lithereal:heated_litherite_leggings"
+        "recipe": "lithereal:burning_litherite_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_heated_litherite",
+      "has_burning_litherite",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lithereal:heated_litherite_leggings"
+      "lithereal:burning_litherite_leggings"
     ]
   },
   "sends_telemetry_event": false

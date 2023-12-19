@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lithereal:heated_litherite_block"
+          "name": "lithereal:burning_litherite_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/heated_litherite_block"
+  "random_sequence": "lithereal:blocks/burning_litherite_block"
 }

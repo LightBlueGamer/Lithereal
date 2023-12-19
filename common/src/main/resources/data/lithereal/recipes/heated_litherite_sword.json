@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "L": {
-      "item": "lithereal:heated_litherite_crystal"
+      "item": "lithereal:burning_litherite_crystal"
     },
     "S": {
       "tag": "forge:rods/wooden"
@@ -15,7 +15,7 @@
     "S"
   ],
   "result": {
-    "item": "lithereal:heated_litherite_sword"
+    "item": "lithereal:burning_litherite_sword"
   },
   "show_notification": true
 }

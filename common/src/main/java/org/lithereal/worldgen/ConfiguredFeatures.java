@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import org.lithereal.Lithereal;
-import org.lithereal.block.Blocks;
+import org.lithereal.block.ModBlocks;
 
 
 import java.util.List;
@@ -25,8 +25,8 @@ public class ConfiguredFeatures {
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
         List<OreConfiguration.TargetBlockState> overworldBlackOpalOres = List.of(OreConfiguration.target(stoneReplaceables,
-                        Blocks.LITHERITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState()));
+                        ModBlocks.LITHERITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState()));
 
         register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldBlackOpalOres, 4));
     }

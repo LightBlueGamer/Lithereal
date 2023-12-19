@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cooled_litherite": {
+    "has_frozen_litherite": {
       "conditions": {
         "items": [
           {
             "items": [
-              "lithereal:cooled_litherite_crystal"
+              "lithereal:frozen_litherite_crystal"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lithereal:cooled_litherite_chestplate"
+        "recipe": "lithereal:frozen_litherite_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_cooled_litherite",
+      "has_frozen_litherite",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lithereal:cooled_litherite_chestplate"
+      "lithereal:frozen_litherite_chestplate"
     ]
   },
   "sends_telemetry_event": false

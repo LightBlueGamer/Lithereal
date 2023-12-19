@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cooled_litherite": {
+    "has_frozen_litherite": {
       "conditions": {
         "items": [
           {
             "items": [
-              "lithereal:cooled_litherite_crystal"
+              "lithereal:frozen_litherite_crystal"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_cooled_litherite",
+      "has_frozen_litherite",
       "has_the_recipe"
     ]
   ],

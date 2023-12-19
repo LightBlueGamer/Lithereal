@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "lithereal:litherite_ore",
-    "lithereal:deepslate_litherite_ore"
+    "lithereal:deepslate_litherite_ore",
+    "lithereal:frozen_litherite_block",
+    "lithereal:burning_litherite_block"
   ]
 }

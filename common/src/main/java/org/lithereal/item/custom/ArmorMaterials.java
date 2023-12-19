@@ -7,7 +7,7 @@ import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.lithereal.item.Items;
+import org.lithereal.item.ModItems;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;
@@ -19,7 +19,7 @@ public enum ArmorMaterials implements ArmorMaterial {
         p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
         p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
         p_266655_.put(ArmorItem.Type.HELMET, 4);
-    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(Items.LITHERITE_CRYSTAL.get()));
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(ModItems.LITHERITE_CRYSTAL.get()));
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266653_) -> {
         p_266653_.put(ArmorItem.Type.BOOTS, 13);

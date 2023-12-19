@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "L": {
-      "item": "lithereal:cooled_litherite_crystal"
+      "item": "lithereal:frozen_litherite_crystal"
     }
   },
   "pattern": [
@@ -12,7 +12,7 @@
     "LLL"
   ],
   "result": {
-    "item": "lithereal:cooled_litherite_chestplate"
+    "item": "lithereal:frozen_litherite_chestplate"
   },
   "show_notification": true
 }

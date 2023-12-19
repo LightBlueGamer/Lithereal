@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "L": {
-      "item": "lithereal:heated_litherite_crystal"
+      "item": "lithereal:burning_litherite_crystal"
     }
   },
   "pattern": [
@@ -12,7 +12,7 @@
     "LLL"
   ],
   "result": {
-    "item": "lithereal:heated_litherite_chestplate"
+    "item": "lithereal:burning_litherite_chestplate"
   },
   "show_notification": true
 }

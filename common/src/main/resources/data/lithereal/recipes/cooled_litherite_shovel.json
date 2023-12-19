@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "L": {
-      "item": "lithereal:cooled_litherite_crystal"
+      "item": "lithereal:frozen_litherite_crystal"
     },
     "S": {
       "tag": "forge:rods/wooden"
@@ -15,7 +15,7 @@
     "S"
   ],
   "result": {
-    "item": "lithereal:cooled_litherite_shovel"
+    "item": "lithereal:frozen_litherite_shovel"
   },
   "show_notification": true
 }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_heated_litherite": {
+    "has_burning_litherite": {
       "conditions": {
         "items": [
           {
             "items": [
-              "lithereal:heated_litherite_crystal"
+              "lithereal:burning_litherite_crystal"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_heated_litherite",
+      "has_burning_litherite",
       "has_the_recipe"
     ]
   ],
