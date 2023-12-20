@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.Lithereal;
 import org.lithereal.block.custom.BlueFireBlock;
 import org.lithereal.block.custom.BurningLitheriteBlock;
+import org.lithereal.block.custom.FrozenLitheriteBlock;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
 
@@ -34,12 +35,12 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistrySupplier<Block> FROZEN_LITHERITE_BLOCK = registerBlock("frozen_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
     public static final RegistrySupplier<Block> BURNING_LITHERITE_BLOCK = registerHeatedBlock("burning_litherite_block",
             () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
+    public static final RegistrySupplier<Block> FORZEN_LITHERITE_BLOCK = registerHeatedBlock("frozen_litherite_block",
+            () -> new FrozenLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",

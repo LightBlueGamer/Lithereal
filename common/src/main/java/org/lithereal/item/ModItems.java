@@ -10,6 +10,8 @@ import org.lithereal.Lithereal;
 import org.lithereal.item.custom.ArmorMaterials;
 import org.lithereal.item.custom.Hammer;
 import org.lithereal.item.custom.ModTier;
+import org.lithereal.item.custom.burning.BurningLitheriteAxe;
+import org.lithereal.item.custom.burning.BurningLitheriteSword;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
@@ -17,9 +19,18 @@ public class ModItems {
     public static final RegistrySupplier<Item> LITHERITE_CRYSTAL = ITEMS.register("litherite_crystal", () ->
             new Item(new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
 
+    public static final RegistrySupplier<Item> BURNING_LITHERITE_CRYSTAL = ITEMS.register("burning_litherite_crystal", () ->
+            new Item(new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
+
+    public static final RegistrySupplier<Item> FROZEN_LITHERITE_CRYSTAL = ITEMS.register("frozen_litherite_crystal", () ->
+            new Item(new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
+
     public static final Tier LITHERITE = new ModTier(4, 1750, 11.0F, 4.0F, 20, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItems.LITHERITE_CRYSTAL.get()));
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->
             new SwordItem(LITHERITE, 3, -2.4f, new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
+
+    public static final RegistrySupplier<Item> BURNING_LITHERITE_SWORD = ITEMS.register("burning_litherite_sword", () ->
+            new BurningLitheriteSword(LITHERITE, 3, -2.4f, new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
 
     public static final RegistrySupplier<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe", () ->
             new PickaxeItem(LITHERITE, 1, -2.8f, new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
@@ -29,6 +40,9 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> LITHERITE_AXE = ITEMS.register("litherite_axe", () ->
             new AxeItem(LITHERITE, 5, -3f, new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
+
+    public static final RegistrySupplier<Item> BURNING_LITHERITE_AXE = ITEMS.register("burning_litherite_axe", () ->
+            new BurningLitheriteAxe(LITHERITE, 5, -3f, new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
 
     public static final RegistrySupplier<Item> LITHERITE_SHOVEL = ITEMS.register("litherite_shovel", () ->
             new ShovelItem(LITHERITE, 1.5f, -3f, new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));

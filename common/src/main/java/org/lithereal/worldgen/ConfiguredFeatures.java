@@ -24,11 +24,11 @@ public class ConfiguredFeatures {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
-        List<OreConfiguration.TargetBlockState> overworldBlackOpalOres = List.of(OreConfiguration.target(stoneReplaceables,
+        List<OreConfiguration.TargetBlockState> overworldLitheriteOres = List.of(OreConfiguration.target(stoneReplaceables,
                         ModBlocks.LITHERITE_ORE.get().defaultBlockState()),
                 OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState()));
 
-        register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldBlackOpalOres, 4));
+        register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldLitheriteOres, 4));
     }
 
 

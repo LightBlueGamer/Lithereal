@@ -25,12 +25,12 @@ public class BurningLitheriteBlock extends BaseEntityBlock {
         super(properties);
     }
 
-    public void stepOn(Level arg, BlockPos arg2, BlockState arg3, Entity arg4) {
-        if (!arg4.isSteppingCarefully() && arg4 instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)arg4)) {
-            arg4.hurt(arg.damageSources().hotFloor(), 6.0F);
+    public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
+        if (entity instanceof LivingEntity) {
+            entity.hurt(level.damageSources().hotFloor(), 6.0F);
         }
 
-        super.stepOn(arg, arg2, arg3, arg4);
+        super.stepOn(level, blockPos, blockState, entity);
     }
 
     private static final VoxelShape SHAPE =
