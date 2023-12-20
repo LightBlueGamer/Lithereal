@@ -1,89 +1,42 @@
-package org.lithereal.item.custom;
+package org.lithereal.item.custom.burning;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.lithereal.item.custom.Hammer;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-// Credits to ErrorMikey for hammer code https://github.com/ErrorMikey/JustHammers
-public class Hammer extends PickaxeItem {
-
-    protected final int depth = 1;
-    protected final int radius = 3;
-    private TagKey<Block> blocks;
-    public Hammer(Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
-
-        this.blocks = BlockTags.MINEABLE_WITH_PICKAXE;
-    }
-
-    private int destroySurroundingBlocks(Level level, BlockPos pos) {
-        int blocksBroken = 0;
-        for (BlockPos p : new BlockPos[]{pos.north(), pos.south(), pos.east(), pos.west(),
-                pos.offset(1, 0, 1), pos.offset(1, 0, -1), pos.offset(-1, 0, 1), pos.offset(-1, 0, -1)}) {
-            blocksBroken += destroyIfNotBedrock(level, p);
-        }
-
-        return blocksBroken;
-    }
-
-    private int destroyIfNotBedrock(Level level, BlockPos pos) {
-        if (level.getBlockState(pos).getBlock() != Blocks.BEDROCK && level.getBlockState(pos).getBlock() != Blocks.AIR) {
-            level.destroyBlock(pos, true);
-            return 1;
-        }
-        return 0;
-    }
-
-    protected boolean actualIsCorrectToolForDrops(BlockState state) {
-        int i = this.getTier().getLevel();
-        if (i < 3 && state.is(BlockTags.NEEDS_DIAMOND_TOOL)) {
-            return false;
-        } else if (i < 2 && state.is(BlockTags.NEEDS_IRON_TOOL)) {
-            return false;
-        } else {
-            return (i >= 1 || !state.is(BlockTags.NEEDS_STONE_TOOL)) && state.is(this.blocks);
-        }
+public class BurningLitheriteHammer extends Hammer {
+    public BurningLitheriteHammer(Tier tier, int i, float f, Properties properties) {
+        super(tier, i, f, properties);
     }
 
     @Override
-    public boolean mineBlock(ItemStack hammerStack, Level level, BlockState blockState, BlockPos blockPos, LivingEntity livingEntity) {
-        if (level.isClientSide || blockState.getDestroySpeed(level, blockPos) == 0.0F) {
-            return true;
-        }
-
-        HitResult pick = livingEntity.pick(20D, 1F, false);
-
-        // Not possible?
-        if (!(pick instanceof BlockHitResult)) {
-            return super.mineBlock(hammerStack, level, blockState, blockPos, livingEntity);
-        }
-
-        this.findAndBreakNearBlocks(pick, blockPos, hammerStack, level, livingEntity);
-        return super.mineBlock(hammerStack, level, blockState, blockPos, livingEntity);
+    public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        if(attacked.isFreezing()) attacked.setTicksFrozen(0);
+        attacked.setSecondsOnFire(1000);
+        return super.hurtEnemy(itemStack, attacked, attacker);
     }
-
+    @Override
     public void findAndBreakNearBlocks(HitResult pick, BlockPos blockPos, ItemStack hammerStack, Level level, LivingEntity livingEntity) {
         if (!(livingEntity instanceof ServerPlayer player)) return;
 
@@ -124,8 +77,12 @@ public class Hammer extends PickaxeItem {
                 if (correctToolForDrops) {
                     targetState.spawnAfterBreak((ServerLevel) level, pos, hammerStack, true);
                     List<ItemStack> drops = Block.getDrops(targetState, (ServerLevel) level, pos, level.getBlockEntity(pos), livingEntity, hammerStack);
-                    drops.forEach(e ->
-                            Block.popResourceFromFace(level, pos, ((BlockHitResult) pick).getDirection(), e));
+                    drops.forEach(e -> {
+                        SmeltingRecipe furnaceRecipe = level.getRecipeManager()
+                                .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(targetState.getBlock().asItem().getDefaultInstance()), level).orElse(null);
+                        if(furnaceRecipe != null) e = furnaceRecipe.getResultItem(level.registryAccess()).getItem().getDefaultInstance();
+                        Block.popResourceFromFace(level, pos, ((BlockHitResult) pick).getDirection(), e);
+                    });
                 }
             }
             damage ++;
@@ -136,18 +93,5 @@ public class Hammer extends PickaxeItem {
                 livingEntityx.broadcastBreakEvent(EquipmentSlot.MAINHAND);
             });
         }
-    }
-
-    protected boolean canDestroy(BlockState targetState, Level level, BlockPos pos) {
-        if (targetState.getDestroySpeed(level, pos) <= 0) {
-            return false;
-        }
-
-        return level.getBlockEntity(pos) == null;
-    }
-
-
-    protected boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        return true;
     }
 }

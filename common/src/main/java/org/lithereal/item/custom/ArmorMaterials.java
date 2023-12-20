@@ -19,7 +19,21 @@ public enum ArmorMaterials implements ArmorMaterial {
         p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
         p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
         p_266655_.put(ArmorItem.Type.HELMET, 4);
-    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(ModItems.LITHERITE_CRYSTAL.get()));
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(ModItems.LITHERITE_CRYSTAL.get())),
+
+    BURNING_LITHERITE("burning_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(ModItems.BURNING_LITHERITE_CRYSTAL.get())),
+
+    FROZEN_LITHERITE("frozen_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+        p_266655_.put(ArmorItem.Type.BOOTS, 4);
+        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
+        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
+        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(ModItems.FROZEN_LITHERITE_CRYSTAL.get()));
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266653_) -> {
         p_266653_.put(ArmorItem.Type.BOOTS, 13);
