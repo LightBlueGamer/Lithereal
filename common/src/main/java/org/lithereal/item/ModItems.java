@@ -1,5 +1,6 @@
 package org.lithereal.item;
 
+import dev.architectury.extensions.ItemExtension;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +13,9 @@ import org.lithereal.item.custom.Hammer;
 import org.lithereal.item.custom.ModTier;
 import org.lithereal.item.custom.burning.*;
 import org.lithereal.item.custom.frozen.*;
+import org.lithereal.item.custom.infused.InfusedLitheriteItem;
+
+import java.util.function.Consumer;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
@@ -24,6 +28,9 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_CRYSTAL = ITEMS.register("frozen_litherite_crystal", () ->
             new Item(new Item.Properties().arch$tab(ModCreativeTabs.LITHEREAL_TAB)));
+
+    public static final RegistrySupplier<Item> INFUSED_LITHERITE_CRYSTAL = ITEMS.register("infused_litherite_crystal", () ->
+            new InfusedLitheriteItem(new Item.Properties()));
 
     public static final Tier LITHERITE = new ModTier(4, 1750, 11.0F, 4.0F, 20, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ModItems.LITHERITE_CRYSTAL.get()));
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->
