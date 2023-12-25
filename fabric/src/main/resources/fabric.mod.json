@@ -16,11 +16,17 @@
   "entrypoints": {
     "main": [
       "org.lithereal.fabric.LitherealFabric"
+    ],
+    "client": [
+      "org.lithereal.fabric.LitherealFabricClient"
     ]
   },
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20.1",
     "architectury": ">=9.1.12"
-  }
+  },
+  "mixins": [
+    "lithereal.mixins.json"
+  ]
 }

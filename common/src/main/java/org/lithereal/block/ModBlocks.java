@@ -16,8 +16,10 @@ import org.lithereal.Lithereal;
 import org.lithereal.block.custom.BlueFireBlock;
 import org.lithereal.block.custom.BurningLitheriteBlock;
 import org.lithereal.block.custom.FrozenLitheriteBlock;
+import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 
 import java.util.function.Supplier;
 
@@ -40,7 +42,7 @@ public class ModBlocks {
             () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistrySupplier<Block> FORZEN_LITHERITE_BLOCK = registerHeatedBlock("frozen_litherite_block",
+    public static final RegistrySupplier<Block> FROZEN_LITHERITE_BLOCK = registerHeatedBlock("frozen_litherite_block",
             () -> new FrozenLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
@@ -81,6 +83,17 @@ public class ModBlocks {
     private static <T extends Block> RegistrySupplier<T> registerBlockOnly(String name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
+    }
+
+    private static <T extends Block> RegistrySupplier<T> registerColoredBlock(String name, Supplier<T> block) {
+        RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
+        registerColoredBlockItem(name, toReturn);
+        return toReturn;
+    }
+
+    private static <T extends Block> RegistrySupplier<Item> registerColoredBlockItem(String name, RegistrySupplier<T> block) {
+        return ModItems.ITEMS.register(name, () -> new InfusedLitheriteBlockItem(block.get(),
+                new Item.Properties()));
     }
 
     public static void register() {

@@ -1,5 +1,6 @@
 {
   "textures": {
+    "all": "lithereal:block/infused_litherite_block",
     "particle": "lithereal:block/infused_litherite_block"
   }
 }

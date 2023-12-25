@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.lithereal.block.ModBlocks;
-import org.lithereal.item.custom.ArmorMaterials;
+import org.lithereal.item.custom.ModArmorMaterials;
 import org.lithereal.util.KeyBinding;
 
 import java.util.Map;
@@ -22,12 +22,12 @@ import java.util.Map;
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
-public class BurningArmor extends ArmorItem {
+public class BurningLitheriteArmor extends ArmorItem {
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ArmorMaterials.BURNING_LITHERITE,
+                    .put(ModArmorMaterials.BURNING_LITHERITE,
                             new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1)).build();
-    public BurningArmor(ArmorMaterial armorMaterial, Type type, Properties properties) {
+    public BurningLitheriteArmor(ArmorMaterial armorMaterial, Type type, Properties properties) {
         super(armorMaterial, type, properties);
     }
 

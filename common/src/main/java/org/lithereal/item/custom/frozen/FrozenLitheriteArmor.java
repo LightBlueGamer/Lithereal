@@ -9,15 +9,15 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import org.lithereal.item.custom.ArmorMaterials;
+import org.lithereal.item.custom.ModArmorMaterials;
 import org.lithereal.util.KeyBinding;
 
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
-public class FrozenArmor extends ArmorItem {
+public class FrozenLitheriteArmor extends ArmorItem {
 
-    public FrozenArmor(ArmorMaterial armorMaterial, Type type, Properties properties) {
+    public FrozenLitheriteArmor(ArmorMaterial armorMaterial, Type type, Properties properties) {
         super(armorMaterial, type, properties);
     }
 
@@ -34,7 +34,7 @@ public class FrozenArmor extends ArmorItem {
             }
             if(!level.isClientSide()) {
                 if(hasFullSuitOfArmorOn(player)) {
-                    if(hasCorrectArmorOn(ArmorMaterials.FROZEN_LITHERITE, player)) {
+                    if(hasCorrectArmorOn(ModArmorMaterials.FROZEN_LITHERITE, player)) {
                         if(player.isFreezing()) {
                             player.setTicksFrozen(0);
                         }

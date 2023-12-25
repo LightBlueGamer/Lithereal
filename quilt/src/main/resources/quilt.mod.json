@@ -24,6 +24,9 @@
     "entrypoints": {
       "init": [
         "org.lithereal.quilt.LitherealQuilt"
+      ],
+      "client": [
+        "org.lithereal.quilt.LitherealQuiltClient"
       ]
     },
     "depends": [
