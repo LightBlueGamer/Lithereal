@@ -14,20 +14,21 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.screen.FreezingStationMenu;
+import org.lithereal.screen.InfusementChamberMenu;
 
-public class FreezingStationBlockEntity extends BlockEntity implements MenuProvider {
+public class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 200;
 
-    public FreezingStationBlockEntity(BlockPos pos, BlockState state) {
-        super(LitherealExpectPlatform.getFreezingStationBlockEntity(), pos, state);
+    public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
+        super(LitherealExpectPlatform.getInfusementChamberBlockEntity(), pos, state);
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> FreezingStationBlockEntity.this.progress;
-                    case 1 -> FreezingStationBlockEntity.this.maxProgress;
+                    case 0 -> InfusementChamberBlockEntity.this.progress;
+                    case 1 -> InfusementChamberBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -35,8 +36,8 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> FreezingStationBlockEntity.this.progress = value;
-                    case 1 -> FreezingStationBlockEntity.this.maxProgress = value;
+                    case 0 -> InfusementChamberBlockEntity.this.progress = value;
+                    case 1 -> InfusementChamberBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -49,7 +50,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Freezing Station");
+        return Component.literal("Infusement Chamber");
     }
 
     protected void resetProgress() {
@@ -67,6 +68,6 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new FreezingStationMenu(i, inventory, this, this.data);
+        return new InfusementChamberMenu(i, inventory, this, this.data);
     }
 }

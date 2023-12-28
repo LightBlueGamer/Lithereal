@@ -9,9 +9,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.entity.FreezingStationBlockEntity;
 
 public class FreezingStationMenu extends AbstractContainerMenu {
-    public FireCrucibleBlockEntity blockEntity;
+    public FreezingStationBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
 
@@ -20,7 +21,7 @@ public class FreezingStationMenu extends AbstractContainerMenu {
     }
 
     public FreezingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(LitherealExpectPlatform.getFireCrucibleMenu(), id);
+        super(LitherealExpectPlatform.getFreezingStationMenu(), id);
     }
 
     public boolean isCrafting() {
@@ -30,21 +31,9 @@ public class FreezingStationMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 13;
+        int progressArrowSize = 22;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-    public int getScaledProgressFuel() {
-        int progress = this.data.get(3);
-        int maxProgress = this.data.get(4);
-        int progressArrowSize = 34;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-    public int getHeatLevel() {
-        return this.data.get(2);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -101,7 +90,7 @@ public class FreezingStationMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, LitherealExpectPlatform.getFireCrucibleBlock());
+                player, LitherealExpectPlatform.getFreezingStationBlock());
     }
 
     protected void addPlayerInventory(Inventory playerInventory) {

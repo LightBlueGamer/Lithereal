@@ -10,10 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
 
-public class FreezingStationScreen extends AbstractContainerScreen<FreezingStationMenu> {
+public class InfusementChamberScreen extends AbstractContainerScreen<InfusementChamberMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png");
-    public FreezingStationScreen(FreezingStationMenu menu, Inventory inventory, Component component) {
+            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png");
+    public InfusementChamberScreen(InfusementChamberMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
@@ -30,14 +30,14 @@ public class FreezingStationScreen extends AbstractContainerScreen<FreezingStati
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
+            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
         }
     }
 

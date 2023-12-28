@@ -11,19 +11,18 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 
-public class FreezingStationBlock extends BaseEntityBlock {
+public class InfusementChamberBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public FreezingStationBlock(Properties properties) {
+    public InfusementChamberBlock(Properties properties) {
         super(properties);
     }
 
@@ -66,14 +65,14 @@ public class FreezingStationBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new FreezingStationBlockEntity(pos, state);
+        return new InfusementChamberBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
-        return createTickerHelper(type, LitherealExpectPlatform.getFreezingStationBlockEntity(),
-                LitherealExpectPlatform.getFreezingStationBlockEntityTicker());
+        return createTickerHelper(type, LitherealExpectPlatform.getInfusementChamberBlockEntity(),
+                LitherealExpectPlatform.getInfusementChamberBlockEntityTicker());
     }
 }

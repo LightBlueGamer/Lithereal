@@ -13,6 +13,12 @@ public class ModRecipes {
     public static final RegistrySupplier<RecipeSerializer<FireCrucibleRecipe>> BURNING_SERIALIZER =
             SERIALIZERS.register("burning", () -> FireCrucibleRecipe.Serializer.INSTANCE);
 
+    public static final RegistrySupplier<RecipeSerializer<FreezingStationRecipe>> FREEZING_SERIALIZER =
+            SERIALIZERS.register("freezing", () -> FreezingStationRecipe.Serializer.INSTANCE);
+
+    public static final RegistrySupplier<RecipeSerializer<InfusementChamberRecipe>> INFUSING_SERIALIZER =
+            SERIALIZERS.register("infusing", () -> InfusementChamberRecipe.Serializer.INSTANCE);
+
     public static void register() {
         SERIALIZERS.register();
     }

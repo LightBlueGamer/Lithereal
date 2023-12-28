@@ -18,10 +18,20 @@ public class ForgeBlockEntities {
                     BlockEntityType.Builder.of(InfusedLitheriteBlockEntity::new,
                             ForgeBlocks.INFUSED_LITHERITE_BLOCK.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<FireCrucibleBlockEntity>> FIRE_CRUCIBLE =
+    public static final RegistryObject<BlockEntityType<ForgeFireCrucibleBlockEntity>> FIRE_CRUCIBLE =
             BLOCK_ENTITIES.register("fire_crucible", () ->
-                    BlockEntityType.Builder.of(FireCrucibleBlockEntity::new,
+                    BlockEntityType.Builder.of(ForgeFireCrucibleBlockEntity::new,
                             ForgeBlocks.FIRE_CRUCIBLE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ForgeFreezingStationBlockEntity>> FREEZING_STATION =
+            BLOCK_ENTITIES.register("freezing_station", () ->
+                    BlockEntityType.Builder.of(ForgeFreezingStationBlockEntity::new,
+                            ForgeBlocks.FREEZING_STATION.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ForgeInfusementChamberBlockEntity>> INFUSEMENT_CHAMBER =
+            BLOCK_ENTITIES.register("infusement_chamber", () ->
+                    BlockEntityType.Builder.of(ForgeInfusementChamberBlockEntity::new,
+                            ForgeBlocks.INFUSMENT_CHAMBER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

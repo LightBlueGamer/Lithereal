@@ -8,10 +8,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.block.custom.FireCrucibleBlock;
+import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
+import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.screen.FireCrucibleMenu;
+import org.lithereal.screen.FreezingStationMenu;
+import org.lithereal.screen.InfusementChamberMenu;
 
 import java.nio.file.Path;
 
@@ -48,6 +54,46 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static MenuType<FireCrucibleMenu> getFireCrucibleMenu() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityType<FreezingStationBlockEntity> getFreezingStationBlockEntity() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityTicker<FreezingStationBlockEntity> getFreezingStationBlockEntityTicker() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static FreezingStationBlock getFreezingStationBlock() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static MenuType<FreezingStationMenu> getFreezingStationMenu() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityType<InfusementChamberBlockEntity> getInfusementChamberBlockEntity() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityTicker<InfusementChamberBlockEntity> getInfusementChamberBlockEntityTicker() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static InfusementChamberBlock getInfusementChamberBlock() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static MenuType<InfusementChamberMenu> getInfusementChamberMenu() {
         throw new AssertionError();
     }
 }

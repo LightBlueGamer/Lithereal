@@ -17,6 +17,12 @@ public class ForgeMenuTypes {
     public static final RegistryObject<MenuType<ForgeFireCrucibleMenu>> FIRE_CRUCIBLE_MENU =
             registerMenuType(ForgeFireCrucibleMenu::new, "fire_crucible_menu");
 
+    public static final RegistryObject<MenuType<ForgeFreezingStationMenu>> FREEZING_STATION_MENU =
+            registerMenuType(ForgeFreezingStationMenu::new, "freezing_station_menu");
+
+    public static final RegistryObject<MenuType<ForgeInfusementChamberMenu>> INFUSEMENT_CHAMBER_MENU =
+            registerMenuType(ForgeInfusementChamberMenu::new, "infusement_chamber_menu");
+
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                   String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

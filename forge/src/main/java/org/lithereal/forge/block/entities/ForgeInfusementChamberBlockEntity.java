@@ -9,6 +9,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -22,13 +25,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
-import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.forge.screen.ForgeFreezingStationMenu;
+import org.lithereal.forge.screen.ForgeInfusementChamberMenu;
 import org.lithereal.recipe.FreezingStationRecipe;
+import org.lithereal.recipe.InfusementChamberRecipe;
 
 import java.util.Optional;
 
-public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity {
+public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -37,7 +42,7 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    public ForgeFreezingStationBlockEntity(BlockPos pos, BlockState state) {
+    public ForgeInfusementChamberBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 
@@ -76,7 +81,7 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new ForgeFreezingStationMenu(id, inventory, this, this.data);
+        return new ForgeInfusementChamberMenu(id, inventory, this, this.data);
     }
 
     public void drops() {
@@ -88,82 +93,81 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, ForgeFreezingStationBlockEntity pEntity) {
-        if(level.isClientSide()) return;
+    private static void craftItem(ForgeInfusementChamberBlockEntity pEntity) {
+        Level level = pEntity.level;
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            ItemStack item = pEntity.itemHandler.getStackInSlot(i);
+            inventory.setItem(i, item);
+        }
+
+        Potion potion = PotionUtils.getPotion(pEntity.itemHandler.getStackInSlot(1));
+
+        Optional<InfusementChamberRecipe> infusingRecipe = level.getRecipeManager()
+                .getRecipeFor(InfusementChamberRecipe.Type.INSTANCE, inventory, level);
+
+        ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
+        PotionUtils.setPotion(resultItem, potion);
+        ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
 
         if(hasRecipe(pEntity)) {
-            pEntity.progress += getCoolingPower(pEntity);
+            craftItem(pEntity, resultItem, outputItem);
+        }
+    }
+
+    private static void craftItem(ForgeInfusementChamberBlockEntity entity, ItemStack resultItem, ItemStack outputItem) {
+        CompoundTag nbt = resultItem.getTag();
+        if(nbt != null) {
+            outputItem.setTag(nbt.copy());
+        }
+
+        entity.itemHandler.extractItem(0, 1, false);
+        if(entity.itemHandler.getStackInSlot(1).is(Items.POTION)) entity.itemHandler.setStackInSlot(1, new ItemStack(Items.GLASS_BOTTLE));
+        else entity.itemHandler.extractItem(1, 1, false);
+        entity.itemHandler.setStackInSlot(2, outputItem);
+
+        entity.resetProgress();
+    }
+
+    private static boolean hasRecipe(ForgeInfusementChamberBlockEntity entity) {
+        Level level = entity.level;
+        Boolean hasRecipe = false;
+        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
+        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<InfusementChamberRecipe> infusingRecipe = level.getRecipeManager()
+                .getRecipeFor(InfusementChamberRecipe.Type.INSTANCE, inventory, level);
+
+        if (infusingRecipe.isPresent()) {
+            ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
+            if (canInsertAmountIntoOutput(inventory) && canInsertItemIntoOutput(inventory, resultItem)) {
+                hasRecipe = true;
+            }
+        }
+
+        return hasRecipe;
+    }
+
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, ForgeInfusementChamberBlockEntity pEntity) {
+        if(level.isClientSide()) return;
+
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        }
+
+        if(hasRecipe(pEntity)) {
+            pEntity.progress++;
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress) {
                 craftItem(pEntity);
             }
         } else {
-            if(pEntity.progress > 0) pEntity.heat(1);
+            if(pEntity.progress > 0) pEntity.progress--;
             setChanged(level, blockPos, blockState);
         }
-    }
-
-    private void heat(int multiplier) {
-        if(this.progress > 0) this.progress -= multiplier;
-    }
-
-    private static int getCoolingPower(ForgeFreezingStationBlockEntity entity) {
-        Level level = entity.getLevel();
-        int cooling = 0;
-
-        Block block = level.getBlockState(entity.getBlockPos().below()).getBlock();
-        cooling += getBlockCoolingPower(entity, block);
-
-        return cooling;
-    }
-
-    private static int getBlockCoolingPower(ForgeFreezingStationBlockEntity entity, Block block) {
-        int cooling = 0;
-        if(block == Blocks.PACKED_ICE) cooling += 1;
-        if(block == ModBlocks.FROZEN_LITHERITE_BLOCK.get()) cooling += 2;
-
-        return cooling;
-    }
-
-    private static void craftItem(ForgeFreezingStationBlockEntity pEntity) {
-        Level level = pEntity.getLevel();
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
-        }
-
-        Optional<FreezingStationRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
-
-        if(hasRecipe(pEntity)) {
-            ItemStack resultItem = recipe.get().getResultItem(level.registryAccess());
-            ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
-
-            CompoundTag nbt = resultItem.getTag();
-            if(nbt != null) {
-                outputItem.setTag(nbt.copy());
-            }
-
-            pEntity.itemHandler.extractItem(0, recipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
-            pEntity.itemHandler.extractItem(1, recipe.get().recipeItems.get(1).getItems()[0].getCount(), false);
-            pEntity.itemHandler.setStackInSlot(2, outputItem);
-
-            pEntity.resetProgress();
-        }
-    }
-
-    private static boolean hasRecipe(ForgeFreezingStationBlockEntity entity) {
-        Level level = entity.level;
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
-        }
-
-        Optional<FreezingStationRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
-
-        return getCoolingPower(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
-                canInsertItemIntoOutput(inventory, recipe.get().getResultItem(level.registryAccess()));
     }
 }

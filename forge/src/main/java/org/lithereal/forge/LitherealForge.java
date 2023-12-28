@@ -15,6 +15,8 @@ import org.lithereal.forge.block.entities.ForgeBlockEntities;
 import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.screen.ForgeMenuTypes;
 import org.lithereal.screen.FireCrucibleScreen;
+import org.lithereal.screen.FreezingStationScreen;
+import org.lithereal.screen.InfusementChamberScreen;
 
 @Mod(Lithereal.MOD_ID)
 public class LitherealForge {
@@ -41,6 +43,8 @@ public class LitherealForge {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ForgeMenuTypes.FIRE_CRUCIBLE_MENU.get(), FireCrucibleScreen::new);
+            MenuScreens.register(ForgeMenuTypes.FREEZING_STATION_MENU.get(), FreezingStationScreen::new);
+            MenuScreens.register(ForgeMenuTypes.INFUSEMENT_CHAMBER_MENU.get(), InfusementChamberScreen::new);
         }
     }
 }

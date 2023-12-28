@@ -8,20 +8,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 
-public class FreezingStationMenu extends AbstractContainerMenu {
-    public FreezingStationBlockEntity blockEntity;
+public class InfusementChamberMenu extends AbstractContainerMenu {
+    public InfusementChamberBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
 
-    public FreezingStationMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+    public InfusementChamberMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
     }
 
-    public FreezingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(LitherealExpectPlatform.getFreezingStationMenu(), id);
+    public InfusementChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(LitherealExpectPlatform.getInfusementChamberMenu(), id);
     }
 
     public boolean isCrafting() {
@@ -90,7 +90,7 @@ public class FreezingStationMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, LitherealExpectPlatform.getFreezingStationBlock());
+                player, LitherealExpectPlatform.getInfusementChamberBlock());
     }
 
     protected void addPlayerInventory(Inventory playerInventory) {

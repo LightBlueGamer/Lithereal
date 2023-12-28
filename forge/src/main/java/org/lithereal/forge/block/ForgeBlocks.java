@@ -11,6 +11,8 @@ import net.minecraftforge.registries.RegistryObject;
 import org.lithereal.Lithereal;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.forge.block.custom.ForgeFireCrucibleBlock;
+import org.lithereal.forge.block.custom.ForgeFreezingStationBlock;
+import org.lithereal.forge.block.custom.ForgeInfusementChamberBlock;
 import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.item.custom.infused.ForgeInfusedLitheriteBlockItem;
 import org.lithereal.item.ModItems;
@@ -27,6 +29,14 @@ public class ForgeBlocks {
 
     public static final RegistryObject<Block> FIRE_CRUCIBLE = registerBlock("fire_crucible",
             () -> new ForgeFireCrucibleBlock(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> FREEZING_STATION = registerBlock("freezing_station",
+            () -> new ForgeFreezingStationBlock(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> INFUSMENT_CHAMBER = registerBlock("infusement_chamber",
+            () -> new ForgeInfusementChamberBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerColouredBlock(String name, Supplier<T> block) {

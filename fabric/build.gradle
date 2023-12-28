@@ -19,6 +19,13 @@ configurations {
     developmentFabric.extendsFrom common
 }
 
+repositories {
+    maven {
+        name = "AlexIIL"
+        url = "https://maven.alexiil.uk/"
+    }
+}
+
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
@@ -27,6 +34,7 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    modCompileOnly("alexiil.mc.lib:libblockattributes-all:0.11.0")
 }
 
 processResources {

@@ -11,9 +11,9 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
 
 public class FireCrucibleMenu extends AbstractContainerMenu {
-    public final FireCrucibleBlockEntity blockEntity;
-    private final Level level;
-    private final ContainerData data;
+    public FireCrucibleBlockEntity blockEntity;
+    protected Level level;
+    protected ContainerData data;
 
     public FireCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
@@ -21,15 +21,6 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
 
     public FireCrucibleMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(LitherealExpectPlatform.getFireCrucibleMenu(), id);
-        checkContainerSize(inv, 3);
-        blockEntity = (FireCrucibleBlockEntity) entity;
-        this.level = inv.player.level();
-        this.data = data;
-
-        addPlayerInventory(inv);
-        addPlayerHotbar(inv);
-
-        addDataSlots(data);
     }
 
     public boolean isCrafting() {
@@ -113,7 +104,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
                 player, LitherealExpectPlatform.getFireCrucibleBlock());
     }
 
-    private void addPlayerInventory(Inventory playerInventory) {
+    protected void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
                 this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
@@ -121,7 +112,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         }
     }
 
-    private void addPlayerHotbar(Inventory playerInventory) {
+    protected void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }

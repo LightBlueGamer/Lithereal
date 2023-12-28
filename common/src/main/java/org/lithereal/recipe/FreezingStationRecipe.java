@@ -1,4 +1,4 @@
-package org.litecraft.lithereal.recipe;
+package org.lithereal.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import org.litecraft.lithereal.Lithereal;
+import org.lithereal.Lithereal;
 
 public class FreezingStationRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
@@ -20,7 +20,7 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
     public final NonNullList<Ingredient> recipeItems;
 
     public FreezingStationRecipe(ResourceLocation id, ItemStack output,
-                                    NonNullList<Ingredient> recipeItems) {
+                                 NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -128,7 +128,7 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
-            buf.writeItemStack(recipe.output, false);
+            buf.writeItem(recipe.output);
         }
     }
 }

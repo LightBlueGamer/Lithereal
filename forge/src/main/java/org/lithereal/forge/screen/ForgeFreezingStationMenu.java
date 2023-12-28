@@ -7,20 +7,19 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.lithereal.forge.block.entities.ForgeFireCrucibleBlockEntity;
-import org.lithereal.screen.FireCrucibleMenu;
+import org.lithereal.forge.block.entities.ForgeFreezingStationBlockEntity;
+import org.lithereal.screen.FreezingStationMenu;
 
-public class ForgeFireCrucibleMenu extends FireCrucibleMenu {
+public class ForgeFreezingStationMenu extends FreezingStationMenu {
 
-    public ForgeFireCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+    public ForgeFreezingStationMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
     }
 
-    public ForgeFireCrucibleMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+    public ForgeFreezingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(id, inv, entity, data);
         checkContainerSize(inv, 3);
-        blockEntity = (ForgeFireCrucibleBlockEntity) entity;
+        blockEntity = (ForgeFreezingStationBlockEntity) entity;
         this.level = inv.player.level();
         this.data = data;
 
@@ -30,9 +29,9 @@ public class ForgeFireCrucibleMenu extends FireCrucibleMenu {
         addDataSlots(data);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 140, 13));
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 57));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 80, 13));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 43, 34));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 68, 34));
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 129, 34));
         });
     }
 

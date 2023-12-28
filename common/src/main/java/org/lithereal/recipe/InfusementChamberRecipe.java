@@ -1,25 +1,18 @@
-package org.litecraft.lithereal.recipe;
+package org.lithereal.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-import org.litecraft.lithereal.Lithereal;
-
-import java.util.Arrays;
+import org.lithereal.Lithereal;
 
 public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
@@ -135,7 +128,7 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
-            buf.writeItemStack(recipe.output, false);
+            buf.writeItem(recipe.output);
         }
     }
 }

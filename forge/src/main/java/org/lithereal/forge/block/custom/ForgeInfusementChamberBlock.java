@@ -11,30 +11,30 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.custom.FreezingStationBlock;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
-import org.lithereal.forge.block.entities.ForgeFireCrucibleBlockEntity;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.forge.block.entities.ForgeFreezingStationBlockEntity;
+import org.lithereal.forge.block.entities.ForgeInfusementChamberBlockEntity;
 
-public class ForgeFreezingStationBlock extends FreezingStationBlock {
-    public ForgeFreezingStationBlock(Properties properties) {
+public class ForgeInfusementChamberBlock extends InfusementChamberBlock {
+    public ForgeInfusementChamberBlock(Properties properties) {
         super(properties);
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ForgeFreezingStationBlockEntity(pos, state);
+        return new ForgeInfusementChamberBlockEntity(pos, state);
     }
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof ForgeFreezingStationBlockEntity) {
-                ((ForgeFreezingStationBlockEntity) blockEntity).drops();
+            if (blockEntity instanceof ForgeInfusementChamberBlockEntity) {
+                ((ForgeInfusementChamberBlockEntity) blockEntity).drops();
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
@@ -45,8 +45,8 @@ public class ForgeFreezingStationBlock extends FreezingStationBlock {
                                  Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof FreezingStationBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (ForgeFreezingStationBlockEntity) entity, pPos);
+            if(entity instanceof InfusementChamberBlockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (ForgeInfusementChamberBlockEntity) entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

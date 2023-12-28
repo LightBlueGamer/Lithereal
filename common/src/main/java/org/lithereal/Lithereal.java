@@ -98,7 +98,7 @@ public class Lithereal {
         }
 
         CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), potionVariants.toArray(new ItemStack[0]));
-        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), LitherealExpectPlatform.getFireCrucibleBlock().asItem().getDefaultInstance());
+        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), LitherealExpectPlatform.getFireCrucibleBlock().asItem().getDefaultInstance(), LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance());
 
     }
 }

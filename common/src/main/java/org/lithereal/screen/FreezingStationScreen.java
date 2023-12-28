@@ -10,10 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
 
-public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu> {
+public class FreezingStationScreen extends AbstractContainerScreen<FreezingStationMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png");
-    public FireCrucibleScreen(FireCrucibleMenu menu, Inventory inventory, Component component) {
+            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png");
+    public FreezingStationScreen(FreezingStationMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
@@ -30,27 +30,16 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
-        renderHeatSource(guiGraphics.pose(), x, y, guiGraphics);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if (menu.isCrafting()) {
-            int arrowHeight = 14;
-            int progressHeight = menu.getScaledProgress();
-            int yOffset = y + 37 + arrowHeight - progressHeight;
-            if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 176, arrowHeight - progressHeight, 14, progressHeight);
-            else if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 190, arrowHeight - progressHeight, 14, progressHeight);
+        if(menu.isCrafting()) {
+            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
         }
     }
-
-    private void renderHeatSource(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
-        else if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
-    }
-
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
