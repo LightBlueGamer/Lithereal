@@ -1,6 +1,8 @@
 package org.lithereal.block.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -53,5 +55,19 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
         return LitherealExpectPlatform.getInfusedLitheriteBlockEntity().create(p_153215_, p_153216_);
+    }
+
+    @Override
+    public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
+        super.stepOn(level, blockPos, blockState, entity);
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if(blockEntity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity) {
+            if(entity instanceof LivingEntity livingEntity) {
+                infusedLitheriteBlockEntity.potion.getEffects().forEach((mobEffectInstance) -> {
+                    MobEffectInstance newEffect = new MobEffectInstance(mobEffectInstance.getEffect(), 1, mobEffectInstance.getAmplifier(), true, false, false);
+                    livingEntity.addEffect(newEffect);
+                });
+            }
+        }
     }
 }

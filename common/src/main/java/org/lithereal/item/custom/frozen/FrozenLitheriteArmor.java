@@ -38,13 +38,13 @@ public class FrozenLitheriteArmor extends ArmorItem {
                         if(player.isFreezing()) {
                             player.setTicksFrozen(0);
                         }
-                    }
-                    if(KeyBinding.FREEZE_KEY.isDown()) {
-                        for (int x = -4; x <= 4; x++) {
-                            for (int z = -4; z <= 4; z++) {
-                                BlockPos checkPos = player.blockPosition().offset(x, -1, z);
-                                if (level.getBlockState(checkPos).getBlock() == Blocks.WATER) {
-                                    level.setBlockAndUpdate(checkPos, Blocks.FROSTED_ICE.defaultBlockState());
+                        if(KeyBinding.FREEZE_KEY.isDown()) {
+                            for (int x = -4; x <= 4; x++) {
+                                for (int z = -4; z <= 4; z++) {
+                                    BlockPos checkPos = player.blockPosition().offset(x, -1, z);
+                                    if (level.getBlockState(checkPos).getBlock() == Blocks.WATER) {
+                                        level.setBlockAndUpdate(checkPos, Blocks.FROSTED_ICE.defaultBlockState());
+                                    }
                                 }
                             }
                         }

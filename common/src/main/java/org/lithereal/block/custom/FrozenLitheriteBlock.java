@@ -16,7 +16,9 @@ public class FrozenLitheriteBlock extends Block {
     public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
         if (entity instanceof LivingEntity) {
             int currentTicksFrozen = entity.getTicksFrozen();
-            int incrementPerStep = (int) Math.ceil(200.0 / 60.0);
+
+            int incrementPerStep = 200 / 20;
+
             int newTicksFrozen = Math.min(currentTicksFrozen + incrementPerStep, 200);
             entity.setTicksFrozen(newTicksFrozen);
         }

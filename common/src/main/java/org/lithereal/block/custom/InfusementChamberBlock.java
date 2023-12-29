@@ -75,4 +75,16 @@ public class InfusementChamberBlock extends BaseEntityBlock {
         return createTickerHelper(type, LitherealExpectPlatform.getInfusementChamberBlockEntity(),
                 LitherealExpectPlatform.getInfusementChamberBlockEntityTicker());
     }
+
+    @Override
+    public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl) {
+        super.neighborChanged(blockState, level, blockPos, block, blockPos2, bl);
+
+        if(!level.isClientSide) {
+            InfusementChamberBlockEntity entity = (InfusementChamberBlockEntity) level.getBlockEntity(blockPos);
+            if(entity != null) {
+                entity.setEmpowerments();
+            }
+        }
+    }
 }

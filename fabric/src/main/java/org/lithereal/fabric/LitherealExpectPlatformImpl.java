@@ -1,7 +1,6 @@
 package org.lithereal.fabric;
 
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.LitherealExpectPlatform;

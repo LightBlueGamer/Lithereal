@@ -28,6 +28,7 @@ public class BurningLitheriteBlock extends BaseEntityBlock {
     public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
         if (entity instanceof LivingEntity) {
             entity.hurt(level.damageSources().hotFloor(), 6.0F);
+            entity.setSecondsOnFire(3);
         }
 
         super.stepOn(level, blockPos, blockState, entity);

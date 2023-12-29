@@ -1,6 +1,7 @@
 package org.lithereal.item.custom.burning;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -46,10 +47,12 @@ public class BurningLitheriteArmor extends ArmorItem {
                 if(hasFullSuitOfArmorOn(player)) {
                     evaluateArmorEffects(player);
                     Block blockBelow = level.getBlockState(player.blockPosition().below()).getBlock();
-                    if(KeyBinding.SCORCH_KEY.isDown()) {
-                        if(blockBelow == Blocks.NETHERRACK) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_NETHERRACK.get().defaultBlockState());
-                        else if(blockBelow == Blocks.CRIMSON_NYLIUM) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_CRIMSON_NYLIUM.get().defaultBlockState());
-                        else if(blockBelow == Blocks.WARPED_NYLIUM) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_WARPED_NYLIUM.get().defaultBlockState());
+                    if(hasCorrectArmorOn(ModArmorMaterials.BURNING_LITHERITE, player)) {
+                        if(KeyBinding.SCORCH_KEY.isDown()) {
+                            if(blockBelow == Blocks.NETHERRACK) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_NETHERRACK.get().defaultBlockState());
+                            else if(blockBelow == Blocks.CRIMSON_NYLIUM) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_CRIMSON_NYLIUM.get().defaultBlockState());
+                            else if(blockBelow == Blocks.WARPED_NYLIUM) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_WARPED_NYLIUM.get().defaultBlockState());
+                        }
                     }
                 }
             }

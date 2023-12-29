@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -12,6 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -32,6 +35,7 @@ import org.lithereal.recipe.FreezingStationRecipe;
 import org.lithereal.recipe.InfusementChamberRecipe;
 
 import java.util.Optional;
+import java.util.Random;
 
 public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -117,6 +121,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
 
     private static void craftItem(ForgeInfusementChamberBlockEntity entity, ItemStack resultItem, ItemStack outputItem) {
         CompoundTag nbt = resultItem.getTag();
+        Random random = new Random();
         if(nbt != null) {
             outputItem.setTag(nbt.copy());
         }
@@ -124,7 +129,13 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
         entity.itemHandler.extractItem(0, 1, false);
         if(entity.itemHandler.getStackInSlot(1).is(Items.POTION)) entity.itemHandler.setStackInSlot(1, new ItemStack(Items.GLASS_BOTTLE));
         else entity.itemHandler.extractItem(1, 1, false);
-        entity.itemHandler.setStackInSlot(2, outputItem);
+        if (random.nextFloat() < entity.successRate) {
+            entity.itemHandler.setStackInSlot(2, outputItem);
+        } else {
+            boolean mobGriefingEnabled = entity.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
+            BlockPos blockPos = entity.getBlockPos();
+            entity.level.explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 7.0f, mobGriefingEnabled, Level.ExplosionInteraction.TNT);
+        }
 
         entity.resetProgress();
     }
@@ -159,14 +170,14 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
         }
 
         if(hasRecipe(pEntity)) {
-            pEntity.progress++;
+            pEntity.progress += (int) (10 * pEntity.power);
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress) {
                 craftItem(pEntity);
             }
         } else {
-            if(pEntity.progress > 0) pEntity.progress--;
+            if(pEntity.progress > 0) pEntity.progress -= (int) (10 * pEntity.power);
             setChanged(level, blockPos, blockState);
         }
     }
