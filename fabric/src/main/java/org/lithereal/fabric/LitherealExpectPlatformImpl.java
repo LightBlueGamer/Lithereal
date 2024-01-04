@@ -15,6 +15,7 @@ import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.fabric.block.FabricBlocks;
 import org.lithereal.fabric.block.entities.FabricBlockEntities;
+import org.lithereal.item.custom.LitheriteItem;
 import org.lithereal.screen.FireCrucibleMenu;
 import org.lithereal.screen.FreezingStationMenu;
 import org.lithereal.screen.InfusementChamberMenu;
@@ -71,5 +72,8 @@ public class LitherealExpectPlatformImpl {
     }
 
     public static MenuType<InfusementChamberMenu> getInfusementChamberMenu() {
+    }
+
+    public static LitheriteItem getLitheriteItem() {
     }
 }

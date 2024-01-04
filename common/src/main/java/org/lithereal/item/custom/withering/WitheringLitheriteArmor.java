@@ -15,9 +15,9 @@ import org.lithereal.item.custom.ModArmorMaterials;
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
-public class WitheringLitheriteArmorItem extends ArmorItem {
+public class WitheringLitheriteArmor extends ArmorItem {
 
-    public WitheringLitheriteArmorItem(ArmorMaterial armorMaterial, Type type, Properties properties) {
+    public WitheringLitheriteArmor(ArmorMaterial armorMaterial, Type type, Properties properties) {
         super(armorMaterial, type, properties);
     }
 

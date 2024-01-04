@@ -7,8 +7,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import org.lithereal.item.custom.Hammer;
 
-public class WitheringLitheriteHammerItem extends Hammer {
-    public WitheringLitheriteHammerItem(Tier tier, int damage, float attackSpeed, Properties properties) {
+public class WitheringLitheriteHammer extends Hammer {
+    public WitheringLitheriteHammer(Tier tier, int damage, float attackSpeed, Properties properties) {
         super(tier, damage, attackSpeed, properties);
     }
 

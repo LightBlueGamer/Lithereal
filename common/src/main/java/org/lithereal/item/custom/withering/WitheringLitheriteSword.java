@@ -1,4 +1,4 @@
-package org.litecraft.lithereal.item.custom.withering;
+package org.lithereal.item.custom.withering;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -15,10 +15,8 @@ public class WitheringLitheriteSword extends SwordItem {
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        if(entity instanceof LivingEntity livingEntity) {
-           livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
-        }
-        return super.onLeftClickEntity(stack, player, entity);
+    public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        attacked.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
+        return super.hurtEnemy(itemStack, attacked, attacker);
     }
 }

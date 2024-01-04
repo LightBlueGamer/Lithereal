@@ -4,6 +4,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.platform.Platform;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,6 +16,7 @@ import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
+import org.lithereal.item.custom.LitheriteItem;
 import org.lithereal.screen.FireCrucibleMenu;
 import org.lithereal.screen.FreezingStationMenu;
 import org.lithereal.screen.InfusementChamberMenu;
@@ -94,6 +96,11 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static MenuType<InfusementChamberMenu> getInfusementChamberMenu() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item getLitheriteItem() {
         throw new AssertionError();
     }
 }

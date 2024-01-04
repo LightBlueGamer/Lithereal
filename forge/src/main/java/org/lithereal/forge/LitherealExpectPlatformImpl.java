@@ -1,6 +1,7 @@
 package org.lithereal.forge;
 
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -16,10 +17,12 @@ import org.lithereal.forge.block.entities.ForgeBlockEntities;
 import org.lithereal.forge.block.entities.ForgeFireCrucibleBlockEntity;
 import org.lithereal.forge.block.entities.ForgeFreezingStationBlockEntity;
 import org.lithereal.forge.block.entities.ForgeInfusementChamberBlockEntity;
+import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
 import org.lithereal.forge.screen.ForgeFreezingStationMenu;
 import org.lithereal.forge.screen.ForgeInfusementChamberMenu;
 import org.lithereal.forge.screen.ForgeMenuTypes;
+import org.lithereal.item.custom.LitheriteItem;
 import org.lithereal.screen.InfusementChamberMenu;
 
 import java.nio.file.Path;
@@ -86,5 +89,9 @@ public class LitherealExpectPlatformImpl {
 
     public static MenuType<ForgeInfusementChamberMenu> getInfusementChamberMenu() {
         return ForgeMenuTypes.INFUSEMENT_CHAMBER_MENU.get();
+    }
+
+    public static Item getLitheriteItem() {
+        return ForgeItems.LITHERITE_CRYSTAL.get();
     }
 }
