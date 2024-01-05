@@ -11,19 +11,16 @@ import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.forge.block.ForgeBlocks;
-import org.lithereal.forge.block.entities.ForgeBlockEntities;
-import org.lithereal.forge.block.entities.ForgeFireCrucibleBlockEntity;
-import org.lithereal.forge.block.entities.ForgeFreezingStationBlockEntity;
-import org.lithereal.forge.block.entities.ForgeInfusementChamberBlockEntity;
+import org.lithereal.forge.block.entity.ForgeBlockEntities;
+import org.lithereal.forge.block.entity.ForgeFireCrucibleBlockEntity;
+import org.lithereal.forge.block.entity.ForgeFreezingStationBlockEntity;
+import org.lithereal.forge.block.entity.ForgeInfusementChamberBlockEntity;
 import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
 import org.lithereal.forge.screen.ForgeFreezingStationMenu;
 import org.lithereal.forge.screen.ForgeInfusementChamberMenu;
 import org.lithereal.forge.screen.ForgeMenuTypes;
-import org.lithereal.item.custom.LitheriteItem;
-import org.lithereal.screen.InfusementChamberMenu;
 
 import java.nio.file.Path;
 

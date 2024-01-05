@@ -1,4 +1,4 @@
-package org.lithereal.forge.block.entities;
+package org.lithereal.forge.block.entity;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -6,7 +6,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.lithereal.Lithereal;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.forge.block.ForgeBlocks;
 

@@ -1,11 +1,10 @@
-package org.lithereal.forge.block.entities;
+package org.lithereal.forge.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -13,11 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -26,12 +22,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.ModBlocks;
-import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
-import org.lithereal.forge.screen.ForgeFreezingStationMenu;
 import org.lithereal.forge.screen.ForgeInfusementChamberMenu;
-import org.lithereal.recipe.FreezingStationRecipe;
 import org.lithereal.recipe.InfusementChamberRecipe;
 
 import java.util.Optional;

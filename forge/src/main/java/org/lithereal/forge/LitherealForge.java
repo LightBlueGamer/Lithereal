@@ -11,7 +11,7 @@ import org.lithereal.Lithereal;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.lithereal.forge.block.ForgeBlocks;
-import org.lithereal.forge.block.entities.ForgeBlockEntities;
+import org.lithereal.forge.block.entity.ForgeBlockEntities;
 import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.screen.ForgeMenuTypes;
 import org.lithereal.screen.FireCrucibleScreen;

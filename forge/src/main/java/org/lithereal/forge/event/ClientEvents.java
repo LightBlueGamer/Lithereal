@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.lithereal.Lithereal;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
-import org.lithereal.forge.block.entities.ForgeBlockEntities;
+import org.lithereal.forge.block.entity.ForgeBlockEntities;
 
 public class ClientEvents {
     @Mod.EventBusSubscriber(modid = Lithereal.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)

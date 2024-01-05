@@ -1,6 +1,7 @@
 package org.lithereal.fabric;
 
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.LitherealExpectPlatform;
@@ -9,16 +10,14 @@ import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.fabric.block.FabricBlocks;
-import org.lithereal.fabric.block.entities.FabricBlockEntities;
-import org.lithereal.item.custom.LitheriteItem;
-import org.lithereal.screen.FireCrucibleMenu;
-import org.lithereal.screen.FreezingStationMenu;
-import org.lithereal.screen.InfusementChamberMenu;
+import org.lithereal.fabric.block.entity.FabricBlockEntities;
+import org.lithereal.fabric.block.entity.FabricFireCrucibleBlockEntity;
+import org.lithereal.fabric.block.entity.FabricFreezingStationBlockEntity;
+import org.lithereal.fabric.block.entity.FabricInfusementChamberBlockEntity;
+import org.lithereal.fabric.item.FabricItems;
+import org.lithereal.fabric.screen.*;
 
 import java.nio.file.Path;
 
@@ -38,42 +37,55 @@ public class LitherealExpectPlatformImpl {
         return FabricBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY;
     }
 
-    public static BlockEntityType<FireCrucibleBlockEntity> getFireCrucibleBlockEntity() {
+    public static BlockEntityType<FabricFireCrucibleBlockEntity> getFireCrucibleBlockEntity() {
+        return FabricBlockEntities.FIRE_CRUCIBLE_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<FireCrucibleBlockEntity> getFireCrucibleBlockEntityTicker() {
+    public static BlockEntityTicker<FabricFireCrucibleBlockEntity> getFireCrucibleBlockEntityTicker() {
+        return FabricFireCrucibleBlockEntity::tick;
     }
 
     public static FireCrucibleBlock getFireCrucibleBlock() {
+        return (FireCrucibleBlock) FabricBlocks.FIRE_CRUCIBLE_BLOCK;
     }
 
-    public static MenuType<FireCrucibleMenu> getFireCrucibleMenu() {
+    public static MenuType<FabricFireCrucibleMenu> getFireCrucibleMenu() {
+        return FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER;
     }
 
-    public static BlockEntityType<FreezingStationBlockEntity> getFreezingStationBlockEntity() {
+    public static BlockEntityType<FabricFreezingStationBlockEntity> getFreezingStationBlockEntity() {
+        return FabricBlockEntities.FREEZING_STATION_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<FreezingStationBlockEntity> getFreezingStationBlockEntityTicker() {
+    public static BlockEntityTicker<FabricFreezingStationBlockEntity> getFreezingStationBlockEntityTicker() {
+        return FabricFreezingStationBlockEntity::tick;
     }
 
-    public static MenuType<FreezingStationMenu> getFreezingStationMenu() {
+    public static MenuType<FabricFreezingStationMenu> getFreezingStationMenu() {
+        return FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER;
     }
 
     public static FreezingStationBlock getFreezingStationBlock() {
+        return (FreezingStationBlock) FabricBlocks.FREEZING_STATION_BLOCK;
     }
 
-    public static BlockEntityType<InfusementChamberBlockEntity> getInfusementChamberBlockEntity() {
+    public static BlockEntityType<FabricInfusementChamberBlockEntity> getInfusementChamberBlockEntity() {
+        return FabricBlockEntities.INFUSEMENT_CHAMBER_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<InfusementChamberBlockEntity> getInfusementChamberBlockEntityTicker() {
+    public static BlockEntityTicker<FabricInfusementChamberBlockEntity> getInfusementChamberBlockEntityTicker() {
+        return FabricInfusementChamberBlockEntity::tick;
     }
 
     public static InfusementChamberBlock getInfusementChamberBlock() {
+        return (InfusementChamberBlock) FabricBlocks.INFUSEMENT_CHAMBER_BLOCK;
     }
 
-    public static MenuType<InfusementChamberMenu> getInfusementChamberMenu() {
+    public static MenuType<FabricInfusementChamberMenu> getInfusementChamberMenu() {
+        return FabricScreenHandlers.INFUSEMENT_CHAMBER_SCREEN_HANDLER;
     }
 
-    public static LitheriteItem getLitheriteItem() {
+    public static Item getLitheriteItem() {
+        return FabricItems.LITHERITE_CRYSTAL;
     }
 }

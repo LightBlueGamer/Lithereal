@@ -14,11 +14,9 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.fabric.block.FabricBlocks;
-import org.lithereal.fabric.block.entities.FabricBlockEntities;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -55,6 +53,5 @@ public class RendererMixin {
                 this.blockEntityRenderDispatcher.renderItem(blockentity, poseStack, multiBufferSource, i, j);
             }
         }
-        this.blockEntityRenderDispatcher.renderItem(this.chest, poseStack, multiBufferSource, i, j);
     }
 }

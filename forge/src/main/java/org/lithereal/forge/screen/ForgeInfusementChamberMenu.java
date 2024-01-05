@@ -7,9 +7,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
-import org.lithereal.forge.block.entities.ForgeFreezingStationBlockEntity;
-import org.lithereal.forge.block.entities.ForgeInfusementChamberBlockEntity;
-import org.lithereal.screen.FreezingStationMenu;
+import org.lithereal.forge.block.entity.ForgeInfusementChamberBlockEntity;
 import org.lithereal.screen.InfusementChamberMenu;
 
 public class ForgeInfusementChamberMenu extends InfusementChamberMenu {

@@ -7,17 +7,13 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.lithereal.forge.block.entities.ForgeBlockEntities;
-import org.lithereal.forge.block.entities.ForgeFireCrucibleBlockEntity;
+import org.lithereal.forge.block.entity.ForgeFireCrucibleBlockEntity;
 
 public class ForgeFireCrucibleBlock extends FireCrucibleBlock {
     public ForgeFireCrucibleBlock(Properties properties) {

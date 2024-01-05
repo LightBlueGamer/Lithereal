@@ -11,12 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
-import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
-import org.lithereal.forge.block.entities.ForgeFreezingStationBlockEntity;
-import org.lithereal.forge.block.entities.ForgeInfusementChamberBlockEntity;
+import org.lithereal.forge.block.entity.ForgeInfusementChamberBlockEntity;
 
 public class ForgeInfusementChamberBlock extends InfusementChamberBlock {
     public ForgeInfusementChamberBlock(Properties properties) {

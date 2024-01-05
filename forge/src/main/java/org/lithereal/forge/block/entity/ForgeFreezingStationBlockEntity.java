@@ -1,4 +1,4 @@
-package org.lithereal.forge.block.entities;
+package org.lithereal.forge.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
-import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
 import org.lithereal.forge.screen.ForgeFreezingStationMenu;
 import org.lithereal.recipe.FreezingStationRecipe;
 

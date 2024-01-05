@@ -1,4 +1,4 @@
-package org.lithereal.forge.block.entities;
+package org.lithereal.forge.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

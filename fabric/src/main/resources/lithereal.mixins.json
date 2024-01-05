@@ -7,7 +7,8 @@
     "RendererMixin"
   ],
   "mixins": [
-    "RendererMixin"
+    "RendererMixin",
+    "ItemEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package org.lithereal.fabric.block.entities;
+package org.lithereal.fabric.block.entity;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

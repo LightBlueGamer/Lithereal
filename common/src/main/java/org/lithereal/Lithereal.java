@@ -40,7 +40,7 @@ public class Lithereal {
 
     public static final Supplier<RegistrarManager> REGISTRIES = Suppliers.memoize(() -> RegistrarManager.get(MOD_ID));
 
-    private static final Logger LOGGER = Logger.getLogger(MOD_ID);
+    public static final Logger LOGGER = Logger.getLogger(MOD_ID);
     public static void init() {
         ModCreativeTabs.register();
         ModBlocks.register();
@@ -75,8 +75,8 @@ public class Lithereal {
     private static void registerItemsToTab(Minecraft client) {
         List<ItemStack> itemsToAdd = new ArrayList<>(Arrays.asList(
                 LitherealExpectPlatform.getLitheriteItem().getDefaultInstance(),
-                LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getFireCrucibleBlock().asItem().getDefaultInstance(),
+                LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()
         ));
 

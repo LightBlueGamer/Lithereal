@@ -1,38 +1,68 @@
-package org.lithereal.screen;
+package org.lithereal.fabric.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.FreezingStationBlockEntity;
+import org.lithereal.fabric.block.FabricBlocks;
+import org.lithereal.fabric.block.entity.FabricFireCrucibleBlockEntity;
+import org.lithereal.screen.FireCrucibleMenu;
 
-public class FreezingStationMenu extends AbstractContainerMenu {
-    public FreezingStationBlockEntity blockEntity;
-    protected Level level;
-    protected ContainerData data;
+public class FabricFireCrucibleMenu extends FireCrucibleMenu {
+    private final Container inventory;
+    private final ContainerData containerData;
+    public final FabricFireCrucibleBlockEntity blockEntity;
 
-    public FreezingStationMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
+    public FabricFireCrucibleMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
+        this(syncId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()),
+                new SimpleContainerData(3));
     }
 
-    public FreezingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(LitherealExpectPlatform.getFreezingStationMenu(), id);
+    public FabricFireCrucibleMenu(int syncId, Inventory playerInventory,
+                                  BlockEntity blockEntity, ContainerData containerData) {
+        super(syncId, playerInventory, blockEntity, containerData);
+        checkContainerSize(((Container) blockEntity), 2);
+        this.inventory = ((Container) blockEntity);
+        inventory.startOpen(playerInventory.player);
+        this.containerData = containerData;
+        this.blockEntity = ((FabricFireCrucibleBlockEntity) blockEntity);
+
+        this.addSlot(new Slot(inventory, 1, 140, 13));
+        this.addSlot(new Slot(inventory, 0, 80, 57));
+        this.addSlot(new Slot(inventory, 2, 80, 13));
+
+
+        addPlayerInventory(playerInventory);
+        addPlayerHotbar(playerInventory);
+
+        addDataSlots(containerData);
     }
 
     public boolean isCrafting() {
-        return data.get(0) > 0;
+        return containerData.get(0) > 0;
     }
 
     public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);
-        int progressArrowSize = 22;
+        int progress = this.containerData.get(0);
+        int maxProgress = this.containerData.get(1);
+        int progressArrowSize = 13;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getScaledProgressFuel() {
+        int progress = this.containerData.get(3);
+        int maxProgress = this.containerData.get(4);
+        int progressArrowSize = 34;
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getHeatLevel() {
+        return this.containerData.get(2);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -88,8 +118,8 @@ public class FreezingStationMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, LitherealExpectPlatform.getFreezingStationBlock());
+        return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos()),
+                player, FabricBlocks.FIRE_CRUCIBLE_BLOCK);
     }
 
     protected void addPlayerInventory(Inventory playerInventory) {

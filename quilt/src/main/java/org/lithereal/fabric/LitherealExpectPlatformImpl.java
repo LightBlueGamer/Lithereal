@@ -5,7 +5,7 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.fabric.block.QuiltBlocks;
-import org.lithereal.fabric.block.entities.QuiltBlockEntities;
+import org.lithereal.fabric.block.entity.QuiltBlockEntities;
 import org.quiltmc.loader.api.QuiltLoader;
 
 import java.nio.file.Path;
