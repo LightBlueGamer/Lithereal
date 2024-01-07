@@ -1,4 +1,4 @@
-package org.lithereal.fabric.block.entity;
+package org.lithereal.block.entity;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

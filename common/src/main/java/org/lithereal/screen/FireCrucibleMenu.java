@@ -1,6 +1,7 @@
 package org.lithereal.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -16,11 +17,20 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     protected ContainerData data;
 
     public FireCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
     }
 
     public FireCrucibleMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(LitherealExpectPlatform.getFireCrucibleMenu(), id);
+        this.blockEntity = (FireCrucibleBlockEntity) entity;
+        this.data = data;
+        this.level = entity.getLevel();
+
+        checkContainerSize(inv, 4);
+        addPlayerInventory(inv);
+        addPlayerHotbar(inv);
+
+        addDataSlots(data);
     }
 
     public boolean isCrafting() {
@@ -47,6 +57,10 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         return this.data.get(2);
     }
 
+    public int getHasBucket() {
+        return this.data.get(5);
+    }
+
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
@@ -63,7 +77,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

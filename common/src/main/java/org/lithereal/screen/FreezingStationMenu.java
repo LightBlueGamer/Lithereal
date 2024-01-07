@@ -21,6 +21,15 @@ public class FreezingStationMenu extends AbstractContainerMenu {
 
     public FreezingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(LitherealExpectPlatform.getFreezingStationMenu(), id);
+        checkContainerSize(inv, 3);
+        blockEntity = (FreezingStationBlockEntity) entity;
+        this.level = inv.player.level();
+        this.data = data;
+
+        addPlayerInventory(inv);
+        addPlayerHotbar(inv);
+
+        addDataSlots(data);
     }
 
     public boolean isCrafting() {

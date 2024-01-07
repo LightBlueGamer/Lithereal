@@ -1,10 +1,13 @@
 package org.lithereal.forge;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.custom.FreezingStationBlock;
@@ -90,5 +93,9 @@ public class LitherealExpectPlatformImpl {
 
     public static Item getLitheriteItem() {
         return ForgeItems.LITHERITE_CRYSTAL.get();
+    }
+
+    public static ResourceLocation getResourceLocation(ItemStack stack) {
+        return ForgeRegistries.ITEMS.getKey(stack.getItem());
     }
 }

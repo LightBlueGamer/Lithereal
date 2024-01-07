@@ -6,48 +6,35 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.fabric.block.custom.FabricFireCrucibleBlock;
-import org.lithereal.fabric.screen.FabricFireCrucibleMenu;
+import org.lithereal.item.ModItems;
 import org.lithereal.recipe.FireCrucibleRecipe;
 
 import java.util.Optional;
 
 public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 2;
-    private static final int FUEL_SLOT = 1;
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
 
     public FabricFireCrucibleBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 
-    public ItemStack getRenderStack() {
-        if(this.getItem(OUTPUT_SLOT).isEmpty()) {
-            return this.getItem(INPUT_SLOT);
-        } else {
-            return this.getItem(OUTPUT_SLOT);
-        }
-    }
-
     @Override
     public void setChanged() {
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 4);
         super.setChanged();
     }
 
@@ -61,12 +48,6 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         return inventory;
     }
 
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new FabricFireCrucibleMenu(id, inventory, this, this.data);
-    }
-
     @Override
     protected void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
@@ -74,6 +55,7 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         nbt.putInt("fire_crucible.progress", progress);
         nbt.putInt("fire_crucible.heat_level", heatLevel);
         nbt.putInt("fire_crucible.fuel_level", fuelLevel);
+        nbt.putInt("fire_crucible.has_bucket", hasBucket);
     }
 
     @Override
@@ -83,15 +65,13 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         progress = nbt.getInt("fire_crucible.progress");
         heatLevel = nbt.getInt("fire_crucible.heat_level");
         fuelLevel = nbt.getInt("fire_crucible.fuel_level");
+        hasBucket = nbt.getInt("fire_crucible.has_bucket");
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricFireCrucibleBlockEntity pEntity) {
         if(level.isClientSide()) return;
 
-        SimpleContainer inventory = new SimpleContainer(pEntity.getContainerSize());
-        for (int i = 0; i < pEntity.getContainerSize(); i++) {
-            inventory.setItem(i, pEntity.getItem(i));
-        }
+        Container inventory = pEntity;
 
         boolean hasSolidFuel = hasSolidFuel(pEntity);
         boolean isBlueFireBelow = level.getBlockState(blockPos.below()).getBlock() == ModBlocks.BLUE_FIRE.get();
@@ -118,6 +98,8 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
                 level.setBlockAndUpdate(blockPos, blockState.setValue(FabricFireCrucibleBlock.BLUE_LIT, false).setValue(FireCrucibleBlock.LIT, false));
             }
         }
+
+        pEntity.setBucket(inventory);
 
         if(hasRecipe(pEntity)) {
             pEntity.progress += pEntity.heatLevel;
@@ -148,9 +130,12 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         ItemStack resultItem = crucibleRecipe.isPresent() ? crucibleRecipe.get().getResultItem(level.registryAccess()) : furnaceRecipe.get().getResultItem(level.registryAccess());
         ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.getItem(2).getCount() + resultItem.getCount());
 
-        if(hasRecipe(pEntity)) {
-            craftItem(pEntity, resultItem, outputItem);
+        if(pEntity.hasBucket(inventory)) {
+            outputItem = new ItemStack(ModItems.MOLTEN_LITHERITE_BUCKET.get(), pEntity.getItem(2).getCount() + 1);
+            pEntity.removeItem(3, 1);
         }
+
+        if(hasRecipe(pEntity)) craftItem(pEntity, resultItem, outputItem);
     }
 
     protected static void craftItem(FabricFireCrucibleBlockEntity entity, ItemStack resultItem, ItemStack outputItem) {

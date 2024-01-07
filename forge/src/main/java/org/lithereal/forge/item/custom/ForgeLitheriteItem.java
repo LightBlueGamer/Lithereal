@@ -1,7 +1,9 @@
 package org.lithereal.forge.item.custom;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.ItemStack;
@@ -51,8 +53,9 @@ public class ForgeLitheriteItem extends LitheriteItem {
 
 
     private void spawnWitherSkeleton(Level level, double x, double y, double z) {
-        WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, level);
+        WitherSkeleton skeleton = EntityType.WITHER_SKELETON.create(level);
         skeleton.setPos(x, y, z);
+        if(level instanceof ServerLevel sLevel) skeleton.finalizeSpawn(sLevel, level.getCurrentDifficultyAt(skeleton.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
         level.addFreshEntity(skeleton);
     }
 }

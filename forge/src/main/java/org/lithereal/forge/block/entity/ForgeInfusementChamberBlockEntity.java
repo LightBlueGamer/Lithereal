@@ -30,7 +30,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEntity {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -104,7 +104,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
 
         ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
         PotionUtils.setPotion(resultItem, potion);
-        ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
+        ItemStack outputItem = new ItemStack(resultItem.getItem(), 1);
 
         if(hasRecipe(pEntity)) {
             craftItem(pEntity, resultItem, outputItem);
@@ -122,7 +122,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
         if(entity.itemHandler.getStackInSlot(1).is(Items.POTION)) entity.itemHandler.setStackInSlot(1, new ItemStack(Items.GLASS_BOTTLE));
         else entity.itemHandler.extractItem(1, 1, false);
         if (random.nextFloat() < entity.successRate) {
-            entity.itemHandler.setStackInSlot(2, outputItem);
+            entity.itemHandler.setStackInSlot(0, outputItem);
         } else {
             boolean mobGriefingEnabled = entity.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
             BlockPos blockPos = entity.getBlockPos();
@@ -143,12 +143,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
         Optional<InfusementChamberRecipe> infusingRecipe = level.getRecipeManager()
                 .getRecipeFor(InfusementChamberRecipe.Type.INSTANCE, inventory, level);
 
-        if (infusingRecipe.isPresent()) {
-            ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
-            if (canInsertAmountIntoOutput(inventory) && canInsertItemIntoOutput(inventory, resultItem)) {
-                hasRecipe = true;
-            }
-        }
+        if (infusingRecipe.isPresent()) hasRecipe = true;
 
         return hasRecipe;
     }

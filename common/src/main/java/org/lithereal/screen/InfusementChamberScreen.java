@@ -33,11 +33,12 @@ public class InfusementChamberScreen extends AbstractContainerScreen<InfusementC
         guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
+        renderPowerArrow(guiGraphics.pose(), x, y, guiGraphics);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
+            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 84, y + 32, 176, 3, 8, menu.getScaledProgress());
         }
     }
 
@@ -46,5 +47,14 @@ public class InfusementChamberScreen extends AbstractContainerScreen<InfusementC
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
+    public void renderPowerArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
+        if(menu.getPowerLevel() > 0) {
+            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 98, y + 35, 176, 25, 28, 16);
+            if(menu.getPowerLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 41, 33, 9);
+            if(menu.getPowerLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 50, 33, 9);
+            if(menu.getPowerLevel() == 3) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 59, 33, 9);
+        }
     }
 }

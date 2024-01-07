@@ -2,7 +2,9 @@ package org.lithereal.forge.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,23 +23,35 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.forge.block.custom.ForgeFireCrucibleBlock;
 import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
+import org.lithereal.item.ModItems;
 import org.lithereal.recipe.FireCrucibleRecipe;
 
 import java.util.Optional;
 
-public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
+public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity implements ImplementedInventory {
+    private final ForgeFireCrucibleItemHandler itemHandler = new ForgeFireCrucibleItemHandler(4);
+
+    private class ForgeFireCrucibleItemHandler extends ItemStackHandler {
+        public ForgeFireCrucibleItemHandler(int size) {
+            super(size);
+        }
+
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
         }
-    };
 
+        public NonNullList<ItemStack> getStacks() {
+            return stacks;
+        }
+    }
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     public ForgeFireCrucibleBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
@@ -93,11 +107,6 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity {
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, ForgeFireCrucibleBlockEntity pEntity) {
         if(level.isClientSide()) return;
 
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
-        }
-
         boolean hasSolidFuel = hasSolidFuel(pEntity);
         boolean isBlueFireBelow = level.getBlockState(blockPos.below()).getBlock() == ModBlocks.BLUE_FIRE.get();
 
@@ -110,7 +119,7 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity {
                 pEntity.heatLevel = 2;
                 level.setBlockAndUpdate(blockPos, blockState.setValue(ForgeFireCrucibleBlock.BLUE_LIT, true));
             } else if (hasSolidFuel) {
-                int fuel = net.minecraftforge.common.ForgeHooks.getBurnTime(inventory.getItem(1), null);
+                int fuel = ForgeHooks.getBurnTime(((Container) pEntity).getItem(1), null);
                 pEntity.maxFuel = fuel;
                 pEntity.fuelLevel = fuel;
                 pEntity.itemHandler.extractItem(1, 1, false);
@@ -123,6 +132,8 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity {
                 level.setBlockAndUpdate(blockPos, blockState.setValue(ForgeFireCrucibleBlock.BLUE_LIT, false).setValue(FireCrucibleBlock.LIT, false));
             }
         }
+
+        pEntity.setBucket(pEntity);
 
         if(hasRecipe(pEntity)) {
             pEntity.progress += pEntity.heatLevel;
@@ -152,6 +163,11 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity {
 
         ItemStack resultItem = crucibleRecipe.isPresent() ? crucibleRecipe.get().getResultItem(level.registryAccess()) : furnaceRecipe.get().getResultItem(level.registryAccess());
         ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
+
+        if(pEntity.hasBucket(pEntity)) {
+            outputItem = new ItemStack(ModItems.MOLTEN_LITHERITE_BUCKET.get(), pEntity.itemHandler.getStackInSlot(2).getCount() + 1);
+            pEntity.itemHandler.extractItem(3, 1, false);
+        }
 
         if(hasRecipe(pEntity)) {
             craftItem(pEntity, resultItem, outputItem);
@@ -186,6 +202,9 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity {
 
         if (crucibleRecipe.isPresent() || furnaceRecipe.isPresent()) {
             ItemStack resultItem = crucibleRecipe.isPresent() ? crucibleRecipe.get().getResultItem(level.registryAccess()) : furnaceRecipe.get().getResultItem(level.registryAccess());
+            if(entity.hasBucket(entity)) {
+                resultItem = new ItemStack(ModItems.MOLTEN_LITHERITE_BUCKET.get(), entity.itemHandler.getStackInSlot(2).getCount() + 1);
+            }
             if (canInsertAmountIntoOutput(inventory) && canInsertItemIntoOutput(inventory, resultItem)) {
                 hasRecipe = true;
             }
@@ -197,5 +216,10 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity {
     protected static boolean hasSolidFuel(ForgeFireCrucibleBlockEntity entity) {
         ItemStack item = entity.itemHandler.getStackInSlot(1);
         return ForgeHooks.getBurnTime(item, RecipeType.SMELTING) > 0;
+    }
+
+    @Override
+    public NonNullList<ItemStack> getItems() {
+        return itemHandler.getStacks();
     }
 }

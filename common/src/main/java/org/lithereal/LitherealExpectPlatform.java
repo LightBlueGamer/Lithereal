@@ -2,6 +2,7 @@ package org.lithereal;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.platform.Platform;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -101,6 +102,11 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static Item getLitheriteItem() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static ResourceLocation getResourceLocation(ItemStack stack) {
         throw new AssertionError();
     }
 }

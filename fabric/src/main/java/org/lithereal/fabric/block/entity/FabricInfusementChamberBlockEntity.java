@@ -19,6 +19,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
+import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.fabric.screen.FabricInfusementChamberMenu;
 import org.lithereal.recipe.InfusementChamberRecipe;

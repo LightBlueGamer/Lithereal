@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
+import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.fabric.screen.FabricFreezingStationMenu;
 import org.lithereal.recipe.FreezingStationRecipe;
 
@@ -27,8 +28,8 @@ import java.util.Optional;
 public class FabricFreezingStationBlockEntity extends FreezingStationBlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
     private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 2;
     private static final int INPUT_SLOT_2 = 1;
+    private static final int OUTPUT_SLOT = 2;
 
     public FabricFreezingStationBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);

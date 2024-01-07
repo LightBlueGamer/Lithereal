@@ -25,8 +25,9 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 6000;
+    protected int powerLevel = 0;
     protected float power = 1.0f;
-    protected float successRate = 0.5f;
+    protected float successRate = 0.2f;
 
     public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
         super(LitherealExpectPlatform.getInfusementChamberBlockEntity(), pos, state);
@@ -36,6 +37,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
                 return switch (index) {
                     case 0 -> InfusementChamberBlockEntity.this.progress;
                     case 1 -> InfusementChamberBlockEntity.this.maxProgress;
+                    case 2 -> InfusementChamberBlockEntity.this.powerLevel;
                     default -> 0;
                 };
             }
@@ -45,12 +47,13 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
                 switch (index) {
                     case 0 -> InfusementChamberBlockEntity.this.progress = value;
                     case 1 -> InfusementChamberBlockEntity.this.maxProgress = value;
+                    case 2 -> InfusementChamberBlockEntity.this.powerLevel = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 3;
             }
         };
     }
@@ -64,14 +67,6 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         this.progress = 0;
     }
 
-    protected static boolean canInsertItemIntoOutput(SimpleContainer inventory, ItemStack itemStack) {
-        return inventory.getItem(2).getItem() == itemStack.getItem() || inventory.getItem(2).isEmpty();
-    }
-
-    protected static boolean canInsertAmountIntoOutput(SimpleContainer inventory) {
-        return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
-    }
-
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
@@ -81,17 +76,38 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
     public void setEmpowerments() {
         this.power = 1.0f;
         this.successRate = 0.2f;
+        int frozenBlocks = 0;
+        int burningBlocks = 0;
+        int chargedBlocks = 0;
         for (int i = 0; i < Direction.values().length; i++) {
             BlockPos adjacentPos = this.getBlockPos().offset(Direction.values()[i].getNormal());
             BlockState blockState = this.level.getBlockState(adjacentPos);
             if(blockState.getBlock() == ModBlocks.FROZEN_LITHERITE_BLOCK.get()) {
                 this.power -= 0.1f;
                 this.successRate += 0.15f;
+                frozenBlocks++;
             } else if(blockState.getBlock() == ModBlocks.BURNING_LITHERITE_BLOCK.get()) {
                 this.power += 0.15f;
                 this.successRate -= 0.1f;
+                burningBlocks++;
+            } else if(blockState.getBlock() == ModBlocks.CHARGED_LITHERITE_BLOCK.get()) {
+                this.power += 0.2f;
+                this.successRate += 0.2f;
+                chargedBlocks++;
             }
+
+            if(frozenBlocks > 0 && burningBlocks > 0 && chargedBlocks > 0) {
+                if (frozenBlocks > burningBlocks && frozenBlocks > chargedBlocks) {
+                    this.powerLevel = 1;
+                } else if (burningBlocks > frozenBlocks && burningBlocks > chargedBlocks) {
+                    this.powerLevel = 2;
+                } else if (chargedBlocks > frozenBlocks && chargedBlocks > burningBlocks) {
+                    this.powerLevel = 3;
+                }
+            } else this.powerLevel = 0;
+
         }
+
     }
 
 }

@@ -41,7 +41,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
         p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
         p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
         p_266655_.put(ArmorItem.Type.HELMET, 4);
-    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(ModItems.INFUSED_LITHERITE_CRYSTAL.get())),
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> Ingredient.of(ModItems.INFUSED_LITHERITE_INGOT.get())),
 
     WITHERING_LITHERITE("withering_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
         p_266655_.put(ArmorItem.Type.BOOTS, 4);

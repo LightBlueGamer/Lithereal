@@ -1,7 +1,10 @@
 package org.lithereal.fabric;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.LitherealExpectPlatform;
@@ -87,5 +90,9 @@ public class LitherealExpectPlatformImpl {
 
     public static Item getLitheriteItem() {
         return FabricItems.LITHERITE_CRYSTAL;
+    }
+
+    public static ResourceLocation getResourceLocation(ItemStack stack) {
+        return BuiltInRegistries.ITEM.getKey(stack.getItem());
     }
 }

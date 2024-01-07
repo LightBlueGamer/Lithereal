@@ -13,7 +13,6 @@ import org.lithereal.screen.InfusementChamberMenu;
 
 public class FabricInfusementChamberMenu extends InfusementChamberMenu {
     private final Container inventory;
-    private final ContainerData containerData;
     public final FabricInfusementChamberBlockEntity blockEntity;
 
     public FabricInfusementChamberMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
@@ -27,7 +26,7 @@ public class FabricInfusementChamberMenu extends InfusementChamberMenu {
         checkContainerSize(((Container) blockEntity), 2);
         this.inventory = ((Container) blockEntity);
         inventory.startOpen(playerInventory.player);
-        this.containerData = containerData;
+        this.data = containerData;
         this.blockEntity = ((FabricInfusementChamberBlockEntity) blockEntity);
 
         this.addSlot(new Slot(inventory, 0, 43, 34));

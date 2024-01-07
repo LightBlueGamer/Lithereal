@@ -11,7 +11,6 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -68,7 +67,7 @@ public class Lithereal {
         ItemColor itemColor = ModItemColors.INFUSED_LITHERITE_COLOR_HANDLER::apply;
         BlockColor blockColor = ModBlockColors.INFUSED_LITHERITE_BLOCK_COLOR;
 
-        ColorHandlerRegistry.registerItemColors(itemColor, LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), ModItems.INFUSED_LITHERITE_CRYSTAL.get(), ModItems.INFUSED_LITHERITE_SWORD.get(), ModItems.INFUSED_LITHERITE_SHOVEL.get(), ModItems.INFUSED_LITHERITE_PICKAXE.get(), ModItems.INFUSED_LITHERITE_AXE.get(), ModItems.INFUSED_LITHERITE_HOE.get(), ModItems.INFUSED_LITHERITE_HAMMER.get(), ModItems.INFUSED_LITHERITE_HELMET.get(), ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModItems.INFUSED_LITHERITE_LEGGINGS.get(), ModItems.INFUSED_LITHERITE_BOOTS.get());
+        ColorHandlerRegistry.registerItemColors(itemColor, LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), ModItems.INFUSED_LITHERITE_INGOT.get(), ModItems.INFUSED_LITHERITE_SWORD.get(), ModItems.INFUSED_LITHERITE_SHOVEL.get(), ModItems.INFUSED_LITHERITE_PICKAXE.get(), ModItems.INFUSED_LITHERITE_AXE.get(), ModItems.INFUSED_LITHERITE_HOE.get(), ModItems.INFUSED_LITHERITE_HAMMER.get(), ModItems.INFUSED_LITHERITE_HELMET.get(), ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModItems.INFUSED_LITHERITE_LEGGINGS.get(), ModItems.INFUSED_LITHERITE_BOOTS.get());
         ColorHandlerRegistry.registerBlockColors(blockColor, LitherealExpectPlatform.getInfusedLitheriteBlock());
     }
 
@@ -87,7 +86,7 @@ public class Lithereal {
                 try {
                     Potion potion = (Potion) field.get(null);
                     itemsToAdd.add(PotionUtils.setPotion(new ItemStack(LitherealExpectPlatform.getInfusedLitheriteBlock()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_CRYSTAL.get()), potion));
+                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_INGOT.get()), potion));
                     itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SWORD.get()), potion));
                     itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SHOVEL.get()), potion));
                     itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_PICKAXE.get()), potion));
@@ -122,19 +121,13 @@ public class Lithereal {
         }
 
         itemsToAdd.sort(Comparator.comparing(itemStack -> {
-            String descriptionId = itemStack.getDescriptionId().toLowerCase();
+            String descriptionId = LitherealExpectPlatform.getResourceLocation(itemStack).getPath();
 
-            if (descriptionId.contains("burning_litherite")) {
-                return "burning_litherite";
-            } else if (descriptionId.contains("frozen_litherite")) {
-                return "frozen_litherite";
-            } else if (descriptionId.contains("infused_litherite")) {
-                return "infused_litherite";
-            } else if (descriptionId.contains("withering_litherite")) {
-                return "withering_litherite";
-            } else if (descriptionId.contains("litherite")) {
-                return "litherite";
-            }
+            if (descriptionId.startsWith("litherite")) return "litherite";
+            else if (descriptionId.startsWith("burning_litherite")) return "burning_litherite";
+            else if (descriptionId.startsWith("frozen_litherite")) return "frozen_litherite";
+            else if (descriptionId.startsWith("withering_litherite")) return "withering_litherite";
+            else if (descriptionId.startsWith("infused_litherite")) return "infused_litherite";
 
             String[] parts = descriptionId.split("[._]");
             return parts.length > 1 ? parts[1] : "other";

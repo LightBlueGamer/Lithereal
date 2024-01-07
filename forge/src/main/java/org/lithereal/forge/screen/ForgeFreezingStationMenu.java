@@ -18,16 +18,6 @@ public class ForgeFreezingStationMenu extends FreezingStationMenu {
 
     public ForgeFreezingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(id, inv, entity, data);
-        checkContainerSize(inv, 3);
-        blockEntity = (ForgeFreezingStationBlockEntity) entity;
-        this.level = inv.player.level();
-        this.data = data;
-
-        addPlayerInventory(inv);
-        addPlayerHotbar(inv);
-
-        addDataSlots(data);
-
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 43, 34));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 68, 34));

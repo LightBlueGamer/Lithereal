@@ -25,7 +25,7 @@ public class ModItems {
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_CRYSTAL = ITEMS.register("frozen_litherite_crystal", () ->
             new Item(new Item.Properties()));
 
-    public static final RegistrySupplier<Item> INFUSED_LITHERITE_CRYSTAL = ITEMS.register("infused_litherite_crystal", () ->
+    public static final RegistrySupplier<Item> INFUSED_LITHERITE_INGOT = ITEMS.register("infused_litherite_ingot", () ->
             new InfusedLitheriteItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_CRYSTAL = ITEMS.register("withering_litherite_crystal", () ->
@@ -181,6 +181,9 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_BOOTS = ITEMS.register("withering_litherite_boots", () ->
             new WitheringLitheriteArmor(ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
+            new Item(new Item.Properties().stacksTo(1)));
 
     public static void register() {
         ITEMS.register();

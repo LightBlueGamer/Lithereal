@@ -1,11 +1,14 @@
 package org.lithereal.fabric.mixin;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.lithereal.item.ModItems;
@@ -59,8 +62,9 @@ public abstract class ItemEntityMixin {
 
     @Unique
     private void spawnWitherSkeleton(Level level, double x, double y, double z) {
-        WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, level);
+        WitherSkeleton skeleton = EntityType.WITHER_SKELETON.create(level);
         skeleton.setPos(x, y, z);
+        if(level instanceof ServerLevel sLevel) skeleton.finalizeSpawn(sLevel, level.getCurrentDifficultyAt(skeleton.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
         level.addFreshEntity(skeleton);
     }
 }

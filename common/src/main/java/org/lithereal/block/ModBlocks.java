@@ -47,6 +47,10 @@ public class ModBlocks {
             () -> new WitheringLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
+    public static final RegistrySupplier<Block> CHARGED_LITHERITE_BLOCK = registerHeatedBlock("charged_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
+
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
             () -> new BlueFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE), 15));
 
