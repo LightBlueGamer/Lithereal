@@ -3,6 +3,6 @@
   "textures": {
     "front": "lithereal:block/infusement_chamber_empty",
     "side": "lithereal:block/infusement_chamber_rest",
-    "top": "lithereal:block/infusement_chamber_rest"
+    "top": "lithereal:block/infusement_chamber_vent"
   }
 }

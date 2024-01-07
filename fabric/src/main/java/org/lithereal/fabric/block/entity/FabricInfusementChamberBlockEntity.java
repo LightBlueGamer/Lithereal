@@ -139,12 +139,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
         Optional<InfusementChamberRecipe> infusingRecipe = level.getRecipeManager()
                 .getRecipeFor(InfusementChamberRecipe.Type.INSTANCE, inventory, level);
 
-        if (infusingRecipe.isPresent()) {
-            ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
-            if (canInsertAmountIntoOutput(inventory) && canInsertItemIntoOutput(inventory, resultItem)) {
-                hasRecipe = true;
-            }
-        }
+        if (infusingRecipe.isPresent()) hasRecipe = true;
 
         return hasRecipe;
     }

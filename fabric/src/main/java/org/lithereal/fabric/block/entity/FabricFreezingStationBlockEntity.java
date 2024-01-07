@@ -27,20 +27,9 @@ import java.util.Optional;
 
 public class FabricFreezingStationBlockEntity extends FreezingStationBlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
-    private static final int INPUT_SLOT = 0;
-    private static final int INPUT_SLOT_2 = 1;
-    private static final int OUTPUT_SLOT = 2;
 
     public FabricFreezingStationBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
-    }
-
-    public ItemStack getRenderStack() {
-        if(this.getItem(OUTPUT_SLOT).isEmpty()) {
-            return this.getItem(INPUT_SLOT);
-        } else {
-            return this.getItem(OUTPUT_SLOT);
-        }
     }
 
     @Override
@@ -106,6 +95,7 @@ public class FabricFreezingStationBlockEntity extends FreezingStationBlockEntity
         Block block = level.getBlockState(entity.getBlockPos().below()).getBlock();
         cooling += getBlockCoolingPower(entity, block);
 
+        entity.coldness = cooling;
         return cooling;
     }
 

@@ -13,8 +13,6 @@ import org.lithereal.screen.FreezingStationMenu;
 
 public class FabricFreezingStationMenu extends FreezingStationMenu {
     private final Container inventory;
-    private final ContainerData containerData;
-    public final FabricFreezingStationBlockEntity blockEntity;
 
     public FabricFreezingStationMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
         this(syncId, inventory, inventory.player.level().getBlockEntity(buf.readBlockPos()),
@@ -24,37 +22,17 @@ public class FabricFreezingStationMenu extends FreezingStationMenu {
     public FabricFreezingStationMenu(int syncId, Inventory playerInventory,
                                      BlockEntity blockEntity, ContainerData containerData) {
         super(syncId, playerInventory, blockEntity, containerData);
-        checkContainerSize(((Container) blockEntity), 2);
         this.inventory = ((Container) blockEntity);
         inventory.startOpen(playerInventory.player);
-        this.containerData = containerData;
-        this.blockEntity = ((FabricFreezingStationBlockEntity) blockEntity);
 
         this.addSlot(new Slot(inventory, 0, 43, 34));
         this.addSlot(new Slot(inventory, 1, 68, 34));
         this.addSlot(new Slot(inventory, 2, 129, 34));
-
-
-        addPlayerInventory(playerInventory);
-        addPlayerHotbar(playerInventory);
-
-        addDataSlots(containerData);
     }
 
-    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
-    // must assign a slot number to each of the slots used by the GUI.
-    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
-    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
-    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
-    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
-    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
-    private static final int HOTBAR_SLOT_COUNT = 9;
-    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
-    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
-    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
-    private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
+    private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
-    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
+    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = 36;
 
     // THIS YOU HAVE TO DEFINE!
     private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
