@@ -19,6 +19,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 200;
+    protected int coldness = 0;
 
     public FreezingStationBlockEntity(BlockPos pos, BlockState state) {
         super(LitherealExpectPlatform.getFreezingStationBlockEntity(), pos, state);
@@ -28,6 +29,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 return switch (index) {
                     case 0 -> FreezingStationBlockEntity.this.progress;
                     case 1 -> FreezingStationBlockEntity.this.maxProgress;
+                    case 2 -> FreezingStationBlockEntity.this.coldness;
                     default -> 0;
                 };
             }
@@ -37,12 +39,13 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 switch (index) {
                     case 0 -> FreezingStationBlockEntity.this.progress = value;
                     case 1 -> FreezingStationBlockEntity.this.maxProgress = value;
+                    case 2 -> FreezingStationBlockEntity.this.coldness = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 3;
             }
         };
     }

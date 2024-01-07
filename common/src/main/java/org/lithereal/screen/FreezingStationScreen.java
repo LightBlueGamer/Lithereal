@@ -37,7 +37,8 @@ public class FreezingStationScreen extends AbstractContainerScreen<FreezingStati
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
+            if(menu.getCooling() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
+            else if(menu.getCooling() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 204, 1, menu.getScaledProgress(), 15);
         }
     }
 

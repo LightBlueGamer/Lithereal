@@ -96,7 +96,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
                 chargedBlocks++;
             }
 
-            if(frozenBlocks > 0 && burningBlocks > 0 && chargedBlocks > 0) {
+            if(frozenBlocks > 0 || burningBlocks > 0 || chargedBlocks > 0) {
                 if (frozenBlocks > burningBlocks && frozenBlocks > chargedBlocks) {
                     this.powerLevel = 1;
                 } else if (burningBlocks > frozenBlocks && burningBlocks > chargedBlocks) {

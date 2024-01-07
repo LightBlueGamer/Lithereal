@@ -29,6 +29,7 @@ import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.forge.block.custom.ForgeFireCrucibleBlock;
+import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
 import org.lithereal.item.ModItems;
 import org.lithereal.recipe.FireCrucibleRecipe;
@@ -164,7 +165,7 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity implem
         ItemStack resultItem = crucibleRecipe.isPresent() ? crucibleRecipe.get().getResultItem(level.registryAccess()) : furnaceRecipe.get().getResultItem(level.registryAccess());
         ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
 
-        if(pEntity.hasBucket(pEntity)) {
+        if(pEntity.hasBucket(pEntity)  && pEntity.itemHandler.getStackInSlot(0).is(ForgeItems.LITHERITE_CRYSTAL.get())) {
             outputItem = new ItemStack(ModItems.MOLTEN_LITHERITE_BUCKET.get(), pEntity.itemHandler.getStackInSlot(2).getCount() + 1);
             pEntity.itemHandler.extractItem(3, 1, false);
         }
@@ -202,7 +203,7 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity implem
 
         if (crucibleRecipe.isPresent() || furnaceRecipe.isPresent()) {
             ItemStack resultItem = crucibleRecipe.isPresent() ? crucibleRecipe.get().getResultItem(level.registryAccess()) : furnaceRecipe.get().getResultItem(level.registryAccess());
-            if(entity.hasBucket(entity)) {
+            if(entity.hasBucket(entity) && entity.itemHandler.getStackInSlot(0).is(ForgeItems.LITHERITE_CRYSTAL.get())) {
                 resultItem = new ItemStack(ModItems.MOLTEN_LITHERITE_BUCKET.get(), entity.itemHandler.getStackInSlot(2).getCount() + 1);
             }
             if (canInsertAmountIntoOutput(inventory) && canInsertItemIntoOutput(inventory, resultItem)) {

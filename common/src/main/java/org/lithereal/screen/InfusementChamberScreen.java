@@ -52,8 +52,8 @@ public class InfusementChamberScreen extends AbstractContainerScreen<InfusementC
     public void renderPowerArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
         if(menu.getPowerLevel() > 0) {
             guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 98, y + 35, 176, 25, 28, 16);
-            if(menu.getPowerLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 41, 33, 9);
-            if(menu.getPowerLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 50, 33, 9);
+            if(menu.getPowerLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 50, 33, 9);
+            if(menu.getPowerLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 41, 33, 9);
             if(menu.getPowerLevel() == 3) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 59, 33, 9);
         }
     }

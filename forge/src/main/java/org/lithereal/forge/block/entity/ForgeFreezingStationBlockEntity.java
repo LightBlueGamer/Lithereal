@@ -122,6 +122,7 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
         if(block == Blocks.PACKED_ICE) cooling += 1;
         if(block == ModBlocks.FROZEN_LITHERITE_BLOCK.get()) cooling += 2;
 
+        entity.coldness = cooling;
         return cooling;
     }
 

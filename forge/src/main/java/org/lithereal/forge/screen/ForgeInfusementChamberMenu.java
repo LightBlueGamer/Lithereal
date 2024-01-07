@@ -18,16 +18,6 @@ public class ForgeInfusementChamberMenu extends InfusementChamberMenu {
 
     public ForgeInfusementChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(id, inv, entity, data);
-        checkContainerSize(inv, 2);
-        blockEntity = (ForgeInfusementChamberBlockEntity) entity;
-        this.level = inv.player.level();
-        this.data = data;
-
-        addPlayerInventory(inv);
-        addPlayerHotbar(inv);
-
-        addDataSlots(data);
-
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 57));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 13));
