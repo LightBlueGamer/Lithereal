@@ -39,11 +39,10 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
         if (menu.isCrafting()) {
-            int arrowHeight = 14;
             int progressHeight = menu.getScaledProgress();
-            int yOffset = y + 37 + arrowHeight - progressHeight;
-            if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 176, arrowHeight - progressHeight, 14, progressHeight);
-            else if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 190, arrowHeight - progressHeight, 14, progressHeight);
+            int yOffset = y + 51 - progressHeight;
+            if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 176, 14 - progressHeight, 14, progressHeight);
+            else if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 190, 14 - progressHeight, 14, progressHeight);
         }
     }
 

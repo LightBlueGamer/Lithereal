@@ -9,17 +9,25 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.fabric.block.custom.FabricFireCrucibleBlock;
+import org.lithereal.fabric.item.FabricItems;
+import org.lithereal.fabric.screen.FabricFireCrucibleMenu;
+import org.lithereal.fabric.screen.FabricFreezingStationMenu;
 import org.lithereal.item.ModItems;
 import org.lithereal.recipe.FireCrucibleRecipe;
 
@@ -41,6 +49,12 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
     @Override
     public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
         buf.writeBlockPos(worldPosition);
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+        return new FabricFireCrucibleMenu(id, inventory, this, this.data);
     }
 
     @Override
@@ -71,8 +85,6 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricFireCrucibleBlockEntity pEntity) {
         if(level.isClientSide()) return;
 
-        Container inventory = pEntity;
-
         boolean hasSolidFuel = hasSolidFuel(pEntity);
         boolean isBlueFireBelow = level.getBlockState(blockPos.below()).getBlock() == ModBlocks.BLUE_FIRE.get();
 
@@ -85,7 +97,7 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
                 pEntity.heatLevel = 2;
                 level.setBlockAndUpdate(blockPos, blockState.setValue(FabricFireCrucibleBlock.BLUE_LIT, true));
             } else if (hasSolidFuel) {
-                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(inventory.getItem(1).getItem(), 0);;
+                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(((Container) pEntity).getItem(1).getItem(), 0);;
                 pEntity.maxFuel = fuel;
                 pEntity.fuelLevel = fuel;
                 pEntity.removeItem(1, 1);
@@ -99,7 +111,7 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
             }
         }
 
-        pEntity.setBucket(inventory);
+        pEntity.setBucket(pEntity);
 
         if(hasRecipe(pEntity)) {
             pEntity.progress += pEntity.heatLevel;
@@ -130,7 +142,7 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         ItemStack resultItem = crucibleRecipe.isPresent() ? crucibleRecipe.get().getResultItem(level.registryAccess()) : furnaceRecipe.get().getResultItem(level.registryAccess());
         ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.getItem(2).getCount() + resultItem.getCount());
 
-        if(pEntity.hasBucket(inventory)) {
+        if(pEntity.hasBucket(pEntity)  && pEntity.getItem(0).is(FabricItems.LITHERITE_CRYSTAL)) {
             outputItem = new ItemStack(ModItems.MOLTEN_LITHERITE_BUCKET.get(), pEntity.getItem(2).getCount() + 1);
             pEntity.removeItem(3, 1);
         }
@@ -166,6 +178,9 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
 
         if (crucibleRecipe.isPresent() || furnaceRecipe.isPresent()) {
             ItemStack resultItem = crucibleRecipe.isPresent() ? crucibleRecipe.get().getResultItem(level.registryAccess()) : furnaceRecipe.get().getResultItem(level.registryAccess());
+            if(entity.hasBucket(entity)  && entity.getItem(0).is(FabricItems.LITHERITE_CRYSTAL)) {
+                resultItem = new ItemStack(ModItems.MOLTEN_LITHERITE_BUCKET.get(), entity.getItem(2).getCount() + 1);
+            }
             if (canInsertAmountIntoOutput(inventory) && canInsertItemIntoOutput(inventory, resultItem)) {
                 hasRecipe = true;
             }

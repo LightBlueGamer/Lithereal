@@ -70,14 +70,6 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         this.progress = 0;
     }
 
-    private void setFuelLevel(int amount) {
-        this.fuelLevel = amount;
-    }
-
-    private void setHeatLevel(int amount) {
-        this.heatLevel = amount;
-    }
-
     private void setHasBucket(int amount) {
         this.hasBucket = amount;
     }
@@ -102,10 +94,6 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
     protected static int getFuelLevel(FireCrucibleBlockEntity entity) {
         return entity.fuelLevel;
-    }
-
-    protected static int getHasBucket(FireCrucibleBlockEntity entity) {
-        return entity.hasBucket;
     }
 
     @Nullable

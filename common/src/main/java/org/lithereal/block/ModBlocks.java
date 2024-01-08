@@ -52,7 +52,7 @@ public class ModBlocks {
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
-            () -> new BlueFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE), 15));
+            () -> new BlueFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE)));
 
     public static final RegistrySupplier<Block> SCORCHED_CRIMSON_NYLIUM = registerBlock("scorched_crimson_nylium",
             () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.MAGMA_BLOCK)));

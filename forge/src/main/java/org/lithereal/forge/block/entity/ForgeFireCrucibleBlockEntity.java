@@ -170,9 +170,7 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity implem
             pEntity.itemHandler.extractItem(3, 1, false);
         }
 
-        if(hasRecipe(pEntity)) {
-            craftItem(pEntity, resultItem, outputItem);
-        }
+        if(hasRecipe(pEntity)) craftItem(pEntity, resultItem, outputItem);
     }
 
     protected static void craftItem(ForgeFireCrucibleBlockEntity entity, ItemStack resultItem, ItemStack outputItem) {
