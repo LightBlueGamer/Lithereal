@@ -19,7 +19,7 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 
-public class InfusementChamberBlock extends BaseEntityBlock {
+public abstract class InfusementChamberBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public InfusementChamberBlock(Properties properties) {
@@ -60,12 +60,6 @@ public class InfusementChamberBlock extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new InfusementChamberBlockEntity(pos, state);
     }
 
     @Nullable

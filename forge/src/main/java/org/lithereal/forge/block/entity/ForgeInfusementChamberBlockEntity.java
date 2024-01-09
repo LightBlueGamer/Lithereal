@@ -38,6 +38,17 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+
+    @Override
+    public Potion getStoredPotion() {
+        return PotionUtils.getPotion(itemHandler.getStackInSlot(1));
+    }
+
+    @Override
+    public ItemStack getStoredItem() {
+        return itemHandler.getStackInSlot(0);
+    }
+
     public ForgeInfusementChamberBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
     }
@@ -104,7 +115,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
 
         ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
         PotionUtils.setPotion(resultItem, potion);
-        ItemStack outputItem = new ItemStack(resultItem.getItem(), 1);
+        ItemStack outputItem = new ItemStack(resultItem.getItem(), resultItem.getCount());
 
         if(hasRecipe(pEntity)) {
             craftItem(pEntity, resultItem, outputItem);

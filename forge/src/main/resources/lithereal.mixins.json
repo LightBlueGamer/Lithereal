@@ -1,12 +1,13 @@
 {
   "required": true,
-  "package": "org.lithereal.mixin.forge",
+  "package": "org.lithereal.forge.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-
+    "ArmorLayerMixin"
   ],
   "mixins": [
+    "BlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -29,7 +29,9 @@ public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
 
-        return hasItem(pContainer, 0);
+        if(recipeItems.size() > 1) {
+            return hasItem(pContainer, 0) && hasItem(pContainer, 1);
+        } else return hasItem(pContainer, 0);
     }
 
     @Override
@@ -87,7 +89,7 @@ public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(ingredients.size(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 Ingredient ingredient = getIngredient(ingredients.get(i).getAsJsonObject());

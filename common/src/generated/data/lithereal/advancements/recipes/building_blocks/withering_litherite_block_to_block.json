@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:withering_litherite_block_to_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_withering_litherite_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lithereal:withering_litherite_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_withering_litherite_crystal",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:withering_litherite_block_to_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

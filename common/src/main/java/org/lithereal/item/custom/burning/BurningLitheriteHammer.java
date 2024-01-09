@@ -14,6 +14,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
@@ -25,7 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class BurningLitheriteHammer extends Hammer {
+public class BurningLitheriteHammer extends Hammer implements BurningItem {
     public BurningLitheriteHammer(Tier tier, int i, float f, Properties properties) {
         super(tier, i, f, properties);
     }
@@ -36,6 +37,15 @@ public class BurningLitheriteHammer extends Hammer {
         attacked.setSecondsOnFire(1000);
         return super.hurtEnemy(itemStack, attacked, attacker);
     }
+
+    @Override
+    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos blockPos, LivingEntity livingEntity) {
+        if (!level.isClientSide && blockState.getDestroySpeed(level, blockPos) != 0.0F) {
+            itemStack.hurtAndBreak(1, livingEntity, (livingEntityx) -> livingEntityx.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        }
+        return true;
+    }
+
     @Override
     public void findAndBreakNearBlocks(HitResult pick, BlockPos blockPos, ItemStack hammerStack, Level level, LivingEntity livingEntity) {
         if (!(livingEntity instanceof ServerPlayer player)) return;
@@ -76,11 +86,8 @@ public class BurningLitheriteHammer extends Hammer {
                 boolean correctToolForDrops = hammerStack.isCorrectToolForDrops(targetState);
                 if (correctToolForDrops) {
                     targetState.spawnAfterBreak((ServerLevel) level, pos, hammerStack, true);
-                    List<ItemStack> drops = Block.getDrops(targetState, (ServerLevel) level, pos, level.getBlockEntity(pos), livingEntity, hammerStack);
+                    List<ItemStack> drops = getSmeltedDrops(Block.getDrops(targetState, (ServerLevel) level, pos, level.getBlockEntity(pos), livingEntity, hammerStack), level);
                     drops.forEach(e -> {
-                        SmeltingRecipe furnaceRecipe = level.getRecipeManager()
-                                .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(targetState.getBlock().asItem().getDefaultInstance()), level).orElse(null);
-                        if(furnaceRecipe != null) e = furnaceRecipe.getResultItem(level.registryAccess()).getItem().getDefaultInstance();
                         Block.popResourceFromFace(level, pos, ((BlockHitResult) pick).getDirection(), e);
                     });
                 }
@@ -92,6 +99,53 @@ public class BurningLitheriteHammer extends Hammer {
             hammerStack.hurtAndBreak(damage, livingEntity, (livingEntityx) -> {
                 livingEntityx.broadcastBreakEvent(EquipmentSlot.MAINHAND);
             });
+        }
+    }
+
+    public List<ItemStack> getSmeltedDrops(List<ItemStack> drops, Level level) {
+        List<ItemStack> smeltedDrops = NonNullList.create();
+        drops.forEach(e -> {
+            SmeltingRecipe furnaceRecipe = level.getRecipeManager()
+                    .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(e), level).orElse(null);
+            if(furnaceRecipe != null) smeltedDrops.add(new ItemStack(furnaceRecipe.getResultItem(level.registryAccess()).getItem(), e.getCount()));
+            else smeltedDrops.add(e);
+        });
+        return smeltedDrops;
+    }
+
+    @Override
+    public void getDrops(Level level, BlockState blockState, BlockPos blockPos, ItemStack itemStack, LivingEntity livingEntity, BlockEntity blockEntity) {
+        if(level instanceof ServerLevel) {
+            List<ItemStack> origDrops = Block.getDrops(blockState, (ServerLevel) level, blockPos, blockEntity, livingEntity, itemStack);
+            SmeltingRecipe[] furnaceRecipes = new SmeltingRecipe[origDrops.size()];
+
+            for (int i = 0; i < origDrops.size(); i++) {
+                furnaceRecipes[i] = level.getRecipeManager()
+                        .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(origDrops.get(i)), level).orElse(null);
+            }
+
+
+            NonNullList<ItemStack> drops = NonNullList.create();
+            for (int i = 0; i < furnaceRecipes.length; i++) {
+                if(furnaceRecipes[i] == null) {
+                    drops.add(i, origDrops.get(i));
+                    continue;
+                }
+                ItemStack dropStack = new ItemStack(furnaceRecipes[i].getResultItem(level.registryAccess()).getItem(), origDrops.get(i).getCount());
+                drops.add(i, dropStack);
+            }
+
+            for (ItemStack drop : drops) {
+                Block.popResource(level, blockPos, drop);
+            }
+            itemStack.hurtAndBreak(0, livingEntity, (p) -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            HitResult pick = livingEntity.pick(20D, 1F, false);
+
+            if (!(pick instanceof BlockHitResult)) return;
+
+            this.findAndBreakNearBlocks(pick, blockPos, itemStack, level, livingEntity);
+
+            level.destroyBlock(blockPos, false);
         }
     }
 }

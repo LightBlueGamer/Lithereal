@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
+import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
 import org.lithereal.recipe.ModRecipes;
@@ -48,8 +49,8 @@ public class Lithereal {
         ModRecipes.register();
 
         ClientLifecycleEvent.CLIENT_SETUP.register(client -> {
-            ModelLayerLocation INFUSED_LITHERITE_BLOCK_LAYER = new ModelLayerLocation(new ResourceLocation(Lithereal.MOD_ID, "infused_litherite_block"), "main");
-            EntityModelLayerRegistry.register(INFUSED_LITHERITE_BLOCK_LAYER, InfusedLitheriteBlockEntityModel::createBodyLayer);
+            EntityModelLayerRegistry.register(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
+            EntityModelLayerRegistry.register(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
             registerKeyBindings(client);
             registerColorHandlers(client);
             registerItemsToTab(client);
@@ -123,14 +124,15 @@ public class Lithereal {
         itemsToAdd.sort(Comparator.comparing(itemStack -> {
             String descriptionId = LitherealExpectPlatform.getResourceLocation(itemStack).getPath();
 
-            if (descriptionId.startsWith("litherite")) return "litherite";
-            else if (descriptionId.startsWith("burning_litherite")) return "burning_litherite";
-            else if (descriptionId.startsWith("frozen_litherite")) return "frozen_litherite";
-            else if (descriptionId.startsWith("withering_litherite")) return "withering_litherite";
-            else if (descriptionId.startsWith("infused_litherite")) return "infused_litherite";
+            if (descriptionId.startsWith("litherite")) return "1";
+            else if (descriptionId.startsWith("burning_litherite")) return "2";
+            else if (descriptionId.startsWith("frozen_litherite")) return "3";
+            else if (descriptionId.startsWith("withering_litherite")) return "4";
+            else if (descriptionId.startsWith("infused_litherite")) return "5";
+            else if (descriptionId.startsWith("charged_litherite")) return "6";
 
             String[] parts = descriptionId.split("[._]");
-            return parts.length > 1 ? parts[1] : "other";
+            return parts.length > 1 ? parts[1] : "0";
         }));
 
         CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), itemsToAdd.toArray(new ItemStack[0]));

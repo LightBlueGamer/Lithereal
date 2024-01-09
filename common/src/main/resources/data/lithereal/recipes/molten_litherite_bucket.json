@@ -1,0 +1,14 @@
+{
+  "type": "lithereal:burning",
+  "ingredients": [
+    {
+      "item": "lithereal:litherite_crystal"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "output": {
+    "item": "lithereal:molten_litherite_bucket"
+  }
+}

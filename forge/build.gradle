@@ -7,6 +7,8 @@ architectury {
     forge()
 }
 
+
+
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
@@ -34,6 +36,9 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+
+    modCompileOnly "mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"
+    modRuntimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
 }
 
 processResources {
@@ -80,5 +85,26 @@ publishing {
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
         // Add repositories to publish to here.
+    }
+}
+
+def generatedResources = file("../common/src/generated")
+
+sourceSets {
+    main {
+        resources.srcDir generatedResources
+    }
+}
+
+loom {
+    forge {
+        runs {
+            data {
+                data()
+                programArgs "--all", "--mod", "lithereal"
+                programArgs "--output", generatedResources.absolutePath
+                programArgs "--existing", file("../common/src/main/resources").absolutePath
+            }
+        }
     }
 }

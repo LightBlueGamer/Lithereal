@@ -69,16 +69,13 @@ public class Hammer extends PickaxeItem {
 
     @Override
     public boolean mineBlock(ItemStack hammerStack, Level level, BlockState blockState, BlockPos blockPos, LivingEntity livingEntity) {
-        if (level.isClientSide || blockState.getDestroySpeed(level, blockPos) == 0.0F) {
-            return true;
-        }
+        if (level.isClientSide || blockState.getDestroySpeed(level, blockPos) == 0.0F) return true;
 
         HitResult pick = livingEntity.pick(20D, 1F, false);
 
         // Not possible?
-        if (!(pick instanceof BlockHitResult)) {
-            return super.mineBlock(hammerStack, level, blockState, blockPos, livingEntity);
-        }
+        if (!(pick instanceof BlockHitResult)) return super.mineBlock(hammerStack, level, blockState, blockPos, livingEntity);
+
 
         this.findAndBreakNearBlocks(pick, blockPos, hammerStack, level, livingEntity);
         return super.mineBlock(hammerStack, level, blockState, blockPos, livingEntity);

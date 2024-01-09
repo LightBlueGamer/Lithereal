@@ -4,11 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-    "RendererMixin"
+    "RendererMixin",
+    "ArmorLayerMixin"
   ],
   "mixins": [
-    "RendererMixin",
-    "ItemEntityMixin"
+    "ItemEntityMixin",
+    "BlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

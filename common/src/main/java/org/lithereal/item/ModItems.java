@@ -31,6 +31,9 @@ public class ModItems {
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_CRYSTAL = ITEMS.register("withering_litherite_crystal", () ->
             new Item(new Item.Properties()));
 
+    public static final RegistrySupplier<Item> CHARGED_LITHERITE_CRYSTAL = ITEMS.register("charged_litherite_crystal", () ->
+            new Item(new Item.Properties()));
+
     public static final Tier LITHERITE = new ModTier(4, 1750, 11.0F, 4.0F, 20, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()));
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->
             new SwordItem(LITHERITE, 3, -2.4f, new Item.Properties()));

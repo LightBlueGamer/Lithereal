@@ -84,7 +84,7 @@ public class LitherealExpectPlatformImpl {
     }
 
     public static InfusementChamberBlock getInfusementChamberBlock() {
-        return (InfusementChamberBlock) ForgeBlocks.INFUSMENT_CHAMBER.get();
+        return (InfusementChamberBlock) ForgeBlocks.INFUSEMENT_CHAMBER.get();
     }
 
     public static MenuType<ForgeInfusementChamberMenu> getInfusementChamberMenu() {

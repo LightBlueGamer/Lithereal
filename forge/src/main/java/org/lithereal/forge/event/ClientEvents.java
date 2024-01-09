@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.Mod;
 import org.lithereal.Lithereal;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
+import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
+import org.lithereal.client.renderer.InfusementChamberBlockEntityRenderer;
 import org.lithereal.forge.block.entity.ForgeBlockEntities;
 
 public class ClientEvents {
@@ -15,6 +17,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void modelLayerLocationInit(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
+            event.registerLayerDefinition(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
         }
         @SubscribeEvent
         public static void entityRendererInit(EntityRenderersEvent.RegisterRenderers event) {
@@ -24,5 +27,6 @@ public class ClientEvents {
 
     public static void registerBlockEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSED_LITHERITE_BLOCK.get(), InfusedLitheriteBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSEMENT_CHAMBER.get(), InfusementChamberBlockEntityRenderer::new);
     }
 }

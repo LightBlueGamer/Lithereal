@@ -27,6 +27,7 @@
     "architectury": ">=9.1.12"
   },
   "mixins": [
-    "lithereal.mixins.json"
+    "lithereal.mixins.json",
+    "lithereal-common.mixins.json"
   ]
 }

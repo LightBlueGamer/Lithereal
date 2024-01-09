@@ -30,7 +30,7 @@ public class ForgeBlockEntities {
     public static final RegistryObject<BlockEntityType<ForgeInfusementChamberBlockEntity>> INFUSEMENT_CHAMBER =
             BLOCK_ENTITIES.register("infusement_chamber", () ->
                     BlockEntityType.Builder.of(ForgeInfusementChamberBlockEntity::new,
-                            ForgeBlocks.INFUSMENT_CHAMBER.get()).build(null));
+                            ForgeBlocks.INFUSEMENT_CHAMBER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

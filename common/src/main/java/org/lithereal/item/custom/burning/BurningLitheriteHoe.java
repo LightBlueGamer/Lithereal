@@ -1,6 +1,7 @@
 package org.lithereal.item.custom.burning;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,9 +12,12 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BurningLitheriteHoe extends HoeItem {
+import java.util.List;
+
+public class BurningLitheriteHoe extends HoeItem implements BurningItem {
     public BurningLitheriteHoe(Tier tier, int i, float f, Properties properties) {
         super(tier, i, f, properties);
     }
@@ -26,14 +30,26 @@ public class BurningLitheriteHoe extends HoeItem {
     }
 
     @Override
-    public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos blockPos, LivingEntity livingEntity) {
-        SmeltingRecipe furnaceRecipe = level.getRecipeManager()
-                .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(blockState.getBlock().asItem().getDefaultInstance()), level).orElse(null);
+    public void getDrops(Level level, BlockState blockState, BlockPos blockPos, ItemStack itemStack, LivingEntity livingEntity, BlockEntity blockEntity) {
+        if(level instanceof ServerLevel) {
+            List<ItemStack> origDrops = Block.getDrops(blockState, (ServerLevel) level, blockPos, blockEntity, livingEntity, itemStack);
+            SmeltingRecipe[] furnaceRecipes = new SmeltingRecipe[origDrops.size()];
 
-        if (furnaceRecipe != null) {
+            for (int i = 0; i < origDrops.size(); i++) {
+                furnaceRecipes[i] = level.getRecipeManager()
+                        .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(origDrops.get(i)), level).orElse(null);
+            }
+
+
             NonNullList<ItemStack> drops = NonNullList.create();
-            ItemStack dropStack = new ItemStack(furnaceRecipe.getResultItem(level.registryAccess()).getItem(), furnaceRecipe.getResultItem(level.registryAccess()).getCount());
-            drops.add(dropStack);
+            for (int i = 0; i < furnaceRecipes.length; i++) {
+                if(furnaceRecipes[i] == null) {
+                    drops.add(i, origDrops.get(i));
+                    continue;
+                }
+                ItemStack dropStack = new ItemStack(furnaceRecipes[i].getResultItem(level.registryAccess()).getItem(), origDrops.get(i).getCount());
+                drops.add(i, dropStack);
+            }
 
             for (ItemStack drop : drops) {
                 Block.popResource(level, blockPos, drop);
@@ -41,6 +57,5 @@ public class BurningLitheriteHoe extends HoeItem {
             itemStack.hurtAndBreak(0, livingEntity, (p) -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             level.destroyBlock(blockPos, false);
         }
-        return super.mineBlock(itemStack, level, blockState, blockPos, livingEntity);
     }
 }

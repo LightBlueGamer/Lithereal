@@ -37,7 +37,7 @@ public class InfusedLitheriteArmor extends ArmorItem {
 
     @Override
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
-        if (entity instanceof Player player) {
+        if (entity instanceof Player player && player.getInventory().armor.contains(itemStack)) {
             if (player.hurtTime > 0 && !player.level().isClientSide) {
                 DamageSource source = player.getLastDamageSource();
                 if(source == null) return;
@@ -60,13 +60,14 @@ public class InfusedLitheriteArmor extends ArmorItem {
             if(!level.isClientSide()) {
                 if(hasFullSuitOfArmorOn(player)) {
                     if(hasCorrectArmorOn(ModArmorMaterials.INFUSED_LITHERITE, player)) {
+                        boolean bl2 = PotionUtils.getPotion(itemStack).getEffects().size() > 1;
                         PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                             boolean bl = mobEffectInstance.getEffect().isBeneficial();
-                            if (bl) {
+                            if (bl || bl2) {
                                 if(mobEffectInstance.getEffect() != MobEffects.HEAL || healTicker >= 200) {
-                                    MobEffectInstance mobEff = new MobEffectInstance(mobEffectInstance.getEffect(), 100, mobEffectInstance.getAmplifier());
+                                    MobEffectInstance mobEff = new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().isInstantenous() ? 1 : 100, mobEffectInstance.getAmplifier());
                                     player.addEffect(mobEff);
-                                    healTicker = 0;
+                                    if(mobEffectInstance.getEffect() == MobEffects.HEAL) healTicker = 0;
                                 }
                             } else {
                                 if (player.hasEffect(mobEffectInstance.getEffect())) player.removeEffect(mobEffectInstance.getEffect());
@@ -75,15 +76,15 @@ public class InfusedLitheriteArmor extends ArmorItem {
                     }
                 }
             }
-        }
-        if (itemStack.isDamaged() && regenTicker >= 10) {
-            PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
-                MobEffect effect = mobEffectInstance.getEffect();
-                if(effect == MobEffects.REGENERATION) {
-                    itemStack.setDamageValue(itemStack.getDamageValue() - mobEffectInstance.getAmplifier());
-                    regenTicker = 0;
-                }
-            });
+            if (itemStack.isDamaged() && regenTicker >= 10) {
+                PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
+                    MobEffect effect = mobEffectInstance.getEffect();
+                    if(effect == MobEffects.REGENERATION) {
+                        itemStack.hurtAndBreak(2 * mobEffectInstance.getAmplifier(), player, player1 -> player1.broadcastBreakEvent(getEquipmentSlot()));
+                        regenTicker = 0;
+                    }
+                });
+            }
         }
         regenTicker++;
         healTicker++;

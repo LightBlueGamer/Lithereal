@@ -15,7 +15,6 @@ import org.lithereal.forge.block.custom.ForgeFreezingStationBlock;
 import org.lithereal.forge.block.custom.ForgeInfusementChamberBlock;
 import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.item.custom.infused.ForgeInfusedLitheriteBlockItem;
-import org.lithereal.item.ModItems;
 
 import java.util.function.Supplier;
 
@@ -35,7 +34,7 @@ public class ForgeBlocks {
             () -> new ForgeFreezingStationBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 
-    public static final RegistryObject<Block> INFUSMENT_CHAMBER = registerBlock("infusement_chamber",
+    public static final RegistryObject<Block> INFUSEMENT_CHAMBER = registerBlock("infusement_chamber",
             () -> new ForgeInfusementChamberBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 

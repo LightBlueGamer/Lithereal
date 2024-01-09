@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,13 +22,16 @@ import org.lithereal.screen.InfusementChamberMenu;
 
 import java.util.List;
 
-public class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider {
+public abstract class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 6000;
     protected int powerLevel = 0;
     protected float power = 1.0f;
     protected float successRate = 0.2f;
+
+    public abstract Potion getStoredPotion();
+    public abstract ItemStack getStoredItem();
 
     public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
         super(LitherealExpectPlatform.getInfusementChamberBlockEntity(), pos, state);
@@ -105,7 +109,6 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
                     this.powerLevel = 3;
                 }
             } else this.powerLevel = 0;
-
         }
 
     }

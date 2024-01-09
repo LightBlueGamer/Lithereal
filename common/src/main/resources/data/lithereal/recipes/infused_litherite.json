@@ -2,7 +2,7 @@
   "type": "lithereal:infusing",
   "ingredients": [
     {
-      "item": "lithereal:litherite_crystal"
+      "item": "lithereal:molten_litherite_bucket"
     },
     {
       "item": "minecraft:potion"

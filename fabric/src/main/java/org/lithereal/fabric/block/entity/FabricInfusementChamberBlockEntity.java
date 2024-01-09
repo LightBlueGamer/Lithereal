@@ -28,26 +28,25 @@ import java.util.Optional;
 import java.util.Random;
 
 public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 2;
-    private static final int INPUT_SLOT_2 = 1;
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
+
+    @Override
+    public Potion getStoredPotion() {
+        return PotionUtils.getPotion(inventory.get(1));
+    }
+
+    @Override
+    public ItemStack getStoredItem() {
+        return inventory.get(0);
+    }
 
     public FabricInfusementChamberBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 
-    public ItemStack getRenderStack() {
-        if(this.getItem(OUTPUT_SLOT).isEmpty()) {
-            return this.getItem(INPUT_SLOT);
-        } else {
-            return this.getItem(OUTPUT_SLOT);
-        }
-    }
-
     @Override
     public void setChanged() {
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);
         super.setChanged();
     }
 
@@ -100,7 +99,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
 
         ItemStack resultItem = infusingRecipe.get().getResultItem(level.registryAccess());
         PotionUtils.setPotion(resultItem, potion);
-        ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.getItem(2).getCount() + resultItem.getCount());
+        ItemStack outputItem = new ItemStack(resultItem.getItem(), resultItem.getCount());
 
         if(hasRecipe(pEntity)) {
             craftItem(pEntity, resultItem, outputItem);
@@ -118,7 +117,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
         if(entity.getItem(1).is(Items.POTION)) entity.setItem(1, new ItemStack(Items.GLASS_BOTTLE));
         else entity.removeItem(1, 1);
         if (random.nextFloat() < entity.successRate) {
-            entity.setItem(2, outputItem);
+            entity.setItem(0, outputItem);
         } else {
             boolean mobGriefingEnabled = entity.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
             BlockPos blockPos = entity.getBlockPos();
