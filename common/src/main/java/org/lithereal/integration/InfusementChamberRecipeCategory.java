@@ -16,7 +16,6 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.item.ModItems;
 import org.lithereal.recipe.InfusementChamberRecipe;
 
 import java.lang.reflect.Field;

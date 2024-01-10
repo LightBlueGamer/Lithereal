@@ -4,7 +4,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import org.lithereal.item.custom.Hammer;
 
 public class FrozenLitheriteHoe extends HoeItem {
     public FrozenLitheriteHoe(Tier tier, int damage, float attackSpeed, Properties properties) {

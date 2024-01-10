@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
@@ -27,7 +26,6 @@ import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.fabric.block.custom.FabricFireCrucibleBlock;
 import org.lithereal.fabric.item.FabricItems;
 import org.lithereal.fabric.screen.FabricFireCrucibleMenu;
-import org.lithereal.fabric.screen.FabricFreezingStationMenu;
 import org.lithereal.item.ModItems;
 import org.lithereal.recipe.FireCrucibleRecipe;
 
@@ -97,7 +95,7 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
                 pEntity.heatLevel = 2;
                 level.setBlockAndUpdate(blockPos, blockState.setValue(FabricFireCrucibleBlock.BLUE_LIT, true));
             } else if (hasSolidFuel) {
-                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(((Container) pEntity).getItem(1).getItem(), 0);;
+                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(((Container) pEntity).getItem(1).getItem(), 0);
                 pEntity.maxFuel = fuel;
                 pEntity.fuelLevel = fuel;
                 pEntity.removeItem(1, 1);

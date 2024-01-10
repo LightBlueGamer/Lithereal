@@ -12,11 +12,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.custom.FreezingStationBlock;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
-import org.lithereal.fabric.block.entity.FabricFreezingStationBlockEntity;
 import org.lithereal.fabric.block.entity.FabricFreezingStationBlockEntity;
 
 public class FabricFreezingStationBlock extends FreezingStationBlock implements EntityBlock {

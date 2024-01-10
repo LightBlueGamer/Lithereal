@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.MagmaBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.Lithereal;
 import org.lithereal.block.custom.*;
-import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 
@@ -86,8 +85,7 @@ public class ModBlocks {
     }
 
     private static <T extends Block> RegistrySupplier<T> registerBlockOnly(String name, Supplier<T> block) {
-        RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
-        return toReturn;
+        return BLOCKS.register(name, block);
     }
 
     private static <T extends Block> RegistrySupplier<T> registerColoredBlock(String name, Supplier<T> block) {

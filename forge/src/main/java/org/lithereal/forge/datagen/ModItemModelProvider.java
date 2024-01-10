@@ -6,12 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.ModBlocks;
-import org.lithereal.forge.item.ForgeItems;
-import org.lithereal.item.ModItems;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {

@@ -2,7 +2,6 @@ package org.lithereal.item.custom.frozen;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 import org.lithereal.item.custom.Hammer;
 

@@ -8,8 +8,6 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.Lithereal;
-import org.lithereal.block.ModBlocks;
-import org.lithereal.forge.block.ForgeBlocks;
 
 import java.util.concurrent.CompletableFuture;
 

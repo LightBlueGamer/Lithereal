@@ -12,11 +12,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
-import org.lithereal.fabric.block.entity.FabricFreezingStationBlockEntity;
 import org.lithereal.fabric.block.entity.FabricInfusementChamberBlockEntity;
 
 public class FabricInfusementChamberBlock extends InfusementChamberBlock implements EntityBlock {

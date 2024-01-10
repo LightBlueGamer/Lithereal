@@ -1,6 +1,5 @@
 package org.lithereal.item.custom.infused;
 
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +11,6 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.item.ModItems;
 
 import java.util.List;
 

@@ -2,13 +2,12 @@ package org.lithereal.fabric.item;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import org.intellij.lang.annotations.Identifier;
 import org.lithereal.Lithereal;
 import org.lithereal.item.custom.LitheriteItem;
 
+@SuppressWarnings("ALL")
 public class FabricItems {
 
     public static final Item LITHERITE_CRYSTAL =

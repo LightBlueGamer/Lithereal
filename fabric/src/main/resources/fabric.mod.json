@@ -11,7 +11,6 @@
     "sources": "https://github.com/LightBlueGamer/Lithereal/tree/Forge-1.20"
   },
   "license": "MIT",
-  "icon": "assets/lithereal/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

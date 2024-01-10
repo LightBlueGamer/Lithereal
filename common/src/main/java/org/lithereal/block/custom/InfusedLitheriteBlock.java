@@ -16,7 +16,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.block.entity.ModBlockEntities;
 
 import java.util.List;
 

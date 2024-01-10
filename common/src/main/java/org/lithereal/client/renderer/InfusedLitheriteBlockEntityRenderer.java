@@ -7,13 +7,10 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import org.lithereal.Lithereal;
-import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.block.entity.ModBlockEntities;
 
 public class InfusedLitheriteBlockEntityRenderer implements BlockEntityRenderer<InfusedLitheriteBlockEntity> {
     public static final ResourceLocation texture = new ResourceLocation(Lithereal.MOD_ID, "textures/block/infused_litherite_block_entity.png");

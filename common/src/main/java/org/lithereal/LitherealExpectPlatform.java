@@ -1,10 +1,8 @@
 package org.lithereal;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import dev.architectury.platform.Platform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -17,7 +15,6 @@ import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
-import org.lithereal.item.custom.LitheriteItem;
 import org.lithereal.screen.FireCrucibleMenu;
 import org.lithereal.screen.FreezingStationMenu;
 import org.lithereal.screen.InfusementChamberMenu;

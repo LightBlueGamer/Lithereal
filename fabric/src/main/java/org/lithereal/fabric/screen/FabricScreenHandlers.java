@@ -6,10 +6,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import org.lithereal.Lithereal;
-import org.lithereal.screen.FireCrucibleMenu;
-import org.lithereal.screen.FreezingStationMenu;
-import org.lithereal.screen.InfusementChamberMenu;
-import org.lithereal.screen.InfusementChamberScreen;
 
 public class FabricScreenHandlers {
 

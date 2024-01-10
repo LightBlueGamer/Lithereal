@@ -1,6 +1,5 @@
 package org.lithereal.item.custom.infused;
 
-import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -10,7 +9,6 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 
 public class InfusedLitheriteBlockItem extends BlockItem implements InfusedItem {
     public InfusedLitheriteBlockItem(Block p_40565_, Properties p_40566_) {

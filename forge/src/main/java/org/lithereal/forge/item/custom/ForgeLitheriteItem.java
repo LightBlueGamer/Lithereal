@@ -1,7 +1,6 @@
 package org.lithereal.forge.item.custom;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -10,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.lithereal.block.ModBlocks;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.custom.LitheriteItem;
 

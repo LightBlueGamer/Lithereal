@@ -12,8 +12,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.ModBlocks;
-import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.item.ModItems;
 
 import javax.annotation.Nullable;

@@ -3,12 +3,8 @@ package org.lithereal.fabric.screen;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.lithereal.fabric.block.FabricBlocks;
-import org.lithereal.fabric.block.entity.FabricInfusementChamberBlockEntity;
 import org.lithereal.screen.InfusementChamberMenu;
 
 public class FabricInfusementChamberMenu extends InfusementChamberMenu {
