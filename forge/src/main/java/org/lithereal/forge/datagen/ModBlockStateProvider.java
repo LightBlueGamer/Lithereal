@@ -14,7 +14,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.CHARGED_LITHERITE_BLOCK.get());
+
     }
 
     private void blockWithItem(Block block) {

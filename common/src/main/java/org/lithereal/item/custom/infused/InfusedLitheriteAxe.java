@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InfusedLitheriteAxe extends AxeItem {
+public class InfusedLitheriteAxe extends AxeItem implements InfusedItem {
     public int regenTicker = 0;
     public Map<MobEffect, Integer> untilReady = new HashMap<>();
     public InfusedLitheriteAxe(Tier tier, int damage, float attackSpeed, Properties properties) {

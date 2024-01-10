@@ -1,21 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "building",
   "key": {
-    "L": {
+    "#": {
       "item": "lithereal:infused_litherite_ingot"
-    },
-    "S": {
-      "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "LL",
-    "LS",
-    " S"
+    "###",
+    "###",
+    "###"
   ],
   "result": {
-    "item": "lithereal:infused_litherite_axe"
+    "item": "lithereal:infused_litherite_block"
   },
   "show_notification": true
 }

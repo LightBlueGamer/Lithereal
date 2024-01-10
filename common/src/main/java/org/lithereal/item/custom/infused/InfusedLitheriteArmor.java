@@ -27,7 +27,7 @@ import java.util.List;
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
-public class InfusedLitheriteArmor extends ArmorItem {
+public class InfusedLitheriteArmor extends ArmorItem implements InfusedItem {
     public int regenTicker = 0;
     public int healTicker = 0;
 

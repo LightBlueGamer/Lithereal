@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InfusedLitheriteShovel extends ShovelItem {
+public class InfusedLitheriteShovel extends ShovelItem implements InfusedItem {
     public int regenTicker = 0;
     public Map<MobEffect, Integer> untilReady = new HashMap<>();
     public InfusedLitheriteShovel(Tier tier, float damage, float attackSpeed, Properties properties) {

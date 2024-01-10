@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InfusedLitheriteHammer extends Hammer {
+public class InfusedLitheriteHammer extends Hammer implements InfusedItem {
     public int regenTicker = 0;
     public Map<MobEffect, Integer> untilReady = new HashMap<>();
     public InfusedLitheriteHammer(Tier tier, int damage, float attackSpeed, Properties properties) {

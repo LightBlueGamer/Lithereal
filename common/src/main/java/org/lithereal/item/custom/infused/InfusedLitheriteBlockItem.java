@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 
-public class InfusedLitheriteBlockItem extends BlockItem {
+public class InfusedLitheriteBlockItem extends BlockItem implements InfusedItem {
     public InfusedLitheriteBlockItem(Block p_40565_, Properties p_40566_) {
         super(p_40565_, p_40566_);
     }

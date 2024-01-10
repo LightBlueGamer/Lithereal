@@ -1,14 +1,18 @@
 {
-  "type": "lithereal:infusing",
-  "ingredients": [
-    {
-      "item": "lithereal:litherite_chestplate"
-    },
-    {
-      "item": "minecraft:potion"
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:infused_litherite_ingot"
     }
+  },
+  "pattern": [
+    "L L",
+    "LLL",
+    "LLL"
   ],
-  "output": {
+  "result": {
     "item": "lithereal:infused_litherite_chestplate"
-  }
+  },
+  "show_notification": true
 }

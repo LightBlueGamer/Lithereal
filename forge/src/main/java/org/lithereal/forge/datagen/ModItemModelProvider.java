@@ -20,8 +20,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ModItems.MOLTEN_LITHERITE_BUCKET.get());
-        simpleItem(ModItems.CHARGED_LITHERITE_CRYSTAL.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {

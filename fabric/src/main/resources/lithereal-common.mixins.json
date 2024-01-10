@@ -6,7 +6,10 @@
   "client": [
   ],
   "mixins": [
-    "ResourceLocationMixin"
+    "ResourceLocationMixin",
+    "ShapedRecipeMixin",
+    "CraftingInventoryMixin",
+    "ShapelessRecipeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

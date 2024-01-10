@@ -16,7 +16,7 @@ import org.lithereal.item.ModItems;
 
 import java.util.List;
 
-public class InfusedLitheriteItem extends Item {
+public class InfusedLitheriteItem extends Item implements InfusedItem {
     public InfusedLitheriteItem(Properties properties) {
         super(properties);
     }

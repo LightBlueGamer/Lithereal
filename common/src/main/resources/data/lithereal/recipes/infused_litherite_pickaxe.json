@@ -1,14 +1,21 @@
 {
-  "type": "lithereal:infusing",
-  "ingredients": [
-    {
-      "item": "lithereal:litherite_pickaxe"
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:infused_litherite_ingot"
     },
-    {
-      "item": "minecraft:potion"
+    "S": {
+      "item": "minecraft:stick"
     }
+  },
+  "pattern": [
+    "LLL",
+    " S ",
+    " S "
   ],
-  "output": {
+  "result": {
     "item": "lithereal:infused_litherite_pickaxe"
-  }
+  },
+  "show_notification": true
 }

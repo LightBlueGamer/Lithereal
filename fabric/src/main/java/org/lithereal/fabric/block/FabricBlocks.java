@@ -9,6 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.lithereal.Lithereal;
+import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.fabric.block.custom.FabricFireCrucibleBlock;
 import org.lithereal.fabric.block.custom.FabricFreezingStationBlock;
@@ -18,7 +19,7 @@ import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 public class FabricBlocks {
 
     public static final Block INFUSED_LITHERITE_BLOCK = registerColoredBlock("infused_litherite_block",
-            new InfusedLitheriteBlock(FabricBlockSettings.copyOf(Blocks.STONE)));
+            new InfusedLitheriteBlock(FabricBlockSettings.copyOf(ModBlocks.LITHERITE_BLOCK.get())));
 
     public static final Block FIRE_CRUCIBLE_BLOCK = registerBlock("fire_crucible",
             new FabricFireCrucibleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));

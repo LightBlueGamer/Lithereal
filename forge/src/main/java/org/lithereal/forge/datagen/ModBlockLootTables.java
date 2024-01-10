@@ -38,11 +38,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         NonNullList<Block> blocks = NonNullList.create();
-        for (Iterator<RegistrySupplier<Block>> it = ModBlocks.BLOCKS.iterator(); it.hasNext(); ) {
-            RegistrySupplier<Block> block = it.next();
-            blocks.add(block.get());
-        }
-        ForgeBlocks.BLOCKS.getEntries().forEach((RegistryObject<Block> block) -> blocks.add(block.get()));
         return blocks;
+//        for (Iterator<RegistrySupplier<Block>> it = ModBlocks.BLOCKS.iterator(); it.hasNext(); ) {
+//            RegistrySupplier<Block> block = it.next();
+//            blocks.add(block.get());
+//        }
+//        ForgeBlocks.BLOCKS.getEntries().forEach((RegistryObject<Block> block) -> blocks.add(block.get()));
+        //return blocks;
     }
 }

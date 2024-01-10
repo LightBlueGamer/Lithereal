@@ -1,14 +1,17 @@
 {
-  "type": "lithereal:infusing",
-  "ingredients": [
-    {
-      "item": "lithereal:litherite_boots"
-    },
-    {
-      "item": "minecraft:potion"
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "lithereal:infused_litherite_ingot"
     }
+  },
+  "pattern": [
+    "L L",
+    "L L"
   ],
-  "output": {
+  "result": {
     "item": "lithereal:infused_litherite_boots"
-  }
+  },
+  "show_notification": true
 }

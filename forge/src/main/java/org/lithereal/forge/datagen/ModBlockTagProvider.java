@@ -20,8 +20,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider p_256380_) {
-        diamondPickTag(ForgeBlocks.INFUSED_LITHERITE_BLOCK.get());
-        diamondPickTag(ForgeBlocks.INFUSEMENT_CHAMBER.get());
     }
 
     private void diamondPickTag(Block block) {

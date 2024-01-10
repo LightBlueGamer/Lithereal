@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InfusedLitheriteSword extends SwordItem {
+public class InfusedLitheriteSword extends SwordItem implements InfusedItem {
     public int regenTicker = 0;
     public Map<MobEffect, Integer> untilReady = new HashMap<>();
     public InfusedLitheriteSword(Tier tier, int damage, float attackSpeed, Properties properties) {
