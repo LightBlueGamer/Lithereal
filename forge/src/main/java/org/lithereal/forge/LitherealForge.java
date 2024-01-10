@@ -10,6 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.lithereal.Lithereal;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.lithereal.LitherealClient;
 import org.lithereal.forge.block.ForgeBlocks;
 import org.lithereal.forge.block.entity.ForgeBlockEntities;
 import org.lithereal.forge.item.ForgeItems;
@@ -42,6 +43,7 @@ public class LitherealForge {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            LitherealClient.init();
             MenuScreens.register(ForgeMenuTypes.FIRE_CRUCIBLE_MENU.get(), FireCrucibleScreen::new);
             MenuScreens.register(ForgeMenuTypes.FREEZING_STATION_MENU.get(), FreezingStationScreen::new);
             MenuScreens.register(ForgeMenuTypes.INFUSEMENT_CHAMBER_MENU.get(), InfusementChamberScreen::new);

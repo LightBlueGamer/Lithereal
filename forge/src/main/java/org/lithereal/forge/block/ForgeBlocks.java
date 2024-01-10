@@ -24,7 +24,8 @@ public class ForgeBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, Lithereal.MOD_ID);
 
     public static final RegistryObject<Block> INFUSED_LITHERITE_BLOCK = registerColouredBlock("infused_litherite_block",
-            () -> new InfusedLitheriteBlock(BlockBehaviour.Properties.copy(ModBlocks.LITHERITE_BLOCK.get())));
+            () -> new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> FIRE_CRUCIBLE = registerBlock("fire_crucible",
             () -> new ForgeFireCrucibleBlock(BlockBehaviour.Properties.of()

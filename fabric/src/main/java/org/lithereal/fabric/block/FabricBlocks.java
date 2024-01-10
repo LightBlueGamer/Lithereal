@@ -19,7 +19,8 @@ import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 public class FabricBlocks {
 
     public static final Block INFUSED_LITHERITE_BLOCK = registerColoredBlock("infused_litherite_block",
-            new InfusedLitheriteBlock(FabricBlockSettings.copyOf(ModBlocks.LITHERITE_BLOCK.get())));
+            new InfusedLitheriteBlock(FabricBlockSettings.of()
+                    .strength(6f).requiresCorrectToolForDrops()));
 
     public static final Block FIRE_CRUCIBLE_BLOCK = registerBlock("fire_crucible",
             new FabricFireCrucibleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));

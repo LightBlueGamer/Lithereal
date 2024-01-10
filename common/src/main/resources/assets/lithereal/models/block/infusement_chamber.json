@@ -1,6 +1,6 @@
 {
   "textures": {
     "all": "lithereal:block/infusement_chamber",
-    "particle": "lithereal:block/infusement_chamber"
+    "particle": "lithereal:block/infusement_chamber_rest"
   }
 }

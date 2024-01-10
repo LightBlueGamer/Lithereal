@@ -119,6 +119,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
 
         if(hasRecipe(pEntity)) {
             craftItem(pEntity, resultItem, outputItem);
+            setChanged(level, pEntity.getBlockPos(), pEntity.getBlockState());
         }
     }
 
