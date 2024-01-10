@@ -99,6 +99,10 @@ sourceSets {
 loom {
     forge {
         runs {
+            client {
+                property 'mixin.env.remapRefMap', 'true'
+                property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            }
             data {
                 data()
                 programArgs "--all", "--mod", "lithereal"
