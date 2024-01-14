@@ -1,8 +1,6 @@
 package org.lithereal.item.custom.infused;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,7 +12,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
@@ -101,12 +98,5 @@ public class InfusedLitheriteArmor extends ArmorItem implements InfusedItem {
 
     public String getDescriptionId(ItemStack p_43364_) {
         return PotionUtils.getPotion(p_43364_).getName(this.getDescriptionId() + ".effect.");
-    }
-
-    public @Nullable String getCreatorModId(ItemStack itemStack) {
-        Potion potion = PotionUtils.getPotion(itemStack);
-        ResourceLocation resourceLocation = BuiltInRegistries.POTION.getKey(potion);
-
-        return resourceLocation.getNamespace();
     }
 }

@@ -1,15 +1,15 @@
 package org.lithereal.item.custom.infused;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
@@ -36,8 +36,7 @@ public class InfusedLitheritePickaxe extends PickaxeItem implements InfusedItem 
             boolean bl2 = attacked.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
             if(!bl || bl2) {
                 if(!(attacked.isInvertedHealAndHarm() && effect == MobEffects.HARM)) {
-                    if(attacker.hasEffect(effect))
-                        attacker.removeEffect(effect);
+                    if(attacker.hasEffect(effect) && PotionUtils.getPotion(itemStack).getEffects().size() == 1) attacker.removeEffect(effect);
                     attacked.addEffect(CommonUtils.clone(mobEffectInstance));
                 }
             } else {
@@ -56,7 +55,9 @@ public class InfusedLitheritePickaxe extends PickaxeItem implements InfusedItem 
         if(entity instanceof LivingEntity livingEntity && isSelected) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
-                if(!untilReady.containsKey(effect) && effect.isBeneficial() && !effect.isInstantenous()) {
+                boolean bl = !untilReady.containsKey(effect) && effect.isBeneficial() && !effect.isInstantenous();
+                boolean bl2 = !untilReady.containsKey(effect) && PotionUtils.getPotion(itemStack).getEffects().size() > 1 && !effect.isInstantenous();
+                if(bl || bl2) {
                     livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                     untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 }
@@ -93,11 +94,5 @@ public class InfusedLitheritePickaxe extends PickaxeItem implements InfusedItem 
 
     public String getDescriptionId(ItemStack p_43364_) {
         return PotionUtils.getPotion(p_43364_).getName(this.getDescriptionId() + ".effect.");
-    }
-    public @Nullable String getCreatorModId(ItemStack itemStack) {
-        Potion potion = PotionUtils.getPotion(itemStack);
-        ResourceLocation resourceLocation = BuiltInRegistries.POTION.getKey(potion);
-
-        return resourceLocation.getNamespace();
     }
 }
