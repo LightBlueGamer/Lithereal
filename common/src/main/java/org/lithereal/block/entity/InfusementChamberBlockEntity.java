@@ -24,6 +24,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     protected int powerLevel = 0;
     protected float power = 1.0f;
     protected float successRate = 0.2f;
+    protected int usedPotions = 0;
 
     public abstract Potion getStoredPotion();
     public abstract ItemStack getStoredItem();
@@ -37,6 +38,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
                     case 0 -> InfusementChamberBlockEntity.this.progress;
                     case 1 -> InfusementChamberBlockEntity.this.maxProgress;
                     case 2 -> InfusementChamberBlockEntity.this.powerLevel;
+                    case 3 -> InfusementChamberBlockEntity.this.usedPotions;
                     default -> 0;
                 };
             }
@@ -47,12 +49,13 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
                     case 0 -> InfusementChamberBlockEntity.this.progress = value;
                     case 1 -> InfusementChamberBlockEntity.this.maxProgress = value;
                     case 2 -> InfusementChamberBlockEntity.this.powerLevel = value;
+                    case 3 -> InfusementChamberBlockEntity.this.usedPotions = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 3;
+                return 4;
             }
         };
     }

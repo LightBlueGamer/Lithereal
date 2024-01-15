@@ -73,6 +73,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
         nbt.putInt("infusement_chamber.progress", progress);
         nbt.putFloat("infusement_chamber.power", power);
         nbt.putFloat("infusement_chamber.success_rate", successRate);
+        nbt.putInt("infusement_chamber.used_potions", usedPotions);
     }
 
     @Override
@@ -82,6 +83,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
         progress = nbt.getInt("infusement_chamber.progress");
         power = nbt.getFloat("infusement_chamber.power");
         successRate = nbt.getFloat("infusement_chamber.success_rate");
+        usedPotions = nbt.getInt("infusement_chamber.used_potions");
     }
 
     private static void craftItem(FabricInfusementChamberBlockEntity pEntity) {
@@ -115,8 +117,16 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
         }
 
         entity.removeItem(0, 1);
-        if(entity.getItem(1).is(Items.POTION)) entity.setItem(1, new ItemStack(Items.GLASS_BOTTLE));
-        else entity.removeItem(1, 1);
+        if(entity.getItem(1).getCount() - 1 > 0) {
+            if (entity.usedPotions <= 64) {
+                entity.usedPotions++;
+            }
+            entity.removeItem(1, 1);
+        } else {
+            if(entity.getItem(1).is(Items.POTION)) entity.setItem(1, new ItemStack(Items.GLASS_BOTTLE, entity.usedPotions+1));
+            else entity.removeItem(1, entity.usedPotions);
+            entity.usedPotions = 0;
+        }
         if (random.nextFloat() < entity.successRate) {
             entity.setItem(0, outputItem);
         } else {
