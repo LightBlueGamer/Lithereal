@@ -124,7 +124,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
             entity.removeItem(1, 1);
         } else {
             if(entity.getItem(1).is(Items.POTION)) entity.setItem(1, new ItemStack(Items.GLASS_BOTTLE, entity.usedPotions+1));
-            else entity.removeItem(1, entity.usedPotions);
+            else entity.removeItem(1, 1);
             entity.usedPotions = 0;
         }
         if (random.nextFloat() < entity.successRate) {

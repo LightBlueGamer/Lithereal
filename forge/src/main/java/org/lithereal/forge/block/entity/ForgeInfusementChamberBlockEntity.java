@@ -138,7 +138,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
             entity.itemHandler.extractItem(1, 1, false);
         } else {
             if(entity.itemHandler.getStackInSlot(1).is(Items.POTION)) entity.itemHandler.setStackInSlot(1, new ItemStack(Items.GLASS_BOTTLE, entity.usedPotions+1));
-            else entity.itemHandler.extractItem(1, entity.usedPotions, false);
+            else entity.itemHandler.extractItem(1, 1, false);
             entity.usedPotions = 0;
         }
         if (random.nextFloat() < entity.successRate) {
