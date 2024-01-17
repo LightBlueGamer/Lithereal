@@ -55,9 +55,10 @@ public class InfusedLitheriteAxe extends AxeItem implements InfusedItem {
         if(entity instanceof LivingEntity livingEntity && isSelected) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
                 MobEffect effect = mobEffectInstance.getEffect();
-                boolean bl = !untilReady.containsKey(effect) && effect.isBeneficial() && !effect.isInstantenous();
-                boolean bl2 = !untilReady.containsKey(effect) && PotionUtils.getPotion(itemStack).getEffects().size() > 1 && !effect.isInstantenous();
-                if(bl || bl2) {
+                boolean bl = !untilReady.containsKey(effect) && (effect.isBeneficial()
+                        || PotionUtils.getPotion(itemStack).getEffects().size() > 1)
+                        && !effect.isInstantenous();
+                if(bl) {
                     livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                     untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 }

@@ -5,17 +5,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
@@ -27,33 +23,12 @@ import java.util.List;
 import java.util.Set;
 
 // Credits to ErrorMikey for hammer code https://github.com/ErrorMikey/JustHammers
-public class Hammer extends PickaxeItem {
+public class Hammer extends DiggerItem {
 
     protected final int depth = 1;
     protected final int radius = 3;
-    private TagKey<Block> blocks;
     public Hammer(Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
-
-        this.blocks = BlockTags.MINEABLE_WITH_PICKAXE;
-    }
-
-    private int destroySurroundingBlocks(Level level, BlockPos pos) {
-        int blocksBroken = 0;
-        for (BlockPos p : new BlockPos[]{pos.north(), pos.south(), pos.east(), pos.west(),
-                pos.offset(1, 0, 1), pos.offset(1, 0, -1), pos.offset(-1, 0, 1), pos.offset(-1, 0, -1)}) {
-            blocksBroken += destroyIfNotBedrock(level, p);
-        }
-
-        return blocksBroken;
-    }
-
-    private int destroyIfNotBedrock(Level level, BlockPos pos) {
-        if (level.getBlockState(pos).getBlock() != Blocks.BEDROCK && level.getBlockState(pos).getBlock() != Blocks.AIR) {
-            level.destroyBlock(pos, true);
-            return 1;
-        }
-        return 0;
+        super(damage, attackSpeed, tier, BlockTags.MINEABLE_WITH_PICKAXE, properties);
     }
 
     protected boolean actualIsCorrectToolForDrops(BlockState state) {
@@ -63,7 +38,7 @@ public class Hammer extends PickaxeItem {
         } else if (i < 2 && state.is(BlockTags.NEEDS_IRON_TOOL)) {
             return false;
         } else {
-            return (i >= 1 || !state.is(BlockTags.NEEDS_STONE_TOOL)) && state.is(this.blocks);
+            return (i >= 1 || !state.is(BlockTags.NEEDS_STONE_TOOL)) && state.is(BlockTags.MINEABLE_WITH_PICKAXE);
         }
     }
 
@@ -141,10 +116,5 @@ public class Hammer extends PickaxeItem {
         }
 
         return level.getBlockEntity(pos) == null;
-    }
-
-
-    protected boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        return true;
     }
 }
