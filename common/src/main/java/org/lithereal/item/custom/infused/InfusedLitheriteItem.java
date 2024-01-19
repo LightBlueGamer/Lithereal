@@ -3,7 +3,9 @@ package org.lithereal.item.custom.infused;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
@@ -23,6 +25,9 @@ public class InfusedLitheriteItem extends Item implements InfusedItem {
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
         PotionUtils.addPotionTooltip(itemStack, components, 1F);
+
+        ItemStack potion = PotionUtils.setPotion(new ItemStack(Items.POTION), PotionUtils.getPotion(itemStack));
+        itemStack.setHoverName(potion.getHoverName());
     }
 
     public String getDescriptionId(ItemStack p_43364_) {
