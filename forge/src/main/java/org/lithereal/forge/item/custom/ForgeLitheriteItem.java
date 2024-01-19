@@ -5,6 +5,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -21,28 +22,34 @@ public class ForgeLitheriteItem extends LitheriteItem {
 
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
-        Level level = entity.level();
-        if (!level.isClientSide()) {
-            BlockState blockState = level.getBlockState(entity.blockPosition());
+        Item item = stack.getItem();
 
-            if (blockState.is(Blocks.WITHER_ROSE)) {
-                ItemStack itemStack = new ItemStack(ModItems.WITHERING_LITHERITE_CRYSTAL.get(), stack.getCount());
-                ItemEntity item = new ItemEntity(level, entity.getX() + 0.5, entity.getY() + 1.0, entity.getZ() + 0.5, itemStack);
-                level.addFreshEntity(item);
-                entity.kill();
+        if (item instanceof LitheriteItem) {
+            Level level = entity.level();
+            if (!level.isClientSide()) {
+                BlockState blockState = level.getBlockState(entity.blockPosition());
 
-                Random random = new Random();
-                int witherSkeletonCount = 0;
+                if (blockState.is(Blocks.WITHER_ROSE)) {
+                    if (!stack.isEmpty()) {
+                        ItemStack newItemStack = new ItemStack(ModItems.WITHERING_LITHERITE_CRYSTAL.get(), 1);
+                        ItemEntity newItemEntity = new ItemEntity(level, entity.getX() + 0.5, entity.getY() + 1.0, entity.getZ() + 0.5, newItemStack);
+                        level.addFreshEntity(newItemEntity);
 
-                for (int i = 0; i < 3; i++) {
-                    if (random.nextInt(100) < 20) {
-                        spawnWitherSkeleton(level, entity.getX(), entity.getY(), entity.getZ());
-                        witherSkeletonCount++;
+                        stack.shrink(1);
+
+                        Random random = new Random();
+                        int witherCount = 0;
+                        for (int i = 0; i < 3; i++) {
+                            if (random.nextInt(100) < 20) {
+                                spawnWitherSkeleton(level, entity.getX(), entity.getY(), entity.getZ());
+                                witherCount++;
+                            }
+                        }
+
+                        if (stack.isEmpty()) entity.discard();
+
+                        if(witherCount > 0) level.removeBlock(entity.blockPosition(), false);
                     }
-                }
-
-                if(witherSkeletonCount > 0) {
-                    level.removeBlock(entity.blockPosition(), false);
                 }
             }
         }

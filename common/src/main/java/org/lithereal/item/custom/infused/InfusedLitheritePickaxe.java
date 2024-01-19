@@ -1,15 +1,13 @@
 package org.lithereal.item.custom.infused;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
@@ -89,8 +87,14 @@ public class InfusedLitheritePickaxe extends PickaxeItem implements InfusedItem 
         return PotionUtils.setPotion(super.getDefaultInstance(), Potions.POISON);
     }
 
-    public void appendHoverText(ItemStack p_43359_, @Nullable Level p_43360_, List<Component> p_43361_, TooltipFlag p_43362_) {
-        PotionUtils.addPotionTooltip(p_43359_, p_43361_, 1F);
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
+        PotionUtils.addPotionTooltip(itemStack, components, 1F);
+
+        ItemStack potion = PotionUtils.setPotion(new ItemStack(Items.POTION), PotionUtils.getPotion(itemStack));
+        Component name = potion.getHoverName();
+        String hoverStr = name.getString().replaceAll("^(?i)(potion of the |potion of |potion )", "");
+        Component newName = Component.literal(hoverStr+ " Litherite Pickaxe").withStyle(Style.EMPTY.withItalic(false));
+        itemStack.setHoverName(newName);
     }
 
     public String getDescriptionId(ItemStack p_43364_) {
