@@ -31,6 +31,11 @@ public class FabricBlockEntities {
                     FabricBlockEntityTypeBuilder.create(FabricInfusementChamberBlockEntity::new,
                             FabricBlocks.INFUSEMENT_CHAMBER_BLOCK).build());
 
+    public static final BlockEntityType<FabricLitherCollectorBlockEntity> LITHER_COLLECTOR_BLOCK_ENTITY =
+            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "lither_collector_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(FabricLitherCollectorBlockEntity::new,
+                            FabricBlocks.LITHER_COLLECTOR_BLOCK).build());
+
     @SuppressWarnings("EmptyMethod")
     public static void registerBlockEntities() {
 

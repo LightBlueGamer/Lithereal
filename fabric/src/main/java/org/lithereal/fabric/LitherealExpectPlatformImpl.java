@@ -14,11 +14,9 @@ import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.fabric.block.FabricBlocks;
-import org.lithereal.fabric.block.entity.FabricBlockEntities;
-import org.lithereal.fabric.block.entity.FabricFireCrucibleBlockEntity;
-import org.lithereal.fabric.block.entity.FabricFreezingStationBlockEntity;
-import org.lithereal.fabric.block.entity.FabricInfusementChamberBlockEntity;
+import org.lithereal.fabric.block.entity.*;
 import org.lithereal.fabric.item.FabricItems;
 import org.lithereal.fabric.screen.*;
 
@@ -94,5 +92,9 @@ public class LitherealExpectPlatformImpl {
 
     public static ResourceLocation getResourceLocation(ItemStack stack) {
         return BuiltInRegistries.ITEM.getKey(stack.getItem());
+    }
+
+    public static BlockEntityType<FabricLitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
+        return FabricBlockEntities.LITHER_COLLECTOR_BLOCK_ENTITY;
     }
 }

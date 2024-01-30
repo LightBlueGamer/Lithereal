@@ -14,6 +14,7 @@ import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.fabric.block.custom.FabricFireCrucibleBlock;
 import org.lithereal.fabric.block.custom.FabricFreezingStationBlock;
 import org.lithereal.fabric.block.custom.FabricInfusementChamberBlock;
+import org.lithereal.fabric.block.custom.FabricLitherCollectorBlock;
 import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 
 public class FabricBlocks {
@@ -30,6 +31,9 @@ public class FabricBlocks {
 
     public static final Block INFUSEMENT_CHAMBER_BLOCK = registerBlock("infusement_chamber",
             new FabricInfusementChamberBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+
+    public static final Block LITHER_COLLECTOR_BLOCK = registerBlock("lither_collector",
+            new FabricLitherCollectorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
