@@ -14,6 +14,7 @@ import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.forge.block.ForgeBlocks;
 import org.lithereal.forge.block.entity.ForgeBlockEntities;
 import org.lithereal.forge.block.entity.ForgeFireCrucibleBlockEntity;
@@ -97,5 +98,8 @@ public class LitherealExpectPlatformImpl {
 
     public static ResourceLocation getResourceLocation(ItemStack stack) {
         return ForgeRegistries.ITEMS.getKey(stack.getItem());
+    }
+
+    public static BlockEntityType<LitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
     }
 }

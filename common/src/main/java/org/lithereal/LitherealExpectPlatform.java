@@ -11,10 +11,7 @@ import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.lithereal.block.entity.FreezingStationBlockEntity;
-import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.block.entity.InfusementChamberBlockEntity;
+import org.lithereal.block.entity.*;
 import org.lithereal.screen.FireCrucibleMenu;
 import org.lithereal.screen.FreezingStationMenu;
 import org.lithereal.screen.InfusementChamberMenu;
@@ -104,6 +101,11 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static ResourceLocation getResourceLocation(ItemStack stack) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityType<LitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
         throw new AssertionError();
     }
 }
