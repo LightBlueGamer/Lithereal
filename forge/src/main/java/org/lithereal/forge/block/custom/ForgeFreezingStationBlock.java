@@ -11,11 +11,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.FreezingStationBlock;
+import org.lithereal.block.custom.LitherCollectorBlock;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.forge.block.entity.ForgeFreezingStationBlockEntity;
 
-public class ForgeFreezingStationBlock extends FreezingStationBlock {
+public class ForgeFreezingStationBlock extends LitherCollectorBlock {
     public ForgeFreezingStationBlock(Properties properties) {
         super(properties);
     }

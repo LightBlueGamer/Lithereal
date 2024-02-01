@@ -10,11 +10,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.LitherealExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
 import org.lithereal.block.custom.FireCrucibleBlock;
-import org.lithereal.block.custom.FreezingStationBlock;
+import org.lithereal.block.custom.LitherCollectorBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.fabric.block.FabricBlocks;
 import org.lithereal.fabric.block.entity.*;
 import org.lithereal.fabric.item.FabricItems;
@@ -66,8 +65,8 @@ public class LitherealExpectPlatformImpl {
         return FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER;
     }
 
-    public static FreezingStationBlock getFreezingStationBlock() {
-        return (FreezingStationBlock) FabricBlocks.FREEZING_STATION_BLOCK;
+    public static LitherCollectorBlock getFreezingStationBlock() {
+        return (LitherCollectorBlock) FabricBlocks.FREEZING_STATION_BLOCK;
     }
 
     public static BlockEntityType<FabricInfusementChamberBlockEntity> getInfusementChamberBlockEntity() {
