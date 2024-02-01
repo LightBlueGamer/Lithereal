@@ -24,7 +24,7 @@ public class FabricBlocks {
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final Block FIRE_CRUCIBLE_BLOCK = registerBlock("fire_crucible",
-            new FabricFireCrucibleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new FabricFireCrucibleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
 
     public static final Block FREEZING_STATION_BLOCK = registerBlock("freezing_station",
             new FabricFreezingStationBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
