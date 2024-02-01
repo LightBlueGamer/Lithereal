@@ -9,6 +9,9 @@
     "lithereal:infused_litherite_block",
     "lithereal:infusement_chamber",
     "lithereal:withering_litherite_block",
-    "lithereal:charged_litherite_block"
+    "lithereal:charged_litherite_block",
+    "lithereal:freezing_station",
+    "lithereal:fire_crucible",
+    "lithereal:lither_collector"
   ]
 }

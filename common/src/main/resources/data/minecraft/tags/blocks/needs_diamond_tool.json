@@ -9,6 +9,7 @@
     "lithereal:withering_litherite_block",
     "lithereal:infused_litherite_block",
     "lithereal:charged_litherite_block",
-    "lithereal:infusement_chamber"
+    "lithereal:infusement_chamber",
+    "lithereal:lither_collector"
   ]
 }

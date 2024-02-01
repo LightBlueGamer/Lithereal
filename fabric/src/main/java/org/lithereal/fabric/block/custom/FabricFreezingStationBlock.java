@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.FreezingStationBlock;
+import org.lithereal.block.custom.LitherCollectorBlock;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.fabric.block.entity.FabricFreezingStationBlockEntity;
 
-public class FabricFreezingStationBlock extends FreezingStationBlock implements EntityBlock {
+public class FabricFreezingStationBlock extends LitherCollectorBlock implements EntityBlock {
 
     public FabricFreezingStationBlock(Properties properties) {
         super(properties);

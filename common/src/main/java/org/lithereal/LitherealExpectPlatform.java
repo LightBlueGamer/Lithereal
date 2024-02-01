@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.block.custom.FireCrucibleBlock;
-import org.lithereal.block.custom.FreezingStationBlock;
+import org.lithereal.block.custom.LitherCollectorBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.*;
@@ -65,7 +65,7 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
-    public static FreezingStationBlock getFreezingStationBlock() {
+    public static LitherCollectorBlock getFreezingStationBlock() {
         throw new AssertionError();
     }
 

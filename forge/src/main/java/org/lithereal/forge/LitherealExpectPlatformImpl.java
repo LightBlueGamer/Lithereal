@@ -10,7 +10,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.custom.FireCrucibleBlock;
-import org.lithereal.block.custom.FreezingStationBlock;
+import org.lithereal.block.custom.LitherCollectorBlock;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
@@ -72,8 +72,8 @@ public class LitherealExpectPlatformImpl {
         return ForgeMenuTypes.FREEZING_STATION_MENU.get();
     }
 
-    public static FreezingStationBlock getFreezingStationBlock() {
-        return (FreezingStationBlock) ForgeBlocks.FREEZING_STATION.get();
+    public static LitherCollectorBlock getFreezingStationBlock() {
+        return (LitherCollectorBlock) ForgeBlocks.FREEZING_STATION.get();
     }
 
     public static BlockEntityType<ForgeInfusementChamberBlockEntity> getInfusementChamberBlockEntity() {
