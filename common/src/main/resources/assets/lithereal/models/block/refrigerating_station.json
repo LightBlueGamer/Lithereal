@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "lithereal:block/refrigerating_station_bottom",
+    "side": "lithereal:block/refrigerating_station_side",
+    "top": "lithereal:block/refrigerating_station_top"
+  }
+}

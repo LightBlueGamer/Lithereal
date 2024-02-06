@@ -7,7 +7,7 @@ license = "MIT"
 modId = "lithereal"
 version = "${version}"
 displayName = "Lithereal"
-authors = "Light, Alexandra"
+authors = "Light, Alexandra, Stunf"
 description = '''
 Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.
 '''
