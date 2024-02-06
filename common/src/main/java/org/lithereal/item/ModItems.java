@@ -127,7 +127,7 @@ public class ModItems {
             new WitheringLitheriteHoe(LITHERITE, -3, 0f, new Item.Properties()));
 
     public static final RegistrySupplier<Item> LITHERITE_WRENCH = ITEMS.register("litherite_wrench", () ->
-            new Wrench(new Item.Properties().stacksTo(1).durability(64)));
+            new Wrench(new Item.Properties().stacksTo(1).durability(128)));
     public static final RegistrySupplier<Item> LITHERITE_HELMET = ITEMS.register("litherite_helmet", () ->
             new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.HELMET, new Item.Properties()));
 
