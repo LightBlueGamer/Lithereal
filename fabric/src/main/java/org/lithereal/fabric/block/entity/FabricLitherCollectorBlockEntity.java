@@ -53,4 +53,7 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
             inventory.setItem(i, pEntity.getItem(i));
         }
     }
+
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, LitherCollectorBlockEntity litherCollectorBlockEntity) {
+    }
 }

@@ -121,4 +121,8 @@ public class LitherealExpectPlatform {
     public static MenuType<LitherCollectorMenu> getLitherCollectorMenuMenu() {
         throw new AssertionError();
     }
+
+    public static MenuType<?> getLitherCollectorMenu() {
+        return null;
+    }
 }

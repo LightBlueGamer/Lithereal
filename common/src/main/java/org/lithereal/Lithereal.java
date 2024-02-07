@@ -45,7 +45,7 @@ public class Lithereal {
         ModItems.register();
         ModBlockEntities.register();
         ModRecipes.register();
-        
+
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
 }

@@ -105,5 +105,6 @@ public class LitherealExpectPlatformImpl {
     }
 
     public static BlockEntityTicker<LitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
+        return null;
     }
 }
