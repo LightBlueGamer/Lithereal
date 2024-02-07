@@ -15,6 +15,7 @@ import org.lithereal.block.entity.*;
 import org.lithereal.screen.FireCrucibleMenu;
 import org.lithereal.screen.FreezingStationMenu;
 import org.lithereal.screen.InfusementChamberMenu;
+import org.lithereal.screen.LitherCollectorMenu;
 
 import java.nio.file.Path;
 
@@ -106,6 +107,21 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static BlockEntityType<LitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityTicker<LitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static LitherCollectorBlock getLitherCollectorBlock() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static MenuType<LitherCollectorMenu> getLitherCollectorMenuMenu() {
         throw new AssertionError();
     }
 }
