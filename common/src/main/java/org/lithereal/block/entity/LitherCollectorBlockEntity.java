@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.screen.LitherCollectorMenu;
 import org.lithereal.util.LitherEnergyContainer;
 
 public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvider {
@@ -55,7 +56,7 @@ public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvi
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return null;
+        return new LitherCollectorMenu(i, inventory, this, this.data);
     }
 
     public LitherEnergyContainer getEnergyContainer() {

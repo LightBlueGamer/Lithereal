@@ -19,6 +19,7 @@ import org.lithereal.fabric.block.FabricBlocks;
 import org.lithereal.fabric.block.entity.*;
 import org.lithereal.fabric.item.FabricItems;
 import org.lithereal.fabric.screen.*;
+import org.lithereal.screen.LitherCollectorMenu;
 
 import java.nio.file.Path;
 
@@ -98,9 +99,15 @@ public class LitherealExpectPlatformImpl {
         return FabricBlockEntities.LITHER_COLLECTOR_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<LitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
+    public static BlockEntityTicker<FabricLitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
         return FabricLitherCollectorBlockEntity::tick;
+    }
 
+    public static LitherCollectorBlock getLitherCollectorBlock() {
+        return (LitherCollectorBlock) FabricBlocks.LITHER_COLLECTOR_BLOCK;
+    }
 
+    public static MenuType<FabricLitherCollectorMenu> getLitherCollectorMenu() {
+        return FabricScreenHandlers.LITHER_COLLECTOR_SCREEN_HANDLER;
     }
 }
