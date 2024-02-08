@@ -13,7 +13,7 @@ import org.lithereal.screen.LitherCollectorMenu;
 public class FabricLitherCollectorMenu extends LitherCollectorMenu {
     private final Container inventory;
     public FabricLitherCollectorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
     public FabricLitherCollectorMenu(int syncId, Inventory playerInventory,
                                      BlockEntity blockEntity, ContainerData containerData) {
@@ -23,8 +23,5 @@ public class FabricLitherCollectorMenu extends LitherCollectorMenu {
         inventory.startOpen(playerInventory.player);
 
         this.addSlot(new Slot(inventory, 0, 94, 57));
-        this.addSlot(new Slot(inventory, 1, 140, 13));
-        this.addSlot(new Slot(inventory, 2, 80, 13));
-        this.addSlot(new Slot(inventory, 3, 66, 57));
     }
 }

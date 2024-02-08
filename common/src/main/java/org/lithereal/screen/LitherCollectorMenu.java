@@ -45,21 +45,6 @@ public class LitherCollectorMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
-    public int getScaledProgressFuel() {
-        int progress = this.data.get(3);
-        int maxProgress = this.data.get(4);
-        int progressArrowSize = 34;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-    public int getHeatLevel() {
-        return this.data.get(2);
-    }
-
-    public int getHasBucket() {
-        return this.data.get(5);
-    }
     private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = 36;

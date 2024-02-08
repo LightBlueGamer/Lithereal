@@ -15,6 +15,7 @@ import org.lithereal.fabric.screen.FabricScreenHandlers;
 import org.lithereal.screen.FireCrucibleScreen;
 import org.lithereal.screen.FreezingStationScreen;
 import org.lithereal.screen.InfusementChamberScreen;
+import org.lithereal.screen.LitherCollectorScreen;
 
 public class LitherealFabricClient implements ClientModInitializer {
     @Override
@@ -27,6 +28,7 @@ public class LitherealFabricClient implements ClientModInitializer {
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);
         MenuScreens.register(FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER, FreezingStationScreen::new);
         MenuScreens.register(FabricScreenHandlers.INFUSEMENT_CHAMBER_SCREEN_HANDLER, InfusementChamberScreen::new);
+        MenuScreens.register(FabricScreenHandlers.LITHER_COLLECTOR_SCREEN_HANDLER, LitherCollectorScreen::new);
         LitherealClient.init();
     }
 }

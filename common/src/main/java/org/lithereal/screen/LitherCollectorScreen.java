@@ -31,29 +31,6 @@ public class LitherCollectorScreen extends AbstractContainerScreen<LitherCollect
         int y = (height - imageHeight) / 2;
 
         guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
-
-        renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
-        renderHeatSource(guiGraphics.pose(), x, y, guiGraphics);
-        renderBucketProcessing(guiGraphics.pose(), x, y, guiGraphics);
-    }
-
-    private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if (menu.isCrafting()) {
-            int progressHeight = menu.getScaledProgress();
-            int yOffset = y + 51 - progressHeight;
-            if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 176, 14 - progressHeight, 14, progressHeight);
-            else if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 190, 14 - progressHeight, 14, progressHeight);
-        }
-    }
-
-    private void renderHeatSource(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
-        else if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
-    }
-
-    private void renderBucketProcessing(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.getHasBucket() == 0 && menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 50, 8, 11);
-        else if(menu.getHasBucket() == 1 && menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 62, 8, 11);
     }
 
 
