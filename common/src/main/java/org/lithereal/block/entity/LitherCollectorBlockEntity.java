@@ -16,8 +16,10 @@ import org.lithereal.util.LitherEnergyContainer;
 
 public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
+    protected int progress = 0;
+    protected int maxProgress = 200;
 
-    private final LitherEnergyContainer ENERGY_CONTAINER = new LitherEnergyContainer(0, 10000, 20);
+    private final LitherEnergyContainer ENERGY_CONTAINER = new LitherEnergyContainer(0, 5000, 20);
 
     public LitherCollectorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(LitherealExpectPlatform.getLitherCollectorBlockEntity(), blockPos, blockState);
@@ -26,8 +28,10 @@ public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvi
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.energy;
-                    case 1 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy;
+                    case 0 -> LitherCollectorBlockEntity.this.progress;
+                    case 1 -> LitherCollectorBlockEntity.this.maxProgress;
+                    case 2 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.energy;
+                    case 3 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy;
                     default -> 0;
                 };
             }
@@ -35,14 +39,16 @@ public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvi
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.energy = value;
-                    case 1 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy = value;
+                    case 0 -> LitherCollectorBlockEntity.this.progress = value;
+                    case 1 -> LitherCollectorBlockEntity.this.maxProgress = value;
+                    case 2 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.energy = value;
+                    case 3 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 4;
             }
         };
     }
