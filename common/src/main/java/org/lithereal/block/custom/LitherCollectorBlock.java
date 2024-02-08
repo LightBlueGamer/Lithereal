@@ -71,10 +71,6 @@ public class LitherCollectorBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker getTicker(Level level, BlockState state,
                                                                BlockEntityType<T> type) {
         return createTickerHelper(type, LitherealExpectPlatform.getLitherCollectorBlockEntity(),
-                LitherealExpectPlatform.getLitherCollectorBlockEntity());
-    }
-
-    private <T extends BlockEntity> BlockEntityTicker createTickerHelper(BlockEntityType<T> type, BlockEntityType<LitherCollectorBlockEntity> litherCollectorBlockEntity, BlockEntityType<LitherCollectorBlockEntity> litherCollectorBlockEntity1) {
-        return null;
+                LitherealExpectPlatform.getLitherCollectorBlockEntityTicker());
     }
 }

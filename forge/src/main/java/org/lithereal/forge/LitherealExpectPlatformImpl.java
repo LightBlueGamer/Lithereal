@@ -25,6 +25,7 @@ import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
 import org.lithereal.forge.screen.ForgeFreezingStationMenu;
 import org.lithereal.forge.screen.ForgeInfusementChamberMenu;
 import org.lithereal.forge.screen.ForgeMenuTypes;
+import org.lithereal.screen.LitherCollectorMenu;
 
 import java.nio.file.Path;
 
@@ -105,5 +106,11 @@ public class LitherealExpectPlatformImpl {
     }
 
     public static BlockEntityTicker<LitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
+    }
+
+    public static LitherCollectorBlock getLitherCollectorBlock() {
+    }
+
+    public static MenuType<LitherCollectorMenu> getLitherCollectorMenu() {
     }
 }

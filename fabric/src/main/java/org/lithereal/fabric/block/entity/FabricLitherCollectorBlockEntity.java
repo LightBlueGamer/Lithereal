@@ -45,12 +45,7 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
         return new FabricLitherCollectorMenu(id, inventory, this, this.data);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricInfusementChamberBlockEntity pEntity) {
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricLitherCollectorBlockEntity pEntity) {
         if(level.isClientSide()) return;
-
-        SimpleContainer inventory = new SimpleContainer(pEntity.getContainerSize());
-        for (int i = 0; i < pEntity.getContainerSize(); i++) {
-            inventory.setItem(i, pEntity.getItem(i));
-        }
     }
 }

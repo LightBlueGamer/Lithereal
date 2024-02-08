@@ -13,7 +13,7 @@ import org.lithereal.Lithereal;
 public class LitherCollectorScreen extends AbstractContainerScreen<LitherCollectorMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png");
-    public LitherCollectorScreen(FireCrucibleMenu menu, Inventory inventory, Component component) {
+    public LitherCollectorScreen(LitherCollectorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
