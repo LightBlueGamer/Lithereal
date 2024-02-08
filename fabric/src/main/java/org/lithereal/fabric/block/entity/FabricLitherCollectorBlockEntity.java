@@ -48,4 +48,7 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricLitherCollectorBlockEntity pEntity) {
         if(level.isClientSide()) return;
     }
+
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, LitherCollectorBlockEntity litherCollectorBlockEntity) {
+    }
 }
