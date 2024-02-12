@@ -12,7 +12,7 @@ import org.lithereal.Lithereal;
 
 public class LitherCollectorScreen extends AbstractContainerScreen<LitherCollectorMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png");
+            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/lither_collector_gui.png");
     public LitherCollectorScreen(LitherCollectorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
@@ -30,9 +30,8 @@ public class LitherCollectorScreen extends AbstractContainerScreen<LitherCollect
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/lither_collector_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
     }
-
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
