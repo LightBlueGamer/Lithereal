@@ -1,7 +1,6 @@
 package org.lithereal.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,31 +14,25 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.screen.LitherCollectorMenu;
 import org.lithereal.util.LitherEnergyContainer;
 
-import java.util.Arrays;
-
-public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvider, IEnergyContainerProvider {
+public class LitherBatteryBlockEntity extends BlockEntity implements MenuProvider, IEnergyContainerProvider {
     protected final ContainerData data;
-    protected int progress = 0;
-    protected int maxProgress = 200;
 
-    private final LitherEnergyContainer ENERGY_CONTAINER = new LitherEnergyContainer(0, 5000, 20);
+    private final LitherEnergyContainer ENERGY_CONTAINER = new LitherEnergyContainer(0, 100000, 100);
 
     @Override
     public LitherEnergyContainer getEnergyContainer() {
         return ENERGY_CONTAINER;
     }
 
-    public LitherCollectorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(LitherealExpectPlatform.getLitherCollectorBlockEntity(), blockPos, blockState);
+    public LitherBatteryBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(LitherealExpectPlatform.getLitherBatteryBlockEntity(), blockPos, blockState);
 
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> LitherCollectorBlockEntity.this.progress;
-                    case 1 -> LitherCollectorBlockEntity.this.maxProgress;
-                    case 2 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.energy;
-                    case 3 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy;
+                    case 1 -> LitherBatteryBlockEntity.this.ENERGY_CONTAINER.energy;
+                    case 2 -> LitherBatteryBlockEntity.this.ENERGY_CONTAINER.maxEnergy;
                     default -> 0;
                 };
             }
@@ -47,23 +40,21 @@ public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvi
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> LitherCollectorBlockEntity.this.progress = value;
-                    case 1 -> LitherCollectorBlockEntity.this.maxProgress = value;
-                    case 2 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.energy = value;
-                    case 3 -> LitherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy = value;
+                    case 1 -> LitherBatteryBlockEntity.this.ENERGY_CONTAINER.energy = value;
+                    case 2 -> LitherBatteryBlockEntity.this.ENERGY_CONTAINER.maxEnergy = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 4;
+                return 2;
             }
         };
     }
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Lither Collector");
+        return Component.literal("Lither Battery");
     }
 
     @Nullable

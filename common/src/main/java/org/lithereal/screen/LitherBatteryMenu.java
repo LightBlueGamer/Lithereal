@@ -8,41 +8,28 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.lithereal.block.entity.LitherCollectorBlockEntity;
+import org.lithereal.block.entity.LitherBatteryBlockEntity;
 
-public class LitherCollectorMenu extends AbstractContainerMenu {
-    public LitherCollectorBlockEntity blockEntity;
+public class LitherBatteryMenu extends AbstractContainerMenu {
+    public LitherBatteryBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
 
-    public LitherCollectorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+    public LitherBatteryMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public LitherCollectorMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(LitherealExpectPlatform.getLitherCollectorMenu(), id);
-        this.blockEntity = (LitherCollectorBlockEntity) entity;
+    public LitherBatteryMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(LitherealExpectPlatform.getLitherBatteryMenu(), id);
+        this.blockEntity = (LitherBatteryBlockEntity) entity;
         this.data = data;
         this.level = entity.getLevel();
 
-        checkContainerSize(inv, 1);
+        checkContainerSize(inv, 0);
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
         addDataSlots(data);
-    }
-
-    public boolean isCrafting() {
-        return data.get(0) > 0;
-    }
-
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);
-        int progressArrowSize = 13;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     private static final int VANILLA_SLOT_COUNT = 36;
@@ -50,7 +37,7 @@ public class LitherCollectorMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = 36;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 0;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

@@ -9,10 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.*;
-import org.lithereal.screen.FireCrucibleMenu;
-import org.lithereal.screen.FreezingStationMenu;
-import org.lithereal.screen.InfusementChamberMenu;
-import org.lithereal.screen.LitherCollectorMenu;
+import org.lithereal.screen.*;
 
 import java.nio.file.Path;
 
@@ -120,6 +117,20 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static MenuType<LitherCollectorMenu> getLitherCollectorMenu() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityType<LitherBatteryBlockEntity> getLitherBatteryBlockEntity() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BlockEntityTicker<LitherBatteryBlockEntity> getLitherBatteryBlockEntityTicker() {
+        throw new AssertionError();
+    }
+
+    public static MenuType<LitherBatteryMenu> getLitherBatteryMenu() {
         throw new AssertionError();
     }
 }
