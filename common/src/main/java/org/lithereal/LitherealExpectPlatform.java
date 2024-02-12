@@ -104,7 +104,6 @@ public class LitherealExpectPlatform {
         throw new AssertionError();
     }
 
-
     @ExpectPlatform
     public static BlockEntityTicker<LitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
         throw new AssertionError();

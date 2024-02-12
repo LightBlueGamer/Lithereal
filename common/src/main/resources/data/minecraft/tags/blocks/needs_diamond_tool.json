@@ -1,16 +1,17 @@
 {
   "replace": false,
   "values": [
-    "lithereal:litherite_ore",
-    "lithereal:deepslate_litherite_ore",
-    "lithereal:litherite_block",
     "lithereal:burning_litherite_block",
-    "lithereal:frozen_litherite_block",
-    "lithereal:withering_litherite_block",
-    "lithereal:infused_litherite_block",
     "lithereal:charged_litherite_block",
+    "lithereal:deepslate_litherite_ore",
     "lithereal:fire_crucible",
+    "lithereal:freezing_station",
+    "lithereal:frozen_litherite_block",
+    "lithereal:infused_litherite_block",
     "lithereal:infusement_chamber",
-    "lithereal:lither_collector"
+    "lithereal:lither_collector",
+    "lithereal:litherite_block",
+    "lithereal:litherite_ore",
+    "lithereal:withering_litherite_block"
   ]
 }
