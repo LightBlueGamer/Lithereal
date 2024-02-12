@@ -8,10 +8,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.item.custom.ModArmorMaterials;
-import org.lithereal.item.custom.Hammer;
-import org.lithereal.item.custom.ModTier;
-import org.lithereal.item.custom.Wrench;
+import org.lithereal.item.custom.*;
 import org.lithereal.item.custom.burning.*;
 import org.lithereal.item.custom.frozen.*;
 import org.lithereal.item.custom.infused.*;
@@ -125,7 +122,8 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HOE = ITEMS.register("withering_litherite_hoe", () ->
             new WitheringLitheriteHoe(LITHERITE, -3, 0f, new Item.Properties()));
-
+    public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
+            new BrushItem(new Item.Properties().stacksTo(1).durability(256)));
     public static final RegistrySupplier<Item> LITHERITE_WRENCH = ITEMS.register("litherite_wrench", () ->
             new Wrench(new Item.Properties().stacksTo(1).durability(128)));
     public static final RegistrySupplier<Item> LITHERITE_HELMET = ITEMS.register("litherite_helmet", () ->

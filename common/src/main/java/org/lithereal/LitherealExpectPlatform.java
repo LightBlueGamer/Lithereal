@@ -130,6 +130,11 @@ public class LitherealExpectPlatform {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static LitherBatteryBlock getLitherBatteryBlock() {
+        throw new AssertionError();
+    }
+
     public static MenuType<LitherBatteryMenu> getLitherBatteryMenu() {
         throw new AssertionError();
     }

@@ -11,7 +11,7 @@ import org.lithereal.Lithereal;
 
 public class LitherBatteryScreen extends AbstractContainerScreen<LitherBatteryMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png");
+            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/lither_battery_gui.png");
     public LitherBatteryScreen(LitherBatteryMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
@@ -29,7 +29,7 @@ public class LitherBatteryScreen extends AbstractContainerScreen<LitherBatteryMe
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/lither_battery_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
     }
 
 
