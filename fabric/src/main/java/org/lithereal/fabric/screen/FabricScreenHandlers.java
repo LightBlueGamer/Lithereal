@@ -25,6 +25,10 @@ public class FabricScreenHandlers {
             Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "lither_collector"),
                     new ExtendedScreenHandlerType<>(FabricLitherCollectorMenu::new));
 
+    public static final MenuType<FabricLitherBatteryMenu> LITHER_BATTERY_SCREEN_HANDLER =
+            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "lither_battery"),
+                    new ExtendedScreenHandlerType<>(FabricLitherBatteryMenu::new));
+
     public static void registerScreenHandlers() {
     }
 }

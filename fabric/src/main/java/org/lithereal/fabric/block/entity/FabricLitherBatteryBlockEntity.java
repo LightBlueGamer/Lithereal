@@ -23,7 +23,7 @@ import org.lithereal.fabric.screen.FabricLitherCollectorMenu;
 import org.lithereal.util.LitherEnergyContainer;
 
 public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory, IEnergyContainerProvider {
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(0, ItemStack.EMPTY);
     public FabricLitherBatteryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
     }

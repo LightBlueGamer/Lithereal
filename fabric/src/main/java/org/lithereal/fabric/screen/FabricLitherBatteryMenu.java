@@ -20,7 +20,5 @@ public class FabricLitherBatteryMenu extends LitherBatteryMenu {
 
         this.inventory = ((Container) blockEntity);
         inventory.startOpen(playerInventory.player);
-
-        this.addSlot(new Slot(inventory, 0, 94, 57));
     }
 }

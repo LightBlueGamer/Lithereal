@@ -9,10 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.LitherealExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
-import org.lithereal.block.custom.FireCrucibleBlock;
-import org.lithereal.block.custom.LitherCollectorBlock;
-import org.lithereal.block.custom.InfusedLitheriteBlock;
-import org.lithereal.block.custom.InfusementChamberBlock;
+import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.fabric.block.FabricBlocks;
@@ -109,5 +106,21 @@ public class LitherealExpectPlatformImpl {
 
     public static MenuType<FabricLitherCollectorMenu> getLitherCollectorMenu() {
         return FabricScreenHandlers.LITHER_COLLECTOR_SCREEN_HANDLER;
+    }
+
+    public static BlockEntityType<FabricLitherBatteryBlockEntity> getLitherBatteryBlockEntity() {
+        return FabricBlockEntities.LITHER_BATTERY_BLOCK_ENTITY;
+    }
+
+    public static BlockEntityTicker<FabricLitherBatteryBlockEntity> getLitherBatteryBlockEntityTicker() {
+        return FabricLitherBatteryBlockEntity::tick;
+    }
+
+    public static MenuType<FabricLitherBatteryMenu> getLitherBatteryMenu() {
+        return FabricScreenHandlers.LITHER_BATTERY_SCREEN_HANDLER;
+    }
+
+    public static LitherBatteryBlock getLitherBatteryBlock() {
+        return (LitherBatteryBlock) FabricBlocks.LITHER_BATTERY_BLOCK;
     }
 }
