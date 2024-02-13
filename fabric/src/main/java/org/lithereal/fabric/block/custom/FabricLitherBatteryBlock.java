@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.custom.LitherBatteryBlock;
+import org.lithereal.block.entity.LitherBatteryBlockEntity;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.fabric.block.entity.FabricLitherBatteryBlockEntity;
 
@@ -43,7 +44,7 @@ public class FabricLitherBatteryBlock extends LitherBatteryBlock implements Enti
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
                                  Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof FabricLitherBatteryBlockEntity) {
-            MenuProvider screenHandlerFactory = ((LitherCollectorBlockEntity) pLevel.getBlockEntity(pPos));
+            MenuProvider screenHandlerFactory = ((LitherBatteryBlockEntity) pLevel.getBlockEntity(pPos));
 
             if (screenHandlerFactory != null) {
                 pPlayer.openMenu(screenHandlerFactory);
