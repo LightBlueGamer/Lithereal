@@ -35,7 +35,7 @@ public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity imp
 
     @Override
     public void setChanged() {
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 4);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);
         super.setChanged();
     }
 

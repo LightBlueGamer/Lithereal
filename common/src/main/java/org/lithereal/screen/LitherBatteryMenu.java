@@ -75,7 +75,7 @@ public class LitherBatteryMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, LitherealExpectPlatform.getLitherCollectorBlock());
+                player, LitherealExpectPlatform.getLitherBatteryBlock());
     }
 
     protected void addPlayerInventory(Inventory playerInventory) {
