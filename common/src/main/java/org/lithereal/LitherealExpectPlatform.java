@@ -143,6 +143,7 @@ public class LitherealExpectPlatform {
     public static BlockEntityType<ChargingStationBlockEntity> getChargingStationBlockEntity() {
         throw new AssertionError();
     }
+
     @ExpectPlatform
     public static BlockEntityTicker<ChargingStationBlockEntity> getChargingStationBlockEntityTicker() {
         throw new AssertionError();
@@ -157,5 +158,4 @@ public class LitherealExpectPlatform {
     public static MenuType<ChargingStationMenu> getChargingStationMenu() {
         throw new AssertionError();
     }
-
 }
