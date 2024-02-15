@@ -54,14 +54,15 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
         if(level.isClientSide()) return;
         if(pEntity.hasCrystal(pEntity)) {
             LitherEnergyContainer energyContainer = pEntity.getEnergyContainer();
-            setMaxProgress(pEntity);
-            if(pEntity.progress <= 0) pEntity.removeItem(0, 1);
+
             if(energyContainer.energy < energyContainer.maxEnergy) {
-                pEntity.progress += energyContainer.transferRate;
-                energyContainer.energy += energyContainer.transferRate;
-                if(pEntity.progress >= pEntity.maxProgress) {
-                    pEntity.progress = 0;
-                }
+                setMaxProgress(pEntity);
+                if(pEntity.progress <= 0) pEntity.removeItem(0, 1);
+                pEntity.progress += energyContainer.transferRate / 10;
+                energyContainer.energy += energyContainer.transferRate / 10;
+            }
+            if(pEntity.progress >= pEntity.maxProgress) {
+                pEntity.progress = 0;
             }
         }
 

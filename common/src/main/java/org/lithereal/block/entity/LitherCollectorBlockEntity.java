@@ -63,7 +63,7 @@ public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvi
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Lither Collector");
+        return Component.literal("Lither Collector" + this.ENERGY_CONTAINER.energy + "/" + this.ENERGY_CONTAINER.maxEnergy);
     }
 
     @Nullable

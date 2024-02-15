@@ -55,7 +55,7 @@ public class LitherBatteryBlockEntity extends BlockEntity implements MenuProvide
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Lither Battery");
+        return Component.literal("Lither Battery" + this.ENERGY_CONTAINER.energy + "/" + this.ENERGY_CONTAINER.maxEnergy);
     }
 
     @Nullable
