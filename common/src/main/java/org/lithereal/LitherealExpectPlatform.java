@@ -138,4 +138,24 @@ public class LitherealExpectPlatform {
     public static MenuType<LitherBatteryMenu> getLitherBatteryMenu() {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static BlockEntityType<ChargingStationBlockEntity> getChargingStationBlockEntity() {
+        throw new AssertionError();
+    }
+    @ExpectPlatform
+    public static BlockEntityTicker<ChargingStationBlockEntity> getChargingStationBlockEntityTicker() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static ChargingStationBlock getChargingStationBlock() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static MenuType<ChargingStationMenu> getChargingStationMenu() {
+        throw new AssertionError();
+    }
+
 }
