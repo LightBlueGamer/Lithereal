@@ -1,0 +1,10 @@
+{
+  "music_disc_sparkle": {
+    "sounds": [
+      {
+        "name": "lithereal:music_disc_sparkle",
+        "stream": true
+      }
+    ]
+  }
+}
