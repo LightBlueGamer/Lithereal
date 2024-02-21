@@ -195,6 +195,9 @@ public class ModItems {
     public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
             new Item(new Item.Properties().stacksTo(1)));
 
+    public static final RegistrySupplier<Item> LITHEREAL_KEY = ITEMS.register("lithereal_key", () ->
+            new Item(new Item.Properties()));
+
     public static void register() {
         ITEMS.register();
     }
