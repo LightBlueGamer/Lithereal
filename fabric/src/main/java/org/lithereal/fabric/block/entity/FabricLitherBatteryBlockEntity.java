@@ -3,8 +3,10 @@ package org.lithereal.fabric.block.entity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -49,8 +51,20 @@ public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity imp
         return new FabricLitherBatteryMenu(id, inventory, this, this.data);
     }
 
+    @Override
+    protected void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
+        nbt.putInt("lither_battery.energy", getEnergyContainer().energy);
+    }
+
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
+        getEnergyContainer().energy = nbt.getInt("lither_battery.energy");
+    }
+
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricLitherBatteryBlockEntity pEntity) {
         if(level.isClientSide()) return;
-        if(pEntity.getEnergyContainer().energy > 0) pEntity.getEnergyContainer().transferEnergy(pEntity);
+        //if(pEntity.getEnergyContainer().energy > 0) pEntity.getEnergyContainer().transferEnergy(pEntity);
     }
 }
