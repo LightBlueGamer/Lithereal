@@ -200,7 +200,7 @@ public class ModItems {
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = ITEMS.register("music_disc_sparkle", () ->
-            new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().stacksTo(1), 2960));
+            new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 2960));
 
     public static void register() {
         ITEMS.register();
