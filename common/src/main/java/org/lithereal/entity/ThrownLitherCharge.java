@@ -9,6 +9,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -56,17 +57,19 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 }
 
                 if (blockState.getBlock() != Blocks.AIR) {
-                    if (!(this.getOwner().getXRot() > 70 && this.getOwner().getXRot() < 110)) {
-                        double fallDistance = this.getOwner().getY() - blockPos.getY();
-                        if (fallDistance > 3) {
-                            int fallDamage = (int) Math.ceil((fallDistance - 3) / 2.0);
-                            if (fallDamage > 0) {
-                                this.getOwner().hurt(this.damageSources().fall(), fallDamage);
+                    if (this.getOwner() instanceof Player && !((Player)this.getOwner()).isSpectator()) {
+                        if (!(this.getOwner().getXRot() > 70 && this.getOwner().getXRot() < 110)) {
+                            double fallDistance = this.getOwner().getY() - blockPos.getY();
+                            if (fallDistance > 3) {
+                                int fallDamage = (int) Math.ceil((fallDistance - 3) / 2.0);
+                                if (fallDamage > 0) {
+                                    this.getOwner().hurt(this.damageSources().fall(), fallDamage);
+                                }
                             }
+                            this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
                         }
-                        this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
+                        this.getOwner().teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
                     }
-                    this.getOwner().teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
                 }
             }
 
