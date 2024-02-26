@@ -25,7 +25,7 @@ public class LitherChargeItem extends Item {
             thrownLitherCharge.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(thrownLitherCharge);
         }
-        itemStack.hurtAndBreak(5, player, (playerEntity) -> {
+        itemStack.hurtAndBreak(3, player, (playerEntity) -> {
             playerEntity.broadcastBreakEvent(interactionHand);
         });
 
