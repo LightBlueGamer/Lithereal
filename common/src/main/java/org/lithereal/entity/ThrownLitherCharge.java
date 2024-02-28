@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.nbt.CompoundTag;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
     public ThrownLitherCharge(EntityType<? extends net.minecraft.world.entity.projectile.ThrownEnderpearl> arg, Level arg2) {
@@ -41,6 +42,12 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         double ratioLength = Math.sqrt(xRatio * xRatio + zRatio * zRatio);
 
         target.push(xRatio / ratioLength * knockbackStrength, 0.0, zRatio / ratioLength * knockbackStrength);
+
+        if (!this.getCommandSenderWorld().isClientSide) {
+            if (this.getOwner() != null && this.getOwner() instanceof LivingEntity && this.getOwner() != target) {
+                this.getCommandSenderWorld().explode(null, this.getX(), this.getY(), this.getZ(), 1.0f, Level.ExplosionInteraction.NONE);
+            }
+        }
     }
 
     protected void onHit(HitResult hitResult) {
@@ -72,8 +79,12 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     }
                 }
             }
-
             this.discard();
         }
+    }
+    @Override
+    public void addAdditionalSaveData(CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
+        compoundTag.putBoolean("shouldRender", false);
     }
 }

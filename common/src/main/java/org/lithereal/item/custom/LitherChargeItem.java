@@ -17,17 +17,18 @@ public class LitherChargeItem extends Item {
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         ItemStack itemStack = player.getItemInHand(interactionHand);
-        level.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+
+        level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         player.getCooldowns().addCooldown(this, 40);
         if (!level.isClientSide) {
             ThrownLitherCharge thrownLitherCharge = new ThrownLitherCharge(level, player);
             thrownLitherCharge.setItem(itemStack);
             thrownLitherCharge.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+            thrownLitherCharge.setOwner(player);
             level.addFreshEntity(thrownLitherCharge);
         }
-        itemStack.hurtAndBreak(5, player, (playerEntity) -> {
-            playerEntity.broadcastBreakEvent(interactionHand);
-        });
+
+        itemStack.shrink(1);
 
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
     }

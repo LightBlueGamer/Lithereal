@@ -125,7 +125,7 @@ public class ModItems {
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HOE = ITEMS.register("withering_litherite_hoe", () ->
             new WitheringLitheriteHoe(LITHERITE, -3, 0f, new Item.Properties()));
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
-            new LitherChargeItem(new Item.Properties().stacksTo(1).durability(64)));
+            new LitherChargeItem(new Item.Properties().stacksTo(64)));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
             new BrushItem(new Item.Properties().stacksTo(1).durability(256)));
