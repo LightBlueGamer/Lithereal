@@ -17,6 +17,8 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.nbt.CompoundTag;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
+    private double prevPosY;
+
     public ThrownLitherCharge(EntityType<? extends net.minecraft.world.entity.projectile.ThrownEnderpearl> arg, Level arg2) {
         super(arg, arg2);
     }
@@ -45,7 +47,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
         if (!this.getCommandSenderWorld().isClientSide) {
             if (this.getOwner() != null && this.getOwner() instanceof LivingEntity && this.getOwner() != target) {
-                this.getCommandSenderWorld().explode(null, this.getX(), this.getY(), this.getZ(), 1.0f, Level.ExplosionInteraction.NONE);
+                this.discard();
             }
         }
     }
@@ -67,15 +69,17 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     if (this.getOwner() instanceof Player && !((Player)this.getOwner()).isSpectator()) {
                         if (!(this.getOwner().getXRot() > 70 && this.getOwner().getXRot() < 110)) {
                             double fallDistance = this.getOwner().getY() - blockPos.getY();
+
+                            double deltaPosY = this.prevPosY - blockPos.getY();
+                            fallDistance += Math.max(deltaPosY, 0.0);
+
                             if (fallDistance > 3) {
-                                int fallDamage = (int) Math.ceil((fallDistance - 3) / 2.0);
-                                if (fallDamage > 0) {
-                                    this.getOwner().hurt(this.damageSources().fall(), fallDamage);
-                                }
+                                this.getOwner().fallDistance = (float) fallDistance;
                             }
                             this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
                         }
                         this.getOwner().teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                        this.prevPosY = blockPos.getY();
                     }
                 }
             }
