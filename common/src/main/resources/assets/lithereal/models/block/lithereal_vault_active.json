@@ -4,6 +4,6 @@
     "bottom": "lithereal:block/lithereal_vault_bottom",
     "front": "lithereal:block/lithereal_vault_front_on",
     "side": "lithereal:block/lithereal_vault_side_on",
-    "top": "lithereal:block/lithereal_vault_top_on"
+    "top": "lithereal:block/lithereal_vault_top"
   }
 }
