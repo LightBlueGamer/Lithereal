@@ -66,6 +66,9 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                         this.hasThrownLitherCharge = true;
                         this.discard();
                     }
+                }
+
+                if (this.hasThrownLitherCharge && this.getOwner() instanceof Player && ((Player) this.getOwner()).fallDistance == 0) {
                     this.getOwner().teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
                 }
             } else if (hitResult.getType() == HitResult.Type.ENTITY) {
@@ -116,12 +119,26 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
             if (this.getOwner() instanceof Player) {
                 double fallDistance = this.originalY - this.getOwner().getY();
-                if (fallDistance > 0) {
+                if (fallDistance > 0 && shouldApplyFallDamage(fallDistance)) {
                     this.getOwner().fallDistance += (float) fallDistance;
                 }
             }
             this.discard();
         }
+    }
+
+    private boolean shouldApplyFallDamage(double fallDistance) {
+        double distanceRemaining = fallDistance;
+        double gravity = 0.08;
+        double terminalVelocity = 3.92;
+        double distanceFalling = 0;
+
+        while (distanceRemaining > 0) {
+            distanceFalling += Math.min(terminalVelocity, Math.sqrt(2 * gravity * distanceRemaining));
+            distanceRemaining -= terminalVelocity;
+        }
+
+        return fallDistance > distanceFalling;
     }
 
     protected void onHitEntity(EntityHitResult arg) {
