@@ -21,13 +21,11 @@ import net.minecraft.world.phys.HitResult;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
     private double originalY;
-    private boolean hasThrownLitherCharge;
 
     public ThrownLitherCharge(Level arg, LivingEntity arg2) {
         super(EntityType.ENDER_PEARL, arg2, arg);
         if (arg2 instanceof Player) {
             this.originalY = arg2.getY();
-            this.hasThrownLitherCharge = false;
         }
     }
 
@@ -63,13 +61,9 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
                         this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, launchSpeed, this.getOwner().getDeltaMovement().z);
                         this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
-                        this.hasThrownLitherCharge = true;
+                        this.teleportPlayerToExplosion(blockPos);
                         this.discard();
                     }
-                }
-
-                if (this.hasThrownLitherCharge && this.getOwner() instanceof Player && ((Player) this.getOwner()).fallDistance == 0) {
-                    this.getOwner().teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
                 }
             } else if (hitResult.getType() == HitResult.Type.ENTITY) {
                 EntityHitResult entityHitResult = (EntityHitResult) hitResult;
@@ -97,9 +91,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                             this.discard();
                         }
                         double explosionPower = 1.0;
-                        if (!this.hasThrownLitherCharge) {
-                            this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
-                        }
+                        this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
 
                         double xDiff = target.getX() - this.getX();
                         double zDiff = target.getZ() - this.getZ();
@@ -172,9 +164,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 this.discard();
             }
             double explosionPower = 1.0;
-            if (!this.hasThrownLitherCharge) {
-                this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
-            }
+            this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
 
             double xDiff = target.getX() - this.getX();
             double zDiff = target.getZ() - this.getZ();
@@ -188,6 +178,13 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
                 target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
             }
+        }
+    }
+
+    private void teleportPlayerToExplosion(BlockPos blockPos) {
+        if (this.getOwner() instanceof Player) {
+            Player owner = (Player) this.getOwner();
+            owner.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
         }
     }
 
