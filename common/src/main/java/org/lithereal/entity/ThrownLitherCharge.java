@@ -2,10 +2,12 @@ package org.lithereal.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -21,6 +24,10 @@ import net.minecraft.world.phys.HitResult;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
     private double originalY;
+
+    public ThrownLitherCharge(EntityType<? extends ThrownLitherCharge> entityType, Level level) {
+        super(entityType, level);
+    }
 
     public ThrownLitherCharge(Level arg, LivingEntity arg2) {
         super(EntityType.ENDER_PEARL, arg2, arg);
@@ -41,6 +48,15 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 BlockHitResult blockHitResult = (BlockHitResult) hitResult;
                 BlockPos blockPos = blockHitResult.getBlockPos();
                 BlockState blockState = this.getCommandSenderWorld().getBlockState(blockPos);
+
+                if (blockState.getBlock() instanceof TntBlock) {
+                    this.getCommandSenderWorld().playSound(null, blockPos, SoundEvents.TNT_PRIMED, null, 1.0f, 1.0f);
+                    this.getCommandSenderWorld().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                    PrimedTnt primedTNT = new PrimedTnt(this.getCommandSenderWorld(), blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D, null);
+                    this.getCommandSenderWorld().addFreshEntity(primedTNT);
+                    this.discard();
+                    return;
+                }
 
                 if (this.getCommandSenderWorld().getFluidState(blockPos).is(FluidTags.WATER)) {
                     return;
@@ -71,7 +87,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
                 if (targetEntity instanceof LivingEntity) {
                     LivingEntity target = (LivingEntity) targetEntity;
-                    handleLivingEntityHit(target);
+                    onHitEntity(target);
                 } else {
                     BlockPos entityPos = targetEntity.blockPosition();
                     this.teleportPlayerToExplosion(entityPos);
@@ -90,7 +106,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         }
     }
 
-    private void handleLivingEntityHit(LivingEntity target) {
+    private void onHitEntity(LivingEntity target) {
         float damageAmount = 2.0f;
         if (this.getOwner() instanceof Player) {
             Player playerOwner = (Player) this.getOwner();
