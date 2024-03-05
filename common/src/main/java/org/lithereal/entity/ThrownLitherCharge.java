@@ -3,6 +3,7 @@ package org.lithereal.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -50,7 +51,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 BlockState blockState = this.getCommandSenderWorld().getBlockState(blockPos);
 
                 if (blockState.getBlock() instanceof TntBlock) {
-                    this.getCommandSenderWorld().playSound(null, blockPos, SoundEvents.TNT_PRIMED, null, 1.0f, 1.0f);
+                    this.getCommandSenderWorld().playSound(null, blockPos, SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0f, 1.0f);
                     this.getCommandSenderWorld().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
                     PrimedTnt primedTNT = new PrimedTnt(this.getCommandSenderWorld(), blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D, null);
                     this.getCommandSenderWorld().addFreshEntity(primedTNT);
