@@ -71,7 +71,7 @@ public class ModItems {
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("burning_litherite_hammer", () ->
             new BurningLitheriteHammer(LITHERITE, 5, -3f, new Item.Properties().durability(8750)));
     public static final RegistrySupplier<Item> CHARGED_LITHERITE_HAMMER = ITEMS.register("charged_litherite_hammer", () ->
-            new Hammer(LITHERITE, 3, -3.3f, new Item.Properties().durability(8750))); // The use of Hammer is temporary, currently fighting with DamageSource
+            new ChargedHammer(LITHERITE, 3, -3.3f, new Item.Properties().durability(8750))); // The use of Hammer is temporary, currently fighting with DamageSource
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer", () ->
             new FrozenLitheriteHammer(LITHERITE, 5, -3f, new Item.Properties().durability(8750)));
