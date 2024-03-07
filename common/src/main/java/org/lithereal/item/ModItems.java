@@ -14,7 +14,6 @@ import org.lithereal.item.custom.frozen.*;
 import org.lithereal.item.custom.infused.*;
 import org.lithereal.item.custom.withering.*;
 import org.lithereal.sound.ModSounds;
-import org.lithereal.item.LitherChargeItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
@@ -70,8 +69,6 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("burning_litherite_hammer", () ->
             new BurningLitheriteHammer(LITHERITE, 5, -3f, new Item.Properties().durability(8750)));
-    public static final RegistrySupplier<Item> CHARGED_LITHERITE_HAMMER = ITEMS.register("charged_litherite_hammer", () ->
-            new ChargedHammer(LITHERITE, 3, -3.3f, new Item.Properties().durability(8750))); // The use of Hammer is temporary, currently fighting with DamageSource
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer", () ->
             new FrozenLitheriteHammer(LITHERITE, 5, -3f, new Item.Properties().durability(8750)));
@@ -207,6 +204,8 @@ public class ModItems {
     public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = ITEMS.register("music_disc_sparkle", () ->
             new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 2960));
 
+    public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
+            new WarHammer(LITHERITE, 3, -3.2f, new Item.Properties().durability(512)));
     public static void register() {
         ITEMS.register();
     }
