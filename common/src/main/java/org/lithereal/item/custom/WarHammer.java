@@ -40,13 +40,20 @@ public class WarHammer extends Hammer {
 
                 target.knockback(horizontalKnockback, xRatio, zRatio);
                 target.knockback(verticalKnockback, 0, 0);
+
                 List<Entity> nearbyEntities = attacker.getCommandSenderWorld().getEntities(attacker, target.getBoundingBox().inflate(3.0), entity -> entity instanceof LivingEntity && entity != target);
                 for (Entity entity : nearbyEntities) {
                     if (entity instanceof LivingEntity) {
                         LivingEntity nearbyEntity = (LivingEntity) entity;
-                        nearbyEntity.knockback(horizontalKnockback, xRatio, zRatio);
-                        nearbyEntity.knockback(verticalKnockback, 0, 0);
-                        nearbyEntity.hurt(attacker.getLastDamageSource(), damageDealt / 2);
+                        double distanceX = nearbyEntity.getX() - target.getX();
+                        double distanceZ = nearbyEntity.getZ() - target.getZ();
+                        double distanceSq = distanceX * distanceX + distanceZ * distanceZ;
+                        double maxDistanceSq = 9.0;
+                        if (distanceSq <= maxDistanceSq) {
+                            nearbyEntity.knockback(horizontalKnockback, xRatio, zRatio);
+                            nearbyEntity.knockback(verticalKnockback, 0, 0);
+                            nearbyEntity.hurt(attacker.getLastDamageSource(), damageDealt / 2);
+                        }
                     }
                 }
             }
