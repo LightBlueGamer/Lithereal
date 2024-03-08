@@ -22,8 +22,8 @@ public class WarHammer extends Hammer {
         if (attacker instanceof ServerPlayer) {
             ServerPlayer serverPlayer = (ServerPlayer) attacker;
             if (!serverPlayer.getCooldowns().isOnCooldown(stack.getItem())) {
-                double horizontalKnockback = 2.5;
-                double verticalKnockback = 3;
+                double horizontalKnockback = 2;
+                double verticalKnockback = 2.5;
                 double xRatio = Math.sin(attacker.yRotO * 0.017453292F);
                 double zRatio = -Math.cos(attacker.yRotO * 0.017453292F);
 

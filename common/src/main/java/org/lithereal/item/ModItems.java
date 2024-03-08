@@ -205,7 +205,7 @@ public class ModItems {
             new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 2960));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            new WarHammer(LITHERITE, 3, -3.2f, new Item.Properties().durability(512)));
+            new WarHammer(LITHERITE, 5, -3.2f, new Item.Properties().durability(512)));
     public static void register() {
         ITEMS.register();
     }
