@@ -13,7 +13,6 @@ import org.lithereal.item.custom.burning.*;
 import org.lithereal.item.custom.frozen.*;
 import org.lithereal.item.custom.infused.*;
 import org.lithereal.item.custom.withering.*;
-import org.lithereal.sound.ModSounds;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
@@ -200,9 +199,6 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> LITHEREAL_KEY = ITEMS.register("lithereal_key", () ->
             new Item(new Item.Properties()));
-
-    public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = ITEMS.register("music_disc_sparkle", () ->
-            new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 2960));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
             new WarHammer(LITHERITE, 5, -3.2f, new Item.Properties().durability(512)));
