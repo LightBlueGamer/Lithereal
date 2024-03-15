@@ -132,7 +132,7 @@ public class ModItems {
             new Wrench(new Item.Properties().stacksTo(1).durability(128)));
 
     public static final RegistrySupplier<Item> CHARGED_LITHERITE_WRENCH = ITEMS.register("charged_litherite_wrench", () ->
-            new ChargedWrench(new Item.Properties().stacksTo(1).durability(256)));
+            new Wrench(new Item.Properties().stacksTo(1).durability(256)));
 
     public static final RegistrySupplier<Item> LITHERITE_HELMET = ITEMS.register("litherite_helmet", () ->
             new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.HELMET, new Item.Properties()));
@@ -201,7 +201,7 @@ public class ModItems {
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            new WarHammer(LITHERITE, 7, -3.2f, new Item.Properties().durability(512)));
+            new WarHammer(LITHERITE, 7, -3f, new Item.Properties().durability(512)));
     public static void register() {
         ITEMS.register();
     }

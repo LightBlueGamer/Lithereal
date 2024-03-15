@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "lithereal:item/handheld_war_hammer",
   "textures": {
     "layer0": "lithereal:item/war_hammer"
   }

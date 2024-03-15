@@ -28,6 +28,7 @@ public class WarHammer extends SwordItem {
                     handleSweepAttack(player, target, knockbackStrength);
                 } else {
                     handleSingleAttack(player, target, knockbackStrength);
+                    applyKnockbackToNearbyEntities(player, target, knockbackStrength);
                 }
             }
         }
@@ -38,16 +39,28 @@ public class WarHammer extends SwordItem {
         double radius = 3.0;
         List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius));
         List<LivingEntity> nearbyLivingEntitiesWithShield = nearbyEntities.stream()
-                .filter(entity -> entity instanceof LivingEntity && !((LivingEntity)entity).isCrouching() && !((LivingEntity)entity).isFallFlying())
+                .filter(entity -> entity instanceof LivingEntity && !((LivingEntity) entity).isCrouching() && !((LivingEntity) entity).isFallFlying())
                 .filter(entity -> !entity.getMainHandItem().isEmpty() && entity.getMainHandItem().getItem() == Items.SHIELD)
                 .collect(Collectors.toList());
 
         for (LivingEntity nearbyEntity : nearbyLivingEntitiesWithShield) {
-            nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float)Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float)Math.PI / 180F)));
+            nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
         }
     }
 
     private void handleSingleAttack(Player player, LivingEntity target, float knockbackStrength) {
-        target.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float)Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float)Math.PI / 180F)));
+        target.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
+    }
+
+    private void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float knockbackStrength) {
+        double radius = 3.0;
+        List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius));
+        nearbyEntities.remove(target);
+
+        for (LivingEntity nearbyEntity : nearbyEntities) {
+            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying()) {
+                nearbyEntity.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
+            }
+        }
     }
 }
