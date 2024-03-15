@@ -201,7 +201,7 @@ public class ModItems {
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            new WarHammer(LITHERITE, 5, -3.2f, new Item.Properties().durability(512)));
+            new WarHammer(LITHERITE, 7, -3.2f, new Item.Properties().durability(512)));
     public static void register() {
         ITEMS.register();
     }
