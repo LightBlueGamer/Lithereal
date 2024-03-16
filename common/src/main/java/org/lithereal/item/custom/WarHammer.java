@@ -57,9 +57,11 @@ public class WarHammer extends SwordItem {
         List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius));
         nearbyEntities.remove(target);
 
+        int knockbackCount = 0;
         for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying()) {
+            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && knockbackCount < 5) {
                 nearbyEntity.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
+                knockbackCount++;
             }
         }
     }

@@ -202,6 +202,8 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
             new WarHammer(LITHERITE, 7, -3f, new Item.Properties().durability(512)));
+    public static final RegistrySupplier<Item> WAR_HAMMER_FRAGMENT = ITEMS.register("war_hammer_fragment", () ->
+            new Item(new Item.Properties().stacksTo(64)));
     public static void register() {
         ITEMS.register();
     }
