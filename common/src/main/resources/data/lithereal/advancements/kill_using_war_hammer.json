@@ -3,7 +3,7 @@
     "icon": {
       "item": "lithereal:war_hammer"
     },
-    "title": "It's Hammer Time!",
+    "title": "Hammer Time!",
     "description": "Kill a mob or player using a War Hammer",
     "frame": "task",
     "show_toast": true,
