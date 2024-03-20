@@ -44,7 +44,9 @@ public class WarHammer extends SwordItem {
                 .collect(Collectors.toList());
 
         for (LivingEntity nearbyEntity : nearbyLivingEntitiesWithShield) {
-            nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
+            if (Math.abs(nearbyEntity.getY() - target.getY()) < 0.1) {
+                nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
+            }
         }
     }
 
@@ -59,9 +61,12 @@ public class WarHammer extends SwordItem {
 
         int knockbackCount = 0;
         for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && knockbackCount < 5) {
+            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && Math.abs(nearbyEntity.getY() - target.getY()) < 0.1 && knockbackCount < 4) {
                 nearbyEntity.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
                 knockbackCount++;
+            }
+            if (knockbackCount >= 4) {
+                break;
             }
         }
     }
