@@ -108,34 +108,33 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     }
 
     private void onHitEntity(LivingEntity target) {
-        float damageAmount = 2.0f;
-        if (this.getOwner() instanceof Player) {
-            Player playerOwner = (Player) this.getOwner();
-            ItemStack heldItem = playerOwner.getMainHandItem();
-            if (heldItem.getItem() instanceof ShieldItem) {
-                damageAmount = 0.0f;
+        if (this.getOwner() != target) {
+            float damageAmount = 2.0f;
+            if (this.getOwner() instanceof Player) {
+                Player playerOwner = (Player) this.getOwner();
+                ItemStack heldItem = playerOwner.getMainHandItem();
+                if (heldItem.getItem() instanceof ShieldItem) {
+                    damageAmount = 0.0f;
+                }
             }
-        }
-        target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
+            target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
 
-        if (!this.getCommandSenderWorld().isClientSide) {
-            if (this.getOwner() != null && this.getOwner() instanceof LivingEntity && this.getOwner() != target) {
-                this.discard();
-            }
-            double explosionPower = 1.0;
-            this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
+            if (!this.getCommandSenderWorld().isClientSide) {
+                double explosionPower = 1.0;
+                this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
 
-            double xDiff = target.getX() - this.getX();
-            double zDiff = target.getZ() - this.getZ();
-            double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
+                double xDiff = target.getX() - this.getX();
+                double zDiff = target.getZ() - this.getZ();
+                double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
 
-            double knockbackStrength = 1.0;
-            if (distance > 0) {
-                double normalizedX = xDiff / distance;
-                double normalizedZ = zDiff / distance;
-                target.push(normalizedX * knockbackStrength, 0.0, normalizedZ * knockbackStrength);
+                double knockbackStrength = 1.0;
+                if (distance > 0) {
+                    double normalizedX = xDiff / distance;
+                    double normalizedZ = zDiff / distance;
+                    target.push(normalizedX * knockbackStrength, 0.0, normalizedZ * knockbackStrength);
 
-                target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
+                    target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
+                }
             }
         }
     }

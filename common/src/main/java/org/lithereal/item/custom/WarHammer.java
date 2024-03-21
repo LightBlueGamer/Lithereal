@@ -22,6 +22,9 @@ public class WarHammer extends SwordItem {
         if (attacker instanceof Player) {
             Player player = (Player) attacker;
             if (player.fallDistance > 0.0F && !player.isFallFlying() && !player.isCrouching()) {
+
+                player.fallDistance = 0.0F;
+
                 float knockbackStrength = 1.0F;
 
                 if (player.isUsingItem()) {
@@ -30,6 +33,8 @@ public class WarHammer extends SwordItem {
                     handleSingleAttack(player, target, knockbackStrength);
                     applyKnockbackToNearbyEntities(player, target, knockbackStrength);
                 }
+
+                return true;
             }
         }
         return super.hurtEnemy(stack, target, attacker);
@@ -55,18 +60,13 @@ public class WarHammer extends SwordItem {
     }
 
     private void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float knockbackStrength) {
-        double radius = 3.0;
+        double radius = 5.0;
         List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius));
         nearbyEntities.remove(target);
 
-        int knockbackCount = 0;
         for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && Math.abs(nearbyEntity.getY() - target.getY()) < 0.1 && knockbackCount < 4) {
+            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && Math.abs(nearbyEntity.getY() - target.getY()) < 0.1) {
                 nearbyEntity.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
-                knockbackCount++;
-            }
-            if (knockbackCount >= 4) {
-                break;
             }
         }
     }
