@@ -1,7 +1,6 @@
 package org.lithereal.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
@@ -158,11 +157,5 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
             Player owner = (Player) this.getOwner();
             owner.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
         }
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag compoundTag) {
-        super.addAdditionalSaveData(compoundTag);
-        compoundTag.putBoolean("shouldRender", false);
     }
 }

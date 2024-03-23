@@ -10,8 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.lithereal.entity.ThrownLitherCharge;
 
-public class LitherChargeItem extends Item {
-    public LitherChargeItem(Item.Properties properties) {
+public class LitherCharge extends Item {
+    public LitherCharge(Properties properties) {
         super(properties);
     }
 

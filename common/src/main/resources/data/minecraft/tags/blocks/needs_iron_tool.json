@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:ethereal_bricks",
+    "lithereal:ethereal_brick_slab",
+    "lithereal:ethereal_brick_stairs",
+    "lithereal:ethereal_brick_wall"
+  ]
+}
