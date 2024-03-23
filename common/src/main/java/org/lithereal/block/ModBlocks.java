@@ -60,13 +60,13 @@ public class ModBlocks {
             () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.MAGMA_BLOCK)));
 
     public static final RegistrySupplier<Block> ETHEREAL_BRICKS = registerBlock("ethereal_bricks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)));
 
     public static final RegistrySupplier<Block> ETHEREAL_BRICK_STAIRS = registerBlock("ethereal_brick_stairs",
-            () -> new StairBlock(Blocks.STONE_BRICK_STAIRS.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_STAIRS)));
+            () -> new StairBlock(Blocks.DEEPSLATE_BRICK_STAIRS.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_STAIRS)));
 
     public static final RegistrySupplier<Block> ETHEREAL_BRICK_SLAB = registerBlock("ethereal_brick_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_SLAB)));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_SLAB)));
 
     public static final RegistrySupplier<Block> ETHEREAL_BRICK_WALL = registerBlock("ethereal_brick_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL)));

@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "lithereal:litherite_crystal"
+    },
+    "title": "Lithereal",
+    "description": "A mod about mysterious crystals and their properties\n\n",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "background": "lithereal:textures/block/litherite_block.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed"
+          }
+      }
+    }
+  }
+}

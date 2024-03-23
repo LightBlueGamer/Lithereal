@@ -1,0 +1,43 @@
+{
+  "display": {
+    "icon": {
+      "item": "lithereal:litherite_chestplate"
+    },
+    "title": "Cover Me in Crystals",
+    "description": "Obtain a full set of Litherite armor",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "litherite_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lithereal:litherite_helmet"
+            ]
+          },
+          {
+            "items": [
+              "lithereal:litherite_chestplate"
+            ]
+          },
+          {
+            "items": [
+              "lithereal:litherite_leggings"
+            ]
+          },
+          {
+            "items": [
+              "lithereal:litherite_boots"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}
