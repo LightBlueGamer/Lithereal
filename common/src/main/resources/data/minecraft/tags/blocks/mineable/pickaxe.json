@@ -17,6 +17,9 @@
     "lithereal:lither_collector",
     "lithereal:litherite_block",
     "lithereal:litherite_ore",
+    "lithereal:scorched_crimson_nylium",
+    "lithereal:scorched_netherrack",
+    "lithereal:scorched_warped_nylium",
     "lithereal:withering_litherite_block"
   ]
 }

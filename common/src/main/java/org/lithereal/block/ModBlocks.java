@@ -51,13 +51,13 @@ public class ModBlocks {
             () -> new BlueFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE)));
 
     public static final RegistrySupplier<Block> SCORCHED_CRIMSON_NYLIUM = registerBlock("scorched_crimson_nylium",
-            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.MAGMA_BLOCK)));
+            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_NYLIUM)));
 
     public static final RegistrySupplier<Block> SCORCHED_NETHERRACK = registerBlock("scorched_netherrack",
-            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.MAGMA_BLOCK)));
+            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.NETHERRACK)));
 
     public static final RegistrySupplier<Block> SCORCHED_WARPED_NYLIUM = registerBlock("scorched_warped_nylium",
-            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.MAGMA_BLOCK)));
+            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_NYLIUM)));
 
     public static final RegistrySupplier<Block> ETHEREAL_BRICKS = registerBlock("ethereal_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)));
@@ -69,7 +69,7 @@ public class ModBlocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_SLAB)));
 
     public static final RegistrySupplier<Block> ETHEREAL_BRICK_WALL = registerBlock("ethereal_brick_wall",
-            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL)));
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_WALL)));
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
