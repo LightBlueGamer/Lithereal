@@ -17,7 +17,7 @@ import org.lithereal.LitherealExpectPlatform;
 import static net.minecraft.world.item.alchemy.PotionUtils.getPotion;
 
 public class InfusedLitheriteBlockEntity extends BlockEntity {
-    public Potion potion = Potions.POISON;
+    public Potion potion = Potions.EMPTY;
 
     public InfusedLitheriteBlockEntity(BlockPos pos, BlockState state) {
         super(LitherealExpectPlatform.getInfusedLitheriteBlockEntity(), pos, state);
