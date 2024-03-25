@@ -347,7 +347,5 @@
   "itemGroup.lithereal.lithereal.tab": "Lithereal",
   "key.category.lithereal.lithereal": "Lithereal",
   "key.lithereal.freeze_water": "Frost Walker",
-  "key.lithereal.scorch_ground": "Scorch Ground",
-  "message.lithereal.missing_infusement_casing": "Missing Infusement Chamber Casing.",
-  "message.lithereal.missing_infusement_core": "Missing Infusement Chamber Core."
+  "key.lithereal.scorch_ground": "Scorch Ground"
 }

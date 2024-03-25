@@ -20,7 +20,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Lithereal.MOD_ID, Registries.BLOCK);
 
     public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
-            () -> new DropExperienceBlock(BlockBehaviour.Properties.of( )
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops(), UniformInt.of(2, 6)));
 
     public static final RegistrySupplier<Block> DEEPSLATE_LITHERITE_ORE = registerBlock("deepslate_litherite_ore",

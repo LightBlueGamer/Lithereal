@@ -23,7 +23,6 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
-    private double originalY;
 
     public ThrownLitherCharge(EntityType<? extends ThrownLitherCharge> entityType, Level level) {
         super(entityType, level);
@@ -32,7 +31,6 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     public ThrownLitherCharge(Level arg, LivingEntity arg2) {
         super(EntityType.ENDER_PEARL, arg2, arg);
         if (arg2 instanceof Player) {
-            this.originalY = arg2.getY();
         }
     }
 
@@ -64,12 +62,6 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
                 if (blockState.getBlock() != Blocks.AIR) {
                     if (this.getOwner() instanceof Player && !((Player) this.getOwner()).isSpectator()) {
-                        double fallDistance = this.getOwner().getY() - blockPos.getY();
-
-                        if (fallDistance > 3) {
-                            this.getOwner().fallDistance = (float) fallDistance;
-                        }
-
                         double launchSpeed = 1.0;
                         if (this.getOwner().getXRot() > 70 && this.getOwner().getXRot() < 110) {
                             launchSpeed = 1.0;
@@ -96,19 +88,13 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 }
             }
 
-            if (this.getOwner() instanceof Player) {
-                double fallDistance = this.originalY - this.getOwner().getY();
-                if (fallDistance > 0 && shouldApplyFallDamage(fallDistance)) {
-                    this.getOwner().fallDistance += (float) fallDistance;
-                }
-            }
             this.discard();
         }
     }
 
     private void onHitEntity(LivingEntity target) {
         if (this.getOwner() != target) {
-            float damageAmount = 2.0f;
+            float damageAmount = 4.0f;
             if (this.getOwner() instanceof Player) {
                 Player playerOwner = (Player) this.getOwner();
                 ItemStack heldItem = playerOwner.getMainHandItem();
@@ -136,20 +122,6 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 }
             }
         }
-    }
-
-    private boolean shouldApplyFallDamage(double fallDistance) {
-        double distanceRemaining = fallDistance;
-        double gravity = 0.08;
-        double terminalVelocity = 3.92;
-        double distanceFalling = 0;
-
-        while (distanceRemaining > 0) {
-            distanceFalling += Math.min(terminalVelocity, Math.sqrt(2 * gravity * distanceRemaining));
-            distanceRemaining -= terminalVelocity;
-        }
-
-        return fallDistance > distanceFalling;
     }
 
     private void teleportPlayerToExplosion(BlockPos blockPos) {

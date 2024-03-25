@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "lithereal:burning_litherite_block"
+    },
+    "title": "Fighting Fire with...?",
+    "description": "Step on a burning Litherite block whilst having Fire Resistance",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "player": {
+          "stepping_on": {
+            "block": {
+              "blocks": [
+                "lithereal:burning_litherite_block"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
