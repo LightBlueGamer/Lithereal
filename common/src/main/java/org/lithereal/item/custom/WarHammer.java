@@ -22,7 +22,14 @@ public class WarHammer extends SwordItem {
         if (attacker instanceof Player) {
             Player player = (Player) attacker;
             if (player.fallDistance > 0.0F && !player.isFallFlying() && !player.isCrouching()) {
+
+                player.fallDistance = 0.0F;
+
                 float knockbackStrength = 1.0F;
+
+                stack.hurtAndBreak(1, player, (entity) -> {
+                    entity.broadcastBreakEvent(player.getUsedItemHand());
+                });
 
                 if (player.isUsingItem()) {
                     handleSweepAttack(player, target, knockbackStrength);
@@ -30,6 +37,8 @@ public class WarHammer extends SwordItem {
                     handleSingleAttack(player, target, knockbackStrength);
                     applyKnockbackToNearbyEntities(player, target, knockbackStrength);
                 }
+
+                return true;
             }
         }
         return super.hurtEnemy(stack, target, attacker);
@@ -44,7 +53,9 @@ public class WarHammer extends SwordItem {
                 .collect(Collectors.toList());
 
         for (LivingEntity nearbyEntity : nearbyLivingEntitiesWithShield) {
-            nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
+            if (Math.abs(nearbyEntity.getY() - target.getY()) < 0.1) {
+                nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
+            }
         }
     }
 
@@ -57,11 +68,16 @@ public class WarHammer extends SwordItem {
         List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius));
         nearbyEntities.remove(target);
 
-        int knockbackCount = 0;
+        int affectedEntities = 0;
+
         for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && knockbackCount < 5) {
+            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && Math.abs(nearbyEntity.getY() - target.getY()) < 0.1) {
                 nearbyEntity.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
-                knockbackCount++;
+                affectedEntities++;
+
+                if (affectedEntities >= 4) {
+                    break;
+                }
             }
         }
     }

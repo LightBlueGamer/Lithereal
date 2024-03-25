@@ -123,16 +123,13 @@ public class ModItems {
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HOE = ITEMS.register("withering_litherite_hoe", () ->
             new WitheringLitheriteHoe(LITHERITE, -3, 0f, new Item.Properties()));
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
-            new LitherChargeItem(new Item.Properties().stacksTo(64).fireResistant()));
+            new LitherCharge(new Item.Properties().stacksTo(64).fireResistant()));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
             new BrushItem(new Item.Properties().stacksTo(1).durability(256)));
 
     public static final RegistrySupplier<Item> LITHERITE_WRENCH = ITEMS.register("litherite_wrench", () ->
             new Wrench(new Item.Properties().stacksTo(1).durability(128)));
-
-    public static final RegistrySupplier<Item> CHARGED_LITHERITE_WRENCH = ITEMS.register("charged_litherite_wrench", () ->
-            new Wrench(new Item.Properties().stacksTo(1).durability(256)));
 
     public static final RegistrySupplier<Item> LITHERITE_HELMET = ITEMS.register("litherite_helmet", () ->
             new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.HELMET, new Item.Properties()));

@@ -1,7 +1,6 @@
 package org.lithereal.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
@@ -24,7 +23,6 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
-    private double originalY;
 
     public ThrownLitherCharge(EntityType<? extends ThrownLitherCharge> entityType, Level level) {
         super(entityType, level);
@@ -33,7 +31,6 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     public ThrownLitherCharge(Level arg, LivingEntity arg2) {
         super(EntityType.ENDER_PEARL, arg2, arg);
         if (arg2 instanceof Player) {
-            this.originalY = arg2.getY();
         }
     }
 
@@ -65,12 +62,6 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
                 if (blockState.getBlock() != Blocks.AIR) {
                     if (this.getOwner() instanceof Player && !((Player) this.getOwner()).isSpectator()) {
-                        double fallDistance = this.getOwner().getY() - blockPos.getY();
-
-                        if (fallDistance > 3) {
-                            this.getOwner().fallDistance = (float) fallDistance;
-                        }
-
                         double launchSpeed = 1.0;
                         if (this.getOwner().getXRot() > 70 && this.getOwner().getXRot() < 110) {
                             launchSpeed = 1.0;
@@ -97,61 +88,40 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 }
             }
 
-            if (this.getOwner() instanceof Player) {
-                double fallDistance = this.originalY - this.getOwner().getY();
-                if (fallDistance > 0 && shouldApplyFallDamage(fallDistance)) {
-                    this.getOwner().fallDistance += (float) fallDistance;
-                }
-            }
             this.discard();
         }
     }
 
     private void onHitEntity(LivingEntity target) {
-        float damageAmount = 2.0f;
-        if (this.getOwner() instanceof Player) {
-            Player playerOwner = (Player) this.getOwner();
-            ItemStack heldItem = playerOwner.getMainHandItem();
-            if (heldItem.getItem() instanceof ShieldItem) {
-                damageAmount = 0.0f;
+        if (this.getOwner() != target) {
+            float damageAmount = 4.0f;
+            if (this.getOwner() instanceof Player) {
+                Player playerOwner = (Player) this.getOwner();
+                ItemStack heldItem = playerOwner.getMainHandItem();
+                if (heldItem.getItem() instanceof ShieldItem) {
+                    damageAmount = 0.0f;
+                }
+            }
+            target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
+
+            if (!this.getCommandSenderWorld().isClientSide) {
+                double explosionPower = 1.0;
+                this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
+
+                double xDiff = target.getX() - this.getX();
+                double zDiff = target.getZ() - this.getZ();
+                double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
+
+                double knockbackStrength = 1.0;
+                if (distance > 0) {
+                    double normalizedX = xDiff / distance;
+                    double normalizedZ = zDiff / distance;
+                    target.push(normalizedX * knockbackStrength, 0.0, normalizedZ * knockbackStrength);
+
+                    target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
+                }
             }
         }
-        target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
-
-        if (!this.getCommandSenderWorld().isClientSide) {
-            if (this.getOwner() != null && this.getOwner() instanceof LivingEntity && this.getOwner() != target) {
-                this.discard();
-            }
-            double explosionPower = 1.0;
-            this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
-
-            double xDiff = target.getX() - this.getX();
-            double zDiff = target.getZ() - this.getZ();
-            double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
-
-            double knockbackStrength = 1.0;
-            if (distance > 0) {
-                double normalizedX = xDiff / distance;
-                double normalizedZ = zDiff / distance;
-                target.push(normalizedX * knockbackStrength, 0.0, normalizedZ * knockbackStrength);
-
-                target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
-            }
-        }
-    }
-
-    private boolean shouldApplyFallDamage(double fallDistance) {
-        double distanceRemaining = fallDistance;
-        double gravity = 0.08;
-        double terminalVelocity = 3.92;
-        double distanceFalling = 0;
-
-        while (distanceRemaining > 0) {
-            distanceFalling += Math.min(terminalVelocity, Math.sqrt(2 * gravity * distanceRemaining));
-            distanceRemaining -= terminalVelocity;
-        }
-
-        return fallDistance > distanceFalling;
     }
 
     private void teleportPlayerToExplosion(BlockPos blockPos) {
@@ -159,11 +129,5 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
             Player owner = (Player) this.getOwner();
             owner.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
         }
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag compoundTag) {
-        super.addAdditionalSaveData(compoundTag);
-        compoundTag.putBoolean("shouldRender", false);
     }
 }

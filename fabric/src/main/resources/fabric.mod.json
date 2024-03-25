@@ -3,7 +3,7 @@
   "id": "lithereal",
   "version": "${version}",
   "name": "Lithereal",
-  "description": "Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.",
+  "description": "Lithereal is a mod about infusing crystals with different magical powers.",
   "authors": [
     "Light, Alexandra, Stunf"
   ],
@@ -26,7 +26,7 @@
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20.1",
-    "architectury": ">=9.1.12"
+    "architectury": ">=9.1.14"
   },
   "mixins": [
     "lithereal.mixins.json",
