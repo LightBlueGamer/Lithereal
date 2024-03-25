@@ -55,9 +55,7 @@ public class LitherealClient {
                 LitherealExpectPlatform.getLitheriteItem().getDefaultInstance(),
                 LitherealExpectPlatform.getFireCrucibleBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
-                LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance(),
-                LitherealExpectPlatform.getLitherCollectorBlock().asItem().getDefaultInstance(),
-                LitherealExpectPlatform.getLitherBatteryBlock().asItem().getDefaultInstance()
+                LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()
         ));
 
         Field[] fields = Potions.class.getDeclaredFields();
