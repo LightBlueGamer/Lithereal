@@ -14,7 +14,7 @@
     }
   },
   "data": {
-    "searge": {
+    "serge": {
       "org/lithereal/mixin/CraftingInventoryMixin": {
         "setChanged": "Lnet/minecraft/world/inventory/TransientCraftingContainer;m_6596_()V"
       },
