@@ -63,8 +63,8 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
         if(blockEntity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity) {
             if(entity instanceof LivingEntity livingEntity) {
                 infusedLitheriteBlockEntity.potion.getEffects().forEach((mobEffectInstance) -> {
-                    MobEffectInstance newEffect = new MobEffectInstance(mobEffectInstance.getEffect(), 100, mobEffectInstance.getAmplifier(), true, false, false);
-                    if(livingEntity.hasEffect(newEffect.getEffect())) livingEntity.addEffect(newEffect);
+                    MobEffectInstance newEffect = new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().isInstantenous() ? 1 : 40, mobEffectInstance.getAmplifier(), true, false, false);
+                    if(!livingEntity.hasEffect(newEffect.getEffect())) livingEntity.addEffect(newEffect);
                 });
             }
         }
