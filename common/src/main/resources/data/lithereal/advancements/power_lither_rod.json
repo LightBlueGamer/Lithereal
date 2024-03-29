@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "lithereal:lither_rod"
+    },
+    "title": "Sparks Fly",
+    "description": "Power a Lither Rod with a Lither Charge",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:channeled_lightning",
+      "conditions": {
+        "player": {}
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}

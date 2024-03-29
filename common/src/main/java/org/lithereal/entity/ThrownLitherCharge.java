@@ -21,10 +21,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.lithereal.block.custom.LitherRodBlock;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
 
     private boolean hasThrownBeforeGround = false;
+    private boolean isOwnerImmune = false;
 
     public ThrownLitherCharge(EntityType<? extends ThrownLitherCharge> entityType, Level level) {
         super(entityType, level);
@@ -69,7 +71,9 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
                         this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, launchSpeed, this.getOwner().getDeltaMovement().z);
                         this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
-                        this.teleportPlayerToExplosion(blockPos);
+                        if (!(blockState.getBlock() instanceof LitherRodBlock)) {
+                            this.teleportPlayerToExplosion(blockPos);
+                        }
                         this.hasThrownBeforeGround = true;
                         this.discard();
                     }
@@ -103,23 +107,26 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     damageAmount = 0.0f;
                 }
             }
-            target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
 
-            if (!this.getCommandSenderWorld().isClientSide) {
-                double explosionPower = 1.0;
-                this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
+            if (!target.is(this.getOwner()) && !this.isOwnerImmune) {
+                target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
 
-                double xDiff = target.getX() - this.getX();
-                double zDiff = target.getZ() - this.getZ();
-                double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
+                if (!this.getCommandSenderWorld().isClientSide) {
+                    double explosionPower = 1.0;
+                    this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
 
-                double knockbackStrength = 1.0;
-                if (distance > 0) {
-                    double normalizedX = xDiff / distance;
-                    double normalizedZ = zDiff / distance;
-                    target.push(normalizedX * knockbackStrength, 0.0, normalizedZ * knockbackStrength);
+                    double xDiff = target.getX() - this.getX();
+                    double zDiff = target.getZ() - this.getZ();
+                    double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
 
-                    target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
+                    double knockbackStrength = 1.0;
+                    if (distance > 0) {
+                        double normalizedX = xDiff / distance;
+                        double normalizedZ = zDiff / distance;
+                        target.push(normalizedX * knockbackStrength, 0.0, normalizedZ * knockbackStrength);
+
+                        target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
+                    }
                 }
             }
         }
@@ -140,6 +147,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
             if (this.getOwner() instanceof Player) {
                 Player owner = (Player) this.getOwner();
                 owner.fallDistance = 0.0f;
+                this.isOwnerImmune = true;
             }
         }
     }
