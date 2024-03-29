@@ -24,14 +24,14 @@ import net.minecraft.world.phys.HitResult;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
 
+    private boolean hasThrownBeforeGround = false;
+
     public ThrownLitherCharge(EntityType<? extends ThrownLitherCharge> entityType, Level level) {
         super(entityType, level);
     }
 
     public ThrownLitherCharge(Level arg, LivingEntity arg2) {
         super(EntityType.ENDER_PEARL, arg2, arg);
-        if (arg2 instanceof Player) {
-        }
     }
 
     protected Item getDefaultItem() {
@@ -70,6 +70,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                         this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, launchSpeed, this.getOwner().getDeltaMovement().z);
                         this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
                         this.teleportPlayerToExplosion(blockPos);
+                        this.hasThrownBeforeGround = true;
                         this.discard();
                     }
                 }
@@ -128,6 +129,18 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         if (this.getOwner() instanceof Player) {
             Player owner = (Player) this.getOwner();
             owner.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.hasThrownBeforeGround && this.onGround()) {
+            this.hasThrownBeforeGround = false;
+            if (this.getOwner() instanceof Player) {
+                Player owner = (Player) this.getOwner();
+                owner.fallDistance = 0.0f;
+            }
         }
     }
 }
