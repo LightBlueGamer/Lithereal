@@ -14,7 +14,15 @@
     "requirement": {
       "trigger": "minecraft:channeled_lightning",
       "conditions": {
-        "player": {}
+        "player": {
+          "equipment": {
+            "": {
+              "items": [
+                "lithereal:lither_charge"
+              ]
+            }
+          }
+        }
       }
     }
   },
