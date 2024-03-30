@@ -4,7 +4,7 @@
       "item": "lithereal:lither_rod"
     },
     "title": "Sparks Fly",
-    "description": "Power a Lither Rod with a Lither Charge",
+    "description": "Use a Lither Charge to power a Lither Rod",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true
