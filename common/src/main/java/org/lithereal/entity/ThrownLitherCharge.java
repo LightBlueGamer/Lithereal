@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.lithereal.block.custom.LitherRodBlock;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
 
@@ -65,15 +64,13 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 if (blockState.getBlock() != Blocks.AIR) {
                     if (this.getOwner() instanceof Player && !((Player) this.getOwner()).isSpectator()) {
                         double launchSpeed = 1.0;
-                        if (this.getOwner().getXRot() > 70 && this.getOwner().getXRot() < 110) {
+                        if (this.getOwner().getXRot() > 80 && this.getOwner().getXRot() < 110) {
                             launchSpeed = 1.0;
                         }
 
                         this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, launchSpeed, this.getOwner().getDeltaMovement().z);
                         this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
-                        if (!(blockState.getBlock() instanceof LitherRodBlock)) {
-                            this.teleportPlayerToExplosion(blockPos);
-                        }
+                        this.teleportPlayerToExplosion(blockPos);
                         this.hasThrownBeforeGround = true;
                         this.discard();
                     }
