@@ -24,9 +24,6 @@ import net.minecraft.world.phys.HitResult;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
 
-    private boolean hasThrownBeforeGround = false;
-    private boolean isOwnerImmune = false;
-
     public ThrownLitherCharge(EntityType<? extends ThrownLitherCharge> entityType, Level level) {
         super(entityType, level);
     }
@@ -71,7 +68,6 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                         this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, launchSpeed, this.getOwner().getDeltaMovement().z);
                         this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
                         this.teleportPlayerToExplosion(blockPos);
-                        this.hasThrownBeforeGround = true;
                         this.discard();
                     }
                 }
@@ -95,7 +91,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     }
 
     private void onHitEntity(LivingEntity target) {
-        if (this.getOwner() != target) {
+        if (this.getOwner() != target && !(target instanceof Player && this.getOwner() == target)) {
             float damageAmount = 4.0f;
             if (this.getOwner() instanceof Player) {
                 Player playerOwner = (Player) this.getOwner();
@@ -105,7 +101,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 }
             }
 
-            if (!target.is(this.getOwner()) && !this.isOwnerImmune) {
+            if (!target.is(this.getOwner())) {
                 target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
 
                 if (!this.getCommandSenderWorld().isClientSide) {
@@ -139,12 +135,18 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     @Override
     public void tick() {
         super.tick();
-        if (this.hasThrownBeforeGround && this.onGround()) {
-            this.hasThrownBeforeGround = false;
+        if (this.onGround()) {
             if (this.getOwner() instanceof Player) {
                 Player owner = (Player) this.getOwner();
                 owner.fallDistance = 0.0f;
-                this.isOwnerImmune = true;
+            }
+            this.discard();
+        } else {
+            if (this.getOwner() instanceof Player) {
+                Player owner = (Player) this.getOwner();
+                if (owner.getY() < this.getY()) {
+                    owner.fallDistance = 0.0f;
+                }
             }
         }
     }

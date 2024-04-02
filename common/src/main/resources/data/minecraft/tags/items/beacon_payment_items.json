@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:burning_litherite_crystal",
+    "lithereal:charged_litherite_crystal",
+    "lithereal:frozen_litherite_crystal",
+    "lithereal:litherite_crystal",
+    "lithereal:withering_litherite_crystal"
+  ]
+}

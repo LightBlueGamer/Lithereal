@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:burning_litherite_sword",
+    "litherite:frozen_litherite_sword",
+    "litherite:infused_litherite_sword",
+    "lithereal:litherite_sword"
+  ]
+}

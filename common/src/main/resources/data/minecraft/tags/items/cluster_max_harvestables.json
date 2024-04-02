@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:burning_litherite_pickaxe",
+    "litherite:frozen_litherite_pickaxe",
+    "litherite:infused_litherite_pickaxe",
+    "lithereal:litherite_pickaxe"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:frozen_litherite_helmet",
+    "lithereal:frozen_litherite_chestplate",
+    "litherite:frozen_litherite_leggings",
+    "litherite:frozen_litherite_boots"
+  ]
+}

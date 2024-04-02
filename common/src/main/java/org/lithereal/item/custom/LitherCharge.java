@@ -7,7 +7,11 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import org.lithereal.entity.ThrownLitherCharge;
 
 public class LitherCharge extends Item {
@@ -17,6 +21,11 @@ public class LitherCharge extends Item {
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         ItemStack itemStack = player.getItemInHand(interactionHand);
+        Fluid fluid = Fluids.EMPTY;
+        BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
+        if (blockHitResult != null && blockHitResult.getLocation().y() <= -63 && blockHitResult.getLocation().y() >= -64) {
+            return InteractionResultHolder.fail(itemStack);
+        }
 
         level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         player.getCooldowns().addCooldown(this, 20);
