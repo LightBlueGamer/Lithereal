@@ -5,7 +5,7 @@
   "name": "Lithereal",
   "description": "Lithereal is a mod about infusing crystals with different magical powers.",
   "authors": [
-    "Light, Alexandra, Stunf"
+    "Light, Stunf, Alexandra"
   ],
   "contact": {
     "sources": "https://github.com/LightBlueGamer/Lithereal"
@@ -26,7 +26,7 @@
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20.1",
-    "architectury": ">=9.1.14"
+    "architectury": ">=9.2.14"
   },
   "mixins": [
     "lithereal.mixins.json",

@@ -70,6 +70,10 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> ETHEREAL_BRICK_WALL = registerBlock("ethereal_brick_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_WALL)));
+
+    public static final RegistrySupplier<Block> LITHER_LANTERN = registerBlock("lither_lantern",
+            () -> new LanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)
+                    .strength(6f)));
     
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);

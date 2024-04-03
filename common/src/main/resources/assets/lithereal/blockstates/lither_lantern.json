@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "lithereal:block/lither_lantern"
+    },
+    "hanging=true": {
+      "model": "lithereal:block/lither_lantern_hanging"
+    }
+  }
+}
