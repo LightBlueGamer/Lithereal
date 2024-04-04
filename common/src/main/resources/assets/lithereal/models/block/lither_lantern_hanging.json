@@ -1,6 +1,0 @@
-{
-  "parent": "lithereal:block/template_hanging_lantern",
-  "textures": {
-    "lantern": "lithereal:block/lither_lantern"
-  }
-}

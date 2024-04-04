@@ -3,6 +3,7 @@
   "values": [
     "lithereal:burning_litherite_block",
     "lithereal:charged_litherite_block",
+    "lithereal:chiseled_ethereal_bricks",
     "lithereal:deepslate_litherite_ore",
     "lithereal:ethereal_bricks",
     "lithereal:ethereal_brick_slab",
@@ -15,7 +16,6 @@
     "lithereal:infusement_chamber",
     "lithereal:lither_battery",
     "lithereal:lither_collector",
-    "lithereal:lither_lantern",
     "lithereal:litherite_block",
     "lithereal:litherite_ore",
     "lithereal:scorched_crimson_nylium",

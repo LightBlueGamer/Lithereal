@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lithereal:lither_lantern"
+          "name": "lithereal:chiseled_ethereal_bricks"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/lither_lantern"
+  "random_sequence": "lithereal:blocks/chiseled_ethereal_bricks"
 }

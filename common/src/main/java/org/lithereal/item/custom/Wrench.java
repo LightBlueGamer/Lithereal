@@ -41,23 +41,19 @@ public class Wrench extends Item {
                 newState = rotateSlabType(world, pos, state);
             }
 
-            // Try rotate direction
             if(newState == null) {
                 newState = rotateDirection(world, pos, state);
             }
 
-            // Try rotate axis
             if(newState == null) {
                 newState = rotateAxis(world, pos, state);
             }
 
-            // Try rotate rotation
             if(newState == null) {
                 newState = rotateRotation(world, pos, state);
             }
 
             if(newState != null) {
-                // Fixes stairs and other blocks
                 newState = updatePostPlacement(world, pos, newState);
 
                 Player player = context.getPlayer();
@@ -67,7 +63,6 @@ public class Wrench extends Item {
                 world.playSound(player, pos, soundType.getPlaceSound(), SoundSource.BLOCKS, 1.0f, world.random.nextFloat() * 0.4f + 0.8f);
 
                 if(player != null) {
-                    // Deal damage to item
                     context.getItemInHand().hurtAndBreak(1, player, (player2) -> {
                         player2.broadcastBreakEvent(context.getHand());
                     });
@@ -88,17 +83,14 @@ public class Wrench extends Item {
             return false;
         }
 
-        // Check block is not extended (pistons)
         if(state.hasProperty(BlockStateProperties.EXTENDED) && state.getValue(BlockStateProperties.EXTENDED)) {
             return false;
         }
 
-        // Check block is not a part of a chest
         if(state.hasProperty(BlockStateProperties.CHEST_TYPE) && state.getValue(BlockStateProperties.CHEST_TYPE) != ChestType.SINGLE) {
             return false;
         }
 
-        // Check if double slab
         if(state.hasProperty(BlockStateProperties.SLAB_TYPE) && state.getValue(BlockStateProperties.SLAB_TYPE) == SlabType.DOUBLE) {
             return false;
         }
@@ -109,7 +101,6 @@ public class Wrench extends Item {
     protected static BlockState updatePostPlacement(Level world, BlockPos pos, BlockState state) {
         DirectionProperty directionProperty = getDirectionProperty(state);
 
-        // Check facing property
         if(directionProperty != null) {
             Direction facing = state.getValue(directionProperty);
 
@@ -135,18 +126,15 @@ public class Wrench extends Item {
         for(int i = array.size() - 1; i >= 0; i--) {
             T value = array.get(i);
 
-            // Skip checking existing value
             if(value == currentValue) {
                 continue;
             }
 
-            // Check if value is applicable
             if(filter != null && filter.test(value)) {
                 array.remove(value);
             }
         }
 
-        // Cannot rotate array of 1
         if(array.size() <= 1) {
             return null;
         }
@@ -163,7 +151,6 @@ public class Wrench extends Item {
     protected static BlockState rotateDirection(Level world, BlockPos pos, BlockState state) {
         DirectionProperty directionProperty = getDirectionProperty(state);
 
-        // Check facing property
         if(directionProperty == null) {
             return null;
         }
@@ -182,7 +169,6 @@ public class Wrench extends Item {
             BlockState facingState = world.getBlockState(pos.relative(dir, -1));
             Block facingBlock = facingState.getBlock();
 
-            // Check that signs are not now attached to each other
             if(isValidPos && facingBlock instanceof WallSignBlock && block instanceof WallSignBlock) {
                 if(facingState.getValue(directionProperty).getOpposite().equals(dir)) {
                     isValidPos = false;
@@ -196,7 +182,6 @@ public class Wrench extends Item {
     protected static BlockState rotateAxis(Level world, BlockPos pos, BlockState state) {
         EnumProperty<Direction.Axis> axisProperty = getAxisProperty(state);
 
-        // Check facing property
         if(axisProperty == null) {
             return null;
         }
@@ -207,12 +192,10 @@ public class Wrench extends Item {
     protected static BlockState rotateSlabType(Level world, BlockPos pos, BlockState state) {
         EnumProperty<SlabType> slabTypeProperty = getSlabTypeProperty(state);
 
-        // Check facing property
         if(slabTypeProperty == null) {
             return null;
         }
 
-        // Remove double slab from rotation
         return rotateProperty(state, slabTypeProperty, (slabType) -> slabType == SlabType.DOUBLE);
     }
 
