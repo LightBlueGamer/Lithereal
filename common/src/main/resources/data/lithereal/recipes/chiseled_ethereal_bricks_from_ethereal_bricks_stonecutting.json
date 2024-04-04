@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "lithereal:ethereal_bricks"
+  },
+  "result": "lithereal:chiseled_ethereal_bricks"
+}
