@@ -5,9 +5,7 @@
     },
     "title": "Sparkling Dedication",
     "description": "Use Litherite Crystals to craft a Hoe, and then reevaluate your life choices",
-    "frame": "challenge",
-    "show_toast": true,
-    "announce_to_chat": true
+    "frame": "challenge"
   },
   "parent": "lithereal:lithereal",
   "criteria": {

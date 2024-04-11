@@ -1,21 +1,6 @@
 {
   "replace": false,
   "values": [
-    "lithereal:burning_litherite_helmet",
-    "lithereal:burning_litherite_chestplate",
-    "litherite:burning_litherite_leggings",
-    "litherite:burning_litherite_boots",
-    "lithereal:frozen_litherite_helmet",
-    "lithereal:frozen_litherite_chestplate",
-    "litherite:frozen_litherite_leggings",
-    "litherite:frozen_litherite_boots",
-    "lithereal:litherite_helmet",
-    "lithereal:litherite_chestplate",
-    "litherite:litherite_leggings",
-    "litherite:litherite_boots",
-    "lithereal:withering_litherite_helmet",
-    "lithereal:withering_litherite_chestplate",
-    "litherite:withering_litherite_leggings",
-    "litherite:withering_litherite_boots"
+    "lithereal:litherite_crystal"
   ]
 }

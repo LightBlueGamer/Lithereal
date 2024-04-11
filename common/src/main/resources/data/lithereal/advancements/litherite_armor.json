@@ -5,9 +5,7 @@
     },
     "title": "Cover Me in Crystals",
     "description": "Obtain a full set of Litherite armor",
-    "frame": "challenge",
-    "show_toast": true,
-    "announce_to_chat": true
+    "frame": "challenge"
   },
   "parent": "lithereal:lithereal",
   "criteria": {

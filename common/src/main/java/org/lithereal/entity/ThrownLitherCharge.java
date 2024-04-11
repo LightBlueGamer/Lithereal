@@ -66,7 +66,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                         }
 
                         this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, launchSpeed, this.getOwner().getDeltaMovement().z);
-                        this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3.0f, Level.ExplosionInteraction.BLOCK);
+                        this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5.0f, Level.ExplosionInteraction.BLOCK);
                         this.teleportPlayerToExplosion(blockPos);
                         this.discard();
                     }
@@ -81,7 +81,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 } else {
                     BlockPos entityPos = targetEntity.blockPosition();
                     this.teleportPlayerToExplosion(entityPos);
-                    this.getCommandSenderWorld().explode(null, entityPos.getX(), entityPos.getY(), entityPos.getZ(), 3.0f, Level.ExplosionInteraction.NONE);
+                    this.getCommandSenderWorld().explode(null, entityPos.getX(), entityPos.getY(), entityPos.getZ(), 5.0f, Level.ExplosionInteraction.NONE);
                     this.discard();
                 }
             }
