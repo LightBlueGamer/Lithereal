@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import dev.architectury.registry.registries.RegistrarManager;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
+import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
 import org.lithereal.recipe.ModRecipes;
@@ -23,6 +24,7 @@ public class Lithereal {
         ModItems.register();
         ModBlockEntities.register();
         ModRecipes.register();
+        ModEntities.register();
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

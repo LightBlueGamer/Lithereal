@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.item.custom.infused.InfusedItem;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
         if(blockEntity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity) {
             if(entity instanceof LivingEntity livingEntity) {
                 infusedLitheriteBlockEntity.potion.getEffects().forEach((mobEffectInstance) -> {
-                    MobEffectInstance newEffect = new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().isInstantenous() ? 1 : 40, mobEffectInstance.getAmplifier(), true, false, false);
+                    MobEffectInstance newEffect = InfusedItem.transformInstance(mobEffectInstance, 40);
                     if(!livingEntity.hasEffect(newEffect.getEffect())) livingEntity.addEffect(newEffect);
                 });
             }

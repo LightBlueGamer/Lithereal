@@ -1,16 +1,12 @@
 package org.lithereal.item.custom.infused;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
@@ -75,8 +71,7 @@ public class InfusedLitheriteHammer extends Hammer implements InfusedItem {
         }
         if (itemStack.isDamaged() && regenTicker >= 10) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
-                MobEffect effect = mobEffectInstance.getEffect();
-                if(effect == MobEffects.REGENERATION) {
+                if(mobEffectInstance.getEffect() == MobEffects.REGENERATION) {
                     itemStack.setDamageValue(itemStack.getDamageValue() - mobEffectInstance.getAmplifier());
                     regenTicker = 0;
                 }
@@ -88,20 +83,24 @@ public class InfusedLitheriteHammer extends Hammer implements InfusedItem {
     }
 
     public ItemStack getDefaultInstance() {
-        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.POISON);
+        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.EMPTY);
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
         PotionUtils.addPotionTooltip(itemStack, components, 1F);
-
-        ItemStack potion = PotionUtils.setPotion(new ItemStack(Items.POTION), PotionUtils.getPotion(itemStack));
-        Component name = potion.getHoverName();
-        String hoverStr = name.getString().replaceAll("^(?i)(potion of the |potion of |potion )", "");
-        Component newName = Component.literal(hoverStr+ " Litherite Hammer").withStyle(Style.EMPTY.withItalic(false));
-        itemStack.setHoverName(newName);
     }
 
     public String getDescriptionId(ItemStack p_43364_) {
         return PotionUtils.getPotion(p_43364_).getName(this.getDescriptionId() + ".effect.");
+    }
+
+    @Override
+    public Component getName(ItemStack itemStack) {
+        return getModifiedName(itemStack);
+    }
+
+    @Override
+    public String getBaseName(ItemStack stack) {
+        return "Litherite Hammer";
     }
 }

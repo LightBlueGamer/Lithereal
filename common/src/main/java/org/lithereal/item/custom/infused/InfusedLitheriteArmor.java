@@ -1,7 +1,6 @@
 package org.lithereal.item.custom.infused;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -61,7 +60,7 @@ public class InfusedLitheriteArmor extends ArmorItem implements InfusedItem {
                             boolean bl = mobEffectInstance.getEffect().isBeneficial();
                             if (bl || bl2) {
                                 if(mobEffectInstance.getEffect() != MobEffects.HEAL || healTicker >= 200) {
-                                    MobEffectInstance mobEff = new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().isInstantenous() ? 1 : 100, mobEffectInstance.getAmplifier());
+                                    MobEffectInstance mobEff = InfusedItem.transformInstance(mobEffectInstance, 100);
                                     player.addEffect(mobEff);
                                     if(mobEffectInstance.getEffect() == MobEffects.HEAL) healTicker = 0;
                                 }
@@ -92,35 +91,31 @@ public class InfusedLitheriteArmor extends ArmorItem implements InfusedItem {
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
-        PotionUtils.addPotionTooltip(itemStack, components, 1F);
-
-        String armorType = "";
-        if(itemStack.getItem() instanceof ArmorItem armorItem) {
-            EquipmentSlot slot = armorItem.getEquipmentSlot();
-            switch (slot) {
-                case HEAD:
-                    armorType = "Helmet";
-                    break;
-                case CHEST:
-                    armorType = "Chestplate";
-                    break;
-                case LEGS:
-                    armorType = "Leggings";
-                    break;
-                case FEET:
-                    armorType = "Boots";
-                    break;
-            }
-        }
-
-        ItemStack potion = PotionUtils.setPotion(new ItemStack(Items.POTION), PotionUtils.getPotion(itemStack));
-        Component name = potion.getHoverName();
-        String hoverStr = name.getString().replaceAll("^(?i)(potion of the |potion of |potion )", "");
-        Component newName = Component.literal(hoverStr + " Litherite " + armorType).withStyle(Style.EMPTY.withItalic(false));
-        itemStack.setHoverName(newName);
+        PotionUtils.addPotionTooltip(transformEffects(itemStack, 100), components, 1F);
     }
 
     public String getDescriptionId(ItemStack p_43364_) {
         return PotionUtils.getPotion(p_43364_).getName(this.getDescriptionId() + ".effect.");
+    }
+
+    @Override
+    public Component getName(ItemStack itemStack) {
+        return getModifiedName(itemStack);
+    }
+
+    @Override
+    public String getBaseName(ItemStack stack) {
+        String armorType = "";
+        if (stack.getItem() instanceof ArmorItem armorItem) {
+            EquipmentSlot slot = armorItem.getEquipmentSlot();
+            armorType = switch (slot) {
+                case HEAD -> "Helmet";
+                case CHEST -> "Chestplate";
+                case LEGS -> "Leggings";
+                case FEET -> "Boots";
+                default -> armorType;
+            };
+        }
+        return "Litherite " + armorType;
     }
 }

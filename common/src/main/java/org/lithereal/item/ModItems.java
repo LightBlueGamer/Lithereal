@@ -12,10 +12,14 @@ import org.lithereal.item.custom.*;
 import org.lithereal.item.custom.burning.*;
 import org.lithereal.item.custom.frozen.*;
 import org.lithereal.item.custom.infused.*;
+import org.lithereal.item.custom.obscured.MysteriousItem;
 import org.lithereal.item.custom.withering.*;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
+
+    public static final RegistrySupplier<Item> UNIDENTIFIED_ROD = ITEMS.register("unidentified_rod", () ->
+            new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_CRYSTAL = ITEMS.register("burning_litherite_crystal", () ->
             new Item(new Item.Properties().fireResistant()));
@@ -124,7 +128,7 @@ public class ModItems {
             new WitheringLitheriteHoe(LITHERITE, -3, 0f, new Item.Properties()));
 
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
-            new LitherCharge(new Item.Properties().stacksTo(64)));
+            new LitherCharge(new Item.Properties()));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
             new BrushItem(new Item.Properties().stacksTo(1).durability(256)));

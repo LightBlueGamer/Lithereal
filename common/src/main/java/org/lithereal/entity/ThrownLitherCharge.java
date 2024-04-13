@@ -1,19 +1,13 @@
 package org.lithereal.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.vehicle.MinecartTNT;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TntBlock;
@@ -21,6 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import org.lithereal.item.ModItems;
+
+import static net.minecraft.world.level.block.TntBlock.explode;
 
 public class ThrownLitherCharge extends ThrowableItemProjectile {
 
@@ -29,60 +27,51 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     }
 
     public ThrownLitherCharge(Level arg, LivingEntity arg2) {
-        super(EntityType.ENDER_PEARL, arg2, arg);
+        super(ModEntities.LITHER_CHARGE.get(), arg2, arg);
     }
 
     protected Item getDefaultItem() {
-        return Items.ENDER_PEARL;
+        return ModItems.LITHER_CHARGE.get();
     }
 
     protected void onHit(HitResult hitResult) {
-        super.onHit(hitResult);
+        if (!this.level().isClientSide) {
+            switch (hitResult.getType()) {
+                case BLOCK -> {
+                    BlockHitResult blockHitResult = (BlockHitResult) hitResult;
+                    BlockPos blockPos = blockHitResult.getBlockPos();
+                    BlockState blockState = this.level().getBlockState(blockPos);
 
-        if (!this.getCommandSenderWorld().isClientSide) {
-            if (hitResult.getType() == HitResult.Type.BLOCK) {
-                BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-                BlockPos blockPos = blockHitResult.getBlockPos();
-                BlockState blockState = this.getCommandSenderWorld().getBlockState(blockPos);
-
-                if (blockState.getBlock() instanceof TntBlock) {
-                    this.getCommandSenderWorld().playSound(null, blockPos, SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0f, 1.0f);
-                    this.getCommandSenderWorld().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-                    PrimedTnt primedTNT = new PrimedTnt(this.getCommandSenderWorld(), blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D, null);
-                    this.getCommandSenderWorld().addFreshEntity(primedTNT);
-                    this.discard();
-                    return;
-                }
-
-                if (this.getCommandSenderWorld().getFluidState(blockPos).is(FluidTags.WATER)) {
-                    return;
-                }
-
-                if (blockState.getBlock() != Blocks.AIR) {
-                    if (this.getOwner() instanceof Player && !((Player) this.getOwner()).isSpectator()) {
-                        double launchSpeed = 1.0;
-                        if (this.getOwner().getXRot() > 80 && this.getOwner().getXRot() < 110) {
-                            launchSpeed = 1.0;
-                        }
-
-                        this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, launchSpeed, this.getOwner().getDeltaMovement().z);
-                        this.getCommandSenderWorld().explode(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5.0f, Level.ExplosionInteraction.BLOCK);
-                        this.teleportPlayerToExplosion(blockPos);
+                    if (blockState.getBlock() instanceof TntBlock) {
+                        level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
+                        explode(level(), blockPos);
                         this.discard();
+                        return;
+                    }
+
+                    if (this.isInWater()) {
+                        causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 5, Level.ExplosionInteraction.BLOCK, this.getOwner() != null && !this.getOwner().isSpectator());
+                        this.discard();
+                        return;
+                    }
+
+                    if (blockState.getBlock() != Blocks.AIR) {
+                        if (this.getOwner() != null && !this.getOwner().isSpectator()) {
+                            this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, 1, this.getOwner().getDeltaMovement().z);
+                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 5, Level.ExplosionInteraction.BLOCK, true);
+                        } else causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 5, Level.ExplosionInteraction.BLOCK, false);
                     }
                 }
-            } else if (hitResult.getType() == HitResult.Type.ENTITY) {
-                EntityHitResult entityHitResult = (EntityHitResult) hitResult;
-                Entity targetEntity = entityHitResult.getEntity();
+                case ENTITY -> {
+                    EntityHitResult entityHitResult = (EntityHitResult) hitResult;
+                    Entity targetEntity = entityHitResult.getEntity();
 
-                if (targetEntity instanceof LivingEntity) {
-                    LivingEntity target = (LivingEntity) targetEntity;
-                    onHitEntity(target);
-                } else {
-                    BlockPos entityPos = targetEntity.blockPosition();
-                    this.teleportPlayerToExplosion(entityPos);
-                    this.getCommandSenderWorld().explode(null, entityPos.getX(), entityPos.getY(), entityPos.getZ(), 5.0f, Level.ExplosionInteraction.NONE);
-                    this.discard();
+                    if (targetEntity instanceof MinecartTNT tnt)
+                        tnt.primeFuse();
+                    else if (targetEntity instanceof LivingEntity target)
+                        onHitEntity(target);
+                    else
+                        causeExplosion(targetEntity.position(), 5, Level.ExplosionInteraction.NONE, true);
                 }
             }
 
@@ -91,59 +80,52 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     }
 
     private void onHitEntity(LivingEntity target) {
-        if (this.getOwner() != target && !(target instanceof Player && this.getOwner() == target)) {
-            float damageAmount = 4.0f;
-            if (this.getOwner() instanceof Player) {
-                Player playerOwner = (Player) this.getOwner();
-                ItemStack heldItem = playerOwner.getMainHandItem();
-                if (heldItem.getItem() instanceof ShieldItem) {
-                    damageAmount = 0.0f;
-                }
+        if (!target.is(getOwner())) {
+            target.hurt(this.damageSources().thrown(this, getOwner()), 4);
+            if (target instanceof Player player && target.isBlocking()) {
+                player.getCooldowns().addCooldown(player.getUseItem().getItem(), 100);
+                player.stopUsingItem();
+                player.level().broadcastEntityEvent(player, (byte)30);
             }
 
-            if (!target.is(this.getOwner())) {
-                target.hurt(this.damageSources().thrown(this, this.getOwner()), damageAmount);
+            if (!this.level().isClientSide) {
+                causeExplosion(target.position(), 1, Level.ExplosionInteraction.NONE, false);
 
-                if (!this.getCommandSenderWorld().isClientSide) {
-                    double explosionPower = 1.0;
-                    this.getCommandSenderWorld().explode(null, target.getX(), target.getY(), target.getZ(), (float) explosionPower, Level.ExplosionInteraction.NONE);
+                double xDiff = target.getX() - this.getX();
+                double zDiff = target.getZ() - this.getZ();
+                double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
 
-                    double xDiff = target.getX() - this.getX();
-                    double zDiff = target.getZ() - this.getZ();
-                    double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
+                if (distance > 0) {
+                    double normalizedX = xDiff / distance;
+                    double normalizedZ = zDiff / distance;
+                    target.push(normalizedX, 0.0, normalizedZ);
 
-                    double knockbackStrength = 1.0;
-                    if (distance > 0) {
-                        double normalizedX = xDiff / distance;
-                        double normalizedZ = zDiff / distance;
-                        target.push(normalizedX * knockbackStrength, 0.0, normalizedZ * knockbackStrength);
-
-                        target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
-                    }
+                    target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
                 }
             }
         }
     }
-
-    private void teleportPlayerToExplosion(BlockPos blockPos) {
-        if (this.getOwner() instanceof Player) {
-            Player owner = (Player) this.getOwner();
-            owner.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-        }
+    private void teleportPlayerToExplosion(Vec3 pos) {
+        Entity owner = getOwner();
+        if (owner != null)
+            owner.teleportTo(pos.x, pos.y + 0.01, pos.z);
+    }
+    private void causeExplosion(Vec3 pos, float range, Level.ExplosionInteraction interaction, boolean teleport) {
+        this.level().explode(null, pos.x, pos.y, pos.z, range, interaction);
+        if (teleport)
+            teleportPlayerToExplosion(pos);
     }
 
     @Override
     public void tick() {
         super.tick();
         if (this.onGround()) {
-            if (this.getOwner() instanceof Player) {
-                Player owner = (Player) this.getOwner();
-                owner.fallDistance = 0.0f;
-            }
+            if (this.getOwner() != null)
+                getOwner().fallDistance = 0.0f;
             this.discard();
         } else {
-            if (this.getOwner() instanceof Player) {
-                Player owner = (Player) this.getOwner();
+            if (this.getOwner() != null) {
+                Entity owner = this.getOwner();
                 if (owner.getY() < this.getY()) {
                     owner.fallDistance = 0.0f;
                 }

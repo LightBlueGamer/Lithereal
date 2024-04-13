@@ -6,10 +6,8 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.Items;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WarHammer extends SwordItem {
 
@@ -19,17 +17,14 @@ public class WarHammer extends SwordItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (attacker instanceof Player) {
-            Player player = (Player) attacker;
+        if (attacker instanceof Player player) {
             if (player.fallDistance > 0.0F && !player.isFallFlying() && !player.isCrouching()) {
 
                 player.fallDistance = 0.0F;
 
                 float knockbackStrength = 1.0F;
 
-                stack.hurtAndBreak(1, player, (entity) -> {
-                    entity.broadcastBreakEvent(player.getUsedItemHand());
-                });
+                stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(player.getUsedItemHand()));
 
                 if (player.isUsingItem()) {
                     handleSweepAttack(player, target, knockbackStrength);
@@ -46,13 +41,16 @@ public class WarHammer extends SwordItem {
 
     private void handleSweepAttack(Player player, LivingEntity target, float knockbackStrength) {
         double radius = 3.0;
-        List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius));
-        List<LivingEntity> nearbyLivingEntitiesWithShield = nearbyEntities.stream()
-                .filter(entity -> entity instanceof LivingEntity && !((LivingEntity) entity).isCrouching() && !((LivingEntity) entity).isFallFlying())
-                .filter(entity -> !entity.getMainHandItem().isEmpty() && entity.getMainHandItem().getItem() == Items.SHIELD)
-                .collect(Collectors.toList());
+        List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius)).stream()
+                .filter(entity -> entity instanceof LivingEntity && !entity.isCrouching() && !entity.isFallFlying() && entity.isBlocking())
+                .toList();
 
-        for (LivingEntity nearbyEntity : nearbyLivingEntitiesWithShield) {
+        for (LivingEntity nearbyEntity : nearbyEntities) {
+            if (nearbyEntity instanceof Player player1) {
+                player1.getCooldowns().addCooldown(player1.getUseItem().getItem(), 100);
+                player1.stopUsingItem();
+                player1.level().broadcastEntityEvent(player1, (byte)30);
+            }
             if (Math.abs(nearbyEntity.getY() - target.getY()) < 0.1) {
                 nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
             }

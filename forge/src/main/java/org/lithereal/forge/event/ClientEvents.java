@@ -1,5 +1,6 @@
 package org.lithereal.forge.event;
 
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -9,6 +10,7 @@ import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityRenderer;
+import org.lithereal.entity.ModEntities;
 import org.lithereal.forge.block.entity.ForgeBlockEntities;
 
 public class ClientEvents {
@@ -22,6 +24,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void entityRendererInit(EntityRenderersEvent.RegisterRenderers event) {
             registerBlockEntityRenderer(event);
+            event.registerEntityRenderer(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
         }
     }
 

@@ -1,7 +1,6 @@
 package org.lithereal.item.custom.infused;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -27,7 +26,6 @@ public class InfusedLitheriteAxe extends AxeItem implements InfusedItem {
 
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-
         PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
             MobEffect effect = mobEffectInstance.getEffect();
             boolean bl = effect.isBeneficial();
@@ -56,14 +54,14 @@ public class InfusedLitheriteAxe extends AxeItem implements InfusedItem {
                 boolean bl = !untilReady.containsKey(effect) && (effect.isBeneficial()
                         || PotionUtils.getPotion(itemStack).getEffects().size() > 1)
                         && !effect.isInstantenous();
-                if(bl) {
+                if (bl) {
                     livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                     untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 }
-                if(effect == MobEffects.MOVEMENT_SPEED) {
+                if (effect == MobEffects.MOVEMENT_SPEED) {
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, mobEffectInstance.getAmplifier()));
                 }
-                if(untilReady.containsKey(effect) && untilReady.get(effect) <= 0) {
+                if (untilReady.containsKey(effect) && untilReady.get(effect) <= 0) {
                     livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                     untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                 }
@@ -71,8 +69,7 @@ public class InfusedLitheriteAxe extends AxeItem implements InfusedItem {
         }
         if (itemStack.isDamaged() && regenTicker >= 10) {
             PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
-                MobEffect effect = mobEffectInstance.getEffect();
-                if(effect == MobEffects.REGENERATION) {
+                if(mobEffectInstance.getEffect() == MobEffects.REGENERATION) {
                     itemStack.setDamageValue(itemStack.getDamageValue() - mobEffectInstance.getAmplifier());
                     regenTicker = 0;
                 }
@@ -89,15 +86,19 @@ public class InfusedLitheriteAxe extends AxeItem implements InfusedItem {
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
         PotionUtils.addPotionTooltip(itemStack, components, 1F);
-
-        ItemStack potion = PotionUtils.setPotion(new ItemStack(Items.POTION), PotionUtils.getPotion(itemStack));
-        Component name = potion.getHoverName();
-        String hoverStr = name.getString().replaceAll("(?i)(potion of the |potion of |potion )", "");
-        Component newName = Component.literal(hoverStr+ " Litherite Axe").withStyle(Style.EMPTY.withItalic(false));
-        itemStack.setHoverName(newName);
     }
 
     public String getDescriptionId(ItemStack p_43364_) {
         return PotionUtils.getPotion(p_43364_).getName(this.getDescriptionId() + ".effect.");
+    }
+
+    @Override
+    public Component getName(ItemStack itemStack) {
+        return getModifiedName(itemStack);
+    }
+
+    @Override
+    public String getBaseName(ItemStack stack) {
+        return "Litherite Axe";
     }
 }

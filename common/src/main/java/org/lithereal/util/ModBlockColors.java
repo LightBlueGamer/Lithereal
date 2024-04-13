@@ -5,7 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 
 import java.util.function.BiFunction;
 
@@ -14,12 +16,10 @@ public class ModBlockColors {
             layer == 0 ? PotionUtils.getColor(itemStack) : -1;
 
     public static final BlockColor INFUSED_LITHERITE_BLOCK_COLOR = (BlockState state, BlockAndTintGetter world, BlockPos pos, int tintIndex) -> {
-        ItemStack stack = getItemStackFromState(state);
+        BlockEntity entity = world.getBlockEntity(pos);
+        if (entity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity)
+            return tintIndex == 0 ? PotionUtils.getColor(infusedLitheriteBlockEntity.getStoredPotion()) : -1;
 
-        return INFUSED_LITHERITE_COLOR_HANDLER.apply(stack, tintIndex);
+        return -1;
     };
-
-    private static ItemStack getItemStackFromState(BlockState state) {
-        return state.getBlock().asItem().getDefaultInstance();
-    }
 }
