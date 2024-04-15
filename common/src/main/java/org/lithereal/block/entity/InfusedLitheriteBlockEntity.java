@@ -25,8 +25,7 @@ public class InfusedLitheriteBlockEntity extends BlockEntity {
 
     @Override
     protected void saveAdditional(CompoundTag nbt) {
-        setPotion(nbt, potion);
-        super.saveAdditional(nbt);
+        super.saveAdditional(setPotion(nbt, potion));
     }
 
     @Override

@@ -87,7 +87,7 @@ public class InfusedLitheriteArmor extends ArmorItem implements InfusedItem {
     }
 
     public ItemStack getDefaultInstance() {
-        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.POISON);
+        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.EMPTY);
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
