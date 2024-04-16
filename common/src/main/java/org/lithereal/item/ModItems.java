@@ -205,6 +205,12 @@ public class ModItems {
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
             new WarHammer(LITHERITE, 7, -3f, new Item.Properties().durability(512)));
 
+    public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
+            new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> UNIFIER = ITEMS.register("unifier", () ->
+            new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+
     public static void register() {
         ITEMS.register();
     }
