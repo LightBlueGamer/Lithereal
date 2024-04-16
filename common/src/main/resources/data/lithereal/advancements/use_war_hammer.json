@@ -5,7 +5,7 @@
     },
     "title": "Hammer Time!",
     "description": "Kill a mob or player using a War Hammer",
-    "frame": "task"
+    "frame": "challenge"
   },
   "parent": "lithereal:lithereal",
   "criteria": {

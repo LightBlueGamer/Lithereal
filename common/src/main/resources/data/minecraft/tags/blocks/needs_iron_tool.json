@@ -1,10 +1,12 @@
 {
   "replace": false,
   "values": [
-    "lithereal:chiseled_ethereal_bricks",
-    "lithereal:ethereal_bricks",
-    "lithereal:ethereal_brick_slab",
-    "lithereal:ethereal_brick_stairs",
-    "lithereal:ethereal_brick_wall"
+    "lithereal:chiseled_etherstone_bricks",
+    "lithereal:cobbled_etherstone",
+    "lithereal:etherstone",
+    "lithereal:etherstone_bricks",
+    "lithereal:etherstone_brick_slab",
+    "lithereal:etherstone_brick_stairs",
+    "lithereal:etherstone_brick_wall"
   ]
 }

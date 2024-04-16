@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "lithereal:etherstone_bricks"
+  },
+  "result": "lithereal:ethestone_brick_slab"
+}

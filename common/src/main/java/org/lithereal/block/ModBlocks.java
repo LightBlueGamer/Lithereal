@@ -59,19 +59,25 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> SCORCHED_WARPED_NYLIUM = registerBlock("scorched_warped_nylium",
             () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_NYLIUM)));
 
-    public static final RegistrySupplier<Block> ETHEREAL_BRICKS = registerBlock("ethereal_bricks",
+    public static final RegistrySupplier<Block> ETHERSTONE = registerBlock("etherstone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> COBBLED_ETHERSTONE = registerBlock("cobbled_etherstone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLED_DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_BRICKS = registerBlock("etherstone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)));
 
-    public static final RegistrySupplier<Block> ETHEREAL_BRICK_STAIRS = registerBlock("ethereal_brick_stairs",
+    public static final RegistrySupplier<Block> ETHERSTONE_BRICK_STAIRS = registerBlock("etherstone_brick_stairs",
             () -> new StairBlock(Blocks.DEEPSLATE_BRICK_STAIRS.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_STAIRS)));
 
-    public static final RegistrySupplier<Block> ETHEREAL_BRICK_SLAB = registerBlock("ethereal_brick_slab",
+    public static final RegistrySupplier<Block> ETHERSTONE_BRICK_SLAB = registerBlock("etherstone_brick_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_SLAB)));
 
-    public static final RegistrySupplier<Block> ETHEREAL_BRICK_WALL = registerBlock("ethereal_brick_wall",
+    public static final RegistrySupplier<Block> ETHERSTONE_BRICK_WALL = registerBlock("etherstone_brick_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_WALL)));
 
-    public static final RegistrySupplier<Block> CHISELED_ETHEREAL_BRICKS = registerBlock("chiseled_ethereal_bricks",
+    public static final RegistrySupplier<Block> CHISELED_ETHERSTONE_BRICKS = registerBlock("chiseled_etherstone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)));
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {

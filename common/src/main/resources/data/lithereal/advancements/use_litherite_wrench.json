@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "lithereal:litherite_wrench"
+    },
+    "title": "You Spin Me Round",
+    "description": "Use a Litherite Wrench to change the rotation of a block",
+    "frame": "task"
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:item_durability_changed",
+      "conditions": {
+        "item": {
+          "items": [
+            "lithereal:litherite_wrench"
+          ]
+        }
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}

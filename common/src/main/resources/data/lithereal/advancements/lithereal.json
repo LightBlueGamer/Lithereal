@@ -5,16 +5,14 @@
     },
     "title": "Lithereal",
     "description": "A mod about infusing crystals with different magical powers",
+    "background": "lithereal:textures/block/etherstone.png",
     "frame": "task",
     "show_toast": false,
-    "announce_to_chat": false,
-    "background": "lithereal:textures/block/ethereal_bricks.png"
+    "announce_to_chat": false
   },
   "criteria": {
     "requirement": {
-      "trigger": "minecraft:inventory_changed"
-          }
-      }
+      "trigger": "minecraft:tick"
     }
   }
 }
