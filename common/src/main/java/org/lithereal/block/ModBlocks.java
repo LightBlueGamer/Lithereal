@@ -80,6 +80,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> CHISELED_ETHERSTONE_BRICKS = registerBlock("chiseled_etherstone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)));
 
+    public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
