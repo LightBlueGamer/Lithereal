@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.LitherealExpectPlatform;
@@ -122,5 +123,9 @@ public class LitherealExpectPlatformImpl {
 
     public static LitherBatteryBlock getLitherBatteryBlock() {
         return (LitherBatteryBlock) FabricBlocks.LITHER_BATTERY_BLOCK;
+    }
+
+    public static Iterable<Potion> getRegisteredPotions() {
+        return BuiltInRegistries.POTION.stream().toList();
     }
 }

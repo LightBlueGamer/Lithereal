@@ -7,6 +7,7 @@ import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.enchantment.ModEnchantments;
 import org.lithereal.recipe.ModRecipes;
 
 import java.util.function.Supplier;
@@ -25,6 +26,7 @@ public class Lithereal {
         ModBlockEntities.register();
         ModRecipes.register();
         ModEntities.register();
+        ModEnchantments.register();
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

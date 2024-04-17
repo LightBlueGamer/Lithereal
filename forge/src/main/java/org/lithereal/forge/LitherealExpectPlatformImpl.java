@@ -1,9 +1,11 @@
 package org.lithereal.forge;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -115,5 +117,9 @@ public class LitherealExpectPlatformImpl {
 
     public static MenuType<LitherCollectorMenu> getLitherCollectorMenu() {
         return null;
+    }
+
+    public static Iterable<Potion> getRegisteredPotions() {
+        return ForgeRegistries.POTIONS;
     }
 }

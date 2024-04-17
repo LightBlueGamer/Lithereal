@@ -18,9 +18,6 @@ import org.lithereal.item.custom.withering.*;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
 
-    public static final RegistrySupplier<Item> UNIDENTIFIED_ROD = ITEMS.register("unidentified_rod", () ->
-            new MysteriousItem(new Item.Properties()));
-
     public static final RegistrySupplier<Item> BURNING_LITHERITE_CRYSTAL = ITEMS.register("burning_litherite_crystal", () ->
             new Item(new Item.Properties().fireResistant()));
 
@@ -127,9 +124,6 @@ public class ModItems {
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HOE = ITEMS.register("withering_litherite_hoe", () ->
             new WitheringLitheriteHoe(LITHERITE, -3, 0f, new Item.Properties()));
 
-    public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
-            new LitherCharge(new Item.Properties()));
-
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
             new BrushItem(new Item.Properties().stacksTo(1).durability(256)));
 
@@ -196,20 +190,26 @@ public class ModItems {
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_BOOTS = ITEMS.register("withering_litherite_boots", () ->
             new WitheringLitheriteArmor(ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
-            new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
+            new LitherCharge(new Item.Properties()));
 
     public static final RegistrySupplier<Item> LITHEREAL_KEY = ITEMS.register("lithereal_key", () ->
             new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> UNIDENTIFIED_ROD = ITEMS.register("unidentified_rod", () ->
+            new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
             new WarHammer(LITHERITE, 7, -3f, new Item.Properties().durability(512)));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
-            new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+            new SimpleFoiledItem(new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistrySupplier<Item> UNIFIER = ITEMS.register("unifier", () ->
-            new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+            new SimpleFoiledItem(new Item.Properties().rarity(Rarity.RARE)));
+
+    public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
+            new Item(new Item.Properties().stacksTo(1)));
 
     public static void register() {
         ITEMS.register();

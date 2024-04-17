@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.block.custom.*;
@@ -156,6 +157,11 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static MenuType<ChargingStationMenu> getChargingStationMenu() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Iterable<Potion> getRegisteredPotions() {
         throw new AssertionError();
     }
 }

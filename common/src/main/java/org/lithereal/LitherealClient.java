@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
@@ -22,11 +21,7 @@ import org.lithereal.util.KeyBinding;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LitherealClient {
     public static void init() {
@@ -51,69 +46,66 @@ public class LitherealClient {
     }
 
     private static void registerItemsToTab() {
-        List<ItemStack> itemsToAdd = new ArrayList<>(Arrays.asList(
-                LitherealExpectPlatform.getLitheriteItem().getDefaultInstance(),
+        List<ItemStack> litherite = new ArrayList<>();
+        List<ItemStack> otherI = new ArrayList<>();
+        List<ItemStack> otherB = new ArrayList<>(Arrays.asList(
                 LitherealExpectPlatform.getFireCrucibleBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
-                LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()
-        ));
+                LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()));
 
-        Field[] fields = Potions.class.getDeclaredFields();
-
-        for (Field field : fields) {
-            if (Potion.class.isAssignableFrom(field.getType())) {
-                try {
-                    Potion potion = (Potion) field.get(null);
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(LitherealExpectPlatform.getInfusedLitheriteBlock()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_INGOT.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SWORD.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SHOVEL.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_PICKAXE.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_AXE.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HOE.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HAMMER.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HELMET.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_CHESTPLATE.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_LEGGINGS.get()), potion));
-                    itemsToAdd.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_BOOTS.get()), potion));
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
-            ItemStack item = new ItemStack(itemRegistrySupplier.get(), 1);
-            if (item != null && !itemsToAdd.contains(item)) {
-                itemsToAdd.add(item);
-            }
+        for (Potion potion : LitherealExpectPlatform.getRegisteredPotions()) {
+            litherite.add(PotionUtils.setPotion(new ItemStack(LitherealExpectPlatform.getInfusedLitheriteBlock()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_INGOT.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SWORD.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SHOVEL.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_PICKAXE.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_AXE.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HOE.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HAMMER.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HELMET.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_CHESTPLATE.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_LEGGINGS.get()), potion));
+            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_BOOTS.get()), potion));
         }
 
         for (RegistrySupplier<Block> blockRegistryObject : ModBlocks.BLOCKS) {
-            Block block = blockRegistryObject.get();
+            ItemStack blockItem = new ItemStack(blockRegistryObject.get());
 
-            ItemStack blockItem = new ItemStack(block.asItem(), 1);
-
-            if (blockItem != null && !itemsToAdd.contains(blockItem) && blockItem.getCount() == 1) {
-                itemsToAdd.add(blockItem);
-            }
+            if (!litherite.contains(blockItem) && isLitherite(LitherealExpectPlatform.getResourceLocation(blockItem).getPath())) {
+                litherite.add(blockItem);
+            } else otherB.add(blockItem);
         }
 
-        itemsToAdd.sort(Comparator.comparing(itemStack -> {
+        litherite.add(LitherealExpectPlatform.getLitheriteItem().getDefaultInstance());
+
+        for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
+            ItemStack item = new ItemStack(itemRegistrySupplier.get());
+
+            if (!litherite.contains(item) && isLitherite(LitherealExpectPlatform.getResourceLocation(item).getPath())) {
+                litherite.add(item);
+            } else otherI.add(item);
+        }
+
+        litherite.sort(Comparator.comparing(itemStack -> {
             String descriptionId = LitherealExpectPlatform.getResourceLocation(itemStack).getPath();
 
-            if (descriptionId.startsWith("litherite")) return "1";
+            if (descriptionId.startsWith("litherite") || descriptionId.startsWith("deepslate_litherite")) return "1";
             else if (descriptionId.startsWith("burning_litherite")) return "2";
             else if (descriptionId.startsWith("frozen_litherite")) return "3";
             else if (descriptionId.startsWith("withering_litherite")) return "4";
             else if (descriptionId.startsWith("infused_litherite")) return "5";
             else if (descriptionId.startsWith("charged_litherite")) return "6";
 
-            String[] parts = descriptionId.split("[._]");
-            return parts.length > 1 ? parts[1] : "0";
+            return descriptionId;
         }));
+        litherite.addAll(otherI);
+        litherite.addAll(otherB);
+        litherite = litherite.stream().filter(stack -> !stack.isEmpty()).toList();
 
-        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), itemsToAdd.toArray(new ItemStack[0]));
+        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), litherite.toArray(new ItemStack[0]));
 
+    }
+    public static boolean isLitherite(String id) {
+        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite");
     }
 }
