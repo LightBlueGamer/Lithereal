@@ -25,19 +25,19 @@
       "predicate": {
         "brushing": 0.25
       },
-      "model": "lithereal:item/litherite_brush_brushing_0"
+      "model": "minecraft:item/brush_brushing_0"
     },
     {
       "predicate": {
         "brushing": 0.5
       },
-      "model": "lithereal:item/litherite_brush_brushing_1"
+      "model": "minecraft:item/brush_brushing_1"
     },
     {
       "predicate": {
         "brushing": 0.75
       },
-      "model": "lithereal:item/litherite_brush_brushing_2"
+      "model": "minecraft:item/brush_brushing_2"
     }
   ]
 }
