@@ -1,11 +1,11 @@
 package org.lithereal.item.custom.burning;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -14,19 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.ability.AbilityHoe;
 
 import java.util.List;
 
-public class BurningLitheriteHoe extends HoeItem implements BurningItem {
+public class BurningLitheriteHoe extends AbilityHoe implements BurningItem {
     public BurningLitheriteHoe(Tier tier, int i, float f, Properties properties) {
-        super(tier, i, f, properties);
-    }
-
-    @Override
-    public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        if(attacked.isFreezing()) attacked.setTicksFrozen(0);
-        attacked.setSecondsOnFire(1000);
-        return super.hurtEnemy(itemStack, attacked, attacker);
+        super(Ability.BURNING, tier, i, f, properties);
     }
 
     @Override

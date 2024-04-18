@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -59,15 +60,7 @@ public class Hammer extends DiggerItem {
     public void findAndBreakNearBlocks(HitResult pick, BlockPos blockPos, ItemStack hammerStack, Level level, LivingEntity livingEntity) {
         if (!(livingEntity instanceof ServerPlayer player)) return;
 
-        var size = (radius / 2);
-        var offset = size - 1;
-
-        Direction direction = ((BlockHitResult) pick).getDirection();
-        var boundingBox = switch (direction) {
-            case DOWN, UP -> new BoundingBox(blockPos.getX() - size, blockPos.getY() - (direction == Direction.UP ? depth - 1 : 0), blockPos.getZ() - size, blockPos.getX() + size, blockPos.getY() + (direction == Direction.DOWN ? depth - 1 : 0), blockPos.getZ() + size);
-            case NORTH, SOUTH -> new BoundingBox(blockPos.getX() - size, blockPos.getY() - size + offset, blockPos.getZ() - (direction == Direction.SOUTH ? depth - 1 : 0), blockPos.getX() + size, blockPos.getY() + size + offset, blockPos.getZ() + (direction == Direction.NORTH ? depth - 1 : 0));
-            case WEST, EAST -> new BoundingBox(blockPos.getX() - (direction == Direction.EAST ? depth - 1 : 0), blockPos.getY() - size + offset, blockPos.getZ() - size, blockPos.getX() + (direction == Direction.WEST ? depth - 1 : 0), blockPos.getY() + size + offset, blockPos.getZ() + size);
-        };
+        var boundingBox = getBoundingBox((BlockHitResult) pick, blockPos);
 
         int damage = 0;
         Iterator<BlockPos> iterator = BlockPos.betweenClosedStream(boundingBox).iterator();
@@ -108,6 +101,19 @@ public class Hammer extends DiggerItem {
                 livingEntityx.broadcastBreakEvent(EquipmentSlot.MAINHAND);
             });
         }
+    }
+
+    @NotNull
+    protected BoundingBox getBoundingBox(BlockHitResult pick, BlockPos blockPos) {
+        var size = (radius / 2);
+        var offset = 0;
+
+        Direction direction = pick.getDirection();
+        return switch (direction) {
+            case DOWN, UP -> new BoundingBox(blockPos.getX() - size, blockPos.getY() - (direction == Direction.UP ? depth - 1 : 0), blockPos.getZ() - size, blockPos.getX() + size, blockPos.getY() + (direction == Direction.DOWN ? depth - 1 : 0), blockPos.getZ() + size);
+            case NORTH, SOUTH -> new BoundingBox(blockPos.getX() - size, blockPos.getY() - size + offset, blockPos.getZ() - (direction == Direction.SOUTH ? depth - 1 : 0), blockPos.getX() + size, blockPos.getY() + size + offset, blockPos.getZ() + (direction == Direction.NORTH ? depth - 1 : 0));
+            case WEST, EAST -> new BoundingBox(blockPos.getX() - (direction == Direction.EAST ? depth - 1 : 0), blockPos.getY() - size + offset, blockPos.getZ() - size, blockPos.getX() + (direction == Direction.WEST ? depth - 1 : 0), blockPos.getY() + size + offset, blockPos.getZ() + size);
+        };
     }
 
     protected boolean canDestroy(BlockState targetState, Level level, BlockPos pos) {

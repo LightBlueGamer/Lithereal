@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.SmeltingRecipe;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.compat.CompatInit;
 import org.lithereal.recipe.FireCrucibleRecipe;
 import org.lithereal.recipe.FreezingStationRecipe;
 import org.lithereal.recipe.InfusementChamberRecipe;
@@ -62,8 +63,7 @@ public class JEILitherealPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-        registration.useNbtForSubtypes(
-                LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(),
+        registration.useNbtForSubtypes(LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(),
                 ModItems.INFUSED_LITHERITE_INGOT.get(),
                 ModItems.INFUSED_LITHERITE_SWORD.get(),
                 ModItems.INFUSED_LITHERITE_SHOVEL.get(),
@@ -75,6 +75,7 @@ public class JEILitherealPlugin implements IModPlugin {
                 ModItems.INFUSED_LITHERITE_CHESTPLATE.get(),
                 ModItems.INFUSED_LITHERITE_LEGGINGS.get(),
                 ModItems.INFUSED_LITHERITE_BOOTS.get());
+        CompatInit.addInfusedNbtSubtypesForCombatify(registration);
         IModPlugin.super.registerItemSubtypes(registration);
     }
 

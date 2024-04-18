@@ -2,14 +2,19 @@ package org.lithereal;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.*;
+import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.WarHammer;
 import org.lithereal.screen.*;
 
 import java.nio.file.Path;
@@ -162,6 +167,46 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static Iterable<Potion> getRegisteredPotions() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float strength) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static WarHammer createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item createLongsword(Tier tier, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item createKnife(Tier tier, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item createAbilityLongsword(Ability ability, Tier tier, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item createAbilityKnife(Ability ability, Tier tier, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item createInfusedLongsword(Tier tier, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item createInfusedKnife(Tier tier, Item.Properties properties) {
         throw new AssertionError();
     }
 }

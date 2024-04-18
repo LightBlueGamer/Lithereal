@@ -17,11 +17,14 @@ import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.compat.CompatInit;
 import org.lithereal.util.KeyBinding;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
 
 import java.util.*;
+
+import static dev.architectury.platform.Platform.isModLoaded;
 
 public class LitherealClient {
     public static void init() {
@@ -42,6 +45,8 @@ public class LitherealClient {
         BlockColor blockColor = ModBlockColors.INFUSED_LITHERITE_BLOCK_COLOR;
 
         ColorHandlerRegistry.registerItemColors(itemColor, LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), ModItems.INFUSED_LITHERITE_INGOT.get(), ModItems.INFUSED_LITHERITE_SWORD.get(), ModItems.INFUSED_LITHERITE_SHOVEL.get(), ModItems.INFUSED_LITHERITE_PICKAXE.get(), ModItems.INFUSED_LITHERITE_AXE.get(), ModItems.INFUSED_LITHERITE_HOE.get(), ModItems.INFUSED_LITHERITE_HAMMER.get(), ModItems.INFUSED_LITHERITE_HELMET.get(), ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModItems.INFUSED_LITHERITE_LEGGINGS.get(), ModItems.INFUSED_LITHERITE_BOOTS.get());
+        if (isModLoaded("combatify"))
+            CompatInit.setColoursForCombatify(itemColor);
         ColorHandlerRegistry.registerBlockColors(blockColor, LitherealExpectPlatform.getInfusedLitheriteBlock());
     }
 
@@ -66,6 +71,8 @@ public class LitherealClient {
             litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_CHESTPLATE.get()), potion));
             litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_LEGGINGS.get()), potion));
             litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_BOOTS.get()), potion));
+            if (isModLoaded("combatify"))
+                litherite = CompatInit.populateInfusedForCombatify(litherite, potion);
         }
 
         for (RegistrySupplier<Block> blockRegistryObject : ModBlocks.BLOCKS) {

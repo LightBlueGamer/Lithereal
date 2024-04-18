@@ -28,6 +28,6 @@ public class CommonUtils {
         return bl;
     }
     public static MobEffectInstance clone(MobEffectInstance original) {
-        return new MobEffectInstance(original.getEffect(), original.getDuration(), original.getAmplifier());
+        return new MobEffectInstance(original);
     }
 }

@@ -78,7 +78,8 @@ public class DamageEffectEnchantment extends Enchantment {
     public void doPostAttack(LivingEntity livingEntity, Entity entity, int level) {
         if (level > 0 && entity instanceof LivingEntity target && canEffect.test(target)) {
             for (MobEffectInstance mobEffectInstance : effectInstances) {
-                target.addEffect(InfusedItem.transformInstance(mobEffectInstance, timeFunction.apply(target, level)));
+                if (mobEffectInstance.getEffect().isInstantenous()) mobEffectInstance.getEffect().applyInstantenousEffect(null, null, target, mobEffectInstance.getAmplifier(), 1.0);
+                else target.addEffect(InfusedItem.transformInstance(mobEffectInstance, timeFunction.apply(target, level)));
             }
         }
     }

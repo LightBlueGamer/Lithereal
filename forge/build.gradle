@@ -39,6 +39,8 @@ dependencies {
 
     modCompileOnly "mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"
     modRuntimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
+
+    modCompileOnly "net.atlas:combatify-${minecraft_version}-forge:${combatify_version}"
 }
 
 processResources {

@@ -1,82 +1,45 @@
 package org.lithereal.item.custom;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.util.Mth;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import static org.lithereal.LitherealExpectPlatform.applyKnockbackToNearbyEntities;
 
-public class WarHammer extends SwordItem {
+public class WarHammer extends TieredItem implements Vanishable {
+    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
+    public WarHammer(Tier tier, int damage, float speed, Properties properties) {
+        super(tier, properties);
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", damage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", speed, AttributeModifier.Operation.ADDITION));
+        this.defaultModifiers = builder.build();
+    }
 
-    public WarHammer(Tier tier, int i, float f, Properties properties) {
-        super(tier, i, f, properties);
+    @Override
+    public boolean canAttackBlock(BlockState blockState, Level level, BlockPos blockPos, Player player) {
+        return !player.isCreative();
     }
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (attacker instanceof Player player) {
-            if (player.fallDistance > 0.0F && !player.isFallFlying() && !player.isCrouching()) {
-
-                player.fallDistance = 0.0F;
-
-                float knockbackStrength = 1.0F;
-
-                stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(player.getUsedItemHand()));
-
-                if (player.isUsingItem()) {
-                    handleSweepAttack(player, target, knockbackStrength);
-                } else {
-                    handleSingleAttack(player, target, knockbackStrength);
-                    applyKnockbackToNearbyEntities(player, target, knockbackStrength);
-                }
-
-                return true;
-            }
-        }
-        return super.hurtEnemy(stack, target, attacker);
+        stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(attacker.getUsedItemHand()));
+        if (attacker instanceof Player player && !player.isFallFlying() && !player.isCrouching())
+            applyKnockbackToNearbyEntities(player, target, 1);
+        return true;
     }
-
-    private void handleSweepAttack(Player player, LivingEntity target, float knockbackStrength) {
-        double radius = 3.0;
-        List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius)).stream()
-                .filter(entity -> entity instanceof LivingEntity && !entity.isCrouching() && !entity.isFallFlying() && entity.isBlocking())
-                .toList();
-
-        for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (nearbyEntity instanceof Player player1) {
-                player1.getCooldowns().addCooldown(player1.getUseItem().getItem(), 100);
-                player1.stopUsingItem();
-                player1.level().broadcastEntityEvent(player1, (byte)30);
-            }
-            if (Math.abs(nearbyEntity.getY() - target.getY()) < 0.1) {
-                nearbyEntity.knockback(knockbackStrength / 2, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
-            }
-        }
-    }
-
-    private void handleSingleAttack(Player player, LivingEntity target, float knockbackStrength) {
-        target.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
-    }
-
-    private void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float knockbackStrength) {
-        double radius = 3.0;
-        List<LivingEntity> nearbyEntities = player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(radius));
-        nearbyEntities.remove(target);
-
-        int affectedEntities = 0;
-
-        for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (!nearbyEntity.isCrouching() && !nearbyEntity.isFallFlying() && Math.abs(nearbyEntity.getY() - target.getY()) < 0.1) {
-                nearbyEntity.knockback(knockbackStrength, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
-                affectedEntities++;
-
-                if (affectedEntities >= 4) {
-                    break;
-                }
-            }
-        }
+    @Override
+    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
+        return equipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
     }
 }

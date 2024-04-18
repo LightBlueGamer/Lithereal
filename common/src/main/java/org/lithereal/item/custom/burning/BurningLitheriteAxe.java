@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -15,24 +14,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.ability.AbilityAxe;
 
 import java.util.List;
 
-public class BurningLitheriteAxe extends AxeItem implements BurningItem {
+public class BurningLitheriteAxe extends AbilityAxe implements BurningItem {
     public BurningLitheriteAxe(Tier tier, int i, float f, Properties properties) {
-        super(tier, i, f, properties);
-    }
-
-    @Override
-    public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        if(attacked.isFreezing()) attacked.setTicksFrozen(0);
-        attacked.setSecondsOnFire(1000);
-        return super.hurtEnemy(itemStack, attacked, attacker);
+        super(Ability.BURNING, tier, i, f, properties);
     }
 
     @Override
     public void getDrops(Level level, BlockState blockState, BlockPos blockPos, ItemStack itemStack, LivingEntity livingEntity, BlockEntity blockEntity) {
-        if(level instanceof ServerLevel) {
+        if (level instanceof ServerLevel) {
             List<ItemStack> origDrops = Block.getDrops(blockState, (ServerLevel) level, blockPos, blockEntity, livingEntity, itemStack);
             SmeltingRecipe[] furnaceRecipes = new SmeltingRecipe[origDrops.size()];
 

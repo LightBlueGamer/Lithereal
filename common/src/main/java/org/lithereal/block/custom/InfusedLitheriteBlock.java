@@ -1,11 +1,11 @@
 package org.lithereal.block.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -51,6 +51,15 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
         return drops;
     }
 
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+        ItemStack stack = super.getCloneItemStack(blockGetter, blockPos, blockState);
+        BlockEntity blockEntity = blockGetter.getBlockEntity(blockPos);
+        if (blockEntity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity)
+            PotionUtils.setPotion(stack, infusedLitheriteBlockEntity.potion);
+        return stack;
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
@@ -64,8 +73,8 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
         if(blockEntity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity) {
             if(entity instanceof LivingEntity livingEntity) {
                 infusedLitheriteBlockEntity.potion.getEffects().forEach((mobEffectInstance) -> {
-                    MobEffectInstance newEffect = InfusedItem.transformInstance(mobEffectInstance, 40);
-                    if(!livingEntity.hasEffect(newEffect.getEffect())) livingEntity.addEffect(newEffect);
+                    if (mobEffectInstance.getEffect().isInstantenous()) mobEffectInstance.getEffect().applyInstantenousEffect(null, null, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
+                    else if (!livingEntity.hasEffect(mobEffectInstance.getEffect())) livingEntity.addEffect(InfusedItem.transformInstance(mobEffectInstance, 40));
                 });
             }
         }

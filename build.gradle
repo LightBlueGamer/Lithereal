@@ -51,6 +51,9 @@ allprojects {
             name = "ModMaven"
             url = "https://modmaven.dev"
         }
+        flatDir {
+            dirs 'libs'
+        }
     }
 
     tasks.withType(JavaCompile) {

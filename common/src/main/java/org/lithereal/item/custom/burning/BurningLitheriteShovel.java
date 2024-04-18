@@ -7,7 +7,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
@@ -15,19 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.ability.AbilityShovel;
 
 import java.util.List;
 
-public class BurningLitheriteShovel extends ShovelItem implements BurningItem {
+public class BurningLitheriteShovel extends AbilityShovel implements BurningItem {
     public BurningLitheriteShovel(Tier tier, float i, float f, Properties properties) {
-        super(tier, i, f, properties);
-    }
-
-    @Override
-    public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        if(attacked.isFreezing()) attacked.setTicksFrozen(0);
-        attacked.setSecondsOnFire(1000);
-        return super.hurtEnemy(itemStack, attacked, attacker);
+        super(Ability.BURNING, tier, i, f, properties);
     }
 
     @Override

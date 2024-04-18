@@ -1,7 +1,6 @@
 package org.lithereal.item.custom.burning;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,26 +15,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.lithereal.item.custom.Hammer;
+import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.ability.AbilityHammer;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class BurningLitheriteHammer extends Hammer implements BurningItem {
+public class BurningLitheriteHammer extends AbilityHammer implements BurningItem {
     public BurningLitheriteHammer(Tier tier, int i, float f, Properties properties) {
-        super(tier, i, f, properties);
-    }
-
-    @Override
-    public boolean hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        if(attacked.isFreezing()) attacked.setTicksFrozen(0);
-        attacked.setSecondsOnFire(1000);
-        return super.hurtEnemy(itemStack, attacked, attacker);
+        super(Ability.BURNING, tier, i, f, properties);
     }
 
     @Override
@@ -50,15 +42,7 @@ public class BurningLitheriteHammer extends Hammer implements BurningItem {
     public void findAndBreakNearBlocks(HitResult pick, BlockPos blockPos, ItemStack hammerStack, Level level, LivingEntity livingEntity) {
         if (!(livingEntity instanceof ServerPlayer player)) return;
 
-        var size = (radius / 2);
-        var offset = size - 1;
-
-        Direction direction = ((BlockHitResult) pick).getDirection();
-        var boundingBox = switch (direction) {
-            case DOWN, UP -> new BoundingBox(blockPos.getX() - size, blockPos.getY() - (direction == Direction.UP ? depth - 1 : 0), blockPos.getZ() - size, blockPos.getX() + size, blockPos.getY() + (direction == Direction.DOWN ? depth - 1 : 0), blockPos.getZ() + size);
-            case NORTH, SOUTH -> new BoundingBox(blockPos.getX() - size, blockPos.getY() - size + offset, blockPos.getZ() - (direction == Direction.SOUTH ? depth - 1 : 0), blockPos.getX() + size, blockPos.getY() + size + offset, blockPos.getZ() + (direction == Direction.NORTH ? depth - 1 : 0));
-            case WEST, EAST -> new BoundingBox(blockPos.getX() - (direction == Direction.EAST ? depth - 1 : 0), blockPos.getY() - size + offset, blockPos.getZ() - size, blockPos.getX() + (direction == Direction.WEST ? depth - 1 : 0), blockPos.getY() + size + offset, blockPos.getZ() + size);
-        };
+        var boundingBox = getBoundingBox((BlockHitResult) pick, blockPos);
 
         int damage = 0;
         Iterator<BlockPos> iterator = BlockPos.betweenClosedStream(boundingBox).iterator();
