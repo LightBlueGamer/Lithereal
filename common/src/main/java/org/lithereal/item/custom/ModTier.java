@@ -14,16 +14,14 @@ public final class ModTier implements Tier {
     private final float speed;
     private final float attackDamageBonus;
     private final int enchantmentValue;
-    private final @NotNull TagKey<Block> tag;
     private final @NotNull Supplier<Ingredient> repairIngredient;
 
-    public ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull TagKey<Block> tag, @NotNull Supplier<Ingredient> repairIngredient) {
+    public ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient) {
         this.level = level;
         this.uses = uses;
         this.speed = speed;
         this.attackDamageBonus = attackDamageBonus;
         this.enchantmentValue = enchantmentValue;
-        this.tag = tag;
         this.repairIngredient = repairIngredient;
     }
 
@@ -47,15 +45,11 @@ public final class ModTier implements Tier {
         return this.enchantmentValue;
     }
 
-    public @NotNull TagKey<Block> getTag() {
-        return this.tag;
-    }
-
     public @NotNull Ingredient getRepairIngredient() {
-        return (Ingredient)this.repairIngredient.get();
+        return this.repairIngredient.get();
     }
 
     public String toString() {
-        return "Tier[level=" + this.level + ", uses=" + this.uses + ", speed=" + this.speed + ", attackDamageBonus=" + this.attackDamageBonus + ", enchantmentValue=" + this.enchantmentValue + ", tag=" + this.tag + ", repairIngredient=" + this.repairIngredient + "]";
+        return "Tier[level=" + this.level + ", uses=" + this.uses + ", speed=" + this.speed + ", attackDamageBonus=" + this.attackDamageBonus + ", enchantmentValue=" + this.enchantmentValue + ", repairIngredient=" + this.repairIngredient + "]";
     }
 }

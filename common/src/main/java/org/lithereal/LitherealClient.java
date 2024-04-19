@@ -78,7 +78,7 @@ public class LitherealClient {
         for (RegistrySupplier<Block> blockRegistryObject : ModBlocks.BLOCKS) {
             ItemStack blockItem = new ItemStack(blockRegistryObject.get());
 
-            if (!litherite.contains(blockItem) && isLitherite(LitherealExpectPlatform.getResourceLocation(blockItem).getPath())) {
+            if (!litherite.contains(blockItem) && isEquipment(LitherealExpectPlatform.getResourceLocation(blockItem).getPath())) {
                 litherite.add(blockItem);
             } else otherB.add(blockItem);
         }
@@ -88,7 +88,7 @@ public class LitherealClient {
         for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
             ItemStack item = new ItemStack(itemRegistrySupplier.get());
 
-            if (!litherite.contains(item) && isLitherite(LitherealExpectPlatform.getResourceLocation(item).getPath())) {
+            if (!litherite.contains(item) && isEquipment(LitherealExpectPlatform.getResourceLocation(item).getPath())) {
                 litherite.add(item);
             } else otherI.add(item);
         }
@@ -102,6 +102,7 @@ public class LitherealClient {
             else if (descriptionId.startsWith("withering_litherite")) return "4";
             else if (descriptionId.startsWith("infused_litherite")) return "5";
             else if (descriptionId.startsWith("charged_litherite")) return "6";
+            else if (descriptionId.startsWith("odysium")) return "7";
 
             return descriptionId;
         }));
@@ -112,7 +113,7 @@ public class LitherealClient {
         CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), litherite.toArray(new ItemStack[0]));
 
     }
-    public static boolean isLitherite(String id) {
-        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite");
+    public static boolean isEquipment(String id) {
+        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite") || id.startsWith("odysium");
     }
 }

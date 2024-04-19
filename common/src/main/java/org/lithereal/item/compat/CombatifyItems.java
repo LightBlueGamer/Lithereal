@@ -4,8 +4,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.Item;
 
 import static org.lithereal.LitherealExpectPlatform.*;
-import static org.lithereal.item.ModItems.ITEMS;
-import static org.lithereal.item.ModItems.LITHERITE;
+import static org.lithereal.item.ModItems.*;
 import static org.lithereal.item.custom.Ability.*;
 
 public class CombatifyItems {
@@ -29,6 +28,10 @@ public class CombatifyItems {
             createInfusedLongsword(LITHERITE, new Item.Properties()));
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_KNIFE = ITEMS.register("infused_litherite_knife", () ->
             createInfusedKnife(LITHERITE, new Item.Properties()));
+    public static final RegistrySupplier<Item> ODYSIUM_LONGSWORD = ITEMS.register("odysium_longsword", () ->
+            createAbilityLongsword(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
+    public static final RegistrySupplier<Item> ODYSIUM_KNIFE = ITEMS.register("odysium_knife", () ->
+            createAbilityKnife(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
 
     public static void init() {
 

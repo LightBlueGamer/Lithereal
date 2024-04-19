@@ -15,40 +15,46 @@ import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
 
-    LITHERITE("litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
-        p_266655_.put(ArmorItem.Type.BOOTS, 4);
-        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
-        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
-        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    LITHERITE("litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 4);
+        map.put(ArmorItem.Type.LEGGINGS, 7);
+        map.put(ArmorItem.Type.CHESTPLATE, 9);
+        map.put(ArmorItem.Type.HELMET, 4);
     }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem())),
 
-    BURNING_LITHERITE("burning_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
-        p_266655_.put(ArmorItem.Type.BOOTS, 4);
-        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
-        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
-        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    BURNING_LITHERITE("burning_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 4);
+        map.put(ArmorItem.Type.LEGGINGS, 7);
+        map.put(ArmorItem.Type.CHESTPLATE, 9);
+        map.put(ArmorItem.Type.HELMET, 4);
     }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, () -> Ingredient.of(ModItems.BURNING_LITHERITE_CRYSTAL.get())),
 
-    FROZEN_LITHERITE("frozen_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
-        p_266655_.put(ArmorItem.Type.BOOTS, 4);
-        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
-        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
-        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    FROZEN_LITHERITE("frozen_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 4);
+        map.put(ArmorItem.Type.LEGGINGS, 7);
+        map.put(ArmorItem.Type.CHESTPLATE, 9);
+        map.put(ArmorItem.Type.HELMET, 4);
     }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, () -> Ingredient.of(ModItems.FROZEN_LITHERITE_CRYSTAL.get())),
 
-    INFUSED_LITHERITE("infused_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
-        p_266655_.put(ArmorItem.Type.BOOTS, 4);
-        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
-        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
-        p_266655_.put(ArmorItem.Type.HELMET, 4);
+    INFUSED_LITHERITE("infused_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 4);
+        map.put(ArmorItem.Type.LEGGINGS, 7);
+        map.put(ArmorItem.Type.CHESTPLATE, 9);
+        map.put(ArmorItem.Type.HELMET, 4);
     }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, () -> Ingredient.of(ModItems.INFUSED_LITHERITE_INGOT.get())),
 
-    WITHERING_LITHERITE("withering_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
-        p_266655_.put(ArmorItem.Type.BOOTS, 4);
-        p_266655_.put(ArmorItem.Type.LEGGINGS, 7);
-        p_266655_.put(ArmorItem.Type.CHESTPLATE, 9);
-        p_266655_.put(ArmorItem.Type.HELMET, 4);
-    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, () -> Ingredient.of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()));
+    WITHERING_LITHERITE("withering_litherite", 25,Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 4);
+        map.put(ArmorItem.Type.LEGGINGS, 7);
+        map.put(ArmorItem.Type.CHESTPLATE, 9);
+        map.put(ArmorItem.Type.HELMET, 4);
+    }), 19, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, () -> Ingredient.of(ModItems.WITHERING_LITHERITE_CRYSTAL.get())),
+    ODYSIUM("odysium", 35,Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 5);
+        map.put(ArmorItem.Type.LEGGINGS, 8);
+        map.put(ArmorItem.Type.CHESTPLATE, 10);
+        map.put(ArmorItem.Type.HELMET, 5);
+    }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.1F, () -> Ingredient.of(ModItems.ODYSIUM_INGOT.get()));
 
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266653_) -> {
@@ -78,8 +84,8 @@ public enum ModArmorMaterials implements ArmorMaterial {
         this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
     }
 
-    public int getDurabilityForType(ArmorItem.Type p_266745_) {
-        return HEALTH_FUNCTION_FOR_TYPE.get(p_266745_) * this.durabilityMultiplier;
+    public int getDurabilityForType(ArmorItem.Type type) {
+        return HEALTH_FUNCTION_FOR_TYPE.get(type) * this.durabilityMultiplier;
     }
 
     public int getDefenseForType(ArmorItem.Type p_266752_) {

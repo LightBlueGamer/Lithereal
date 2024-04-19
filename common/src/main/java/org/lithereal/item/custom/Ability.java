@@ -19,7 +19,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.item.custom.ability.AbilityItem;
+import org.lithereal.item.custom.enhanceable.EnhanceableItem;
 import org.lithereal.item.custom.infused.InfusedItem;
+import org.lithereal.item.enchantment.ModEnchantments;
 import org.lithereal.util.CommonUtils;
 import org.lithereal.util.KeyBinding;
 
@@ -293,6 +295,25 @@ public enum Ability {
             }
             regenTickerAMap.put(entityID, regenTickerA.getAndIncrement());
             healTickerMap.put(entityID, healTicker.getAndIncrement());
+        }
+    },
+    ENHANCED {
+        @Override
+        public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+            if (EnhanceableItem.isEnhanced(itemStack))
+                ModEnchantments.HEROS_EDGE.get().doPostAttack(attacker, attacked, 1);
+        }
+
+        @Override
+        public void onItemTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+
+        }
+
+        @Override
+        public void onArmourTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+            if (entity instanceof Player player && EnhanceableItem.isEnhanced(itemStack) && !level.isClientSide())
+                if (hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(ModArmorMaterials.ODYSIUM, player) && !player.hasEffect(MobEffects.DAMAGE_RESISTANCE))
+                    player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 1));
         }
     };
     public abstract void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
