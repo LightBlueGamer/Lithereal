@@ -229,7 +229,7 @@ public class ModItems {
             new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 6, -3f, new Item.Properties().durability(512)));
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 5, -3f, new Item.Properties().durability(512)));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
             new SimpleFoiledItem(new Item.Properties().rarity(Rarity.RARE)));
