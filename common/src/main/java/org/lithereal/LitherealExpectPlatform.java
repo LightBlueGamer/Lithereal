@@ -213,4 +213,16 @@ public class LitherealExpectPlatform {
     public static ModTier createCombatifyTier(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static TagKey<Block> getTier5Incorrect() {
+        // Await Conventional Tags
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static TagKey<Block> getTier6Incorrect() {
+        // Await Conventional Tags
+        throw new AssertionError();
+    }
 }

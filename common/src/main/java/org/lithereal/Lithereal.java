@@ -10,6 +10,7 @@ import org.lithereal.item.ModItems;
 import org.lithereal.item.custom.ModArmorMaterials;
 import org.lithereal.item.custom.component.ModComponents;
 import org.lithereal.item.enchantment.ModEnchantments;
+import org.lithereal.item.tag.ModTags;
 import org.lithereal.recipe.ModRecipes;
 
 import java.util.function.Supplier;
@@ -26,6 +27,7 @@ public class Lithereal {
         ModBlocks.register();
         ModArmorMaterials.register();
         ModComponents.register();
+        ModTags.init();
         ModItems.register();
         ModBlockEntities.register();
         ModRecipes.register();
