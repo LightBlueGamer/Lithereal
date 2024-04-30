@@ -1,6 +1,7 @@
 package org.lithereal.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -14,6 +15,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     public FireCrucibleBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
+    private final Container inventory;
 
     public FireCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
@@ -30,6 +32,14 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         addDataSlots(data);
+
+        this.inventory = ((Container) blockEntity);
+        inventory.startOpen(inv.player);
+
+        this.addSlot(new Slot(inventory, 0, 94, 57));
+        this.addSlot(new Slot(inventory, 1, 140, 13));
+        this.addSlot(new Slot(inventory, 2, 80, 13));
+        this.addSlot(new Slot(inventory, 3, 66, 57));
     }
 
     public boolean isCrafting() {

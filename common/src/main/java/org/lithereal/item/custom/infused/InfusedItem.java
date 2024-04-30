@@ -27,7 +27,7 @@ public interface InfusedItem extends AbilityItem {
         return newList;
     }
     static MobEffectInstance transformInstance(MobEffectInstance mobEffectInstance, int timeNonInstant) {
-        return new MobEffectInstance(mobEffectInstance.getEffect(), timeNonInstant, mobEffectInstance.getAmplifier(), mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon());
+        return new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().value().isInstantenous() ? 1 : timeNonInstant, mobEffectInstance.getAmplifier(), mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon());
     }
 
     @Override

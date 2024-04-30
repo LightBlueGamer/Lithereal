@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.EventHooks;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.custom.LitheriteItem;
 
@@ -60,7 +61,7 @@ public class ForgeLitheriteItem extends LitheriteItem {
     private void spawnWitherSkeleton(Level level, double x, double y, double z) {
         WitherSkeleton skeleton = EntityType.WITHER_SKELETON.create(level);
         skeleton.setPos(x, y, z);
-        if(level instanceof ServerLevel sLevel) skeleton.finalizeSpawn(sLevel, level.getCurrentDifficultyAt(skeleton.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
+        if(level instanceof ServerLevel sLevel) EventHooks.onFinalizeSpawn(skeleton, sLevel, level.getCurrentDifficultyAt(skeleton.blockPosition()), MobSpawnType.MOB_SUMMONED, null);
         level.addFreshEntity(skeleton);
     }
 }

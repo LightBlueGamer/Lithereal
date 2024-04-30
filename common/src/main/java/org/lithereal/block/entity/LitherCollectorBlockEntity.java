@@ -1,7 +1,6 @@
 package org.lithereal.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,8 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.screen.LitherCollectorMenu;
 import org.lithereal.util.LitherEnergyContainer;
-
-import java.util.Arrays;
 
 public class LitherCollectorBlockEntity extends BlockEntity implements MenuProvider, IEnergyContainerProvider {
     protected final ContainerData data;

@@ -2,12 +2,11 @@ package org.lithereal.fabric.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -20,20 +19,13 @@ import org.lithereal.block.entity.IEnergyContainerProvider;
 import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.fabric.item.FabricItems;
-import org.lithereal.fabric.screen.FabricInfusementChamberMenu;
 import org.lithereal.fabric.screen.FabricLitherCollectorMenu;
-import org.lithereal.item.ModItems;
 import org.lithereal.util.LitherEnergyContainer;
 
-public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory, IEnergyContainerProvider {
+public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     public FabricLitherCollectorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
-    }
-
-    @Override
-    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-        buf.writeBlockPos(worldPosition);
     }
 
     @Override
@@ -53,18 +45,18 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
     }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        ContainerHelper.saveAllItems(nbt, inventory);
+    protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.saveAdditional(nbt, provider);
+        ContainerHelper.saveAllItems(nbt, inventory, provider);
         nbt.putInt("lither_collector.progress", progress);
         nbt.putInt("lither_collector.max_progress", maxProgress);
         nbt.putInt("lither_collector.energy", getEnergyContainer().energy);
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        ContainerHelper.loadAllItems(nbt, inventory);
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.loadAdditional(nbt, provider);
+        ContainerHelper.loadAllItems(nbt, inventory, provider);
         progress = nbt.getInt("lither_collector.progress");
         maxProgress = nbt.getInt("lither_collector.max_progress");
         getEnergyContainer().energy = nbt.getInt("lither_collector.energy");
@@ -96,5 +88,16 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
 
     public boolean hasCrystal(FabricLitherCollectorBlockEntity pEntity) {
         return pEntity.getItem(0).getItem() == FabricItems.LITHERITE_CRYSTAL || pEntity.getItem(0).getItem() == ModBlocks.LITHERITE_BLOCK.get().asItem();
+    }
+
+    /**
+     * Writes additional server -&gt; client screen opening data to the buffer.
+     *
+     * @param player the player that is opening the screen
+     * @return the screen opening data
+     */
+    @Override
+    public BlockPos getScreenOpeningData(ServerPlayer player) {
+        return worldPosition;
     }
 }

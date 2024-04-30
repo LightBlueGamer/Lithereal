@@ -5,9 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -22,7 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
-import org.lithereal.forge.screen.ForgeFreezingStationMenu;
 import org.lithereal.recipe.FreezingStationRecipe;
 
 import java.util.Optional;
@@ -70,12 +66,6 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new ForgeFreezingStationMenu(id, inventory, this, this.data);
     }
 
     public void drops() {

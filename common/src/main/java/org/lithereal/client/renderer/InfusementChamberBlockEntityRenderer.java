@@ -8,8 +8,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.alchemy.PotionContents;
 import org.lithereal.Lithereal;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
@@ -33,8 +32,8 @@ public class InfusementChamberBlockEntityRenderer implements BlockEntityRenderer
         matrixStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
         matrixStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockState().getValue(InfusementChamberBlock.FACING).getOpposite().toYRot()));
         model.renderToBuffer(matrixStack, builder, 15728880, p_112312_, 1, 1, 1,1);
-        if(blockEntity.getStoredPotion() != Potions.EMPTY) {
-            int hex = PotionUtils.getColor(blockEntity.getStoredPotion());
+        if(blockEntity.getStoredPotion() != PotionContents.EMPTY) {
+            int hex = blockEntity.getStoredPotion().getColor();
             float r = (float)(hex >> 16 & 255) / 255.0F;
             float g = (float)(hex >> 8 & 255) / 255.0F;
             float b = (float)(hex & 255) / 255.0F;

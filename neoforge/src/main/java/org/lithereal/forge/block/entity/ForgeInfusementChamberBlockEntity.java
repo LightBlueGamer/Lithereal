@@ -23,8 +23,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
-import org.lithereal.forge.screen.ForgeInfusementChamberMenu;
 import org.lithereal.recipe.InfusementChamberRecipe;
+import org.lithereal.screen.InfusementChamberMenu;
 
 import java.util.Optional;
 import java.util.Random;
@@ -83,12 +83,6 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new ForgeInfusementChamberMenu(id, inventory, this, this.data);
     }
 
     public void drops() {

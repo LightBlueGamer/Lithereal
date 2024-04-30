@@ -1,6 +1,5 @@
 package org.lithereal.fabric.block.entity;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -13,32 +12,32 @@ import org.lithereal.fabric.block.FabricBlocks;
 public class FabricBlockEntities {
     public static final BlockEntityType<InfusedLitheriteBlockEntity> INFUSED_LITHERITE_BLOCK_ENTITY =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "infused_litherite_block_entity"),
-                    FabricBlockEntityTypeBuilder.create(InfusedLitheriteBlockEntity::new,
+                    BlockEntityType.Builder.of(InfusedLitheriteBlockEntity::new,
                             FabricBlocks.INFUSED_LITHERITE_BLOCK).build());
 
     public static final BlockEntityType<FabricFireCrucibleBlockEntity> FIRE_CRUCIBLE_BLOCK_ENTITY =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "fire_crucible_block_entity"),
-                    FabricBlockEntityTypeBuilder.create(FabricFireCrucibleBlockEntity::new,
+                    BlockEntityType.Builder.of(FabricFireCrucibleBlockEntity::new,
                             FabricBlocks.FIRE_CRUCIBLE_BLOCK).build());
 
     public static final BlockEntityType<FabricFreezingStationBlockEntity> FREEZING_STATION_BLOCK_ENTITY =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "freezing_station_block_entity"),
-                    FabricBlockEntityTypeBuilder.create(FabricFreezingStationBlockEntity::new,
+                    BlockEntityType.Builder.of(FabricFreezingStationBlockEntity::new,
                             FabricBlocks.FREEZING_STATION_BLOCK).build());
 
     public static final BlockEntityType<FabricInfusementChamberBlockEntity> INFUSEMENT_CHAMBER_BLOCK_ENTITY =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "infusement_chamber_block_entity"),
-                    FabricBlockEntityTypeBuilder.create(FabricInfusementChamberBlockEntity::new,
+                    BlockEntityType.Builder.of(FabricInfusementChamberBlockEntity::new,
                             FabricBlocks.INFUSEMENT_CHAMBER_BLOCK).build());
 
     public static final BlockEntityType<FabricLitherCollectorBlockEntity> LITHER_COLLECTOR_BLOCK_ENTITY =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "lither_collector_block_entity"),
-                    FabricBlockEntityTypeBuilder.create(FabricLitherCollectorBlockEntity::new,
+                    BlockEntityType.Builder.of(FabricLitherCollectorBlockEntity::new,
                             FabricBlocks.LITHER_COLLECTOR_BLOCK).build());
 
     public static final BlockEntityType<FabricLitherBatteryBlockEntity> LITHER_BATTERY_BLOCK_ENTITY =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "lither_battery_block_entity"),
-                    FabricBlockEntityTypeBuilder.create(FabricLitherBatteryBlockEntity::new,
+                    BlockEntityType.Builder.of(FabricLitherBatteryBlockEntity::new,
                             FabricBlocks.LITHER_BATTERY_BLOCK).build());
 
     @SuppressWarnings("EmptyMethod")

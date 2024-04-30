@@ -7,9 +7,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
@@ -29,7 +26,6 @@ import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.forge.block.custom.ForgeFireCrucibleBlock;
 import org.lithereal.forge.item.ForgeItems;
-import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
 import org.lithereal.item.ModItems;
 import org.lithereal.recipe.FireCrucibleRecipe;
 
@@ -87,12 +83,6 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity implem
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new ForgeFireCrucibleMenu(id, inventory, this, this.data);
     }
 
     public void drops() {

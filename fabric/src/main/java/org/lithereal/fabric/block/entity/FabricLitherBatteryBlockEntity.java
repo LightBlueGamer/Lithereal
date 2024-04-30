@@ -2,6 +2,7 @@ package org.lithereal.fabric.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -24,15 +25,10 @@ import org.lithereal.fabric.screen.FabricLitherBatteryMenu;
 import org.lithereal.fabric.screen.FabricLitherCollectorMenu;
 import org.lithereal.util.LitherEnergyContainer;
 
-public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory, IEnergyContainerProvider {
+public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(0, ItemStack.EMPTY);
     public FabricLitherBatteryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
-    }
-
-    @Override
-    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-        buf.writeBlockPos(worldPosition);
     }
 
     @Override
@@ -52,19 +48,30 @@ public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity imp
     }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
+    protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.saveAdditional(nbt, provider);
         nbt.putInt("lither_battery.energy", getEnergyContainer().energy);
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.loadAdditional(nbt, provider);
         getEnergyContainer().energy = nbt.getInt("lither_battery.energy");
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricLitherBatteryBlockEntity pEntity) {
         if(level.isClientSide()) return;
         //if(pEntity.getEnergyContainer().energy > 0) pEntity.getEnergyContainer().transferEnergy(pEntity);
+    }
+
+    /**
+     * Writes additional server -&gt; client screen opening data to the buffer.
+     *
+     * @param player the player that is opening the screen
+     * @return the screen opening data
+     */
+    @Override
+    public BlockPos getScreenOpeningData(ServerPlayer player) {
+        return worldPosition;
     }
 }

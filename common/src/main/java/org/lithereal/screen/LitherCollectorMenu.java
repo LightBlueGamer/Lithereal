@@ -1,6 +1,7 @@
 package org.lithereal.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -15,6 +16,7 @@ public class LitherCollectorMenu extends AbstractContainerMenu {
     public LitherCollectorBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
+    private final Container inventory;
 
     public LitherCollectorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
@@ -31,6 +33,11 @@ public class LitherCollectorMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         addDataSlots(data);
+
+        this.inventory = ((Container) blockEntity);
+        inventory.startOpen(inv.player);
+
+        this.addSlot(new Slot(inventory, 0, 94, 57));
     }
 
     public boolean isCrafting() {

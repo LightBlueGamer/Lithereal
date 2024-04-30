@@ -30,13 +30,13 @@ import org.lithereal.forge.block.entity.ForgeInfusementChamberBlockEntity;
 import org.lithereal.forge.compat.CombatifyHooks;
 import org.lithereal.forge.item.ForgeItems;
 import org.lithereal.forge.item.custom.ForgeWarHammer;
-import org.lithereal.forge.screen.ForgeFireCrucibleMenu;
-import org.lithereal.forge.screen.ForgeFreezingStationMenu;
-import org.lithereal.forge.screen.ForgeInfusementChamberMenu;
 import org.lithereal.forge.screen.ForgeMenuTypes;
 import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.ModTier;
 import org.lithereal.item.custom.WarHammer;
+import org.lithereal.screen.FireCrucibleMenu;
+import org.lithereal.screen.FreezingStationMenu;
+import org.lithereal.screen.InfusementChamberMenu;
 import org.lithereal.screen.LitherCollectorMenu;
 
 import java.nio.file.Path;
@@ -71,7 +71,7 @@ public class LitherealExpectPlatformImpl {
         return ForgeBlocks.FIRE_CRUCIBLE.get();
     }
 
-    public static MenuType<ForgeFireCrucibleMenu> getFireCrucibleMenu() {
+    public static MenuType<FireCrucibleMenu> getFireCrucibleMenu() {
         return ForgeMenuTypes.FIRE_CRUCIBLE_MENU.get();
     }
 
@@ -83,7 +83,7 @@ public class LitherealExpectPlatformImpl {
         return ForgeFreezingStationBlockEntity::tick;
     }
 
-    public static MenuType<ForgeFreezingStationMenu> getFreezingStationMenu() {
+    public static MenuType<FreezingStationMenu> getFreezingStationMenu() {
         return ForgeMenuTypes.FREEZING_STATION_MENU.get();
     }
 
@@ -103,7 +103,7 @@ public class LitherealExpectPlatformImpl {
         return ForgeBlocks.INFUSEMENT_CHAMBER.get();
     }
 
-    public static MenuType<ForgeInfusementChamberMenu> getInfusementChamberMenu() {
+    public static MenuType<InfusementChamberMenu> getInfusementChamberMenu() {
         return ForgeMenuTypes.INFUSEMENT_CHAMBER_MENU.get();
     }
 

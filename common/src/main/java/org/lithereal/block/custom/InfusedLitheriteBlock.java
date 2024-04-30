@@ -2,7 +2,9 @@ package org.lithereal.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -60,9 +62,7 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
     @Override
     public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         ItemStack stack = super.getCloneItemStack(levelReader, blockPos, blockState);
-        BlockEntity blockEntity = levelReader.getBlockEntity(blockPos);
-        if (blockEntity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity)
-            stack.set(DataComponents.POTION_CONTENTS, infusedLitheriteBlockEntity.potion);
+        levelReader.getBlockEntity(blockPos, LitherealExpectPlatform.getInfusedLitheriteBlockEntity()).ifPresent(infusedLitheriteBlockEntity -> infusedLitheriteBlockEntity.saveToItem(stack, levelReader.registryAccess()));
         return stack;
     }
 
@@ -78,9 +78,10 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if(blockEntity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity) {
             if(entity instanceof LivingEntity livingEntity) {
-                infusedLitheriteBlockEntity.potion.getEffects().forEach((mobEffectInstance) -> {
-                    if (mobEffectInstance.getEffect().isInstantenous()) mobEffectInstance.getEffect().applyInstantenousEffect(null, null, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
-                    else if (!livingEntity.hasEffect(mobEffectInstance.getEffect())) livingEntity.addEffect(InfusedItem.transformInstance(mobEffectInstance, 40));
+                infusedLitheriteBlockEntity.potion.forEachEffect((mobEffectInstance) -> {
+                    Holder<MobEffect> effect = mobEffectInstance.getEffect();
+                    if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(null, null, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
+                    else if (!livingEntity.hasEffect(effect)) livingEntity.addEffect(InfusedItem.transformInstance(mobEffectInstance, 40));
                 });
             }
         }

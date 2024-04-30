@@ -1,15 +1,14 @@
 package org.lithereal.fabric.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.Lithereal;
-import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.InfusedLitheriteBlock;
 import org.lithereal.fabric.block.custom.*;
 import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
@@ -17,23 +16,23 @@ import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 public class FabricBlocks {
 
     public static final Block INFUSED_LITHERITE_BLOCK = registerColoredBlock("infused_litherite_block",
-            new InfusedLitheriteBlock(FabricBlockSettings.of()
+            new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final Block FIRE_CRUCIBLE_BLOCK = registerBlock("fire_crucible",
-            new FabricFireCrucibleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+            new FabricFireCrucibleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
 
     public static final Block FREEZING_STATION_BLOCK = registerBlock("freezing_station",
-            new FabricFreezingStationBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new FabricFreezingStationBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     public static final Block INFUSEMENT_CHAMBER_BLOCK = registerBlock("infusement_chamber",
-            new FabricInfusementChamberBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new FabricInfusementChamberBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     public static final Block LITHER_COLLECTOR_BLOCK = registerBlock("lither_collector",
-            new FabricLitherCollectorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new FabricLitherCollectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     public static final Block LITHER_BATTERY_BLOCK = registerBlock("lither_battery",
-            new FabricLitherBatteryBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+            new FabricLitherBatteryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
@@ -42,7 +41,7 @@ public class FabricBlocks {
 
     private static void registerBlockItem(String name, Block block) {
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Lithereal.MOD_ID, name),
-                new BlockItem(block, new FabricItemSettings()));
+                new BlockItem(block, new Item.Properties()));
     }
 
     private static Block registerColoredBlock(String name, Block block) {
@@ -52,7 +51,7 @@ public class FabricBlocks {
 
     private static void registerColoredBlockItem(String name, Block block) {
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Lithereal.MOD_ID, name),
-                new InfusedLitheriteBlockItem(block, new FabricItemSettings()));
+                new InfusedLitheriteBlockItem(block, new Item.Properties()));
     }
 
     public static void registerModBlocks() {

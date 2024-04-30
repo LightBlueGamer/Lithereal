@@ -1,6 +1,7 @@
 package org.lithereal.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -14,6 +15,7 @@ public class FreezingStationMenu extends AbstractContainerMenu {
     public FreezingStationBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
+    private final Container inventory;
 
     public FreezingStationMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
@@ -30,6 +32,13 @@ public class FreezingStationMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         addDataSlots(data);
+
+        this.inventory = ((Container) blockEntity);
+        inventory.startOpen(inv.player);
+
+        this.addSlot(new Slot(inventory, 0, 43, 34));
+        this.addSlot(new Slot(inventory, 1, 68, 34));
+        this.addSlot(new Slot(inventory, 2, 129, 34));
     }
 
     public boolean isCrafting() {

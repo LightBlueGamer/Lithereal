@@ -1,6 +1,7 @@
 package org.lithereal.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -14,9 +15,10 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
     public InfusementChamberBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
+    private final Container inventory;
 
     public InfusementChamberMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     public InfusementChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -32,6 +34,11 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
 
         addDataSlots(data);
 
+        this.inventory = ((Container) blockEntity);
+        inventory.startOpen(inv.player);
+
+        this.addSlot(new Slot(inventory, 0, 80, 57));
+        this.addSlot(new Slot(inventory, 1, 80, 13));
     }
 
     public boolean isCrafting() {

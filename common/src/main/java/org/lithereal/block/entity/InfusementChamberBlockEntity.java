@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +26,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     protected float successRate = 0.2f;
     protected int usedPotions = 0;
 
-    public abstract Potion getStoredPotion();
+    public abstract PotionContents getStoredPotion();
     public abstract ItemStack getStoredItem();
 
     public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {

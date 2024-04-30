@@ -2,8 +2,8 @@ package org.lithereal.forge.item.custom;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraftforge.common.ToolAction;
-import net.minecraftforge.common.ToolActions;
+import net.neoforged.neoforge.common.ToolAction;
+import net.neoforged.neoforge.common.ToolActions;
 import org.lithereal.item.custom.WarHammer;
 
 public class ForgeWarHammer extends WarHammer {
