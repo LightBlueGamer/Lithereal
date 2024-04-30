@@ -35,7 +35,7 @@ public class InfusedLitheriteBlockEntity extends BlockEntity {
     protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
         super.loadAdditional(compoundTag, provider);
         if (compoundTag.contains("Potion"))
-            setPotion(new PotionContents(BuiltInRegistries.POTION.get(ResourceLocation.tryParse(compoundTag.getString("Potion")))));
+            setPotion(new PotionContents(BuiltInRegistries.POTION.wrapAsHolder(BuiltInRegistries.POTION.get(ResourceLocation.tryParse(compoundTag.getString("Potion"))))));
     }
 
     public void setPotion(PotionContents potion) {
