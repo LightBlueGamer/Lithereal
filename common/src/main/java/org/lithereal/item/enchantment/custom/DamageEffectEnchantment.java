@@ -1,11 +1,14 @@
 package org.lithereal.item.enchantment.custom;
 
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.DamageEnchantment;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -20,9 +23,9 @@ public class DamageEffectEnchantment extends Enchantment {
     final Predicate<LivingEntity> canEffect;
     final MobEffectInstance[] effectInstances;
     final BiFunction<LivingEntity, Integer, Integer> timeFunction;
-    final BiFunction<MobType, Integer, Float> damageFunction;
+    final BiFunction<MobSpawnType, Integer, Float> damageFunction;
     final int maxLevel;
-    public DamageEffectEnchantment(Rarity rarity, Predicate<LivingEntity> canEffect, MobEffectInstance[] effect, BiFunction<LivingEntity, Integer, Integer> timeFunc, BiFunction<MobType, Integer, Float> damageFunc, int max, EquipmentSlot... equipmentSlots) {
+    public DamageEffectEnchantment(Rarity rarity, Predicate<LivingEntity> canEffect, MobEffectInstance[] effect, BiFunction<LivingEntity, Integer, Integer> timeFunc, BiFunction<MobSpawnType, Integer, Float> damageFunc, int max, EquipmentSlot... equipmentSlots) {
         super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
         this.canEffect = canEffect;
         effectInstances = effect;
@@ -50,7 +53,7 @@ public class DamageEffectEnchantment extends Enchantment {
     }
 
     @Override
-    public float getDamageBonus(int i, MobType mobType) {
+    public float getDamageBonus(int i, MobSpawnType mobType) {
         return damageFunction.apply(mobType, i);
     }
 
@@ -78,7 +81,8 @@ public class DamageEffectEnchantment extends Enchantment {
     public void doPostAttack(LivingEntity livingEntity, Entity entity, int level) {
         if (level > 0 && entity instanceof LivingEntity target && canEffect.test(target)) {
             for (MobEffectInstance mobEffectInstance : effectInstances) {
-                if (mobEffectInstance.getEffect().isInstantenous()) mobEffectInstance.getEffect().applyInstantenousEffect(null, null, target, mobEffectInstance.getAmplifier(), 1.0);
+                Holder<MobEffect> effect = mobEffectInstance.getEffect();
+                if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(null, null, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
                 else target.addEffect(InfusedItem.transformInstance(mobEffectInstance, timeFunction.apply(target, level)));
             }
         }

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static org.lithereal.LitherealExpectPlatform.applyKnockbackToNearbyEntities;
 
-public class WarHammer extends TieredItem implements Vanishable {
+public class WarHammer extends TieredItem {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
     public WarHammer(Tier tier, int damage, float speed, Properties properties) {
         super(tier, properties);
