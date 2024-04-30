@@ -1,6 +1,5 @@
 package org.lithereal.block;
 
-import com.mojang.serialization.MapCodec;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 
