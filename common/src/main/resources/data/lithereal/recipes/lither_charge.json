@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lithereal:lither_rod"
+    }
+  ],
+  "result": {
+    "item": "lithereal:lither_charge",
+    "count": 4
+  }
+}

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "lithereal:item/unidentified_rod"
+    "layer0": "lithereal:item/mysterious_rod"
   }
 }

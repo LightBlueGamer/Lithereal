@@ -222,10 +222,13 @@ public class ModItems {
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
             new LitherCharge(new Item.Properties()));
 
+    public static final RegistrySupplier<Item> LITHER_ROD = ITEMS.register("lither_rod", () ->
+            new Item(new Item.Properties()));
+
     public static final RegistrySupplier<Item> LITHEREAL_KEY = ITEMS.register("lithereal_key", () ->
             new Item(new Item.Properties()));
 
-    public static final RegistrySupplier<Item> UNIDENTIFIED_ROD = ITEMS.register("unidentified_rod", () ->
+    public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
             new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
