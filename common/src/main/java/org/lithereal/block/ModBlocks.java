@@ -1,5 +1,6 @@
 package org.lithereal.block;
 
+import com.mojang.serialization.MapCodec;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 
@@ -20,12 +21,12 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Lithereal.MOD_ID, Registries.BLOCK);
 
     public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
-            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
-                    .strength(5f).requiresCorrectToolForDrops(), UniformInt.of(2, 6)));
+            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
+                                .strength(5f).requiresCorrectToolForDrops()));
 
     public static final RegistrySupplier<Block> DEEPSLATE_LITHERITE_ORE = registerBlock("deepslate_litherite_ore",
-            () -> new DropExperienceBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops(), UniformInt.of(2, 6)));
+            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
+                                .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistrySupplier<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
@@ -48,40 +49,40 @@ public class ModBlocks {
                     .strength(6f).requiresCorrectToolForDrops()));
 
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
-            () -> new BlueFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE)));
+            () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
 
     public static final RegistrySupplier<Block> SCORCHED_NETHERRACK = registerBlock("scorched_netherrack",
-            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.NETHERRACK)));
+            () -> new MagmaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK)));
 
     public static final RegistrySupplier<Block> SCORCHED_CRIMSON_NYLIUM = registerBlock("scorched_crimson_nylium",
-            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_NYLIUM)));
+            () -> new MagmaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM)));
 
     public static final RegistrySupplier<Block> SCORCHED_WARPED_NYLIUM = registerBlock("scorched_warped_nylium",
-            () -> new MagmaBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_NYLIUM)));
+            () -> new MagmaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM)));
 
     public static final RegistrySupplier<Block> ETHERSTONE = registerBlock("etherstone",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE)));
 
     public static final RegistrySupplier<Block> COBBLED_ETHERSTONE = registerBlock("cobbled_etherstone",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLED_DEEPSLATE)));
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
 
     public static final RegistrySupplier<Block> ETHERSTONE_BRICKS = registerBlock("etherstone_bricks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)));
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)));
 
     public static final RegistrySupplier<Block> ETHERSTONE_BRICK_STAIRS = registerBlock("etherstone_brick_stairs",
-            () -> new StairBlock(ETHERSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_STAIRS)));
+            () -> new StairBlock(ETHERSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICK_STAIRS)));
 
     public static final RegistrySupplier<Block> ETHERSTONE_BRICK_SLAB = registerBlock("etherstone_brick_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_SLAB)));
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICK_SLAB)));
 
     public static final RegistrySupplier<Block> ETHERSTONE_BRICK_WALL = registerBlock("etherstone_brick_wall",
-            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICK_WALL)));
+            () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICK_WALL)));
 
     public static final RegistrySupplier<Block> CHISELED_ETHERSTONE_BRICKS = registerBlock("chiseled_etherstone_bricks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)));
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)));
 
     public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
