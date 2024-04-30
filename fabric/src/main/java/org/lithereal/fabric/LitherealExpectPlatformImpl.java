@@ -1,5 +1,6 @@
 package org.lithereal.fabric;
 
+import net.fabricmc.fabric.api.tag.convention.v2.TagUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
