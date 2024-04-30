@@ -10,8 +10,8 @@ import org.lithereal.item.custom.Ability;
 
 public class AbilityHoe extends HoeItem implements AbilityItem {
     final Ability ability;
-    public AbilityHoe(Ability ability, Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
+    public AbilityHoe(Ability ability, Tier tier, Properties properties) {
+        super(tier, properties);
         this.ability = ability;
     }
 

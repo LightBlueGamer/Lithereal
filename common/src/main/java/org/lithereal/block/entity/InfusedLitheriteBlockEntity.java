@@ -1,53 +1,54 @@
 package org.lithereal.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 
-import static net.minecraft.world.item.alchemy.PotionUtils.getPotion;
-
 public class InfusedLitheriteBlockEntity extends BlockEntity {
-    public Potion potion = Potions.EMPTY;
+    public PotionContents potion = PotionContents.EMPTY;
 
     public InfusedLitheriteBlockEntity(BlockPos pos, BlockState state) {
         super(LitherealExpectPlatform.getInfusedLitheriteBlockEntity(), pos, state);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(setPotion(nbt, potion));
+    protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.saveAdditional(setPotion(nbt, potion), provider);
     }
 
-    @Override
-    public void load(CompoundTag nbt) {
-        setPotion(getPotion(nbt));
-        super.load(nbt);
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        if (compoundTag.contains("Potion"))
+            setPotion(new PotionContents(BuiltInRegistries.POTION.get(ResourceLocation.tryParse(compoundTag.getString("Potion")))));
     }
 
-    public void setPotion(Potion potion) {
+    public void setPotion(PotionContents potion) {
         this.potion = potion;
         setChanged();
     }
-    public Potion getStoredPotion() {
+    public PotionContents getStoredPotion() {
         return this.potion;
     }
-    public static CompoundTag setPotion(CompoundTag nbt, Potion p_43551_) {
-        ResourceLocation resourcelocation = BuiltInRegistries.POTION.getKey(p_43551_);
-        if (p_43551_ == Potions.EMPTY) {
-            nbt.remove("Potion");
-        } else {
-            nbt.putString("Potion", resourcelocation.toString());
-        }
+    public static CompoundTag setPotion(CompoundTag nbt, PotionContents contents) {
+        ResourceLocation resourceLocation = BuiltInRegistries.POTION.getKey(contents.potion().orElse(Potions.WATER).value());
+        if (contents.potion().isEmpty()) nbt.remove("Potion");
+        else nbt.putString("Potion", resourceLocation.toString());
 
         return nbt;
     }
@@ -58,8 +59,19 @@ public class InfusedLitheriteBlockEntity extends BlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
+    protected void applyImplicitComponents(BlockEntity.DataComponentInput dataComponentInput) {
+        super.applyImplicitComponents(dataComponentInput);
+        this.potion = dataComponentInput.get(DataComponents.POTION_CONTENTS);
+    }
+
+    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
+        super.collectImplicitComponents(builder);
+        builder.set(DataComponents.POTION_CONTENTS, this.potion);
+    }
+
     @Override
-    public CompoundTag getUpdateTag() {
-        return saveWithoutMetadata();
+    public void removeComponentsFromTag(CompoundTag compoundTag) {
+        compoundTag.remove("Potion");
+        super.removeComponentsFromTag(compoundTag);
     }
 }

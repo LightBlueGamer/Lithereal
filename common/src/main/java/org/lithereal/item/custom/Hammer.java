@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -29,18 +30,7 @@ public class Hammer extends DiggerItem {
     protected final int depth = 1;
     protected final int radius = 3;
     public Hammer(Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(damage, attackSpeed, tier, BlockTags.MINEABLE_WITH_PICKAXE, properties);
-    }
-
-    protected boolean actualIsCorrectToolForDrops(BlockState state) {
-        int i = this.getTier().getLevel();
-        if (i < 3 && state.is(BlockTags.NEEDS_DIAMOND_TOOL)) {
-            return false;
-        } else if (i < 2 && state.is(BlockTags.NEEDS_IRON_TOOL)) {
-            return false;
-        } else {
-            return (i >= 1 || !state.is(BlockTags.NEEDS_STONE_TOOL)) && state.is(BlockTags.MINEABLE_WITH_PICKAXE);
-        }
+        super(tier, BlockTags.MINEABLE_WITH_PICKAXE, properties.attributes(AxeItem.createAttributes(tier, damage, attackSpeed)));
     }
 
     @Override
@@ -73,11 +63,7 @@ public class Hammer extends DiggerItem {
             }
 
             BlockState targetState = level.getBlockState(pos);
-            if (pos == blockPos || removedPos.contains(pos) || !canDestroy(targetState, level, pos)) {
-                continue;
-            }
-            // Skips any blocks that require a higher tier hammer
-            if (!actualIsCorrectToolForDrops(targetState)) {
+            if (pos == blockPos || removedPos.contains(pos) || cannotDestroy(targetState, level, pos) || !hammerStack.isCorrectToolForDrops(targetState)) {
                 continue;
             }
 
@@ -93,13 +79,11 @@ public class Hammer extends DiggerItem {
                             Block.popResourceFromFace(level, pos, ((BlockHitResult) pick).getDirection(), e));
                 }
             }
-            damage ++;
+            damage++;
         }
 
         if (damage != 0 && !player.isCreative()) {
-            hammerStack.hurtAndBreak(damage, livingEntity, (livingEntityx) -> {
-                livingEntityx.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-            });
+            hammerStack.hurtAndBreak(damage, livingEntity, EquipmentSlot.MAINHAND);
         }
     }
 
@@ -116,11 +100,11 @@ public class Hammer extends DiggerItem {
         };
     }
 
-    protected boolean canDestroy(BlockState targetState, Level level, BlockPos pos) {
+    protected boolean cannotDestroy(BlockState targetState, Level level, BlockPos pos) {
         if (targetState.getDestroySpeed(level, pos) <= 0) {
-            return false;
+            return true;
         }
 
-        return level.getBlockEntity(pos) == null;
+        return level.getBlockEntity(pos) != null;
     }
 }

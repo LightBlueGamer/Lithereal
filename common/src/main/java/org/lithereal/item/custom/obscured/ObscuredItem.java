@@ -3,6 +3,7 @@ package org.lithereal.item.custom.obscured;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.lithereal.item.custom.component.ModComponents;
 
 public interface ObscuredItem {
     Item self();
@@ -11,7 +12,7 @@ public interface ObscuredItem {
         return setRevealed(base, false);
     }
     static boolean isRevealed(ItemStack stack) {
-        return isRevealed(stack.getTag());
+        return stack.getOrDefault(ModComponents.REVEALED.get(), false);
     }
 
     static boolean isRevealed(CompoundTag tag) {
@@ -19,7 +20,7 @@ public interface ObscuredItem {
     }
 
     static ItemStack setRevealed(ItemStack stack, boolean bl) {
-        setRevealed(stack.getOrCreateTag(), bl);
+        stack.set(ModComponents.REVEALED.get(), bl);
         return stack;
     }
 

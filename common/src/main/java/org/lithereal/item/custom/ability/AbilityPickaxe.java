@@ -10,8 +10,8 @@ import org.lithereal.item.custom.Ability;
 
 public class AbilityPickaxe extends PickaxeItem implements AbilityItem {
     final Ability ability;
-    public AbilityPickaxe(Ability ability, Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
+    public AbilityPickaxe(Ability ability, Tier tier, Properties properties) {
+        super(tier, properties.attributes(PickaxeItem.createAttributes(tier, 1, -2.8f)));
         this.ability = ability;
     }
 

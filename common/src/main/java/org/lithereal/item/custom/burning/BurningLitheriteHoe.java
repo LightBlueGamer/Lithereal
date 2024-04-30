@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
@@ -20,8 +21,8 @@ import org.lithereal.item.custom.ability.AbilityHoe;
 import java.util.List;
 
 public class BurningLitheriteHoe extends AbilityHoe implements BurningItem {
-    public BurningLitheriteHoe(Tier tier, int i, float f, Properties properties) {
-        super(Ability.BURNING, tier, i, f, properties);
+    public BurningLitheriteHoe(Tier tier, Properties properties) {
+        super(Ability.BURNING, tier, properties);
     }
 
     @Override
@@ -31,8 +32,9 @@ public class BurningLitheriteHoe extends AbilityHoe implements BurningItem {
             SmeltingRecipe[] furnaceRecipes = new SmeltingRecipe[origDrops.size()];
 
             for (int i = 0; i < origDrops.size(); i++) {
-                furnaceRecipes[i] = level.getRecipeManager()
+                RecipeHolder<SmeltingRecipe> holder = level.getRecipeManager()
                         .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(origDrops.get(i)), level).orElse(null);
+                furnaceRecipes[i] = holder == null ? null : holder.value();
             }
 
 
@@ -49,7 +51,7 @@ public class BurningLitheriteHoe extends AbilityHoe implements BurningItem {
             for (ItemStack drop : drops) {
                 Block.popResource(level, blockPos, drop);
             }
-            itemStack.hurtAndBreak(0, livingEntity, (p) -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            itemStack.hurtAndBreak(0, livingEntity, EquipmentSlot.MAINHAND);
             level.destroyBlock(blockPos, false);
         }
     }

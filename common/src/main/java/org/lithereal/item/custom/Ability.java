@@ -2,6 +2,8 @@ package org.lithereal.item.custom;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,13 +15,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.item.custom.ability.AbilityItem;
-import org.lithereal.item.custom.enhanceable.EnhanceableItem;
 import org.lithereal.item.custom.infused.InfusedItem;
 import org.lithereal.item.enchantment.ModEnchantments;
 import org.lithereal.util.CommonUtils;
@@ -35,14 +36,14 @@ import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
 public enum Ability {
     BURNING {
-        private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
-                (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
+        private static final Map<Holder<ArmorMaterial>, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
+                (new ImmutableMap.Builder<Holder<ArmorMaterial>, MobEffectInstance>())
                         .put(ModArmorMaterials.BURNING_LITHERITE,
                                 new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1)).build();
         @Override
         public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
             if (attacked.isFreezing()) attacked.setTicksFrozen(0);
-            attacked.setSecondsOnFire(1000);
+            attacked.setRemainingFireTicks(20000);
         }
 
         @Override
@@ -58,7 +59,7 @@ public enum Ability {
                     if(source == null) return;
                     Entity attacker = source.getEntity();
                     if (attacker instanceof LivingEntity) {
-                        attacker.setSecondsOnFire(5);
+                        attacker.setRemainingFireTicks(100);
                     }
                 }
                 if(!level.isClientSide()) {
@@ -78,8 +79,8 @@ public enum Ability {
         }
 
         private void evaluateArmorEffects(Player player) {
-            for (Map.Entry<ArmorMaterial, MobEffectInstance> entry : MATERIAL_TO_EFFECT_MAP.entrySet()) {
-                ArmorMaterial mapArmorMaterial = entry.getKey();
+            for (Map.Entry<Holder<ArmorMaterial>, MobEffectInstance> entry : MATERIAL_TO_EFFECT_MAP.entrySet()) {
+                Holder<ArmorMaterial> mapArmorMaterial = entry.getKey();
                 MobEffectInstance mapStatusEffect = entry.getValue();
 
                 if(hasCorrectArmorOn(mapArmorMaterial, player)) {
@@ -88,7 +89,7 @@ public enum Ability {
             }
         }
 
-        private void addStatusEffectForMaterial(Player player, ArmorMaterial mapArmorMaterial, MobEffectInstance mapStatusEffect) {
+        private void addStatusEffectForMaterial(Player player, Holder<ArmorMaterial> mapArmorMaterial, MobEffectInstance mapStatusEffect) {
             boolean hasPlayerEffect = player.hasEffect(mapStatusEffect.getEffect());
 
             if(hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
@@ -179,17 +180,20 @@ public enum Ability {
         public final Map<UUID, Integer> regenTickerAMap = new HashMap<>();
         public final Map<UUID, Integer> healTickerMap = new HashMap<>();
         public final Map<UUID, Integer> regenTickerIMap = new HashMap<>();
-        public final Map<UUID, Map<MobEffect, Integer>> untilReadyMap = new HashMap<>();
+        public final Map<UUID, Map<Holder<MobEffect>, Integer>> untilReadyMap = new HashMap<>();
         @Override
         public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-            PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
-                MobEffect effect = mobEffectInstance.getEffect();
-                boolean bl = effect.isBeneficial();
+            PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+            AtomicInteger count = new AtomicInteger();
+            potionContents.forEachEffect((mobEffectInstance) -> count.getAndIncrement());
+            potionContents.forEachEffect((mobEffectInstance) -> {
+                Holder<MobEffect> effect = mobEffectInstance.getEffect();
+                boolean bl = effect.value().isBeneficial();
                 boolean bl2 = attacked.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                 if(!bl || bl2) {
                     if(!(attacked.isInvertedHealAndHarm() && effect == MobEffects.HARM)) {
-                        if(attacker.hasEffect(effect) && PotionUtils.getPotion(itemStack).getEffects().size() == 1) attacker.removeEffect(effect);
-                        if (mobEffectInstance.getEffect().isInstantenous()) mobEffectInstance.getEffect().applyInstantenousEffect(attacker, attacker, attacked, mobEffectInstance.getAmplifier(), 1.0);
+                        if(attacker.hasEffect(effect) && count.get() == 1) attacker.removeEffect(effect);
+                        if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(attacker, attacker, attacked, mobEffectInstance.getAmplifier(), 1.0);
                         else attacked.addEffect(CommonUtils.clone(mobEffectInstance));
                     }
                 } else {
@@ -209,13 +213,16 @@ public enum Ability {
             if (!untilReadyMap.containsKey(entityID))
                 untilReadyMap.put(entityID, new HashMap<>());
             AtomicInteger regenTickerI = new AtomicInteger(regenTickerIMap.get(entityID));
-            Map<MobEffect, Integer> untilReady = untilReadyMap.get(entityID);
+            Map<Holder<MobEffect>, Integer> untilReady = untilReadyMap.get(entityID);
             if(entity instanceof LivingEntity livingEntity && isSelected) {
-                PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
-                    MobEffect effect = mobEffectInstance.getEffect();
-                    boolean bl = !untilReady.containsKey(effect) && (effect.isBeneficial()
-                            || PotionUtils.getPotion(itemStack).getEffects().size() > 1)
-                            && !effect.isInstantenous();
+                PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+                AtomicInteger count = new AtomicInteger();
+                potionContents.forEachEffect((mobEffectInstance) -> count.getAndIncrement());
+                potionContents.forEachEffect((mobEffectInstance) -> {
+                    Holder<MobEffect> effect = mobEffectInstance.getEffect();
+                    boolean bl = !untilReady.containsKey(effect) && (effect.value().isBeneficial()
+                            || count.get() > 1)
+                            && !effect.value().isInstantenous();
                     if (bl) {
                         if (!livingEntity.hasEffect(effect)) livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                         untilReady.put(effect, mobEffectInstance.getDuration() * 2);
@@ -226,7 +233,7 @@ public enum Ability {
                         if (!livingEntity.hasEffect(effect)) livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                         untilReady.put(effect, mobEffectInstance.getDuration() * 2);
                     }
-                    if (itemStack.isDamaged() && regenTickerI.get() >= 10 && mobEffectInstance.getEffect() == MobEffects.REGENERATION) {
+                    if (itemStack.isDamaged() && regenTickerI.get() >= 10 && effect == MobEffects.REGENERATION) {
                         itemStack.setDamageValue(itemStack.getDamageValue() - mobEffectInstance.getAmplifier());
                         regenTickerI.set(0);
                     }
@@ -252,13 +259,16 @@ public enum Ability {
                     if(source == null) return;
                     Entity attacker = source.getEntity();
                     if(attacker instanceof LivingEntity livingEntity) {
-                        PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
-                            MobEffect effect = mobEffectInstance.getEffect();
-                            boolean bl = effect.isBeneficial();
+                        PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+                        AtomicInteger count = new AtomicInteger();
+                        potionContents.forEachEffect((mobEffectInstance) -> count.getAndIncrement());
+                        potionContents.forEachEffect((mobEffectInstance) -> {
+                            Holder<MobEffect> effect = mobEffectInstance.getEffect();
+                            boolean bl = effect.value().isBeneficial();
                             boolean bl2 = livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HEAL;
                             if(!bl || bl2) {
                                 if (!(livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HARM)) {
-                                    if (mobEffectInstance.getEffect().isInstantenous()) mobEffectInstance.getEffect().applyInstantenousEffect(player, player, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
+                                    if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(player, player, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
                                     else livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
                                 }
                             } else {
@@ -271,21 +281,25 @@ public enum Ability {
                 if(!level.isClientSide()) {
                     if(hasFullSuitOfArmorOn(player)) {
                         if(hasCorrectArmorOn(ModArmorMaterials.INFUSED_LITHERITE, player)) {
-                            boolean bl2 = PotionUtils.getPotion(itemStack).getEffects().size() > 1;
-                            PotionUtils.getPotion(itemStack).getEffects().forEach((mobEffectInstance) -> {
-                                boolean bl = mobEffectInstance.getEffect().isBeneficial();
+                            PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+                            AtomicInteger count = new AtomicInteger();
+                            potionContents.forEachEffect((mobEffectInstance) -> count.getAndIncrement());
+                            boolean bl2 = count.get() > 1;
+                            potionContents.forEachEffect((mobEffectInstance) -> {
+                                Holder<MobEffect> effect = mobEffectInstance.getEffect();
+                                boolean bl = effect.value().isBeneficial();
                                 if (bl || bl2) {
-                                    if(mobEffectInstance.getEffect() != MobEffects.HEAL || healTicker.get() >= 200) {
+                                    if(effect != MobEffects.HEAL || healTicker.get() >= 200) {
                                         MobEffectInstance mobEff = InfusedItem.transformInstance(mobEffectInstance, 100);
-                                        if (mobEffectInstance.getEffect().isInstantenous()) mobEffectInstance.getEffect().applyInstantenousEffect(null, null, player, mobEffectInstance.getAmplifier(), 1.0);
+                                        if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(null, null, player, mobEffectInstance.getAmplifier(), 1.0);
                                         else player.addEffect(mobEff);
-                                        if (mobEffectInstance.getEffect() == MobEffects.HEAL) healTicker.set(0);
+                                        if (effect == MobEffects.HEAL) healTicker.set(0);
                                     }
                                 } else {
-                                    if (player.hasEffect(mobEffectInstance.getEffect())) player.removeEffect(mobEffectInstance.getEffect());
+                                    if (player.hasEffect(effect)) player.removeEffect(effect);
                                 }
-                                if (itemStack.isDamaged() && regenTickerA.get() >= 10 && mobEffectInstance.getEffect() == MobEffects.REGENERATION) {
-                                    itemStack.hurtAndBreak(2 * mobEffectInstance.getAmplifier(), player, player1 -> player1.broadcastBreakEvent(item instanceof ArmorItem armorItem ? armorItem.getEquipmentSlot() : EquipmentSlot.MAINHAND));
+                                if (itemStack.isDamaged() && regenTickerA.get() >= 10 && effect == MobEffects.REGENERATION) {
+                                    itemStack.hurtAndBreak(2 * mobEffectInstance.getAmplifier(), player, item instanceof ArmorItem armorItem ? armorItem.getEquipmentSlot() : EquipmentSlot.MAINHAND);
                                     regenTickerA.set(0);
                                 }
                             });
@@ -300,7 +314,7 @@ public enum Ability {
     ENHANCED {
         @Override
         public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-            if (EnhanceableItem.isEnhanced(itemStack))
+            if (CommonUtils.isEnhanced(itemStack))
                 ModEnchantments.HEROS_EDGE.get().doPostAttack(attacker, attacked, 1);
         }
 
@@ -311,7 +325,7 @@ public enum Ability {
 
         @Override
         public void onArmourTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
-            if (entity instanceof Player player && EnhanceableItem.isEnhanced(itemStack) && !level.isClientSide())
+            if (entity instanceof Player player && CommonUtils.isEnhanced(itemStack) && !level.isClientSide())
                 if (hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(ModArmorMaterials.ODYSIUM, player) && !player.hasEffect(MobEffects.DAMAGE_RESISTANCE))
                     player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 1));
         }

@@ -7,10 +7,14 @@ import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
@@ -58,27 +62,33 @@ public class LitherealClient {
                 LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()));
 
-        for (Potion potion : LitherealExpectPlatform.getRegisteredPotions()) {
-            litherite.add(PotionUtils.setPotion(new ItemStack(LitherealExpectPlatform.getInfusedLitheriteBlock()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_INGOT.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SWORD.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_SHOVEL.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_PICKAXE.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_AXE.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HOE.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HAMMER.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_HELMET.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_CHESTPLATE.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_LEGGINGS.get()), potion));
-            litherite.add(PotionUtils.setPotion(new ItemStack(ModItems.INFUSED_LITHERITE_BOOTS.get()), potion));
+        for (Potion potion : BuiltInRegistries.POTION.stream().toList()) {
+            Holder<Potion> holder = BuiltInRegistries.POTION.wrapAsHolder(potion);
+            List<ItemLike> itemLikes = Arrays.asList(LitherealExpectPlatform.getInfusedLitheriteBlock(),
+                    ModItems.INFUSED_LITHERITE_INGOT.get(),
+                    ModItems.INFUSED_LITHERITE_SWORD.get(),
+                    ModItems.INFUSED_LITHERITE_SHOVEL.get(),
+                    ModItems.INFUSED_LITHERITE_PICKAXE.get(),
+                    ModItems.INFUSED_LITHERITE_AXE.get(),
+                    ModItems.INFUSED_LITHERITE_HOE.get(),
+                    ModItems.INFUSED_LITHERITE_HAMMER.get(),
+                    ModItems.INFUSED_LITHERITE_HELMET.get(),
+                    ModItems.INFUSED_LITHERITE_CHESTPLATE.get(),
+                    ModItems.INFUSED_LITHERITE_LEGGINGS.get(),
+                    ModItems.INFUSED_LITHERITE_BOOTS.get());
+            for (ItemLike itemLike : itemLikes){
+                ItemStack current = new ItemStack(itemLike);
+                current.set(DataComponents.POTION_CONTENTS, new PotionContents(holder));
+                litherite.add(current);
+            }
             if (isModLoaded("combatify"))
-                litherite = CompatInit.populateInfusedForCombatify(litherite, potion);
+                litherite = CompatInit.populateInfusedForCombatify(litherite, holder);
         }
 
         for (RegistrySupplier<Block> blockRegistryObject : ModBlocks.BLOCKS) {
             ItemStack blockItem = new ItemStack(blockRegistryObject.get());
 
-            if (!litherite.contains(blockItem) && isEquipment(LitherealExpectPlatform.getResourceLocation(blockItem).getPath())) {
+            if (!litherite.contains(blockItem) && isEquipment(BuiltInRegistries.ITEM.getKey(blockItem.getItem()).getPath())) {
                 litherite.add(blockItem);
             } else otherB.add(blockItem);
         }
@@ -88,13 +98,13 @@ public class LitherealClient {
         for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
             ItemStack item = new ItemStack(itemRegistrySupplier.get());
 
-            if (!litherite.contains(item) && isEquipment(LitherealExpectPlatform.getResourceLocation(item).getPath())) {
+            if (!litherite.contains(item) && isEquipment(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath())) {
                 litherite.add(item);
             } else otherI.add(item);
         }
 
         litherite.sort(Comparator.comparing(itemStack -> {
-            String descriptionId = LitherealExpectPlatform.getResourceLocation(itemStack).getPath();
+            String descriptionId = BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getPath();
 
             if (descriptionId.startsWith("litherite") || descriptionId.startsWith("deepslate_litherite")) return "1";
             else if (descriptionId.startsWith("burning_litherite")) return "2";

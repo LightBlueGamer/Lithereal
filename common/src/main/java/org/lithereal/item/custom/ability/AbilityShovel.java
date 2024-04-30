@@ -10,8 +10,8 @@ import org.lithereal.item.custom.Ability;
 
 public class AbilityShovel extends ShovelItem implements AbilityItem {
     final Ability ability;
-    public AbilityShovel(Ability ability, Tier tier, float damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
+    public AbilityShovel(Ability ability, Tier tier, Properties properties) {
+        super(tier, properties.attributes(ShovelItem.createAttributes(tier, 1.5f, -3f)));
         this.ability = ability;
     }
 

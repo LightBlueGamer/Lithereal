@@ -1,31 +1,38 @@
 package org.lithereal.item.custom.infused;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.ability.AbilityHoe;
 
 import java.util.List;
+import java.util.Objects;
 
 public class InfusedLitheriteHoe extends AbilityHoe implements InfusedItem {
-    public InfusedLitheriteHoe(Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(Ability.INFUSED, tier, damage, attackSpeed, properties);
+    public InfusedLitheriteHoe(Tier tier, Properties properties) {
+        super(Ability.INFUSED, tier, properties);
     }
 
     public ItemStack getDefaultInstance() {
-        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.EMPTY);
+        ItemStack itemStack = super.getDefaultInstance();
+        itemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER));
+        return itemStack;
     }
 
-    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
-        PotionUtils.addPotionTooltip(itemStack, components, 1F);
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
+        PotionContents potionContents = itemStack.get(DataComponents.POTION_CONTENTS);
+        if (potionContents != null) {
+            Objects.requireNonNull(components);
+            potionContents.addPotionTooltip(components::add, 1.0F, tooltipContext.tickRate());
+        }
     }
 
-    public String getDescriptionId(ItemStack p_43364_) {
-        return PotionUtils.getPotion(p_43364_).getName(this.getDescriptionId() + ".effect.");
+    public String getDescriptionId(ItemStack itemStack) {
+        return Potion.getName(itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).potion(), this.getDescriptionId() + ".effect.");
     }
 
     @Override

@@ -1,23 +1,27 @@
 package org.lithereal;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.*;
 import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.ModTier;
 import org.lithereal.item.custom.WarHammer;
 import org.lithereal.screen.*;
 
 import java.nio.file.Path;
+import java.util.function.Supplier;
 
 public class LitherealExpectPlatform {
     @ExpectPlatform
@@ -97,11 +101,6 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static Item getLitheriteItem() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static ResourceLocation getResourceLocation(ItemStack stack) {
         throw new AssertionError();
     }
 
@@ -207,6 +206,11 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static Item createInfusedKnife(Tier tier, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static ModTier createCombatifyTier(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
         throw new AssertionError();
     }
 }

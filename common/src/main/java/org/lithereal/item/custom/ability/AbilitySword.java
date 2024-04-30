@@ -10,8 +10,8 @@ import org.lithereal.item.custom.Ability;
 
 public class AbilitySword extends SwordItem implements AbilityItem {
     final Ability ability;
-    public AbilitySword(Ability ability, Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
+    public AbilitySword(Ability ability, Tier tier, Properties properties) {
+        super(tier, properties.attributes(SwordItem.createAttributes(tier, 3, -2.4f)));
         this.ability = ability;
     }
 

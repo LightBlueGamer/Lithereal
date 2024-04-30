@@ -10,8 +10,8 @@ import org.lithereal.item.custom.Ability;
 
 public class AbilityAxe extends AxeItem implements AbilityItem {
     final Ability ability;
-    public AbilityAxe(Ability ability, Tier tier, float damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
+    public AbilityAxe(Ability ability, Tier tier, Properties properties) {
+        super(tier, properties.attributes(AxeItem.createAttributes(tier, 5, -3)));
         this.ability = ability;
     }
 

@@ -1,0 +1,41 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mixins]]
+config="lithereal.mixins.json"
+
+[[mixins]]
+config="lithereal-common.mixins.json"
+
+[[mods]]
+modId = "lithereal"
+version = "${version}"
+displayName = "Lithereal"
+authors = "Light, Alexandra, Stunf"
+description = '''
+Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.
+'''
+#logoFile = ""
+
+[[dependencies.lithereal]]
+modId = "neoforge"
+mandatory = true
+versionRange = "[20.5.0-beta,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lithereal]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.6,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lithereal]]
+modId = "architectury"
+mandatory = true
+versionRange = "[12.0.27,)"
+ordering = "AFTER"
+side = "BOTH"

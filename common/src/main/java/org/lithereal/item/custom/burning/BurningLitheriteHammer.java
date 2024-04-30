@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
@@ -32,9 +33,7 @@ public class BurningLitheriteHammer extends AbilityHammer implements BurningItem
 
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState blockState, BlockPos blockPos, LivingEntity livingEntity) {
-        if (!level.isClientSide && blockState.getDestroySpeed(level, blockPos) != 0.0F) {
-            itemStack.hurtAndBreak(1, livingEntity, (livingEntityx) -> livingEntityx.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-        }
+        if (!level.isClientSide && blockState.getDestroySpeed(level, blockPos) != 0.0F) itemStack.hurtAndBreak(1, livingEntity, EquipmentSlot.MAINHAND);
         return true;
     }
 
@@ -55,11 +54,7 @@ public class BurningLitheriteHammer extends AbilityHammer implements BurningItem
             }
 
             BlockState targetState = level.getBlockState(pos);
-            if (pos == blockPos || removedPos.contains(pos) || !canDestroy(targetState, level, pos)) {
-                continue;
-            }
-            // Skips any blocks that require a higher tier hammer
-            if (!actualIsCorrectToolForDrops(targetState)) {
+            if (pos == blockPos || removedPos.contains(pos) || cannotDestroy(targetState, level, pos) || !hammerStack.isCorrectToolForDrops(targetState)) {
                 continue;
             }
 
@@ -80,18 +75,16 @@ public class BurningLitheriteHammer extends AbilityHammer implements BurningItem
         }
 
         if (damage != 0 && !player.isCreative()) {
-            hammerStack.hurtAndBreak(damage, livingEntity, (livingEntityx) -> {
-                livingEntityx.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-            });
+            hammerStack.hurtAndBreak(damage, livingEntity, EquipmentSlot.MAINHAND);
         }
     }
 
     public List<ItemStack> getSmeltedDrops(List<ItemStack> drops, Level level) {
         List<ItemStack> smeltedDrops = NonNullList.create();
         drops.forEach(e -> {
-            SmeltingRecipe furnaceRecipe = level.getRecipeManager()
+            RecipeHolder<SmeltingRecipe> furnaceRecipe = level.getRecipeManager()
                     .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(e), level).orElse(null);
-            if(furnaceRecipe != null) smeltedDrops.add(new ItemStack(furnaceRecipe.getResultItem(level.registryAccess()).getItem(), e.getCount()));
+            if(furnaceRecipe != null) smeltedDrops.add(new ItemStack(furnaceRecipe.value().getResultItem(level.registryAccess()).getItem(), e.getCount()));
             else smeltedDrops.add(e);
         });
         return smeltedDrops;
@@ -104,8 +97,9 @@ public class BurningLitheriteHammer extends AbilityHammer implements BurningItem
             SmeltingRecipe[] furnaceRecipes = new SmeltingRecipe[origDrops.size()];
 
             for (int i = 0; i < origDrops.size(); i++) {
-                furnaceRecipes[i] = level.getRecipeManager()
+                RecipeHolder<SmeltingRecipe> holder = level.getRecipeManager()
                         .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(origDrops.get(i)), level).orElse(null);
+                furnaceRecipes[i] = holder == null ? null : holder.value();
             }
 
 
@@ -122,7 +116,7 @@ public class BurningLitheriteHammer extends AbilityHammer implements BurningItem
             for (ItemStack drop : drops) {
                 Block.popResource(level, blockPos, drop);
             }
-            itemStack.hurtAndBreak(0, livingEntity, (p) -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            itemStack.hurtAndBreak(0, livingEntity, EquipmentSlot.MAINHAND);
             HitResult pick = livingEntity.pick(20D, 1F, false);
 
             if (!(pick instanceof BlockHitResult)) return;

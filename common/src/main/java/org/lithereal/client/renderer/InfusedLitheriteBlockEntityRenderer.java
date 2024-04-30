@@ -25,7 +25,7 @@ public class InfusedLitheriteBlockEntityRenderer implements BlockEntityRenderer<
         matrixStack.pushPose();
         matrixStack.translate(0.5f, 1.5f, 0.5f);
         matrixStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
-        int hex = PotionUtils.getColor(blockEntity.getStoredPotion());
+        int hex = blockEntity.getStoredPotion().getColor();
         float r = (float)(hex >> 16 & 255) / 255.0F;
         float g = (float)(hex >> 8 & 255) / 255.0F;
         float b = (float)(hex & 255) / 255.0F;

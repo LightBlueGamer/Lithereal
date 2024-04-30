@@ -5,24 +5,29 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
+import org.lithereal.LitherealExpectPlatform;
 
 import java.util.function.Supplier;
 
-public final class ModTier implements Tier {
-    private final int level;
+import static dev.architectury.platform.Platform.isModLoaded;
+
+public class ModTier implements Tier {
+    public final int level;
     private final int uses;
     private final float speed;
     private final float attackDamageBonus;
     private final int enchantmentValue;
     private final @NotNull Supplier<Ingredient> repairIngredient;
+    private final TagKey<Block> incorrect;
 
-    public ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient) {
+    public ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
         this.level = level;
         this.uses = uses;
         this.speed = speed;
         this.attackDamageBonus = attackDamageBonus;
         this.enchantmentValue = enchantmentValue;
         this.repairIngredient = repairIngredient;
+        this.incorrect = incorrect;
     }
 
     public int getUses() {
@@ -37,8 +42,9 @@ public final class ModTier implements Tier {
         return this.attackDamageBonus;
     }
 
-    public int getLevel() {
-        return this.level;
+    @Override
+    public @NotNull TagKey<Block> getIncorrectBlocksForDrops() {
+        return incorrect;
     }
 
     public int getEnchantmentValue() {
@@ -51,5 +57,11 @@ public final class ModTier implements Tier {
 
     public String toString() {
         return "Tier[level=" + this.level + ", uses=" + this.uses + ", speed=" + this.speed + ", attackDamageBonus=" + this.attackDamageBonus + ", enchantmentValue=" + this.enchantmentValue + ", repairIngredient=" + this.repairIngredient + "]";
+    }
+
+    public static ModTier create(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
+        if (isModLoaded("combatify"))
+            return LitherealExpectPlatform.createCombatifyTier(name, level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
+        return new ModTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
     }
 }

@@ -1,18 +1,18 @@
 package org.lithereal.fabric;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
 import org.lithereal.block.custom.*;
@@ -23,10 +23,12 @@ import org.lithereal.fabric.compat.CombatifyHooks;
 import org.lithereal.fabric.item.FabricItems;
 import org.lithereal.fabric.screen.*;
 import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.ModTier;
 import org.lithereal.item.custom.WarHammer;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class LitherealExpectPlatformImpl {
     /**
@@ -96,10 +98,6 @@ public class LitherealExpectPlatformImpl {
         return FabricItems.LITHERITE_CRYSTAL;
     }
 
-    public static ResourceLocation getResourceLocation(ItemStack stack) {
-        return BuiltInRegistries.ITEM.getKey(stack.getItem());
-    }
-
     public static BlockEntityType<FabricLitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
         return FabricBlockEntities.LITHER_COLLECTOR_BLOCK_ENTITY;
     }
@@ -130,10 +128,6 @@ public class LitherealExpectPlatformImpl {
 
     public static LitherBatteryBlock getLitherBatteryBlock() {
         return (LitherBatteryBlock) FabricBlocks.LITHER_BATTERY_BLOCK;
-    }
-
-    public static Iterable<Potion> getRegisteredPotions() {
-        return BuiltInRegistries.POTION.stream().toList();
     }
 
     public static void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float strength) {
@@ -200,5 +194,9 @@ public class LitherealExpectPlatformImpl {
 
     public static Item createInfusedKnife(Tier tier, Item.Properties properties) {
         return CombatifyHooks.generateInfusedKnife(tier, properties);
+    }
+
+    public static ModTier createCombatifyTier(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
+        return CombatifyHooks.registerTier(name, CombatifyHooks.generateExtendedTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect));
     }
 }
