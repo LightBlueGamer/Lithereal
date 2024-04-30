@@ -64,7 +64,7 @@ public class Wrench extends Item {
 
                 if(player != null) {
                     context.getItemInHand().hurtAndBreak(1, player, (player2) -> {
-                        player2.broadcastBreakEvent(context.getHand());
+                        player.broadcastBreakEvent(context.getHand());
                     });
                 }
 
