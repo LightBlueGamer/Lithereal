@@ -21,8 +21,8 @@ public class WarHammer extends TieredItem {
     public WarHammer(Tier tier, int damage, float speed, Properties properties) {
         super(tier, properties);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", damage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", speed, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE.value(), new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", damage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE));
+        builder.put(Attributes.ATTACK_SPEED.value(), new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", speed, AttributeModifier.Operation.ADD_VALUE));
         this.defaultModifiers = builder.build();
     }
 
@@ -38,7 +38,6 @@ public class WarHammer extends TieredItem {
             applyKnockbackToNearbyEntities(player, target, 1);
         return true;
     }
-    @Override
     public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
         return equipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
     }

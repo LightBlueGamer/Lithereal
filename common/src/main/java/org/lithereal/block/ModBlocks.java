@@ -83,6 +83,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
+    public static final RegistrySupplier<Block> LITHEREAL_VAULT = registerBlock("lithereal_vault",
+            () -> new LitherealVaultBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VAULT)));
+
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
