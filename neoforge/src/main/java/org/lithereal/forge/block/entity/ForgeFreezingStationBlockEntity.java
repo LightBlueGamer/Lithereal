@@ -1,80 +1,54 @@
 package org.lithereal.forge.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.Containers;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
+import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.recipe.FreezingStationRecipe;
 
 import java.util.Optional;
 
-public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-        }
-    };
+public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity implements ImplementedInventory {
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
 
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     public ForgeFreezingStationBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap, side);
+    public void setChanged() {
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        super.setChanged();
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+    public NonNullList<ItemStack> getItems() {
+        return inventory;
     }
 
     @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
+    protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.saveAdditional(nbt, provider);
+        ContainerHelper.saveAllItems(nbt, inventory, provider);
+        nbt.putInt("freezing_station.progress", progress);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        nbt.put("inventory", itemHandler.serializeNBT());
-        super.saveAdditional(nbt);
-    }
-
-    @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-    }
-
-    public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.loadAdditional(nbt, provider);
+        ContainerHelper.loadAllItems(nbt, inventory, provider);
+        progress = nbt.getInt("freezing_station.progress");
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, ForgeFreezingStationBlockEntity pEntity) {
@@ -104,6 +78,7 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
         Block block = level.getBlockState(entity.getBlockPos().below()).getBlock();
         cooling += getBlockCoolingPower(entity, block);
 
+        entity.coldness = cooling;
         return cooling;
     }
 
@@ -112,32 +87,27 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
         if(block == Blocks.PACKED_ICE) cooling += 1;
         if(block == ModBlocks.FROZEN_LITHERITE_BLOCK.get()) cooling += 2;
 
-        entity.coldness = cooling;
         return cooling;
     }
 
     private static void craftItem(ForgeFreezingStationBlockEntity pEntity) {
         Level level = pEntity.getLevel();
-        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
-        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        SimpleContainer inventory = new SimpleContainer(pEntity.getContainerSize());
+        for (int i = 0; i < pEntity.getContainerSize(); i++) {
+            inventory.setItem(i, pEntity.getItem(i));
         }
 
-        Optional<FreezingStationRecipe> recipe = level.getRecipeManager()
+        Optional<RecipeHolder<FreezingStationRecipe>> recipe = level.getRecipeManager()
                 .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
 
         if(hasRecipe(pEntity)) {
-            ItemStack resultItem = recipe.get().getResultItem(level.registryAccess());
-            ItemStack outputItem = new ItemStack(resultItem.getItem(), pEntity.itemHandler.getStackInSlot(2).getCount() + resultItem.getCount());
+            ItemStack resultItem = recipe.get().value().getResultItem(level.registryAccess());
+            ItemStack outputItem = resultItem.copy();
+            outputItem.setCount(pEntity.getItem(2).getCount() + resultItem.getCount());
 
-            CompoundTag nbt = resultItem.getTag();
-            if(nbt != null) {
-                outputItem.setTag(nbt.copy());
-            }
-
-            pEntity.itemHandler.extractItem(0, recipe.get().recipeItems.get(0).getItems()[0].getCount(), false);
-            pEntity.itemHandler.extractItem(1, recipe.get().recipeItems.get(1).getItems()[0].getCount(), false);
-            pEntity.itemHandler.setStackInSlot(2, outputItem);
+            pEntity.removeItem(0, recipe.get().value().recipeItems.get(0).getItems()[0].getCount());
+            pEntity.removeItem(1, recipe.get().value().recipeItems.get(1).getItems()[0].getCount());
+            pEntity.setItem(2, outputItem);
 
             pEntity.resetProgress();
         }
@@ -145,15 +115,14 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
 
     private static boolean hasRecipe(ForgeFreezingStationBlockEntity entity) {
         Level level = entity.level;
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
-        }
+        SimpleContainer inventory = new SimpleContainer(entity.getContainerSize());
+        for (int i = 0; i < entity.getContainerSize(); i++)
+            inventory.setItem(i, entity.getItem(i));
 
-        Optional<FreezingStationRecipe> recipe = level.getRecipeManager()
+        Optional<RecipeHolder<FreezingStationRecipe>> recipe = level.getRecipeManager()
                 .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
 
         return getCoolingPower(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
-                canInsertItemIntoOutput(inventory, recipe.get().getResultItem(level.registryAccess()));
+                canInsertItemIntoOutput(inventory, recipe.get().value().getResultItem(level.registryAccess()));
     }
 }

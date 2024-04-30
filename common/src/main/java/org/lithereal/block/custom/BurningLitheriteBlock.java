@@ -1,5 +1,6 @@
 package org.lithereal.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,19 +15,26 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.block.entity.BurningLitheriteBlockEntity;
 
 public class BurningLitheriteBlock extends BaseEntityBlock {
+    public static final MapCodec<BurningLitheriteBlock> CODEC = simpleCodec(BurningLitheriteBlock::new);
     public BurningLitheriteBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
         if (entity instanceof LivingEntity) {
             entity.hurt(level.damageSources().hotFloor(), 6.0F);
-            entity.setSecondsOnFire(3);
+            entity.setRemainingFireTicks(60);
         }
 
         super.stepOn(level, blockPos, blockState, entity);
@@ -61,8 +69,8 @@ public class BurningLitheriteBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         if (type == ModBlockEntities.BURNING_LITHERITE_BLOCK.get()) {
             return (lvl, pos, blkState, blockEntity) -> {
-                if (blockEntity instanceof BurningLitheriteBlockEntity burningEntity) {
-                    burningEntity.tick(lvl, pos, blkState);
+                if (blockEntity instanceof BurningLitheriteBlockEntity) {
+                    BurningLitheriteBlockEntity.tick(lvl, pos, blkState);
                 }
             };
         }

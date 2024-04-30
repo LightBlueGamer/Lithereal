@@ -1,5 +1,6 @@
 package org.lithereal.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class WitheringLitheriteBlock extends Block {
+    public static final MapCodec<WitheringLitheriteBlock> CODEC = simpleCodec(WitheringLitheriteBlock::new);
     public WitheringLitheriteBlock(Properties properties) {
         super(properties);
     }
@@ -20,5 +22,10 @@ public class WitheringLitheriteBlock extends Block {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 1, 1));
         }
         super.stepOn(level, blockPos, blockState, entity);
+    }
+
+    @Override
+    protected MapCodec<? extends Block> codec() {
+        return CODEC;
     }
 }

@@ -1,7 +1,6 @@
 package org.lithereal.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,16 +11,6 @@ public class BurningLitheriteBlockEntity extends BlockEntity {
 
     public BurningLitheriteBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BURNING_LITHERITE_BLOCK.get(), pos, state);
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
-    }
-
-    @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState) {

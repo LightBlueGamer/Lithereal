@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
@@ -24,13 +25,14 @@ import org.lithereal.item.custom.infused.InfusedItem;
 import java.util.List;
 
 public class InfusedLitheriteBlock extends BaseEntityBlock {
+    public static final MapCodec<InfusedLitheriteBlock> CODEC = simpleCodec(InfusedLitheriteBlock::new);
     public InfusedLitheriteBlock(Properties p_49795_) {
         super(p_49795_);
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return null;
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override

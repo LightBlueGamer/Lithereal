@@ -1,14 +1,17 @@
 package org.lithereal.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.ModBlocks;
 
 public class BlueFireBlock extends BaseFireBlock {
+    public static final MapCodec<BlueFireBlock> CODEC = simpleCodec(BlueFireBlock::new);
     public BlueFireBlock(Properties properties) {
         super(properties, 1.0f);
     }
@@ -23,6 +26,11 @@ public class BlueFireBlock extends BaseFireBlock {
 
     public static boolean canSurviveOnBlock(BlockState blockState) {
         return blockState.is(ModBlocks.BURNING_LITHERITE_BLOCK.get());
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseFireBlock> codec() {
+        return CODEC;
     }
 
     protected boolean canBurn(BlockState blockState) {

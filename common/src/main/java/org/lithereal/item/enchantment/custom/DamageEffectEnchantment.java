@@ -3,17 +3,11 @@ package org.lithereal.item.enchantment.custom;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.DamageEnchantment;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.enchantment.TridentImpalerEnchantment;
 import org.lithereal.item.custom.infused.InfusedItem;
 
 import java.util.function.BiFunction;
@@ -23,28 +17,19 @@ public class DamageEffectEnchantment extends Enchantment {
     final Predicate<LivingEntity> canEffect;
     final MobEffectInstance[] effectInstances;
     final BiFunction<LivingEntity, Integer, Integer> timeFunction;
-    final BiFunction<MobSpawnType, Integer, Float> damageFunction;
-    final int maxLevel;
-    public DamageEffectEnchantment(Rarity rarity, Predicate<LivingEntity> canEffect, MobEffectInstance[] effect, BiFunction<LivingEntity, Integer, Integer> timeFunc, BiFunction<MobSpawnType, Integer, Float> damageFunc, int max, EquipmentSlot... equipmentSlots) {
-        super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
+    final BiFunction<EntityType<?>, Integer, Float> damageFunction;
+    final boolean isTradeable;
+    final boolean isDiscoverable;
+    final boolean isTreasureOnly;
+    public DamageEffectEnchantment(EnchantmentDefinition enchantmentDefinition, Predicate<LivingEntity> canEffect, MobEffectInstance[] effect, BiFunction<LivingEntity, Integer, Integer> timeFunc, BiFunction<EntityType<?>, Integer, Float> damageFunc, boolean tradeable, boolean discoverable, boolean treasureOnly) {
+        super(enchantmentDefinition);
         this.canEffect = canEffect;
         effectInstances = effect;
         timeFunction = timeFunc;
         damageFunction = damageFunc;
-        maxLevel = max;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return maxLevel;
-    }
-
-    public int getMinCost(int i) {
-        return i * 25;
-    }
-
-    public int getMaxCost(int i) {
-        return this.getMinCost(i) + 50;
+        isTradeable = tradeable;
+        isDiscoverable = discoverable;
+        isTreasureOnly = treasureOnly;
     }
 
     @Override
@@ -53,28 +38,28 @@ public class DamageEffectEnchantment extends Enchantment {
     }
 
     @Override
-    public float getDamageBonus(int i, MobSpawnType mobType) {
+    public float getDamageBonus(int i, EntityType<?> mobType) {
         return damageFunction.apply(mobType, i);
     }
 
     @Override
     public boolean checkCompatibility(Enchantment enchantment) {
-        return !(enchantment instanceof DamageEnchantment || enchantment instanceof TridentImpalerEnchantment || enchantment instanceof DamageEffectEnchantment);
+        return !(enchantment instanceof DamageEnchantment || enchantment instanceof DamageEffectEnchantment);
     }
 
     @Override
     public boolean isTradeable() {
-        return false;
+        return isTradeable;
     }
 
     @Override
     public boolean isDiscoverable() {
-        return false;
+        return isDiscoverable;
     }
 
     @Override
     public boolean isTreasureOnly() {
-        return true;
+        return isTreasureOnly;
     }
 
     @Override

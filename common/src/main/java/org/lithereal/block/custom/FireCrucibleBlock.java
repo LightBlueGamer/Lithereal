@@ -1,5 +1,6 @@
 package org.lithereal.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
 
-public class FireCrucibleBlock extends BaseEntityBlock {
+public abstract class FireCrucibleBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final BooleanProperty BLUE_LIT = BooleanProperty.create("blue_lit");

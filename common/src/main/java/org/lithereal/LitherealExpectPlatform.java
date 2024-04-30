@@ -7,11 +7,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.*;
@@ -21,6 +21,7 @@ import org.lithereal.item.custom.WarHammer;
 import org.lithereal.screen.*;
 
 import java.nio.file.Path;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class LitherealExpectPlatform {
@@ -70,7 +71,7 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
-    public static LitherCollectorBlock getFreezingStationBlock() {
+    public static FreezingStationBlock getFreezingStationBlock() {
         throw new AssertionError();
     }
 
@@ -161,11 +162,6 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static MenuType<ChargingStationMenu> getChargingStationMenu() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static Iterable<Potion> getRegisteredPotions() {
         throw new AssertionError();
     }
 

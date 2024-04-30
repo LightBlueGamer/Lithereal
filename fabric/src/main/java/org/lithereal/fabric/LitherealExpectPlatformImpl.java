@@ -1,6 +1,5 @@
 package org.lithereal.fabric;
 
-import net.fabricmc.fabric.api.tag.convention.v2.TagUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -13,12 +12,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.fabric.block.FabricBlocks;
+import org.lithereal.fabric.block.custom.FabricInfusementChamberBlock;
 import org.lithereal.fabric.block.entity.*;
 import org.lithereal.fabric.compat.CombatifyHooks;
 import org.lithereal.fabric.item.FabricItems;
@@ -29,6 +30,7 @@ import org.lithereal.item.custom.WarHammer;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class LitherealExpectPlatformImpl {
@@ -75,8 +77,8 @@ public class LitherealExpectPlatformImpl {
         return FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER;
     }
 
-    public static LitherCollectorBlock getFreezingStationBlock() {
-        return (LitherCollectorBlock) FabricBlocks.FREEZING_STATION_BLOCK;
+    public static FreezingStationBlock getFreezingStationBlock() {
+        return (FreezingStationBlock) FabricBlocks.FREEZING_STATION_BLOCK;
     }
 
     public static BlockEntityType<FabricInfusementChamberBlockEntity> getInfusementChamberBlockEntity() {
@@ -89,6 +91,10 @@ public class LitherealExpectPlatformImpl {
 
     public static InfusementChamberBlock getInfusementChamberBlock() {
         return (InfusementChamberBlock) FabricBlocks.INFUSEMENT_CHAMBER_BLOCK;
+    }
+
+    public static Function<BlockBehaviour.Properties, InfusementChamberBlock> getInfusementChamberBlockFactory() {
+        return FabricInfusementChamberBlock::new;
     }
 
     public static MenuType<FabricInfusementChamberMenu> getInfusementChamberMenu() {

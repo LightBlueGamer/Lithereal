@@ -17,9 +17,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.LitherBatteryBlockEntity;
-import org.lithereal.block.entity.LitherCollectorBlockEntity;
 
-public class LitherBatteryBlock extends BaseEntityBlock {
+public abstract class LitherBatteryBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public LitherBatteryBlock(Properties properties) {

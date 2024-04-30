@@ -1,5 +1,6 @@
 package org.lithereal.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 
-public class FreezingStationBlock extends BaseEntityBlock {
+public abstract class FreezingStationBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public FreezingStationBlock(Properties properties) {

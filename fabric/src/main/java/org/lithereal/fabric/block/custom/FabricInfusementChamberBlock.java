@@ -1,25 +1,32 @@
 package org.lithereal.fabric.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.fabric.block.entity.FabricInfusementChamberBlockEntity;
 
 public class FabricInfusementChamberBlock extends InfusementChamberBlock implements EntityBlock {
+    public static final MapCodec<FabricInfusementChamberBlock> CODEC = simpleCodec(FabricInfusementChamberBlock::new);
 
     public FabricInfusementChamberBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Nullable
@@ -41,16 +48,28 @@ public class FabricInfusementChamberBlock extends InfusementChamberBlock impleme
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof InfusementChamberBlockEntity) {
-            MenuProvider screenHandlerFactory = ((InfusementChamberBlockEntity) pLevel.getBlockEntity(pPos));
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
+            MenuProvider screenHandlerFactory = ((FabricInfusementChamberBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
-                pPlayer.openMenu(screenHandlerFactory);
+                player.openMenu(screenHandlerFactory);
             }
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
+            MenuProvider screenHandlerFactory = ((FabricInfusementChamberBlockEntity) level.getBlockEntity(blockPos));
+
+            if (screenHandlerFactory != null) {
+                player.openMenu(screenHandlerFactory);
+            }
+        }
+
+        return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     }
 }

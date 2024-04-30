@@ -1,12 +1,12 @@
 package org.lithereal.fabric.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,9 +17,15 @@ import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.fabric.block.entity.FabricFireCrucibleBlockEntity;
 
 public class FabricFireCrucibleBlock extends FireCrucibleBlock implements EntityBlock {
+    public static final MapCodec<FabricFireCrucibleBlock> CODEC = simpleCodec(FabricFireCrucibleBlock::new);
 
     public FabricFireCrucibleBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Nullable
@@ -41,16 +47,28 @@ public class FabricFireCrucibleBlock extends FireCrucibleBlock implements Entity
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof FireCrucibleBlockEntity) {
-            MenuProvider screenHandlerFactory = ((FabricFireCrucibleBlockEntity) pLevel.getBlockEntity(pPos));
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FireCrucibleBlockEntity) {
+            MenuProvider screenHandlerFactory = ((FabricFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
-                pPlayer.openMenu(screenHandlerFactory);
+                player.openMenu(screenHandlerFactory);
             }
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FireCrucibleBlockEntity) {
+            MenuProvider screenHandlerFactory = ((FabricFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
+
+            if (screenHandlerFactory != null) {
+                player.openMenu(screenHandlerFactory);
+            }
+        }
+
+        return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     }
 }

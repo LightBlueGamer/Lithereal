@@ -1,23 +1,32 @@
 package org.lithereal.forge.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.custom.FireCrucibleBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.forge.block.entity.ForgeFireCrucibleBlockEntity;
 
 public class ForgeFireCrucibleBlock extends FireCrucibleBlock {
+    public static final MapCodec<ForgeFireCrucibleBlock> CODEC = simpleCodec(ForgeFireCrucibleBlock::new);
     public ForgeFireCrucibleBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Nullable
@@ -31,10 +40,11 @@ public class ForgeFireCrucibleBlock extends FireCrucibleBlock {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof ForgeFireCrucibleBlockEntity) {
-                ((ForgeFireCrucibleBlockEntity) blockEntity).drops();
+                Containers.dropContents(pLevel, pPos, (ForgeFireCrucibleBlockEntity)blockEntity);
+                pLevel.updateNeighbourForOutputSignal(pPos,this);
             }
+            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
         }
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     @Override

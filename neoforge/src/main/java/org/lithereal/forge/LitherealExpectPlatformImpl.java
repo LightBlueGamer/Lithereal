@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +24,7 @@ import org.lithereal.block.custom.InfusementChamberBlock;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.forge.block.ForgeBlocks;
+import org.lithereal.forge.block.custom.ForgeInfusementChamberBlock;
 import org.lithereal.forge.block.entity.ForgeBlockEntities;
 import org.lithereal.forge.block.entity.ForgeFireCrucibleBlockEntity;
 import org.lithereal.forge.block.entity.ForgeFreezingStationBlockEntity;
@@ -41,6 +43,7 @@ import org.lithereal.screen.LitherCollectorMenu;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class LitherealExpectPlatformImpl {
@@ -101,6 +104,10 @@ public class LitherealExpectPlatformImpl {
 
     public static InfusementChamberBlock getInfusementChamberBlock() {
         return ForgeBlocks.INFUSEMENT_CHAMBER.get();
+    }
+
+    public static Function<BlockBehaviour.Properties, InfusementChamberBlock> getInfusementChamberBlockFactory() {
+        return ForgeInfusementChamberBlock::new;
     }
 
     public static MenuType<InfusementChamberMenu> getInfusementChamberMenu() {

@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
 
-public class LitherCollectorBlock extends BaseEntityBlock {
+public abstract class LitherCollectorBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public LitherCollectorBlock(Properties properties) {

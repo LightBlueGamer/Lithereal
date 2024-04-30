@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
@@ -34,12 +35,10 @@ public class Wrench extends Item {
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
-        BlockState newState = null;
+        BlockState newState;
 
         if(isRotationAllowed(state)) {
-            if(newState == null) {
-                newState = rotateSlabType(world, pos, state);
-            }
+            newState = rotateSlabType(world, pos, state);
 
             if(newState == null) {
                 newState = rotateDirection(world, pos, state);
@@ -63,9 +62,7 @@ public class Wrench extends Item {
                 world.playSound(player, pos, soundType.getPlaceSound(), SoundSource.BLOCKS, 1.0f, world.random.nextFloat() * 0.4f + 0.8f);
 
                 if(player != null) {
-                    context.getItemInHand().hurtAndBreak(1, player, (player2) -> {
-                        player.broadcastBreakEvent(context.getHand());
-                    });
+                    context.getItemInHand().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
 
                 return InteractionResult.SUCCESS;
@@ -91,11 +88,7 @@ public class Wrench extends Item {
             return false;
         }
 
-        if(state.hasProperty(BlockStateProperties.SLAB_TYPE) && state.getValue(BlockStateProperties.SLAB_TYPE) == SlabType.DOUBLE) {
-            return false;
-        }
-
-        return true;
+        return !state.hasProperty(BlockStateProperties.SLAB_TYPE) || state.getValue(BlockStateProperties.SLAB_TYPE) != SlabType.DOUBLE;
     }
 
     protected static BlockState updatePostPlacement(Level world, BlockPos pos, BlockState state) {
