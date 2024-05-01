@@ -24,11 +24,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.entity.LitherealVault.LitherealVaultBlockEntity;
-import org.lithereal.block.entity.LitherealVault.LitherealVaultState;
+import org.lithereal.block.entity.vault.LitherealVaultBlockEntity;
+import org.lithereal.block.entity.vault.LitherealVaultState;
 
 public class LitherealVaultBlock extends BaseEntityBlock {
     public static final MapCodec<LitherealVaultBlock> CODEC = simpleCodec(LitherealVaultBlock::new);
@@ -41,7 +40,7 @@ public class LitherealVaultBlock extends BaseEntityBlock {
 
     public LitherealVaultBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(STATE, LitherealVaultState.INACTIVE)));
+        this.registerDefaultState((BlockState) ((BlockState) this.stateDefinition.any().setValue(FACING, Direction.NORTH)).setValue(STATE, LitherealVaultState.INACTIVE));
     }
 
     public ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
@@ -70,7 +69,7 @@ public class LitherealVaultBlock extends BaseEntityBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, STATE});
+        builder.add(FACING, STATE);
     }
 
     @Nullable
@@ -90,15 +89,15 @@ public class LitherealVaultBlock extends BaseEntityBlock {
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return (BlockState)this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
     }
 
     public BlockState rotate(BlockState blockState, Rotation rotation) {
-        return (BlockState)blockState.setValue(FACING, rotation.rotate((Direction)blockState.getValue(FACING)));
+        return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
     }
 
     public BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.rotate(mirror.getRotation((Direction)blockState.getValue(FACING)));
+        return blockState.rotate(mirror.getRotation(blockState.getValue(FACING)));
     }
 
     public RenderShape getRenderShape(BlockState blockState) {

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.FireCrucibleBlock;
@@ -81,7 +83,16 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricFireCrucibleBlockEntity pEntity) {
-        if(level.isClientSide()) return;
+        if(level.isClientSide()) {
+            if (hasRecipe(pEntity)) {
+                Vec3 center = Vec3.upFromBottomCenterOf(blockPos, 0.2);
+                if (pEntity.heatLevel == 1)
+                    level.addParticle(ParticleTypes.FLAME, center.x, center.y, center.z, 0.05, 0.15, 0.5);
+                else if (pEntity.heatLevel >= 2) // Temp Soul Fire
+                    level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, center.x, center.y, center.z, 0.05, 0.15, 0.5);
+            }
+            return;
+        }
 
         boolean hasSolidFuel = hasSolidFuel(pEntity);
         Block block = level.getBlockState(blockPos.below()).getBlock();

@@ -1,4 +1,4 @@
-package org.lithereal.block.entity.LitherealVault;
+package org.lithereal.block.entity.vault;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.mojang.serialization.Codec;

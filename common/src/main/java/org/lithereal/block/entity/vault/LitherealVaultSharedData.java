@@ -1,4 +1,4 @@
-package org.lithereal.block.entity.LitherealVault;
+package org.lithereal.block.entity.vault;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
