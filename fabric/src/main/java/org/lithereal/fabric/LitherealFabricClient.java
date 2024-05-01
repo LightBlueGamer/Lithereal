@@ -25,6 +25,7 @@ public class LitherealFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(FabricBlocks.FIRE_CRUCIBLE_BLOCK, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BLUE_FIRE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.INFINITY_GLASS.get(), RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHEREAL_VAULT.get(), RenderType.cutout());
         EntityRendererRegistry.register(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
 
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);

@@ -15,21 +15,24 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
-import net.minecraft.world.level.block.entity.vault.VaultState;
 import net.minecraft.world.level.block.entity.vault.VaultBlockEntity.Client;
 import net.minecraft.world.level.block.entity.vault.VaultBlockEntity.Server;
+import net.minecraft.world.level.block.entity.vault.VaultState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import org.lithereal.block.entity.LitherealVault.LitherealVaultBlockEntity;
+import org.lithereal.block.entity.LitherealVault.LitherealVaultState;
 
 public class LitherealVaultBlock extends BaseEntityBlock {
     public static final MapCodec<LitherealVaultBlock> CODEC = simpleCodec(LitherealVaultBlock::new);
-    public static final Property<VaultState> STATE;
+    public static final EnumProperty<VaultState> STATE;
     public static final DirectionProperty FACING;
 
     public MapCodec<LitherealVaultBlock> codec() {
@@ -38,17 +41,17 @@ public class LitherealVaultBlock extends BaseEntityBlock {
 
     public LitherealVaultBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(STATE, VaultState.INACTIVE)));
+        this.registerDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(STATE, LitherealVaultState.INACTIVE)));
     }
 
     public ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if (!itemStack.isEmpty() && blockState.getValue(STATE) == VaultState.ACTIVE) {
+        if (!itemStack.isEmpty() && blockState.getValue(STATE) == LitherealVaultState.ACTIVE) {
             if (level instanceof ServerLevel) {
                 ServerLevel serverLevel = (ServerLevel)level;
                 BlockEntity var10 = serverLevel.getBlockEntity(blockPos);
-                if (var10 instanceof VaultBlockEntity) {
-                    VaultBlockEntity vaultBlockEntity = (VaultBlockEntity)var10;
-                    Server.tryInsertKey(serverLevel, blockPos, blockState, vaultBlockEntity.getConfig(), vaultBlockEntity.getServerData(), vaultBlockEntity.getSharedData(), player, itemStack);
+                if (var10 instanceof LitherealVaultBlockEntity) {
+                    LitherealVaultBlockEntity litherealVaultBlockEntity = (LitherealVaultBlockEntity)var10;
+                    Server.tryInsertKey(serverLevel, blockPos, blockState, litherealVaultBlockEntity.getConfig(), litherealVaultBlockEntity.getServerData(), litherealVaultBlockEntity.getSharedData(), player, itemStack);
                     return ItemInteractionResult.SUCCESS;
                 } else {
                     return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
