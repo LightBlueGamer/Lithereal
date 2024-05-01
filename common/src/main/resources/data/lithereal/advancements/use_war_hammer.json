@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "lithereal:war_hammer"
+      "id": "lithereal:war_hammer"
     },
     "title": "Hammer Time!",
     "description": "Kill a mob or player using a War Hammer",

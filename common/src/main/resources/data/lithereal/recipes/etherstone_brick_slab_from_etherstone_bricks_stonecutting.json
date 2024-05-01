@@ -4,5 +4,8 @@
   "ingredient": {
     "item": "lithereal:etherstone_bricks"
   },
-  "result": "lithereal:ethestone_brick_slab"
+  "result": {
+    "count": 2,
+    "id": "lithereal:etherstone_brick_slab"
+  }
 }

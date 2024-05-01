@@ -44,7 +44,7 @@ public class MysteriousItem extends Item implements ObscuredItem {
             return;
         boolean reveal = entity instanceof Player player && player.isCreative();
         if (!reveal && advancement != null && entity instanceof ServerPlayer player)
-            reveal = player.getAdvancements().getOrStartProgress(Objects.requireNonNull(player.getServer()).getAdvancements().getAdvancement(advancement)).isDone();
+            reveal = player.getAdvancements().getOrStartProgress(Objects.requireNonNull(player.getServer()).getAdvancements().get(advancement)).isDone();
 
         if (ObscuredItem.isRevealed(itemStack) != reveal)
             ObscuredItem.setRevealed(itemStack, reveal);

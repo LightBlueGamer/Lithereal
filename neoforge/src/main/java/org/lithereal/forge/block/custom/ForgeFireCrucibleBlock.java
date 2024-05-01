@@ -2,11 +2,9 @@ package org.lithereal.forge.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -48,17 +46,28 @@ public class ForgeFireCrucibleBlock extends FireCrucibleBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof FireCrucibleBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (ForgeFireCrucibleBlockEntity) entity, pPos);
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FireCrucibleBlockEntity) {
+            MenuProvider screenHandlerFactory = ((ForgeFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
+
+            if (screenHandlerFactory != null) {
+                player.openMenu(screenHandlerFactory);
             }
         }
 
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FireCrucibleBlockEntity) {
+            MenuProvider screenHandlerFactory = ((ForgeFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
+
+            if (screenHandlerFactory != null) {
+                player.openMenu(screenHandlerFactory);
+            }
+        }
+
+        return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     }
 }

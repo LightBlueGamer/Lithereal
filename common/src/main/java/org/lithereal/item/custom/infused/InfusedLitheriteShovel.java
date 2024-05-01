@@ -5,7 +5,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.alchemy.Potions;
 import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.ability.AbilityShovel;
 
@@ -19,7 +18,7 @@ public class InfusedLitheriteShovel extends AbilityShovel implements InfusedItem
 
     public ItemStack getDefaultInstance() {
         ItemStack itemStack = super.getDefaultInstance();
-        itemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER));
+        itemStack.set(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         return itemStack;
     }
 

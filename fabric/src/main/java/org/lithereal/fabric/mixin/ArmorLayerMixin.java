@@ -62,13 +62,13 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
                 this.setPartVisibility(humanoidModel, equipmentSlot);
                 boolean bl = this.usesInnerModel(equipmentSlot);
                 ArmorMaterial armorMaterial = infusedLitheriteArmorItem.getMaterial().value();
+                int c = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor();
+                float r = (float) (c >> 16 & 255) / 255.0F;
+                float g = (float) (c >> 8 & 255) / 255.0F;
+                float b = (float) (c & 255) / 255.0F;
 
                 for (ArmorMaterial.Layer armorMaterialLayer : armorMaterial.layers()) {
-                    int c = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor();
-                    float r = (float) (c >> 16 & 255) / 255.0F;
-                    float g = (float) (c >> 8 & 255) / 255.0F;
-                    float b = (float) (c & 255) / 255.0F;
-                    this.renderModel(poseStack, multiBufferSource, c, humanoidModel, r, g, b, armorMaterialLayer.texture(bl));
+                    this.renderModel(poseStack, multiBufferSource, i, humanoidModel, r, g, b, armorMaterialLayer.texture(bl));
                 }
 
                 ArmorTrim armortrim = itemStack.get(DataComponents.TRIM);

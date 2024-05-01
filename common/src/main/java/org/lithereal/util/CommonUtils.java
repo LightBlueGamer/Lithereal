@@ -30,6 +30,14 @@ public class CommonUtils {
 
         return bl;
     }
+
+    public static <T> boolean isAnyOf(T t, T... objects) {
+        boolean ret = false;
+        for (T object : objects) {
+            ret |= t == object;
+        }
+        return ret;
+    }
     public static MobEffectInstance clone(MobEffectInstance original) {
         return new MobEffectInstance(original);
     }

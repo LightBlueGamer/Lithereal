@@ -221,7 +221,7 @@ public enum Ability {
                 potionContents.forEachEffect((mobEffectInstance) -> {
                     Holder<MobEffect> effect = mobEffectInstance.getEffect();
                     boolean bl = !untilReady.containsKey(effect) && (effect.value().isBeneficial()
-                            || count.get() > 1)
+                            || count.get() > 1 || effect == MobEffects.WEAVING)
                             && !effect.value().isInstantenous();
                     if (bl) {
                         if (!livingEntity.hasEffect(effect)) livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
@@ -287,7 +287,7 @@ public enum Ability {
                             boolean bl2 = count.get() > 1;
                             potionContents.forEachEffect((mobEffectInstance) -> {
                                 Holder<MobEffect> effect = mobEffectInstance.getEffect();
-                                boolean bl = effect.value().isBeneficial();
+                                boolean bl = effect.value().isBeneficial() || effect == MobEffects.WEAVING;
                                 if (bl || bl2) {
                                     if(effect != MobEffects.HEAL || healTicker.get() >= 200) {
                                         MobEffectInstance mobEff = InfusedItem.transformInstance(mobEffectInstance, 100);

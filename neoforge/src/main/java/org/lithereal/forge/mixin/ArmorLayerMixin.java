@@ -65,11 +65,11 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
             float g = (float)(c >> 8 & 255) / 255.0F;
             float b = (float)(c & 255) / 255.0F;
             ResourceLocation texture = ClientHooks.getArmorTexture(t, itemStack, armorMaterialLayer, flag, equipmentSlot);
-            this.renderModel(poseStack, multiBufferSource, c, model, r, g, b, texture);
+            this.renderModel(poseStack, multiBufferSource, i, model, r, g, b, texture);
 
             ArmorTrim armortrim = itemStack.get(DataComponents.TRIM);
             if (armortrim != null)
-                this.renderTrim(infusedLitheriteArmorItem.getMaterial(), poseStack, multiBufferSource, c, armortrim, (A) model, flag);
+                this.renderTrim(infusedLitheriteArmorItem.getMaterial(), poseStack, multiBufferSource, i, armortrim, (A) model, flag);
             if (itemStack.hasFoil())
                 this.renderGlint(poseStack, multiBufferSource, i, model);
             ci.cancel();

@@ -23,6 +23,7 @@ import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.fabric.screen.FabricFreezingStationMenu;
 import org.lithereal.recipe.FreezingStationRecipe;
+import org.lithereal.recipe.ModRecipes;
 
 import java.util.Optional;
 
@@ -111,7 +112,7 @@ public class FabricFreezingStationBlockEntity extends FreezingStationBlockEntity
         }
 
         Optional<RecipeHolder<FreezingStationRecipe>> recipe = level.getRecipeManager()
-                .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
+                .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), inventory, level);
 
         if(hasRecipe(pEntity)) {
             ItemStack resultItem = recipe.get().value().getResultItem(level.registryAccess());
@@ -133,7 +134,7 @@ public class FabricFreezingStationBlockEntity extends FreezingStationBlockEntity
             inventory.setItem(i, entity.getItem(i));
 
         Optional<RecipeHolder<FreezingStationRecipe>> recipe = level.getRecipeManager()
-                .getRecipeFor(FreezingStationRecipe.Type.INSTANCE, inventory, level);
+                .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), inventory, level);
 
         return getCoolingPower(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
                 canInsertItemIntoOutput(inventory, recipe.get().value().getResultItem(level.registryAccess()));

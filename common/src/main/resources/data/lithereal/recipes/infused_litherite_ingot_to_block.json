@@ -12,7 +12,7 @@
     "###"
   ],
   "result": {
-    "item": "lithereal:infused_litherite_block"
+    "id": "lithereal:infused_litherite_block"
   },
   "show_notification": true
 }

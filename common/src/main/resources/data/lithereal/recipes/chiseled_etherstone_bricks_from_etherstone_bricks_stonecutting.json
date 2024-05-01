@@ -4,5 +4,7 @@
   "ingredient": {
     "item": "lithereal:etherstone_bricks"
   },
-  "result": "lithereal:chiseled_etherstone_bricks"
+  "result": {
+    "id": "lithereal:chiseled_etherstone_bricks"
+  }
 }

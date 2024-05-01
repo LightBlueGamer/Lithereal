@@ -1,11 +1,9 @@
 {
   "type": "lithereal:burning",
-  "ingredients": [
-    {
-      "item": "lithereal:litherite_crystal"
-    }
-  ],
+  "crystal": {
+    "item": "lithereal:litherite_crystal"
+  },
   "output": {
-    "item": "lithereal:burning_litherite_crystal"
+    "id": "lithereal:burning_litherite_crystal"
   }
 }

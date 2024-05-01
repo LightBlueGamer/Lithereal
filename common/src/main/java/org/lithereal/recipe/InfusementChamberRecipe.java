@@ -1,29 +1,36 @@
 package org.lithereal.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 
 public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
+    @Override
+    public ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
+        return output;
+    }
+
+    @Override
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
+        return output.copy();
+    }
+
     public final ItemStack output;
     public final NonNullList<Ingredient> recipeItems;
 
-    public InfusementChamberRecipe(ResourceLocation id, ItemStack output,
-                                   NonNullList<Ingredient> recipeItems) {
-        this.id = id;
+    public InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingredient potion) {
         this.output = output;
-        this.recipeItems = recipeItems;
+        this.recipeItems = NonNullList.of(bucket, potion);
     }
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
@@ -38,27 +45,12 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
     }
 
     private boolean hasItem(SimpleContainer container, int index) {
-        return recipeItems.get(index).test(container.getItem(index)) && container.getItem(index).getCount() >= recipeItems.get(index).getItems()[0].getCount();
-    }
-
-    @Override
-    public ItemStack assemble(SimpleContainer p_44001_, RegistryAccess p_267165_) {
-        return output;
+        return recipeItems.get(index).test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
     public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
         return true;
-    }
-
-    @Override
-    public ItemStack getResultItem(RegistryAccess p_267052_) {
-        return output.copy();
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 
     @Override
@@ -68,67 +60,44 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<InfusementChamberRecipe> {
-        private Type() { }
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "infusing";
+        return ModRecipes.INFUSING_TYPE.get();
     }
 
     public static class Serializer implements RecipeSerializer<InfusementChamberRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
                 new ResourceLocation(Lithereal.MOD_ID, "infusing");
+        public static final MapCodec<InfusementChamberRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+                instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
+                        Ingredient.CODEC.fieldOf("bucket").forGetter(infusementChamberRecipe -> infusementChamberRecipe.recipeItems.getFirst()),
+                        Ingredient.CODEC.fieldOf("potion").forGetter(infusementChamberRecipe -> infusementChamberRecipe.recipeItems.get(1)))
+                        .apply(instance, InfusementChamberRecipe::new));
+        public static final StreamCodec<RegistryFriendlyByteBuf, InfusementChamberRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
-        @Override
-        public InfusementChamberRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
+        public static @NotNull InfusementChamberRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
+            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
 
-            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
+            inputs.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
 
-            for (int i = 0; i < inputs.size(); i++) {
-                Ingredient ingredient = getIngredient(ingredients.get(i).getAsJsonObject());
-                inputs.set(i, ingredient);
-            }
-
-            return new InfusementChamberRecipe(pRecipeId, output, inputs);
+            ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
+            return new InfusementChamberRecipe(output, inputs.get(0), inputs.get(1));
         }
 
-        private Ingredient getIngredient(JsonObject json) {
-            Ingredient ingredient = Ingredient.fromJson(json);
-            int count = 1;
-
-            if (json.getAsJsonObject().has("count")) {
-                count = GsonHelper.getAsInt(json, "count");
-            }
-
-            ItemStack itemStack = ingredient.getItems()[0];
-            itemStack.setCount(count);
-
-            return  ingredient;
+        public static void toNetwork(RegistryFriendlyByteBuf buf, InfusementChamberRecipe recipe) {
+            buf.writeVarInt(recipe.getIngredients().size());
+            for (Ingredient ing : recipe.getIngredients())
+                Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ing);
+            ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
 
         @Override
-        public @Nullable InfusementChamberRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
-
-            inputs.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-
-            ItemStack output = buf.readItem();
-            return new InfusementChamberRecipe(id, output, inputs);
+        public @NotNull MapCodec<InfusementChamberRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, InfusementChamberRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
-            }
-            buf.writeItem(recipe.output);
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, InfusementChamberRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

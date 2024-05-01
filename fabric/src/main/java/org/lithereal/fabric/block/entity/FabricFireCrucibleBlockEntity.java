@@ -17,6 +17,8 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +31,8 @@ import org.lithereal.fabric.item.FabricItems;
 import org.lithereal.fabric.screen.FabricFireCrucibleMenu;
 import org.lithereal.item.ModItems;
 import org.lithereal.recipe.FireCrucibleRecipe;
+import org.lithereal.recipe.ModRecipes;
+import org.lithereal.util.CommonUtils;
 
 import java.util.Optional;
 
@@ -80,9 +84,12 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         if(level.isClientSide()) return;
 
         boolean hasSolidFuel = hasSolidFuel(pEntity);
-        boolean isBlueFireBelow = level.getBlockState(blockPos.below()).getBlock() == ModBlocks.BLUE_FIRE.get();
+        Block block = level.getBlockState(blockPos.below()).getBlock();
+        boolean isBlueFireBelow = block == ModBlocks.BLUE_FIRE.get();
+        boolean isFireBelow = CommonUtils.isAnyOf(block, ModBlocks.BURNING_LITHERITE_BLOCK.get(), Blocks.FIRE, Blocks.SOUL_FIRE);
+        boolean isFueledFromBelow = isFireBelow || isBlueFireBelow;
 
-        if (getFuelLevel(pEntity) > 0 && !isBlueFireBelow) {
+        if (getFuelLevel(pEntity) > 0 && !isFueledFromBelow) {
             pEntity.fuelLevel--;
         } else {
             if (isBlueFireBelow) {
@@ -90,6 +97,11 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
                 pEntity.maxFuel = 100;
                 pEntity.heatLevel = 2;
                 level.setBlockAndUpdate(blockPos, blockState.setValue(FabricFireCrucibleBlock.BLUE_LIT, true));
+            } else if (isFireBelow) {
+                pEntity.fuelLevel = 75;
+                pEntity.maxFuel = 75;
+                pEntity.heatLevel = 1;
+                level.setBlockAndUpdate(blockPos, blockState.setValue(FabricFireCrucibleBlock.LIT, true));
             } else if (hasSolidFuel) {
                 int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(((Container) pEntity).getItem(1).getItem(), 0);
                 pEntity.maxFuel = fuel;
@@ -128,7 +140,7 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         }
 
         Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe = level.getRecipeManager()
-                .getRecipeFor(FireCrucibleRecipe.Type.INSTANCE, inventory, level);
+                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), inventory, level);
 
         Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe = level.getRecipeManager()
                 .getRecipeFor(RecipeType.SMELTING, inventory, level);
@@ -161,7 +173,7 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
         }
 
         Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe = level.getRecipeManager()
-                .getRecipeFor(FireCrucibleRecipe.Type.INSTANCE, inventory, level);
+                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), inventory, level);
 
         Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe = level.getRecipeManager()
                 .getRecipeFor(RecipeType.SMELTING, inventory, level);

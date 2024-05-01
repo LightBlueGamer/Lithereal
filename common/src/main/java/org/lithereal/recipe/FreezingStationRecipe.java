@@ -1,29 +1,26 @@
 package org.lithereal.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 
 public class FreezingStationRecipe implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
     public final ItemStack output;
     public final NonNullList<Ingredient> recipeItems;
 
-    public FreezingStationRecipe(ResourceLocation id, ItemStack output,
-                                 NonNullList<Ingredient> recipeItems) {
-        this.id = id;
+    public FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal) {
         this.output = output;
-        this.recipeItems = recipeItems;
+        this.recipeItems = NonNullList.of(cooler, crystal);
     }
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
@@ -33,17 +30,17 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
+    public ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
+        return output;
+    }
+
+    @Override
     public NonNullList<Ingredient> getIngredients() {
         return recipeItems;
     }
 
     private boolean hasItem(SimpleContainer container, int index) {
-        return recipeItems.get(index).test(container.getItem(index)) && container.getItem(index).getCount() >= recipeItems.get(index).getItems()[0].getCount();
-    }
-
-    @Override
-    public ItemStack assemble(SimpleContainer p_44001_, RegistryAccess p_267165_) {
-        return output;
+        return recipeItems.get(index).test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
@@ -52,13 +49,8 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess p_267052_) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return output.copy();
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 
     @Override
@@ -68,67 +60,44 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<FreezingStationRecipe> {
-        private Type() { }
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "freezing";
+        return ModRecipes.FREEZING_TYPE.get();
     }
 
     public static class Serializer implements RecipeSerializer<FreezingStationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
                 new ResourceLocation(Lithereal.MOD_ID, "freezing");
+        public static final MapCodec<FreezingStationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+                instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
+                        Ingredient.CODEC.fieldOf("cooler").forGetter(freezingStationRecipe -> freezingStationRecipe.recipeItems.getFirst()),
+                        Ingredient.CODEC.fieldOf("crystal").forGetter(freezingStationRecipe -> freezingStationRecipe.recipeItems.get(1)))
+                        .apply(instance, FreezingStationRecipe::new));
+        public static final StreamCodec<RegistryFriendlyByteBuf, FreezingStationRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
-        @Override
-        public FreezingStationRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
+        public static @NotNull FreezingStationRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
+            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
 
-            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
+            inputs.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
 
-            for (int i = 0; i < inputs.size(); i++) {
-                Ingredient ingredient = getIngredient(ingredients.get(i).getAsJsonObject());
-                inputs.set(i, ingredient);
-            }
-
-            return new FreezingStationRecipe(pRecipeId, output, inputs);
+            ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
+            return new FreezingStationRecipe(output, inputs.get(0), inputs.get(1));
         }
 
-        private Ingredient getIngredient(JsonObject json) {
-            Ingredient ingredient = Ingredient.fromJson(json);
-            int count = 1;
-
-            if (json.getAsJsonObject().has("count")) {
-                count = GsonHelper.getAsInt(json, "count");
-            }
-
-            ItemStack itemStack = ingredient.getItems()[0];
-            itemStack.setCount(count);
-
-            return  ingredient;
+        public static void toNetwork(RegistryFriendlyByteBuf buf, FreezingStationRecipe recipe) {
+            buf.writeVarInt(recipe.getIngredients().size());
+            for (Ingredient ing : recipe.getIngredients())
+                Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ing);
+            ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
 
         @Override
-        public @Nullable FreezingStationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
-
-            inputs.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-
-            ItemStack output = buf.readItem();
-            return new FreezingStationRecipe(id, output, inputs);
+        public @NotNull MapCodec<FreezingStationRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, FreezingStationRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
-            }
-            buf.writeItem(recipe.output);
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, FreezingStationRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

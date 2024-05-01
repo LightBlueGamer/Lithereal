@@ -51,9 +51,9 @@
 //    public void registerRecipes(IRecipeRegistration registration) {
 //        RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 //
-//        List<FreezingStationRecipe> recipesInfusing = rm.getAllRecipesFor(FreezingStationRecipe.Type.INSTANCE);
-//        List<FireCrucibleRecipe> recipesBurning = rm.getAllRecipesFor(FireCrucibleRecipe.Type.INSTANCE);
-//        List<InfusementChamberRecipe> recipesInfChamber = rm.getAllRecipesFor(InfusementChamberRecipe.Type.INSTANCE);
+//        List<FreezingStationRecipe> recipesInfusing = rm.getAllRecipesFor(ModRecipes.FREEZING_TYPE.get());
+//        List<FireCrucibleRecipe> recipesBurning = rm.getAllRecipesFor(ModRecipes.BURNING_TYPE.get());
+//        List<InfusementChamberRecipe> recipesInfChamber = rm.getAllRecipesFor(ModRecipes.INFUSING_TYPE.get());
 //        List<SmeltingRecipe> recipesFurnace = rm.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING);
 //
 //        registration.addRecipes(FREEZING_TYPE, recipesInfusing);

@@ -22,6 +22,7 @@ import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.compat.CompatInit;
+import org.lithereal.item.custom.infused.InfusedItem;
 import org.lithereal.util.KeyBinding;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
@@ -88,7 +89,7 @@ public class LitherealClient {
         for (RegistrySupplier<Block> blockRegistryObject : ModBlocks.BLOCKS) {
             ItemStack blockItem = new ItemStack(blockRegistryObject.get());
 
-            if (!litherite.contains(blockItem) && isEquipment(BuiltInRegistries.ITEM.getKey(blockItem.getItem()).getPath())) {
+            if (!(blockItem.getItem() instanceof InfusedItem) && !litherite.contains(blockItem) && isEquipment(BuiltInRegistries.ITEM.getKey(blockItem.getItem()).getPath())) {
                 litherite.add(blockItem);
             } else otherB.add(blockItem);
         }
@@ -98,7 +99,7 @@ public class LitherealClient {
         for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
             ItemStack item = new ItemStack(itemRegistrySupplier.get());
 
-            if (!litherite.contains(item) && isEquipment(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath())) {
+            if (!(item.getItem() instanceof InfusedItem) && !litherite.contains(item) && isEquipment(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath())) {
                 litherite.add(item);
             } else otherI.add(item);
         }

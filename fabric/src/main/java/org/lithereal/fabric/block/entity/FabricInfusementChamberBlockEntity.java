@@ -24,6 +24,7 @@ import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.fabric.screen.FabricInfusementChamberMenu;
 import org.lithereal.recipe.InfusementChamberRecipe;
+import org.lithereal.recipe.ModRecipes;
 
 import java.util.Optional;
 import java.util.Random;
@@ -93,7 +94,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
         PotionContents potion = pEntity.getItem(1).getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
 
         Optional<RecipeHolder<InfusementChamberRecipe>> infusingRecipe = level.getRecipeManager()
-                .getRecipeFor(InfusementChamberRecipe.Type.INSTANCE, inventory, level);
+                .getRecipeFor(ModRecipes.INFUSING_TYPE.get(), inventory, level);
 
         ItemStack outputItem = ItemStack.EMPTY;
         if (infusingRecipe.isPresent()) {
@@ -141,7 +142,7 @@ public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEn
         }
 
         Optional<RecipeHolder<InfusementChamberRecipe>> infusingRecipe = level.getRecipeManager()
-                .getRecipeFor(InfusementChamberRecipe.Type.INSTANCE, inventory, level);
+                .getRecipeFor(ModRecipes.INFUSING_TYPE.get(), inventory, level);
 
         if (infusingRecipe.isPresent()) hasRecipe = true;
 

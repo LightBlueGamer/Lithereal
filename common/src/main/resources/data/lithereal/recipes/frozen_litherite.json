@@ -1,14 +1,12 @@
 {
   "type": "lithereal:freezing",
-  "ingredients": [
-    {
-      "item": "minecraft:ice"
-    },
-    {
-      "item": "lithereal:litherite_crystal"
-    }
-  ],
+  "cooler": {
+    "item": "minecraft:ice"
+  },
+  "crystal": {
+    "item": "lithereal:litherite_crystal"
+  },
   "output": {
-    "item": "lithereal:frozen_litherite_crystal"
+    "id": "lithereal:frozen_litherite_crystal"
   }
 }
