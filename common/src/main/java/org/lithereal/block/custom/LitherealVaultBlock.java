@@ -28,11 +28,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class LitherealVaultBlock extends BaseEntityBlock {
-    public static final MapCodec<org.lithereal.block.custom.LitherealVaultBlock> CODEC = simpleCodec(org.lithereal.block.custom.LitherealVaultBlock::new);
+    public static final MapCodec<LitherealVaultBlock> CODEC = simpleCodec(LitherealVaultBlock::new);
     public static final Property<VaultState> STATE;
     public static final DirectionProperty FACING;
 
-    public MapCodec<org.lithereal.block.custom.LitherealVaultBlock> codec() {
+    public MapCodec<LitherealVaultBlock> codec() {
         return CODEC;
     }
 
