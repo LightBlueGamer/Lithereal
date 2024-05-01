@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:cutout",
   "parent": "minecraft:block/template_vault",
   "textures": {
     "bottom": "lithereal:block/lithereal_vault_bottom",

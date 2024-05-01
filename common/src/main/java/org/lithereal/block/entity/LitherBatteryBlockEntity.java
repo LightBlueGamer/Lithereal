@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.screen.LitherBatteryMenu;
-import org.lithereal.screen.LitherCollectorMenu;
 import org.lithereal.util.LitherEnergyContainer;
 
 public class LitherBatteryBlockEntity extends BlockEntity implements MenuProvider, IEnergyContainerProvider {
