@@ -75,18 +75,16 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
         public static final StreamCodec<RegistryFriendlyByteBuf, FreezingStationRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
         public static @NotNull FreezingStationRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
-
-            inputs.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
+            Ingredient cooler = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
+            Ingredient crystal = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
 
             ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
-            return new FreezingStationRecipe(output, inputs.get(0), inputs.get(1));
+            return new FreezingStationRecipe(output, cooler, crystal);
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FreezingStationRecipe recipe) {
-            buf.writeVarInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients())
-                Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ing);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().getFirst());
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().get(1));
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
 

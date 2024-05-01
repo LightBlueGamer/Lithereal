@@ -27,11 +27,6 @@ public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
         else
             recipeItems = NonNullList.of(crystal);
     }
-
-    public FireCrucibleRecipe(ItemStack output, NonNullList<Ingredient> recipeItems) {
-        this.output = output;
-        this.recipeItems = recipeItems;
-    }
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
@@ -87,18 +82,21 @@ public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
         public static final StreamCodec<RegistryFriendlyByteBuf, FireCrucibleRecipe> STREAM_CODEC = StreamCodec.of(FireCrucibleRecipe.Serializer::toNetwork, FireCrucibleRecipe.Serializer::fromNetwork);
 
         public static @NotNull FireCrucibleRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
-
-            inputs.replaceAll(ignored -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
+            boolean hasBucket = buf.readBoolean();
+            Ingredient crystal = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
+            Optional<Ingredient> bucket = Optional.empty();
+            if (hasBucket)
+                bucket = Optional.of(Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
 
             ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
-            return new FireCrucibleRecipe(output, inputs);
+            return new FireCrucibleRecipe(output, crystal, bucket);
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FireCrucibleRecipe recipe) {
-            buf.writeVarInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients())
-                Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ing);
+            boolean hasBucket = recipe.recipeItems.size() > 1;
+            buf.writeBoolean(hasBucket);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().getFirst());
+            if (hasBucket) Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().get(1));
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
 
