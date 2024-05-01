@@ -2,7 +2,6 @@ package org.lithereal.block;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -12,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.Lithereal;
 import org.lithereal.block.custom.*;
 import org.lithereal.item.ModItems;
-import org.lithereal.item.custom.infused.InfusedLitheriteBlockItem;
 
 import java.util.function.Supplier;
 
@@ -31,21 +29,21 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
-    public static final RegistrySupplier<Block> BURNING_LITHERITE_BLOCK = registerHeatedBlock("burning_litherite_block",
+    public static final RegistrySupplier<Block> BURNING_LITHERITE_BLOCK = registerBlock("burning_litherite_block",
             () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
+                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
 
-    public static final RegistrySupplier<Block> FROZEN_LITHERITE_BLOCK = registerHeatedBlock("frozen_litherite_block",
+    public static final RegistrySupplier<Block> FROZEN_LITHERITE_BLOCK = registerBlock("frozen_litherite_block",
             () -> new FrozenLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
+                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
 
-    public static final RegistrySupplier<Block> WITHERING_LITHERITE_BLOCK = registerHeatedBlock("withering_litherite_block",
+    public static final RegistrySupplier<Block> WITHERING_LITHERITE_BLOCK = registerBlock("withering_litherite_block",
             () -> new WitheringLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
+                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
 
-    public static final RegistrySupplier<Block> CHARGED_LITHERITE_BLOCK = registerHeatedBlock("charged_litherite_block",
+    public static final RegistrySupplier<Block> CHARGED_LITHERITE_BLOCK = registerBlock("charged_litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
+                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
 
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
             () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
@@ -87,40 +85,22 @@ public class ModBlocks {
             () -> new LitherealVaultBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VAULT)));
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
+        return registerBlock(name, block, Item.Properties::new);
+    }
+
+    private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block, Supplier<Item.Properties> properties) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn);
+        registerBlockItem(name, toReturn, properties);
         return toReturn;
     }
 
-    private static <T extends Block> RegistrySupplier<Item> registerBlockItem(String name, RegistrySupplier<T> block) {
+    private static <T extends Block> RegistrySupplier<Item> registerBlockItem(String name, RegistrySupplier<T> block, Supplier<Item.Properties> propertiesSupplier) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties()));
-    }
-
-    private static <T extends Block> RegistrySupplier<T> registerHeatedBlock(String name, Supplier<T> block) {
-        RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
-        registerHeatedBlockItem(name, toReturn);
-        return toReturn;
-    }
-
-    private static <T extends Block> RegistrySupplier<Item> registerHeatedBlockItem(String name, RegistrySupplier<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties().fireResistant()));
+                propertiesSupplier.get()));
     }
 
     private static <T extends Block> RegistrySupplier<T> registerBlockOnly(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);
-    }
-
-    private static <T extends Block> RegistrySupplier<T> registerColoredBlock(String name, Supplier<T> block) {
-        RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
-        registerColoredBlockItem(name, toReturn);
-        return toReturn;
-    }
-
-    private static <T extends Block> RegistrySupplier<Item> registerColoredBlockItem(String name, RegistrySupplier<T> block) {
-        return ModItems.ITEMS.register(name, () -> new InfusedLitheriteBlockItem(block.get(),
-                new Item.Properties()));
     }
 
     public static void register() {
