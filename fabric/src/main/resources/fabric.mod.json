@@ -18,9 +18,6 @@
     ],
     "client": [
       "org.lithereal.fabric.LitherealFabricClient"
-    ],
-    "jei_mod_plugin": [
-      "org.lithereal.integration.JEILitherealPlugin"
     ]
   },
   "depends": {

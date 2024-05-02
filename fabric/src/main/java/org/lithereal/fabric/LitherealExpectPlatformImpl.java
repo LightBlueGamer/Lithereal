@@ -23,10 +23,19 @@ import org.lithereal.fabric.block.custom.FabricInfusementChamberBlock;
 import org.lithereal.fabric.block.entity.*;
 import org.lithereal.fabric.compat.CombatifyHooks;
 import org.lithereal.fabric.item.FabricItems;
+import org.lithereal.fabric.item.custom.HammerWithType;
+import org.lithereal.fabric.item.custom.WarHammerWithType;
+import org.lithereal.fabric.item.custom.ability.AbilityHammerWithType;
+import org.lithereal.fabric.item.custom.burning.BurningLitheriteHammerWithType;
+import org.lithereal.fabric.item.custom.infused.InfusedLitheriteHammerWithType;
 import org.lithereal.fabric.screen.*;
 import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.Hammer;
 import org.lithereal.item.custom.ModTier;
 import org.lithereal.item.custom.WarHammer;
+import org.lithereal.item.custom.ability.AbilityHammer;
+import org.lithereal.item.custom.burning.BurningLitheriteHammer;
+import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -175,7 +184,26 @@ public class LitherealExpectPlatformImpl {
             }
         }
     }
+
+    public static Hammer createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new HammerWithType(tier, damage, speed, properties);
+    }
+
+    public static AbilityHammer createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
+        return new AbilityHammerWithType(ability, tier, damage, speed, properties);
+    }
+
+    public static BurningLitheriteHammer createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new BurningLitheriteHammerWithType(tier, damage, speed, properties);
+    }
+
+    public static InfusedLitheriteHammer createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new InfusedLitheriteHammerWithType(tier, damage, speed, properties);
+    }
+
     public static WarHammer createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
+        if (FabricLoader.getInstance().isModLoaded("combatify"))
+            return new WarHammerWithType(tier, damage, speed, properties);
         return new WarHammer(tier, damage, speed, properties);
     }
 

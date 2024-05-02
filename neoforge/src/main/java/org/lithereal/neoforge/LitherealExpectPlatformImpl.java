@@ -20,6 +20,10 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
+import org.lithereal.item.custom.Hammer;
+import org.lithereal.item.custom.ability.AbilityHammer;
+import org.lithereal.item.custom.burning.BurningLitheriteHammer;
+import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
 import org.lithereal.neoforge.block.ForgeBlocks;
 import org.lithereal.neoforge.block.custom.ForgeInfusementChamberBlock;
 import org.lithereal.neoforge.block.entity.ForgeBlockEntities;
@@ -163,10 +167,27 @@ public class LitherealExpectPlatformImpl {
                     CombatifyHooks.knockback(nearbyEntity, strength, x, z);
                 affectedEntities++;
 
-                if (affectedEntities >= 4) break;
+                if (affectedEntities > 3) break;
             }
         }
     }
+
+    public static Hammer createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new Hammer(tier, damage, speed, properties);
+    }
+
+    public static AbilityHammer createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
+        return new AbilityHammer(ability, tier, damage, speed, properties);
+    }
+
+    public static BurningLitheriteHammer createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new BurningLitheriteHammer(tier, damage, speed, properties);
+    }
+
+    public static InfusedLitheriteHammer createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new InfusedLitheriteHammer(tier, damage, speed, properties);
+    }
+
     public static WarHammer createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
         return new ForgeWarHammer(tier, damage, speed, properties);
     }
