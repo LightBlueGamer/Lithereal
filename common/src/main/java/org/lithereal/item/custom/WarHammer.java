@@ -42,19 +42,8 @@ public class WarHammer extends TieredItem {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        if (attacker instanceof Player player && !player.isSprinting() && !player.isCrouching() && !player.onGround()) {
-            if (entitiesAffected < MAX_ENTITIES_AFFECTED) {
-                applyKnockbackToNearbyEntities(player, target, knockbackStrength);
-            }
-        }
+        if (attacker instanceof Player player && !player.isSprinting() && !player.isCrouching() && !player.onGround())
+            applyKnockbackToNearbyEntities(player, target, knockbackStrength);
         return true;
-    }
-
-    @Override
-    public void onUseTick(Level world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        super.onUseTick(world, user, stack, remainingUseTicks);
-        if (remainingUseTicks == this.getUseDuration(stack)) {
-            entitiesAffected = 0;
-        }
     }
 }
