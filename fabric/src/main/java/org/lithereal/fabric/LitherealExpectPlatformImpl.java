@@ -169,7 +169,7 @@ public class LitherealExpectPlatformImpl {
                     CombatifyHooks.knockback(nearbyEntity, strength, x, z);
                 affectedEntities++;
 
-                if (affectedEntities >= 4) {
+                if (affectedEntities >= 3) {
                     break;
                 }
             }
