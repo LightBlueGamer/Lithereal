@@ -17,10 +17,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.custom.FireCrucibleBlock;
-import org.lithereal.block.custom.LitherCollectorBlock;
-import org.lithereal.block.custom.InfusedLitheriteBlock;
-import org.lithereal.block.custom.InfusementChamberBlock;
+import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.neoforge.block.ForgeBlocks;
@@ -90,7 +87,7 @@ public class LitherealExpectPlatformImpl {
         return ForgeMenuTypes.FREEZING_STATION_MENU.get();
     }
 
-    public static LitherCollectorBlock getFreezingStationBlock() {
+    public static FreezingStationBlock getFreezingStationBlock() {
         return ForgeBlocks.FREEZING_STATION.get();
     }
 

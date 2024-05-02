@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.LitherCollectorBlock;
+import org.lithereal.block.custom.FreezingStationBlock;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.neoforge.block.entity.ForgeFreezingStationBlockEntity;
 
-public class ForgeFreezingStationBlock extends LitherCollectorBlock {
+public class ForgeFreezingStationBlock extends FreezingStationBlock {
     public static final MapCodec<ForgeFreezingStationBlock> CODEC = simpleCodec(ForgeFreezingStationBlock::new);
     public ForgeFreezingStationBlock(Properties properties) {
         super(properties);
