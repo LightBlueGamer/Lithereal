@@ -16,24 +16,12 @@ import org.lithereal.Lithereal;
 
 import java.util.Optional;
 
-public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
-    public final ItemStack output;
-    public final NonNullList<Ingredient> recipeItems;
-
-    public FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket) {
-        this.output = output;
-        if (bucket.isPresent())
-            this.recipeItems = NonNullList.of(crystal, bucket.get());
-        else
-            recipeItems = NonNullList.of(crystal);
-    }
+public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket) implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
 
-        if (recipeItems.size() > 1 && !recipeItems.get(1).isEmpty()) {
-            return hasItem(pContainer, 0) && hasItem(pContainer, 1);
-        } else return hasItem(pContainer, 0);
+        return hasCrystal(pContainer, 0) && hasBucket(pContainer, 3);
     }
 
     @Override
@@ -42,12 +30,19 @@ public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return recipeItems;
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> ret = NonNullList.withSize(2, Ingredient.EMPTY);
+        ret.set(0, crystal);
+        bucket.ifPresent(ingredient -> ret.set(1, ingredient));
+        return ret;
     }
 
-    private boolean hasItem(SimpleContainer container, int index) {
-        return recipeItems.get(index).test(container.getItem(index * 3)) && container.getItem(index * 3).getCount() >= 1;
+    private boolean hasBucket(SimpleContainer container, int index) {
+        return bucket.map(ingredient -> ingredient.test(container.getItem(index)) && container.getItem(index).getCount() >= 1).orElse(true);
+    }
+
+    private boolean hasCrystal(SimpleContainer container, int index) {
+        return crystal.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
@@ -76,8 +71,8 @@ public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
                 new ResourceLocation(Lithereal.MOD_ID, "burning");
         public static final MapCodec<FireCrucibleRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                        Ingredient.CODEC.fieldOf("crystal").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.recipeItems.getFirst()),
-                        Ingredient.CODEC.optionalFieldOf("bucket").forGetter(fireCrucibleRecipe -> Optional.of(fireCrucibleRecipe.recipeItems.get(1))))
+                        Ingredient.CODEC.fieldOf("crystal").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.crystal),
+                        Ingredient.CODEC.optionalFieldOf("bucket").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.bucket))
                         .apply(instance, FireCrucibleRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, FireCrucibleRecipe> STREAM_CODEC = StreamCodec.of(FireCrucibleRecipe.Serializer::toNetwork, FireCrucibleRecipe.Serializer::fromNetwork);
 
@@ -93,10 +88,10 @@ public class FireCrucibleRecipe implements Recipe<SimpleContainer> {
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FireCrucibleRecipe recipe) {
-            boolean hasBucket = recipe.recipeItems.size() > 1;
+            boolean hasBucket = recipe.bucket.isPresent();
             buf.writeBoolean(hasBucket);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().getFirst());
-            if (hasBucket) Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().get(1));
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.crystal);
+            if (hasBucket) Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.bucket.get());
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
 

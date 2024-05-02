@@ -106,8 +106,8 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
             ItemStack outputItem = resultItem.copy();
             outputItem.setCount(pEntity.getItem(2).getCount() + resultItem.getCount());
 
-            pEntity.removeItem(0, recipe.get().value().recipeItems.get(0).getItems()[0].getCount());
-            pEntity.removeItem(1, recipe.get().value().recipeItems.get(1).getItems()[0].getCount());
+            pEntity.removeItem(0, recipe.get().value().cooler().getItems()[0].getCount());
+            pEntity.removeItem(1, recipe.get().value().crystal().getItems()[0].getCount());
             pEntity.setItem(2, outputItem);
 
             pEntity.resetProgress();

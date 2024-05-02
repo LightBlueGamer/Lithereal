@@ -7,6 +7,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
@@ -83,13 +84,16 @@ public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity imple
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricFireCrucibleBlockEntity pEntity) {
-        if(level.isClientSide()) {
+        if (level.isClientSide()) {
             if (hasRecipe(pEntity)) {
                 Vec3 center = Vec3.upFromBottomCenterOf(blockPos, 0.2);
+                RandomSource randomSource = level.getRandom();
+                double xDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 2;
+                double zDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 2;
                 if (pEntity.heatLevel == 1)
-                    level.addParticle(ParticleTypes.FLAME, center.x, center.y, center.z, 0.05, 0.15, 0.5);
+                    level.addParticle(ParticleTypes.FLAME, center.x, center.y, center.z, xDir, 0.0015, zDir);
                 else if (pEntity.heatLevel >= 2) // Temp Soul Fire
-                    level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, center.x, center.y, center.z, 0.05, 0.15, 0.5);
+                    level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, center.x, center.y, center.z, xDir, 0.002, zDir);
             }
             return;
         }

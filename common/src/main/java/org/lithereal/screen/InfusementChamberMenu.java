@@ -18,7 +18,7 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
     private final Container inventory;
 
     public InfusementChamberMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
     public InfusementChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {

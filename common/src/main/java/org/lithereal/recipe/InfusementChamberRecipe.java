@@ -13,8 +13,9 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
+import org.lithereal.util.CommonUtils;
 
-public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
+public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingredient potion) implements Recipe<SimpleContainer> {
     @Override
     public ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
         return output;
@@ -25,27 +26,24 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
         return output.copy();
     }
 
-    public final ItemStack output;
-    public final NonNullList<Ingredient> recipeItems;
-
-    public InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingredient potion) {
-        this.output = output;
-        this.recipeItems = NonNullList.of(bucket, potion);
-    }
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) return false;
+        if (pLevel.isClientSide()) return false;
 
-        return hasItem(pContainer, 0) && hasItem(pContainer, 1);
+        return hasBucket(pContainer, 0) && hasPotion(pContainer, 1);
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return recipeItems;
+        return CommonUtils.of(bucket, potion);
     }
 
-    private boolean hasItem(SimpleContainer container, int index) {
-        return recipeItems.get(index).test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+    private boolean hasBucket(SimpleContainer container, int index) {
+        return bucket.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+    }
+
+    private boolean hasPotion(SimpleContainer container, int index) {
+        return potion.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
@@ -69,8 +67,8 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
                 new ResourceLocation(Lithereal.MOD_ID, "infusing");
         public static final MapCodec<InfusementChamberRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                        Ingredient.CODEC.fieldOf("bucket").forGetter(infusementChamberRecipe -> infusementChamberRecipe.recipeItems.getFirst()),
-                        Ingredient.CODEC.fieldOf("potion").forGetter(infusementChamberRecipe -> infusementChamberRecipe.recipeItems.get(1)))
+                                Ingredient.CODEC.fieldOf("bucket").forGetter(infusementChamberRecipe -> infusementChamberRecipe.bucket),
+                                Ingredient.CODEC.fieldOf("potion").forGetter(infusementChamberRecipe -> infusementChamberRecipe.potion))
                         .apply(instance, InfusementChamberRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, InfusementChamberRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
@@ -83,8 +81,8 @@ public class InfusementChamberRecipe implements Recipe<SimpleContainer> {
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, InfusementChamberRecipe recipe) {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().getFirst());
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().get(1));
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.bucket);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.potion);
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
 

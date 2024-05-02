@@ -68,6 +68,6 @@ public class ForgeInfusementChamberBlock extends InfusementChamberBlock {
             }
         }
 
-        return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        return ItemInteractionResult.SUCCESS;
     }
 }

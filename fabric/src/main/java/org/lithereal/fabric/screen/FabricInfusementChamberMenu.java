@@ -9,7 +9,7 @@ import org.lithereal.screen.InfusementChamberMenu;
 public class FabricInfusementChamberMenu extends InfusementChamberMenu {
     public FabricInfusementChamberMenu(int syncId, Inventory inventory, BlockPos pos) {
         this(syncId, inventory, inventory.player.level().getBlockEntity(pos),
-                new SimpleContainerData(3));
+                new SimpleContainerData(4));
     }
 
     public FabricInfusementChamberMenu(int syncId, Inventory playerInventory,

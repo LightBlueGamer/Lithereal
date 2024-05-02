@@ -1,12 +1,14 @@
 package org.lithereal.util;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.item.custom.component.ModComponents;
 
 public class CommonUtils {
@@ -40,6 +42,10 @@ public class CommonUtils {
     }
     public static MobEffectInstance clone(MobEffectInstance original) {
         return new MobEffectInstance(original);
+    }
+
+    public static NonNullList<Ingredient> of(Ingredient... values) {
+        return NonNullList.of(Ingredient.EMPTY, values);
     }
 
     public static boolean isEnhanced(ItemStack stack) {

@@ -13,20 +13,22 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
+import org.lithereal.util.CommonUtils;
 
-public class FreezingStationRecipe implements Recipe<SimpleContainer> {
-    public final ItemStack output;
-    public final NonNullList<Ingredient> recipeItems;
-
-    public FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal) {
-        this.output = output;
-        this.recipeItems = NonNullList.of(cooler, crystal);
-    }
+public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal) implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
 
-        return hasItem(pContainer, 0) && hasItem(pContainer, 1);
+        return hasCooler(pContainer, 0) && hasCrystal(pContainer, 1);
+    }
+
+    private boolean hasCooler(SimpleContainer container, int index) {
+        return cooler.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+    }
+
+    private boolean hasCrystal(SimpleContainer container, int index) {
+        return crystal.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
@@ -36,11 +38,7 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return recipeItems;
-    }
-
-    private boolean hasItem(SimpleContainer container, int index) {
-        return recipeItems.get(index).test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+        return CommonUtils.of(cooler, crystal);
     }
 
     @Override
@@ -69,8 +67,8 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
                 new ResourceLocation(Lithereal.MOD_ID, "freezing");
         public static final MapCodec<FreezingStationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                        Ingredient.CODEC.fieldOf("cooler").forGetter(freezingStationRecipe -> freezingStationRecipe.recipeItems.getFirst()),
-                        Ingredient.CODEC.fieldOf("crystal").forGetter(freezingStationRecipe -> freezingStationRecipe.recipeItems.get(1)))
+                        Ingredient.CODEC.fieldOf("cooler").forGetter(freezingStationRecipe -> freezingStationRecipe.cooler),
+                        Ingredient.CODEC.fieldOf("crystal").forGetter(freezingStationRecipe -> freezingStationRecipe.crystal))
                         .apply(instance, FreezingStationRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, FreezingStationRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
@@ -83,8 +81,8 @@ public class FreezingStationRecipe implements Recipe<SimpleContainer> {
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FreezingStationRecipe recipe) {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().getFirst());
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.getIngredients().get(1));
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.cooler);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.crystal);
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
 

@@ -70,6 +70,6 @@ public class FabricInfusementChamberBlock extends InfusementChamberBlock impleme
             }
         }
 
-        return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        return ItemInteractionResult.SUCCESS;
     }
 }
