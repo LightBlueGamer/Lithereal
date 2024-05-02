@@ -16,6 +16,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(BurningLitheriteBlockEntity::new,
                             ModBlocks.BURNING_LITHERITE_BLOCK.get()).build(null));
 
+    public static final RegistrySupplier<BlockEntityType<LitherealVaultBlockEntity>> LITHEREAL_VAULT =
+            BLOCK_ENTITIES.register("lithereal_vault", () ->
+                    BlockEntityType.Builder.of(LitherealVaultBlockEntity::new,
+                            ModBlocks.LITHEREAL_VAULT.get()).build(null));
+
     public static void register() {
         BLOCK_ENTITIES.register();
     }

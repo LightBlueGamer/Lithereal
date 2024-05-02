@@ -22,7 +22,7 @@ Lithereal is a mod about mysterious metals and crystals with magical properties 
 [[dependencies.lithereal]]
 modId = "neoforge"
 mandatory = true
-versionRange = "[20.5.0-beta,)"
+versionRange = "[20.6.0-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
