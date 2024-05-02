@@ -17,10 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import static org.lithereal.LitherealExpectPlatform.applyKnockbackToNearbyEntities;
 
 public class WarHammer extends TieredItem {
-
-    private int entitiesAffected = 0;
     private static final int knockbackStrength = 1;
-    private static final int MAX_ENTITIES_AFFECTED = 3;
 
     public WarHammer(Tier tier, int damage, float speed, Properties properties) {
         super(tier, properties.attributes(createAttributes(tier, damage, speed)));
