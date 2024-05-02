@@ -32,6 +32,8 @@ public class CombatifyItems {
             createAbilityLongsword(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
     public static final RegistrySupplier<Item> ODYSIUM_KNIFE = ITEMS.register("odysium_knife", () ->
             createAbilityKnife(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
+    public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
+            createWarHammer(LITHERITE, 9, 2, new Item.Properties().fireResistant()));
 
     public static void init() {
 

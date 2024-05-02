@@ -13,7 +13,7 @@ config="lithereal-common.mixins.json"
 modId = "lithereal"
 version = "${version}"
 displayName = "Lithereal"
-authors = "Light, Alexandra, Stunf"
+authors = "Light, Stunf, Alexandra"
 description = '''
 Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.
 '''

@@ -41,8 +41,8 @@ public class ModItems {
             new Item(new Item.Properties()));
 
     public static final Tier LITHERITE = ModTier.create("litherite", 5, 2701, 11.0F, 5.0F, 20, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_LITHERITE_TOOL);
+    public static final Tier ODYSIUM = ModTier.create("odysium", 6, 3271, 13.0F, 6.0F, 30, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
 
-    public static final Tier ODYSIUM = ModTier.create("odysium", 6, 3000, 13.0F, 6.0F, 30, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->
             new SwordItem(LITHERITE, new Item.Properties().attributes(SwordItem.createAttributes(LITHERITE, 3, -2.4f))));
 
@@ -233,7 +233,7 @@ public class ModItems {
             new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 5, -3f, new Item.Properties().durability(512)));
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 2, -3f, new Item.Properties().durability(512)));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
             new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));

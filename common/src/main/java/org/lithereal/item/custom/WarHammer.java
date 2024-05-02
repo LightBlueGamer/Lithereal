@@ -17,9 +17,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import static org.lithereal.LitherealExpectPlatform.applyKnockbackToNearbyEntities;
 
 public class WarHammer extends TieredItem {
+
+    private int entitiesAffected = 0;
+    private static final int knockbackStrength = 1;
+    private static final int MAX_ENTITIES_AFFECTED = 3;
+
     public WarHammer(Tier tier, int damage, float speed, Properties properties) {
         super(tier, properties.attributes(createAttributes(tier, damage, speed)));
     }
+
     public static ItemAttributeModifiers createAttributes(Tier tier, float damage, float speed) {
         return ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", damage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", speed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
     }
@@ -29,11 +35,26 @@ public class WarHammer extends TieredItem {
         return !player.isCreative();
     }
 
+    public int getEnchantmentValue() {
+        return 15;
+    }
+
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        if (attacker instanceof Player player && !player.isFallFlying() && !player.isCrouching())
-            applyKnockbackToNearbyEntities(player, target, 1);
+        if (attacker instanceof Player player && !player.isSprinting() && !player.isCrouching() && !player.onGround()) {
+            if (entitiesAffected < MAX_ENTITIES_AFFECTED) {
+                applyKnockbackToNearbyEntities(player, target, knockbackStrength);
+            }
+        }
         return true;
+    }
+
+    @Override
+    public void onUseTick(Level world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
+        super.onUseTick(world, user, stack, remainingUseTicks);
+        if (remainingUseTicks == this.getUseDuration(stack)) {
+            entitiesAffected = 0;
+        }
     }
 }
