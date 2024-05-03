@@ -1,15 +1,12 @@
 {
   "variants": {
-    "lit=false,blue_lit=false": {
+    "heat_state=unlit": {
       "model": "lithereal:block/fire_crucible"
     },
-    "lit=true,blue_lit=false": {
+    "heat_state=lit": {
       "model": "lithereal:block/fire_crucible_lit"
     },
-    "lit=false,blue_lit=true": {
-      "model": "lithereal:block/fire_crucible_blue_lit"
-    },
-    "lit=true,blue_lit=true": {
+    "heat_state=blue_lit": {
       "model": "lithereal:block/fire_crucible_blue_lit"
     }
   }

@@ -40,7 +40,7 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
     }
 
     private boolean hasBucket(SimpleContainer container) {
-        return bucket.map(ingredient -> ingredient.test(container.getItem(3)) && container.getItem(3).getCount() >= 1).orElse(true);
+        return bucket.map(ingredient -> ingredient.test(container.getItem(3)) && container.getItem(3).getCount() >= 1).orElse(container.getItem(3).isEmpty());
     }
 
     private boolean hasCrystal(SimpleContainer container) {
@@ -53,17 +53,17 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
+    public @NotNull ItemStack getResultItem(HolderLookup.Provider provider) {
         return output.copy();
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return Serializer.INSTANCE;
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public @NotNull RecipeType<?> getType() {
         return ModRecipes.BURNING_TYPE.get();
     }
 
