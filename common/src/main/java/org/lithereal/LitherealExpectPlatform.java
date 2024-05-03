@@ -16,8 +16,12 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.*;
 import org.lithereal.item.custom.Ability;
+import org.lithereal.item.custom.Hammer;
 import org.lithereal.item.custom.ModTier;
 import org.lithereal.item.custom.WarHammer;
+import org.lithereal.item.custom.ability.AbilityHammer;
+import org.lithereal.item.custom.burning.BurningLitheriteHammer;
+import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
 import org.lithereal.screen.*;
 
 import java.nio.file.Path;
@@ -167,6 +171,26 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float strength) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Hammer createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static AbilityHammer createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static BurningLitheriteHammer createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static InfusedLitheriteHammer createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
         throw new AssertionError();
     }
 

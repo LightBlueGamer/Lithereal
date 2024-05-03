@@ -55,7 +55,7 @@ public class CombatifyHooks {
         return new ModExtendedTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
     }
     public static ModTier registerTier(String name, ModExtendedTier tier) {
-        Combatify.ITEMS.tiers.put(name, tier);
+        Combatify.defineDefaultTier(name, tier);
         return tier;
     }
 }

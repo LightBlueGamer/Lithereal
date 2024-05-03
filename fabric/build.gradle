@@ -28,7 +28,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modCompileOnly "net.atlas:combatify-${minecraft_version}-fabric:${combatify_version}"
+    modCompileOnly "net.atlas:combatify-1.20.6-fabric:${combatify_version}"
 }
 
 processResources {
