@@ -58,8 +58,8 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     if (blockState.getBlock() != Blocks.AIR) {
                         if (this.getOwner() != null && !this.getOwner().isSpectator()) {
                             this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, 1, this.getOwner().getDeltaMovement().z);
-                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 5, Level.ExplosionInteraction.BLOCK, true);
-                        } else causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 5, Level.ExplosionInteraction.BLOCK, false);
+                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, true);
+                        } else causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, false);
                     }
                 }
                 case ENTITY -> {
