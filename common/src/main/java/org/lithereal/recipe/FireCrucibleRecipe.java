@@ -1,10 +1,12 @@
 package org.lithereal.recipe;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.PrimitiveCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
@@ -16,16 +18,16 @@ import org.lithereal.Lithereal;
 
 import java.util.Optional;
 
-public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket) implements Recipe<SimpleContainer> {
+public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket, Integer maxProgress) implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
 
-        return hasCrystal(pContainer, 0) && hasBucket(pContainer, 3);
+        return hasCrystal(pContainer) && hasBucket(pContainer);
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
+    public @NotNull ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
         return output;
     }
 
@@ -37,12 +39,12 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
         return ret;
     }
 
-    private boolean hasBucket(SimpleContainer container, int index) {
-        return bucket.map(ingredient -> ingredient.test(container.getItem(index)) && container.getItem(index).getCount() >= 1).orElse(true);
+    private boolean hasBucket(SimpleContainer container) {
+        return bucket.map(ingredient -> ingredient.test(container.getItem(3)) && container.getItem(3).getCount() >= 1).orElse(true);
     }
 
-    private boolean hasCrystal(SimpleContainer container, int index) {
-        return crystal.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+    private boolean hasCrystal(SimpleContainer container) {
+        return crystal.test(container.getItem(0)) && container.getItem(0).getCount() >= 1;
     }
 
     @Override
@@ -71,8 +73,9 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
                 new ResourceLocation(Lithereal.MOD_ID, "burning");
         public static final MapCodec<FireCrucibleRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                        Ingredient.CODEC.fieldOf("crystal").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.crystal),
-                        Ingredient.CODEC.optionalFieldOf("bucket").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.bucket))
+                                Ingredient.CODEC.fieldOf("crystal").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.crystal),
+                                Ingredient.CODEC.optionalFieldOf("bucket").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.bucket),
+                                PrimitiveCodec.INT.fieldOf("max_progress").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.maxProgress))
                         .apply(instance, FireCrucibleRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, FireCrucibleRecipe> STREAM_CODEC = StreamCodec.of(FireCrucibleRecipe.Serializer::toNetwork, FireCrucibleRecipe.Serializer::fromNetwork);
 
@@ -84,7 +87,8 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
                 bucket = Optional.of(Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
 
             ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
-            return new FireCrucibleRecipe(output, crystal, bucket);
+            Integer maxProgress = ByteBufCodecs.VAR_INT.decode(buf);
+            return new FireCrucibleRecipe(output, crystal, bucket, maxProgress);
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FireCrucibleRecipe recipe) {
@@ -93,6 +97,7 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
             Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.crystal);
             if (hasBucket) Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.bucket.get());
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
+            ByteBufCodecs.VAR_INT.encode(buf, recipe.maxProgress);
         }
 
         @Override

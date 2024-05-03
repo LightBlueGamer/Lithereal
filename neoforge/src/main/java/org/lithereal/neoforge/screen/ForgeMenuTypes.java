@@ -18,13 +18,13 @@ public class ForgeMenuTypes {
             DeferredRegister.create(BuiltInRegistries.MENU, Lithereal.MOD_ID);
 
     public static final DeferredHolder<MenuType<?>, MenuType<FireCrucibleMenu>> FIRE_CRUCIBLE_MENU =
-            registerMenuType(FireCrucibleMenu::new, "fire_crucible_menu");
+            registerMenuType(ForgeFireCrucibleMenu::create, "fire_crucible_menu");
 
     public static final DeferredHolder<MenuType<?>, MenuType<FreezingStationMenu>> FREEZING_STATION_MENU =
-            registerMenuType(FreezingStationMenu::new, "freezing_station_menu");
+            registerMenuType(ForgeFreezingStationMenu::create, "freezing_station_menu");
 
     public static final DeferredHolder<MenuType<?>, MenuType<InfusementChamberMenu>> INFUSEMENT_CHAMBER_MENU =
-            registerMenuType(InfusementChamberMenu::new, "infusement_chamber_menu");
+            registerMenuType(ForgeInfusementChamberMenu::create, "infusement_chamber_menu");
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));

@@ -34,13 +34,6 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.lithereal]]
-modId = "combatify"
-mandatory = false
-versionRange = "[1.20.5-1.2.0-BETA,)"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies.lithereal]]
 modId = "architectury"
 mandatory = true
 versionRange = "[12.0.27,)"

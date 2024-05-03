@@ -6,6 +6,7 @@
   "bucket": {
     "item": "minecraft:bucket"
   },
+  "max_progress": 200,
   "output": {
     "id": "lithereal:molten_litherite_bucket"
   }

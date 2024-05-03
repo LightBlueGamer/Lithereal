@@ -1,10 +1,12 @@
 package org.lithereal.recipe;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.PrimitiveCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
@@ -15,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.util.CommonUtils;
 
-public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal) implements Recipe<SimpleContainer> {
+public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal, Integer maxProgress) implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
@@ -32,12 +34,12 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
+    public @NotNull ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
         return output;
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         return CommonUtils.of(cooler, crystal);
     }
 
@@ -47,17 +49,17 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
+    public @NotNull ItemStack getResultItem(HolderLookup.Provider provider) {
         return output.copy();
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return Serializer.INSTANCE;
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public @NotNull RecipeType<?> getType() {
         return ModRecipes.FREEZING_TYPE.get();
     }
 
@@ -67,8 +69,9 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
                 new ResourceLocation(Lithereal.MOD_ID, "freezing");
         public static final MapCodec<FreezingStationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                        Ingredient.CODEC.fieldOf("cooler").forGetter(freezingStationRecipe -> freezingStationRecipe.cooler),
-                        Ingredient.CODEC.fieldOf("crystal").forGetter(freezingStationRecipe -> freezingStationRecipe.crystal))
+                                Ingredient.CODEC.fieldOf("cooler").forGetter(freezingStationRecipe -> freezingStationRecipe.cooler),
+                                Ingredient.CODEC.fieldOf("crystal").forGetter(freezingStationRecipe -> freezingStationRecipe.crystal),
+                                PrimitiveCodec.INT.fieldOf("max_progress").forGetter(freezingStationRecipe -> freezingStationRecipe.maxProgress))
                         .apply(instance, FreezingStationRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, FreezingStationRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
@@ -77,13 +80,15 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
             Ingredient crystal = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
 
             ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
-            return new FreezingStationRecipe(output, cooler, crystal);
+            Integer maxProgress = ByteBufCodecs.VAR_INT.decode(buf);
+            return new FreezingStationRecipe(output, cooler, crystal, maxProgress);
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FreezingStationRecipe recipe) {
             Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.cooler);
             Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.crystal);
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
+            ByteBufCodecs.VAR_INT.encode(buf, recipe.maxProgress);
         }
 
         @Override

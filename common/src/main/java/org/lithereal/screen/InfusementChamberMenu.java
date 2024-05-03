@@ -1,6 +1,6 @@
 package org.lithereal.screen;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,17 +17,17 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
     protected ContainerData data;
     private final Container inventory;
 
-    public InfusementChamberMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+    public InfusementChamberMenu(int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public InfusementChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+    public InfusementChamberMenu(int id, Inventory inv, BlockEntity entity) {
         super(LitherealExpectPlatform.getInfusementChamberMenu(), id);
 
         checkContainerSize(inv, 2);
         blockEntity = (InfusementChamberBlockEntity) entity;
         this.level = inv.player.level();
-        this.data = data;
+        this.data = blockEntity.getData();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);

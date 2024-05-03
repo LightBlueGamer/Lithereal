@@ -67,10 +67,6 @@ public class LitherealExpectPlatformImpl {
         return ForgeBlockEntities.FIRE_CRUCIBLE.get();
     }
 
-    public static BlockEntityTicker<ForgeFireCrucibleBlockEntity> getFireCrucibleBlockEntityTicker() {
-        return ForgeFireCrucibleBlockEntity::tick;
-    }
-
     public static FireCrucibleBlock getFireCrucibleBlock() {
         return ForgeBlocks.FIRE_CRUCIBLE.get();
     }
@@ -81,10 +77,6 @@ public class LitherealExpectPlatformImpl {
 
     public static BlockEntityType<ForgeFreezingStationBlockEntity> getFreezingStationBlockEntity() {
         return ForgeBlockEntities.FREEZING_STATION.get();
-    }
-
-    public static BlockEntityTicker<ForgeFreezingStationBlockEntity> getFreezingStationBlockEntityTicker() {
-        return ForgeFreezingStationBlockEntity::tick;
     }
 
     public static MenuType<FreezingStationMenu> getFreezingStationMenu() {

@@ -1,6 +1,6 @@
 package org.lithereal.screen;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,16 +17,16 @@ public class FreezingStationMenu extends AbstractContainerMenu {
     protected ContainerData data;
     private final Container inventory;
 
-    public FreezingStationMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
+    public FreezingStationMenu(int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public FreezingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+    public FreezingStationMenu(int id, Inventory inv, BlockEntity entity) {
         super(LitherealExpectPlatform.getFreezingStationMenu(), id);
         checkContainerSize(inv, 3);
         blockEntity = (FreezingStationBlockEntity) entity;
         this.level = inv.player.level();
-        this.data = data;
+        this.data = blockEntity.getData();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);

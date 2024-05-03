@@ -1,6 +1,6 @@
 package org.lithereal.screen;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,14 +17,14 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     protected ContainerData data;
     private final Container inventory;
 
-    public FireCrucibleMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
+    public FireCrucibleMenu(int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public FireCrucibleMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+    public FireCrucibleMenu(int id, Inventory inv, BlockEntity entity) {
         super(LitherealExpectPlatform.getFireCrucibleMenu(), id);
         this.blockEntity = (FireCrucibleBlockEntity) entity;
-        this.data = data;
+        this.data = blockEntity.getData();
         this.level = entity.getLevel();
 
         checkContainerSize(inv, 4);
@@ -33,7 +33,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
 
         addDataSlots(data);
 
-        this.inventory = ((Container) blockEntity);
+        this.inventory = blockEntity;
         inventory.startOpen(inv.player);
 
         this.addSlot(new Slot(inventory, 0, 94, 57));
@@ -66,8 +66,8 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         return this.data.get(2);
     }
 
-    public int getHasBucket() {
-        return this.data.get(5);
+    public boolean hasBucket() {
+        return !this.inventory.getItem(3).isEmpty();
     }
     private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;

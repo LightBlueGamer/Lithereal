@@ -52,8 +52,8 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
     }
 
     private void renderBucketProcessing(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.getHasBucket() == 0 && menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 50, 8, 11);
-        else if(menu.getHasBucket() == 1 && menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 62, 8, 11);
+        if(!menu.hasBucket() && menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 50, 8, 11);
+        else if(menu.hasBucket() && menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 62, 8, 11);
     }
 
 

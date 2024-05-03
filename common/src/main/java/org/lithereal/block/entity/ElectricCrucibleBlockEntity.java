@@ -89,6 +89,6 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new FireCrucibleMenu(i, inventory, this, this.data);
+        return new FireCrucibleMenu(i, inventory, this);
     }
 }

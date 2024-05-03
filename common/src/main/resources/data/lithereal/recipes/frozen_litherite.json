@@ -6,6 +6,7 @@
   "crystal": {
     "item": "lithereal:litherite_crystal"
   },
+  "max_progress": 200,
   "output": {
     "id": "lithereal:frozen_litherite_crystal"
   }

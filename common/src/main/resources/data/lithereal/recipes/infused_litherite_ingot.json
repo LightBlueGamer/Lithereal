@@ -6,6 +6,7 @@
   "potion": {
     "item": "minecraft:potion"
   },
+  "max_progress": 6000,
   "output": {
     "id": "lithereal:infused_litherite_ingot"
   }

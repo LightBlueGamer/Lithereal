@@ -1,6 +1,5 @@
 package org.lithereal.block.custom;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -14,6 +13,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -22,8 +22,7 @@ import org.lithereal.block.entity.FireCrucibleBlockEntity;
 
 public abstract class FireCrucibleBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty LIT = BooleanProperty.create("lit");
-    public static final BooleanProperty BLUE_LIT = BooleanProperty.create("blue_lit");
+    public static final EnumProperty<FireCrucibleBlockEntity.HeatState> HEAT_STATE = EnumProperty.create("heat_state", FireCrucibleBlockEntity.HeatState.class);
 
     public FireCrucibleBlock(Properties properties) {
         super(properties);
@@ -41,8 +40,7 @@ public abstract class FireCrucibleBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState()
                 .setValue(FACING, pContext.getHorizontalDirection().getOpposite())
-                .setValue(LIT, false)
-                .setValue(BLUE_LIT, false);
+                .setValue(HEAT_STATE, FireCrucibleBlockEntity.HeatState.UNLIT);
     }
 
     @Override
@@ -57,7 +55,7 @@ public abstract class FireCrucibleBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LIT, BLUE_LIT);
+        builder.add(FACING, HEAT_STATE);
     }
 
     /* BLOCK ENTITY */
@@ -78,6 +76,6 @@ public abstract class FireCrucibleBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
         return createTickerHelper(type, LitherealExpectPlatform.getFireCrucibleBlockEntity(),
-                LitherealExpectPlatform.getFireCrucibleBlockEntityTicker());
+                FireCrucibleBlockEntity::tick);
     }
 }

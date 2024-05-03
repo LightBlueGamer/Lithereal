@@ -1,6 +1,5 @@
 package org.lithereal.block.custom;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -73,6 +72,6 @@ public abstract class FreezingStationBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
         return createTickerHelper(type, LitherealExpectPlatform.getFreezingStationBlockEntity(),
-                LitherealExpectPlatform.getFreezingStationBlockEntityTicker());
+                FreezingStationBlockEntity::tick);
     }
 }

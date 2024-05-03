@@ -13,6 +13,6 @@ public class FabricFireCrucibleMenu extends FireCrucibleMenu {
     }
     public FabricFireCrucibleMenu(int syncId, Inventory playerInventory,
                                   BlockEntity blockEntity, ContainerData containerData) {
-        super(syncId, playerInventory, blockEntity, containerData);
+        super(syncId, playerInventory, blockEntity);
     }
 }

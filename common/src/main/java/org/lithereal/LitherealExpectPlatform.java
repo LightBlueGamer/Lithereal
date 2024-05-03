@@ -11,7 +11,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.*;
@@ -25,7 +24,6 @@ import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
 import org.lithereal.screen.*;
 
 import java.nio.file.Path;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class LitherealExpectPlatform {
@@ -50,11 +48,6 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
-    public static BlockEntityTicker<FireCrucibleBlockEntity> getFireCrucibleBlockEntityTicker() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static FireCrucibleBlock getFireCrucibleBlock() {
         throw new AssertionError();
     }
@@ -66,11 +59,6 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static BlockEntityType<FreezingStationBlockEntity> getFreezingStationBlockEntity() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static BlockEntityTicker<FreezingStationBlockEntity> getFreezingStationBlockEntityTicker() {
         throw new AssertionError();
     }
 

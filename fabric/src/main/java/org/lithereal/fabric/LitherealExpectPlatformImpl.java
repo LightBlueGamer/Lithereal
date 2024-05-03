@@ -1,5 +1,6 @@
 package org.lithereal.fabric;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
-import net.fabricmc.loader.api.FabricLoader;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.fabric.block.FabricBlocks;
@@ -23,11 +23,6 @@ import org.lithereal.fabric.block.custom.FabricInfusementChamberBlock;
 import org.lithereal.fabric.block.entity.*;
 import org.lithereal.fabric.compat.CombatifyHooks;
 import org.lithereal.fabric.item.FabricItems;
-import org.lithereal.fabric.item.custom.HammerWithType;
-import org.lithereal.fabric.item.custom.WarHammerWithType;
-import org.lithereal.fabric.item.custom.ability.AbilityHammerWithType;
-import org.lithereal.fabric.item.custom.burning.BurningLitheriteHammerWithType;
-import org.lithereal.fabric.item.custom.infused.InfusedLitheriteHammerWithType;
 import org.lithereal.fabric.screen.*;
 import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.Hammer;
@@ -62,10 +57,6 @@ public class LitherealExpectPlatformImpl {
         return FabricBlockEntities.FIRE_CRUCIBLE_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<FabricFireCrucibleBlockEntity> getFireCrucibleBlockEntityTicker() {
-        return FabricFireCrucibleBlockEntity::tick;
-    }
-
     public static FireCrucibleBlock getFireCrucibleBlock() {
         return (FireCrucibleBlock) FabricBlocks.FIRE_CRUCIBLE_BLOCK;
     }
@@ -76,10 +67,6 @@ public class LitherealExpectPlatformImpl {
 
     public static BlockEntityType<FabricFreezingStationBlockEntity> getFreezingStationBlockEntity() {
         return FabricBlockEntities.FREEZING_STATION_BLOCK_ENTITY;
-    }
-
-    public static BlockEntityTicker<FabricFreezingStationBlockEntity> getFreezingStationBlockEntityTicker() {
-        return FabricFreezingStationBlockEntity::tick;
     }
 
     public static MenuType<FabricFreezingStationMenu> getFreezingStationMenu() {
@@ -186,24 +173,24 @@ public class LitherealExpectPlatformImpl {
     }
 
     public static Hammer createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
-        return new HammerWithType(tier, damage, speed, properties);
+        return CombatifyHooks.createHammerWithType(tier, damage, speed, properties);
     }
 
     public static AbilityHammer createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
-        return new AbilityHammerWithType(ability, tier, damage, speed, properties);
+        return CombatifyHooks.createAbilityHammerWithType(ability, tier, damage, speed, properties);
     }
 
     public static BurningLitheriteHammer createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
-        return new BurningLitheriteHammerWithType(tier, damage, speed, properties);
+        return CombatifyHooks.createBurningHammerWithType(tier, damage, speed, properties);
     }
 
     public static InfusedLitheriteHammer createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
-        return new InfusedLitheriteHammerWithType(tier, damage, speed, properties);
+        return CombatifyHooks.createInfusedHammerWithType(tier, damage, speed, properties);
     }
 
     public static WarHammer createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
         if (FabricLoader.getInstance().isModLoaded("combatify"))
-            return new WarHammerWithType(tier, damage, speed, properties);
+            return CombatifyHooks.createWarHammerWithType(tier, damage, speed, properties);
         return new WarHammer(tier, damage, speed, properties);
     }
 
