@@ -142,12 +142,12 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
             if (hasRecipe(pEntity)) {
                 Vec3 center = Vec3.upFromBottomCenterOf(blockPos, 0.2);
                 RandomSource randomSource = level.getRandom();
-                double xDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 2;
-                double zDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 2;
+                double xDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.1;
+                double zDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.1;
                 if (pEntity.heatState == HeatState.LIT)
-                    level.addParticle(ParticleTypes.FLAME, center.x, center.y, center.z, xDir, 0.0015, zDir);
+                    level.addParticle(ParticleTypes.FLAME, center.x, center.y, center.z, xDir * 0.75, 0.1, zDir * 0.75);
                 else if (pEntity.heatState == HeatState.BLUE_LIT) // Temp Soul Fire
-                    level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, center.x, center.y, center.z, xDir, 0.002, zDir);
+                    level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, center.x, center.y, center.z, xDir, 0.15, zDir);
             }
             return;
         }
