@@ -29,12 +29,6 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
     }
 
     @Override
-    public void setChanged() {
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-        super.setChanged();
-    }
-
-    @Override
     public NonNullList<ItemStack> getItems() {
         return itemHandler.getStacks();
     }
@@ -62,7 +56,7 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
 
     @Override
     public void loadItems(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
-        itemHandler.deserializeNBT(provider, nbt);
+        itemHandler.deserializeNBT(provider, nbt.getCompound("Items"));
     }
 
     @Override
@@ -91,7 +85,7 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
     @Override
     public void clearContent() {
         for (int index = 0; index < itemHandler.getSlots(); index++) {
-            itemHandler.setStackInSlotNoUpdate(index, ItemStack.EMPTY);
+            removeItemNoUpdate(index);
         }
     }
 

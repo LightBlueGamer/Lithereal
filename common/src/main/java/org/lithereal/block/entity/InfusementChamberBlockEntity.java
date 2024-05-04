@@ -35,7 +35,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     protected int maxProgress = 6000;
     protected PowerState powerState = PowerState.UNPOWERED;
     protected float power = 1.0f;
-    protected float successRate = 0.2f;
+    protected float successRate = 0.4f;
     protected int usedPotions = 0;
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
 
@@ -99,7 +99,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
 
     public void setEmpowerments() {
         this.power = 1.0f;
-        this.successRate = 0.2f;
+        this.successRate = 0.4f;
         int frozenBlocks = 0;
         int burningBlocks = 0;
         int chargedBlocks = 0;

@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.neoforge.screen.ForgeInfusementChamberMenu;
 
@@ -27,12 +26,6 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new ForgeInfusementChamberMenu(i, inventory, this);
-    }
-
-    @Override
-    public void setChanged() {
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);
-        super.setChanged();
     }
 
     @Override
@@ -63,7 +56,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
 
     @Override
     public void loadItems(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
-        itemHandler.deserializeNBT(provider, nbt);
+        itemHandler.deserializeNBT(provider, nbt.getCompound("Items"));
     }
 
     @Override
@@ -92,7 +85,7 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
     @Override
     public void clearContent() {
         for (int index = 0; index < itemHandler.getSlots(); index++) {
-            itemHandler.setStackInSlotNoUpdate(index, ItemStack.EMPTY);
+            removeItemNoUpdate(index);
         }
     }
 
