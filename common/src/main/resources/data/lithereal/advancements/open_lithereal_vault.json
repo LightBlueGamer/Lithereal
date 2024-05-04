@@ -1,0 +1,44 @@
+{
+  "display": {
+    "icon": {
+      "id": "lithereal:lithereal_key",
+      "count": 1
+    },
+    "title": {
+      "text": "The Vaultening"
+    },
+    "description": {
+      "text": "Unlock a Lithereal Vault with a Lithereal Key"
+    }
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "open_lithereal_vault": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "lithereal:lithereal_vault"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "lithereal:lithereal_key"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "open_lithereal_vault"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
