@@ -61,7 +61,7 @@ public class ModTier implements Tier {
 
     public static ModTier create(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
         if (isModLoaded("combatify"))
-            return LitherealExpectPlatform.createCombatifyTier(name, level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
+            return LitherealExpectPlatform.createCombatifyTier(name, level, uses, speed, attackDamageBonus - 1, enchantmentValue, repairIngredient, incorrect);
         return new ModTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
     }
 }
