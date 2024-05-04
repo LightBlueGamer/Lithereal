@@ -91,10 +91,6 @@ public class LitherealExpectPlatformImpl {
         return ForgeBlockEntities.INFUSEMENT_CHAMBER.get();
     }
 
-    public static BlockEntityTicker<ForgeInfusementChamberBlockEntity> getInfusementChamberBlockEntityTicker() {
-        return ForgeInfusementChamberBlockEntity::tick;
-    }
-
     public static InfusementChamberBlock getInfusementChamberBlock() {
         return ForgeBlocks.INFUSEMENT_CHAMBER.get();
     }

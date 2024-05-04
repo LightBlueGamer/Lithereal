@@ -78,11 +78,6 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
-    public static BlockEntityTicker<InfusementChamberBlockEntity> getInfusementChamberBlockEntityTicker() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static InfusementChamberBlock getInfusementChamberBlock() {
         throw new AssertionError();
     }

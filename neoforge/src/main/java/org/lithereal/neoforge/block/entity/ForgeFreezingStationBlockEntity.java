@@ -56,6 +56,11 @@ public class ForgeFreezingStationBlockEntity extends FreezingStationBlockEntity 
     }
 
     @Override
+    public void saveItems(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
+        nbt.put("Items", getHandler().serializeNBT(provider));
+    }
+
+    @Override
     public void loadItems(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         itemHandler.deserializeNBT(provider, nbt);
     }

@@ -66,7 +66,7 @@ public abstract class InfusementChamberBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
         return createTickerHelper(type, LitherealExpectPlatform.getInfusementChamberBlockEntity(),
-                LitherealExpectPlatform.getInfusementChamberBlockEntityTicker());
+                InfusementChamberBlockEntity::tick);
     }
 
     @Override

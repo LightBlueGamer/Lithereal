@@ -81,10 +81,6 @@ public class LitherealExpectPlatformImpl {
         return FabricBlockEntities.INFUSEMENT_CHAMBER_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<FabricInfusementChamberBlockEntity> getInfusementChamberBlockEntityTicker() {
-        return FabricInfusementChamberBlockEntity::tick;
-    }
-
     public static InfusementChamberBlock getInfusementChamberBlock() {
         return (InfusementChamberBlock) FabricBlocks.INFUSEMENT_CHAMBER_BLOCK;
     }

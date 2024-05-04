@@ -57,6 +57,11 @@ public class ForgeInfusementChamberBlockEntity extends InfusementChamberBlockEnt
     }
 
     @Override
+    public void saveItems(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
+        nbt.put("Items", getHandler().serializeNBT(provider));
+    }
+
+    @Override
     public void loadItems(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         itemHandler.deserializeNBT(provider, nbt);
     }

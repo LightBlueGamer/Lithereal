@@ -28,6 +28,12 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity implem
     }
 
     @Override
+    public void setChanged() {
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        super.setChanged();
+    }
+
+    @Override
     public NonNullList<ItemStack> getItems() {
         return itemHandler.getStacks();
     }
@@ -46,6 +52,11 @@ public class ForgeFireCrucibleBlockEntity extends FireCrucibleBlockEntity implem
     @Override
     public ImplementedItemHandler getHandler() {
         return itemHandler;
+    }
+
+    @Override
+    public void saveItems(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
+        nbt.put("Items", getHandler().serializeNBT(provider));
     }
 
     @Override
