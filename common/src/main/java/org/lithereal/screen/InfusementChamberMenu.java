@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
+import org.lithereal.block.entity.InfusementChamberBlockEntity.PowerState;
 
 public class InfusementChamberMenu extends AbstractContainerMenu {
     public InfusementChamberBlockEntity blockEntity;
@@ -34,7 +35,7 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
 
         addDataSlots(data);
 
-        this.inventory = ((Container) blockEntity);
+        this.inventory = blockEntity;
         inventory.startOpen(inv.player);
 
         this.addSlot(new Slot(inventory, 0, 80, 57));
@@ -53,8 +54,8 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
-    public int getPowerLevel() {
-        return this.data.get(2);
+    public PowerState getPowerState() {
+        return PowerState.fromId(this.data.get(2));
     }
 
     private static final int VANILLA_SLOT_COUNT = 36;

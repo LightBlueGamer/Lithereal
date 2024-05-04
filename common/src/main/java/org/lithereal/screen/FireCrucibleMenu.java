@@ -67,7 +67,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     }
 
     public boolean hasBucket() {
-        return !this.inventory.getItem(3).isEmpty();
+        return !blockEntity.getItem(3).isEmpty();
     }
     private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;

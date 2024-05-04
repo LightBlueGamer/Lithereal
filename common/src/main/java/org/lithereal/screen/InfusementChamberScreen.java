@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 
 public class InfusementChamberScreen extends AbstractContainerScreen<InfusementChamberMenu> {
     private static final ResourceLocation TEXTURE =
@@ -50,11 +51,15 @@ public class InfusementChamberScreen extends AbstractContainerScreen<InfusementC
     }
 
     public void renderPowerArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.getPowerLevel() > 0) {
+        if(menu.getPowerState() != InfusementChamberBlockEntity.PowerState.UNPOWERED) {
             guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 98, y + 35, 176, 25, 28, 16);
-            if(menu.getPowerLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 50, 33, 9);
-            if(menu.getPowerLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 41, 33, 9);
-            if(menu.getPowerLevel() == 3) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, 59, 33, 9);
+            int u = switch (menu.getPowerState()) {
+                case UNPOWERED -> 0; // Impossible
+                case FROZEN -> 50;
+                case BURNING -> 41;
+                case CHARGED -> 59;
+            };
+            guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, u, 33, 9);
         }
     }
 }

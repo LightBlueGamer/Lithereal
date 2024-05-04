@@ -40,11 +40,11 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
 
     public PotionContents getStoredPotion() {
-        return inventory.get(1).getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+        return getItem(1).getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
     }
 
     public ItemStack getStoredItem() {
-        return inventory.getFirst();
+        return getItem(0);
     }
 
     public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
@@ -287,7 +287,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
             return getY() == greatest();
         }
         public boolean isGreatestCharged() {
-            return getZ() == 1;
+            return getZ() == greatest();
         }
         public int greatest() {
             return Math.max(Math.max(getX(), Math.max(getY(), getZ())), 1);
