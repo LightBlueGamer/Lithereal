@@ -8,5 +8,6 @@ public class LitherealVaultBlockEntity extends VaultBlockEntity {
 
     public LitherealVaultBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
+        ((IBlockEntity) this).setType(ModBlockEntities.LITHEREAL_VAULT.get());
     }
 }

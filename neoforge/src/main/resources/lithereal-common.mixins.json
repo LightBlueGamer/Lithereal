@@ -9,10 +9,10 @@
     "ResourceLocationMixin",
     "ShapedRecipeMixin",
     "CraftingInventoryMixin",
-    "ShapelessRecipeMixin"
+    "ShapelessRecipeMixin",
+    "BlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "refmap": "lithereal-common-refmap.json"
+  }
 }
