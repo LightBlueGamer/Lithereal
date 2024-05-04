@@ -13,7 +13,6 @@
     }
   },
   "result": {
-    "item": "lithereal:war_hammer",
-    "count": 1
+    "id": "lithereal:war_hammer"
   }
 }

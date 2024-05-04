@@ -51,7 +51,7 @@ public class ForgeFireCrucibleBlock extends FireCrucibleBlock {
             MenuProvider screenHandlerFactory = ((ForgeFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
-                player.openMenu(screenHandlerFactory);
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
             }
         }
 
@@ -64,7 +64,7 @@ public class ForgeFireCrucibleBlock extends FireCrucibleBlock {
             MenuProvider screenHandlerFactory = ((ForgeFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
-                player.openMenu(screenHandlerFactory);
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
             }
         }
 

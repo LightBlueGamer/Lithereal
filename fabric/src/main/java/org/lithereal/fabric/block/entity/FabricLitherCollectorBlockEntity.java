@@ -40,6 +40,16 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
     }
 
     @Override
+    public void setItems(NonNullList<ItemStack> items) {
+        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
+    }
+
+    @Override
+    public GetterAndSetter getOrSet() {
+        return new GetterAndSetter(this::getItems, this::setItems);
+    }
+
+    @Override
     public @Nullable AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
         return new FabricLitherCollectorMenu(id, inventory, this, this.data);
     }

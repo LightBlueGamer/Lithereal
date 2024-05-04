@@ -4,7 +4,6 @@ import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -132,9 +131,19 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     }
 
     @Override
+    public void setItems(NonNullList<ItemStack> items) {
+        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
+    }
+
+    @Override
+    public GetterAndSetter getOrSet() {
+        return new GetterAndSetter(this::getItems, this::setItems);
+    }
+
+    @Override
     protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.saveAdditional(nbt, provider);
-        ContainerHelper.saveAllItems(nbt, inventory, provider);
+        saveItems(nbt, provider);
         nbt.putInt("infusement_chamber.progress", progress);
         nbt.putInt("infusement_chamber.max_progress", maxProgress);
         nbt.putFloat("infusement_chamber.power", power);
@@ -145,7 +154,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.loadAdditional(nbt, provider);
-        ContainerHelper.loadAllItems(nbt, inventory, provider);
+        loadItems(nbt, provider);
         progress = nbt.getInt("infusement_chamber.progress");
         maxProgress = nbt.getInt("infusement_chamber.max_progress");
         power = nbt.getFloat("infusement_chamber.power");

@@ -118,9 +118,19 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     }
 
     @Override
+    public void setItems(NonNullList<ItemStack> items) {
+        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
+    }
+
+    @Override
+    public GetterAndSetter getOrSet() {
+        return new GetterAndSetter(this::getItems, this::setItems);
+    }
+
+    @Override
     protected void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(nbt, provider);
-        ContainerHelper.saveAllItems(nbt, inventory, provider);
+        saveItems(nbt, provider);
         nbt.putInt("fire_crucible.progress", progress);
         nbt.putInt("fire_crucible.max_progress", maxProgress);
         nbt.putInt("fire_crucible.heat_level", heatState.heat);
@@ -130,7 +140,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(nbt, provider);
-        ContainerHelper.loadAllItems(nbt, inventory, provider);
+        loadItems(nbt, provider);
         progress = nbt.getInt("fire_crucible.progress");
         maxProgress = nbt.getInt("fire_crucible.max_progress");
         heatState = HeatState.fromHeat(nbt.getInt("fire_crucible.heat_level"));

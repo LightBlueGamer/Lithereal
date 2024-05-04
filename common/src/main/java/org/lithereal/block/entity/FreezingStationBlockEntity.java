@@ -5,7 +5,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -99,9 +98,19 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     }
 
     @Override
+    public void setItems(NonNullList<ItemStack> items) {
+        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
+    }
+
+    @Override
+    public GetterAndSetter getOrSet() {
+        return new GetterAndSetter(this::getItems, this::setItems);
+    }
+
+    @Override
     protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.saveAdditional(nbt, provider);
-        ContainerHelper.saveAllItems(nbt, inventory, provider);
+        saveItems(nbt, provider);
         nbt.putInt("freezing_station.progress", progress);
         nbt.putInt("freezing_station.max_progress", maxProgress);
     }
@@ -109,7 +118,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.loadAdditional(nbt, provider);
-        ContainerHelper.loadAllItems(nbt, inventory, provider);
+        loadItems(nbt, provider);
         progress = nbt.getInt("freezing_station.progress");
         maxProgress = nbt.getInt("freezing_station.max_progress");
     }

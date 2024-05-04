@@ -51,7 +51,7 @@ public class ForgeFreezingStationBlock extends FreezingStationBlock {
             MenuProvider screenHandlerFactory = ((ForgeFreezingStationBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
-                player.openMenu(screenHandlerFactory);
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
             }
         }
 
@@ -64,7 +64,7 @@ public class ForgeFreezingStationBlock extends FreezingStationBlock {
             MenuProvider screenHandlerFactory = ((ForgeFreezingStationBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
-                player.openMenu(screenHandlerFactory);
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
             }
         }
 
