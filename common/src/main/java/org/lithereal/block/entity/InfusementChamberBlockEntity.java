@@ -103,8 +103,8 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         int frozenBlocks = 0;
         int burningBlocks = 0;
         int chargedBlocks = 0;
-        for (int i = 0; i < Direction.values().length; i++) {
-            BlockPos adjacentPos = this.getBlockPos().offset(Direction.values()[i].getNormal());
+        for (Direction direction : Direction.values()) {
+            BlockPos adjacentPos = this.getBlockPos().relative(direction);
             BlockState blockState = this.level.getBlockState(adjacentPos);
             if(blockState.getBlock() == ModBlocks.FROZEN_LITHERITE_BLOCK.get()) {
                 this.power -= 0.1f;
@@ -119,8 +119,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
                 this.successRate += 0.2f;
                 chargedBlocks++;
             }
-            SurroundingBlocks surroundingBlocks = new SurroundingBlocks(frozenBlocks, burningBlocks, chargedBlocks);
-            powerState = PowerState.fromSurrounding(surroundingBlocks);
+            powerState = PowerState.fromSurrounding(new SurroundingBlocks(frozenBlocks, burningBlocks, chargedBlocks));
         }
 
     }
@@ -266,7 +265,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
             return VALUES[id];
         }
 
-        public static PowerState fromSurrounding(Vec3i surrounding) {
+        public static PowerState fromSurrounding(TriIntHolder surrounding) {
             return switch (surrounding) {
                 case SurroundingBlocks blocks when blocks.isGreatestFrozen() -> FROZEN;
                 case SurroundingBlocks blocks when blocks.isGreatestBurning() -> BURNING;
@@ -276,21 +275,27 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         }
     }
 
-    public static class SurroundingBlocks extends Vec3i {
-        public SurroundingBlocks(int i, int j, int k) {
-            super(i, j, k);
+    public interface TriIntHolder {
+        int[] toArray();
+    }
+
+    public record SurroundingBlocks(int frozen, int burning, int charged) implements TriIntHolder {
+        public SurroundingBlocks(int[] values) {
+            this(values[0], values[1], values[2]);
         }
         public boolean isGreatestFrozen() {
-            return getX() == greatest();
+            return frozen > burning && frozen > charged;
         }
         public boolean isGreatestBurning() {
-            return getY() == greatest();
+            return burning > frozen && burning > charged;
         }
         public boolean isGreatestCharged() {
-            return getZ() == greatest();
+            return charged > frozen && charged > burning;
         }
-        public int greatest() {
-            return Math.max(Math.max(getX(), Math.max(getY(), getZ())), 1);
+
+        @Override
+        public int[] toArray() {
+            return new int[]{frozen, burning, charged};
         }
     }
 
