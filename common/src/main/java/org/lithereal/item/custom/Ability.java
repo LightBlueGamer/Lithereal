@@ -16,6 +16,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -53,18 +54,33 @@ public enum Ability {
 
         @Override
         public void onArmourTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+            if (entity.isInPowderSnow) {
+                for (int i = 0; i < 3; i++) {
+                    BlockPos blockPos = entity.blockPosition().above(i - 1);
+                    if ((level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || entity instanceof Player) && entity.mayInteract(level, blockPos) && level.getBlockState(blockPos).is(Blocks.POWDER_SNOW))
+                        level.destroyBlock(blockPos, false);
+                }
+            }
+
+            if (entity.isOnFire() && !(entity instanceof Player)) {
+                entity.extinguishFire();
+                entity.setSharedFlagOnFire(false);
+            }
+
             if (entity instanceof Player player) {
                 if (player.hurtTime > 0 && !player.level().isClientSide) {
                     DamageSource source = player.getLastDamageSource();
-                    if(source == null) return;
+                    if (source == null) return;
                     Entity attacker = source.getEntity();
-                    if (attacker instanceof LivingEntity) {
-                        attacker.setRemainingFireTicks(100);
-                    }
+                    if (attacker instanceof LivingEntity) attacker.setRemainingFireTicks(100);
                 }
                 if(!level.isClientSide()) {
                     if(hasFullSuitOfArmorOn(player)) {
                         evaluateArmorEffects(player);
+                        if (player.isOnFire()) {
+                            player.extinguishFire();
+                            player.setSharedFlagOnFire(false);
+                        }
                         Block blockBelow = level.getBlockState(player.blockPosition().below()).getBlock();
                         if(hasCorrectArmorOn(ModArmorMaterials.BURNING_LITHERITE, player)) {
                             if(KeyBinding.SCORCH_KEY.isDown()) {
@@ -100,7 +116,7 @@ public enum Ability {
     FROZEN {
         @Override
         public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-            if(attacked.isOnFire()) attacked.extinguishFire();
+            if (attacked.isOnFire()) attacked.extinguishFire();
             attacked.setTicksFrozen(1000);
         }
 
@@ -114,18 +130,15 @@ public enum Ability {
             if (entity instanceof Player player) {
                 if (player.hurtTime > 0 && !player.level().isClientSide) {
                     DamageSource source = player.getLastDamageSource();
-                    if(source == null) return;
+                    if (source == null) return;
                     Entity attacker = source.getEntity();
-                    if (attacker instanceof LivingEntity) {
-                        attacker.setTicksFrozen(1000);
-                    }
+                    if (attacker instanceof LivingEntity) attacker.setTicksFrozen(1000);
                 }
                 if(!level.isClientSide()) {
                     if(hasFullSuitOfArmorOn(player)) {
                         if(hasCorrectArmorOn(ModArmorMaterials.FROZEN_LITHERITE, player)) {
-                            if(player.isFreezing()) {
+                            if (player.isFreezing())
                                 player.setTicksFrozen(0);
-                            }
                             if(KeyBinding.FREEZE_KEY.isDown()) {
                                 for (int x = -4; x <= 4; x++) {
                                     for (int z = -4; z <= 4; z++) {

@@ -25,6 +25,7 @@ public class InfusedLitheriteArmor extends AbilityArmor implements InfusedItem {
     }
 
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, components, tooltipFlag);
         PotionContents.addPotionTooltip(transformEffects(itemStack, 100), components::add, 1.0F, tooltipContext.tickRate());
     }
 

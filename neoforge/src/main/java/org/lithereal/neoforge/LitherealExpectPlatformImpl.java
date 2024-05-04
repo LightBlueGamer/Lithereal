@@ -220,6 +220,6 @@ public class LitherealExpectPlatformImpl {
 
     @OnlyIn(Dist.CLIENT)
     public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
-        ParticleProviderRegistry.register(type, particleProvider);
+        // Ignore
     }
 }

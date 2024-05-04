@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.ability.AbilityAxe;
 
@@ -16,13 +17,14 @@ public class InfusedLitheriteAxe extends AbilityAxe implements InfusedItem {
         super(Ability.INFUSED, tier, properties);
     }
 
-    public ItemStack getDefaultInstance() {
+    public @NotNull ItemStack getDefaultInstance() {
         ItemStack itemStack = super.getDefaultInstance();
         itemStack.set(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         return itemStack;
     }
 
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, components, tooltipFlag);
         PotionContents potionContents = itemStack.get(DataComponents.POTION_CONTENTS);
         if (potionContents != null) {
             Objects.requireNonNull(components);
@@ -30,12 +32,12 @@ public class InfusedLitheriteAxe extends AbilityAxe implements InfusedItem {
         }
     }
 
-    public String getDescriptionId(ItemStack itemStack) {
+    public @NotNull String getDescriptionId(ItemStack itemStack) {
         return Potion.getName(itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).potion(), this.getDescriptionId() + ".effect.");
     }
 
     @Override
-    public Component getName(ItemStack itemStack) {
+    public @NotNull Component getName(ItemStack itemStack) {
         return getModifiedName(itemStack);
     }
 

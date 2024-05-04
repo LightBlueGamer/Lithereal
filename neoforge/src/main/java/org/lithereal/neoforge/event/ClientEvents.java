@@ -1,12 +1,15 @@
 package org.lithereal.neoforge.event;
 
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import org.lithereal.LitherealClient;
+import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
@@ -26,6 +29,10 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             LitherealClient.init();
+        }
+        @SubscribeEvent
+        public static void onParticleProviderRegister(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
         }
         @SubscribeEvent
         public static void onRegisterMenu(RegisterMenuScreensEvent event) {

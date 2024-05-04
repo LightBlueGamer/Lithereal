@@ -23,6 +23,7 @@ public class InfusedLitheriteHoe extends AbilityHoe implements InfusedItem {
     }
 
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, components, tooltipFlag);
         PotionContents potionContents = itemStack.get(DataComponents.POTION_CONTENTS);
         if (potionContents != null) {
             Objects.requireNonNull(components);

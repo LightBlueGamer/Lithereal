@@ -3,7 +3,6 @@ package org.lithereal;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
-import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.color.block.BlockColor;
@@ -30,7 +29,10 @@ import org.lithereal.util.KeyBinding;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 import static dev.architectury.platform.Platform.isModLoaded;
 

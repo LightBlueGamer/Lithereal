@@ -1,19 +1,28 @@
 package org.lithereal.util;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.Hammer;
 import org.lithereal.item.custom.ability.AbilityHammer;
 import org.lithereal.item.custom.burning.BurningLitheriteHammer;
+import org.lithereal.item.custom.component.Enhanced;
 import org.lithereal.item.custom.component.ModComponents;
 import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
+
+import java.util.Optional;
+import java.util.function.Consumer;
 
 import static dev.architectury.platform.Platform.isModLoaded;
 
@@ -39,6 +48,7 @@ public class CommonUtils {
         return bl;
     }
 
+    @SafeVarargs
     public static <T> boolean isAnyOf(T t, T... objects) {
         boolean ret = false;
         for (T object : objects) {
@@ -55,20 +65,33 @@ public class CommonUtils {
     }
 
     public static boolean isEnhanced(ItemStack stack) {
-        return stack.getOrDefault(ModComponents.ENHANCED.get(), false);
+        return stack.has(ModComponents.ENHANCED.get());
     }
 
     public static boolean isEnhanced(CompoundTag tag) {
         return tag != null && tag.getBoolean("Enhanced");
     }
 
-    public static ItemStack setEnhanced(ItemStack stack, boolean bl) {
-        stack.set(ModComponents.ENHANCED.get(), bl);
+    public static ItemStack setEnhanced(ItemStack stack, boolean showInTooltip, MutableComponent component) {
+        stack.set(ModComponents.ENHANCED.get(), new Enhanced(showInTooltip, Optional.of(component.withStyle(ChatFormatting.BLUE))));
+        return stack;
+    }
+
+    public static ItemStack removeEnhanced(ItemStack stack) {
+        stack.remove(ModComponents.ENHANCED.get());
         return stack;
     }
 
     public static void setEnhanced(CompoundTag tag, boolean bl) {
         tag.putBoolean("Enhanced", bl);
+    }
+
+    public static <T extends TooltipProvider> void addToTooltip(ItemStack stack, DataComponentType<T> dataComponentType, Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
+        T tooltipProvider = stack.get(dataComponentType);
+        if (tooltipProvider != null) {
+            tooltipProvider.addToTooltip(tooltipContext, consumer, tooltipFlag);
+        }
+
     }
 
     public static Hammer createHammer(Tier tier, int damage, float attackSpeed, Item.Properties properties) {
