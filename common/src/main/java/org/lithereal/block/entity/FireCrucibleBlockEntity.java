@@ -31,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.custom.FireCrucibleBlock;
+import org.lithereal.client.particle.ModParticles;
 import org.lithereal.recipe.FireCrucibleRecipe;
 import org.lithereal.recipe.ModRecipes;
 import org.lithereal.screen.FireCrucibleMenu;
@@ -148,15 +149,15 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FireCrucibleBlockEntity pEntity) {
         if (level.isClientSide()) {
-            if (hasRecipe(pEntity)) {
+            RandomSource randomSource = level.getRandom();
+            if (hasRecipe(pEntity) && randomSource.nextBoolean()) {
                 Vec3 center = Vec3.upFromBottomCenterOf(blockPos, 0.2);
-                RandomSource randomSource = level.getRandom();
-                double xDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.1;
-                double zDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.1;
+                double xDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.075;
+                double zDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.075;
                 if (pEntity.heatState == HeatState.LIT)
                     level.addParticle(ParticleTypes.FLAME, center.x, center.y, center.z, xDir * 0.75, 0.1, zDir * 0.75);
-                else if (pEntity.heatState == HeatState.BLUE_LIT) // Temp Soul Fire
-                    level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, center.x, center.y, center.z, xDir, 0.15, zDir);
+                else if (pEntity.heatState == HeatState.BLUE_LIT)
+                    level.addParticle(ModParticles.BLUE_FIRE_FLAME.get(), center.x, center.y, center.z, xDir, 0.15, zDir);
             }
             return;
         }

@@ -1,6 +1,12 @@
 package org.lithereal;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.architectury.registry.client.particle.ParticleProviderRegistry;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -226,6 +232,17 @@ public class LitherealExpectPlatform {
     @ExpectPlatform
     public static TagKey<Block> getTier6Incorrect() {
         // Await Conventional Tags
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    @Environment(EnvType.CLIENT)
+    public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
         throw new AssertionError();
     }
 }

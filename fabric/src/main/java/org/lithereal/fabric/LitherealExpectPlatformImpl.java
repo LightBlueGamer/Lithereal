@@ -1,9 +1,20 @@
 package org.lithereal.fabric;
 
+import dev.architectury.registry.client.particle.ParticleProviderRegistry;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
@@ -216,5 +227,34 @@ public class LitherealExpectPlatformImpl {
 
     public static ModTier createCombatifyTier(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
         return CombatifyHooks.registerTier(name, CombatifyHooks.generateExtendedTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect));
+    }
+
+    public static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
+        return FabricParticleTypes.simple(alwaysSpawn);
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
+        ParticleFactoryRegistry.getInstance().register(type, (provider) -> particleProvider.create(new ParticleProviderRegistry.ExtendedSpriteSet() {
+            @Override
+            public TextureAtlas getAtlas() {
+                return provider.getAtlas();
+            }
+
+            @Override
+            public List<TextureAtlasSprite> getSprites() {
+                return provider.getSprites();
+            }
+
+            @Override
+            public TextureAtlasSprite get(int i, int j) {
+                return provider.get(i, j);
+            }
+
+            @Override
+            public TextureAtlasSprite get(RandomSource randomSource) {
+                return provider.get(randomSource);
+            }
+        }));
     }
 }

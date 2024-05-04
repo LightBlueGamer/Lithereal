@@ -106,15 +106,15 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         for (Direction direction : Direction.values()) {
             BlockPos adjacentPos = this.getBlockPos().relative(direction);
             BlockState blockState = this.level.getBlockState(adjacentPos);
-            if(blockState.getBlock() == ModBlocks.FROZEN_LITHERITE_BLOCK.get()) {
+            if(blockState.is(ModBlocks.FROZEN_LITHERITE_BLOCK.get())) {
                 this.power -= 0.1f;
                 this.successRate += 0.15f;
                 frozenBlocks++;
-            } else if(blockState.getBlock() == ModBlocks.BURNING_LITHERITE_BLOCK.get()) {
+            } else if(blockState.is(ModBlocks.BURNING_LITHERITE_BLOCK.get())) {
                 this.power += 0.15f;
                 this.successRate -= 0.1f;
                 burningBlocks++;
-            } else if(blockState.getBlock() == ModBlocks.CHARGED_LITHERITE_BLOCK.get()) {
+            } else if(blockState.is(ModBlocks.CHARGED_LITHERITE_BLOCK.get())) {
                 this.power += 0.2f;
                 this.successRate += 0.2f;
                 chargedBlocks++;
@@ -145,6 +145,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         saveItems(nbt, provider);
         nbt.putInt("infusement_chamber.progress", progress);
         nbt.putInt("infusement_chamber.max_progress", maxProgress);
+        nbt.putInt("infusement_chamber.power_state", powerState.id);
         nbt.putFloat("infusement_chamber.power", power);
         nbt.putFloat("infusement_chamber.success_rate", successRate);
         nbt.putInt("infusement_chamber.used_potions", usedPotions);
@@ -156,6 +157,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         loadItems(nbt, provider);
         progress = nbt.getInt("infusement_chamber.progress");
         maxProgress = nbt.getInt("infusement_chamber.max_progress");
+        powerState = PowerState.fromId(nbt.getInt("infusement_chamber.power_state"));
         power = nbt.getFloat("infusement_chamber.power");
         successRate = nbt.getFloat("infusement_chamber.success_rate");
         usedPotions = nbt.getInt("infusement_chamber.used_potions");
@@ -265,38 +267,30 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
             return VALUES[id];
         }
 
-        public static PowerState fromSurrounding(TriIntHolder surrounding) {
+        public static PowerState fromSurrounding(SurroundingBlocks surrounding) {
             return switch (surrounding) {
-                case SurroundingBlocks blocks when blocks.isGreatestFrozen() -> FROZEN;
-                case SurroundingBlocks blocks when blocks.isGreatestBurning() -> BURNING;
-                case SurroundingBlocks blocks when blocks.isGreatestCharged() -> CHARGED;
+                case SurroundingBlocks ignored when surrounding.isGreatestCharged() -> CHARGED;
+                case SurroundingBlocks ignored when surrounding.isGreatestFrozen() -> FROZEN;
+                case SurroundingBlocks ignored when surrounding.isGreatestBurning() -> BURNING;
                 default -> UNPOWERED;
             };
         }
     }
 
-    public interface TriIntHolder {
-        int[] toArray();
-    }
-
-    public record SurroundingBlocks(int frozen, int burning, int charged) implements TriIntHolder {
+    public record SurroundingBlocks(int frozen, int burning, int charged) {
         public SurroundingBlocks(int[] values) {
             this(values[0], values[1], values[2]);
         }
+        public boolean isGreatestCharged() {
+            return charged >= frozen && charged >= burning;
+        }
         public boolean isGreatestFrozen() {
-            return frozen > burning && frozen > charged;
+            return frozen >= burning && frozen >= charged;
         }
         public boolean isGreatestBurning() {
-            return burning > frozen && burning > charged;
-        }
-        public boolean isGreatestCharged() {
-            return charged > frozen && charged > burning;
+            return burning >= frozen && burning >= charged;
         }
 
-        @Override
-        public int[] toArray() {
-            return new int[]{frozen, burning, charged};
-        }
     }
 
 }

@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
+import org.lithereal.client.particle.ModParticles;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
@@ -38,6 +39,7 @@ public class Lithereal {
         ModRecipes.register();
         ModEntities.register();
         ModEnchantments.register();
+        ModParticles.register();
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

@@ -14,25 +14,41 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
 
 public abstract class FireCrucibleBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final VoxelShape OUTER_SHAPE = Shapes.block();
+    public static final VoxelShape SHAPE;
     public static final EnumProperty<FireCrucibleBlockEntity.HeatState> HEAT_STATE = EnumProperty.create("heat_state", FireCrucibleBlockEntity.HeatState.class);
 
     public FireCrucibleBlock(Properties properties) {
         super(properties);
     }
 
-    private static final VoxelShape SHAPE =
-            Block.box(0, 0, 0, 16, 16, 16);
+    static {
+        SHAPE = Shapes.join(Shapes.join(OUTER_SHAPE, Block.box(1.0, 15.0, 1.0, 15.0, 16.0, 15.0), BooleanOp.ONLY_FIRST), Block.box(2.0, 5.0, 2.0, 14.0, 15.0, 14.0), BooleanOp.ONLY_FIRST);
+    }
 
     @Override
-    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+    public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return SHAPE;
+    }
+
+    @Override
+    protected @NotNull VoxelShape getInteractionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return OUTER_SHAPE;
+    }
+
+    @Override
+    protected @NotNull VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return SHAPE;
     }
 

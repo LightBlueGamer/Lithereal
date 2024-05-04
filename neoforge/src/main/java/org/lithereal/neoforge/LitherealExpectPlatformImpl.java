@@ -1,5 +1,9 @@
 package org.lithereal.neoforge;
 
+import dev.architectury.registry.client.particle.ParticleProviderRegistry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -13,6 +17,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +26,10 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.block.entity.LitherCollectorBlockEntity;
+import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.Hammer;
+import org.lithereal.item.custom.ModTier;
+import org.lithereal.item.custom.WarHammer;
 import org.lithereal.item.custom.ability.AbilityHammer;
 import org.lithereal.item.custom.burning.BurningLitheriteHammer;
 import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
@@ -34,9 +43,6 @@ import org.lithereal.neoforge.compat.CombatifyHooks;
 import org.lithereal.neoforge.item.ForgeItems;
 import org.lithereal.neoforge.item.custom.ForgeWarHammer;
 import org.lithereal.neoforge.screen.ForgeMenuTypes;
-import org.lithereal.item.custom.Ability;
-import org.lithereal.item.custom.ModTier;
-import org.lithereal.item.custom.WarHammer;
 import org.lithereal.screen.FireCrucibleMenu;
 import org.lithereal.screen.FreezingStationMenu;
 import org.lithereal.screen.InfusementChamberMenu;
@@ -206,5 +212,14 @@ public class LitherealExpectPlatformImpl {
 
     public static ModTier createCombatifyTier(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
         return CombatifyHooks.generateExtendedTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
+    }
+
+    public static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
+        return new SimpleParticleType(alwaysSpawn);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
+        ParticleProviderRegistry.register(type, particleProvider);
     }
 }

@@ -3,10 +3,12 @@ package org.lithereal;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
+import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.item.ModCreativeTabs;
@@ -35,6 +38,7 @@ public class LitherealClient {
     public static void init() {
         EntityModelLayerRegistry.register(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
+        LitherealExpectPlatform.registerParticleProvider(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
         registerKeyBindings();
         registerColorHandlers();
         registerItemsToTab();
