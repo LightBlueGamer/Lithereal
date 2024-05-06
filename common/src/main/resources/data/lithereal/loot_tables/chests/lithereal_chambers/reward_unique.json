@@ -11,7 +11,13 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:trident"
+          "name": "minecraft:flow_armor_trim_smithing_template",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:flow_banner_pattern",
+          "weight": 2
         },
         {
           "type": "minecraft:item",

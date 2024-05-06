@@ -105,11 +105,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:diamond_block"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "lithereal:litherite_crystal",
-          "weight": 2
         }
       ],
       "rolls": 1.0
