@@ -153,7 +153,7 @@ public class ModItems {
             createAbilityHammer(ENHANCED, ODYSIUM, 5, -3f, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
-            new BrushItem(new Item.Properties().stacksTo(1).durability(256)));
+            new BrushItem(new Item.Properties().durability(256)));
 
     public static final RegistrySupplier<Item> LITHERITE_WRENCH = ITEMS.register("litherite_wrench", () ->
             new Wrench(new Item.Properties().stacksTo(1).durability(128)));

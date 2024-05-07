@@ -60,7 +60,7 @@ public class ModArmorMaterials {
         map.put(ArmorItem.Type.LEGGINGS, 8);
         map.put(ArmorItem.Type.CHESTPLATE, 10);
         map.put(ArmorItem.Type.HELMET, 5);
-    }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.1F, () -> Ingredient.of(ModItems.ODYSIUM_INGOT.get()));
+    }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 5.0F, 0.2F, () -> Ingredient.of(ModItems.ODYSIUM_INGOT.get()));
 
 
     public static final BiFunction<ArmorItem.Type, Integer, Integer> HEALTH_FUNCTION_FOR_TYPE = ArmorItem.Type::getDurability;

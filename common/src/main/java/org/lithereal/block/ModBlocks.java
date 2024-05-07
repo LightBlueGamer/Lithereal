@@ -23,7 +23,7 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> DEEPSLATE_LITHERITE_ORE = registerBlock("deepslate_litherite_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
-                                .strength(6f).requiresCorrectToolForDrops()));
+                                .strength(6f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
 
     public static final RegistrySupplier<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
