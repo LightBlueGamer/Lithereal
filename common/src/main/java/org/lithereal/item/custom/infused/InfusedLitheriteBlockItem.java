@@ -21,7 +21,7 @@ public class InfusedLitheriteBlockItem extends BlockItem implements InfusedItem 
     }
 
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
-        PotionContents.addPotionTooltip(transformEffects(itemStack, 40), components::add, 1.0F, tooltipContext.tickRate());
+        PotionContents.addPotionTooltip(transformEffects(itemStack, 100), components::add, 1.0F, tooltipContext.tickRate());
     }
 
     public String getDescriptionId(ItemStack itemStack) {
