@@ -19,7 +19,7 @@ public class WitheringLitheriteBlock extends Block {
     @Override
     public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 1, 1));
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 1));
         }
         super.stepOn(level, blockPos, blockState, entity);
     }
