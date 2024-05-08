@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "id": "lithereal:litherite_crystal"
+      "id": "lithereal:litherite_crystal",
+      "count": 1
     },
     "title": "Lithereal",
     "description": "A mod about infusing crystals with different magical powers",

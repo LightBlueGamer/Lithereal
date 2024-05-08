@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Wrench extends Item {
-    public Wrench(Properties properties) {
+public class WrenchItem extends Item {
+    public WrenchItem(Properties properties) {
         super(properties);
     }
 

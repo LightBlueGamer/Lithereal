@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "id": "lithereal:litherite_chestplate"
+      "id": "lithereal:litherite_chestplate",
+      "count": 1
     },
     "title": "Cover Me in Crystals",
     "description": "Obtain a full set of Litherite armor",
