@@ -15,16 +15,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.block.entity.EtherCollectorBlockEntity;
 import org.lithereal.block.entity.IEnergyContainerProvider;
 import org.lithereal.block.entity.ImplementedInventory;
-import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.fabric.item.FabricItems;
-import org.lithereal.fabric.screen.FabricLitherCollectorMenu;
-import org.lithereal.util.LitherEnergyContainer;
+import org.lithereal.fabric.screen.FabricEtherCollectorMenu;
+import org.lithereal.util.EtherEnergyContainer;
 
-public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {
+public class FabricEtherCollectorBlockEntity extends EtherCollectorBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
-    public FabricLitherCollectorBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public FabricEtherCollectorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
     }
 
@@ -51,31 +51,31 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new FabricLitherCollectorMenu(id, inventory, this, this.data);
+        return new FabricEtherCollectorMenu(id, inventory, this, this.data);
     }
 
     @Override
     protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.saveAdditional(nbt, provider);
         ContainerHelper.saveAllItems(nbt, inventory, provider);
-        nbt.putInt("lither_collector.progress", progress);
-        nbt.putInt("lither_collector.max_progress", maxProgress);
-        nbt.putInt("lither_collector.energy", getEnergyContainer().energy);
+        nbt.putInt("ether_collector.progress", progress);
+        nbt.putInt("ether_collector.max_progress", maxProgress);
+        nbt.putInt("ether_collector.energy", getEnergyContainer().energy);
     }
 
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.loadAdditional(nbt, provider);
         ContainerHelper.loadAllItems(nbt, inventory, provider);
-        progress = nbt.getInt("lither_collector.progress");
-        maxProgress = nbt.getInt("lither_collector.max_progress");
-        getEnergyContainer().energy = nbt.getInt("lither_collector.energy");
+        progress = nbt.getInt("ether_collector.progress");
+        maxProgress = nbt.getInt("ether_collector.max_progress");
+        getEnergyContainer().energy = nbt.getInt("ether_collector.energy");
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricLitherCollectorBlockEntity pEntity) {
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricEtherCollectorBlockEntity pEntity) {
         if(level.isClientSide()) return;
         if(pEntity.hasCrystal(pEntity) || pEntity.progress > 0) {
-            LitherEnergyContainer energyContainer = pEntity.getEnergyContainer();
+            EtherEnergyContainer energyContainer = pEntity.getEnergyContainer();
 
             if(energyContainer.energy < energyContainer.maxEnergy) {
                 setMaxProgress(pEntity);
@@ -91,12 +91,12 @@ public class FabricLitherCollectorBlockEntity extends LitherCollectorBlockEntity
         if(pEntity.getEnergyContainer().energy > 0) pEntity.getEnergyContainer().transferEnergy(pEntity);
     }
 
-    public static void setMaxProgress(FabricLitherCollectorBlockEntity pEntity) {
+    public static void setMaxProgress(FabricEtherCollectorBlockEntity pEntity) {
         if(pEntity.getItem(0).getItem() == FabricItems.LITHERITE_CRYSTAL) pEntity.maxProgress = 1000;
         else if(pEntity.getItem(0).getItem() == ModBlocks.LITHERITE_BLOCK.get().asItem()) pEntity.maxProgress = 9000;
     }
 
-    public boolean hasCrystal(FabricLitherCollectorBlockEntity pEntity) {
+    public boolean hasCrystal(FabricEtherCollectorBlockEntity pEntity) {
         return pEntity.getItem(0).getItem() == FabricItems.LITHERITE_CRYSTAL || pEntity.getItem(0).getItem() == ModBlocks.LITHERITE_BLOCK.get().asItem();
     }
 

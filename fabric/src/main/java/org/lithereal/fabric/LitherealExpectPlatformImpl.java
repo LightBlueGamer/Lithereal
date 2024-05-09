@@ -108,36 +108,36 @@ public class LitherealExpectPlatformImpl {
         return FabricItems.LITHERITE_CRYSTAL;
     }
 
-    public static BlockEntityType<FabricLitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
-        return FabricBlockEntities.LITHER_COLLECTOR_BLOCK_ENTITY;
+    public static BlockEntityType<FabricEtherBatteryBlockEntity> getEtherBatteryBlockEntity() {
+        return FabricBlockEntities.ETHER_BATTERY_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<FabricLitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
-        return FabricLitherCollectorBlockEntity::tick;
+    public static BlockEntityTicker<FabricEtherBatteryBlockEntity> getEtherBatteryBlockEntityTicker() {
+        return FabricEtherBatteryBlockEntity::tick;
     }
 
-    public static LitherCollectorBlock getLitherCollectorBlock() {
-        return (LitherCollectorBlock) FabricBlocks.LITHER_COLLECTOR_BLOCK;
+    public static MenuType<FabricEtherBatteryMenu> getEtherBatteryMenu() {
+        return FabricScreenHandlers.ETHER_BATTERY_SCREEN_HANDLER;
     }
 
-    public static MenuType<FabricLitherCollectorMenu> getLitherCollectorMenu() {
-        return FabricScreenHandlers.LITHER_COLLECTOR_SCREEN_HANDLER;
+    public static EtherBatteryBlock getEtherBatteryBlock() {
+        return (EtherBatteryBlock) FabricBlocks.ETHER_BATTERY_BLOCK;
     }
 
-    public static BlockEntityType<FabricLitherBatteryBlockEntity> getLitherBatteryBlockEntity() {
-        return FabricBlockEntities.LITHER_BATTERY_BLOCK_ENTITY;
+    public static BlockEntityType<FabricEtherCollectorBlockEntity> getEtherCollectorBlockEntity() {
+        return FabricBlockEntities.ETHER_COLLECTOR_BLOCK_ENTITY;
     }
 
-    public static BlockEntityTicker<FabricLitherBatteryBlockEntity> getLitherBatteryBlockEntityTicker() {
-        return FabricLitherBatteryBlockEntity::tick;
+    public static BlockEntityTicker<FabricEtherCollectorBlockEntity> getEtherCollectorBlockEntityTicker() {
+        return FabricEtherCollectorBlockEntity::tick;
     }
 
-    public static MenuType<FabricLitherBatteryMenu> getLitherBatteryMenu() {
-        return FabricScreenHandlers.LITHER_BATTERY_SCREEN_HANDLER;
+    public static EtherCollectorBlock getEtherCollectorBlock() {
+        return (EtherCollectorBlock) FabricBlocks.ETHER_COLLECTOR_BLOCK;
     }
 
-    public static LitherBatteryBlock getLitherBatteryBlock() {
-        return (LitherBatteryBlock) FabricBlocks.LITHER_BATTERY_BLOCK;
+    public static MenuType<FabricEtherCollectorMenu> getEtherCollectorMenu() {
+        return FabricScreenHandlers.ETHER_COLLECTOR_SCREEN_HANDLER;
     }
 
     public static void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float strength) {

@@ -13,14 +13,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
+import org.lithereal.block.entity.EtherBatteryBlockEntity;
 import org.lithereal.block.entity.IEnergyContainerProvider;
 import org.lithereal.block.entity.ImplementedInventory;
-import org.lithereal.block.entity.LitherBatteryBlockEntity;
-import org.lithereal.fabric.screen.FabricLitherBatteryMenu;
+import org.lithereal.fabric.screen.FabricEtherBatteryMenu;
 
-public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {
+public class FabricEtherBatteryBlockEntity extends EtherBatteryBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(0, ItemStack.EMPTY);
-    public FabricLitherBatteryBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public FabricEtherBatteryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
     }
 
@@ -47,7 +47,7 @@ public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity imp
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new FabricLitherBatteryMenu(id, inventory, this, this.data);
+        return new FabricEtherBatteryMenu(id, inventory, this, this.data);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class FabricLitherBatteryBlockEntity extends LitherBatteryBlockEntity imp
         getEnergyContainer().energy = nbt.getInt("lither_battery.energy");
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricLitherBatteryBlockEntity pEntity) {
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, FabricEtherBatteryBlockEntity pEntity) {
         if(level.isClientSide()) return;
         //if(pEntity.getEnergyContainer().energy > 0) pEntity.getEnergyContainer().transferEnergy(pEntity);
     }

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lithereal:lither_battery"
+          "name": "lithereal:ether_battery"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/lither_battery"
+  "random_sequence": "lithereal:blocks/ether_battery"
 }

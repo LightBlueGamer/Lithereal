@@ -9,21 +9,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.LitherCollectorBlockEntity;
+import org.lithereal.block.entity.EtherCollectorBlockEntity;
 
-public class LitherCollectorMenu extends AbstractContainerMenu {
-    public LitherCollectorBlockEntity blockEntity;
+public class EtherCollectorMenu extends AbstractContainerMenu {
+    public EtherCollectorBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
     private final Container inventory;
 
-    public LitherCollectorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+    public EtherCollectorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
-    public LitherCollectorMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(LitherealExpectPlatform.getLitherCollectorMenu(), id);
-        this.blockEntity = (LitherCollectorBlockEntity) entity;
+    public EtherCollectorMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(LitherealExpectPlatform.getEtherCollectorMenu(), id);
+        this.blockEntity = (EtherCollectorBlockEntity) entity;
         this.data = data;
         this.level = entity.getLevel();
 
@@ -56,7 +56,7 @@ public class LitherCollectorMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = 36;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // Must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -94,7 +94,7 @@ public class LitherCollectorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, LitherealExpectPlatform.getLitherCollectorBlock());
+                player, LitherealExpectPlatform.getEtherCollectorBlock());
     }
 
     protected void addPlayerInventory(Inventory playerInventory) {

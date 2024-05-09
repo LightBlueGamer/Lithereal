@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lithereal:lither_collector"
+          "name": "lithereal:ether_collector"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/lither_collector"
+  "random_sequence": "lithereal:blocks/ether_collector"
 }

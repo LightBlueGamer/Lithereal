@@ -13,12 +13,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.LitherCollectorBlockEntity;
+import org.lithereal.block.entity.EtherBatteryBlockEntity;
 
-public abstract class LitherCollectorBlock extends BaseEntityBlock {
+public abstract class EtherBatteryBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public LitherCollectorBlock(Properties properties) {
+    public EtherBatteryBlock(Properties properties) {
         super(properties);
     }
 
@@ -53,13 +53,13 @@ public abstract class LitherCollectorBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new LitherCollectorBlockEntity(pos, state);
+        return new EtherBatteryBlockEntity(pos, state);
     }
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker getTicker(Level level, BlockState state,
                                                                BlockEntityType<T> type) {
-        return createTickerHelper(type, LitherealExpectPlatform.getLitherCollectorBlockEntity(),
-                LitherealExpectPlatform.getLitherCollectorBlockEntityTicker());
+        return createTickerHelper(type, LitherealExpectPlatform.getEtherBatteryBlockEntity(),
+                LitherealExpectPlatform.getEtherBatteryBlockEntityTicker());
     }
 }

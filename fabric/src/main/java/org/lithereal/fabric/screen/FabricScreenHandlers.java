@@ -36,13 +36,13 @@ public class FabricScreenHandlers {
             Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "infusement_chamber"),
                     new ExtendedScreenHandlerType<>(FabricInfusementChamberMenu::new, BLOCK_POS));
 
-    public static final MenuType<FabricLitherCollectorMenu> LITHER_COLLECTOR_SCREEN_HANDLER =
-            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "lither_collector"),
-                    new ExtendedScreenHandlerType<>(FabricLitherCollectorMenu::new, BLOCK_POS));
+    public static final MenuType<FabricEtherBatteryMenu> ETHER_BATTERY_SCREEN_HANDLER =
+            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "ether_battery"),
+                    new ExtendedScreenHandlerType<>(FabricEtherBatteryMenu::new, BLOCK_POS));
 
-    public static final MenuType<FabricLitherBatteryMenu> LITHER_BATTERY_SCREEN_HANDLER =
-            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "lither_battery"),
-                    new ExtendedScreenHandlerType<>(FabricLitherBatteryMenu::new, BLOCK_POS));
+    public static final MenuType<FabricEtherCollectorMenu> ETHER_COLLECTOR_SCREEN_HANDLER =
+            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "ether_collector"),
+                    new ExtendedScreenHandlerType<>(FabricEtherCollectorMenu::new, BLOCK_POS));
 
     public static void registerScreenHandlers() {
     }

@@ -99,42 +99,42 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
-    public static BlockEntityType<LitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
+    public static BlockEntityType<EtherCollectorBlockEntity> getEtherCollectorBlockEntity() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static BlockEntityTicker<LitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
+    public static BlockEntityTicker<EtherCollectorBlockEntity> getEtherCollectorBlockEntityTicker() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static LitherCollectorBlock getLitherCollectorBlock() {
+    public static EtherCollectorBlock getEtherCollectorBlock() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static MenuType<LitherCollectorMenu> getLitherCollectorMenu() {
+    public static MenuType<EtherCollectorMenu> getEtherCollectorMenu() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static BlockEntityType<LitherBatteryBlockEntity> getLitherBatteryBlockEntity() {
+    public static BlockEntityType<EtherBatteryBlockEntity> getEtherBatteryBlockEntity() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static BlockEntityTicker<LitherBatteryBlockEntity> getLitherBatteryBlockEntityTicker() {
+    public static BlockEntityTicker<EtherBatteryBlockEntity> getEtherBatteryBlockEntityTicker() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static LitherBatteryBlock getLitherBatteryBlock() {
+    public static EtherBatteryBlock getEtherBatteryBlock() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static MenuType<LitherBatteryMenu> getLitherBatteryMenu() {
+    public static MenuType<EtherBatteryMenu> getEtherBatteryMenu() {
         throw new AssertionError();
     }
 

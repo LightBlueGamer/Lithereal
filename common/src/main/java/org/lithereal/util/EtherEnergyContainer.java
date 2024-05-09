@@ -6,18 +6,18 @@ import org.lithereal.block.entity.IEnergyContainerProvider;
 
 import java.util.Arrays;
 
-public class LitherEnergyContainer {
+public class EtherEnergyContainer {
     public int energy;
     public int maxEnergy;
     public int transferRate;
 
-    public LitherEnergyContainer(int energy, int maxEnergy, int transferRate) {
+    public EtherEnergyContainer(int energy, int maxEnergy, int transferRate) {
         this.energy = energy;
         this.maxEnergy = maxEnergy;
         this.transferRate = transferRate;
     }
 
-    public void transferEnergy(LitherEnergyContainer energyContainer, int toTransfer) {
+    public void transferEnergy(EtherEnergyContainer energyContainer, int toTransfer) {
         if(energyContainer.maxEnergy < energyContainer.energy + toTransfer) toTransfer = maxEnergy - energy;
         energyContainer.energy += toTransfer;
         this.energy -= toTransfer;

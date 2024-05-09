@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "lithereal:block/lither_battery"
+    "all": "lithereal:block/ether_collector"
   }
 }

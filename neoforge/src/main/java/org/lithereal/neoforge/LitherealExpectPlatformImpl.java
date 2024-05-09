@@ -24,8 +24,8 @@ import net.neoforged.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.custom.*;
+import org.lithereal.block.entity.EtherCollectorBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.block.entity.LitherCollectorBlockEntity;
 import org.lithereal.item.custom.Ability;
 import org.lithereal.item.custom.Hammer;
 import org.lithereal.item.custom.ModTier;
@@ -43,10 +43,10 @@ import org.lithereal.neoforge.compat.CombatifyHooks;
 import org.lithereal.neoforge.item.ForgeItems;
 import org.lithereal.neoforge.item.custom.ForgeWarHammer;
 import org.lithereal.neoforge.screen.ForgeMenuTypes;
+import org.lithereal.screen.EtherCollectorMenu;
 import org.lithereal.screen.FireCrucibleMenu;
 import org.lithereal.screen.FreezingStationMenu;
 import org.lithereal.screen.InfusementChamberMenu;
-import org.lithereal.screen.LitherCollectorMenu;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -113,19 +113,19 @@ public class LitherealExpectPlatformImpl {
         return ForgeItems.LITHERITE_CRYSTAL.get();
     }
 
-    public static BlockEntityType<LitherCollectorBlockEntity> getLitherCollectorBlockEntity() {
+    public static BlockEntityType<EtherCollectorBlockEntity> getEtherCollectorBlockEntity() {
         return null;
     }
 
-    public static BlockEntityTicker<LitherCollectorBlockEntity> getLitherCollectorBlockEntityTicker() {
+    public static BlockEntityTicker<EtherCollectorBlockEntity> getEtherCollectorBlockEntityTicker() {
         return null;
     }
 
-    public static LitherCollectorBlock getLitherCollectorBlock() {
+    public static EtherCollectorBlock getEtherCollectorBlock() {
         return null;
     }
 
-    public static MenuType<LitherCollectorMenu> getLitherCollectorMenu() {
+    public static MenuType<EtherCollectorMenu> getEtherCollectorMenu() {
         return null;
     }
 

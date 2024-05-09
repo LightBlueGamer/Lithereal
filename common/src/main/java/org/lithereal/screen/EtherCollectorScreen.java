@@ -9,10 +9,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
 
-public class LitherCollectorScreen extends AbstractContainerScreen<LitherCollectorMenu> {
+public class EtherCollectorScreen extends AbstractContainerScreen<EtherCollectorMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/lither_collector_gui.png");
-    public LitherCollectorScreen(LitherCollectorMenu menu, Inventory inventory, Component component) {
+            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/ether_collector_gui.png");
+    public EtherCollectorScreen(EtherCollectorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
@@ -29,7 +29,7 @@ public class LitherCollectorScreen extends AbstractContainerScreen<LitherCollect
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/lither_collector_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/ether_collector_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
     }
 
     @Override

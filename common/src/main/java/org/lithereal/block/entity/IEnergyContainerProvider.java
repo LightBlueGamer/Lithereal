@@ -1,6 +1,6 @@
 package org.lithereal.block.entity;
 
-import org.lithereal.util.LitherEnergyContainer;
+import org.lithereal.util.EtherEnergyContainer;
 
 public interface IEnergyContainerProvider {
     int[] sides = {
@@ -12,5 +12,5 @@ public interface IEnergyContainerProvider {
             0, // west
             0, // east
     };
-    LitherEnergyContainer getEnergyContainer();
+    EtherEnergyContainer getEnergyContainer();
 }

@@ -13,13 +13,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.custom.LitherBatteryBlock;
-import org.lithereal.block.entity.LitherBatteryBlockEntity;
-import org.lithereal.fabric.block.entity.FabricLitherBatteryBlockEntity;
+import org.lithereal.block.custom.EtherCollectorBlock;
+import org.lithereal.block.entity.EtherCollectorBlockEntity;
+import org.lithereal.fabric.block.entity.FabricEtherCollectorBlockEntity;
 
-public class FabricLitherBatteryBlock extends LitherBatteryBlock implements EntityBlock {
-    public static final MapCodec<FabricLitherBatteryBlock> CODEC = simpleCodec(FabricLitherBatteryBlock::new);
-    public FabricLitherBatteryBlock(Properties properties) {
+public class FabricEtherCollectorBlock extends EtherCollectorBlock implements EntityBlock {
+    public static final MapCodec<FabricEtherCollectorBlock> CODEC = simpleCodec(FabricEtherCollectorBlock::new);
+    public FabricEtherCollectorBlock(Properties properties) {
         super(properties);
     }
 
@@ -31,15 +31,15 @@ public class FabricLitherBatteryBlock extends LitherBatteryBlock implements Enti
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new FabricLitherBatteryBlockEntity(pos, state);
+        return new FabricEtherCollectorBlockEntity(pos, state);
     }
 
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FabricLitherBatteryBlockEntity) {
-                Containers.dropContents(world, pos, (FabricLitherBatteryBlockEntity)blockEntity);
+            if (blockEntity instanceof FabricEtherCollectorBlockEntity) {
+                Containers.dropContents(world, pos, (FabricEtherCollectorBlockEntity)blockEntity);
                 world.updateNeighbourForOutputSignal(pos,this);
             }
             super.onRemove(state, world, pos, newState, moved);
@@ -48,8 +48,8 @@ public class FabricLitherBatteryBlock extends LitherBatteryBlock implements Enti
 
     @Override
     protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof LitherBatteryBlockEntity) {
-            MenuProvider screenHandlerFactory = ((FabricLitherBatteryBlockEntity) level.getBlockEntity(blockPos));
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof EtherCollectorBlockEntity) {
+            MenuProvider screenHandlerFactory = ((FabricEtherCollectorBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
                 player.openMenu(screenHandlerFactory);
@@ -61,8 +61,8 @@ public class FabricLitherBatteryBlock extends LitherBatteryBlock implements Enti
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof LitherBatteryBlockEntity) {
-            MenuProvider screenHandlerFactory = ((FabricLitherBatteryBlockEntity) level.getBlockEntity(blockPos));
+        if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof EtherCollectorBlockEntity) {
+            MenuProvider screenHandlerFactory = ((FabricEtherCollectorBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
                 player.openMenu(screenHandlerFactory);
