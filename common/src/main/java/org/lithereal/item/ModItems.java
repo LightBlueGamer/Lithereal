@@ -234,7 +234,7 @@ public class ModItems {
             new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 2, -3f, new Item.Properties().durability(512).fireResistant()));
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 2, -3.25f, new Item.Properties().durability(512).fireResistant()));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
             new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));

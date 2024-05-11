@@ -25,7 +25,7 @@ public class WarHammer extends TieredItem {
     private static final int knockbackStrength = 1;
     private boolean isCharged = true;
     private int cooldownTicks = 0;
-    private static final int COOLDOWN_DURATION = 20;
+    private static final int COOLDOWN_DURATION = 25;
 
     public WarHammer(Tier tier, int damage, float speed, Properties properties) {
         super(tier, properties.attributes(createAttributes(tier, damage, speed)));
@@ -56,13 +56,17 @@ public class WarHammer extends TieredItem {
             List<LivingEntity> entities = world.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(3));
             int affectedEntities = 0;
 
-            for (LivingEntity entity : entities) {
-                if (entity != target && affectedEntities < 3) {
-                    applyKnockbackToNearbyEntities(player, entity, knockbackStrength);
-                    world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.MACE_SMASH_GROUND, SoundSource.PLAYERS, 1.0f, 1.0f);
-                    affectedEntities++;
+            if (target.isAlive()) {
+                for (LivingEntity entity : entities) {
+                    if (entity != target && affectedEntities < 3) {
+                        applyKnockbackToNearbyEntities(player, entity, knockbackStrength);
+                        affectedEntities++;
+                    }
                 }
             }
+
+            world.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.MACE_SMASH_GROUND, SoundSource.PLAYERS, 1.0f, 1.0f);
+
             isCharged = false;
             cooldownTicks = COOLDOWN_DURATION;
         }
