@@ -1,34 +1,37 @@
 package org.lithereal.item.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import org.lithereal.item.ModItems;
 
 import java.util.List;
+import java.util.function.Predicate;
 
-import static org.lithereal.LitherealExpectPlatform.applyKnockbackToNearbyEntities;
-
-public class WarHammer extends TieredItem {
-    private static final int knockbackStrength = 1;
-    private boolean isCharged = true;
-    private int cooldownTicks = 0;
-    private static final int COOLDOWN_DURATION = 25;
+public class WarHammer extends Item {
 
     public WarHammer(Tier tier, int damage, float speed, Properties properties) {
-        super(tier, properties.attributes(createAttributes(tier, damage, speed)));
+        super(properties.attributes(createAttributes(tier, damage, speed)));
     }
 
     public static ItemAttributeModifiers createAttributes(Tier tier, float damage, float speed) {
@@ -38,7 +41,10 @@ public class WarHammer extends TieredItem {
                 .build();
     }
 
-    @Override
+    public static Tool createToolProperties() {
+        return new Tool(List.of(), 1.0F, 2);
+    }
+
     public boolean canAttackBlock(BlockState blockState, Level level, BlockPos blockPos, Player player) {
         return !player.isCreative();
     }
@@ -47,43 +53,81 @@ public class WarHammer extends TieredItem {
         return 15;
     }
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        Level world = attacker.getCommandSenderWorld();
-
-        if (attacker instanceof Player player && isCharged && cooldownTicks == 0 && !player.isSprinting() && !player.isCrouching() && !player.onGround()) {
-            List<LivingEntity> entities = world.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(3));
-            int affectedEntities = 0;
-
-            if (target.isAlive()) {
-                for (LivingEntity entity : entities) {
-                    if (entity != target && affectedEntities < 3) {
-                        applyKnockbackToNearbyEntities(player, entity, knockbackStrength);
-                        affectedEntities++;
-                    }
+    public boolean hurtEnemy(ItemStack itemStack, LivingEntity livingEntity, LivingEntity livingEntity2) {
+        itemStack.hurtAndBreak(1, livingEntity2, EquipmentSlot.MAINHAND);
+        if (livingEntity2 instanceof ServerPlayer serverPlayer) {
+            if (canSmashAttack(serverPlayer)) {
+                ServerLevel serverLevel = (ServerLevel)livingEntity2.level();
+                serverPlayer.currentImpulseImpactPos = serverPlayer.position();
+                serverPlayer.ignoreFallDamageFromCurrentImpulse = false;
+                serverPlayer.setDeltaMovement(serverPlayer.getDeltaMovement().with(Axis.Y, 0.009999999776482582));
+                serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(serverPlayer));
+                if (livingEntity.onGround()) {
+                    serverPlayer.setSpawnExtraParticlesOnFall(true);
+                    SoundEvent soundEvent = SoundEvents.MACE_SMASH_GROUND;
+                    serverLevel.playSound((Player)null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), soundEvent, serverPlayer.getSoundSource(), 1.0F, 1.0F);
                 }
+
+                knockback(serverLevel, serverPlayer, livingEntity);
+                return true;
             }
-
-            world.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.MACE_SMASH_GROUND, SoundSource.PLAYERS, 1.0f, 1.0f);
-
-            isCharged = false;
-            cooldownTicks = COOLDOWN_DURATION;
         }
-        return true;
+
+        return false;
     }
 
+    public boolean isValidRepairItem(ItemStack itemStack, ItemStack itemStack2) {
+        return itemStack2.is(ModItems.MYSTERIOUS_ROD);
+    }
 
-    @Override
-    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean isSelected) {
-        super.inventoryTick(stack, world, entity, slot, isSelected);
+    public float getAttackDamageBonus(Player player, float f) {
+        return canSmashAttack(player) ? f * 2.0F : 0.0F;
+    }
 
-        if (cooldownTicks > 0) {
-            cooldownTicks--;
-        }
+    private static void knockback(Level level, Player player, Entity entity) {
+        level.levelEvent(2013, entity.getOnPos(), 750);
+        level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.5), knockbackPredicate(player, entity)).forEach((livingEntity) -> {
+            Vec3 vec3 = livingEntity.position().subtract(entity.position());
+            double d = getKnockbackPower(player, livingEntity, vec3);
+            Vec3 vec32 = vec3.normalize().scale(d);
+            if (d > 0.0) {
+                livingEntity.push(vec32.x, 0.34999999404, vec32.z);
+            }
 
-        if (cooldownTicks == 0 && !isCharged) {
-            isCharged = true;
-        }
+        });
+    }
+
+    private static Predicate<LivingEntity> knockbackPredicate(Player player, Entity entity) {
+        return (livingEntity) -> {
+            boolean var10000;
+            boolean bl;
+            boolean bl2;
+            boolean bl3;
+            label44: {
+                bl = !livingEntity.isSpectator();
+                bl2 = livingEntity != player && livingEntity != entity;
+                bl3 = !player.isAlliedTo(livingEntity);
+                if (livingEntity instanceof ArmorStand armorStand) {
+                    if (armorStand.isMarker()) {
+                        var10000 = false;
+                        break label44;
+                    }
+                }
+
+                var10000 = true;
+            }
+
+            boolean bl4 = var10000;
+            boolean bl5 = entity.distanceToSqr(livingEntity) <= Math.pow(3.5, 2.0);
+            return bl && bl2 && bl3 && bl4 && bl5;
+        };
+    }
+
+    private static double getKnockbackPower(Player player, LivingEntity livingEntity, Vec3 vec3) {
+        return (3.5 - vec3.length()) * 0.34999999404 * (double)(player.fallDistance >= 0.1F ? 2 : 1) * (1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+    }
+
+    public static boolean canSmashAttack(Player player) {
+        return player.fallDistance >= 0.1F && !player.isFallFlying() && !player.onGround();
     }
 }

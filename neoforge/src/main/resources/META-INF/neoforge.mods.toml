@@ -15,7 +15,7 @@ version = "${version}"
 displayName = "Lithereal"
 authors = "Light, Stunf, Alexandra"
 description = '''
-Lithereal is a mod about mysterious metals and crystals with magical properties that can upgrade your gear to the next level.
+A mod about infusing crystals with different magical powers.
 '''
 #logoFile = ""
 
@@ -36,6 +36,6 @@ side = "BOTH"
 [[dependencies.lithereal]]
 modId = "architectury"
 mandatory = true
-versionRange = "[12.0.27,)"
+versionRange = "[12.0.28,)"
 ordering = "AFTER"
 side = "BOTH"
