@@ -59,7 +59,6 @@ public class WarHammer extends Item {
             if (canSmashAttack(serverPlayer)) {
                 ServerLevel serverLevel = (ServerLevel)livingEntity2.level();
                 serverPlayer.currentImpulseImpactPos = serverPlayer.position();
-                serverPlayer.ignoreFallDamageFromCurrentImpulse = false;
                 serverPlayer.setDeltaMovement(serverPlayer.getDeltaMovement().with(Axis.Y, 0.009999999776482582));
                 serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(serverPlayer));
                 if (livingEntity.onGround()) {
