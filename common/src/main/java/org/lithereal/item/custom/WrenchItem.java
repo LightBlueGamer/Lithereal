@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
+import org.lithereal.block.custom.LitherealVaultBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,7 @@ public class WrenchItem extends Item {
 
                 world.setBlock(pos, newState, 11);
                 world.playSound(player, pos, soundType.getPlaceSound(), SoundSource.BLOCKS, 1.0f, world.random.nextFloat() * 0.4f + 0.8f);
+                world.playSound(player, pos, SoundType.METAL.getPlaceSound(), SoundSource.BLOCKS, 1.0f, world.random.nextFloat() * 0.4f + 0.8f);
 
                 if(player != null) {
                     context.getItemInHand().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
@@ -73,6 +75,10 @@ public class WrenchItem extends Item {
 
         if(block instanceof BedBlock
                 || block instanceof PistonHeadBlock) {
+            return false;
+        }
+
+        if (block instanceof LitherealVaultBlock) {
             return false;
         }
 
