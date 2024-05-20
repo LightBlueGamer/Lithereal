@@ -15,9 +15,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
@@ -28,10 +28,10 @@ import org.lithereal.item.ModItems;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class WarHammer extends Item {
+public class WarHammer extends TieredItem {
 
     public WarHammer(Tier tier, int damage, float speed, Properties properties) {
-        super(properties.attributes(createAttributes(tier, damage, speed)));
+        super(tier, properties.attributes(createAttributes(tier, damage, speed)));
     }
 
     public static ItemAttributeModifiers createAttributes(Tier tier, float damage, float speed) {

@@ -15,6 +15,7 @@ import org.lithereal.item.custom.burning.*;
 import org.lithereal.item.custom.infused.*;
 import org.lithereal.item.custom.obscured.MysteriousItem;
 import org.lithereal.item.tag.ModTags;
+import org.lithereal.sound.ModSounds;
 
 import static dev.architectury.platform.Platform.isModLoaded;
 import static org.lithereal.item.custom.Ability.*;
@@ -229,6 +230,9 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> LITHEREAL_KEY = ITEMS.register("lithereal_key", () ->
             new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = ITEMS.register("music_disc_sparkle", () ->
+            new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 2960));
 
     public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
             new MysteriousItem(new Item.Properties()));
