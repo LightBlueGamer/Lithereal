@@ -22,7 +22,7 @@ public class ForgeBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(BuiltInRegistries.BLOCK, Lithereal.MOD_ID);
 
-    public static final DeferredHolder<Block, InfusedLitheriteBlock> INFUSED_LITHERITE_BLOCK = registerColouredBlock("infused_litherite_block",
+    public static final DeferredHolder<Block, InfusedLitheriteBlock> INFUSED_LITHERITE_BLOCK = registerColoredBlock("infused_litherite_block",
             () -> new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
@@ -38,13 +38,13 @@ public class ForgeBlocks {
             () -> new ForgeInfusementChamberBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
 
-    private static <T extends Block> DeferredHolder<Block, T> registerColouredBlock(String name, Supplier<T> block) {
+    private static <T extends Block> DeferredHolder<Block, T> registerColoredBlock(String name, Supplier<T> block) {
         DeferredHolder<Block, T> toReturn = BLOCKS.register(name, block);
-        registerColouredBlockItem(name, toReturn);
+        registerColoredBlockItem(name, toReturn);
         return toReturn;
     }
 
-    private static <T extends Block> DeferredHolder<Item, ForgeInfusedLitheriteBlockItem> registerColouredBlockItem(String name, DeferredHolder<Block, T> block) {
+    private static <T extends Block> DeferredHolder<Item, ForgeInfusedLitheriteBlockItem> registerColoredBlockItem(String name, DeferredHolder<Block, T> block) {
         return ForgeItems.ITEMS.register(name, () -> new ForgeInfusedLitheriteBlockItem(block.get(),
                 new Item.Properties()));
     }

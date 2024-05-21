@@ -1,10 +1,11 @@
 {
   "display": {
     "icon": {
-      "id": "lithereal:litherite_crystal"
+      "id": "lithereal:litherite_crystal",
+      "count": 1
     },
     "title": "Lithereal",
-    "description": "A mod about infusing crystals with different magical powers",
+    "description": "A mod about mysterious metals and crystals with magical properties",
     "background": "lithereal:textures/block/etherstone.png",
     "frame": "task",
     "show_toast": false,

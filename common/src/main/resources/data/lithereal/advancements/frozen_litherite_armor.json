@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "id": "lithereal:frozen_litherite_boots",
+      "count": 1
+    },
+    "title": "Fighting Freeze",
+    "description": "Step on Powder Snow with Frozen Litherite armor",
+    "frame": "task"
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:tick",
+      "conditions": {
+        "player": {
+          "stepping_on": {
+            "block": {
+              "blocks": "minecraft:powder_snow"
+            }
+          },
+          "equipment": {
+            "head": {
+              "items": "lithereal:frozen_litherite_helmet"
+            },
+            "chest": {
+              "items": "lithereal:frozen_litherite_chestplate"
+            },
+            "legs": {
+              "items": "lithereal:frozen_litherite_leggings"
+            },
+            "feet": {
+              "items": "lithereal:frozen_litherite_boots"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}

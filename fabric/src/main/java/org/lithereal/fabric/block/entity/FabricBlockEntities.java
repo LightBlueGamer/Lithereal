@@ -30,15 +30,15 @@ public class FabricBlockEntities {
                     BlockEntityType.Builder.of(FabricInfusementChamberBlockEntity::new,
                             FabricBlocks.INFUSEMENT_CHAMBER_BLOCK).build());
 
-    public static final BlockEntityType<FabricLitherCollectorBlockEntity> LITHER_COLLECTOR_BLOCK_ENTITY =
-            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "lither_collector_block_entity"),
-                    BlockEntityType.Builder.of(FabricLitherCollectorBlockEntity::new,
-                            FabricBlocks.LITHER_COLLECTOR_BLOCK).build());
+    public static final BlockEntityType<FabricEtherBatteryBlockEntity> ETHER_BATTERY_BLOCK_ENTITY =
+            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "ether_battery_block_entity"),
+                    BlockEntityType.Builder.of(FabricEtherBatteryBlockEntity::new,
+                            FabricBlocks.ETHER_BATTERY_BLOCK).build());
 
-    public static final BlockEntityType<FabricLitherBatteryBlockEntity> LITHER_BATTERY_BLOCK_ENTITY =
-            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "lither_battery_block_entity"),
-                    BlockEntityType.Builder.of(FabricLitherBatteryBlockEntity::new,
-                            FabricBlocks.LITHER_BATTERY_BLOCK).build());
+    public static final BlockEntityType<FabricEtherCollectorBlockEntity> ETHER_COLLECTOR_BLOCK_ENTITY =
+            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Lithereal.MOD_ID, "ether_collector_block_entity"),
+                    BlockEntityType.Builder.of(FabricEtherCollectorBlockEntity::new,
+                            FabricBlocks.ETHER_COLLECTOR_BLOCK).build());
 
     @SuppressWarnings("EmptyMethod")
     public static void registerBlockEntities() {

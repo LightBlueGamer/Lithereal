@@ -28,11 +28,11 @@ public class FabricBlocks {
     public static final Block INFUSEMENT_CHAMBER_BLOCK = registerBlock("infusement_chamber",
             new FabricInfusementChamberBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
-    public static final Block LITHER_COLLECTOR_BLOCK = registerBlock("lither_collector",
-            new FabricLitherCollectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+    public static final Block ETHER_BATTERY_BLOCK = registerBlock("ether_battery",
+            new FabricEtherBatteryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
-    public static final Block LITHER_BATTERY_BLOCK = registerBlock("lither_battery",
-            new FabricLitherBatteryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+    public static final Block ETHER_COLLECTOR_BLOCK = registerBlock("ether_collector",
+            new FabricEtherCollectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

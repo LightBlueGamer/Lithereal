@@ -15,6 +15,7 @@ import org.lithereal.item.custom.burning.*;
 import org.lithereal.item.custom.infused.*;
 import org.lithereal.item.custom.obscured.MysteriousItem;
 import org.lithereal.item.tag.ModTags;
+import org.lithereal.sound.ModSounds;
 
 import static dev.architectury.platform.Platform.isModLoaded;
 import static org.lithereal.item.custom.Ability.*;
@@ -153,10 +154,10 @@ public class ModItems {
             createAbilityHammer(ENHANCED, ODYSIUM, 5, -3f, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
-            new BrushItem(new Item.Properties().stacksTo(1).durability(256)));
+            new BrushItem(new Item.Properties().durability(256)));
 
     public static final RegistrySupplier<Item> LITHERITE_WRENCH = ITEMS.register("litherite_wrench", () ->
-            new Wrench(new Item.Properties().stacksTo(1).durability(128)));
+            new WrenchItem(new Item.Properties().stacksTo(1).durability(128)));
 
     public static final RegistrySupplier<Item> LITHERITE_HELMET = ITEMS.register("litherite_helmet", () ->
             new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(25))));
@@ -230,11 +231,14 @@ public class ModItems {
     public static final RegistrySupplier<Item> LITHEREAL_KEY = ITEMS.register("lithereal_key", () ->
             new Item(new Item.Properties()));
 
+    public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = ITEMS.register("music_disc_sparkle", () ->
+            new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 2960));
+
     public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
             new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 2, -3f, new Item.Properties().durability(512).fireResistant()));
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 2, -3.25f, new Item.Properties().durability(512).fireResistant()));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
             new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
