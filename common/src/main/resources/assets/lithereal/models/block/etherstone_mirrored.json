@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_mirrored",
-  "textures": {
-    "end": "lithereal:block/etherstone_top",
-    "side": "lithereal:block/etherstone"
-  }
-}

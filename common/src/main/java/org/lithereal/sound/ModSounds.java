@@ -9,7 +9,7 @@ public class ModSounds {
 
     public static final SoundEvent MUSIC_DISC_SPARKLE = register();
     private static SoundEvent register() {
-        return register(new ResourceLocation("music_disc_sparkle"));
+        return register(new ResourceLocation("lithereal", "music_disc_sparkle"));
     }
 
     private static SoundEvent register(ResourceLocation resourceLocation) {

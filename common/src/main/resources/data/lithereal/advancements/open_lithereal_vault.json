@@ -4,12 +4,9 @@
       "id": "lithereal:lithereal_key",
       "count": 1
     },
-    "title": {
-      "text": "The Vaultening"
-    },
-    "description": {
-      "text": "Unlock a Lithereal Vault with a Lithereal Key"
-    }
+    "title": "The Vaultening",
+    "description": "Unlock a Lithereal Vault with a Lithereal Key",
+    "frame": "goal"
   },
   "parent": "lithereal:lithereal",
   "criteria": {

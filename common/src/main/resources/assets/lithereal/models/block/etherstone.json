@@ -1,7 +1,6 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "end": "lithereal:block/etherstone_top",
-    "side": "lithereal:block/etherstone"
+    "all": "lithereal:block/etherstone"
   }
 }

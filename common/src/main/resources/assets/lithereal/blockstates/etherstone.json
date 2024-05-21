@@ -1,62 +1,7 @@
 {
   "variants": {
-    "axis=x": [
-      {
-        "model": "lithereal:block/etherstone",
-        "x": 90,
-        "y": 90
-      },
-      {
-        "model": "lithereal:block/etherstone_mirrored",
-        "x": 90,
-        "y": 90
-      },
-      {
-        "model": "lithereal:block/etherstone",
-        "x": 90,
-        "y": 90
-      },
-      {
-        "model": "lithereal:block/etherstone_mirrored",
-        "x": 90,
-        "y": 90
-      }
-    ],
-    "axis=y": [
-      {
-        "model": "lithereal:block/etherstone"
-      },
-      {
-        "model": "lithereal:block/etherstone_mirrored"
-      },
-      {
-        "model": "lithereal:block/etherstone",
-        "y": 180
-      },
-      {
-        "model": "lithereal:block/etherstone_mirrored",
-        "y": 180
-      }
-    ],
-    "axis=z": [
-      {
-        "model": "lithereal:block/etherstone",
-        "x": 90
-      },
-      {
-        "model": "litherealv:block/etherstone_mirrored",
-        "x": 90
-      },
-      {
-        "model": "lithereal:block/etherstone",
-        "x": 90,
-        "y": 180
-      },
-      {
-        "model": "lithereal:block/etherstone_mirrored",
-        "x": 90,
-        "y": 180
-      }
-    ]
+    "": {
+      "model": "lithereal:block/etherstone"
+    }
   }
 }

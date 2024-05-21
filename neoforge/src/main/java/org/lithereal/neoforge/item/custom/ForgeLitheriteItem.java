@@ -61,7 +61,7 @@ public class ForgeLitheriteItem extends LitheriteItem {
     private void spawnWitherSkeleton(Level level, double x, double y, double z) {
         WitherSkeleton skeleton = EntityType.WITHER_SKELETON.create(level);
         skeleton.setPos(x, y, z);
-        if(level instanceof ServerLevel sLevel) EventHooks.onFinalizeSpawn(skeleton, sLevel, level.getCurrentDifficultyAt(skeleton.blockPosition()), MobSpawnType.MOB_SUMMONED, null);
+        if(level instanceof ServerLevel sLevel) EventHooks.finalizeMobSpawn(skeleton, sLevel, level.getCurrentDifficultyAt(skeleton.blockPosition()), MobSpawnType.MOB_SUMMONED, null);
         level.addFreshEntity(skeleton);
     }
 }

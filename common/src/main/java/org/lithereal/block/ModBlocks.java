@@ -49,13 +49,13 @@ public class ModBlocks {
             () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
 
     public static final RegistrySupplier<Block> SCORCHED_NETHERRACK = registerBlock("scorched_netherrack",
-            () -> new MagmaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK)));
+            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK)));
 
     public static final RegistrySupplier<Block> SCORCHED_CRIMSON_NYLIUM = registerBlock("scorched_crimson_nylium",
-            () -> new MagmaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM)));
+            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM)));
 
     public static final RegistrySupplier<Block> SCORCHED_WARPED_NYLIUM = registerBlock("scorched_warped_nylium",
-            () -> new MagmaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM)));
+            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM)));
 
     public static final RegistrySupplier<Block> ETHERSTONE = registerBlock("etherstone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE)));
