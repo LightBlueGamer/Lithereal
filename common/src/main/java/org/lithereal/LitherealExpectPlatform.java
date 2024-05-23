@@ -21,12 +21,12 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.*;
 import org.lithereal.item.custom.Ability;
-import org.lithereal.item.custom.Hammer;
+import org.lithereal.item.custom.HammerItem;
 import org.lithereal.item.custom.ModTier;
-import org.lithereal.item.custom.WarHammer;
-import org.lithereal.item.custom.ability.AbilityHammer;
-import org.lithereal.item.custom.burning.BurningLitheriteHammer;
-import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
+import org.lithereal.item.custom.WarHammerItem;
+import org.lithereal.item.custom.ability.AbilityHammerItem;
+import org.lithereal.item.custom.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.custom.infused.InfusedLitheriteHammerItem;
 import org.lithereal.screen.*;
 
 import java.nio.file.Path;
@@ -164,27 +164,27 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
-    public static Hammer createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static HammerItem createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static AbilityHammer createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
+    public static AbilityHammerItem createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static BurningLitheriteHammer createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static BurningLitheriteHammerItem createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static InfusedLitheriteHammer createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static InfusedLitheriteHammerItem createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static WarHammer createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static WarHammerItem createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
         throw new AssertionError();
     }
 

@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "id": "lithereal:burning_litherite_boots",
+      "count": 1
+    },
+    "title": "The Floor is Lava",
+    "description": "Prevent overheating in lava with Burning Litherite armor",
+    "frame": "task"
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:tick",
+      "conditions": {
+        "player": {
+          "stepping_on": {
+            "fluid": {
+              "fluids": "minecraft:lava"
+            }
+          },
+          "equipment": {
+            "head": {
+              "items": "lithereal:burning_litherite_helmet"
+            },
+            "chest": {
+              "items": "lithereal:burning_litherite_chestplate"
+            },
+            "legs": {
+              "items": "lithereal:burning_litherite_leggings"
+            },
+            "feet": {
+              "items": "lithereal:burning_litherite_boots"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}

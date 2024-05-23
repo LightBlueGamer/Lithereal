@@ -78,6 +78,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> CHISELED_ETHERSTONE_BRICKS = registerBlock("chiseled_etherstone_bricks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)));
 
+    public static final RegistrySupplier<Block> REINFORCED_ETHERSTONE = registerBlock("reinforced_etherstone",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.REINFORCED_DEEPSLATE)));
+
     public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "id": "lithereal:litherite_wrench",
+      "count": 1
+    },
+    "title": "You Spin Me Round",
+    "description": "Use a Litherite Wrench to rotate a block",
+    "frame": "task"
+  },
+  "parent": "lithereal:lithereal",
+  "criteria": {
+    "use_litherite_wrench": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {}
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "lithereal:litherite_wrench"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "use_litherite_wrench": [
+    [
+      "use_litherite_wrench"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

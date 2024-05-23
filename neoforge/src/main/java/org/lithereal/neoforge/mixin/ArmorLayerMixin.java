@@ -22,7 +22,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.armortrim.ArmorTrim;
 import net.neoforged.neoforge.client.ClientHooks;
 import org.lithereal.item.custom.ModArmorMaterials;
-import org.lithereal.item.custom.infused.InfusedLitheriteArmor;
+import org.lithereal.item.custom.infused.InfusedLitheriteArmorItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -58,7 +58,7 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
     public void injectPotionChanges(PoseStack poseStack, MultiBufferSource multiBufferSource, T t, EquipmentSlot equipmentSlot, int i, A a, CallbackInfo ci, @Local(ordinal = 0) Model model, @Local(ordinal = 0) ArmorMaterial.Layer armorMaterialLayer) {
         ItemStack itemStack = t.getItemBySlot(equipmentSlot);
         Item armorItem = itemStack.getItem();
-        if(armorItem instanceof InfusedLitheriteArmor infusedLitheriteArmorItem) {
+        if(armorItem instanceof InfusedLitheriteArmorItem infusedLitheriteArmorItem) {
             boolean flag = this.usesInnerModel(equipmentSlot);
             int c = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor();
             float r = (float)(c >> 16 & 255) / 255.0F;
@@ -79,7 +79,7 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
     private boolean armorHasCorrectEffect(Player player) {
         AtomicBoolean bl = new AtomicBoolean(false);
         for (ItemStack armorStack : player.getInventory().armor) {
-            if(!(armorStack.getItem() instanceof InfusedLitheriteArmor)) return false;
+            if(!(armorStack.getItem() instanceof InfusedLitheriteArmorItem)) return false;
             armorStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).forEachEffect(mobEffectInstance -> bl.set(bl.get() || mobEffectInstance.getEffect() == MobEffects.INVISIBILITY));
         }
         return bl.get();

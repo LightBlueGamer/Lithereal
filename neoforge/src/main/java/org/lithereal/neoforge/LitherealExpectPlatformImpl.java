@@ -27,12 +27,12 @@ import org.lithereal.block.custom.*;
 import org.lithereal.block.entity.EtherCollectorBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.item.custom.Ability;
-import org.lithereal.item.custom.Hammer;
+import org.lithereal.item.custom.HammerItem;
 import org.lithereal.item.custom.ModTier;
-import org.lithereal.item.custom.WarHammer;
-import org.lithereal.item.custom.ability.AbilityHammer;
-import org.lithereal.item.custom.burning.BurningLitheriteHammer;
-import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
+import org.lithereal.item.custom.WarHammerItem;
+import org.lithereal.item.custom.ability.AbilityHammerItem;
+import org.lithereal.item.custom.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.custom.infused.InfusedLitheriteHammerItem;
 import org.lithereal.neoforge.block.ForgeBlocks;
 import org.lithereal.neoforge.block.custom.ForgeInfusementChamberBlock;
 import org.lithereal.neoforge.block.entity.ForgeBlockEntities;
@@ -41,7 +41,7 @@ import org.lithereal.neoforge.block.entity.ForgeFreezingStationBlockEntity;
 import org.lithereal.neoforge.block.entity.ForgeInfusementChamberBlockEntity;
 import org.lithereal.neoforge.compat.CombatifyHooks;
 import org.lithereal.neoforge.item.ForgeItems;
-import org.lithereal.neoforge.item.custom.ForgeWarHammer;
+import org.lithereal.neoforge.item.custom.ForgeWarHammerItem;
 import org.lithereal.neoforge.screen.ForgeMenuTypes;
 import org.lithereal.screen.EtherCollectorMenu;
 import org.lithereal.screen.FireCrucibleMenu;
@@ -166,24 +166,24 @@ public class LitherealExpectPlatformImpl {
         }
     }
 
-    public static Hammer createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
-        return new Hammer(tier, damage, speed, properties);
+    public static HammerItem createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new HammerItem(tier, damage, speed, properties);
     }
 
-    public static AbilityHammer createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
-        return new AbilityHammer(ability, tier, damage, speed, properties);
+    public static AbilityHammerItem createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
+        return new AbilityHammerItem(ability, tier, damage, speed, properties);
     }
 
-    public static BurningLitheriteHammer createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
-        return new BurningLitheriteHammer(tier, damage, speed, properties);
+    public static BurningLitheriteHammerItem createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new BurningLitheriteHammerItem(tier, damage, speed, properties);
     }
 
-    public static InfusedLitheriteHammer createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
-        return new InfusedLitheriteHammer(tier, damage, speed, properties);
+    public static InfusedLitheriteHammerItem createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new InfusedLitheriteHammerItem(tier, damage, speed, properties);
     }
 
-    public static WarHammer createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
-        return new ForgeWarHammer(tier, damage, speed, properties);
+    public static WarHammerItem createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
+        return new ForgeWarHammerItem(tier, damage, speed, properties);
     }
 
     public static Item createLongsword(Tier tier, Item.Properties properties) {

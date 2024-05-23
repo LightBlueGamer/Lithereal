@@ -36,12 +36,12 @@ import org.lithereal.fabric.compat.CombatifyHooks;
 import org.lithereal.fabric.item.FabricItems;
 import org.lithereal.fabric.screen.*;
 import org.lithereal.item.custom.Ability;
-import org.lithereal.item.custom.Hammer;
+import org.lithereal.item.custom.HammerItem;
 import org.lithereal.item.custom.ModTier;
-import org.lithereal.item.custom.WarHammer;
-import org.lithereal.item.custom.ability.AbilityHammer;
-import org.lithereal.item.custom.burning.BurningLitheriteHammer;
-import org.lithereal.item.custom.infused.InfusedLitheriteHammer;
+import org.lithereal.item.custom.WarHammerItem;
+import org.lithereal.item.custom.ability.AbilityHammerItem;
+import org.lithereal.item.custom.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.custom.infused.InfusedLitheriteHammerItem;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -179,26 +179,26 @@ public class LitherealExpectPlatformImpl {
         }
     }
 
-    public static Hammer createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static HammerItem createHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
         return CombatifyHooks.createHammerWithType(tier, damage, speed, properties);
     }
 
-    public static AbilityHammer createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
+    public static AbilityHammerItem createAbilityHammerWithType(Ability ability, Tier tier, int damage, float speed, Item.Properties properties) {
         return CombatifyHooks.createAbilityHammerWithType(ability, tier, damage, speed, properties);
     }
 
-    public static BurningLitheriteHammer createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static BurningLitheriteHammerItem createBurningHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
         return CombatifyHooks.createBurningHammerWithType(tier, damage, speed, properties);
     }
 
-    public static InfusedLitheriteHammer createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static InfusedLitheriteHammerItem createInfusedHammerWithType(Tier tier, int damage, float speed, Item.Properties properties) {
         return CombatifyHooks.createInfusedHammerWithType(tier, damage, speed, properties);
     }
 
-    public static WarHammer createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
+    public static WarHammerItem createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
         if (FabricLoader.getInstance().isModLoaded("combatify"))
             return CombatifyHooks.createWarHammerWithType(tier, damage, speed, properties);
-        return new WarHammer(tier, damage, speed, properties);
+        return new WarHammerItem(tier, damage, speed, properties);
     }
 
     public static Item createLongsword(Tier tier, Item.Properties properties) {
