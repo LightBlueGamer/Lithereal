@@ -42,6 +42,6 @@ public class InfusedLitheriteHammerItem extends AbilityHammerItem implements Inf
 
     @Override
     public String getBaseName(ItemStack stack) {
-        return "Litherite HammerItem";
+        return "Litherite Hammer";
     }
 }
