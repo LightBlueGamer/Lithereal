@@ -84,9 +84,7 @@
               },
               "function": "minecraft:set_count"
             }
-          ],
-          "name": "lithereal:litherite_crystal",
-          "weight": 2
+          ]
         }
       ],
       "rolls": 1.0

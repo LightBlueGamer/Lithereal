@@ -110,7 +110,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         if (owner != null)
             owner.teleportTo(pos.x, pos.y + 0.01, pos.z);
     }
-    private void causeExplosion(Vec3 pos, float range, Level.ExplosionInteraction interaction, boolean teleport) {
+    public void causeExplosion(Vec3 pos, float range, Level.ExplosionInteraction interaction, boolean teleport) {
         this.level().explode(null, pos.x, pos.y, pos.z, range, interaction);
         if (teleport)
             teleportPlayerToExplosion(pos);

@@ -87,7 +87,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:glow_berries",
+          "name": "lithereal:lither_berry",
           "weight": 2
         },
         {

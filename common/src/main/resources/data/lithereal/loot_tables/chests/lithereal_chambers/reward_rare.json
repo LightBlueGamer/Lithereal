@@ -37,6 +37,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lithereal:litherite_crystal",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",

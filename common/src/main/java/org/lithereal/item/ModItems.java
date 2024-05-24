@@ -4,6 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
@@ -154,7 +155,7 @@ public class ModItems {
             createAbilityHammer(ENHANCED, ODYSIUM, 5, -3f, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
-            new BrushItem(new Item.Properties().durability(256)));
+            new LitheriteBrushItem(new Item.Properties().durability(256)));
 
     public static final RegistrySupplier<Item> LITHERITE_WRENCH = ITEMS.register("litherite_wrench", () ->
             new WrenchItem(new Item.Properties().stacksTo(1).durability(128)));
@@ -222,8 +223,11 @@ public class ModItems {
     public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
             new Item(new Item.Properties().stacksTo(1)));
 
+    public static final RegistrySupplier<Item> LITHER_BERRY = ITEMS.register("lither_berry", () ->
+            new LitherBerryItem(new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).build())));
+
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
-            new LitherCharge(new Item.Properties()));
+            new LitherChargeItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> LITHER_ROD = ITEMS.register("lither_rod", () ->
             new Item(new Item.Properties()));

@@ -13,8 +13,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.lithereal.entity.ThrownLitherCharge;
 
-public class LitherCharge extends Item {
-    public LitherCharge(Properties properties) {
+public class LitherChargeItem extends Item {
+    public LitherChargeItem(Properties properties) {
         super(properties);
     }
 
