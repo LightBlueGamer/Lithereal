@@ -6,6 +6,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.player.Player;
@@ -56,12 +58,17 @@ public class LitherBerryItem extends Item {
                 livingEntity.resetFallDistance();
             }
 
-            ThrownLitherCharge charge = new ThrownLitherCharge(level, livingEntity);
-            charge.causeExplosion(new Vec3(targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5), 3, Level.ExplosionInteraction.BLOCK, true);
-
             if (livingEntity instanceof Player) {
                 Player player = (Player)livingEntity;
-                player.getCooldowns().addCooldown(this, 10);
+                if (!player.getCooldowns().isOnCooldown(this)) {
+                    player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 4, false, false));
+                    player.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1, false, false));
+                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 0, false, false));
+                    player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 100, 0, false, false));
+                    ThrownLitherCharge charge = new ThrownLitherCharge(level, livingEntity);
+                    charge.causeExplosion(new Vec3(targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5), 3, Level.ExplosionInteraction.BLOCK, true);
+                }
+                player.getCooldowns().addCooldown(this, 100);
             }
         }
 

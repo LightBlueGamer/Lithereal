@@ -224,7 +224,7 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(1)));
 
     public static final RegistrySupplier<Item> LITHER_BERRY = ITEMS.register("lither_berry", () ->
-            new LitherBerryItem(new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).build())));
+            new LitherBerryItem(new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition((int) 5.5).saturationModifier((int) 6.5).build())));
 
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
             new LitherChargeItem(new Item.Properties()));
