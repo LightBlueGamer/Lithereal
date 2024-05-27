@@ -1,6 +1,8 @@
 package org.lithereal.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -51,6 +53,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
                     if (this.isInWater()) {
                         causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 5, Level.ExplosionInteraction.BLOCK, this.getOwner() != null && !this.getOwner().isSpectator());
+                        addEffects();
                         this.discard();
                         return;
                     }
@@ -59,6 +62,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                         if (this.getOwner() != null && !this.getOwner().isSpectator()) {
                             this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, 1, this.getOwner().getDeltaMovement().z);
                             causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, true);
+                            addEffects();
                         } else causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, false);
                     }
                 }
@@ -71,7 +75,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     else if (targetEntity instanceof LivingEntity target)
                         onHitEntity(target);
                     else
-                        causeExplosion(targetEntity.position(), 5, Level.ExplosionInteraction.NONE, true);
+                        causeExplosion(targetEntity.position(), 3, Level.ExplosionInteraction.NONE, true);
                 }
             }
 
@@ -81,7 +85,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
     private void onHitEntity(LivingEntity target) {
         if (!target.is(getOwner())) {
-            target.hurt(this.damageSources().thrown(this, getOwner()), 4);
+            target.hurt(this.damageSources().thrown(this, getOwner()), 8);
             if (target instanceof Player player && target.isBlocking()) {
                 player.getCooldowns().addCooldown(player.getUseItem().getItem(), 100);
                 player.stopUsingItem();
@@ -110,26 +114,20 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         if (owner != null)
             owner.teleportTo(pos.x, pos.y + 0.01, pos.z);
     }
+
     public void causeExplosion(Vec3 pos, float range, Level.ExplosionInteraction interaction, boolean teleport) {
         this.level().explode(null, pos.x, pos.y, pos.z, range, interaction);
         if (teleport)
             teleportPlayerToExplosion(pos);
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.onGround()) {
-            if (this.getOwner() != null)
-                getOwner().fallDistance = 0.0f;
-            this.discard();
-        } else {
-            if (this.getOwner() != null) {
-                Entity owner = this.getOwner();
-                if (owner.getY() < this.getY()) {
-                    owner.fallDistance = 0.0f;
-                }
-            }
+    private void addEffects() {
+        if (this.getOwner() instanceof Player) {
+            Player player = (Player) this.getOwner();
+
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 4, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0, false, false));
         }
     }
 }

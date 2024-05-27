@@ -26,7 +26,7 @@ public class LitherChargeItem extends Item {
         }
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
-        player.getCooldowns().addCooldown(this, 20);
+        player.getCooldowns().addCooldown(this, 60);
         if (!level.isClientSide) {
             ThrownLitherCharge thrownLitherCharge = new ThrownLitherCharge(level, player);
             thrownLitherCharge.setItem(itemStack);

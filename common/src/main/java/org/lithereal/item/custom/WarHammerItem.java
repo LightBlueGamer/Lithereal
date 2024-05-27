@@ -80,7 +80,7 @@ public class WarHammerItem extends TieredItem {
     }
 
     public float getAttackDamageBonus(Player player, float f) {
-        return canSmashAttack(player) ? f * 2.0F : 0.0F;
+        return canSmashAttack(player) ? f * 2.5F : 0.0F;
     }
 
     private static void knockback(Level level, Player player, Entity entity) {
@@ -90,7 +90,7 @@ public class WarHammerItem extends TieredItem {
             double d = getKnockbackPower(player, livingEntity, vec3);
             Vec3 vec32 = vec3.normalize().scale(d);
             if (d > 0.0) {
-                livingEntity.push(vec32.x, 0.34999999404, vec32.z);
+                livingEntity.push(vec32.x, 0.52499999105, vec32.z);
             }
 
         });
@@ -123,7 +123,7 @@ public class WarHammerItem extends TieredItem {
     }
 
     private static double getKnockbackPower(Player player, LivingEntity livingEntity, Vec3 vec3) {
-        return (3.5 - vec3.length()) * 0.34999999404 * (double)(player.fallDistance >= 0.1F ? 2 : 1) * (1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+        return (3.5 - vec3.length()) * 0.52499999105 * (double)(player.fallDistance >= 0.1F ? 2 : 1) * (1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
     }
 
     public static boolean canSmashAttack(Player player) {

@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/brush",
   "textures": {
     "layer0": "lithereal:item/litherite_brush"
   },

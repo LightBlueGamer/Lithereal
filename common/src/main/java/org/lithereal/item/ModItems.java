@@ -4,7 +4,6 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
@@ -43,8 +42,8 @@ public class ModItems {
     public static final RegistrySupplier<Item> CHARGED_LITHERITE_CRYSTAL = ITEMS.register("charged_litherite_crystal", () ->
             new Item(new Item.Properties()));
 
-    public static final Tier LITHERITE = ModTier.create("litherite", 5, 2701, 11.0F, 5.0F, 20, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_LITHERITE_TOOL);
-    public static final Tier ODYSIUM = ModTier.create("odysium", 6, 3271, 13.0F, 6.0F, 30, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
+    public static final Tier LITHERITE = ModTier.create("litherite", 5, 1791, 11.0F, 4.0F, 20, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_LITHERITE_TOOL);
+    public static final Tier ODYSIUM = ModTier.create("odysium", 6, 2431, 13.0F, 5.0F, 30, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
 
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->
             new SwordItem(LITHERITE, new Item.Properties().attributes(SwordItem.createAttributes(LITHERITE, 3, -2.4f))));
@@ -223,9 +222,6 @@ public class ModItems {
     public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
             new Item(new Item.Properties().stacksTo(1)));
 
-    public static final RegistrySupplier<Item> LITHER_BERRY = ITEMS.register("lither_berry", () ->
-            new LitherBerryItem(new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition((int) 5.5).saturationModifier((int) 6.5).build())));
-
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
             new LitherChargeItem(new Item.Properties()));
 
@@ -242,7 +238,7 @@ public class ModItems {
             new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 2, -3.25f, new Item.Properties().durability(512).fireResistant()));
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.5f, new Item.Properties().durability(512).fireResistant()));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
             new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
