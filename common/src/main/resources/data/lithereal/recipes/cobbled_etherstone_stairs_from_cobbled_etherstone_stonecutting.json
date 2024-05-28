@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "lithereal:cobbled_etherstone"
+  },
+  "result": {
+    "id": "lithereal:cobbled_etherstone_stairs"
+  }
+}

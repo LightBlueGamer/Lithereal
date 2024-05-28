@@ -81,7 +81,8 @@
                 "minecraft:punch",
                 "minecraft:smite",
                 "minecraft:looting",
-                "minecraft:multishot"
+                "minecraft:multishot",
+                "lithereal:heros_edge"
               ],
               "function": "minecraft:enchant_randomly"
             }
@@ -98,8 +99,7 @@
                 "minecraft:loyalty",
                 "minecraft:channeling",
                 "minecraft:impaling",
-                "minecraft:mending",
-                "lithereal:heros_edge"
+                "minecraft:mending"
               ],
               "function": "minecraft:enchant_randomly"
             }

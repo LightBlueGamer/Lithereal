@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "lithereal:cobbled_etherstone_slab",
     "lithereal:etherstone_brick_slab"
   ]
 }

@@ -5,6 +5,9 @@
   "block.lithereal.charging_station": "Charging Station",
   "block.lithereal.chiseled_etherstone": "Chiseled Etherstone",
   "block.lithereal.cobbled_etherstone": "Cobbled Etherstone",
+  "block.lithereal.cobbled_etherstone_slab": "Cobbled Etherstone Slab",
+  "block.lithereal.cobbled_etherstone_stairs": "Cobbled Etherstone Stairs",
+  "block.lithereal.cobbled_etherstone_wall": "Cobbled Etherstone Wall",
   "block.lithereal.deepslate_litherite_ore": "Deepslate Litherite Ore",
   "block.lithereal.electric_crucible": "Electric Crucible",
   "block.lithereal.ether_battery": "Ether Battery",
@@ -473,5 +476,6 @@
   "itemGroup.lithereal.lithereal.tab": "Lithereal",
   "key.category.lithereal.lithereal": "Lithereal",
   "key.lithereal.freeze_water": "Frost Walker",
-  "key.lithereal.scorch_ground": "Scorch Ground"
+  "key.lithereal.scorch_ground": "Scorch Ground",
+  "trim_material.lithereal.litherite": "Litherite Material"
 }

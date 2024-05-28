@@ -63,6 +63,15 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> COBBLED_ETHERSTONE = registerBlock("cobbled_etherstone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
 
+    public static final RegistrySupplier<Block> COBBLED_ETHERSTONE_STAIRS = registerBlock("cobbled_etherstone_stairs",
+            () -> new StairBlock(COBBLED_ETHERSTONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+
+    public static final RegistrySupplier<Block> COBBLED_ETHERSTONE_SLAB = registerBlock("cobbled_etherstone_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
+    public static final RegistrySupplier<Block> COBBLED_ETHERSTONE_WALL = registerBlock("cobbled_etherstone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICK_SLAB)));
+
     public static final RegistrySupplier<Block> CHISELED_ETHERSTONE = registerBlock("chiseled_etherstone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_DEEPSLATE)));
 
