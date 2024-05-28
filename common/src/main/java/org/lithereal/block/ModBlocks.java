@@ -27,23 +27,23 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
+                    .strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
     public static final RegistrySupplier<Block> BURNING_LITHERITE_BLOCK = registerBlock("burning_litherite_block",
             () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
+                    .strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
 
     public static final RegistrySupplier<Block> FROZEN_LITHERITE_BLOCK = registerBlock("frozen_litherite_block",
             () -> new FrozenLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
+                    .strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
 
     public static final RegistrySupplier<Block> WITHERING_LITHERITE_BLOCK = registerBlock("withering_litherite_block",
             () -> new WitheringLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
+                    .strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
 
     public static final RegistrySupplier<Block> CHARGED_LITHERITE_BLOCK = registerBlock("charged_litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()), () -> new Item.Properties().fireResistant());
+                    .strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
 
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
             () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
@@ -63,6 +63,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> COBBLED_ETHERSTONE = registerBlock("cobbled_etherstone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
 
+    public static final RegistrySupplier<Block> CHISELED_ETHERSTONE = registerBlock("chiseled_etherstone",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_DEEPSLATE)));
+
     public static final RegistrySupplier<Block> ETHERSTONE_BRICKS = registerBlock("etherstone_bricks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)));
 
@@ -74,9 +77,6 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> ETHERSTONE_BRICK_WALL = registerBlock("etherstone_brick_wall",
             () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICK_WALL)));
-
-    public static final RegistrySupplier<Block> CHISELED_ETHERSTONE_BRICKS = registerBlock("chiseled_etherstone_bricks",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)));
 
     public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));

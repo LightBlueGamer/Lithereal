@@ -153,6 +153,12 @@ public class ModItems {
     public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ITEMS.register("odysium_hammer", () ->
             createAbilityHammer(ENHANCED, ODYSIUM, 5, -3f, new Item.Properties().fireResistant()));
 
+    public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
+            new MysteriousItem(new Item.Properties().fireResistant()));
+
+    public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.5f, new Item.Properties().durability(512).fireResistant()));
+
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
             new LitheriteBrushItem(new Item.Properties().durability(256)));
 
@@ -234,17 +240,11 @@ public class ModItems {
     public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = ITEMS.register("music_disc_sparkle", () ->
             new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 135));
 
-    public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
-            new MysteriousItem(new Item.Properties()));
-
-    public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.5f, new Item.Properties().durability(512).fireResistant()));
-
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
-            new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+            new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     public static final RegistrySupplier<Item> UNIFIER = ITEMS.register("unifier", () ->
-            new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+            new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     public static void register() {
         if (isModLoaded("combatify"))

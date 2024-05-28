@@ -40,7 +40,7 @@ public enum Ability {
         private static final Map<Holder<ArmorMaterial>, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
                 (new ImmutableMap.Builder<Holder<ArmorMaterial>, MobEffectInstance>())
                         .put(ModArmorMaterials.BURNING_LITHERITE,
-                                new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1)).build();
+                                new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0)).build();
         @Override
         public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
             if (attacked.isFreezing()) attacked.setTicksFrozen(0);

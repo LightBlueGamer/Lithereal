@@ -29,7 +29,7 @@ public abstract class FireCrucibleBlock extends BaseEntityBlock {
     public static final EnumProperty<FireCrucibleBlockEntity.HeatState> HEAT_STATE = EnumProperty.create("heat_state", FireCrucibleBlockEntity.HeatState.class);
 
     public FireCrucibleBlock(Properties properties) {
-        super(properties);
+        super(properties.sound(SoundType.STONE));
     }
 
     static {

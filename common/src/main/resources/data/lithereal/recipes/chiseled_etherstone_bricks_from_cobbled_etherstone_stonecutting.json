@@ -2,9 +2,9 @@
   "type": "minecraft:stonecutting",
   "count": 1,
   "ingredient": {
-    "item": "lithereal:etherstone_bricks"
+    "item": "lithereal:cobbled_etherstone"
   },
   "result": {
-    "id": "lithereal:chiseled_etherstone_bricks"
+    "id": "lithereal:chiseled_etherstone"
   }
 }

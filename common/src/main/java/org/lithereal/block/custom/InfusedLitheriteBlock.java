@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -27,7 +28,7 @@ import java.util.List;
 public class InfusedLitheriteBlock extends BaseEntityBlock {
     public static final MapCodec<InfusedLitheriteBlock> CODEC = simpleCodec(InfusedLitheriteBlock::new);
     public InfusedLitheriteBlock(Properties p_49795_) {
-        super(p_49795_);
+        super(p_49795_.sound(SoundType.METAL));
     }
 
     @Override

@@ -127,6 +127,6 @@ public class WarHammerItem extends TieredItem {
     }
 
     public static boolean canSmashAttack(Player player) {
-        return player.fallDistance >= 0.1F && !player.isFallFlying() && !player.onGround();
+        return player.fallDistance >= 0.1F && !player.isFallFlying() && !player.isSprinting();
     }
 }
