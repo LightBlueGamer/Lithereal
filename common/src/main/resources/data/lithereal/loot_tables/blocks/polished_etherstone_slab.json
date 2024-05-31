@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lithereal:polished_etherstone_stairs"
+          "name": "lithereal:polished_etherstone_slab"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/polished_etherstone_stairs"
+  "random_sequence": "lithereal:blocks/polished_etherstone_slab"
 }

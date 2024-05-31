@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "lithereal:cobbled_etherstone_stairs",
-    "lithereal:etherstone_brick_stairs"
+    "lithereal:etherstone_brick_stairs",
+    "lithereal:polished_etherstone_stairs"
   ]
 }
