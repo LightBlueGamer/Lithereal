@@ -47,23 +47,21 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     if (blockState.getBlock() instanceof TntBlock) {
                         level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
                         explode(level(), blockPos);
-                        this.discard();
-                        return;
-                    }
-
-                    if (this.isInWater()) {
-                        causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 5, Level.ExplosionInteraction.BLOCK, this.getOwner() != null && !this.getOwner().isSpectator());
+                    } else if (this.isInWater()) {
+                        causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, this.getOwner() != null && !this.getOwner().isSpectator());
                         addEffects();
-                        this.discard();
-                        return;
-                    }
-
-                    if (blockState.getBlock() != Blocks.AIR) {
+                    } else if (blockState.getBlock() != Blocks.AIR) {
                         if (this.getOwner() != null && !this.getOwner().isSpectator()) {
-                            this.getOwner().setDeltaMovement(this.getOwner().getDeltaMovement().x, 1, this.getOwner().getDeltaMovement().z);
-                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, true);
+                            float explosionRange = (blockState.getBlock() == Blocks.STONE ||
+                                    blockState.getBlock() == Blocks.DEEPSLATE ||
+                                    blockState.getBlock() == Blocks.END_STONE ||
+                                    blockState.getBlock() == Blocks.COBBLESTONE ||
+                                    blockState.getBlock() == Blocks.COBBLED_DEEPSLATE) ? 5 : 3;
+                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), explosionRange, Level.ExplosionInteraction.BLOCK, true);
                             addEffects();
-                        } else causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, false);
+                        } else {
+                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, false);
+                        }
                     }
                 }
                 case ENTITY -> {
@@ -85,7 +83,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
     private void onHitEntity(LivingEntity target) {
         if (!target.is(getOwner())) {
-            target.hurt(this.damageSources().thrown(this, getOwner()), 8);
+            target.hurt(this.damageSources().thrown(this, getOwner()), 12);
             if (target instanceof Player player && target.isBlocking()) {
                 player.getCooldowns().addCooldown(player.getUseItem().getItem(), 100);
                 player.stopUsingItem();
@@ -122,9 +120,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     }
 
     private void addEffects() {
-        if (this.getOwner() instanceof Player) {
-            Player player = (Player) this.getOwner();
-
+        if (this.getOwner() instanceof Player player) {
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 4, false, false));
             player.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1, false, false));
             player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0, false, false));
