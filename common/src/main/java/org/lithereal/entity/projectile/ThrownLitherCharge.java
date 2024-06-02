@@ -1,4 +1,4 @@
-package org.lithereal.entity;
+package org.lithereal.entity.projectile;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,6 +18,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModItems;
 
 import static net.minecraft.world.level.block.TntBlock.explode;
@@ -48,8 +49,8 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                         level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
                         explode(level(), blockPos);
                     } else if (this.isInWater()) {
-                        causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, this.getOwner() != null && !this.getOwner().isSpectator());
                         addEffects();
+                        causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, this.getOwner() != null && !this.getOwner().isSpectator());
                     } else if (blockState.getBlock() != Blocks.AIR) {
                         if (this.getOwner() != null && !this.getOwner().isSpectator()) {
                             float explosionRange = (blockState.getBlock() == Blocks.STONE ||
@@ -57,8 +58,8 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                                     blockState.getBlock() == Blocks.END_STONE ||
                                     blockState.getBlock() == Blocks.COBBLESTONE ||
                                     blockState.getBlock() == Blocks.COBBLED_DEEPSLATE) ? 5 : 3;
-                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), explosionRange, Level.ExplosionInteraction.BLOCK, true);
                             addEffects();
+                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), explosionRange, Level.ExplosionInteraction.BLOCK, true);
                         } else {
                             causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, false);
                         }

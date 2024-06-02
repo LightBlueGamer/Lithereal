@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import org.lithereal.Lithereal;
+import org.lithereal.entity.projectile.ThrownLitherCharge;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Lithereal.MOD_ID, Registries.ENTITY_TYPE);

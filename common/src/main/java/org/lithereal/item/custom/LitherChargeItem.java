@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
-import org.lithereal.entity.ThrownLitherCharge;
+import org.lithereal.entity.projectile.ThrownLitherCharge;
 
 public class LitherChargeItem extends Item {
 
