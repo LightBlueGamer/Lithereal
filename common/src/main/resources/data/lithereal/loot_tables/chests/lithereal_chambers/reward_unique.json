@@ -6,13 +6,27 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "minecraft:golden_apple",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:enchanted_golden_apple",
           "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "lithereal:music_disc_sparkle",
+          "name": "minecraft:bolt_armor_trim_smithing_template",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:guster_banner_pattern",
           "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lithereal:music_disc_sparkle"
         },
         {
           "type": "minecraft:item",

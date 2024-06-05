@@ -33,81 +33,89 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         super(ModEntities.LITHER_CHARGE.get(), arg2, arg);
     }
 
+    @Override
     protected Item getDefaultItem() {
         return ModItems.LITHER_CHARGE.get();
     }
 
+    @Override
     protected void onHit(HitResult hitResult) {
         if (!this.level().isClientSide) {
             switch (hitResult.getType()) {
-                case BLOCK -> {
-                    BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-                    BlockPos blockPos = blockHitResult.getBlockPos();
-                    BlockState blockState = this.level().getBlockState(blockPos);
-
-                    if (blockState.getBlock() instanceof TntBlock) {
-                        level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
-                        explode(level(), blockPos);
-                    } else if (this.isInWater()) {
-                        addEffects();
-                        causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, this.getOwner() != null && !this.getOwner().isSpectator());
-                    } else if (blockState.getBlock() != Blocks.AIR) {
-                        if (this.getOwner() != null && !this.getOwner().isSpectator()) {
-                            float explosionRange = (blockState.getBlock() == Blocks.STONE ||
-                                    blockState.getBlock() == Blocks.DEEPSLATE ||
-                                    blockState.getBlock() == Blocks.END_STONE ||
-                                    blockState.getBlock() == Blocks.COBBLESTONE ||
-                                    blockState.getBlock() == Blocks.COBBLED_DEEPSLATE) ? 5 : 3;
-                            addEffects();
-                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), explosionRange, Level.ExplosionInteraction.BLOCK, true);
-                        } else {
-                            causeExplosion(new Vec3(blockPos.getX(), blockPos.getY(), blockPos.getZ()), 3, Level.ExplosionInteraction.BLOCK, false);
-                        }
-                    }
-                }
-                case ENTITY -> {
-                    EntityHitResult entityHitResult = (EntityHitResult) hitResult;
-                    Entity targetEntity = entityHitResult.getEntity();
-
-                    if (targetEntity instanceof MinecartTNT tnt)
-                        tnt.primeFuse();
-                    else if (targetEntity instanceof LivingEntity target)
-                        onHitEntity(target);
-                    else
-                        causeExplosion(targetEntity.position(), 3, Level.ExplosionInteraction.NONE, true);
-                }
+                case BLOCK:
+                    handleBlockHit((BlockHitResult) hitResult);
+                    break;
+                case ENTITY:
+                    handleEntityHit((EntityHitResult) hitResult);
+                    break;
             }
-
             this.discard();
         }
     }
 
-    private void onHitEntity(LivingEntity target) {
-        if (!target.is(getOwner())) {
-            target.hurt(this.damageSources().thrown(this, getOwner()), 12);
-            if (target instanceof Player player && target.isBlocking()) {
-                player.getCooldowns().addCooldown(player.getUseItem().getItem(), 100);
-                player.stopUsingItem();
-                player.level().broadcastEntityEvent(player, (byte)30);
+    private void handleBlockHit(BlockHitResult blockHitResult) {
+        BlockPos blockPos = blockHitResult.getBlockPos();
+        BlockState blockState = this.level().getBlockState(blockPos);
+
+        if (blockState.getBlock() instanceof TntBlock) {
+            level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
+            explode(level(), blockPos);
+        } else if (this.isInWater()) {
+            addEffects();
+            causeExplosion(blockHitResult.getLocation(), 3, Level.ExplosionInteraction.BLOCK, shouldTeleport());
+        } else if (blockState.getBlock() != Blocks.AIR) {
+            if (this.getOwner() != null && !this.getOwner().isSpectator()) {
+                float explosionRange = (blockState.getBlock() == Blocks.STONE ||
+                        blockState.getBlock() == Blocks.DEEPSLATE ||
+                        blockState.getBlock() == Blocks.END_STONE ||
+                        blockState.getBlock() == Blocks.COBBLESTONE ||
+                        blockState.getBlock() == Blocks.COBBLED_DEEPSLATE) ? 5 : 3;
+                addEffects();
+                causeExplosion(blockHitResult.getLocation(), explosionRange, Level.ExplosionInteraction.BLOCK, true);
+            } else {
+                causeExplosion(blockHitResult.getLocation(), 3, Level.ExplosionInteraction.BLOCK, false);
             }
+        }
+    }
+
+    private void handleEntityHit(EntityHitResult entityHitResult) {
+        Entity targetEntity = entityHitResult.getEntity();
+
+        if (targetEntity instanceof MinecartTNT tnt)
+            tnt.primeFuse();
+        else if (targetEntity instanceof LivingEntity livingEntity)
+            handleLivingEntityHit(livingEntity);
+        else
+            causeExplosion(targetEntity.position(), 3, Level.ExplosionInteraction.NONE, true);
+    }
+
+    private void handleLivingEntityHit(LivingEntity livingEntity) {
+        if (!livingEntity.is(getOwner())) {
+            if (livingEntity instanceof Player player && player.isBlocking()) {
+                double distance = player.distanceTo(this);
+                if (distance <= 3) {
+                    return;
+                }
+            }
+            livingEntity.hurt(this.damageSources().thrown(this, getOwner()), 12);
 
             if (!this.level().isClientSide) {
-                causeExplosion(target.position(), 1, Level.ExplosionInteraction.NONE, false);
+                causeExplosion(livingEntity.position(), 1, Level.ExplosionInteraction.NONE, false);
 
-                double xDiff = target.getX() - this.getX();
-                double zDiff = target.getZ() - this.getZ();
+                double xDiff = livingEntity.getX() - this.getX();
+                double zDiff = livingEntity.getZ() - this.getZ();
                 double distance = Math.sqrt(xDiff * xDiff + zDiff * zDiff);
 
-                if (distance > 0) {
+                if (distance <= 3) {
                     double normalizedX = xDiff / distance;
                     double normalizedZ = zDiff / distance;
-                    target.push(normalizedX, 0.0, normalizedZ);
-
-                    target.setDeltaMovement(target.getDeltaMovement().x, 0.5, target.getDeltaMovement().z);
+                    livingEntity.push(normalizedX, 0.0, normalizedZ);
+                    livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().x, 0.5, livingEntity.getDeltaMovement().z);
                 }
             }
         }
     }
+
     private void teleportPlayerToExplosion(Vec3 pos) {
         Entity owner = getOwner();
         if (owner != null)
@@ -126,5 +134,9 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
             player.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1, false, false));
             player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0, false, false));
         }
+    }
+
+    private boolean shouldTeleport() {
+        return this.getOwner() != null && !this.getOwner().isSpectator();
     }
 }
