@@ -14,7 +14,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
 
-
 import java.util.List;
 
 public class ConfiguredFeatures {

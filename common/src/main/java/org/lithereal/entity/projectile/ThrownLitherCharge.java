@@ -8,6 +8,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.MinecartTNT;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -29,8 +31,8 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         super(entityType, level);
     }
 
-    public ThrownLitherCharge(Level arg, LivingEntity arg2) {
-        super(ModEntities.LITHER_CHARGE.get(), arg2, arg);
+    public ThrownLitherCharge(Level level, LivingEntity livingEntity) {
+        super(ModEntities.LITHER_CHARGE.get(), livingEntity, level);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
     @Override
     protected void onHit(HitResult hitResult) {
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             switch (hitResult.getType()) {
                 case BLOCK:
                     handleBlockHit((BlockHitResult) hitResult);
@@ -49,8 +51,8 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     handleEntityHit((EntityHitResult) hitResult);
                     break;
             }
-            this.discard();
         }
+        this.discard();
     }
 
     private void handleBlockHit(BlockHitResult blockHitResult) {
@@ -58,12 +60,12 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         BlockState blockState = this.level().getBlockState(blockPos);
 
         if (blockState.getBlock() instanceof TntBlock) {
-            level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
+            level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
             explode(level(), blockPos);
         } else if (this.isInWater()) {
             addEffects();
             causeExplosion(blockHitResult.getLocation(), 3, Level.ExplosionInteraction.BLOCK, shouldTeleport());
-        } else if (blockState.getBlock() != Blocks.AIR) {
+        } else if (!blockState.isAir()) {
             if (this.getOwner() != null && !this.getOwner().isSpectator()) {
                 float explosionRange = (blockState.getBlock() == Blocks.STONE ||
                         blockState.getBlock() == Blocks.DEEPSLATE ||
@@ -81,25 +83,27 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     private void handleEntityHit(EntityHitResult entityHitResult) {
         Entity targetEntity = entityHitResult.getEntity();
 
-        if (targetEntity instanceof MinecartTNT tnt)
-            tnt.primeFuse();
-        else if (targetEntity instanceof LivingEntity livingEntity)
-            handleLivingEntityHit(livingEntity);
-        else
-            causeExplosion(targetEntity.position(), 3, Level.ExplosionInteraction.NONE, true);
+        if (targetEntity instanceof MinecartTNT) {
+            ((MinecartTNT) targetEntity).primeFuse();
+        } else if (targetEntity instanceof LivingEntity) {
+            handleLivingEntityHit((LivingEntity) targetEntity);
+        } else if (targetEntity instanceof Boat || targetEntity instanceof AbstractMinecart) {
+            Vec3 targetPos = targetEntity.position();
+            causeExplosion(targetPos, 3, Level.ExplosionInteraction.NONE, false);
+        }
     }
 
     private void handleLivingEntityHit(LivingEntity livingEntity) {
-        if (!livingEntity.is(getOwner())) {
+        if (!livingEntity.is(this.getOwner())) {
             if (livingEntity instanceof Player player && player.isBlocking()) {
                 double distance = player.distanceTo(this);
                 if (distance <= 3) {
                     return;
                 }
             }
-            livingEntity.hurt(this.damageSources().thrown(this, getOwner()), 12);
+            livingEntity.hurt(this.damageSources().thrown(this, this.getOwner()), 12);
 
-            if (!this.level().isClientSide) {
+            if (!this.level().isClientSide()) {
                 causeExplosion(livingEntity.position(), 1, Level.ExplosionInteraction.NONE, false);
 
                 double xDiff = livingEntity.getX() - this.getX();
@@ -116,20 +120,20 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         }
     }
 
-    private void teleportPlayerToExplosion(Vec3 pos) {
-        Entity owner = getOwner();
-        if (owner != null)
-            owner.teleportTo(pos.x, pos.y + 0.01, pos.z);
-    }
-
     public void causeExplosion(Vec3 pos, float range, Level.ExplosionInteraction interaction, boolean teleport) {
         this.level().explode(null, pos.x, pos.y, pos.z, range, interaction);
-        if (teleport)
-            teleportPlayerToExplosion(pos);
+        if (teleport) {
+            Entity owner = this.getOwner();
+            if (owner instanceof Player) {
+                owner.teleportTo(pos.x, pos.y + 0.01, pos.z);
+            }
+        }
     }
 
     private void addEffects() {
-        if (this.getOwner() instanceof Player player) {
+        Entity owner = this.getOwner();
+        if (owner instanceof Player) {
+            Player player = (Player) owner;
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 4, false, false));
             player.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1, false, false));
             player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0, false, false));
@@ -137,6 +141,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     }
 
     private boolean shouldTeleport() {
-        return this.getOwner() != null && !this.getOwner().isSpectator();
+        Entity owner = this.getOwner();
+        return owner != null && !owner.isSpectator();
     }
 }

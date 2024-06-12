@@ -8,8 +8,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.neoforge.item.custom.ModExtendedTier;
 import org.lithereal.item.custom.Ability;
+import org.lithereal.neoforge.item.custom.ModExtendedTier;
 
 import java.util.function.Supplier;
 

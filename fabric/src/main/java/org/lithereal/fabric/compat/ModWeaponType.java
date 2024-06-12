@@ -3,7 +3,7 @@ package org.lithereal.fabric.compat;
 import net.atlas.combatify.Combatify;
 import net.atlas.combatify.item.WeaponType;
 
-import static net.atlas.combatify.item.WeaponType.*;
+import static net.atlas.combatify.item.WeaponType.createBasic;
 
 public class ModWeaponType {
     public static final WeaponType HAMMER = createBasic("hammer", 3.0, -0.75, 0.5);
