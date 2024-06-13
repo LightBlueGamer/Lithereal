@@ -96,6 +96,9 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
     private void handleLivingEntityHit(LivingEntity livingEntity) {
         if (!livingEntity.is(this.getOwner())) {
             if (livingEntity instanceof Player player && player.isBlocking()) {
+                player.getCooldowns().addCooldown(player.getUseItem().getItem(), 100);
+                player.stopUsingItem();
+                player.level().broadcastEntityEvent(player, (byte)30);
                 double distance = player.distanceTo(this);
                 if (distance <= 3) {
                     return;
