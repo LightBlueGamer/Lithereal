@@ -160,7 +160,7 @@ public class ModItems {
             new MysteriousItem(new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.25f, new Item.Properties().durability(512).fireResistant().rarity(Rarity.EPIC)));
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.4f, new Item.Properties().durability(500).fireResistant().rarity(Rarity.EPIC)));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
             new LitheriteBrushItem(new Item.Properties().durability(256)));

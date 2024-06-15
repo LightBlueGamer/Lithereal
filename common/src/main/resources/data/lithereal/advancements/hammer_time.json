@@ -5,27 +5,45 @@
       "count": 1
     },
     "title": "Hammer Time!",
-    "description": "Kill a mob or player using a War Hammer",
+    "description": "Deal 20 hearts of damage in a single hit using the War Hammer",
     "frame": "challenge"
   },
   "parent": "lithereal:lithereal",
   "criteria": {
-    "requirement": {
-      "trigger": "minecraft:player_killed_entity",
+    "hammer_time": {
+      "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "killing_blow": {
-          "source_entity": {
-            "equipment": {
-              "mainhand": {
-                "items": [
-                  "lithereal:war_hammer"
-                ]
+        "damage": {
+          "dealt": {
+            "min": 40
+          },
+          "type": {
+            "tags": [
+              {
+                "id": "minecraft:is_player_attack",
+                "expected": true
+              }
+            ],
+            "direct_entity": {
+              "type": "minecraft:player",
+              "equipment": {
+                "mainhand": {
+                  "items": "lithereal:war_hammer"
+                }
               }
             }
           }
         }
       }
     }
+  },
+  "requirements": [
+    [
+      "hammer_time"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
   },
   "sends_telemetry_event": true
 }

@@ -1,7 +1,6 @@
 package org.lithereal.item.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction.Axis;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -59,7 +58,6 @@ public class WarHammerItem extends TieredItem {
             if (canSmashAttack(serverPlayer)) {
                 ServerLevel serverLevel = (ServerLevel)livingEntity2.level();
                 serverPlayer.currentImpulseImpactPos = serverPlayer.position();
-                serverPlayer.setDeltaMovement(serverPlayer.getDeltaMovement().with(Axis.Y, 0.009999999776482582));
                 serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(serverPlayer));
                 if (livingEntity.onGround()) {
                     serverPlayer.setSpawnExtraParticlesOnFall(true);
@@ -87,7 +85,7 @@ public class WarHammerItem extends TieredItem {
         level.levelEvent(2013, entity.getOnPos(), 750);
         level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.5), knockbackPredicate(player, entity)).forEach((livingEntity) -> {
             Vec3 vec3 = livingEntity.position().subtract(entity.position());
-            double d = getKnockbackPower(livingEntity, vec3);
+            double d = getKnockbackPower(player, livingEntity, vec3);
             Vec3 vec32 = vec3.normalize().scale(d);
             if (d > 0.0) {
                 livingEntity.push(vec32.x, 0.52499999105, vec32.z);
@@ -122,11 +120,11 @@ public class WarHammerItem extends TieredItem {
         };
     }
 
-    private static double getKnockbackPower(LivingEntity livingEntity, Vec3 vec3) {
-        return (3.5 - vec3.length()) * 0.52499999105 * (1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+    private static double getKnockbackPower(Player player, LivingEntity livingEntity, Vec3 vec3) {
+        return (3.5 - vec3.length()) * 0.52499999105 * (double)(player.fallDistance >= 0.1F ? 2 : 1) * (1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
     }
 
     public static boolean canSmashAttack(Player player) {
-        return !player.onGround() && !player.isFallFlying();
+        return player.fallDistance >= 0.1F && !player.isFallFlying() && !player.isSprinting();
     }
 }

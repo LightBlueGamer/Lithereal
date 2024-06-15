@@ -195,7 +195,7 @@ public class WrenchItem extends Item {
                 world.playSound(player, pos, SoundType.METAL.getPlaceSound(), SoundSource.BLOCKS, 1.0f, world.random.nextFloat() * 0.4f + 0.8f);
 
                 if (player != null) {
-                    context.getItemInHand().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+                    context.getItemInHand().hurtAndBreak(20, player, EquipmentSlot.MAINHAND);
                 }
 
                 return InteractionResult.SUCCESS;
