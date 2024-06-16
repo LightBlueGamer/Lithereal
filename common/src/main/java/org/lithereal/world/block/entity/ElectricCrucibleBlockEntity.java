@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.screen.FireCrucibleMenu;
+import org.lithereal.client.gui.screens.inventory.FireCrucibleMenu;
 
 public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;

@@ -1,18 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#",
-    "/"
-  ],
+  "category": "equipment",
   "key": {
     "#": {
       "item": "minecraft:heavy_core"
     },
-    "/": {
+    "I": {
       "item": "lithereal:mysterious_rod"
     }
   },
+  "pattern": [
+    " # ",
+    " I "
+  ],
   "result": {
+    "count": 1,
     "id": "lithereal:war_hammer"
   }
 }

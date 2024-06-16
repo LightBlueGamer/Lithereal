@@ -19,7 +19,7 @@ import org.lithereal.world.block.entity.EtherCollectorBlockEntity;
 import org.lithereal.world.block.entity.IEnergyContainerProvider;
 import org.lithereal.world.block.entity.ImplementedInventory;
 import org.lithereal.fabric.world.item.FabricItems;
-import org.lithereal.fabric.screen.FabricEtherCollectorMenu;
+import org.lithereal.fabric.client.gui.screens.inventory.FabricEtherCollectorMenu;
 import org.lithereal.util.EtherEnergyContainer;
 
 public class FabricEtherCollectorBlockEntity extends EtherCollectorBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {

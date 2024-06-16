@@ -20,12 +20,12 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.lithereal.client.KeyMapping;
 import org.lithereal.util.CommonUtils;
-import org.lithereal.util.KeyBinding;
 import org.lithereal.world.block.ModBlocks;
-import org.lithereal.world.item.infused.InfusedItem;
 import org.lithereal.world.item.ModArmorMaterials;
 import org.lithereal.world.item.enchantment.ModEnchantments;
+import org.lithereal.world.item.infused.InfusedItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,7 +83,7 @@ public enum Ability {
                         }
                         Block blockBelow = level.getBlockState(player.blockPosition().below()).getBlock();
                         if(hasCorrectArmorOn(ModArmorMaterials.BURNING_LITHERITE, player)) {
-                            if(KeyBinding.SCORCH_KEY.isDown()) {
+                            if(KeyMapping.SCORCH_KEY.isDown()) {
                                 if (blockBelow == Blocks.NETHERRACK) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_NETHERRACK.get().defaultBlockState());
                                 else if (blockBelow == Blocks.CRIMSON_NYLIUM) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_CRIMSON_NYLIUM.get().defaultBlockState());
                                 else if (blockBelow == Blocks.WARPED_NYLIUM) level.setBlockAndUpdate(player.blockPosition().below(), ModBlocks.SCORCHED_WARPED_NYLIUM.get().defaultBlockState());
@@ -139,7 +139,7 @@ public enum Ability {
                         if(hasCorrectArmorOn(ModArmorMaterials.FROZEN_LITHERITE, player)) {
                             if (player.isFreezing())
                                 player.setTicksFrozen(0);
-                            if(KeyBinding.FREEZE_KEY.isDown()) {
+                            if(KeyMapping.FREEZE_KEY.isDown()) {
                                 for (int x = -4; x <= 4; x++) {
                                     for (int z = -4; z <= 4; z++) {
                                         BlockPos checkPos = player.blockPosition().offset(x, -1, z);

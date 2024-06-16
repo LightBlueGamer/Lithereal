@@ -8,7 +8,7 @@ import org.lithereal.neoforge.world.block.ForgeBlocks;
 import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
 import org.lithereal.neoforge.client.event.ClientEvents;
 import org.lithereal.neoforge.world.item.ForgeItems;
-import org.lithereal.neoforge.screen.ForgeMenuTypes;
+import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
 
 @Mod(Lithereal.MOD_ID)
 public class LitherealForge {

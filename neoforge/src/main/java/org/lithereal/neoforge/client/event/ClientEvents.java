@@ -16,10 +16,10 @@ import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityRenderer;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
-import org.lithereal.neoforge.screen.ForgeMenuTypes;
-import org.lithereal.screen.FireCrucibleScreen;
-import org.lithereal.screen.FreezingStationScreen;
-import org.lithereal.screen.InfusementChamberScreen;
+import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
+import org.lithereal.client.gui.screens.inventory.FireCrucibleScreen;
+import org.lithereal.client.gui.screens.inventory.FreezingStationScreen;
+import org.lithereal.client.gui.screens.inventory.InfusementChamberScreen;
 
 public class ClientEvents {
     public static class ClientModBusEvents {

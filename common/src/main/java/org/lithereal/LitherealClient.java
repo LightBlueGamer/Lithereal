@@ -17,17 +17,17 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import org.lithereal.world.block.ModBlocks;
+import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
+import org.lithereal.util.ModBlockColors;
+import org.lithereal.util.ModItemColors;
+import org.lithereal.world.block.ModBlocks;
 import org.lithereal.world.item.ModCreativeTabs;
 import org.lithereal.world.item.ModItems;
 import org.lithereal.world.item.compat.CompatInit;
 import org.lithereal.world.item.infused.InfusedItem;
-import org.lithereal.util.KeyBinding;
-import org.lithereal.util.ModBlockColors;
-import org.lithereal.util.ModItemColors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,8 +47,8 @@ public class LitherealClient {
     }
 
     private static void registerKeyBindings() {
-        KeyMappingRegistry.register(KeyBinding.FREEZE_KEY);
-        KeyMappingRegistry.register(KeyBinding.SCORCH_KEY);
+        KeyMappingRegistry.register(KeyMapping.FREEZE_KEY);
+        KeyMappingRegistry.register(KeyMapping.SCORCH_KEY);
     }
 
     private static void registerColorHandlers() {

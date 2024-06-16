@@ -8,13 +8,13 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import org.lithereal.LitherealClient;
+import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.world.block.ModBlocks;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityRenderer;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
-import org.lithereal.fabric.screen.FabricScreenHandlers;
-import org.lithereal.screen.*;
+import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
 import org.lithereal.world.entity.ModEntities;
 
 public class LitherealFabricClient implements ClientModInitializer {
@@ -25,6 +25,7 @@ public class LitherealFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(FabricBlocks.FIRE_CRUCIBLE_BLOCK, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BLUE_FIRE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.INFINITY_GLASS.get(), RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_LANTERN.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHEREAL_VAULT.get(), RenderType.cutout());
         EntityRendererRegistry.register(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
 

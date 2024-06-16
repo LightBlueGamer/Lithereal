@@ -9,7 +9,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.world.block.entity.FireCrucibleBlockEntity;
-import org.lithereal.fabric.screen.FabricFireCrucibleMenu;
+import org.lithereal.fabric.client.gui.screens.inventory.FabricFireCrucibleMenu;
 
 public class FabricFireCrucibleBlockEntity extends FireCrucibleBlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
     public FabricFireCrucibleBlockEntity(BlockPos pos, BlockState state) {

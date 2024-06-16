@@ -24,9 +24,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.recipe.InfusementChamberRecipe;
-import org.lithereal.recipe.ModRecipes;
-import org.lithereal.screen.InfusementChamberMenu;
+import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
+import org.lithereal.data.recipes.InfusementChamberRecipe;
+import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.world.block.ModBlocks;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "org.lithereal.mixin",
+  "package": "org.lithereal.data.mixin",
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [

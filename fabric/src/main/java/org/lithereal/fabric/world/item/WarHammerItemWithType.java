@@ -5,7 +5,7 @@ import net.atlas.combatify.extensions.WeaponWithType;
 import net.atlas.combatify.item.WeaponType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
-import org.lithereal.fabric.compat.ModWeaponType;
+import org.lithereal.fabric.data.compat.ModWeaponType;
 import org.lithereal.world.item.WarHammerItem;
 
 public class WarHammerItemWithType extends WarHammerItem implements WeaponWithType {

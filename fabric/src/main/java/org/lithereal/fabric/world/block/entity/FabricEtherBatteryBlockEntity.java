@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.world.block.entity.EtherBatteryBlockEntity;
 import org.lithereal.world.block.entity.IEnergyContainerProvider;
 import org.lithereal.world.block.entity.ImplementedInventory;
-import org.lithereal.fabric.screen.FabricEtherBatteryMenu;
+import org.lithereal.fabric.client.gui.screens.inventory.FabricEtherBatteryMenu;
 
 public class FabricEtherBatteryBlockEntity extends EtherBatteryBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(0, ItemStack.EMPTY);

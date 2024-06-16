@@ -21,9 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.recipe.FreezingStationRecipe;
-import org.lithereal.recipe.ModRecipes;
-import org.lithereal.screen.FreezingStationMenu;
+import org.lithereal.client.gui.screens.inventory.FreezingStationMenu;
+import org.lithereal.data.recipes.FreezingStationRecipe;
+import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.util.CommonUtils;
 import org.lithereal.world.block.ModBlocks;
 

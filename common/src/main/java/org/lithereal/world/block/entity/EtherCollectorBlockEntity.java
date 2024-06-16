@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.screen.EtherCollectorMenu;
+import org.lithereal.client.gui.screens.inventory.EtherCollectorMenu;
 import org.lithereal.util.EtherEnergyContainer;
 
 public class EtherCollectorBlockEntity extends BlockEntity implements MenuProvider, IEnergyContainerProvider {

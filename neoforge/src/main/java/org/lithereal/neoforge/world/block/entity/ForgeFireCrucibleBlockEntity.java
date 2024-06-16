@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.neoforge.screen.ForgeFireCrucibleMenu;
+import org.lithereal.neoforge.client.gui.screens.inventory.ForgeFireCrucibleMenu;
 import org.lithereal.world.block.entity.FireCrucibleBlockEntity;
 
 

@@ -101,6 +101,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
+    public static final RegistrySupplier<Block> LITHER_LANTERN = registerBlock("lither_lantern",
+            () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)));
+
     public static final RegistrySupplier<Block> LITHEREAL_VAULT = registerBlock("lithereal_vault",
             () -> new LitherealVaultBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VAULT)));
 

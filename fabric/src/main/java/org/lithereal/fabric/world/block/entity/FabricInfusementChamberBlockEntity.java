@@ -9,7 +9,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.world.block.entity.InfusementChamberBlockEntity;
-import org.lithereal.fabric.screen.FabricInfusementChamberMenu;
+import org.lithereal.fabric.client.gui.screens.inventory.FabricInfusementChamberMenu;
 
 public class FabricInfusementChamberBlockEntity extends InfusementChamberBlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
 

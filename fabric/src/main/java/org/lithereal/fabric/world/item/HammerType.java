@@ -3,7 +3,7 @@ package org.lithereal.fabric.world.item;
 import net.atlas.combatify.Combatify;
 import net.atlas.combatify.extensions.WeaponWithType;
 import net.atlas.combatify.item.WeaponType;
-import org.lithereal.fabric.compat.ModWeaponType;
+import org.lithereal.fabric.data.compat.ModWeaponType;
 
 public interface HammerType extends WeaponWithType {
     @Override

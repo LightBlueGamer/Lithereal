@@ -8,7 +8,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.sound.ModSounds;
+import org.lithereal.sounds.ModSounds;
 import org.lithereal.tags.ModTags;
 import org.lithereal.world.item.ability.*;
 import org.lithereal.world.item.burning.BurningLitheriteAxeItem;
@@ -66,7 +66,7 @@ public class ModItems {
             new AbilitySwordItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe", () ->
-            new PickaxeItem(LITHERITE, new Item.Properties().attributes(PickaxeItem.createAttributes(LITHERITE, 1, -2.8f))));
+            new PickaxeItem(LITHERITE, new Item.Properties().attributes(PickaxeItem.createAttributes(LITHERITE, 1, -2.8F))));
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_PICKAXE = ITEMS.register("burning_litherite_pickaxe", () ->
             new BurningLitheritePickaxeItem(LITHERITE, new Item.Properties().fireResistant()));
@@ -102,7 +102,7 @@ public class ModItems {
             new AbilityAxeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> LITHERITE_SHOVEL = ITEMS.register("litherite_shovel", () ->
-            new ShovelItem(LITHERITE, new Item.Properties().attributes(ShovelItem.createAttributes(LITHERITE, 1.5f, -3f))));
+            new ShovelItem(LITHERITE, new Item.Properties().attributes(ShovelItem.createAttributes(LITHERITE, 1.5F, -3F))));
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_SHOVEL = ITEMS.register("burning_litherite_shovel", () ->
             new BurningLitheriteShovelItem(LITHERITE, new Item.Properties().fireResistant()));
@@ -138,28 +138,28 @@ public class ModItems {
             new AbilityHoeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -6, 0))));
 
     public static final RegistrySupplier<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer", () ->
-            createHammer(LITHERITE, 5, -3f, new Item.Properties()));
+            createHammer(LITHERITE, 5, -3.0F, new Item.Properties()));
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("burning_litherite_hammer", () ->
-            createBurningHammer(LITHERITE, 5, -3f, new Item.Properties().fireResistant()));
+            createBurningHammer(LITHERITE, 5, -3.0F, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer", () ->
-            createAbilityHammer(FROZEN, LITHERITE, 5, -3f, new Item.Properties()));
+            createAbilityHammer(FROZEN, LITHERITE, 5, -3F, new Item.Properties()));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HAMMER = ITEMS.register("infused_litherite_hammer", () ->
-            createInfusedHammer(LITHERITE, 5, -3f, new Item.Properties()));
+            createInfusedHammer(LITHERITE, 5, -3.0F, new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HAMMER = ITEMS.register("withering_litherite_hammer", () ->
-            createAbilityHammer(WITHERING, LITHERITE, 5, -3f, new Item.Properties()));
+            createAbilityHammer(WITHERING, LITHERITE, 5, -3.0F, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ITEMS.register("odysium_hammer", () ->
-            createAbilityHammer(ENHANCED, ODYSIUM, 5, -3f, new Item.Properties().fireResistant()));
+            createAbilityHammer(ENHANCED, ODYSIUM, 5, -3.0F, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
             new MysteriousItem(new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
-            LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.4f, new Item.Properties().durability(500).fireResistant().rarity(Rarity.EPIC)));
+            LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.4F, new Item.Properties().durability(500).fireResistant().rarity(Rarity.EPIC)));
 
     public static final RegistrySupplier<Item> LITHERITE_BRUSH = ITEMS.register("litherite_brush", () ->
             new LitheriteBrushItem(new Item.Properties().durability(256)));

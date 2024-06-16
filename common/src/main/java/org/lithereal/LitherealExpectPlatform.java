@@ -18,16 +18,16 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
+import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.world.block.*;
 import org.lithereal.world.block.entity.*;
-import org.lithereal.world.item.ability.Ability;
 import org.lithereal.world.item.HammerItem;
 import org.lithereal.world.item.ModTier;
 import org.lithereal.world.item.WarHammerItem;
+import org.lithereal.world.item.ability.Ability;
 import org.lithereal.world.item.ability.AbilityHammerItem;
 import org.lithereal.world.item.burning.BurningLitheriteHammerItem;
 import org.lithereal.world.item.infused.InfusedLitheriteHammerItem;
-import org.lithereal.screen.*;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
