@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.PotionContents;
 import org.lithereal.Lithereal;
-import org.lithereal.block.custom.InfusementChamberBlock;
-import org.lithereal.block.entity.InfusementChamberBlockEntity;
+import org.lithereal.world.block.InfusementChamberBlock;
+import org.lithereal.world.block.entity.InfusementChamberBlockEntity;
 
 public class InfusementChamberBlockEntityRenderer implements BlockEntityRenderer<InfusementChamberBlockEntity> {
     public static final ResourceLocation textureEmpty = new ResourceLocation(Lithereal.MOD_ID, "textures/block/infusement_chamber_block_entity_empty.png");

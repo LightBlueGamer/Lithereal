@@ -14,8 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
-import org.lithereal.neoforge.block.ForgeBlocks;
+import org.lithereal.world.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.neoforge.world.block.ForgeBlocks;
 
 public class LitherealBlockEntityWithoutLevelRenderer extends BlockEntityWithoutLevelRenderer {
     private final InfusedLitheriteBlockEntity chest = new InfusedLitheriteBlockEntity(BlockPos.ZERO, ForgeBlocks.INFUSED_LITHERITE_BLOCK.get().defaultBlockState());

@@ -11,8 +11,8 @@
 //import net.minecraft.world.item.crafting.SmeltingRecipe;
 //import org.lithereal.Lithereal;
 //import org.lithereal.LitherealExpectPlatform;
-//import org.lithereal.item.ModItems;
-//import org.lithereal.item.compat.CompatInit;
+//import org.lithereal.world.item.ModItems;
+//import org.lithereal.world.item.compat.CompatInit;
 //import org.lithereal.recipe.FireCrucibleRecipe;
 //import org.lithereal.recipe.FreezingStationRecipe;
 //import org.lithereal.recipe.InfusementChamberRecipe;

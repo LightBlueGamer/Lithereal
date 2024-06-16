@@ -10,7 +10,7 @@
   },
   "parent": "lithereal:lithereal",
   "criteria": {
-    "open_lithereal_vault": {
+    "lo_and_behold": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
         "location": [
@@ -34,7 +34,7 @@
   },
   "requirements": [
     [
-      "open_lithereal_vault"
+      "lo_and_behold"
     ]
   ],
   "sends_telemetry_event": true

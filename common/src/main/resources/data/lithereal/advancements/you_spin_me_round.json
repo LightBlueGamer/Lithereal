@@ -5,12 +5,12 @@
       "count": 1
     },
     "title": "You Spin Me Round",
-    "description": "Use a Litherite Wrench to rotate a block",
+    "description": "Change the rotation of a block using a Litherite Wrench",
     "frame": "task"
   },
   "parent": "lithereal:lithereal",
   "criteria": {
-    "use_litherite_wrench": {
+    "you_spin_me_round": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
         "location": [
@@ -28,9 +28,9 @@
       }
     }
   },
-  "use_litherite_wrench": [
+  "you_spin_me_round": [
     [
-      "use_litherite_wrench"
+      "you_spin_me_round"
     ]
   ],
   "sends_telemetry_event": true

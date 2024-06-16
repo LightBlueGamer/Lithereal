@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.EtherBatteryBlockEntity;
+import org.lithereal.world.block.entity.EtherBatteryBlockEntity;
 
 public class EtherBatteryMenu extends AbstractContainerMenu {
     public EtherBatteryBlockEntity blockEntity;

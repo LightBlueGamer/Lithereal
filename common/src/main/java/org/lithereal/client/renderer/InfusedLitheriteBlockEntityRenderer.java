@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.lithereal.Lithereal;
-import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.world.block.entity.InfusedLitheriteBlockEntity;
 
 public class InfusedLitheriteBlockEntityRenderer implements BlockEntityRenderer<InfusedLitheriteBlockEntity> {
     public static final ResourceLocation texture = new ResourceLocation(Lithereal.MOD_ID, "textures/block/infused_litherite_block_entity.png");
