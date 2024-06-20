@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import org.lithereal.Lithereal;
-import org.lithereal.world.block.ModBlocks;
+import org.lithereal.block.ModBlocks;
 
 import java.util.List;
 

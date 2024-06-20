@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.world.block.EtherCollectorBlock;
-import org.lithereal.world.block.entity.EtherCollectorBlockEntity;
+import org.lithereal.block.EtherCollectorBlock;
+import org.lithereal.block.entity.EtherCollectorBlockEntity;
 import org.lithereal.fabric.world.block.entity.FabricEtherCollectorBlockEntity;
 
 public class FabricEtherCollectorBlock extends EtherCollectorBlock implements EntityBlock {

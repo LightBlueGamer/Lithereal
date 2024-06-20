@@ -23,11 +23,11 @@ import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
-import org.lithereal.world.block.ModBlocks;
-import org.lithereal.world.item.ModCreativeTabs;
-import org.lithereal.world.item.ModItems;
-import org.lithereal.world.item.compat.CompatInit;
-import org.lithereal.world.item.infused.InfusedItem;
+import org.lithereal.block.ModBlocks;
+import org.lithereal.item.ModCreativeTabs;
+import org.lithereal.item.ModItems;
+import org.lithereal.item.compat.CompatInit;
+import org.lithereal.item.infused.InfusedItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -14,12 +14,12 @@ import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.world.item.ability.Ability;
-import org.lithereal.world.item.HammerItem;
-import org.lithereal.world.item.ability.AbilityHammerItem;
-import org.lithereal.world.item.burning.BurningLitheriteHammerItem;
-import org.lithereal.world.item.component.Enhanced;
-import org.lithereal.world.item.infused.InfusedLitheriteHammerItem;
+import org.lithereal.item.ability.Ability;
+import org.lithereal.item.HammerItem;
+import org.lithereal.item.ability.AbilityHammerItem;
+import org.lithereal.item.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.component.Enhanced;
+import org.lithereal.item.infused.InfusedLitheriteHammerItem;
 
 import java.util.Optional;
 import java.util.function.Consumer;

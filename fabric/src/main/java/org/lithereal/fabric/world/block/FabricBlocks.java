@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.Lithereal;
-import org.lithereal.world.block.InfusedLitheriteBlock;
-import org.lithereal.world.item.infused.InfusedLitheriteBlockItem;
+import org.lithereal.block.InfusedLitheriteBlock;
+import org.lithereal.item.infused.InfusedLitheriteBlockItem;
 
 public class FabricBlocks {
 

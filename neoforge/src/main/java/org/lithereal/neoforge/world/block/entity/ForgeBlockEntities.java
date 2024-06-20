@@ -7,7 +7,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.lithereal.Lithereal;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
-import org.lithereal.world.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 
 public class ForgeBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =

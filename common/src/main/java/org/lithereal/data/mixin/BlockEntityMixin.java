@@ -2,7 +2,7 @@ package org.lithereal.data.mixin;
 
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import org.lithereal.world.block.entity.IBlockEntity;
+import org.lithereal.block.entity.IBlockEntity;
 import org.spongepowered.asm.mixin.*;
 
 @Mixin(BlockEntity.class)

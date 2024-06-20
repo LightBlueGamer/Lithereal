@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
-import org.lithereal.world.block.entity.InfusementChamberBlockEntity;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 
 public class InfusementChamberScreen extends AbstractContainerScreen<InfusementChamberMenu> {
     private static final ResourceLocation TEXTURE =

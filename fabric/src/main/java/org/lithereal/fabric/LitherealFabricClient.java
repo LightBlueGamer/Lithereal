@@ -9,13 +9,13 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import org.lithereal.LitherealClient;
 import org.lithereal.client.gui.screens.inventory.*;
-import org.lithereal.world.block.ModBlocks;
+import org.lithereal.block.ModBlocks;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityRenderer;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
-import org.lithereal.world.entity.ModEntities;
+import org.lithereal.entity.ModEntities;
 
 public class LitherealFabricClient implements ClientModInitializer {
     @Override

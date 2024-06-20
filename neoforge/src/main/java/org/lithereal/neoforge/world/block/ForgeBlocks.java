@@ -9,7 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.lithereal.Lithereal;
-import org.lithereal.world.block.InfusedLitheriteBlock;
+import org.lithereal.block.InfusedLitheriteBlock;
 import org.lithereal.neoforge.world.item.ForgeItems;
 import org.lithereal.neoforge.world.item.infused.ForgeInfusedLitheriteBlockItem;
 

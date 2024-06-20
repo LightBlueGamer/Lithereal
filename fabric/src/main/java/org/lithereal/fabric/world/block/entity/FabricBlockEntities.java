@@ -5,7 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.lithereal.Lithereal;
-import org.lithereal.world.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.fabric.world.block.FabricBlocks;
 
 @SuppressWarnings("EmptyMethod")

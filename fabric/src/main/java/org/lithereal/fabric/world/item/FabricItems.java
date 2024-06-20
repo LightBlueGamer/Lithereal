@@ -5,7 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import org.lithereal.Lithereal;
-import org.lithereal.world.item.LitheriteItem;
+import org.lithereal.item.LitheriteItem;
 
 @SuppressWarnings("ALL")
 public class FabricItems {

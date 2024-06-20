@@ -9,8 +9,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import org.lithereal.fabric.world.item.ability.FabricAbilityLongSword;
-import org.lithereal.world.item.ability.Ability;
-import org.lithereal.world.item.infused.InfusedItem;
+import org.lithereal.item.ability.Ability;
+import org.lithereal.item.infused.InfusedItem;
 
 import java.util.List;
 import java.util.Objects;

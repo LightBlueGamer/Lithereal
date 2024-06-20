@@ -23,13 +23,13 @@ import org.lithereal.fabric.world.item.burning.BurningLitheriteHammerItemWithTyp
 import org.lithereal.fabric.world.item.infused.FabricInfusedKnife;
 import org.lithereal.fabric.world.item.infused.FabricInfusedLongSword;
 import org.lithereal.fabric.world.item.infused.InfusedLitheriteHammerItemWithType;
-import org.lithereal.world.item.HammerItem;
-import org.lithereal.world.item.ModTier;
-import org.lithereal.world.item.WarHammerItem;
-import org.lithereal.world.item.ability.Ability;
-import org.lithereal.world.item.ability.AbilityHammerItem;
-import org.lithereal.world.item.burning.BurningLitheriteHammerItem;
-import org.lithereal.world.item.infused.InfusedLitheriteHammerItem;
+import org.lithereal.item.HammerItem;
+import org.lithereal.item.ModTier;
+import org.lithereal.item.WarHammerItem;
+import org.lithereal.item.ability.Ability;
+import org.lithereal.item.ability.AbilityHammerItem;
+import org.lithereal.item.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.infused.InfusedLitheriteHammerItem;
 
 import java.util.function.Supplier;
 

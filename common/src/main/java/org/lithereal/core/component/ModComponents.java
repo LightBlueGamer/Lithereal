@@ -7,7 +7,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import org.lithereal.Lithereal;
-import org.lithereal.world.item.component.Enhanced;
+import org.lithereal.item.component.Enhanced;
 
 import java.util.function.UnaryOperator;
 

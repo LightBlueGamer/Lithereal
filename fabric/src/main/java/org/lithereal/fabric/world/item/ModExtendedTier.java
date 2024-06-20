@@ -5,7 +5,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.world.item.ModTier;
+import org.lithereal.item.ModTier;
 
 import java.util.function.Supplier;
 

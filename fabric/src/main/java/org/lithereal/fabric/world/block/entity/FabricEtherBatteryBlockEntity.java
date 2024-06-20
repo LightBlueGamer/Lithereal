@@ -13,9 +13,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.world.block.entity.EtherBatteryBlockEntity;
-import org.lithereal.world.block.entity.IEnergyContainerProvider;
-import org.lithereal.world.block.entity.ImplementedInventory;
+import org.lithereal.block.entity.EtherBatteryBlockEntity;
+import org.lithereal.block.entity.IEnergyContainerProvider;
+import org.lithereal.block.entity.ImplementedInventory;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricEtherBatteryMenu;
 
 public class FabricEtherBatteryBlockEntity extends EtherBatteryBlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, IEnergyContainerProvider {

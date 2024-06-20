@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.world.block.entity.FreezingStationBlockEntity;
+import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricFreezingStationMenu;
 
 public class FabricFreezingStationBlockEntity extends FreezingStationBlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {

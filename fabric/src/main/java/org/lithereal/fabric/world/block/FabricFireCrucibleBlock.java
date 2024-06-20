@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.world.block.FireCrucibleBlock;
-import org.lithereal.world.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.FireCrucibleBlock;
+import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.fabric.world.block.entity.FabricFireCrucibleBlockEntity;
 
 public class FabricFireCrucibleBlock extends FireCrucibleBlock implements EntityBlock {

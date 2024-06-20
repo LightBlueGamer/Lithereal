@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.world.item.infused.InfusedLitheriteBlockItem;
+import org.lithereal.item.infused.InfusedLitheriteBlockItem;
 import org.lithereal.neoforge.client.renderer.LitherealBlockEntityWithoutLevelRenderer;
 
 import java.util.function.Consumer;

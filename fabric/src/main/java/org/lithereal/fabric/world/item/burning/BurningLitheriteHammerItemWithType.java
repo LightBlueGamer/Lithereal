@@ -2,7 +2,7 @@ package org.lithereal.fabric.world.item.burning;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
-import org.lithereal.world.item.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.burning.BurningLitheriteHammerItem;
 import org.lithereal.fabric.world.item.HammerType;
 
 public class BurningLitheriteHammerItemWithType extends BurningLitheriteHammerItem implements HammerType {

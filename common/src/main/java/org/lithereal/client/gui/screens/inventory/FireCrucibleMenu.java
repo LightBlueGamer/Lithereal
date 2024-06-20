@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.world.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.entity.FireCrucibleBlockEntity;
 
 public class FireCrucibleMenu extends AbstractContainerMenu {
     public FireCrucibleBlockEntity blockEntity;

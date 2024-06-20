@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.world.block.FreezingStationBlock;
-import org.lithereal.world.block.entity.FreezingStationBlockEntity;
+import org.lithereal.block.FreezingStationBlock;
+import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.neoforge.world.block.entity.ForgeFreezingStationBlockEntity;
 
 public class ForgeFreezingStationBlock extends FreezingStationBlock {

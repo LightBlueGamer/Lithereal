@@ -2,7 +2,7 @@ package org.lithereal.util;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.lithereal.world.block.entity.IEnergyContainerProvider;
+import org.lithereal.block.entity.IEnergyContainerProvider;
 
 import java.util.Arrays;
 

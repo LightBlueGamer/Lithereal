@@ -6,8 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
-import org.lithereal.world.item.ability.Ability;
-import org.lithereal.world.item.ability.AbilityItem;
+import org.lithereal.item.ability.Ability;
+import org.lithereal.item.ability.AbilityItem;
 
 public class FabricAbilityKnife extends KnifeItem implements AbilityItem {
     final Ability ability;
