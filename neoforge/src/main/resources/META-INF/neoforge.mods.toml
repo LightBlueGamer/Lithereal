@@ -22,20 +22,20 @@ A mod about mysterious metals and crystals with magical properties.
 [[dependencies.lithereal]]
 modId = "neoforge"
 mandatory = true
-versionRange = "[20.6.116,)"
+versionRange = "[21.0.45-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.lithereal]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.6,)"
+versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.lithereal]]
 modId = "architectury"
 mandatory = true
-versionRange = "[12.1.2,)"
+versionRange = "[13.0.3,)"
 ordering = "AFTER"
 side = "BOTH"
