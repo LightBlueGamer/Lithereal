@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class WrenchItem extends Item {
+
     public WrenchItem(Properties properties) {
         super(properties);
     }
@@ -33,12 +34,10 @@ public class WrenchItem extends Item {
         if (directionProperty != null) {
             Direction facing = state.getValue(directionProperty);
 
-            if (facing != null) {
-                BlockPos facingPos = pos.relative(facing);
-                BlockState facingState = world.getBlockState(facingPos);
+            BlockPos facingPos = pos.relative(facing);
+            BlockState facingState = world.getBlockState(facingPos);
 
-                state = state.updateShape(facing, facingState, world, pos, facingPos);
-            }
+            state = state.updateShape(facing, facingState, world, pos, facingPos);
         }
 
         return state;

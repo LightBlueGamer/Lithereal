@@ -13,7 +13,7 @@ config="lithereal-common.mixins.json"
 modId = "lithereal"
 version = "${version}"
 displayName = "Lithereal"
-authors = "Light, Stunf, Alexandra"
+authors = "Light, Alexandra"
 description = '''
 A mod about mysterious metals and crystals with magical properties.
 '''
@@ -29,13 +29,13 @@ side = "BOTH"
 [[dependencies.lithereal]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.21,)"
+versionRange = "[1.20.6,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.lithereal]]
 modId = "architectury"
 mandatory = true
-versionRange = "[13.0.3,)"
+versionRange = "[12.1.4,)"
 ordering = "AFTER"
 side = "BOTH"
