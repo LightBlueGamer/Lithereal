@@ -61,7 +61,7 @@ public class WarHammerItem extends TieredItem {
                 if (livingEntity.onGround()) {
                     serverPlayer.setSpawnExtraParticlesOnFall(true);
                     SoundEvent soundEvent = SoundEvents.MACE_SMASH_GROUND;
-                    serverLevel.playSound((Player)null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), soundEvent, serverPlayer.getSoundSource(), 1.0F, 1.0F);
+                    serverLevel.playSound(null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), soundEvent, serverPlayer.getSoundSource(), 1.0F, 1.0F);
                 }
 
                 knockback(serverLevel, serverPlayer, livingEntity);
@@ -77,7 +77,7 @@ public class WarHammerItem extends TieredItem {
     }
 
     public float getAttackDamageBonus(Player player, float f) {
-        return canSmashAttack(player) ? f * 2.25F : 0.0F;
+        return canSmashAttack(player) ? f * 2.0F : 0.0F;
     }
 
     private static void knockback(Level level, Player player, Entity entity) {

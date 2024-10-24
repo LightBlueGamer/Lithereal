@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.lithereal.item.ModItems;
-import org.lithereal.item.LitheriteItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,9 +29,7 @@ public abstract class ItemEntityMixin {
     private void onTick(CallbackInfo ci) {
         ItemEntity entity = (ItemEntity)(Object)this;
         ItemStack stack = entity.getItem();
-        Item item = stack.getItem();
 
-        if (item instanceof LitheriteItem) {
             Level level = entity.level();
             if (!level.isClientSide()) {
                 BlockState blockState = level.getBlockState(entity.blockPosition());
@@ -61,7 +58,6 @@ public abstract class ItemEntityMixin {
                 }
             }
         }
-    }
 
     @Unique
     private void spawnWitherSkeleton(Level level, double x, double y, double z) {

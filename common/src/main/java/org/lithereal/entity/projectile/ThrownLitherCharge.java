@@ -69,14 +69,10 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
             level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
             explode(level(), blockPos);
 
-            if (blockState.getBlock() instanceof NetherPortalBlock || blockState.getBlock() instanceof EndPortalBlock) {
-                return;
-            }
-
         } else if (this.isInWater()) {
             addEffects();
             causeExplosion(blockHitResult.getLocation(), 3, Level.ExplosionInteraction.BLOCK, shouldTeleport());
-            this.level().playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
+            this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
         } else if (!blockState.isAir()) {
             if (this.getOwner() != null && !this.getOwner().isSpectator()) {
                 float explosionRange = (blockState.getBlock() == Blocks.STONE ||
@@ -87,7 +83,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                 addEffects();
                 entity.resetFallDistance();
                 causeExplosion(blockHitResult.getLocation(), explosionRange, Level.ExplosionInteraction.BLOCK, true);
-                this.level().playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
             } else {
                 causeExplosion(blockHitResult.getLocation(), 3, Level.ExplosionInteraction.BLOCK, false);
             }
@@ -146,7 +142,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
                     player.dismountTo(pos.x, pos.y + 0.01, pos.z);
                 } else {
                     player.teleportTo(pos.x, pos.y + 0.01, pos.z);
-                    this.level().playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
+                    this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
                 }
             }
         }
@@ -154,10 +150,9 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
 
     private void addEffects() {
         Entity owner = this.getOwner();
-        if (owner instanceof Player) {
-            Player player = (Player) owner;
+        if (owner instanceof Player player) {
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 4, false, false));
-            player.addEffect(new MobEffectInstance(MobEffects.JUMP, 100, 1, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.JUMP, 200, 1, false, false));
             player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0, false, false));
         }
     }
@@ -171,7 +166,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         if (entity instanceof ThrownLitherCharge) {
             return false;
         } else {
-            return entity.getType() == EntityType.END_CRYSTAL ? false : super.canHitEntity(entity);
+            return entity.getType() != EntityType.END_CRYSTAL && super.canHitEntity(entity);
         }
     }
 
