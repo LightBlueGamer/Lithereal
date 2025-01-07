@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "_",
+    "_"
+  ],
+  "key": {
+    "_": {
+      "item": "lithereal:etherstone_slab"
+    }
+  },
+  "result": {
+    "id": "lithereal:chiseled_etherstone"
+  }
+}

@@ -14,7 +14,7 @@ public class FabricItems {
             registerItem("litherite_crystal", new LitheriteItem(new Item.Properties()));
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Lithereal.MOD_ID, name), item);
+        return Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name), item);
     }
 
     public static void registerModItems() {

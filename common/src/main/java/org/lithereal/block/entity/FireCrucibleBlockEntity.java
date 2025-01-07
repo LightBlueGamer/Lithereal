@@ -18,6 +18,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -33,6 +34,7 @@ import org.lithereal.block.FireCrucibleBlock;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleMenu;
 import org.lithereal.client.particle.ModParticles;
+import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.FireCrucibleRecipe;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.util.CommonUtils;
@@ -213,10 +215,10 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         }
 
         Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe = level.getRecipeManager()
-                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), inventory, level);
+                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), new ContainerRecipeInput(inventory), level);
 
         Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe = level.getRecipeManager()
-                .getRecipeFor(RecipeType.SMELTING, inventory, level);
+                .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(inventory.getItem(0)), level);
 
         ItemStack resultItem = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().getResultItem(level.registryAccess())).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().getResultItem(level.registryAccess())).orElse(ItemStack.EMPTY));
         ItemStack outputItem = resultItem.copy();
@@ -244,10 +246,10 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         }
 
         Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe = level.getRecipeManager()
-                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), inventory, level);
+                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), new ContainerRecipeInput(inventory), level);
 
         Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe = level.getRecipeManager()
-                .getRecipeFor(RecipeType.SMELTING, inventory, level);
+                .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(inventory.getItem(0)), level);
 
         if (crucibleRecipe.isPresent() || furnaceRecipe.isPresent()) {
             ItemStack resultItem = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().getResultItem(level.registryAccess())).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().getResultItem(level.registryAccess())).orElse(ItemStack.EMPTY));

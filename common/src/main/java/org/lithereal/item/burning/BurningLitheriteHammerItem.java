@@ -4,13 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -66,9 +66,7 @@ public class BurningLitheriteHammerItem extends AbilityHammerItem implements Bur
                 if (correctToolForDrops) {
                     targetState.spawnAfterBreak((ServerLevel) level, pos, hammerStack, true);
                     List<ItemStack> drops = getSmeltedDrops(Block.getDrops(targetState, (ServerLevel) level, pos, level.getBlockEntity(pos), livingEntity, hammerStack), level);
-                    drops.forEach(e -> {
-                        Block.popResourceFromFace(level, pos, ((BlockHitResult) pick).getDirection(), e);
-                    });
+                    drops.forEach(e -> Block.popResourceFromFace(level, pos, ((BlockHitResult) pick).getDirection(), e));
                 }
             }
             damage ++;
@@ -83,7 +81,7 @@ public class BurningLitheriteHammerItem extends AbilityHammerItem implements Bur
         List<ItemStack> smeltedDrops = NonNullList.create();
         drops.forEach(e -> {
             RecipeHolder<SmeltingRecipe> furnaceRecipe = level.getRecipeManager()
-                    .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(e), level).orElse(null);
+                    .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(e), level).orElse(null);
             if(furnaceRecipe != null) smeltedDrops.add(new ItemStack(furnaceRecipe.value().getResultItem(level.registryAccess()).getItem(), e.getCount()));
             else smeltedDrops.add(e);
         });
@@ -98,7 +96,7 @@ public class BurningLitheriteHammerItem extends AbilityHammerItem implements Bur
 
             for (int i = 0; i < origDrops.size(); i++) {
                 RecipeHolder<SmeltingRecipe> holder = level.getRecipeManager()
-                        .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(origDrops.get(i)), level).orElse(null);
+                        .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(origDrops.get(i)), level).orElse(null);
                 furnaceRecipes[i] = holder == null ? null : holder.value();
             }
 

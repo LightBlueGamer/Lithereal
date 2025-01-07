@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
+import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.block.ModBlocks;
@@ -177,7 +178,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         PotionContents potion = pEntity.getItem(1).getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
 
         Optional<RecipeHolder<InfusementChamberRecipe>> infusingRecipe = level.getRecipeManager()
-                .getRecipeFor(ModRecipes.INFUSING_TYPE.get(), inventory, level);
+                .getRecipeFor(ModRecipes.INFUSING_TYPE.get(), new ContainerRecipeInput(inventory), level);
 
         ItemStack outputItem = ItemStack.EMPTY;
         if (infusingRecipe.isPresent()) {
@@ -225,7 +226,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         }
 
         Optional<RecipeHolder<InfusementChamberRecipe>> infusingRecipe = level.getRecipeManager()
-                .getRecipeFor(ModRecipes.INFUSING_TYPE.get(), inventory, level);
+                .getRecipeFor(ModRecipes.INFUSING_TYPE.get(), new ContainerRecipeInput(inventory), level);
         if (entity.progress == 0)
             entity.maxProgress = infusingRecipe.map(infusementChamberRecipeRecipeHolder -> infusementChamberRecipeRecipeHolder.value().maxProgress()).orElse(200);
 

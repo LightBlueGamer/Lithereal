@@ -1,4 +1,4 @@
-//package org.lithereal.forge.world.item.ability;
+//package org.lithereal.neoforge.world.item.ability;
 //
 //import net.atlas.combatify.item.LongSwordItem;
 //import net.minecraft.world.entity.Entity;
@@ -6,8 +6,8 @@
 //import net.minecraft.world.item.ItemStack;
 //import net.minecraft.world.item.Tier;
 //import net.minecraft.world.level.Level;
-//import org.lithereal.world.item.ability.Ability;
-//import org.lithereal.world.item.ability.AbilityItem;
+//import org.lithereal.item.ability.Ability;
+//import org.lithereal.item.ability.AbilityItem;
 //
 //public class ForgeAbilityLongSword extends LongSwordItem implements AbilityItem {
 //    final Ability ability;

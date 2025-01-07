@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "lithereal:block/cobbled_etherstone",
-    "side": "lithereal:block/cobbled_etherstone",
-    "top": "lithereal:block/cobbled_etherstone"
-  }
-}

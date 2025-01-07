@@ -21,7 +21,7 @@ public abstract class PlayerMixin extends LivingEntity {
         super(entityType, level);
     }
 
-    @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getFireAspect(Lnet/minecraft/world/entity/LivingEntity;)I"))
+    @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getDeltaMovement()Lnet/minecraft/world/phys/Vec3;"))
     public void createSweep(Entity target, CallbackInfo ci, @Local(ordinal = 0) boolean bl, @Local(ordinal = 1) boolean bl2, @Local(ordinal = 2) boolean bl3, @Local(ordinal = 3) LocalBooleanRef bl4) {
         ItemStack mainHandItem = getItemInHand(InteractionHand.MAIN_HAND);
         boolean sweep = bl && !bl3 && !bl2 && this.onGround() && this.walkDist - this.walkDistO < (double)this.getSpeed() && mainHandItem.getItem() instanceof WarHammerItem;

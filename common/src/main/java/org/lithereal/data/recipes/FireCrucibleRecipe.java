@@ -9,7 +9,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -21,16 +20,16 @@ import org.lithereal.Lithereal;
 
 import java.util.Optional;
 
-public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket, Integer maxProgress) implements Recipe<SimpleContainer> {
+public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
+    public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
 
         return hasCrystal(pContainer) && hasBucket(pContainer);
     }
 
     @Override
-    public @NotNull ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
+    public @NotNull ItemStack assemble(ContainerRecipeInput container, HolderLookup.Provider provider) {
         return output;
     }
 
@@ -42,11 +41,11 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
         return ret;
     }
 
-    private boolean hasBucket(SimpleContainer container) {
+    private boolean hasBucket(ContainerRecipeInput container) {
         return bucket.map(ingredient -> ingredient.test(container.getItem(3)) && container.getItem(3).getCount() >= 1).orElse(container.getItem(3).isEmpty());
     }
 
-    private boolean hasCrystal(SimpleContainer container) {
+    private boolean hasCrystal(ContainerRecipeInput container) {
         return crystal.test(container.getItem(0)) && container.getItem(0).getCount() >= 1;
     }
 
@@ -73,7 +72,7 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
     public static class Serializer implements RecipeSerializer<FireCrucibleRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(Lithereal.MOD_ID, "burning");
+                ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "burning");
         public static final MapCodec<FireCrucibleRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
                                 Ingredient.CODEC.fieldOf("crystal").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.crystal),

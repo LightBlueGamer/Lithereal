@@ -120,22 +120,22 @@ public class ModItems {
             new AbilityShovelItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> LITHERITE_HOE = ITEMS.register("litherite_hoe", () ->
-            new HoeItem(LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -5, 0))));
+            new HoeItem(LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HOE = ITEMS.register("burning_litherite_hoe", () ->
-            new BurningLitheriteHoeItem(LITHERITE, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(LITHERITE, -5, 0))));
+            new BurningLitheriteHoeItem(LITHERITE, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HOE = ITEMS.register("frozen_litherite_hoe", () ->
-            new AbilityHoeItem(FROZEN, LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -5, 0))));
+            new AbilityHoeItem(FROZEN, LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HOE = ITEMS.register("infused_litherite_hoe", () ->
-            new InfusedLitheriteHoeItem(LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -5, 0))));
+            new InfusedLitheriteHoeItem(LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HOE = ITEMS.register("withering_litherite_hoe", () ->
-            new AbilityHoeItem(WITHERING, LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -5, 0))));
+            new AbilityHoeItem(WITHERING, LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
     public static final RegistrySupplier<Item> ODYSIUM_HOE = ITEMS.register("odysium_hoe", () ->
-            new AbilityHoeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -6, 0))));
+            new AbilityHoeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0))));
 
     public static final RegistrySupplier<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer", () ->
             createHammer(LITHERITE, 5, -3.0F, new Item.Properties()));
@@ -237,7 +237,7 @@ public class ModItems {
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = ITEMS.register("music_disc_sparkle", () ->
-            new RecordItem(16, ModSounds.MUSIC_DISC_SPARKLE, new Item.Properties().rarity(Rarity.RARE).stacksTo(1), 135));
+            new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).jukeboxPlayable(ModSounds.SPARKLE)));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
             new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));

@@ -65,7 +65,7 @@ public class ModArmorMaterials {
     public static final BiFunction<ArmorItem.Type, Integer, Integer> HEALTH_FUNCTION_FOR_TYPE = ArmorItem.Type::getDurability;
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> defenseBase, int enchantmentValue, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
-        List<ArmorMaterial.Layer> layers = List.of(new ArmorMaterial.Layer(new ResourceLocation(name)));
+        List<ArmorMaterial.Layer> layers = List.of(new ArmorMaterial.Layer(ResourceLocation.parse(name)));
         return register(name, defenseBase, enchantmentValue, equipSound, toughness, knockbackResistance, repairIngredient, layers);
     }
 

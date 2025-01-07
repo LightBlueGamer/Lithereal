@@ -16,14 +16,13 @@ import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
-import org.lithereal.item.enchantment.ModEnchantments;
 
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 public class Lithereal {
     public static final String MOD_ID = "lithereal";
-    public static final ResourceKey<LootTable> LITHEREAL_CHAMBERS_REWARD = ResourceKey.create(Registries.LOOT_TABLE, new ResourceLocation(Lithereal.MOD_ID, "chests/lithereal_chambers/reward"));
+    public static final ResourceKey<LootTable> LITHEREAL_CHAMBERS_REWARD = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "chests/lithereal_chambers/reward"));
 
     public static final Supplier<RegistrarManager> REGISTRIES = Suppliers.memoize(() -> RegistrarManager.get(MOD_ID));
 
@@ -38,7 +37,6 @@ public class Lithereal {
         ModBlockEntities.register();
         ModRecipes.register();
         ModEntities.register();
-        ModEnchantments.register();
         ModParticles.register();
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());

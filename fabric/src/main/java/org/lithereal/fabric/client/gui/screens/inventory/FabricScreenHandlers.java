@@ -25,23 +25,23 @@ public class FabricScreenHandlers {
     };
 
     public static final MenuType<FabricFireCrucibleMenu> FIRE_CRUCIBLE_SCREEN_HANDLER =
-            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "fire_crucible"),
+            Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "fire_crucible"),
                     new ExtendedScreenHandlerType<>(FabricFireCrucibleMenu::new, BLOCK_POS));
 
     public static final MenuType<FabricFreezingStationMenu> FREEZING_STATION_SCREEN_HANDLER =
-            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "freezing_station"),
+            Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "freezing_station"),
                     new ExtendedScreenHandlerType<>(FabricFreezingStationMenu::new, BLOCK_POS));
 
     public static final MenuType<FabricInfusementChamberMenu> INFUSEMENT_CHAMBER_SCREEN_HANDLER =
-            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "infusement_chamber"),
+            Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "infusement_chamber"),
                     new ExtendedScreenHandlerType<>(FabricInfusementChamberMenu::new, BLOCK_POS));
 
     public static final MenuType<FabricEtherBatteryMenu> ETHER_BATTERY_SCREEN_HANDLER =
-            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "ether_battery"),
+            Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "ether_battery"),
                     new ExtendedScreenHandlerType<>(FabricEtherBatteryMenu::new, BLOCK_POS));
 
     public static final MenuType<FabricEtherCollectorMenu> ETHER_COLLECTOR_SCREEN_HANDLER =
-            Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Lithereal.MOD_ID, "ether_collector"),
+            Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "ether_collector"),
                     new ExtendedScreenHandlerType<>(FabricEtherCollectorMenu::new, BLOCK_POS));
 
     public static void registerScreenHandlers() {

@@ -1,4 +1,4 @@
-//package org.lithereal.forge.world.item.infused;
+//package org.lithereal.neoforge.world.item.infused;
 //
 //import net.minecraft.network.chat.Component;
 //import net.minecraft.world.item.ItemStack;
@@ -8,9 +8,9 @@
 //import net.minecraft.world.item.alchemy.Potions;
 //import net.minecraft.world.level.Level;
 //import org.jetbrains.annotations.Nullable;
-//import org.lithereal.forge.world.item.ability.ForgeAbilityLongSword;
-//import org.lithereal.world.item.ability.Ability;
-//import org.lithereal.world.item.infused.InfusedItem;
+//import org.lithereal.neoforge.world.item.ability.ForgeAbilityLongSword;
+//import org.lithereal.item.ability.Ability;
+//import org.lithereal.item.infused.InfusedItem;
 //
 //import java.util.List;
 //

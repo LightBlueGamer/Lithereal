@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.gui.screens.inventory.FreezingStationMenu;
+import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.FreezingStationRecipe;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.util.CommonUtils;
@@ -170,7 +171,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         }
 
         Optional<RecipeHolder<FreezingStationRecipe>> recipe = level.getRecipeManager()
-                .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), inventory, level);
+                .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), new ContainerRecipeInput(inventory), level);
 
         if(hasRecipe(pEntity)) {
             ItemStack resultItem = recipe.get().value().getResultItem(level.registryAccess());
@@ -192,7 +193,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
             inventory.setItem(i, entity.getItem(i));
 
         Optional<RecipeHolder<FreezingStationRecipe>> recipe = level.getRecipeManager()
-                .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), inventory, level);
+                .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), new ContainerRecipeInput(inventory), level);
         if (entity.progress == 0)
             entity.maxProgress = recipe.map(freezingStationRecipeRecipeHolder -> freezingStationRecipeRecipeHolder.value().maxProgress()).orElse(200);
 

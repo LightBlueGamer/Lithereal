@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.item.ModArmorMaterials;
-import org.lithereal.item.enchantment.ModEnchantments;
 import org.lithereal.item.infused.InfusedItem;
 import org.lithereal.util.CommonUtils;
 import org.lithereal.block.ModBlocks;
@@ -327,8 +326,7 @@ public enum Ability {
     ENHANCED {
         @Override
         public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-            if (CommonUtils.isEnhanced(itemStack))
-                ModEnchantments.HEROS_EDGE.get().doPostAttack(attacker, attacked, 1);
+            if (CommonUtils.isEnhanced(itemStack)) attacked.addEffect(new MobEffectInstance(MobEffects.WITHER, 150));
         }
 
         @Override

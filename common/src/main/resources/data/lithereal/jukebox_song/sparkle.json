@@ -1,0 +1,8 @@
+{
+  "description": {
+    "translate": "jukebox_song.lithereal.sparkle"
+  },
+  "comparator_output": 15,
+  "length_in_seconds": 135,
+  "sound_event": "lithereal:music_disc_sparkle"
+}

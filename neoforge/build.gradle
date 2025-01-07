@@ -31,7 +31,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
-    modCompileOnly "net.atlas:combatify-1.20.6-fabric:${combatify_version}"
+    modCompileOnly "net.atlas:combatify-1.21-fabric:${combatify_version}"
 }
 
 processResources {

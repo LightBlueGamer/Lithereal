@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/etherstone_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/etherstone"
+    },
+    "type=top": {
+      "model": "lithereal:block/etherstone_slab_top"
+    }
+  }
+}

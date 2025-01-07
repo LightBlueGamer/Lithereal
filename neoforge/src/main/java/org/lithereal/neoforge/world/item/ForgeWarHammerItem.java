@@ -2,8 +2,8 @@ package org.lithereal.neoforge.world.item;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import org.lithereal.item.WarHammerItem;
 
 public class ForgeWarHammerItem extends WarHammerItem {
@@ -12,7 +12,7 @@ public class ForgeWarHammerItem extends WarHammerItem {
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return super.canPerformAction(stack, toolAction) || toolAction == ToolActions.SWORD_SWEEP;
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+        return super.canPerformAction(stack, itemAbility) || itemAbility == ItemAbilities.SWORD_SWEEP;
     }
 }

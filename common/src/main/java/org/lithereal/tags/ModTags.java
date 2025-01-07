@@ -17,7 +17,7 @@ public class ModTags {
         return create(name, Registries.BLOCK);
     }
     public static <T> TagKey<T> create(String name, ResourceKey<? extends Registry<T>> registry) {
-        return TagKey.create(registry, new ResourceLocation(Lithereal.MOD_ID, name));
+        return TagKey.create(registry, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name));
     }
     public static void init() {
 

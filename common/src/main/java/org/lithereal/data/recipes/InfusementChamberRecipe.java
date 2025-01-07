@@ -9,7 +9,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -20,9 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.util.CommonUtils;
 
-public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingredient potion, Integer maxProgress) implements Recipe<SimpleContainer> {
+public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingredient potion, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
-    public @NotNull ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
+    public @NotNull ItemStack assemble(ContainerRecipeInput container, HolderLookup.Provider provider) {
         return output;
     }
 
@@ -32,7 +31,7 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
     }
 
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
+    public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
         if (pLevel.isClientSide()) return false;
 
         return hasBucket(pContainer, 0) && hasPotion(pContainer, 1);
@@ -43,11 +42,11 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
         return CommonUtils.of(bucket, potion);
     }
 
-    private boolean hasBucket(SimpleContainer container, int index) {
+    private boolean hasBucket(ContainerRecipeInput container, int index) {
         return bucket.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
-    private boolean hasPotion(SimpleContainer container, int index) {
+    private boolean hasPotion(ContainerRecipeInput container, int index) {
         return potion.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
@@ -69,7 +68,7 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
     public static class Serializer implements RecipeSerializer<InfusementChamberRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(Lithereal.MOD_ID, "infusing");
+                ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "infusing");
         public static final MapCodec<InfusementChamberRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
                                 Ingredient.CODEC.fieldOf("bucket").forGetter(infusementChamberRecipe -> infusementChamberRecipe.bucket),

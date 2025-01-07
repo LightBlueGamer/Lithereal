@@ -12,7 +12,7 @@ import org.lithereal.Lithereal;
 
 public class FreezingStationScreen extends AbstractContainerScreen<FreezingStationMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png");
+            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png");
     public FreezingStationScreen(FreezingStationMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
@@ -30,15 +30,15 @@ public class FreezingStationScreen extends AbstractContainerScreen<FreezingStati
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
         if(menu.isCrafting()) {
-            if(menu.getCooling() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
-            else if(menu.getCooling() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 204, 1, menu.getScaledProgress(), 15);
+            if(menu.getCooling() == 1) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 178, 1, menu.getScaledProgress(), 15);
+            else if(menu.getCooling() == 2) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/freezing_station_gui.png"), x + 96, y + 34, 204, 1, menu.getScaledProgress(), 15);
         }
     }
 

@@ -2,9 +2,9 @@ package org.lithereal.data.mixin;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import org.lithereal.item.infused.InfusedItem;
 import org.spongepowered.asm.mixin.Final;
@@ -21,13 +21,13 @@ public class ShapedRecipeMixin {
 
     @Shadow
     @Final
-    private ItemStack result;
+    ItemStack result;
 
-    @Inject(method = "assemble(Lnet/minecraft/world/inventory/CraftingContainer;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
-    public void assemble(CraftingContainer craftingContainer, HolderLookup.Provider provider, CallbackInfoReturnable<ItemStack> cir) {
+    @Inject(method = "assemble(Lnet/minecraft/world/item/crafting/CraftingInput;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
+    public void assemble(CraftingInput craftingInput, HolderLookup.Provider provider, CallbackInfoReturnable<ItemStack> cir) {
         AtomicBoolean bl = new AtomicBoolean(true);
         ItemStack result = this.result.copy();
-        if(result.getItem() instanceof InfusedItem) craftingContainer.getItems().forEach(itemStack -> {
+        if(result.getItem() instanceof InfusedItem) craftingInput.items().forEach(itemStack -> {
             if (itemStack.getItem() instanceof InfusedItem) {
                 PotionContents oldContents = result.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
                 PotionContents newContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);

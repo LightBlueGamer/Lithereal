@@ -22,6 +22,7 @@ import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -37,11 +38,11 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
 
     @Shadow protected abstract void renderGlint(PoseStack arg, MultiBufferSource arg2, int i, A arg3);
 
-    @Shadow protected abstract void renderModel(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, A humanoidModel, float f, float g, float h, ResourceLocation resourceLocation);
-
     @Shadow protected abstract void renderTrim(Holder<ArmorMaterial> holder, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, ArmorTrim armorTrim, A humanoidModel, boolean bl);
 
     @Shadow protected abstract void setPartVisibility(A humanoidModel, EquipmentSlot equipmentSlot);
+
+    @Shadow protected abstract void renderModel(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, A humanoidModel, int j, ResourceLocation resourceLocation);
 
     public ArmorLayerMixin(RenderLayerParent<T, M> p_117346_) {
         super(p_117346_);
@@ -63,12 +64,9 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
                 boolean bl = this.usesInnerModel(equipmentSlot);
                 ArmorMaterial armorMaterial = infusedLitheriteArmorItem.getMaterial().value();
                 int c = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor();
-                float r = (float) (c >> 16 & 255) / 255.0F;
-                float g = (float) (c >> 8 & 255) / 255.0F;
-                float b = (float) (c & 255) / 255.0F;
 
                 for (ArmorMaterial.Layer armorMaterialLayer : armorMaterial.layers()) {
-                    this.renderModel(poseStack, multiBufferSource, i, humanoidModel, r, g, b, armorMaterialLayer.texture(bl));
+                    renderModel(poseStack, multiBufferSource, i, humanoidModel, c, armorMaterialLayer.texture(bl));
                 }
 
                 ArmorTrim armortrim = itemStack.get(DataComponents.TRIM);
@@ -81,6 +79,7 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
         }
     }
 
+    @Unique
     private boolean armorHasCorrectEffect(Player player) {
         AtomicBoolean bl = new AtomicBoolean(false);
         for (ItemStack armorStack : player.getInventory().armor) {

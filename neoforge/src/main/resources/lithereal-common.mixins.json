@@ -6,7 +6,6 @@
   "client": [
   ],
   "mixins": [
-    "ResourceLocationMixin",
     "ShapedRecipeMixin",
     "CraftingInventoryMixin",
     "ShapelessRecipeMixin",

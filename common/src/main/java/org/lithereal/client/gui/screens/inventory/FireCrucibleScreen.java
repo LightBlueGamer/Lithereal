@@ -12,7 +12,7 @@ import org.lithereal.Lithereal;
 
 public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png");
+            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png");
     public FireCrucibleScreen(FireCrucibleMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
@@ -30,7 +30,7 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
         renderHeatSource(guiGraphics.pose(), x, y, guiGraphics);
@@ -41,19 +41,19 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
         if (menu.isCrafting()) {
             int progressHeight = menu.getScaledProgress();
             int yOffset = y + 51 - progressHeight;
-            if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 176, 14 - progressHeight, 14, progressHeight);
-            else if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 190, 14 - progressHeight, 14, progressHeight);
+            if(menu.getHeatLevel() == 1) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 176, 14 - progressHeight, 14, progressHeight);
+            else if(menu.getHeatLevel() == 2) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 80, yOffset, 190, 14 - progressHeight, 14, progressHeight);
         }
     }
 
     private void renderHeatSource(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.getHeatLevel() == 2) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
-        else if(menu.getHeatLevel() == 1) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
+        if(menu.getHeatLevel() == 2) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
+        else if(menu.getHeatLevel() == 1) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/fire_crucible_gui.png"), x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
     }
 
     private void renderBucketProcessing(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(!menu.hasBucket() && menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 50, 8, 11);
-        else if(menu.isCrafting()) guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 62, 8, 11);
+        if(!menu.hasBucket() && menu.isCrafting()) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 50, 8, 11);
+        else if(menu.isCrafting()) guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png"), x + 84, y + 55, 176, 62, 8, 11);
     }
 
 

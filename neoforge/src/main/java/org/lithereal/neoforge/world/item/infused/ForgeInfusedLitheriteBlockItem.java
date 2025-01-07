@@ -16,6 +16,7 @@ public class ForgeInfusedLitheriteBlockItem extends InfusedLitheriteBlockItem {
     }
 
 
+    @SuppressWarnings("removal")
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {

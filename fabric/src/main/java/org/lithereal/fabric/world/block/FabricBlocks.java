@@ -35,21 +35,21 @@ public class FabricBlocks {
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
-        return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Lithereal.MOD_ID, name), block);
+        return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name), block);
     }
 
     private static void registerBlockItem(String name, Block block) {
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Lithereal.MOD_ID, name),
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name),
                 new BlockItem(block, new Item.Properties()));
     }
 
     private static Block registerColoredBlock(String name, Block block) {
         registerColoredBlockItem(name, block);
-        return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Lithereal.MOD_ID, name), block);
+        return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name), block);
     }
 
     private static void registerColoredBlockItem(String name, Block block) {
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Lithereal.MOD_ID, name),
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name),
                 new InfusedLitheriteBlockItem(block, new Item.Properties()));
     }
 

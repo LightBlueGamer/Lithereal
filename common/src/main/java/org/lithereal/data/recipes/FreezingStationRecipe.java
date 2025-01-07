@@ -9,7 +9,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -20,24 +19,24 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.util.CommonUtils;
 
-public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal, Integer maxProgress) implements Recipe<SimpleContainer> {
+public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
+    public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
         if(pLevel.isClientSide()) return false;
 
         return hasCooler(pContainer, 0) && hasCrystal(pContainer, 1);
     }
 
-    private boolean hasCooler(SimpleContainer container, int index) {
+    private boolean hasCooler(ContainerRecipeInput container, int index) {
         return cooler.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
-    private boolean hasCrystal(SimpleContainer container, int index) {
+    private boolean hasCrystal(ContainerRecipeInput container, int index) {
         return crystal.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
-    public @NotNull ItemStack assemble(SimpleContainer container, HolderLookup.Provider provider) {
+    public @NotNull ItemStack assemble(ContainerRecipeInput container, HolderLookup.Provider provider) {
         return output;
     }
 
@@ -69,7 +68,7 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
     public static class Serializer implements RecipeSerializer<FreezingStationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(Lithereal.MOD_ID, "freezing");
+                ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "freezing");
         public static final MapCodec<FreezingStationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
                                 Ingredient.CODEC.fieldOf("cooler").forGetter(freezingStationRecipe -> freezingStationRecipe.cooler),

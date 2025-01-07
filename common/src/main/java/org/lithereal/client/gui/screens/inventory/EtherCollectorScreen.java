@@ -11,7 +11,7 @@ import org.lithereal.Lithereal;
 
 public class EtherCollectorScreen extends AbstractContainerScreen<EtherCollectorMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Lithereal.MOD_ID,"textures/gui/ether_collector_gui.png");
+            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/ether_collector_gui.png");
     public EtherCollectorScreen(EtherCollectorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
@@ -29,7 +29,7 @@ public class EtherCollectorScreen extends AbstractContainerScreen<EtherCollector
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(new ResourceLocation(Lithereal.MOD_ID,"textures/gui/ether_collector_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/ether_collector_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
     }
 
     @Override
