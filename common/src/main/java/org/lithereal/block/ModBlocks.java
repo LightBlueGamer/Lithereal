@@ -104,6 +104,14 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> LITHEREAL_VAULT = registerBlock("lithereal_vault",
             () -> new LitherealVaultBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VAULT)));
 
+    public static final RegistrySupplier<Block> NERITH_ORE = registerBlock("nerith_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
+                    .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> DEEPSLATE_NERITH_ORE = registerBlock("deepslate_nerith_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         return registerBlock(name, block, Item.Properties::new);
     }

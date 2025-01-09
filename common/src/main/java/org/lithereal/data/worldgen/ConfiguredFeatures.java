@@ -18,6 +18,7 @@ import java.util.List;
 
 public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LITHERITE_ORE_KEY = registerKey("litherite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NERITH_ORE_KEY = registerKey("nerith_ore");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -28,6 +29,12 @@ public class ConfiguredFeatures {
                 OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState()));
 
         register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldLitheriteOres, 4));
+
+        List<OreConfiguration.TargetBlockState> overworldNerithOres = List.of(OreConfiguration.target(stoneReplaceables,
+                        ModBlocks.NERITH_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_NERITH_ORE.get().defaultBlockState()));
+
+        register(context, NERITH_ORE_KEY, Feature.ORE, new OreConfiguration(overworldNerithOres, 2));
     }
 
 
