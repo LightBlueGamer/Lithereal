@@ -9,5 +9,8 @@ public class FabricOreGeneration {
     public static void generateOres() {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
                 GenerationStep.Decoration.UNDERGROUND_ORES, PlacedFeatures.LITHERITE_PLACED_KEY);
+
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
+                GenerationStep.Decoration.UNDERGROUND_ORES, PlacedFeatures.NERITH_PLACED_KEY);
     }
 }
