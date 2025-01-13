@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -18,6 +19,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -41,6 +44,7 @@ import org.lithereal.item.WarHammerItem;
 import org.lithereal.item.ability.Ability;
 import org.lithereal.item.ability.AbilityHammerItem;
 import org.lithereal.item.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 import org.lithereal.item.infused.InfusedLitheriteHammerItem;
 
 import java.nio.file.Path;
@@ -54,6 +58,10 @@ public class LitherealExpectPlatformImpl {
      */
     public static Path getConfigDirectory() {
         return FabricLoader.getInstance().getConfigDir();
+    }
+
+    public static InfusedLitheriteArmorItem createInfusedLitheriteArmorItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, int durability, Item.Properties properties) {
+        return new InfusedLitheriteArmorItem(armorMaterial, type, durability, properties);
     }
 
     public static InfusedLitheriteBlock getInfusedLitheriteBlock() {

@@ -177,7 +177,7 @@ public class ModItems {
             new AbilityArmorItem(FROZEN, ModArmorMaterials.FROZEN_LITHERITE, ArmorItem.Type.HELMET, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HELMET = ITEMS.register("infused_litherite_helmet", () ->
-            new InfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.HELMET, 25, new Item.Properties()));
+            LitherealExpectPlatform.createInfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.HELMET, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HELMET = ITEMS.register("withering_litherite_helmet", () ->
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.HELMET, 25, new Item.Properties()));
@@ -192,7 +192,7 @@ public class ModItems {
             new AbilityArmorItem(FROZEN, ModArmorMaterials.FROZEN_LITHERITE, ArmorItem.Type.CHESTPLATE, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_CHESTPLATE = ITEMS.register("infused_litherite_chestplate", () ->
-            new InfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.CHESTPLATE, 25, new Item.Properties()));
+            LitherealExpectPlatform.createInfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.CHESTPLATE, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_CHESTPLATE = ITEMS.register("withering_litherite_chestplate", () ->
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.CHESTPLATE, 25, new Item.Properties()));
@@ -207,7 +207,7 @@ public class ModItems {
             new AbilityArmorItem(FROZEN, ModArmorMaterials.FROZEN_LITHERITE, ArmorItem.Type.LEGGINGS, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_LEGGINGS = ITEMS.register("infused_litherite_leggings", () ->
-            new InfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.LEGGINGS, 25, new Item.Properties()));
+            LitherealExpectPlatform.createInfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.LEGGINGS, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_LEGGINGS = ITEMS.register("withering_litherite_leggings", () ->
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.LEGGINGS, 25, new Item.Properties()));
@@ -222,7 +222,7 @@ public class ModItems {
             new AbilityArmorItem(FROZEN, ModArmorMaterials.FROZEN_LITHERITE, ArmorItem.Type.BOOTS, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_BOOTS = ITEMS.register("infused_litherite_boots", () ->
-            new InfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.BOOTS, 25, new Item.Properties()));
+            LitherealExpectPlatform.createInfusedLitheriteArmorItem(ModArmorMaterials.INFUSED_LITHERITE, ArmorItem.Type.BOOTS, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_BOOTS = ITEMS.register("withering_litherite_boots", () ->
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.BOOTS, 25, new Item.Properties()));

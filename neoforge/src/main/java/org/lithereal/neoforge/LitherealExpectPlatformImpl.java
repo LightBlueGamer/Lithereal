@@ -1,6 +1,7 @@
 package org.lithereal.neoforge;
 
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -10,6 +11,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -32,6 +35,7 @@ import org.lithereal.item.WarHammerItem;
 import org.lithereal.item.ability.Ability;
 import org.lithereal.item.ability.AbilityHammerItem;
 import org.lithereal.item.burning.BurningLitheriteHammerItem;
+import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 import org.lithereal.item.infused.InfusedLitheriteHammerItem;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
 import org.lithereal.neoforge.world.block.ForgeInfusementChamberBlock;
@@ -47,6 +51,7 @@ import org.lithereal.client.gui.screens.inventory.EtherCollectorMenu;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleMenu;
 import org.lithereal.client.gui.screens.inventory.FreezingStationMenu;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
+import org.lithereal.neoforge.world.item.infused.ForgeInfusedLitheriteArmorItem;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -59,6 +64,10 @@ public class LitherealExpectPlatformImpl {
      */
     public static Path getConfigDirectory() {
         return FMLPaths.CONFIGDIR.get();
+    }
+
+    public static InfusedLitheriteArmorItem createInfusedLitheriteArmorItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, int durability, Item.Properties properties) {
+        return new ForgeInfusedLitheriteArmorItem(armorMaterial, type, durability, properties);
     }
 
     public static InfusedLitheriteBlock getInfusedLitheriteBlock() {
