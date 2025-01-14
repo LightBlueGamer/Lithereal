@@ -97,7 +97,7 @@ public class LitherealClient {
 
             if (!(blockItem.getItem() instanceof InfusedItem) && !litherite.contains(blockItem) && isEquipment(BuiltInRegistries.ITEM.getKey(blockItem.getItem()).getPath())) {
                 litherite.add(blockItem);
-            } else otherB.add(blockItem);
+            } else if (!(blockItem.getItem() instanceof InfusedItem)) otherB.add(blockItem);
         }
 
         litherite.add(LitherealExpectPlatform.getLitheriteItem().getDefaultInstance());
@@ -107,7 +107,7 @@ public class LitherealClient {
 
             if (!(item.getItem() instanceof InfusedItem) && !litherite.contains(item) && isEquipment(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath())) {
                 litherite.add(item);
-            } else otherI.add(item);
+            } else if (!(item.getItem() instanceof InfusedItem)) otherI.add(item);
         }
 
         litherite.sort(Comparator.comparing(itemStack -> {
