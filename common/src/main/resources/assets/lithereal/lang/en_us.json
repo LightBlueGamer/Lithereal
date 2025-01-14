@@ -60,8 +60,13 @@
   "block.lithereal.scorched_netherrack": "Scorched Netherrack",
   "block.lithereal.scorched_warped_nylium": "Scorched Warped Nylium",
   "block.lithereal.withering_litherite_block": "Block of Withering Litherite",
+  "block.lithereal.nerith_ore": "Nerith Ore",
+  "block.lithereal.deepslate_nerith_ore": "Deepslate Nerith Ore",
+
   "enchantment.lithereal.heros_edge": "Hero's Edge",
+
   "entity.lithereal.lither_charge": "Thrown Lither Charge",
+
   "item.enhanced": "Enhanced",
   "item.lithereal.boss_essence_nether_star": "Boss Essence Nether Star",
   "item.lithereal.burning_litherite_axe": "Burning Litherite Axe",
@@ -448,7 +453,6 @@
   "item.lithereal.litherite_wrench": "Litherite Wrench",
   "item.lithereal.molten_litherite_bucket": "Molten Litherite Bucket",
   "item.lithereal.music_disc_sparkle": "Music Disc",
-  "jukebox_song.lithereal.sparkle": "Lithereal - Sparkle",
   "item.lithereal.mycronium_orb": "Mycronium Orb",
   "item.lithereal.mysterious_rod.obscured": "Mysterious Rod",
   "item.lithereal.mysterious_rod.revealed": "Odysium Rod",
@@ -476,9 +480,15 @@
   "item.lithereal.withering_litherite_pickaxe": "Withering Litherite Pickaxe",
   "item.lithereal.withering_litherite_shovel": "Withering Litherite Shovel",
   "item.lithereal.withering_litherite_sword": "Withering Litherite Sword",
+  "item.lithereal.nerith_ingot": "Nerith Ingot",
+
   "itemGroup.lithereal.lithereal.tab": "Lithereal",
+
   "key.category.lithereal.lithereal": "Lithereal",
   "key.lithereal.freeze_water": "Frost Walker",
   "key.lithereal.scorch_ground": "Scorch Ground",
+
+  "jukebox_song.lithereal.sparkle": "Lithereal - Sparkle",
+
   "trim_material.lithereal.litherite": "Litherite Material"
 }

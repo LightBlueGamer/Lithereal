@@ -10,6 +10,8 @@
     "lithereal:lither_lantern",
     "lithereal:litherite_block",
     "lithereal:litherite_ore",
-    "lithereal:withering_litherite_block"
+    "lithereal:withering_litherite_block",
+    "lithereal:nerith_ore",
+    "lithereal:deepslate_nerith_ore"
   ]
 }

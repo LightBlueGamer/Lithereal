@@ -34,7 +34,7 @@ public class ConfiguredFeatures {
                         ModBlocks.NERITH_ORE.get().defaultBlockState()),
                 OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_NERITH_ORE.get().defaultBlockState()));
 
-        register(context, NERITH_ORE_KEY, Feature.ORE, new OreConfiguration(overworldNerithOres, 2));
+        register(context, NERITH_ORE_KEY, Feature.ORE, new OreConfiguration(overworldNerithOres, 4));
     }
 
 

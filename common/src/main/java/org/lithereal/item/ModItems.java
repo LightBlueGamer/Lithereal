@@ -245,6 +245,9 @@ public class ModItems {
     public static final RegistrySupplier<Item> UNIFIER = ITEMS.register("unifier", () ->
             new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
+    public static final RegistrySupplier<Item> NERITH_INGOT = ITEMS.register("nerith_ingot", () ->
+            new Item(new Item.Properties()));
+
     public static void register() {
         if (isModLoaded("combatify"))
             CompatInit.initCombatify();
