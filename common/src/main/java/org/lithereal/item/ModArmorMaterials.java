@@ -54,6 +54,7 @@ public class ModArmorMaterials {
         map.put(ArmorItem.Type.CHESTPLATE, 8);
         map.put(ArmorItem.Type.HELMET, 3);
     }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, () -> Ingredient.of(ModItems.WITHERING_LITHERITE_CRYSTAL.get()));
+
     public static final Holder<ArmorMaterial> ODYSIUM = register("odysium", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
         map.put(ArmorItem.Type.BOOTS, 4);
         map.put(ArmorItem.Type.LEGGINGS, 7);
