@@ -92,14 +92,6 @@ public class LitherealClient {
                 litherite = CompatInit.populateInfusedForCombatify(litherite, holder);
         }
 
-        for (RegistrySupplier<Block> blockRegistryObject : ModBlocks.BLOCKS) {
-            ItemStack blockItem = new ItemStack(blockRegistryObject.get());
-
-            if (!(blockItem.getItem() instanceof InfusedItem) && !litherite.contains(blockItem) && isEquipment(BuiltInRegistries.ITEM.getKey(blockItem.getItem()).getPath())) {
-                litherite.add(blockItem);
-            } else if (!(blockItem.getItem() instanceof InfusedItem)) otherB.add(blockItem);
-        }
-
         litherite.add(LitherealExpectPlatform.getLitheriteItem().getDefaultInstance());
 
         for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
