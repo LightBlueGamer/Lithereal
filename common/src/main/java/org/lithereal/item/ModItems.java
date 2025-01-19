@@ -294,7 +294,7 @@ public class ModItems {
     public static final RegistrySupplier<Item> NETHERITE_NUGGET = ITEMS.register("netherite_nugget", () ->
             new Item(new Item.Properties()));
 
-    public static final RegistrySupplier<Item> RAW_ALLIAN = ITEMS.register("raw_allian", () ->
+    public static final RegistrySupplier<Item> RAW_ALLIUM = ITEMS.register("raw_allium", () ->
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> RAW_NERITH = ITEMS.register("raw_nerith", () ->

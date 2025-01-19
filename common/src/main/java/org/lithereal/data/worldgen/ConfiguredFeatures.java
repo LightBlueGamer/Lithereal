@@ -40,17 +40,20 @@ public class ConfiguredFeatures {
         RuleTest endstoneReplaceables = new BlockMatchTest(Blocks.END_STONE);
 
         List<OreConfiguration.TargetBlockState> overworldCyrumOres = List.of(
-                OreConfiguration.target(stoneReplaceables, ModBlocks.CYRUM_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceables, ModBlocks.CYRUM_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_CYRUM_ORE.get().defaultBlockState())
         );
         register(context, CYRUM_ORE_KEY, Feature.ORE, new OreConfiguration(overworldCyrumOres, 12)); // Vein size 12
 
         List<OreConfiguration.TargetBlockState> overworldAureliteOres = List.of(
-                OreConfiguration.target(stoneReplaceables, ModBlocks.AURELITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceables, ModBlocks.AURELITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_AURELITE_ORE.get().defaultBlockState())
         );
         register(context, AURELITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldAureliteOres, 8)); // Vein size 8
 
         List<OreConfiguration.TargetBlockState> overworldCopaliteOres = List.of(
-                OreConfiguration.target(stoneReplaceables, ModBlocks.COPALITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceables, ModBlocks.COPALITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_COPALITE_ORE.get().defaultBlockState())
         );
         register(context, COPALITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldCopaliteOres, 8)); // Vein size 8
 
@@ -60,7 +63,8 @@ public class ConfiguredFeatures {
         register(context, HELLIONITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherHellioniteOres, 5)); // Vein size 5
 
         List<OreConfiguration.TargetBlockState> overworldLitheriteOres = List.of(
-                OreConfiguration.target(stoneReplaceables, ModBlocks.LITHERITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceables, ModBlocks.LITHERITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState())
         );
         register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldLitheriteOres, 4)); // Vein size 4
 
@@ -85,7 +89,8 @@ public class ConfiguredFeatures {
         register(context, ALLIAN_ORE_KEY, Feature.ORE, new OreConfiguration(endAllianOres, 2)); // Vein size 2
 
         List<OreConfiguration.TargetBlockState> overworldLuminiumOres = List.of(
-                OreConfiguration.target(stoneReplaceables, ModBlocks.LUMINIUM_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceables, ModBlocks.LUMINIUM_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LUMINIUM_ORE.get().defaultBlockState())
         );
         register(context, LUMINIUM_ORE_KEY, Feature.ORE, new OreConfiguration(overworldLuminiumOres, 4)); // Vein size 2
 
