@@ -1,9 +1,9 @@
 {
-  "feature": "lithereal:litherite_ore",
+  "feature": "lithereal:hellionite_ore",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 6
+      "count": 8
     },
     {
       "type": "minecraft:in_square"
@@ -13,10 +13,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "above_bottom": 32
+          "absolute": 128
         },
         "min_inclusive": {
-          "above_bottom": -32
+          "absolute": 0
         }
       }
     },

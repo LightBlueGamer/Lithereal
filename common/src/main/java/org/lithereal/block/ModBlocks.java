@@ -112,6 +112,58 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
 
+    public static final RegistrySupplier<Block> ELUNITE_ORE = registerBlock("elunite_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> CHRYON_ORE = registerBlock("chryon_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> SATURNITE_ORE = registerBlock("saturnite_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> HELLIONITE_ORE = registerBlock("hellionite_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> LUMINIUM_ORE = registerBlock("luminium_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> DEEPSLATE_LUMINIUM_ORE = registerBlock("deepslate_luminium_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> CYRUM_ORE = registerBlock("cyrum_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> DEEPSLATE_CYRUM_ORE = registerBlock("deepslate_cyrum_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> COPALITE_ORE = registerBlock("copalite_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> DEEPSLATE_COPALITE_ORE = registerBlock("deepslate_copalite_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> AURELITE_ORE = registerBlock("aurelite_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> DEEPSLATE_AURELITE_ORE = registerBlock("deepslate_aurelite_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> ALLIAN_ORE = registerBlock("allian_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         return registerBlock(name, block, Item.Properties::new);
     }

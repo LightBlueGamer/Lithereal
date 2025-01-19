@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "lithereal:litherite_ore"
+          "Name": "lithereal:luminium_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "lithereal:deepslate_litherite_ore"
+          "Name": "lithereal:deepslate_luminium_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

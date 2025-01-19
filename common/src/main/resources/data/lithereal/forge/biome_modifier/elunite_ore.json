@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#is_overworld",
-  "features": "lithereal:luminium_ore_placed",
+  "biomes": "#is_end",
+  "features": "lithereal:elunite_ore_placed",
   "step": "underground_ores"
 }

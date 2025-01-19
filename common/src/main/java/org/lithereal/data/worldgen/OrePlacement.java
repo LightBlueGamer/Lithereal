@@ -9,6 +9,10 @@ public class OrePlacement {
         return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());
     }
 
+    public static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_, BiomeFilter biomeFilter) {
+        return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());
+    }
+
     public static List<PlacementModifier> commonOrePlacement(int veinsPerChunk, PlacementModifier placementModifier) {
         return orePlacement(CountPlacement.of(veinsPerChunk), placementModifier);
     }

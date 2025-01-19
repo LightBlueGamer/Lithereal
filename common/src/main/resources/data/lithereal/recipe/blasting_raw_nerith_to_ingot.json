@@ -4,9 +4,9 @@
     "cookingtime": 100,
     "experience": 0.7,
     "ingredient": {
-      "item": "lithereal:raw_allian"
+      "item": "lithereal:raw_nerith"
     },
     "result": {
-      "id": "lithereal:allian_ingot"
+      "id": "lithereal:nerith_ingot"
     }
   }

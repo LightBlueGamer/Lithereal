@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:blasting",
+    "category": "misc",
+    "cookingtime": 100,
+    "experience": 0.7,
+    "ingredient": {
+      "item": "lithereal:cyrum_ore"
+    },
+    "result": {
+      "id": "lithereal:cyrum_crystal"
+    }
+  }

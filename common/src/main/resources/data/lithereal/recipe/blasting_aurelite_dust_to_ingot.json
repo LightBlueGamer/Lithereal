@@ -4,9 +4,9 @@
     "cookingtime": 100,
     "experience": 0.7,
     "ingredient": {
-      "item": "lithereal:copalite_dust"
+      "item": "lithereal:aurelite_dust"
     },
     "result": {
-      "id": "lithereal:copalite_ingot"
+      "id": "lithereal:aurelite_ingot"
     }
   }

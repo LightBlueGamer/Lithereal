@@ -261,6 +261,48 @@ public class ModItems {
     public static final RegistrySupplier<Item> NERITH_INGOT = ITEMS.register("nerith_ingot", () ->
             new Item(new Item.Properties()));
 
+    public static final RegistrySupplier<Item> ALLIAN_INGOT = ITEMS.register("allian_ingot", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> AURELITE_DUST = ITEMS.register("aurelite_dust", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> AURELITE_INGOT = ITEMS.register("aurelite_ingot", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> CHRYON_CRYSTAL = ITEMS.register("chryon_crystal", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> COPALITE_DUST = ITEMS.register("copalite_dust", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> COPALITE_INGOT = ITEMS.register("copalite_ingot", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> CYRUM_CRYSTAL = ITEMS.register("cyrum_crystal", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> ELUNITE_CRYSTAL = ITEMS.register("elunite_crystal", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> HELLIONITE_CRYSTAL = ITEMS.register("hellionite_crystal", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> LUMINIUM_CRYSTAL = ITEMS.register("luminium_crystal", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> NETHERITE_NUGGET = ITEMS.register("netherite_nugget", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> RAW_ALLIAN = ITEMS.register("raw_allian", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> RAW_NERITH = ITEMS.register("raw_nerith", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> SATURNITE_CRYSTAL = ITEMS.register("saturnite_crystal", () ->
+            new Item(new Item.Properties()));
+
     public static void register() {
         if (isModLoaded("combatify"))
             CompatInit.initCombatify();

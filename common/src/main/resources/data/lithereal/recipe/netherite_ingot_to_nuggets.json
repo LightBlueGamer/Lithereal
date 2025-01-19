@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "lithereal:burning_litherite_block"
+      "item": "minecraft:netherite_ingot"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:burning_litherite_crystal"
+    "id": "lithereal:netherite_nugget"
   }
 }

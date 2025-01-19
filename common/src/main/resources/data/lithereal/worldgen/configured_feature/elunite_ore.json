@@ -2,11 +2,11 @@
   "type": "minecraft:ore",
   "config": {
     "discard_chance_on_air_exposure": 0,
-    "size": 3,
+    "size": 2,
     "targets": [
       {
         "state": {
-          "Name": "lithereal:chryon_ore"
+          "Name": "lithereal:elunite_ore"
         },
         "target": {
           "block": "minecraft:end_stone",
