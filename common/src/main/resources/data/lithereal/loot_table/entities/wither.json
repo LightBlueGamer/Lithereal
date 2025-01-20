@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lithereal:boss_essence",
+          "conditions": []
+        }
+      ]
+    }
+  ],
+  "random_sequence": "minecraft:entities/wither"
+}

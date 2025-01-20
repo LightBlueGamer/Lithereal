@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "lithereal:item/raw_allium"
+    "layer0": "lithereal:item/soliumite_ingot"
   }
 }

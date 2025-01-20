@@ -294,7 +294,7 @@ public class ModItems {
     public static final RegistrySupplier<Item> NETHERITE_NUGGET = ITEMS.register("netherite_nugget", () ->
             new Item(new Item.Properties()));
 
-    public static final RegistrySupplier<Item> RAW_ALLIUM = ITEMS.register("raw_allium", () ->
+    public static final RegistrySupplier<Item> RAW_ALLIA = ITEMS.register("raw_allia", () ->
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> RAW_NERITH = ITEMS.register("raw_nerith", () ->
@@ -302,6 +302,15 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> SATURNITE_CRYSTAL = ITEMS.register("saturnite_crystal", () ->
             new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> SOLIUMITE_INGOT = ITEMS.register("soliumite_ingot", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> ELCRUM_INGOT = ITEMS.register("elcrum_ingot", () ->
+            new Item(new Item.Properties()));
+
+    public static final RegistrySupplier<Item> BOSS_ESSENCE = ITEMS.register("boss_essence", () ->
+            new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     public static void register() {
         if (isModLoaded("combatify"))
