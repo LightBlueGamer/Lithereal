@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lithereal:hellionite_crystal"
+    },
+    {
+      "item": "lithereal:luminium_crystal"
+    }
+  ],
+  "result": {
+    "id": "lithereal:soliumite_ingot"
+  }
+}

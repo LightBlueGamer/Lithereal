@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lithereal:elunite_crystal"
+    },
+    {
+      "item": "lithereal:cyrum_crystal"
+    }
+  ],
+  "result": {
+    "id": "lithereal:elcrum_ingot"
+  }
+}

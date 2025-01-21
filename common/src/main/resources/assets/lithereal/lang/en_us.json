@@ -503,7 +503,7 @@
   "item.lithereal.aurelite_ingot": "Aurelite Ingot",
   "item.lithereal.chryon_crystal": "Chryon Crystal",
   "item.lithereal.copalite_dust": "Copalite Dust",
-  "item.lithereal.copalite_ingot": "Copalite_ingot",
+  "item.lithereal.copalite_ingot": "Copalite Ingot",
   "item.lithereal.cyrum_crystal": "Cyrum Orb",
   "item.lithereal.elunite_crystal": "Elunite Crystal",
   "item.lithereal.hellionite_crystal": "Hellionite Crystal",
@@ -512,6 +512,9 @@
   "item.lithereal.raw_allium": "Raw Allium",
   "item.lithereal.raw_nerith": "Raw Nerith",
   "item.lithereal.saturnite_crystal": "Saturnite Crystal",
+  "item.lithereal.soliumite_ingot": "Soliumite Ingot",
+  "item.lithereal.elcrum_ingot": "Elcrum Ingot",
+  "item.lithereal.boss_essence": "Boss Essence",
 
   "itemGroup.lithereal.lithereal.tab": "Lithereal",
 

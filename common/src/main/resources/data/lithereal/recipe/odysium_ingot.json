@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lithereal:allian_ingot"
+    },
+    {
+      "item": "lithereal:nerith_ingot"
+    },
+    {
+      "item": "lithereal:copalite_ingot"
+    },
+    {
+      "item": "lithereal:aurelite_ingot"
+    },
+    {
+      "item": "lithereal:unifier"
+    },
+    {
+      "item": "lithereal:elcrum_ingot"
+    },
+    {
+      "item": "lithereal:soliumite_ingot"
+    },
+    {
+      "item": "chryon_crystal"
+    },
+    {
+      "item": "saturnite_crystal"
+    }
+  ],
+  "result": {
+    "id": "lithereal:odysium_ingot"
+  }
+}
