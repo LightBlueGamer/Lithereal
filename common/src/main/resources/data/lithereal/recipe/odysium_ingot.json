@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "lithereal:allian_ingotl"
+      "item": "lithereal:allian_ingot"
     },
     {
       "item": "lithereal:nerith_ingot"
