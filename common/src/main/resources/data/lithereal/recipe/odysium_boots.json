@@ -1,13 +1,13 @@
 {
-  "type": "smithing_transform",
-  "template": "namespace:odysium_upgrade_smithing_template",
+  "type": "minecraft:smithing_transform",
+  "template": "lithereal:odysium_upgrade_smithing_template",
   "base": {
     "item": "minecraft:netherite_boots"
   },
   "addition": {
-    "item": "namespace:odysium_ingot"
+    "item": "lithereal:odysium_ingot"
   },
   "result": {
-    "item": "namespace:odysium_boots"
+    "item": "lithereal:odysium_boots"
   }
 }
