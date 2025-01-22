@@ -515,6 +515,10 @@
   "item.lithereal.soliumite_ingot": "Soliumite Ingot",
   "item.lithereal.elcrum_ingot": "Elcrum Ingot",
   "item.lithereal.boss_essence": "Boss Essence",
+  "item.lithereal.smithing_template.odysium_upgrade.additions_slot_description": "Add Odysium Ingot",
+  "item.lithereal.smithing_template.odysium_upgrade.applies_to": "Netherite Equipment",
+  "item.lithereal.smithing_template.odysium_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.lithereal.smithing_template.odysium_upgrade.ingredients": "Odysium Ingot",
 
   "itemGroup.lithereal.lithereal.tab": "Lithereal",
 
@@ -524,5 +528,7 @@
 
   "jukebox_song.lithereal.sparkle": "Lithereal - Sparkle",
 
-  "trim_material.lithereal.litherite": "Litherite Material"
+  "trim_material.lithereal.litherite": "Litherite Material",
+
+  "upgrade.lithereal.odysium_upgrade": "Odysium Upgrade"
 }

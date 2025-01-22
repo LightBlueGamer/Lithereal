@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "lithereal:litherite_crystal"
+    },
+    "C": {
+      "item": "lithereal:etherstone"
+    },
+    "S": {
+      "item": "lithereal:odysium_upgrade_smithing_template"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "id": "lithereal:odysium_upgrade_smithing_template"
+  }
+}

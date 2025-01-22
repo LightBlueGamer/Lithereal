@@ -2,8 +2,10 @@ package org.lithereal.item;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
@@ -18,6 +20,7 @@ import org.lithereal.item.burning.BurningLitheriteHoeItem;
 import org.lithereal.item.burning.BurningLitheritePickaxeItem;
 import org.lithereal.item.compat.CompatInit;
 import org.lithereal.item.obscured.MysteriousItem;
+
 
 import static dev.architectury.platform.Platform.isModLoaded;
 import static org.lithereal.util.CommonUtils.*;
@@ -311,6 +314,19 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE = ITEMS.register("boss_essence", () ->
             new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
+    public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("odysium_upgrade_smithing_template",
+            () -> new SmithingTemplateItem(
+                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.applies_to").withStyle(ChatFormatting.BLUE),
+                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.ingredients").withStyle(ChatFormatting.BLUE),
+                    Component.translatable("upgrade.lithereal.odysium_upgrade").withStyle(ChatFormatting.GRAY),
+                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.base_slot_description"),
+                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.additions_slot_description"),
+                    SmithingTemplateItem.createNetheriteUpgradeTemplate().getBaseSlotEmptyIcons(),
+                    SmithingTemplateItem.createNetheriteUpgradeTemplate().getAdditionalSlotEmptyIcons()
+            ));
+
+
 
     public static void register() {
         if (isModLoaded("combatify"))

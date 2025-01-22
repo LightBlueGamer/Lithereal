@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "lithereal:item/raw_allia"
+    "layer0": "lithereal:item/raw_allium"
   }
 }

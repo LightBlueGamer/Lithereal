@@ -1,6 +1,8 @@
 {
   "replace": false,
   "entries": [
-    "lithereal:boss_essence"
+    "lithereal:boss_essence",
+    "lithereal:odysium_upgrade",
+    "lithereal:etherstone"
   ]
 }
