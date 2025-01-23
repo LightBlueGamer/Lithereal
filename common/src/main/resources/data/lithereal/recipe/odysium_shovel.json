@@ -1,6 +1,8 @@
 {
   "type": "minecraft:smithing_transform",
-  "template": "lithereal:odysium_upgrade_smithing_template",
+  "template": {
+    "item": "lithereal:odysium_upgrade_smithing_template"
+  },
   "base": {
     "item": "minecraft:netherite_shovel"
   },
@@ -8,6 +10,6 @@
     "item": "lithereal:odysium_ingot"
   },
   "result": {
-    "item": "lithereal:odysium_shovel"
+    "id": "lithereal:odysium_shovel"
   }
 }

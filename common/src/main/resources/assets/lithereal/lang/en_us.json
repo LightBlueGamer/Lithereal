@@ -519,6 +519,7 @@
   "item.lithereal.smithing_template.odysium_upgrade.applies_to": "Netherite Equipment",
   "item.lithereal.smithing_template.odysium_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
   "item.lithereal.smithing_template.odysium_upgrade.ingredients": "Odysium Ingot",
+  "item.lithereal.odysium_upgrade_smithing_template": "Odysium Upgrade",
 
   "itemGroup.lithereal.lithereal.tab": "Lithereal",
 

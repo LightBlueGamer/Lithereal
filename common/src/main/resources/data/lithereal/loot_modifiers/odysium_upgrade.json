@@ -6,5 +6,5 @@
       "loot_table_id": "minecraft:chests/bastion_treasure"
     }
   ],
-  "table": "lithereal:entities/wither"
+  "table": "lithereal:chests/bastion_treasure"
 }

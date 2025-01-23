@@ -116,38 +116,6 @@ public class LitherealExpectPlatformImpl {
         return FabricItems.LITHERITE_CRYSTAL;
     }
 
-    public static BlockEntityType<FabricEtherBatteryBlockEntity> getEtherBatteryBlockEntity() {
-        return FabricBlockEntities.ETHER_BATTERY_BLOCK_ENTITY;
-    }
-
-    public static BlockEntityTicker<FabricEtherBatteryBlockEntity> getEtherBatteryBlockEntityTicker() {
-        return FabricEtherBatteryBlockEntity::tick;
-    }
-
-    public static MenuType<FabricEtherBatteryMenu> getEtherBatteryMenu() {
-        return FabricScreenHandlers.ETHER_BATTERY_SCREEN_HANDLER;
-    }
-
-    public static EtherBatteryBlock getEtherBatteryBlock() {
-        return (EtherBatteryBlock) FabricBlocks.ETHER_BATTERY_BLOCK;
-    }
-
-    public static BlockEntityType<FabricEtherCollectorBlockEntity> getEtherCollectorBlockEntity() {
-        return FabricBlockEntities.ETHER_COLLECTOR_BLOCK_ENTITY;
-    }
-
-    public static BlockEntityTicker<FabricEtherCollectorBlockEntity> getEtherCollectorBlockEntityTicker() {
-        return FabricEtherCollectorBlockEntity::tick;
-    }
-
-    public static EtherCollectorBlock getEtherCollectorBlock() {
-        return (EtherCollectorBlock) FabricBlocks.ETHER_COLLECTOR_BLOCK;
-    }
-
-    public static MenuType<FabricEtherCollectorMenu> getEtherCollectorMenu() {
-        return FabricScreenHandlers.ETHER_COLLECTOR_SCREEN_HANDLER;
-    }
-
     public static void applyKnockbackToNearbyEntities(Player player, LivingEntity target, float strength) {
         boolean combatify = FabricLoader.getInstance().isModLoaded("combatify");
         double radius = !combatify ? 3.0 : CombatifyHooks.getCurrentAttackReach(player, 1);

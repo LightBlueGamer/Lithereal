@@ -76,5 +76,6 @@
       "functions": [],
       "conditions": []
     }
-  ]
+  ],
+  "random_sequence": "lithereal:chests/etherstone_treasure"
 }

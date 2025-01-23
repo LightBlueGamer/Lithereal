@@ -27,12 +27,6 @@ public class FabricBlocks {
     public static final Block INFUSEMENT_CHAMBER_BLOCK = registerBlock("infusement_chamber",
             new FabricInfusementChamberBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
-    public static final Block ETHER_BATTERY_BLOCK = registerBlock("ether_battery",
-            new FabricEtherBatteryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
-
-    public static final Block ETHER_COLLECTOR_BLOCK = registerBlock("ether_collector",
-            new FabricEtherCollectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
-
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
         return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name), block);

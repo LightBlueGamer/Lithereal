@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
@@ -316,15 +317,7 @@ public class ModItems {
             new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("odysium_upgrade_smithing_template",
-            () -> new SmithingTemplateItem(
-                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.applies_to").withStyle(ChatFormatting.BLUE),
-                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.ingredients").withStyle(ChatFormatting.BLUE),
-                    Component.translatable("upgrade.lithereal.odysium_upgrade").withStyle(ChatFormatting.GRAY),
-                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.base_slot_description"),
-                    Component.translatable("item.lithereal.smithing_template.odysium_upgrade.additions_slot_description"),
-                    SmithingTemplateItem.createNetheriteUpgradeTemplate().getBaseSlotEmptyIcons(),
-                    SmithingTemplateItem.createNetheriteUpgradeTemplate().getAdditionalSlotEmptyIcons()
-            ));
+            ModSmithingTemplateItem::createOdysiumUpgradeTemplate);
 
 
 

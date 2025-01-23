@@ -12,10 +12,19 @@ Will you join these brave adventurers on their quest to uncover the truth about 
 
 ### Found a bug?
 
-Please report the bug to the issue tracker.
+Please report the bug to the [issue tracker](minecraft:chests/buried/treasure).
 
+# Change Log
 
- 
+## 1.5.1
+### Bug Fixes
+- Fixed bug causing pickaxes not to work on Neo(Forge)
+- Fixed an ID and translation key error
 
- 
-
+### Additions
+- Added smithing recipes for Odysium tools, armor, and weapons
+- Added recipe for Odysium ingot
+- Added bunch of new ores to be found in The Overworld, The Nether, and The End
+- Added a Unifier to unify all ores into a greater form
+- Added Boss Essence which is droppd upon defeating The Wither boss
+- Added Odysium Upgrade Template found in bastions together with Netherite Upgrade Templates
