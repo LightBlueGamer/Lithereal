@@ -206,12 +206,12 @@ public enum Ability {
                     if(!(attacked.isInvertedHealAndHarm() && effect == MobEffects.HARM)) {
                         if(attacker.hasEffect(effect) && count.get() == 1) attacker.removeEffect(effect);
                         if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(attacker, attacker, attacked, mobEffectInstance.getAmplifier(), 1.0);
-                        else attacked.addEffect(CommonUtils.clone(mobEffectInstance));
+                        else attacked.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration() / 10, mobEffectInstance.getAmplifier()));
                     }
                 } else {
                     if (attacked.hasEffect(effect)) {
                         attacked.removeEffect(effect);
-                        attacker.addEffect(CommonUtils.clone(mobEffectInstance));
+                        attacked.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration() / 10, mobEffectInstance.getAmplifier()));
                     }
                 }
             });
@@ -281,7 +281,7 @@ public enum Ability {
                             if(!bl || bl2) {
                                 if (!(livingEntity.isInvertedHealAndHarm() && effect == MobEffects.HARM)) {
                                     if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(player, player, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
-                                    else livingEntity.addEffect(CommonUtils.clone(mobEffectInstance));
+                                    else livingEntity.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getDuration() / 10, mobEffectInstance.getAmplifier()));
                                 }
                             } else {
                                 if (livingEntity.hasEffect(effect))

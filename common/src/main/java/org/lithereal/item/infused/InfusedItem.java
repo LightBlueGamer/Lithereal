@@ -23,11 +23,11 @@ public interface InfusedItem extends AbilityItem {
     default List<MobEffectInstance> transformEffects(ItemStack stack, int timeNonInstant) {
         PotionContents potionContents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         List<MobEffectInstance> newList = Lists.newArrayList();
-        potionContents.forEachEffect((mobEffectInstance) -> newList.add(transformInstance(mobEffectInstance, timeNonInstant)));
+        potionContents.forEachEffect((mobEffectInstance) -> newList.add(transformInstance(mobEffectInstance, mobEffectInstance.getDuration() / 10)));
         return newList;
     }
     static MobEffectInstance transformInstance(MobEffectInstance mobEffectInstance, int timeNonInstant) {
-        return new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().value().isInstantenous() ? 1 : timeNonInstant, mobEffectInstance.getAmplifier(), mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon());
+        return new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().value().isInstantenous() ? 1 : mobEffectInstance.getDuration() / 10, mobEffectInstance.getAmplifier(), mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon());
     }
 
     @Override
