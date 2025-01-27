@@ -12,9 +12,13 @@ Will you join these brave adventurers on their quest to uncover the truth about 
 
 ### Found a bug?
 
-Please report the bug to the [issue tracker](minecraft:chests/buried/treasure).
+Please report the bug to the [issue tracker](https://github.com/LightBlueGamer/Lithereal/issues).
 
 # Change Log
+
+## 1.5.2
+### Additions
+- Added JEI Integration
 
 ## 1.5.1
 ### Bug Fixes
