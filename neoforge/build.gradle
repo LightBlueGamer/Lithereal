@@ -44,6 +44,9 @@ dependencies {
     shadowBundle(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
     modCompileOnly "net.atlas:combatify-1.21-fabric:${combatify_version}"
+
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 }
 
 processResources {
