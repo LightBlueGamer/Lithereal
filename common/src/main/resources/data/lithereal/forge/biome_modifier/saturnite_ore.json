@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#is_nether",
-  "features": "lithereal:saturnite_ore_placed",
-  "step": "underground_ores"
-}
