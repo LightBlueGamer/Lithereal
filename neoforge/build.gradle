@@ -19,7 +19,7 @@ configurations {
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentNeoForge.extendsFrom common
-
+    
     // Files in this configuration will be bundled into your mod using the Shadow plugin.
     // Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
     shadowBundle {
@@ -44,9 +44,6 @@ dependencies {
     shadowBundle(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
     modCompileOnly "net.atlas:combatify-1.21-fabric:${combatify_version}"
-
-    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
-    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 }
 
 processResources {

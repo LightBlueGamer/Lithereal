@@ -1,0 +1,41 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mixins]]
+config="lithereal.mixins.json"
+
+[[mixins]]
+config="lithereal-common.mixins.json"
+
+[[mods]]
+modId = "lithereal"
+version = "${version}"
+displayName = "Lithereal"
+authors = "Tim, Stunf, Alexandra"
+description = '''
+A mod about mysterious metals and crystals with magical properties.
+'''
+#logoFile = ""
+
+[[dependencies.lithereal]]
+modId = "neoforge"
+mandatory = true
+versionRange = "[21.0.45-beta,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lithereal]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lithereal]]
+modId = "architectury"
+mandatory = true
+versionRange = "[13.0.3,)"
+ordering = "AFTER"
+side = "BOTH"
