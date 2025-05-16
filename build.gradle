@@ -39,6 +39,10 @@ subprojects {
             name = "ModMaven"
             url = "https://modmaven.dev"
         }
+        maven {
+            name = "MinecraftForge"
+            url = "https://maven.minecraftforge.net/"
+        }
         flatDir {
             dirs 'libs'
         }

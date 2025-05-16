@@ -24,13 +24,13 @@ public class ModDimensions {
         context.register(LITHEREAL_DIM_TYPE, new DimensionType(
                 OptionalLong.of(12000),
                 true, // hasSkylight
-                true, // hasCeiling
+                false, // hasCeiling
                 false, // ultraWarm
                 true, // natural
                 1.0, // coordinateScale
                 true, // bedWorks
                 false, // respawnAnchorWorks
-                0, // minY
+                -64, // minY
                 256, // height
                 256, // logicalHeight
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn

@@ -44,6 +44,7 @@ dependencies {
     shadowBundle(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
     modCompileOnly "net.atlas:combatify-1.21-fabric:${combatify_version}"
+    modImplementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
 }
 
 processResources {
