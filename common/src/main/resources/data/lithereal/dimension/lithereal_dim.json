@@ -1,0 +1,11 @@
+{
+  "type": "lithereal:lithereal_dim_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:overworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "lithereal:lithereal_biome"
+    }
+  }
+}
