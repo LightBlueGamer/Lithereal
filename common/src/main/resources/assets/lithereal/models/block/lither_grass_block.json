@@ -1,0 +1,9 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "lithereal:block/lither_dirt",
+    "bottom": "lithereal:block/lither_dirt",
+    "top": "lithereal:block/lither_grass_block_top",
+    "side": "lithereal:block/lither_grass_block_side"
+  }
+}
