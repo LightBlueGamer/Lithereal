@@ -2,8 +2,8 @@ package org.lithereal.fabric.world.biome;
 
 import net.minecraft.resources.ResourceLocation;
 import org.lithereal.Lithereal;
-import org.lithereal.world.biome.ModOverworldRegion;
-import org.lithereal.world.biome.surface.ModSurfaceRules;
+import org.lithereal.data.worldgen.biome.ModOverworldRegion;
+import org.lithereal.data.worldgen.biome.surface.ModSurfaceRules;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 import terrablender.api.TerraBlenderApi;

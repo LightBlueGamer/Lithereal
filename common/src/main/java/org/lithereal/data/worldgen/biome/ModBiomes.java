@@ -1,4 +1,4 @@
-package org.lithereal.world.biome;
+package org.lithereal.data.worldgen.biome;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
