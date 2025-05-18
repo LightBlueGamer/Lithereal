@@ -1,4 +1,4 @@
-package org.lithereal.world.biome;
+package org.lithereal.data.worldgen.biome;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
