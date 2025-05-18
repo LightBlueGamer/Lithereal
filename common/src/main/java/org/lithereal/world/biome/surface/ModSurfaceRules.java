@@ -1,7 +1,6 @@
 package org.lithereal.world.biome.surface;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import org.lithereal.block.ModBlocks;
 
