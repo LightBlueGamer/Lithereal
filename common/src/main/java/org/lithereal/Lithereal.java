@@ -28,8 +28,8 @@ public class Lithereal {
 
     public static final Logger LOGGER = Logger.getLogger(MOD_ID);
     public static void init() {
-        ModCreativeTabs.register();
         ModBlocks.register();
+        ModCreativeTabs.register();
         ModArmorMaterials.register();
         ModComponents.register();
         ModTags.init();

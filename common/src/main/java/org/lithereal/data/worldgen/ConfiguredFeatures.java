@@ -42,32 +42,36 @@ public class ConfiguredFeatures {
 
         List<OreConfiguration.TargetBlockState> cyrumOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.CYRUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_CYRUM_ORE.get().defaultBlockState())
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_CYRUM_ORE.get().defaultBlockState()),
+                OreConfiguration.target(etherstoneReplaceables, ModBlocks.ETHERSTONE_CYRUM_ORE.get().defaultBlockState())
         );
-        register(context, CYRUM_ORE_KEY, Feature.ORE, new OreConfiguration(cyrumOres, 12)); // Vein size 12
+        register(context, CYRUM_ORE_KEY, Feature.ORE, new OreConfiguration(cyrumOres, 12));
 
-        List<OreConfiguration.TargetBlockState> overworldAureliteOres = List.of(
+        List<OreConfiguration.TargetBlockState> aureliteOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.AURELITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_AURELITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_AURELITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(etherstoneReplaceables, ModBlocks.ETHERSTONE_AURELITE_ORE.get().defaultBlockState())
         );
-        register(context, AURELITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldAureliteOres, 8)); // Vein size 8
+        register(context, AURELITE_ORE_KEY, Feature.ORE, new OreConfiguration(aureliteOres, 8)); // Vein size 8
 
-        List<OreConfiguration.TargetBlockState> overworldCopaliteOres = List.of(
+        List<OreConfiguration.TargetBlockState> copaliteOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.COPALITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_COPALITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_COPALITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(etherstoneReplaceables, ModBlocks.ETHERSTONE_COPALITE_ORE.get().defaultBlockState())
         );
-        register(context, COPALITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldCopaliteOres, 8)); // Vein size 8
+        register(context, COPALITE_ORE_KEY, Feature.ORE, new OreConfiguration(copaliteOres, 8)); // Vein size 8
 
         List<OreConfiguration.TargetBlockState> netherHellioniteOres = List.of(
                 OreConfiguration.target(netherrackReplaceables, ModBlocks.HELLIONITE_ORE.get().defaultBlockState())
         );
         register(context, HELLIONITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherHellioniteOres, 5)); // Vein size 5
 
-        List<OreConfiguration.TargetBlockState> overworldLitheriteOres = List.of(
+        List<OreConfiguration.TargetBlockState> litheriteOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.LITHERITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(etherstoneReplaceables, ModBlocks.ETHERSTONE_LITHERITE_ORE.get().defaultBlockState())
         );
-        register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldLitheriteOres, 4)); // Vein size 4
+        register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(litheriteOres, 4)); // Vein size 4
 
         List<OreConfiguration.TargetBlockState> netherSaturniteOres = List.of(
                 OreConfiguration.target(netherrackReplaceables, ModBlocks.SATURNITE_ORE.get().defaultBlockState())
@@ -89,20 +93,20 @@ public class ConfiguredFeatures {
         );
         register(context, ALLIAN_ORE_KEY, Feature.ORE, new OreConfiguration(endAllianOres, 2)); // Vein size 2
 
-        List<OreConfiguration.TargetBlockState> overworldLuminiumOres = List.of(
+        List<OreConfiguration.TargetBlockState> luminiumOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.LUMINIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LUMINIUM_ORE.get().defaultBlockState())
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LUMINIUM_ORE.get().defaultBlockState()),
+                OreConfiguration.target(etherstoneReplaceables, ModBlocks.ETHERSTONE_LUMINIUM_ORE.get().defaultBlockState())
         );
-        register(context, LUMINIUM_ORE_KEY, Feature.ORE, new OreConfiguration(overworldLuminiumOres, 4)); // Vein size 2
+        register(context, LUMINIUM_ORE_KEY, Feature.ORE, new OreConfiguration(luminiumOres, 4)); // Vein size 2
 
-        List<OreConfiguration.TargetBlockState> overworldNerithOres = List.of(
+        List<OreConfiguration.TargetBlockState> nerithOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.NERITH_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_NERITH_ORE.get().defaultBlockState())
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_NERITH_ORE.get().defaultBlockState()),
+                OreConfiguration.target(etherstoneReplaceables, ModBlocks.ETHERSTONE_NERITH_ORE.get().defaultBlockState())
         );
-        register(context, NERITH_ORE_KEY, Feature.ORE, new OreConfiguration(overworldNerithOres, 2)); // Vein size 1
-
+        register(context, NERITH_ORE_KEY, Feature.ORE, new OreConfiguration(nerithOres, 2)); // Vein size 1
     }
-
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name));

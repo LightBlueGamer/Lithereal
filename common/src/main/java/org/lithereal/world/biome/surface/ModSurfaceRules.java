@@ -1,4 +1,4 @@
-package org.lithereal.data.worldgen.biome.surface;
+package org.lithereal.world.biome.surface;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

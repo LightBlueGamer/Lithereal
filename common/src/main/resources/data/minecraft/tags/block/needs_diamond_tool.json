@@ -13,13 +13,18 @@
     "lithereal:withering_litherite_block",
     "lithereal:nerith_ore",
     "lithereal:deepslate_nerith_ore",
+    "lithereal:etherstone_nerith_ore",
     "lithereal:cyrum_ore",
     "lithereal:deepslate_cyrum_ore",
+    "lithereal:etherstone_cyrum_ore",
     "lithereal:aurelite_ore",
     "lithereal:deepslate_aurelite_ore",
+    "lithereal:etherstone_aurelite_ore",
     "lithereal:copalite_ore",
     "lithereal:deepslate_copalite_ore",
+    "lithereal:etherstone_copalite_ore",
     "lithereal:luminium_ore",
-    "lithereal:deepslate_luminium_ore"
+    "lithereal:deepslate_luminium_ore",
+    "lithereal:etherstone_luminium_ore"
   ]
 }

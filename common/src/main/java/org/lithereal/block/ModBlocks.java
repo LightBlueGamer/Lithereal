@@ -16,6 +16,12 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Lithereal.MOD_ID, Registries.BLOCK);
 
+    public static final RegistrySupplier<Block> LITHER_DIRT = registerBlock("lither_dirt",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
+
+    public static final RegistrySupplier<Block> LITHER_GRASS_BLOCK = registerBlock("lither_grass_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK)));
+
     public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
                                 .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
@@ -58,12 +64,6 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> ETHERSTONE = registerBlock("etherstone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE)));
-
-    public static final RegistrySupplier<Block> LITHER_GRASS_BLOCK = registerBlock("lither_grass_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK)));
-
-    public static final RegistrySupplier<Block> LITHER_DIRT = registerBlock("lither_dirt",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
 
     public static final RegistrySupplier<Block> ETHERSTONE_STAIRS = registerBlock("etherstone_stairs",
             () -> new StairBlock(ETHERSTONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
@@ -169,6 +169,24 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> ALLIAN_ORE = registerBlock("allian_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_AURELITE_ORE = registerBlock("etherstone_aurelite_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_AURELITE_ORE.get())));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_COPALITE_ORE = registerBlock("etherstone_copalite_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_COPALITE_ORE.get())));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_CYRUM_ORE = registerBlock("etherstone_cyrum_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_CYRUM_ORE.get())));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_LITHERITE_ORE = registerBlock("etherstone_litherite_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_LITHERITE_ORE.get())));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_LUMINIUM_ORE = registerBlock("etherstone_luminium_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_LUMINIUM_ORE.get())));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_NERITH_ORE = registerBlock("etherstone_nerith_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_NERITH_ORE.get())));
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         return registerBlock(name, block, Item.Properties::new);

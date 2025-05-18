@@ -76,10 +76,7 @@ public class PlacedFeatures {
         register(context, NERITH_PLACED_KEY, configuredFeatures.getOrThrow(ConfiguredFeatures.NERITH_ORE_KEY),
                 OrePlacement.rareOrePlacement(5, // One vein every 5 chunks (rare)
                         HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(32))));
-
-
     }
-
 
     private static ResourceKey<PlacedFeature> createKey(String name) {
         return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name));
