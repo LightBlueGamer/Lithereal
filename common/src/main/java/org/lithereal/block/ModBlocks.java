@@ -20,7 +20,7 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
 
     public static final RegistrySupplier<Block> LITHER_GRASS_BLOCK = registerBlock("lither_grass_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK)));
+            () -> new ExtendedGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK), LITHER_DIRT));
 
     public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()

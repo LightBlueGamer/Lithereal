@@ -3,7 +3,7 @@
   "textures": {
     "bottom": "lithereal:block/lither_dirt",
     "particle": "lithereal:block/lither_dirt",
-    "side": "lithereal:block/lither_grass_block_side",
+    "side": "lithereal:block/lither_grass_block_snow",
     "top": "lithereal:block/lither_grass_block_top"
   }
 }
