@@ -38,12 +38,13 @@ public class ConfiguredFeatures {
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherrackReplaceables = new TagMatchTest(BlockTags.NETHER_CARVER_REPLACEABLES);
         RuleTest endstoneReplaceables = new BlockMatchTest(Blocks.END_STONE);
+        RuleTest etherstoneReplaceables = new BlockMatchTest(ModBlocks.ETHERSTONE.get());
 
-        List<OreConfiguration.TargetBlockState> overworldCyrumOres = List.of(
+        List<OreConfiguration.TargetBlockState> cyrumOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.CYRUM_ORE.get().defaultBlockState()),
                 OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_CYRUM_ORE.get().defaultBlockState())
         );
-        register(context, CYRUM_ORE_KEY, Feature.ORE, new OreConfiguration(overworldCyrumOres, 12)); // Vein size 12
+        register(context, CYRUM_ORE_KEY, Feature.ORE, new OreConfiguration(cyrumOres, 12)); // Vein size 12
 
         List<OreConfiguration.TargetBlockState> overworldAureliteOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.AURELITE_ORE.get().defaultBlockState()),
