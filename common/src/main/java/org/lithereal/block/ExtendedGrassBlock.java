@@ -1,34 +1,55 @@
 package org.lithereal.block;
 
+import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class ExtendedGrassBlock extends GrassBlock {
+public class ExtendedGrassBlock extends SpreadingSnowyDirtBlock implements BonemealableBlock {
     public final Supplier<Block> dirtBlock;
-    public static final MapCodec<GrassBlock> CODEC = simpleCodec(GrassBlock::new);
+    public static final MapCodec<ExtendedGrassBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(propertiesCodec(),
+            BuiltInRegistries.BLOCK.byNameCodec().fieldOf("dirt_block").forGetter(ExtendedGrassBlock::getDirtBlock)).apply(instance, ExtendedGrassBlock::new));
 
-    public MapCodec<GrassBlock> codec() {
+    public @NotNull MapCodec<ExtendedGrassBlock> codec() {
         return CODEC;
     }
 
     public ExtendedGrassBlock(Properties properties, Supplier<Block> dirtBlock) {
         super(properties);
-        this.dirtBlock = dirtBlock;
+        this.dirtBlock = Suppliers.memoize(dirtBlock::get);
+    }
+
+    public ExtendedGrassBlock(Properties properties, Block dirtBlock) {
+        super(properties);
+        this.dirtBlock = Suppliers.memoize(() -> dirtBlock);
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        return levelReader.getBlockState(blockPos.above()).isAir();
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        return false; // Make it function when there is a feature for bonemealing
     }
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        super.performBonemeal(serverLevel, randomSource, blockPos, blockState); // Change impl once more features exist
+        // Change impl once more features exist
     }
 
     private static boolean canBeGrass(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
@@ -66,5 +87,9 @@ public class ExtendedGrassBlock extends GrassBlock {
             }
 
         }
+    }
+
+    public Block getDirtBlock() {
+        return dirtBlock.get();
     }
 }
