@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "lithereal:phantom_diamond_block",
+    "lithereal:litherite_block",
     "lithereal:burning_litherite_block",
     "lithereal:charged_litherite_block",
     "lithereal:deepslate_litherite_ore",
@@ -8,23 +10,21 @@
     "lithereal:infused_litherite_block",
     "lithereal:infusement_chamber",
     "lithereal:lither_lantern",
-    "lithereal:litherite_block",
     "lithereal:litherite_ore",
     "lithereal:withering_litherite_block",
+    "lithereal:hellionite_ore",
+    "lithereal:saturnite_ore",
     "lithereal:nerith_ore",
     "lithereal:deepslate_nerith_ore",
     "lithereal:etherstone_nerith_ore",
-    "lithereal:cyrum_ore",
-    "lithereal:deepslate_cyrum_ore",
-    "lithereal:etherstone_cyrum_ore",
     "lithereal:aurelite_ore",
     "lithereal:deepslate_aurelite_ore",
     "lithereal:etherstone_aurelite_ore",
     "lithereal:copalite_ore",
     "lithereal:deepslate_copalite_ore",
     "lithereal:etherstone_copalite_ore",
-    "lithereal:luminium_ore",
-    "lithereal:deepslate_luminium_ore",
-    "lithereal:etherstone_luminium_ore"
+    "lithereal:chryon_ore",
+    "lithereal:elunite_ore",
+    "lithereal:allian_ore"
   ]
 }

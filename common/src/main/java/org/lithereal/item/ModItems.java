@@ -2,11 +2,8 @@ package org.lithereal.item;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
@@ -29,6 +26,9 @@ import static org.lithereal.item.ability.Ability.*;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
+
+    public static final RegistrySupplier<Item> PHANTOM_DIAMOND = ITEMS.register("phantom_diamond", () ->
+            new MysteriousItem(new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_INGOT = ITEMS.register("odysium_ingot", () ->
             new Item(new Item.Properties().fireResistant()));

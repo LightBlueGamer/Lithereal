@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "lithereal:freezing_station",
-    "lithereal:hellionite_ore",
-    "lithereal:saturnite_ore"
+    "lithereal:freezing_station"
   ]
 }

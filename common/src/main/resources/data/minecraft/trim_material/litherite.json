@@ -5,5 +5,8 @@
     "translate": "trim_material.lithereal.litherite"
   },
   "ingredient": "lithereal:litherite_crystal",
-  "item_model_index": 0.7
+  "item_model_index": 0.7,
+  "override_armor_materials": {
+    "lithereal:litherite": "litherite_darker"
   }
+}

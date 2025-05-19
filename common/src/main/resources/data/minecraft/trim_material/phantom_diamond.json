@@ -1,0 +1,9 @@
+{
+  "asset_name": "phantom_diamond",
+  "description": {
+    "color": "#8179FF",
+    "translate": "trim_material.lithereal.phantom_diamond"
+  },
+  "ingredient": "lithereal:phantom_diamond",
+  "item_model_index": 1.0
+}

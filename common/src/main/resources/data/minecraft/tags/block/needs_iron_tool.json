@@ -14,8 +14,11 @@
     "lithereal:polished_etherstone_slab",
     "lithereal:polished_etherstone_stairs",
     "lithereal:polished_etherstone_wall",
-    "lithereal:chryon_ore",
-    "lithereal:elunite_ore",
-    "lithereal:allian_ore"
+    "lithereal:cyrum_ore",
+    "lithereal:deepslate_cyrum_ore",
+    "lithereal:etherstone_cyrum_ore",
+    "lithereal:luminium_ore",
+    "lithereal:deepslate_luminium_ore",
+    "lithereal:etherstone_luminium_ore"
   ]
 }

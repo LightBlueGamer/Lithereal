@@ -10,7 +10,9 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.Lithereal;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.obscured.MysteriousBlockItem;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -21,6 +23,9 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> LITHER_GRASS_BLOCK = registerBlock("lither_grass_block",
             () -> new ExtendedGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK), LITHER_DIRT));
+
+    public static final RegistrySupplier<Block> PHANTOM_DIAMOND_BLOCK = registerBlock("phantom_diamond_block", () ->
+            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)), block -> new MysteriousBlockItem(block, new Item.Properties()));
 
     public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
@@ -195,6 +200,11 @@ public class ModBlocks {
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block, Supplier<Item.Properties> properties) {
         RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn, properties);
+        return toReturn;
+    }
+    private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block, Function<Block, BlockItem> blockItem) {
+        RegistrySupplier<T> toReturn = BLOCKS.register(name, block);
+        ModItems.ITEMS.register(name, () -> blockItem.apply(toReturn.get()));
         return toReturn;
     }
 

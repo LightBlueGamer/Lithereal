@@ -1,4 +1,6 @@
 {
+  "block.lithereal.phantom_diamond_block.obscured": "Block of Diamond?",
+  "block.lithereal.phantom_diamond_block.revealed": "Phantom Block of Diamond",
   "block.lithereal.blue_fire": "Blue Fire",
   "block.lithereal.burning_litherite_block": "Block of Burning Litherite",
   "block.lithereal.charged_litherite_block": "Block of Charged Litherite",
@@ -477,6 +479,8 @@
   "item.lithereal.mycronium_orb": "Mycronium Orb",
   "item.lithereal.mysterious_rod.obscured": "Mysterious Rod",
   "item.lithereal.mysterious_rod.revealed": "Odysium Rod",
+  "item.lithereal.phantom_diamond.obscured": "Diamond?",
+  "item.lithereal.phantom_diamond.revealed": "Phantom Diamond",
   "item.lithereal.odysium_axe": "Odysium Axe",
   "item.lithereal.odysium_hammer": "Odysium Hammer",
   "item.lithereal.odysium_hoe": "Odysium Hoe",
@@ -527,7 +531,7 @@
   "item.lithereal.smithing_template.odysium_upgrade.applies_to": "Netherite Equipment",
   "item.lithereal.smithing_template.odysium_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
   "item.lithereal.smithing_template.odysium_upgrade.ingredients": "Odysium Ingot",
-  "item.lithereal.odysium_upgrade_smithing_template": "Odysium Upgrade",
+  "item.lithereal.odysium_upgrade_smithing_template": "Smithing Template",
 
   "itemGroup.lithereal.lithereal.tab": "Lithereal",
 
@@ -538,6 +542,7 @@
   "jukebox_song.lithereal.sparkle": "Lithereal - Sparkle",
 
   "trim_material.lithereal.litherite": "Litherite Material",
+  "trim_material.lithereal.phantom_diamond": "Phantom Diamond Material",
 
   "upgrade.lithereal.odysium_upgrade": "Odysium Upgrade"
 }

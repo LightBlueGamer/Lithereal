@@ -72,9 +72,8 @@ public class ModArmorMaterials {
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> defenseBase, int enchantmentValue, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient, List<ArmorMaterial.Layer> layers) {
         EnumMap<ArmorItem.Type, Integer> defense = new EnumMap<>(ArmorItem.Type.class);
-        ArmorItem.Type[] var9 = ArmorItem.Type.values();
 
-        for (ArmorItem.Type type : var9) {
+        for (ArmorItem.Type type : ArmorItem.Type.values()) {
             defense.put(type, defenseBase.get(type));
         }
 

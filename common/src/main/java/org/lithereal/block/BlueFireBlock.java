@@ -18,10 +18,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -51,55 +51,54 @@ public class BlueFireBlock extends BaseFireBlock {
     private static final int BURN_EASY = 60;
     private static final int BURN_MEDIUM = 20;
     private static final int BURN_HARD = 5;
-    private final Object2IntMap<Block> igniteOdds = new Object2IntOpenHashMap();
-    private final Object2IntMap<Block> burnOdds = new Object2IntOpenHashMap();
+    private final Object2IntMap<Block> igniteOdds = new Object2IntOpenHashMap<>();
+    private final Object2IntMap<Block> burnOdds = new Object2IntOpenHashMap<>();
 
-    public MapCodec<BlueFireBlock> codec() {
+    public @NotNull MapCodec<BlueFireBlock> codec() {
         return CODEC;
     }
 
     public BlueFireBlock(Properties properties) {
         super(properties, 1.0F);
-        this.registerDefaultState((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(AGE, 0)).setValue(NORTH, false)).setValue(EAST, false)).setValue(SOUTH, false)).setValue(WEST, false)).setValue(UP, false));
-        this.shapesCache = ImmutableMap.copyOf((Map)this.stateDefinition.getPossibleStates().stream().filter((blockState) -> {
-            return (Integer)blockState.getValue(AGE) == 0;
-        }).collect(Collectors.toMap(Function.identity(), BlueFireBlock::calculateShape)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(UP, false));
+        this.shapesCache = ImmutableMap.copyOf(this.stateDefinition.getPossibleStates().stream().filter((blockState) -> blockState.getValue(AGE) == 0).collect(Collectors.toMap(Function.identity(), BlueFireBlock::calculateShape)));
+        this.init();
     }
 
     private static VoxelShape calculateShape(BlockState blockState) {
         VoxelShape voxelShape = Shapes.empty();
-        if ((Boolean)blockState.getValue(UP)) {
+        if (blockState.getValue(UP)) {
             voxelShape = UP_AABB;
         }
 
-        if ((Boolean)blockState.getValue(NORTH)) {
+        if (blockState.getValue(NORTH)) {
             voxelShape = Shapes.or(voxelShape, NORTH_AABB);
         }
 
-        if ((Boolean)blockState.getValue(SOUTH)) {
+        if (blockState.getValue(SOUTH)) {
             voxelShape = Shapes.or(voxelShape, SOUTH_AABB);
         }
 
-        if ((Boolean)blockState.getValue(EAST)) {
+        if (blockState.getValue(EAST)) {
             voxelShape = Shapes.or(voxelShape, EAST_AABB);
         }
 
-        if ((Boolean)blockState.getValue(WEST)) {
+        if (blockState.getValue(WEST)) {
             voxelShape = Shapes.or(voxelShape, WEST_AABB);
         }
 
         return voxelShape.isEmpty() ? DOWN_AABB : voxelShape;
     }
 
-    protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
-        return this.canSurvive(blockState, levelAccessor, blockPos) ? this.getStateWithAge(levelAccessor, blockPos, (Integer)blockState.getValue(AGE)) : Blocks.AIR.defaultBlockState();
+    protected @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        return this.canSurvive(blockState, levelAccessor, blockPos) ? this.getStateWithAge(levelAccessor, blockPos, blockState.getValue(AGE)) : Blocks.AIR.defaultBlockState();
     }
 
-    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return (VoxelShape)this.shapesCache.get(blockState.setValue(AGE, 0));
+    protected @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return this.shapesCache.get(blockState.setValue(AGE, 0));
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
+    public @NotNull BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         return this.getStateForPlacement(blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos());
     }
 
@@ -108,14 +107,11 @@ public class BlueFireBlock extends BaseFireBlock {
         BlockState blockState = blockGetter.getBlockState(blockPos2);
         if (!this.canBurn(blockState) && !blockState.isFaceSturdy(blockGetter, blockPos2, Direction.UP)) {
             BlockState blockState2 = this.defaultBlockState();
-            Direction[] var6 = Direction.values();
-            int var7 = var6.length;
 
-            for(int var8 = 0; var8 < var7; ++var8) {
-                Direction direction = var6[var8];
-                BooleanProperty booleanProperty = (BooleanProperty)PROPERTY_BY_DIRECTION.get(direction);
+            for (Direction direction : Direction.values()) {
+                BooleanProperty booleanProperty = PROPERTY_BY_DIRECTION.get(direction);
                 if (booleanProperty != null) {
-                    blockState2 = (BlockState)blockState2.setValue(booleanProperty, this.canBurn(blockGetter.getBlockState(blockPos.relative(direction))));
+                    blockState2 = blockState2.setValue(booleanProperty, this.canBurn(blockGetter.getBlockState(blockPos.relative(direction))));
                 }
             }
 
@@ -139,13 +135,13 @@ public class BlueFireBlock extends BaseFireBlock {
 
             BlockState blockState2 = serverLevel.getBlockState(blockPos.below());
             boolean bl = blockState2.is(serverLevel.dimensionType().infiniburn());
-            int i = (Integer)blockState.getValue(AGE);
+            int i = blockState.getValue(AGE);
             if (!bl && serverLevel.isRaining() && this.isNearRain(serverLevel, blockPos) && randomSource.nextFloat() < 0.2F + (float)i * 0.03F) {
                 serverLevel.removeBlock(blockPos, false);
             } else {
-                int j = Math.min(15, i + randomSource.nextInt(3) / 2);
+                int j = Math.min(MAX_AGE, i + randomSource.nextInt(3) / 2);
                 if (i != j) {
-                    blockState = (BlockState)blockState.setValue(AGE, j);
+                    blockState = blockState.setValue(AGE, j);
                     serverLevel.setBlock(blockPos, blockState, 4);
                 }
 
@@ -159,7 +155,7 @@ public class BlueFireBlock extends BaseFireBlock {
                         return;
                     }
 
-                    if (i == 15 && randomSource.nextInt(4) == 0 && !this.canBurn(serverLevel.getBlockState(blockPos.below()))) {
+                    if (i == MAX_AGE && randomSource.nextInt(4) == 0 && !this.canBurn(serverLevel.getBlockState(blockPos.below()))) {
                         serverLevel.removeBlock(blockPos, false);
                         return;
                     }
@@ -193,7 +189,7 @@ public class BlueFireBlock extends BaseFireBlock {
                                     }
 
                                     if (q > 0 && randomSource.nextInt(o) <= q && (!serverLevel.isRaining() || !this.isNearRain(serverLevel, mutableBlockPos))) {
-                                        int r = Math.min(15, i + randomSource.nextInt(5) / 4);
+                                        int r = Math.min(MAX_AGE, i + randomSource.nextInt(5) / 4);
                                         serverLevel.setBlock(mutableBlockPos, this.getStateWithAge(serverLevel, mutableBlockPos, r), 3);
                                     }
                                 }
@@ -211,11 +207,11 @@ public class BlueFireBlock extends BaseFireBlock {
     }
 
     private int getBurnOdds(BlockState blockState) {
-        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && (Boolean)blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.burnOdds.getInt(blockState.getBlock());
+        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.burnOdds.getInt(blockState.getBlock());
     }
 
     private int getIgniteOdds(BlockState blockState) {
-        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && (Boolean)blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.igniteOdds.getInt(blockState.getBlock());
+        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.igniteOdds.getInt(blockState.getBlock());
     }
 
     private void checkBurnOut(Level level, BlockPos blockPos, int i, RandomSource randomSource, int j) {
@@ -223,7 +219,7 @@ public class BlueFireBlock extends BaseFireBlock {
         if (randomSource.nextInt(i) < k) {
             BlockState blockState = level.getBlockState(blockPos);
             if (randomSource.nextInt(j + 10) < 5 && !level.isRainingAt(blockPos)) {
-                int l = Math.min(j + randomSource.nextInt(5) / 4, 15);
+                int l = Math.min(j + randomSource.nextInt(5) / 4, MAX_AGE);
                 level.setBlock(blockPos, this.getStateWithAge(level, blockPos, l), 3);
             } else {
                 level.removeBlock(blockPos, false);
@@ -239,15 +235,11 @@ public class BlueFireBlock extends BaseFireBlock {
 
     private BlockState getStateWithAge(LevelAccessor levelAccessor, BlockPos blockPos, int i) {
         BlockState blockState = getState(levelAccessor, blockPos);
-        return blockState.is(ModBlocks.BLUE_FIRE) ? (BlockState)blockState.setValue(AGE, i) : blockState;
+        return blockState.is(ModBlocks.BLUE_FIRE) ? blockState.setValue(AGE, i) : blockState;
     }
 
     private boolean isValidFireLocation(BlockGetter blockGetter, BlockPos blockPos) {
-        Direction[] var3 = Direction.values();
-        int var4 = var3.length;
-
-        for(int var5 = 0; var5 < var4; ++var5) {
-            Direction direction = var3[var5];
+        for (Direction direction : Direction.values()) {
             if (this.canBurn(blockGetter.getBlockState(blockPos.relative(direction)))) {
                 return true;
             }
@@ -261,11 +253,8 @@ public class BlueFireBlock extends BaseFireBlock {
             return 0;
         } else {
             int i = 0;
-            Direction[] var4 = Direction.values();
-            int var5 = var4.length;
 
-            for(int var6 = 0; var6 < var5; ++var6) {
-                Direction direction = var4[var6];
+            for (Direction direction : Direction.values()) {
                 BlockState blockState = levelReader.getBlockState(blockPos.relative(direction));
                 i = Math.max(this.getIgniteOdds(blockState), i);
             }
@@ -275,7 +264,7 @@ public class BlueFireBlock extends BaseFireBlock {
     }
 
     protected boolean canBurn(BlockState blockState) {
-        return this.getIgniteOdds(blockState) > 0;
+        return true;
     }
 
     protected void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
@@ -288,7 +277,7 @@ public class BlueFireBlock extends BaseFireBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{AGE, NORTH, EAST, SOUTH, WEST, UP});
+        builder.add(AGE, NORTH, EAST, SOUTH, WEST, UP);
     }
 
     public void setFlammable(Block block, int i, int j) {
@@ -296,182 +285,181 @@ public class BlueFireBlock extends BaseFireBlock {
         this.burnOdds.put(block, j);
     }
 
-    public static void bootStrap() {
-        BlueFireBlock blueFireBlock = (BlueFireBlock)Blocks.FIRE;
-        blueFireBlock.setFlammable(Blocks.OAK_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BIRCH_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.ACACIA_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.CHERRY_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_PLANKS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_MOSAIC, 5, 20);
-        blueFireBlock.setFlammable(Blocks.OAK_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BIRCH_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.ACACIA_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.CHERRY_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_MOSAIC_SLAB, 5, 20);
-        blueFireBlock.setFlammable(Blocks.OAK_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BIRCH_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.ACACIA_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.CHERRY_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_FENCE_GATE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.OAK_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BIRCH_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.ACACIA_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.CHERRY_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_FENCE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.OAK_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BIRCH_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.ACACIA_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.CHERRY_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_MOSAIC_STAIRS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.OAK_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.BIRCH_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.ACACIA_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.CHERRY_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.BAMBOO_BLOCK, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_OAK_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_SPRUCE_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_BIRCH_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_JUNGLE_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_ACACIA_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_CHERRY_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_DARK_OAK_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_MANGROVE_LOG, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_BAMBOO_BLOCK, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_OAK_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_SPRUCE_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_BIRCH_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_JUNGLE_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_ACACIA_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_CHERRY_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_DARK_OAK_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.STRIPPED_MANGROVE_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.OAK_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.BIRCH_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.ACACIA_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.CHERRY_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_WOOD, 5, 5);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_ROOTS, 5, 20);
-        blueFireBlock.setFlammable(Blocks.OAK_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.SPRUCE_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.BIRCH_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.JUNGLE_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.ACACIA_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.CHERRY_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.DARK_OAK_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.MANGROVE_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.BOOKSHELF, 30, 20);
-        blueFireBlock.setFlammable(Blocks.TNT, 15, 100);
-        blueFireBlock.setFlammable(Blocks.SHORT_GRASS, 60, 100);
-        blueFireBlock.setFlammable(Blocks.FERN, 60, 100);
-        blueFireBlock.setFlammable(Blocks.DEAD_BUSH, 60, 100);
-        blueFireBlock.setFlammable(Blocks.SUNFLOWER, 60, 100);
-        blueFireBlock.setFlammable(Blocks.LILAC, 60, 100);
-        blueFireBlock.setFlammable(Blocks.ROSE_BUSH, 60, 100);
-        blueFireBlock.setFlammable(Blocks.PEONY, 60, 100);
-        blueFireBlock.setFlammable(Blocks.TALL_GRASS, 60, 100);
-        blueFireBlock.setFlammable(Blocks.LARGE_FERN, 60, 100);
-        blueFireBlock.setFlammable(Blocks.DANDELION, 60, 100);
-        blueFireBlock.setFlammable(Blocks.POPPY, 60, 100);
-        blueFireBlock.setFlammable(Blocks.BLUE_ORCHID, 60, 100);
-        blueFireBlock.setFlammable(Blocks.ALLIUM, 60, 100);
-        blueFireBlock.setFlammable(Blocks.AZURE_BLUET, 60, 100);
-        blueFireBlock.setFlammable(Blocks.RED_TULIP, 60, 100);
-        blueFireBlock.setFlammable(Blocks.ORANGE_TULIP, 60, 100);
-        blueFireBlock.setFlammable(Blocks.WHITE_TULIP, 60, 100);
-        blueFireBlock.setFlammable(Blocks.PINK_TULIP, 60, 100);
-        blueFireBlock.setFlammable(Blocks.OXEYE_DAISY, 60, 100);
-        blueFireBlock.setFlammable(Blocks.CORNFLOWER, 60, 100);
-        blueFireBlock.setFlammable(Blocks.LILY_OF_THE_VALLEY, 60, 100);
-        blueFireBlock.setFlammable(Blocks.TORCHFLOWER, 60, 100);
-        blueFireBlock.setFlammable(Blocks.PITCHER_PLANT, 60, 100);
-        blueFireBlock.setFlammable(Blocks.WITHER_ROSE, 60, 100);
-        blueFireBlock.setFlammable(Blocks.PINK_PETALS, 60, 100);
-        blueFireBlock.setFlammable(Blocks.WHITE_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.ORANGE_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.MAGENTA_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.LIGHT_BLUE_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.YELLOW_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.LIME_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.PINK_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.GRAY_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.LIGHT_GRAY_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.CYAN_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.PURPLE_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.BLUE_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.BROWN_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.GREEN_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.RED_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.BLACK_WOOL, 30, 60);
-        blueFireBlock.setFlammable(Blocks.VINE, 15, 100);
-        blueFireBlock.setFlammable(Blocks.COAL_BLOCK, 5, 5);
-        blueFireBlock.setFlammable(Blocks.HAY_BLOCK, 60, 20);
-        blueFireBlock.setFlammable(Blocks.TARGET, 15, 20);
-        blueFireBlock.setFlammable(Blocks.WHITE_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.ORANGE_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.MAGENTA_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.LIGHT_BLUE_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.YELLOW_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.LIME_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.PINK_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.GRAY_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.LIGHT_GRAY_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.CYAN_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.PURPLE_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.BLUE_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.BROWN_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.GREEN_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.RED_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.BLACK_CARPET, 60, 20);
-        blueFireBlock.setFlammable(Blocks.DRIED_KELP_BLOCK, 30, 60);
-        blueFireBlock.setFlammable(Blocks.BAMBOO, 60, 60);
-        blueFireBlock.setFlammable(Blocks.SCAFFOLDING, 60, 60);
-        blueFireBlock.setFlammable(Blocks.LECTERN, 30, 20);
-        blueFireBlock.setFlammable(Blocks.COMPOSTER, 5, 20);
-        blueFireBlock.setFlammable(Blocks.SWEET_BERRY_BUSH, 60, 100);
-        blueFireBlock.setFlammable(Blocks.BEEHIVE, 5, 20);
-        blueFireBlock.setFlammable(Blocks.BEE_NEST, 30, 20);
-        blueFireBlock.setFlammable(Blocks.AZALEA_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.FLOWERING_AZALEA_LEAVES, 30, 60);
-        blueFireBlock.setFlammable(Blocks.CAVE_VINES, 15, 60);
-        blueFireBlock.setFlammable(Blocks.CAVE_VINES_PLANT, 15, 60);
-        blueFireBlock.setFlammable(Blocks.SPORE_BLOSSOM, 60, 100);
-        blueFireBlock.setFlammable(Blocks.AZALEA, 30, 60);
-        blueFireBlock.setFlammable(Blocks.FLOWERING_AZALEA, 30, 60);
-        blueFireBlock.setFlammable(Blocks.BIG_DRIPLEAF, 60, 100);
-        blueFireBlock.setFlammable(Blocks.BIG_DRIPLEAF_STEM, 60, 100);
-        blueFireBlock.setFlammable(Blocks.SMALL_DRIPLEAF, 60, 100);
-        blueFireBlock.setFlammable(Blocks.HANGING_ROOTS, 30, 60);
-        blueFireBlock.setFlammable(Blocks.GLOW_LICHEN, 15, 100);
+    public void init() {
+        this.setFlammable(Blocks.OAK_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.SPRUCE_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BIRCH_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.JUNGLE_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.ACACIA_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.CHERRY_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.DARK_OAK_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.MANGROVE_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_PLANKS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_MOSAIC, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.OAK_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.SPRUCE_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BIRCH_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.JUNGLE_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.ACACIA_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.CHERRY_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.DARK_OAK_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.MANGROVE_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_MOSAIC_SLAB, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.OAK_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.SPRUCE_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BIRCH_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.JUNGLE_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.ACACIA_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.CHERRY_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.DARK_OAK_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.MANGROVE_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_FENCE_GATE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.OAK_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.SPRUCE_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BIRCH_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.JUNGLE_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.ACACIA_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.CHERRY_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.DARK_OAK_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.MANGROVE_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_FENCE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.OAK_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BIRCH_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.SPRUCE_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.JUNGLE_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.ACACIA_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.CHERRY_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.DARK_OAK_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.MANGROVE_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BAMBOO_MOSAIC_STAIRS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.OAK_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.SPRUCE_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.BIRCH_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.JUNGLE_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.ACACIA_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.CHERRY_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.DARK_OAK_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.MANGROVE_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.BAMBOO_BLOCK, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_OAK_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_SPRUCE_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_BIRCH_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_JUNGLE_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_ACACIA_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_CHERRY_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_DARK_OAK_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_MANGROVE_LOG, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_BAMBOO_BLOCK, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_OAK_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_SPRUCE_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_BIRCH_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_JUNGLE_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_ACACIA_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_CHERRY_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_DARK_OAK_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.STRIPPED_MANGROVE_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.OAK_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.SPRUCE_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.BIRCH_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.JUNGLE_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.ACACIA_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.CHERRY_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.DARK_OAK_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.MANGROVE_WOOD, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.MANGROVE_ROOTS, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.OAK_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.SPRUCE_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.BIRCH_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.JUNGLE_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.ACACIA_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.CHERRY_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.DARK_OAK_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.MANGROVE_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.BOOKSHELF, IGNITE_EASY, BURN_MEDIUM);
+        this.setFlammable(Blocks.TNT, IGNITE_MEDIUM, BURN_INSTANT);
+        this.setFlammable(Blocks.SHORT_GRASS, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.FERN, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.DEAD_BUSH, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.SUNFLOWER, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.LILAC, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.ROSE_BUSH, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.PEONY, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.TALL_GRASS, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.LARGE_FERN, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.DANDELION, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.POPPY, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.BLUE_ORCHID, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.ALLIUM, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.AZURE_BLUET, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.RED_TULIP, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.ORANGE_TULIP, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.WHITE_TULIP, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.PINK_TULIP, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.OXEYE_DAISY, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.CORNFLOWER, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.LILY_OF_THE_VALLEY, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.TORCHFLOWER, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.PITCHER_PLANT, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.WITHER_ROSE, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.PINK_PETALS, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.WHITE_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.ORANGE_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.MAGENTA_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.LIGHT_BLUE_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.YELLOW_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.LIME_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.PINK_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.GRAY_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.LIGHT_GRAY_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.CYAN_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.PURPLE_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.BLUE_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.BROWN_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.GREEN_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.RED_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.BLACK_WOOL, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.VINE, IGNITE_MEDIUM, BURN_INSTANT);
+        this.setFlammable(Blocks.COAL_BLOCK, IGNITE_HARD, BURN_HARD);
+        this.setFlammable(Blocks.HAY_BLOCK, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.TARGET, IGNITE_MEDIUM, BURN_MEDIUM);
+        this.setFlammable(Blocks.WHITE_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.ORANGE_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.MAGENTA_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.LIGHT_BLUE_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.YELLOW_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.LIME_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.PINK_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.GRAY_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.LIGHT_GRAY_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.CYAN_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.PURPLE_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.BLUE_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.BROWN_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.GREEN_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.RED_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.BLACK_CARPET, IGNITE_INSTANT, BURN_MEDIUM);
+        this.setFlammable(Blocks.DRIED_KELP_BLOCK, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.BAMBOO, IGNITE_INSTANT, BURN_EASY);
+        this.setFlammable(Blocks.SCAFFOLDING, IGNITE_INSTANT, BURN_EASY);
+        this.setFlammable(Blocks.LECTERN, IGNITE_EASY, BURN_MEDIUM);
+        this.setFlammable(Blocks.COMPOSTER, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.SWEET_BERRY_BUSH, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.BEEHIVE, IGNITE_HARD, BURN_MEDIUM);
+        this.setFlammable(Blocks.BEE_NEST, IGNITE_EASY, BURN_MEDIUM);
+        this.setFlammable(Blocks.AZALEA_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.FLOWERING_AZALEA_LEAVES, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.CAVE_VINES, IGNITE_MEDIUM, BURN_EASY);
+        this.setFlammable(Blocks.CAVE_VINES_PLANT, IGNITE_MEDIUM, BURN_EASY);
+        this.setFlammable(Blocks.SPORE_BLOSSOM, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.AZALEA, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.FLOWERING_AZALEA, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.BIG_DRIPLEAF, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.BIG_DRIPLEAF_STEM, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.SMALL_DRIPLEAF, IGNITE_INSTANT, BURN_INSTANT);
+        this.setFlammable(Blocks.HANGING_ROOTS, IGNITE_EASY, BURN_EASY);
+        this.setFlammable(Blocks.GLOW_LICHEN, IGNITE_MEDIUM, BURN_INSTANT);
     }
 
     static {
@@ -481,9 +469,7 @@ public class BlueFireBlock extends BaseFireBlock {
         SOUTH = PipeBlock.SOUTH;
         WEST = PipeBlock.WEST;
         UP = PipeBlock.UP;
-        PROPERTY_BY_DIRECTION = (Map)PipeBlock.PROPERTY_BY_DIRECTION.entrySet().stream().filter((entry) -> {
-            return entry.getKey() != Direction.DOWN;
-        }).collect(Util.toMap());
+        PROPERTY_BY_DIRECTION = PipeBlock.PROPERTY_BY_DIRECTION.entrySet().stream().filter((entry) -> entry.getKey() != Direction.DOWN).collect(Util.toMap());
         UP_AABB = Block.box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0);
         WEST_AABB = Block.box(0.0, 0.0, 0.0, 1.0, 16.0, 16.0);
         EAST_AABB = Block.box(15.0, 0.0, 0.0, 16.0, 16.0, 16.0);
