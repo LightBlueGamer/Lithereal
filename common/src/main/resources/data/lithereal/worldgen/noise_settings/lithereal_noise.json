@@ -12,8 +12,8 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 384,
-    "min_y": -64,
+    "height": 512,
+    "min_y": -128,
     "size_horizontal": 1,
     "size_vertical": 2
   },
@@ -24,9 +24,41 @@
       "xz_scale": 1,
       "y_scale": 0.5
     },
-    "continents": "minecraft:overworld/continents",
-    "depth": "minecraft:overworld/depth",
-    "erosion": "minecraft:overworld/erosion",
+    "continents": {
+      "type": "minecraft:flat_cache",
+      "argument": {
+        "type": "minecraft:shifted_noise",
+        "noise": "minecraft:continentalness",
+        "shift_x": "minecraft:shift_x",
+        "shift_y": 0,
+        "shift_z": "minecraft:shift_z",
+        "xz_scale": 0.5,
+        "y_scale": 0
+      }
+    },
+    "depth": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_value": 2.5,
+        "from_y": -128,
+        "to_value": -2,
+        "to_y": 384
+      },
+      "argument2": "minecraft:overworld_amplified/offset"
+    },
+    "erosion": {
+      "type": "minecraft:flat_cache",
+      "argument": {
+        "type": "minecraft:shifted_noise",
+        "noise": "minecraft:erosion_large",
+        "xz_scale": 0.5,
+        "y_scale": 0,
+        "shift_x": "minecraft:shift_x",
+        "shift_y": 0,
+        "shift_z": "minecraft:shift_z"
+      }
+    },
     "final_density": {
       "type": "minecraft:min",
       "argument1": {
@@ -40,19 +72,19 @@
               "type": "minecraft:blend_density",
               "argument": {
                 "type": "minecraft:add",
-                "argument1": 0.1171875,
+                "argument1": 0.4,
                 "argument2": {
                   "type": "minecraft:mul",
                   "argument1": {
                     "type": "minecraft:y_clamped_gradient",
                     "from_value": 0,
-                    "from_y": -64,
+                    "from_y": -128,
                     "to_value": 1,
                     "to_y": -40
                   },
                   "argument2": {
                     "type": "minecraft:add",
-                    "argument1": -0.1171875,
+                    "argument1": -0.4,
                     "argument2": {
                       "type": "minecraft:add",
                       "argument1": -0.078125,
@@ -61,21 +93,21 @@
                         "argument1": {
                           "type": "minecraft:y_clamped_gradient",
                           "from_value": 1,
-                          "from_y": 240,
+                          "from_y": 368,
                           "to_value": 0,
-                          "to_y": 256
+                          "to_y": 384
                         },
                         "argument2": {
                           "type": "minecraft:add",
                           "argument1": 0.078125,
                           "argument2": {
                             "type": "minecraft:range_choice",
-                            "input": "minecraft:overworld/sloped_cheese",
+                            "input": "minecraft:overworld_amplified/sloped_cheese",
                             "max_exclusive": 1.5625,
                             "min_inclusive": -1000000,
                             "when_in_range": {
                               "type": "minecraft:min",
-                              "argument1": "minecraft:overworld/sloped_cheese",
+                              "argument1": "minecraft:overworld_amplified/sloped_cheese",
                               "argument2": {
                                 "type": "minecraft:mul",
                                 "argument1": 5,
@@ -128,7 +160,7 @@
                                           "argument2": {
                                             "type": "minecraft:mul",
                                             "argument1": -0.64,
-                                            "argument2": "minecraft:overworld/sloped_cheese"
+                                            "argument2": "minecraft:overworld_amplified/sloped_cheese"
                                           }
                                         },
                                         "max": 0.5,
@@ -180,19 +212,19 @@
     },
     "initial_density_without_jaggedness": {
       "type": "minecraft:add",
-      "argument1": 0.1171875,
+      "argument1": 0.4,
       "argument2": {
         "type": "minecraft:mul",
         "argument1": {
           "type": "minecraft:y_clamped_gradient",
           "from_value": 0,
-          "from_y": -64,
+          "from_y": -128,
           "to_value": 1,
           "to_y": -40
         },
         "argument2": {
           "type": "minecraft:add",
-          "argument1": -0.1171875,
+          "argument1": -0.4,
           "argument2": {
             "type": "minecraft:add",
             "argument1": -0.078125,
@@ -201,9 +233,9 @@
               "argument1": {
                 "type": "minecraft:y_clamped_gradient",
                 "from_value": 1,
-                "from_y": 240,
+                "from_y": 368,
                 "to_value": 0,
-                "to_y": 256
+                "to_y": 384
               },
               "argument2": {
                 "type": "minecraft:add",
@@ -220,17 +252,17 @@
                         "type": "minecraft:quarter_negative",
                         "argument": {
                           "type": "minecraft:mul",
-                          "argument1": "minecraft:overworld/depth",
+                          "argument1": "minecraft:overworld_amplified/depth",
                           "argument2": {
                             "type": "minecraft:cache_2d",
-                            "argument": "minecraft:overworld/factor"
+                            "argument": "minecraft:overworld_amplified/factor"
                           }
                         }
                       }
                     }
                   },
-                  "max": 64,
-                  "min": -64
+                  "max": 128,
+                  "min": -128
                 }
               }
             }
@@ -332,7 +364,7 @@
     }
   },
   "ore_veins_enabled": true,
-  "sea_level": 63,
+  "sea_level": 50,
   "spawn_target": [
     {
       "continentalness": [
