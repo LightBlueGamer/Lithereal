@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "lithereal:block/lither_dirt",
-    "particle": "lithereal:block/lither_dirt",
-    "side": "lithereal:block/lither_grass_block_side",
-    "top": "lithereal:block/lither_grass_block_top"
-  }
-}

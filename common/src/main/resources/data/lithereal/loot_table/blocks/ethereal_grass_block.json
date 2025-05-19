@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "lithereal:lither_grass_block"
+              "name": "lithereal:ethereal_grass_block"
             },
             {
               "type": "minecraft:item",
@@ -43,5 +43,5 @@
       "rolls": 1
     }
   ],
-  "random_sequence": "lithereal:blocks/lither_grass_block"
+  "random_sequence": "lithereal:blocks/ethereal_grass_block"
 }

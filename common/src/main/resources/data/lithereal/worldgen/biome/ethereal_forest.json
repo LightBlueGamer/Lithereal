@@ -9,11 +9,11 @@
   "downfall": 0.8,
   "effects": {
     "fog_color": 3626122,
-    "foliage_color": 214612,
-    "grass_color": 5523561,
+    "foliage_color": 8572152,
+    "grass_color": 8573157,
     "mood_sound": {
       "block_search_extent": 8,
-      "offset": 2.0,
+      "offset": 2,
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000
     },

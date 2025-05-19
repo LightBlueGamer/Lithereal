@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "lithereal:block/ethereal_grass_block"
+      },
+      {
+        "model": "lithereal:block/ethereal_grass_block",
+        "y": 90
+      },
+      {
+        "model": "lithereal:block/ethereal_grass_block",
+        "y": 180
+      },
+      {
+        "model": "lithereal:block/ethereal_grass_block",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "lithereal:block/ethereal_grass_block_snow"
+    }
+  }
+}

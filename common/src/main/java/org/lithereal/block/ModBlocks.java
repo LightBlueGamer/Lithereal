@@ -18,11 +18,11 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Lithereal.MOD_ID, Registries.BLOCK);
 
-    public static final RegistrySupplier<Block> LITHER_DIRT = registerBlock("lither_dirt",
+    public static final RegistrySupplier<Block> ETHEREAL_DIRT = registerBlock("ethereal_dirt",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
 
-    public static final RegistrySupplier<Block> LITHER_GRASS_BLOCK = registerBlock("lither_grass_block",
-            () -> new ExtendedGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK), LITHER_DIRT));
+    public static final RegistrySupplier<Block> ETHEREAL_GRASS_BLOCK = registerBlock("ethereal_grass_block",
+            () -> new ExtendedGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK), ETHEREAL_DIRT));
 
     public static final RegistrySupplier<Block> PHANTOM_DIAMOND_BLOCK = registerBlock("phantom_diamond_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)), block -> new MysteriousBlockItem(block, new Item.Properties()));

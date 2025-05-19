@@ -438,7 +438,7 @@
           "then_run": {
             "type": "minecraft:block",
             "result_state": {
-              "Name": "lithereal:lither_grass_block"
+              "Name": "lithereal:ethereal_grass_block"
             }
           }
         }
@@ -455,7 +455,7 @@
         "then_run": {
           "type": "minecraft:block",
           "result_state": {
-            "Name": "lithereal:lither_dirt"
+            "Name": "lithereal:ethereal_dirt"
           }
         }
       },

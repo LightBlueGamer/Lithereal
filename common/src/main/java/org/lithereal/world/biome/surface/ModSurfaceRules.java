@@ -5,8 +5,8 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import org.lithereal.block.ModBlocks;
 
 public class ModSurfaceRules {
-    private static final SurfaceRules.RuleSource DIRT = makeStateRule(ModBlocks.LITHER_DIRT.get());
-    private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(ModBlocks.LITHER_GRASS_BLOCK.get());
+    private static final SurfaceRules.RuleSource DIRT = makeStateRule(ModBlocks.ETHEREAL_DIRT.get());
+    private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(ModBlocks.ETHEREAL_GRASS_BLOCK.get());
     private static final SurfaceRules.RuleSource ETHERSTONE = makeStateRule(ModBlocks.ETHERSTONE.get());
 
     public static SurfaceRules.RuleSource makeRules() {

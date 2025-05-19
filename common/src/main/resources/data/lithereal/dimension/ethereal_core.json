@@ -1,0 +1,11 @@
+{
+  "type": "lithereal:ethereal_core_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "lithereal:ethereal_core_noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "lithereal:ethereal_forest"
+    }
+  }
+}

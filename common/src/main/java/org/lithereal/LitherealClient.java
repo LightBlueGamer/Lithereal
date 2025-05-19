@@ -4,10 +4,13 @@ import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
+import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.particle.FlameParticle;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
@@ -59,6 +61,9 @@ public class LitherealClient {
         if (isModLoaded("combatify"))
             CompatInit.setColoursForCombatify(itemColor);
         ColorHandlerRegistry.registerBlockColors(blockColor, LitherealExpectPlatform.getInfusedLitheriteBlock());
+        ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> blockAndTintGetter != null && blockPos != null ? BiomeColors.getAverageGrassColor(blockAndTintGetter, blockPos) : 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
+        ColorHandlerRegistry.registerItemColors((itemStack, i) -> 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get());
     }
 
     private static void registerItemsToTab() {
