@@ -4,6 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -27,6 +28,15 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> PHANTOM_DIAMOND_BLOCK = registerBlock("phantom_diamond_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)), block -> new MysteriousBlockItem(block, new Item.Properties()));
 
+    public static final RegistrySupplier<Block> PHANTOM_ROSE = registerBlock("phantom_rose", () ->
+            new FlowerBlock(MobEffects.DAMAGE_BOOST, 3, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)), block -> new MysteriousBlockItem(block, new Item.Properties()));
+
+    public static final RegistrySupplier<Block> PHANTOM_ICE_FLOWER = registerBlock("phantom_ice_flower", () ->
+            new FlowerBlock(MobEffects.WEAVING, 5, BlockBehaviour.Properties.ofFullCopy(Blocks.CORNFLOWER)), block -> new MysteriousBlockItem(block, new Item.Properties()));
+
+    public static final RegistrySupplier<Block> ETHEREAL_CORE_FLOWER = registerBlock("ethereal_core_flower", () ->
+            new FlowerBlock(MobEffects.DIG_SPEED, 3.5F, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)), block -> new MysteriousBlockItem(block, new Item.Properties()));
+
     public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
                                 .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
@@ -34,6 +44,10 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> DEEPSLATE_LITHERITE_ORE = registerBlock("deepslate_litherite_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
                                 .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> ODYSIUM_BLOCK = registerBlock("odysium_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(8f).requiresCorrectToolForDrops().explosionResistance(50).sound(SoundType.METAL)));
 
     public static final RegistrySupplier<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()
