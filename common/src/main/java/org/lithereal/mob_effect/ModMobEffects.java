@@ -1,4 +1,4 @@
-package org.lithereal.mobeffect;
+package org.lithereal.mob_effect;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;

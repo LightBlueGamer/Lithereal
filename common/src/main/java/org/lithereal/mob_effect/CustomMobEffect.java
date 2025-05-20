@@ -1,4 +1,4 @@
-package org.lithereal.mobeffect;
+package org.lithereal.mob_effect;
 
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.effect.MobEffect;

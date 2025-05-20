@@ -3,7 +3,7 @@ package org.lithereal.util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.PotionContents;
-import org.lithereal.mobeffect.ModMobEffects;
+import org.lithereal.mob_effect.ModMobEffects;
 
 import java.util.List;
 import java.util.Optional;

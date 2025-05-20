@@ -9,7 +9,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.data.recipes.ModRecipes;
-import org.lithereal.mobeffect.ModMobEffects;
+import org.lithereal.mob_effect.ModMobEffects;
+import org.lithereal.mob_effect.potion.ModPotions;
 import org.lithereal.tags.ModTags;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -34,6 +35,7 @@ public class Lithereal {
         ModArmorMaterials.register();
         ModComponents.register();
         ModMobEffects.register();
+        ModPotions.register();
         ModTags.init();
         ModItems.register();
         ModBlockEntities.register();
