@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "lithereal:block/ethereal_core_flower"
+    "cross": "lithereal:block/phantom_rose_ethereal_core"
   }
 }

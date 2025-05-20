@@ -63,7 +63,7 @@ public class LitherealClient {
         ColorHandlerRegistry.registerBlockColors(blockColor, LitherealExpectPlatform.getInfusedLitheriteBlock());
         ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> blockAndTintGetter != null && blockPos != null ? BiomeColors.getAverageGrassColor(blockAndTintGetter, blockPos) : 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
         ColorHandlerRegistry.registerItemColors((itemStack, i) -> 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
-        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(), ModBlocks.ETHEREAL_CORE_FLOWER.get(), ModBlocks.PHANTOM_ICE_FLOWER.get(), ModBlocks.PHANTOM_ROSE.get());
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(), ModBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModBlocks.PHANTOM_ICE_FLOWER.get(), ModBlocks.PHANTOM_ROSE.get());
     }
 
     private static void registerItemsToTab() {
@@ -110,13 +110,14 @@ public class LitherealClient {
         litherite.sort(Comparator.comparing(itemStack -> {
             String descriptionId = BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getPath();
 
-            if (descriptionId.startsWith("litherite") || descriptionId.startsWith("deepslate_litherite")) return "1";
+            if (descriptionId.startsWith("litherite") || descriptionId.startsWith("deepslate_litherite") || descriptionId.startsWith("etherstone_litherite")) return "1";
             else if (descriptionId.startsWith("burning_litherite")) return "2";
             else if (descriptionId.startsWith("frozen_litherite")) return "3";
             else if (descriptionId.startsWith("withering_litherite")) return "4";
             else if (descriptionId.startsWith("infused_litherite")) return "5";
             else if (descriptionId.startsWith("charged_litherite")) return "6";
             else if (descriptionId.startsWith("odysium")) return "7";
+            else if (descriptionId.startsWith("phantom")) return "8";
 
             return descriptionId;
         }));
@@ -128,6 +129,6 @@ public class LitherealClient {
 
     }
     public static boolean isEquipment(String id) {
-        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite") || id.startsWith("odysium");
+        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("etherstone_lithereite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite") || id.startsWith("odysium") || id.startsWith("phantom");
     }
 }

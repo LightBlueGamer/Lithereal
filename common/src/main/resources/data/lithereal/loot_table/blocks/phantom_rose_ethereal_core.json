@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lithereal:ethereal_core_flower"
+          "name": "lithereal:phantom_rose_ethereal_core"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/ethereal_core_flower"
+  "random_sequence": "lithereal:blocks/phantom_rose_ethereal_core"
 }

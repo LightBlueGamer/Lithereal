@@ -25,62 +25,6 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> ETHEREAL_GRASS_BLOCK = registerBlock("ethereal_grass_block",
             () -> new ExtendedGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK), ETHEREAL_DIRT));
 
-    public static final RegistrySupplier<Block> PHANTOM_DIAMOND_BLOCK = registerBlock("phantom_diamond_block", () ->
-            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)), block -> new MysteriousBlockItem(block, new Item.Properties()));
-
-    public static final RegistrySupplier<Block> PHANTOM_ROSE = registerBlock("phantom_rose", () ->
-            new FlowerBlock(MobEffects.DAMAGE_BOOST, 3, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)), block -> new MysteriousBlockItem(block, new Item.Properties()));
-
-    public static final RegistrySupplier<Block> PHANTOM_ICE_FLOWER = registerBlock("phantom_ice_flower", () ->
-            new FlowerBlock(MobEffects.WEAVING, 5, BlockBehaviour.Properties.ofFullCopy(Blocks.CORNFLOWER)), block -> new MysteriousBlockItem(block, new Item.Properties()));
-
-    public static final RegistrySupplier<Block> ETHEREAL_CORE_FLOWER = registerBlock("ethereal_core_flower", () ->
-            new FlowerBlock(MobEffects.DIG_SPEED, 3.5F, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)), block -> new MysteriousBlockItem(block, new Item.Properties()));
-
-    public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
-            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
-                                .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
-
-    public static final RegistrySupplier<Block> DEEPSLATE_LITHERITE_ORE = registerBlock("deepslate_litherite_ore",
-            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
-                                .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
-
-    public static final RegistrySupplier<Block> ODYSIUM_BLOCK = registerBlock("odysium_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(8f).requiresCorrectToolForDrops().explosionResistance(50).sound(SoundType.METAL)));
-
-    public static final RegistrySupplier<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)));
-
-    public static final RegistrySupplier<Block> BURNING_LITHERITE_BLOCK = registerBlock("burning_litherite_block",
-            () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
-
-    public static final RegistrySupplier<Block> FROZEN_LITHERITE_BLOCK = registerBlock("frozen_litherite_block",
-            () -> new FrozenLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
-
-    public static final RegistrySupplier<Block> WITHERING_LITHERITE_BLOCK = registerBlock("withering_litherite_block",
-            () -> new WitheringLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
-
-    public static final RegistrySupplier<Block> CHARGED_LITHERITE_BLOCK = registerBlock("charged_litherite_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
-
-    public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
-            () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
-
-    public static final RegistrySupplier<Block> SCORCHED_NETHERRACK = registerBlock("scorched_netherrack",
-            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK)));
-
-    public static final RegistrySupplier<Block> SCORCHED_CRIMSON_NYLIUM = registerBlock("scorched_crimson_nylium",
-            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM)));
-
-    public static final RegistrySupplier<Block> SCORCHED_WARPED_NYLIUM = registerBlock("scorched_warped_nylium",
-            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM)));
-
     public static final RegistrySupplier<Block> ETHERSTONE = registerBlock("etherstone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE)));
 
@@ -120,6 +64,53 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> ETHERSTONE_BRICK_WALL = registerBlock("etherstone_brick_wall",
             () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICK_WALL)));
 
+    public static final RegistrySupplier<Block> LITHERITE_ORE = registerBlock("litherite_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
+                                .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> DEEPSLATE_LITHERITE_ORE = registerBlock("deepslate_litherite_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
+                                .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_LITHERITE_ORE = registerBlock("etherstone_litherite_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_LITHERITE_ORE.get())));
+
+    public static final RegistrySupplier<Block> ODYSIUM_BLOCK = registerBlock("odysium_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(8f).requiresCorrectToolForDrops().explosionResistance(50).sound(SoundType.METAL)));
+
+    public static final RegistrySupplier<Block> LITHERITE_BLOCK = registerBlock("litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)));
+
+    public static final RegistrySupplier<Block> BURNING_LITHERITE_BLOCK = registerBlock("burning_litherite_block",
+            () -> new BurningLitheriteBlock(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
+
+    public static final RegistrySupplier<Block> FROZEN_LITHERITE_BLOCK = registerBlock("frozen_litherite_block",
+            () -> new FrozenLitheriteBlock(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
+
+    public static final RegistrySupplier<Block> WITHERING_LITHERITE_BLOCK = registerBlock("withering_litherite_block",
+            () -> new WitheringLitheriteBlock(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
+
+    public static final RegistrySupplier<Block> CHARGED_LITHERITE_BLOCK = registerBlock("charged_litherite_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
+
+    public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
+            () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
+
+    public static final RegistrySupplier<Block> SCORCHED_NETHERRACK = registerBlock("scorched_netherrack",
+            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK)));
+
+    public static final RegistrySupplier<Block> SCORCHED_CRIMSON_NYLIUM = registerBlock("scorched_crimson_nylium",
+            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM)));
+
+    public static final RegistrySupplier<Block> SCORCHED_WARPED_NYLIUM = registerBlock("scorched_warped_nylium",
+            () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM)));
+
     public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
@@ -136,6 +127,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> DEEPSLATE_NERITH_ORE = registerBlock("deepslate_nerith_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_NERITH_ORE = registerBlock("etherstone_nerith_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_NERITH_ORE.get())));
 
     public static final RegistrySupplier<Block> ELUNITE_ORE = registerBlock("elunite_ore",
             () -> new Block(BlockBehaviour.Properties.of()
@@ -161,6 +155,9 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
 
+    public static final RegistrySupplier<Block> ETHERSTONE_LUMINIUM_ORE = registerBlock("etherstone_luminium_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_LUMINIUM_ORE.get())));
+
     public static final RegistrySupplier<Block> CYRUM_ORE = registerBlock("cyrum_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
@@ -168,6 +165,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> DEEPSLATE_CYRUM_ORE = registerBlock("deepslate_cyrum_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
+    public static final RegistrySupplier<Block> ETHERSTONE_CYRUM_ORE = registerBlock("etherstone_cyrum_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_CYRUM_ORE.get())));
 
     public static final RegistrySupplier<Block> COPALITE_ORE = registerBlock("copalite_ore",
             () -> new Block(BlockBehaviour.Properties.of()
@@ -177,6 +177,9 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
 
+    public static final RegistrySupplier<Block> ETHERSTONE_COPALITE_ORE = registerBlock("etherstone_copalite_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_COPALITE_ORE.get())));
+
     public static final RegistrySupplier<Block> AURELITE_ORE = registerBlock("aurelite_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
@@ -185,27 +188,24 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
 
+    public static final RegistrySupplier<Block> ETHERSTONE_AURELITE_ORE = registerBlock("etherstone_aurelite_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_AURELITE_ORE.get())));
+
     public static final RegistrySupplier<Block> ALLIAN_ORE = registerBlock("allian_ore",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));
 
-    public static final RegistrySupplier<Block> ETHERSTONE_AURELITE_ORE = registerBlock("etherstone_aurelite_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_AURELITE_ORE.get())));
+    public static final RegistrySupplier<Block> PHANTOM_DIAMOND_BLOCK = registerBlock("phantom_diamond_block", () ->
+            new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK)), block -> new MysteriousBlockItem(block, new Item.Properties()));
 
-    public static final RegistrySupplier<Block> ETHERSTONE_COPALITE_ORE = registerBlock("etherstone_copalite_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_COPALITE_ORE.get())));
+    public static final RegistrySupplier<Block> PHANTOM_ROSE = registerBlock("phantom_rose", () ->
+            new FlowerBlock(MobEffects.DAMAGE_BOOST, 3, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)), block -> new MysteriousBlockItem(block, new Item.Properties()));
 
-    public static final RegistrySupplier<Block> ETHERSTONE_CYRUM_ORE = registerBlock("etherstone_cyrum_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_CYRUM_ORE.get())));
+    public static final RegistrySupplier<Block> PHANTOM_ICE_FLOWER = registerBlock("phantom_ice_flower", () ->
+            new FlowerBlock(MobEffects.WEAVING, 5, BlockBehaviour.Properties.ofFullCopy(Blocks.CORNFLOWER)), block -> new MysteriousBlockItem(block, new Item.Properties()));
 
-    public static final RegistrySupplier<Block> ETHERSTONE_LITHERITE_ORE = registerBlock("etherstone_litherite_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_LITHERITE_ORE.get())));
-
-    public static final RegistrySupplier<Block> ETHERSTONE_LUMINIUM_ORE = registerBlock("etherstone_luminium_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_LUMINIUM_ORE.get())));
-
-    public static final RegistrySupplier<Block> ETHERSTONE_NERITH_ORE = registerBlock("etherstone_nerith_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_NERITH_ORE.get())));
+    public static final RegistrySupplier<Block> PHANTOM_ROSE_ETHEREAL_CORE = registerBlock("phantom_rose_ethereal_core", () ->
+            new FlowerBlock(MobEffects.DIG_SPEED, 3.5F, BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY)), block -> new MysteriousBlockItem(block, new Item.Properties()));
 
     private static <T extends Block> RegistrySupplier<T> registerBlock(String name, Supplier<T> block) {
         return registerBlock(name, block, Item.Properties::new);
