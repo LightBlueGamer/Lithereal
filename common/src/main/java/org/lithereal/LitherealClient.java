@@ -76,8 +76,7 @@ public class LitherealClient {
 
         for (Potion potion : BuiltInRegistries.POTION.stream().toList()) {
             Holder<Potion> holder = BuiltInRegistries.POTION.wrapAsHolder(potion);
-            List<ItemLike> itemLikes = Arrays.asList(LitherealExpectPlatform.getInfusedLitheriteBlock(),
-                    ModItems.INFUSED_LITHERITE_INGOT.get(),
+            List<ItemLike> itemLikes = Arrays.asList(ModItems.INFUSED_LITHERITE_INGOT.get(),
                     ModItems.INFUSED_LITHERITE_SWORD.get(),
                     ModItems.INFUSED_LITHERITE_SHOVEL.get(),
                     ModItems.INFUSED_LITHERITE_PICKAXE.get(),
@@ -87,7 +86,8 @@ public class LitherealClient {
                     ModItems.INFUSED_LITHERITE_HELMET.get(),
                     ModItems.INFUSED_LITHERITE_CHESTPLATE.get(),
                     ModItems.INFUSED_LITHERITE_LEGGINGS.get(),
-                    ModItems.INFUSED_LITHERITE_BOOTS.get());
+                    ModItems.INFUSED_LITHERITE_BOOTS.get(),
+                    LitherealExpectPlatform.getInfusedLitheriteBlock());
             for (ItemLike itemLike : itemLikes){
                 ItemStack current = new ItemStack(itemLike);
                 current.set(DataComponents.POTION_CONTENTS, new PotionContents(holder));
