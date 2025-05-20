@@ -97,6 +97,10 @@
 
   "entity.lithereal.lither_charge": "Thrown Lither Charge",
 
+  "effect.lithereal.boss_power": "Boss Essence Power",
+  "effect.lithereal.protected": "Protected",
+  "effect.lithereal.weak_armour": "Weak Armor",
+
   "item.enhanced": "Enhanced",
   "item.lithereal.boss_essence_nether_star": "Boss Essence Nether Star",
   "item.lithereal.burning_litherite_axe": "Burning Litherite Axe",

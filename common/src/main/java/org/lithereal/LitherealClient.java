@@ -74,8 +74,7 @@ public class LitherealClient {
                 LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()));
 
-        for (Potion potion : BuiltInRegistries.POTION.stream().toList()) {
-            Holder<Potion> holder = BuiltInRegistries.POTION.wrapAsHolder(potion);
+        for (Holder<Potion> holder : BuiltInRegistries.POTION.holders().toList()) {
             List<ItemLike> itemLikes = Arrays.asList(ModItems.INFUSED_LITHERITE_INGOT.get(),
                     ModItems.INFUSED_LITHERITE_SWORD.get(),
                     ModItems.INFUSED_LITHERITE_SHOVEL.get(),
@@ -88,7 +87,7 @@ public class LitherealClient {
                     ModItems.INFUSED_LITHERITE_LEGGINGS.get(),
                     ModItems.INFUSED_LITHERITE_BOOTS.get(),
                     LitherealExpectPlatform.getInfusedLitheriteBlock());
-            for (ItemLike itemLike : itemLikes){
+            for (ItemLike itemLike : itemLikes) {
                 ItemStack current = new ItemStack(itemLike);
                 current.set(DataComponents.POTION_CONTENTS, new PotionContents(holder));
                 litherite.add(current);

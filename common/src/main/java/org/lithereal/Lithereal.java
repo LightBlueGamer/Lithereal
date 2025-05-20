@@ -9,6 +9,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.data.recipes.ModRecipes;
+import org.lithereal.mobeffect.ModMobEffects;
 import org.lithereal.tags.ModTags;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -32,6 +33,7 @@ public class Lithereal {
         ModCreativeTabs.register();
         ModArmorMaterials.register();
         ModComponents.register();
+        ModMobEffects.register();
         ModTags.init();
         ModItems.register();
         ModBlockEntities.register();
@@ -40,5 +42,9 @@ public class Lithereal {
         ModParticles.register();
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
+    }
+
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }

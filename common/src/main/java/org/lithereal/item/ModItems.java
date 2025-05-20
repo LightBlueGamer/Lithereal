@@ -257,10 +257,10 @@ public class ModItems {
             new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).jukeboxPlayable(ModSounds.SPARKLE)));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE_NETHER_STAR = ITEMS.register("boss_essence_nether_star", () ->
-            new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+            new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     public static final RegistrySupplier<Item> UNIFIER = ITEMS.register("unifier", () ->
-            new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+            new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     public static final RegistrySupplier<Item> NERITH_INGOT = ITEMS.register("nerith_ingot", () ->
             new Item(new Item.Properties()));
@@ -314,7 +314,7 @@ public class ModItems {
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE = ITEMS.register("boss_essence", () ->
-            new Item(new Item.Properties().rarity(Rarity.UNCOMMON).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), BossEssenceItem.BASE));
 
     public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("odysium_upgrade_smithing_template",
             ModSmithingTemplateItem::createOdysiumUpgradeTemplate);

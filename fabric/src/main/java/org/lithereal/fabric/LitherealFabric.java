@@ -1,10 +1,8 @@
 package org.lithereal.fabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.loot.v3.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
