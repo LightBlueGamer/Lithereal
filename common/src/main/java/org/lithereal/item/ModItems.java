@@ -4,6 +4,8 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
@@ -18,7 +20,11 @@ import org.lithereal.item.burning.BurningLitheriteHoeItem;
 import org.lithereal.item.burning.BurningLitheritePickaxeItem;
 import org.lithereal.item.compat.CompatInit;
 import org.lithereal.item.obscured.MysteriousItem;
+import org.lithereal.util.BaseBossEssence;
 
+
+import java.util.Collections;
+import java.util.List;
 
 import static dev.architectury.platform.Platform.isModLoaded;
 import static org.lithereal.util.CommonUtils.*;
@@ -262,6 +268,9 @@ public class ModItems {
     public static final RegistrySupplier<Item> UNIFIER = ITEMS.register("unifier", () ->
             new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
+    public static final RegistrySupplier<Item> IMPURE_ETHEREAL_CRYSTAL_SHARD = ITEMS.register("impure_ethereal_crystal_shard", () ->
+            new Item(new Item.Properties()));
+
     public static final RegistrySupplier<Item> NERITH_INGOT = ITEMS.register("nerith_ingot", () ->
             new Item(new Item.Properties()));
 
@@ -314,7 +323,13 @@ public class ModItems {
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE = ITEMS.register("boss_essence", () ->
-            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), BossEssenceItem.BASE));
+            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), new BaseBossEssence(14100520, 0, Collections.emptyList())));
+
+    public static final RegistrySupplier<Item> AWAKENED_BOSS_ESSENCE = ITEMS.register("awakened_boss_essence", () ->
+            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), new BaseBossEssence(4726207, 1, Collections.emptyList())));
+
+    public static final RegistrySupplier<Item> PURE_BOSS_ESSENCE = ITEMS.register("pure_boss_essence", () ->
+            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), new BaseBossEssence(13985849, 2, List.of(new MobEffectInstance(MobEffects.REGENERATION, 6000)))));
 
     public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("odysium_upgrade_smithing_template",
             ModSmithingTemplateItem::createOdysiumUpgradeTemplate);

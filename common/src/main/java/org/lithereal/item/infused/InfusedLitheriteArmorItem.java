@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ability.Ability;
 import org.lithereal.item.ability.AbilityArmorItem;
 
@@ -18,7 +19,7 @@ public class InfusedLitheriteArmorItem extends AbilityArmorItem implements Infus
         super(Ability.INFUSED, armorMaterial, type, durability, properties);
     }
 
-    public ItemStack getDefaultInstance() {
+    public @NotNull ItemStack getDefaultInstance() {
         ItemStack itemStack = super.getDefaultInstance();
         itemStack.set(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         return itemStack;
@@ -26,15 +27,15 @@ public class InfusedLitheriteArmorItem extends AbilityArmorItem implements Infus
 
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, tooltipContext, components, tooltipFlag);
-        PotionContents.addPotionTooltip(transformEffects(itemStack, 100), components::add, 1.0F, tooltipContext.tickRate());
+        PotionContents.addPotionTooltip(transformEffects(itemStack), components::add, 1.0F, tooltipContext.tickRate());
     }
 
-    public String getDescriptionId(ItemStack itemStack) {
+    public @NotNull String getDescriptionId(ItemStack itemStack) {
         return Potion.getName(itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).potion(), this.getDescriptionId() + ".effect.");
     }
 
     @Override
-    public Component getName(ItemStack itemStack) {
+    public @NotNull Component getName(ItemStack itemStack) {
         return getModifiedName(itemStack);
     }
 

@@ -21,6 +21,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(LitherealVaultBlockEntity::new,
                             ModBlocks.LITHEREAL_VAULT.get()).build(null));
 
+    public static final RegistrySupplier<BlockEntityType<EtherealCorePortalBlockEntity>> ETHEREAL_CORE_PORTAL =
+            BLOCK_ENTITIES.register("ethereal_core_portal", () ->
+                    BlockEntityType.Builder.of(EtherealCorePortalBlockEntity::new,
+                            ModBlocks.ETHEREAL_CORE_PORTAL.get()).build(null));
+
     public static void register() {
         BLOCK_ENTITIES.register();
     }

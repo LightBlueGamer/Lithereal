@@ -20,14 +20,14 @@ public interface InfusedItem extends AbilityItem {
         String hoverStr = potion.getHoverName().getString().replaceAll("^(?i)(potion of the |potion of |potion )", "") + " " + getBaseName(itemStack);
         return Component.translatableWithFallback(itemStack.getDescriptionId(), hoverStr);
     }
-    default List<MobEffectInstance> transformEffects(ItemStack stack, int timeNonInstant) {
+    default List<MobEffectInstance> transformEffects(ItemStack stack) {
         PotionContents potionContents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         List<MobEffectInstance> newList = Lists.newArrayList();
-        potionContents.forEachEffect((mobEffectInstance) -> newList.add(transformInstance(mobEffectInstance, mobEffectInstance.getDuration() / 10)));
+        potionContents.forEachEffect((mobEffectInstance) -> newList.add(transformInstance(mobEffectInstance)));
         return newList;
     }
-    static MobEffectInstance transformInstance(MobEffectInstance mobEffectInstance, int timeNonInstant) {
-        return new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().value().isInstantenous() ? 1 : mobEffectInstance.getDuration() / 10, mobEffectInstance.getAmplifier(), mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon());
+    static MobEffectInstance transformInstance(MobEffectInstance mobEffectInstance) {
+        return new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().value().isInstantenous() ? 1 : Math.max(mobEffectInstance.getDuration() / 10, 100), mobEffectInstance.getAmplifier(), mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon());
     }
 
     @Override

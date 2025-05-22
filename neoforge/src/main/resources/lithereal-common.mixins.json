@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "MobEffectMixin",
     "ShapedRecipeMixin",
     "CraftingInventoryMixin",
     "ShapelessRecipeMixin",

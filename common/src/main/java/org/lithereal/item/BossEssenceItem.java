@@ -14,12 +14,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.util.BaseBossEssence;
-import org.lithereal.util.BossEssenceTier;
 
 public class BossEssenceItem extends Item {
-    public static final BossEssenceTier BASE = new BaseBossEssence();
-    public BossEssenceItem(Properties properties, BossEssenceTier tier) {
-        super(properties.component(DataComponents.POTION_CONTENTS, tier.generatePotionContents()));
+    public BossEssenceItem(Properties properties, BaseBossEssence bossEssence) {
+        super(properties.component(DataComponents.POTION_CONTENTS, bossEssence.generatePotionContents()));
     }
 
     public @NotNull ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
@@ -32,7 +30,7 @@ public class BossEssenceItem extends Item {
             PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
             potionContents.forEachEffect((mobEffectInstance) -> {
                 if (mobEffectInstance.getEffect().value().isInstantenous()) {
-                    mobEffectInstance.getEffect().value().applyInstantenousEffect(player, player, livingEntity, mobEffectInstance.getAmplifier(), (double)1.0F);
+                    mobEffectInstance.getEffect().value().applyInstantenousEffect(player, player, livingEntity, mobEffectInstance.getAmplifier(), 1.0);
                 } else {
                     livingEntity.addEffect(mobEffectInstance);
                 }
