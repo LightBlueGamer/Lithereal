@@ -11,8 +11,8 @@
     "CraftingInventoryMixin",
     "ShapelessRecipeMixin",
     "ServerPlayerMixin",
-    "BlockEntityMixin",
-    "LevelChunkMixin"
+    "BlockStateBaseMixin",
+    "BlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

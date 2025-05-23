@@ -14,11 +14,9 @@ import org.lithereal.Lithereal;
 import org.lithereal.world.structure.WaterReplaceProcessor;
 
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EtherealCoreArenaFeature extends Feature<NoneFeatureConfiguration> {
     public static final BoundingBox UNCHANGEABLE = new BoundingBox(-23, 234, -23, 23, 259, 23);
-    public static final AtomicBoolean UPDATED = new AtomicBoolean();
     public EtherealCoreArenaFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
@@ -42,9 +40,6 @@ public class EtherealCoreArenaFeature extends Feature<NoneFeatureConfiguration> 
         StructurePlaceSettings structurePlaceSettings = new StructurePlaceSettings();
         structurePlaceSettings.addProcessor(WaterReplaceProcessor.INSTANCE);
         template.placeInWorld(level, cornerPos, centerPos, structurePlaceSettings, randomSource, 2);
-        synchronized (UPDATED){
-            UPDATED.set(true);
-        }
         return true;
     }
 }

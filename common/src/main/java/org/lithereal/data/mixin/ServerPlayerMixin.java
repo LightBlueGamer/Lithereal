@@ -35,9 +35,6 @@ public abstract class ServerPlayerMixin extends Player {
     @Inject(method = "tick", at = @At("HEAD"))
     public void injectEffectiveAdventure(CallbackInfo ci) {
         if (level().dimension().location().equals(Lithereal.id("ethereal_core")) && EtherealCoreArenaFeature.UNCHANGEABLE.isInside(blockPosition())) {
-            if (!EtherealCoreArenaFeature.UPDATED.get()) synchronized (EtherealCoreArenaFeature.UPDATED) {
-                EtherealCoreArenaFeature.UPDATED.set(true);
-            }
             if (lithereal$originalGameMode == null) {
                 lithereal$originalGameMode = gameMode.getGameModeForPlayer();
                 boolean mayFly = getAbilities().mayfly;
