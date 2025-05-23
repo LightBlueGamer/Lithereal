@@ -2,12 +2,15 @@ package org.lithereal.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
+import org.lithereal.client.EtherealCoreSpecialEffects;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
@@ -27,6 +30,7 @@ public class LitherealFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.INFINITY_GLASS.get(), RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_LANTERN.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHEREAL_VAULT.get(), RenderType.cutout());
+        DimensionRenderingRegistry.registerDimensionEffects(Lithereal.id("ethereal_core"), new EtherealCoreSpecialEffects());
         EntityRendererRegistry.register(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
 
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);

@@ -2,7 +2,7 @@
   "ambient_light": 1.0,
   "bed_works": true,
   "coordinate_scale": 1.0,
-  "effects": "minecraft:overworld",
+  "effects": "lithereal:ethereal_core",
   "fixed_time": 12000,
   "has_ceiling": false,
   "has_raids": false,

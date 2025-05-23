@@ -8,7 +8,7 @@
   },
   "downfall": 0.8,
   "effects": {
-    "fog_color": 3626122,
+    "fog_color": 665436,
     "foliage_color": 7761384,
     "grass_color": 8573157,
     "mood_sound": {
@@ -17,9 +17,15 @@
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000
     },
-    "sky_color": 354790,
-    "water_color": 237858480,
-    "water_fog_color": 188090601
+    "sky_color": 1464748,
+    "water_color": 1580186,
+    "water_fog_color": 1574496,
+    "particle": {
+      "options": {
+        "type": "lithereal:ethereal_core_soul"
+      },
+      "probability": 0.025
+    }
   },
   "features": [
     [],

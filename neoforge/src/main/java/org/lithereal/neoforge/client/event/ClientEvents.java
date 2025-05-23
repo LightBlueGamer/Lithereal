@@ -6,9 +6,13 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
+import org.lithereal.client.EtherealCoreSpecialEffects;
+import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
@@ -31,8 +35,13 @@ public class ClientEvents {
             LitherealClient.init();
         }
         @SubscribeEvent
+        public static void onDimensionSpecialEffectsRegister(RegisterDimensionSpecialEffectsEvent event) {
+            event.register(Lithereal.id("ethereal_core"), new EtherealCoreSpecialEffects());
+        }
+        @SubscribeEvent
         public static void onParticleProviderRegister(RegisterParticleProvidersEvent event) {
             event.registerSpriteSet(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
+            event.registerSpriteSet(ModParticles.SOUL.get(), EtherealSoulProvider::new);
         }
         @SubscribeEvent
         public static void onRegisterMenu(RegisterMenuScreensEvent event) {

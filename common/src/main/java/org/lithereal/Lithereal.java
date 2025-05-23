@@ -18,6 +18,8 @@ import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
+import org.lithereal.world.feature.ModFeatures;
+import org.lithereal.world.structure.ModStructureProcessorTypes;
 
 import java.util.function.Supplier;
 import java.util.logging.Logger;
@@ -42,6 +44,8 @@ public class Lithereal {
         ModRecipes.register();
         ModEntities.register();
         ModParticles.register();
+        ModStructureProcessorTypes.register();
+        ModFeatures.register();
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

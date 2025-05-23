@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Portal;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
@@ -31,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.block.entity.EtherealCorePortalBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
+import org.lithereal.world.feature.ModFeatures;
 
 public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
     public static final BlockPos SPAWN_POINT = new BlockPos(0, 250, 0);
@@ -73,8 +75,10 @@ public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
             BlockPos blockPos2 = destinationIsNotOverworld ? SPAWN_POINT : toMoveTo.getSharedSpawnPos();
             Vec3 vec3 = blockPos2.getBottomCenter();
             float newYRot = entity.getYRot();
-            if (destinationIsNotOverworld) newYRot = Direction.NORTH.toYRot();
-            else {
+            if (destinationIsNotOverworld) {
+                newYRot = Direction.NORTH.toYRot();
+                ModFeatures.ETHEREAL_CORE_ARENA.get().place(NoneFeatureConfiguration.INSTANCE, toMoveTo, toMoveTo.getChunkSource().getGenerator(), toMoveTo.random, SPAWN_POINT.below(16));
+            } else {
                 if (entity instanceof ServerPlayer serverPlayer) return serverPlayer.findRespawnPositionAndUseSpawnBlock(false, DimensionTransition.DO_NOTHING);
 
                 vec3 = entity.adjustSpawnLocation(toMoveTo, blockPos2).getBottomCenter();
