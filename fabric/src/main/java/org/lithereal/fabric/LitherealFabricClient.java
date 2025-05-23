@@ -2,6 +2,7 @@ package org.lithereal.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -19,6 +20,7 @@ import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
 import org.lithereal.entity.ModEntities;
+import org.lithereal.world.feature.EtherealCoreArenaFeature;
 
 public class LitherealFabricClient implements ClientModInitializer {
     @Override
@@ -36,6 +38,11 @@ public class LitherealFabricClient implements ClientModInitializer {
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);
         MenuScreens.register(FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER, FreezingStationScreen::new);
         MenuScreens.register(FabricScreenHandlers.INFUSEMENT_CHAMBER_SCREEN_HANDLER, InfusementChamberScreen::new);
+        ClientPlayConnectionEvents.DISCONNECT.register(Lithereal.id("disconnect"), (clientPacketListener, minecraft) -> {
+            if (EtherealCoreArenaFeature.UPDATED.get()) synchronized (EtherealCoreArenaFeature.UPDATED) {
+                EtherealCoreArenaFeature.UPDATED.set(false);
+            }
+        });
 
         LitherealClient.init();
     }

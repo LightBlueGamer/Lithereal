@@ -10,7 +10,9 @@
     "ShapedRecipeMixin",
     "CraftingInventoryMixin",
     "ShapelessRecipeMixin",
-    "BlockEntityMixin"
+    "ServerPlayerMixin",
+    "BlockEntityMixin",
+    "LevelChunkMixin"
   ],
   "injectors": {
     "defaultRequire": 1

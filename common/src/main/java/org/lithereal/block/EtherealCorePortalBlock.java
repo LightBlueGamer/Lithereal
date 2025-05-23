@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.block.entity.EtherealCorePortalBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
+import org.lithereal.world.feature.EtherealCoreArenaFeature;
 import org.lithereal.world.feature.ModFeatures;
 
 public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
@@ -77,7 +78,7 @@ public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
             float newYRot = entity.getYRot();
             if (destinationIsNotOverworld) {
                 newYRot = Direction.NORTH.toYRot();
-                ModFeatures.ETHEREAL_CORE_ARENA.get().place(NoneFeatureConfiguration.INSTANCE, toMoveTo, toMoveTo.getChunkSource().getGenerator(), toMoveTo.random, SPAWN_POINT.below(16));
+                if (!EtherealCoreArenaFeature.UPDATED.get()) ModFeatures.ETHEREAL_CORE_ARENA.get().place(NoneFeatureConfiguration.INSTANCE, toMoveTo, toMoveTo.getChunkSource().getGenerator(), toMoveTo.random, SPAWN_POINT.below(16));
             } else {
                 if (entity instanceof ServerPlayer serverPlayer) return serverPlayer.findRespawnPositionAndUseSpawnBlock(false, DimensionTransition.DO_NOTHING);
 

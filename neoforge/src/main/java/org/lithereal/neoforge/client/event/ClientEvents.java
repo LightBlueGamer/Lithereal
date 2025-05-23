@@ -5,10 +5,8 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.NeoForge;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
 import org.lithereal.client.EtherealCoreSpecialEffects;
@@ -24,6 +22,7 @@ import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleScreen;
 import org.lithereal.client.gui.screens.inventory.FreezingStationScreen;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberScreen;
+import org.lithereal.world.feature.EtherealCoreArenaFeature;
 
 public class ClientEvents {
     public static class ClientModBusEvents {
@@ -59,6 +58,17 @@ public class ClientEvents {
             event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSED_LITHERITE_BLOCK.get(), InfusedLitheriteBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSEMENT_CHAMBER.get(), InfusementChamberBlockEntityRenderer::new);
             event.registerEntityRenderer(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
+        }
+    }
+    public static class ClientForgeBusEvents {
+        public static void register() {
+            NeoForge.EVENT_BUS.register(ClientForgeBusEvents.class);
+        }
+        @SubscribeEvent
+        public static void onClientDisconnect(ClientPlayerNetworkEvent.LoggingOut event) {
+            if (EtherealCoreArenaFeature.UPDATED.get()) synchronized (EtherealCoreArenaFeature.UPDATED) {
+                EtherealCoreArenaFeature.UPDATED.set(false);
+            }
         }
     }
 }
