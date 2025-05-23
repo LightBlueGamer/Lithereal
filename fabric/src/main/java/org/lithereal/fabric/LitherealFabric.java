@@ -15,7 +15,7 @@ import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
-import org.lithereal.fabric.data.compat.ModWeaponType;
+import org.lithereal.data.compat.ModWeaponType;
 import org.lithereal.fabric.world.item.FabricItems;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
 import org.lithereal.fabric.data.worldgen.FabricWorldGeneration;

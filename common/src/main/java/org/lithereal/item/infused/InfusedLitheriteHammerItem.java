@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class InfusedLitheriteHammerItem extends AbilityHammerItem implements InfusedItem {
-    public InfusedLitheriteHammerItem(Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(Ability.INFUSED, tier, damage, attackSpeed, properties);
+    public InfusedLitheriteHammerItem(Tier tier, int damage, float attackSpeed, int weaponLevel, Properties properties) {
+        super(Ability.INFUSED, tier, damage, attackSpeed, weaponLevel, properties);
     }
 
     public ItemStack getDefaultInstance() {

@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:odysium_axe",
+    "lithereal:odysium_hammer",
+    "lithereal:odysium_hoe",
+    "lithereal:odysium_pickaxe",
+    "lithereal:odysium_shovel",
+    "lithereal:odysium_sword",
+    {
+      "id": "lithereal:odysium_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:odysium_knife",
+      "required": false
+    }
+  ]
+}

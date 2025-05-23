@@ -5,7 +5,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.data.compat.DefaultedHooks;
 
 import java.util.function.Supplier;
 
@@ -60,8 +60,9 @@ public class ModTier implements Tier {
     }
 
     public static ModTier create(String name, int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient, TagKey<Block> incorrect) {
-        if (isModLoaded("combatify"))
-            return LitherealExpectPlatform.createCombatifyTier(name, level, uses, speed, attackDamageBonus - 1, enchantmentValue, repairIngredient, incorrect);
-        return new ModTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
+        ModTier tier = new ModTier(level, uses, speed, attackDamageBonus, enchantmentValue, repairIngredient, incorrect);
+        if (isModLoaded("defaulted"))
+            return DefaultedHooks.registerTier(name, tier);
+        return tier;
     }
 }

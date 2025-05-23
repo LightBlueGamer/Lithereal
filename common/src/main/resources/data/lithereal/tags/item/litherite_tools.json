@@ -1,0 +1,75 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:litherite_axe",
+    "lithereal:litherite_hammer",
+    "lithereal:litherite_hoe",
+    "lithereal:litherite_pickaxe",
+    "lithereal:litherite_shovel",
+    "lithereal:litherite_sword",
+    {
+      "id": "lithereal:litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:litherite_knife",
+      "required": false
+    },
+    "lithereal:burning_litherite_axe",
+    "lithereal:burning_litherite_hammer",
+    "lithereal:burning_litherite_hoe",
+    "lithereal:burning_litherite_pickaxe",
+    "lithereal:burning_litherite_shovel",
+    "lithereal:burning_litherite_sword",
+    {
+      "id": "lithereal:burning_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:burning_litherite_knife",
+      "required": false
+    },
+    "lithereal:frozen_litherite_axe",
+    "lithereal:frozen_litherite_hammer",
+    "lithereal:frozen_litherite_hoe",
+    "lithereal:frozen_litherite_pickaxe",
+    "lithereal:frozen_litherite_shovel",
+    "lithereal:frozen_litherite_sword",
+    {
+      "id": "lithereal:frozen_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:frozen_litherite_knife",
+      "required": false
+    },
+    "lithereal:infused_litherite_axe",
+    "lithereal:infused_litherite_hammer",
+    "lithereal:infused_litherite_hoe",
+    "lithereal:infused_litherite_pickaxe",
+    "lithereal:infused_litherite_shovel",
+    "lithereal:infused_litherite_sword",
+    {
+      "id": "lithereal:infused_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:infused_litherite_knife",
+      "required": false
+    },
+    "lithereal:withering_litherite_axe",
+    "lithereal:withering_litherite_hammer",
+    "lithereal:withering_litherite_hoe",
+    "lithereal:withering_litherite_pickaxe",
+    "lithereal:withering_litherite_shovel",
+    "lithereal:withering_litherite_sword",
+    {
+      "id": "lithereal:withering_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:withering_litherite_knife",
+      "required": false
+    }
+  ]
+}

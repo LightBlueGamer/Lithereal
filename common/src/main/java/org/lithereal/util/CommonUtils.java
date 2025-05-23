@@ -13,18 +13,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.core.component.ModComponents;
-import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.item.ability.Ability;
-import org.lithereal.item.HammerItem;
-import org.lithereal.item.ability.AbilityHammerItem;
-import org.lithereal.item.burning.BurningLitheriteHammerItem;
 import org.lithereal.item.component.Enhanced;
-import org.lithereal.item.infused.InfusedLitheriteHammerItem;
 
 import java.util.Optional;
 import java.util.function.Consumer;
-
-import static dev.architectury.platform.Platform.isModLoaded;
 
 public class CommonUtils {
     public static boolean hasFullSuitOfArmorOn(Player player) {
@@ -92,29 +84,5 @@ public class CommonUtils {
             tooltipProvider.addToTooltip(tooltipContext, consumer, tooltipFlag);
         }
 
-    }
-
-    public static HammerItem createHammer(Tier tier, int damage, float attackSpeed, Item.Properties properties) {
-        if (isModLoaded("combatify"))
-            return LitherealExpectPlatform.createHammerWithType(tier, damage, attackSpeed, properties);
-        return new HammerItem(tier, damage, attackSpeed, properties);
-    }
-
-    public static AbilityHammerItem createAbilityHammer(Ability ability, Tier tier, int damage, float attackSpeed, Item.Properties properties) {
-        if (isModLoaded("combatify"))
-            return LitherealExpectPlatform.createAbilityHammerWithType(ability, tier, damage, attackSpeed, properties);
-        return new AbilityHammerItem(ability, tier, damage, attackSpeed, properties);
-    }
-
-    public static BurningLitheriteHammerItem createBurningHammer(Tier tier, int damage, float attackSpeed, Item.Properties properties) {
-        if (isModLoaded("combatify"))
-            return LitherealExpectPlatform.createBurningHammerWithType(tier, damage, attackSpeed, properties);
-        return new BurningLitheriteHammerItem(tier, damage, attackSpeed, properties);
-    }
-
-    public static InfusedLitheriteHammerItem createInfusedHammer(Tier tier, int damage, float attackSpeed, Item.Properties properties) {
-        if (isModLoaded("combatify"))
-            return LitherealExpectPlatform.createInfusedHammerWithType(tier, damage, attackSpeed, properties);
-        return new InfusedLitheriteHammerItem(tier, damage, attackSpeed, properties);
     }
 }

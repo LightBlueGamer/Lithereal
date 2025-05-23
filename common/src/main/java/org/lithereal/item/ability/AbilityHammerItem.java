@@ -17,8 +17,8 @@ import static org.lithereal.util.CommonUtils.addToTooltip;
 
 public class AbilityHammerItem extends HammerItem implements AbilityItem {
     final Ability ability;
-    public AbilityHammerItem(Ability ability, Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(tier, damage, attackSpeed, properties);
+    public AbilityHammerItem(Ability ability, Tier tier, int damage, float attackSpeed, int weaponLevel, Properties properties) {
+        super(tier, damage, attackSpeed, weaponLevel, properties);
         this.ability = ability;
     }
 

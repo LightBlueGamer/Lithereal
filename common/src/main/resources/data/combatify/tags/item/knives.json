@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "lithereal:litherite_knife",
+      "required": false
+    },
+    {
+      "id": "lithereal:odysium_knife",
+      "required": false
+    }
+  ]
+}

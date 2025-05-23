@@ -1,4 +1,4 @@
-package org.lithereal.fabric.data.compat;
+package org.lithereal.data.compat;
 
 import net.atlas.combatify.Combatify;
 import net.atlas.combatify.item.WeaponType;

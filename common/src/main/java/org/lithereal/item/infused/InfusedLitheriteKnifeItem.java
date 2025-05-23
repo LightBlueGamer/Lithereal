@@ -1,4 +1,4 @@
-package org.lithereal.fabric.world.item.infused;
+package org.lithereal.item.infused;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -8,15 +8,14 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
-import org.lithereal.fabric.world.item.ability.FabricAbilityLongSword;
 import org.lithereal.item.ability.Ability;
-import org.lithereal.item.infused.InfusedItem;
+import org.lithereal.item.ability.AbilityKnifeItem;
 
 import java.util.List;
 import java.util.Objects;
 
-public class FabricInfusedLongSword extends FabricAbilityLongSword implements InfusedItem {
-    public FabricInfusedLongSword(Tier tier, Properties properties) {
+public class InfusedLitheriteKnifeItem extends AbilityKnifeItem implements InfusedItem {
+    public InfusedLitheriteKnifeItem(Tier tier, Item.Properties properties) {
         super(Ability.INFUSED, tier, properties);
     }
 
@@ -45,6 +44,6 @@ public class FabricInfusedLongSword extends FabricAbilityLongSword implements In
 
     @Override
     public String getBaseName(ItemStack stack) {
-        return "Litherite Longsword";
+        return "Litherite Knife";
     }
 }

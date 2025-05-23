@@ -1,5 +1,6 @@
 package org.lithereal.item;
 
+import dev.architectury.platform.Platform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +23,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.lithereal.data.compat.ModWeaponType;
 
 import java.util.function.Predicate;
 
@@ -32,6 +34,11 @@ public class WarHammerItem extends TieredItem {
     }
 
     public static ItemAttributeModifiers createAttributes(Tier tier, float damage, float speed) {
+        if (Platform.isModLoaded("combatify")) {
+            ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+            ModWeaponType.WAR_HAMMER.addCombatAttributes(4, tier, builder);
+            return builder.build();
+        }
         return ItemAttributeModifiers.builder()
                 .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, damage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, speed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)

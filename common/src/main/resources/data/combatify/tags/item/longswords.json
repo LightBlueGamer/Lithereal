@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "lithereal:litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:odysium_longsword",
+      "required": false
+    }
+  ]
+}

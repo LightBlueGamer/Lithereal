@@ -11,13 +11,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.item.ability.*;
-import org.lithereal.item.burning.BurningLitheriteShovelItem;
+import org.lithereal.item.burning.*;
 import org.lithereal.item.infused.*;
 import org.lithereal.sounds.ModSounds;
 import org.lithereal.tags.ModTags;
-import org.lithereal.item.burning.BurningLitheriteAxeItem;
-import org.lithereal.item.burning.BurningLitheriteHoeItem;
-import org.lithereal.item.burning.BurningLitheritePickaxeItem;
 import org.lithereal.item.compat.CompatInit;
 import org.lithereal.item.obscured.MysteriousItem;
 import org.lithereal.util.BaseBossEssence;
@@ -149,22 +146,22 @@ public class ModItems {
             new AbilityHoeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0))));
 
     public static final RegistrySupplier<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer", () ->
-            createHammer(LITHERITE, 5, -3.0F, new Item.Properties()));
+            new HammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties()));
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("burning_litherite_hammer", () ->
-            createBurningHammer(LITHERITE, 5, -3.0F, new Item.Properties().fireResistant()));
+            new BurningLitheriteHammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer", () ->
-            createAbilityHammer(FROZEN, LITHERITE, 5, -3F, new Item.Properties()));
+            new AbilityHammerItem(FROZEN, LITHERITE, 5, -3F, 4, new Item.Properties()));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HAMMER = ITEMS.register("infused_litherite_hammer", () ->
-            createInfusedHammer(LITHERITE, 5, -3.0F, new Item.Properties()));
+            new InfusedLitheriteHammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HAMMER = ITEMS.register("withering_litherite_hammer", () ->
-            createAbilityHammer(WITHERING, LITHERITE, 5, -3.0F, new Item.Properties()));
+            new AbilityHammerItem(WITHERING, LITHERITE, 5, -3.0F, 4, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ITEMS.register("odysium_hammer", () ->
-            createAbilityHammer(ENHANCED, ODYSIUM, 5, -3.0F, new Item.Properties().fireResistant()));
+            new AbilityHammerItem(ENHANCED, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
             new MysteriousItem(new Item.Properties().fireResistant()));

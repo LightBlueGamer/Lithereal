@@ -1,5 +1,6 @@
 package org.lithereal.item;
 
+import dev.architectury.platform.Platform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
+import org.lithereal.data.compat.ModWeaponType;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -29,8 +32,16 @@ public class HammerItem extends DiggerItem {
 
     protected final int depth = 1;
     protected final int radius = 3;
-    public HammerItem(Tier tier, int damage, float attackSpeed, Properties properties) {
-        super(tier, BlockTags.MINEABLE_WITH_PICKAXE, properties.attributes(AxeItem.createAttributes(tier, damage, attackSpeed)));
+    public HammerItem(Tier tier, int damage, float attackSpeed, int weaponLevel, Properties properties) {
+        super(tier, BlockTags.MINEABLE_WITH_PICKAXE, properties.attributes(createAttributes(tier, damage, attackSpeed, weaponLevel)));
+    }
+    public static ItemAttributeModifiers createAttributes(Tier tier, float damage, float speed, int weaponLevel) {
+        if (Platform.isModLoaded("combatify")) {
+            ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+            ModWeaponType.HAMMER.addCombatAttributes(weaponLevel, tier, builder);
+            return builder.build();
+        }
+        return AxeItem.createAttributes(tier, damage, speed);
     }
 
     @Override

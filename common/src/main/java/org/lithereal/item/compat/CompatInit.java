@@ -24,7 +24,7 @@ public class CompatInit {
     public static List<ItemStack> populateInfusedForCombatify(List<ItemStack> litherite, Holder<Potion> potion) {
         List<ItemLike> itemLikes = Arrays.asList(CombatifyItems.INFUSED_LITHERITE_LONGSWORD.get(),
                 CombatifyItems.INFUSED_LITHERITE_KNIFE.get());
-        for (ItemLike itemLike : itemLikes){
+        for (ItemLike itemLike : itemLikes) {
             ItemStack current = new ItemStack(itemLike);
             current.set(DataComponents.POTION_CONTENTS, new PotionContents(potion));
             litherite.add(current);
