@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.tags.ModTags;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class ConfiguredFeatures {
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherrackReplaceables = new TagMatchTest(BlockTags.NETHER_CARVER_REPLACEABLES);
         RuleTest endstoneReplaceables = new BlockMatchTest(Blocks.END_STONE);
-        RuleTest etherstoneReplaceables = new BlockMatchTest(ModBlocks.ETHERSTONE.get());
+        RuleTest etherstoneReplaceables = new TagMatchTest(ModTags.ETHERSTONE_ORE_REPLACEABLES);
 
         List<OreConfiguration.TargetBlockState> cyrumOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.CYRUM_ORE.get().defaultBlockState()),
@@ -68,8 +69,7 @@ public class ConfiguredFeatures {
 
         List<OreConfiguration.TargetBlockState> litheriteOres = List.of(
                 OreConfiguration.target(stoneReplaceables, ModBlocks.LITHERITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(etherstoneReplaceables, ModBlocks.ETHERSTONE_LITHERITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(deepslateReplaceables, ModBlocks.DEEPSLATE_LITHERITE_ORE.get().defaultBlockState())
         );
         register(context, LITHERITE_ORE_KEY, Feature.ORE, new OreConfiguration(litheriteOres, 4)); // Vein size 4
 

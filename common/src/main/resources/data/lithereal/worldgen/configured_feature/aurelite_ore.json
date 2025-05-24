@@ -1,8 +1,8 @@
 {
   "type": "minecraft:ore",
   "config": {
-    "discard_chance_on_air_exposure": 0.0,
-    "size": 8,
+    "discard_chance_on_air_exposure": 0.2,
+    "size": 7,
     "targets": [
       {
         "state": {
@@ -27,8 +27,8 @@
           "Name": "lithereal:etherstone_aurelite_ore"
         },
         "target": {
-          "predicate_type": "minecraft:block_match",
-          "block": "lithereal:etherstone"
+          "predicate_type": "minecraft:tag_match",
+          "tag": "lithereal:etherstone_ore_replaceables"
         }
       }
     ]

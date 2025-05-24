@@ -21,6 +21,8 @@
     "lithereal:lither_lantern",
     "lithereal:litherite_block",
     "lithereal:odysium_block",
+    "lithereal:pailite",
+    "lithereal:phantom_diamond_ore",
     "lithereal:phantom_diamond_block",
     "lithereal:polished_etherstone",
     "lithereal:polished_etherstone_slab",
@@ -32,10 +34,13 @@
     "lithereal:withering_litherite_block",
     "lithereal:cyrum_ore",
     "lithereal:deepslate_cyrum_ore",
+    "lithereal:etherstone_cyrum_ore",
     "lithereal:aurelite_ore",
     "lithereal:deepslate_aurelite_ore",
+    "lithereal:etherstone_aurelite_ore",
     "lithereal:copalite_ore",
     "lithereal:deepslate_copalite_ore",
+    "lithereal:etherstone_copalite_ore",
     "lithereal:hellionite_ore",
     "lithereal:saturnite_ore",
     "lithereal:chryon_ore",
@@ -43,9 +48,11 @@
     "lithereal:allian_ore",
     "lithereal:luminium_ore",
     "lithereal:deepslate_luminium_ore",
+    "lithereal:etherstone_luminium_ore",
     "lithereal:litherite_ore",
     "lithereal:deepslate_litherite_ore",
     "lithereal:nerith_ore",
-    "lithereal:deepslate_nerith_ore"
+    "lithereal:deepslate_nerith_ore",
+    "lithereal:etherstone_nerith_ore"
   ]
 }

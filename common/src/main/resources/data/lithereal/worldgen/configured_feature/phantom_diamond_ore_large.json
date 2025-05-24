@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.7,
+    "size": 11,
+    "targets": [
+      {
+        "state": {
+          "Name": "lithereal:phantom_diamond_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "lithereal:etherstone_ore_replaceables"
+        }
+      }
+    ]
+  }
+}

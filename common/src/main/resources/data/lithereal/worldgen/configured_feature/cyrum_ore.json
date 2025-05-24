@@ -27,8 +27,8 @@
           "Name": "lithereal:etherstone_cyrum_ore"
         },
         "target": {
-          "predicate_type": "minecraft:block_match",
-          "block": "lithereal:etherstone"
+          "predicate_type": "minecraft:tag_match",
+          "tag": "lithereal:etherstone_ore_replaceables"
         }
       }
     ]

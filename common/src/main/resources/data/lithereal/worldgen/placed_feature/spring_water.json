@@ -1,9 +1,9 @@
 {
-  "feature": "lithereal:litherite_ore",
+  "feature": "lithereal:spring_water",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 6
+      "count": 25
     },
     {
       "type": "minecraft:in_square"
@@ -11,14 +11,13 @@
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:trapezoid",
+        "type": "minecraft:uniform",
         "max_inclusive": {
-          "above_bottom": 32
+          "absolute": 192
         },
         "min_inclusive": {
-          "above_bottom": -56
-        },
-        "plateau": 12
+          "above_bottom": 0
+        }
       }
     },
     {

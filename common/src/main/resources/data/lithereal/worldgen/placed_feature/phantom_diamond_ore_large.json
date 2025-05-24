@@ -1,9 +1,9 @@
 {
-  "feature": "lithereal:litherite_ore",
+  "feature": "lithereal:phantom_diamond_ore_large",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 6
+      "type": "minecraft:rarity_filter",
+      "chance": 8
     },
     {
       "type": "minecraft:in_square"
@@ -13,12 +13,12 @@
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "above_bottom": 32
+          "above_bottom": 75
         },
         "min_inclusive": {
-          "above_bottom": -56
+          "above_bottom": -128
         },
-        "plateau": 12
+        "plateau": 28
       }
     },
     {

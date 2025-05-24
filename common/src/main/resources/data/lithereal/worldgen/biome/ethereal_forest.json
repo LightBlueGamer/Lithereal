@@ -1,9 +1,9 @@
 {
   "carvers": {
     "air": [
-      "minecraft:cave",
-      "minecraft:cave_extra_underground",
-      "minecraft:canyon"
+      "lithereal:ethereal_core_cave",
+      "lithereal:ethereal_core_cave_extra",
+      "lithereal:ethereal_core_canyon"
     ]
   },
   "downfall": 0.8,
@@ -30,25 +30,29 @@
   "features": [
     [],
     [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
+      "lithereal:lake_lava_underground",
+      "lithereal:lake_lava_surface"
     ],
     [],
     [],
     [],
     [],
     [
+      "lithereal:ore_pailite_lower",
+      "lithereal:ore_pailite_upper",
       "lithereal:aurelite_ore_placed",
       "lithereal:copalite_ore_placed",
       "lithereal:cyrum_ore_placed",
-      "lithereal:litherite_ore_placed",
       "lithereal:luminium_ore_placed",
-      "lithereal:nerith_ore_placed"
+      "lithereal:nerith_ore_placed",
+      "lithereal:phantom_diamond_ore",
+      "lithereal:phantom_diamond_ore_buried",
+      "lithereal:phantom_diamond_ore_large"
     ],
     [],
     [
-      "minecraft:spring_water",
-      "minecraft:spring_lava"
+      "lithereal:spring_water",
+      "lithereal:spring_lava"
     ],
     [
       "lithereal:impure_ethereal_crystal_patch",

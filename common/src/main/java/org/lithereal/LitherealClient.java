@@ -27,6 +27,8 @@ import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
+import org.lithereal.core.component.ModComponents;
+import org.lithereal.item.obscured.ObscuredItem;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
 import org.lithereal.block.ModBlocks;
@@ -107,6 +109,7 @@ public class LitherealClient {
         for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
             if (itemRegistrySupplier.is(ModBlocks.ETHEREAL_CORE_PORTAL_LOC)) continue;
             ItemStack item = new ItemStack(itemRegistrySupplier.get());
+            if (item.getItem() instanceof ObscuredItem) item.set(ModComponents.REVEALED.get(), true);
 
             if (!(item.getItem() instanceof InfusedItem) && !litherite.contains(item) && isEquipment(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath())) {
                 litherite.add(item);

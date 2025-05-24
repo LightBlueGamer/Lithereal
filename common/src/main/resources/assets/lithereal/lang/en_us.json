@@ -1,4 +1,6 @@
 {
+  "block.lithereal.phantom_diamond_ore.obscured": "Diamond Ore?",
+  "block.lithereal.phantom_diamond_ore.revealed": "Phantom Diamond Ore",
   "block.lithereal.phantom_diamond_block.obscured": "Block of Diamond?",
   "block.lithereal.phantom_diamond_block.revealed": "Phantom Block of Diamond",
   "block.lithereal.blue_fire": "Blue Fire",
@@ -58,6 +60,7 @@
   "block.lithereal.litherite_block": "Block of Litherite",
   "block.lithereal.litherite_ore": "Litherite Ore",
   "block.lithereal.odysium_block": "Block of Odysium",
+  "block.lithereal.pailite": "Pailite",
   "block.lithereal.polished_etherstone": "Polished Etherstone",
   "block.lithereal.polished_etherstone_slab": "Polished Etherstone Slab",
   "block.lithereal.polished_etherstone_stairs": "Polished Etherstone Stairs",
@@ -93,7 +96,6 @@
   "block.lithereal.etherstone_aurelite_ore": "Etherstone Aurelite Ore",
   "block.lithereal.etherstone_copalite_ore": "Etherstone Copalite Ore",
   "block.lithereal.etherstone_cyrum_ore": "Etherstone Cyrum Ore",
-  "block.lithereal.etherstone_litherite_ore": "Etherstone Litherite Ore",
   "block.lithereal.etherstone_luminium_ore": "Etherstone Luminium Ore",
   "block.lithereal.etherstone_nerith_ore": "Etherstone Nerith Ore",
 

@@ -3,7 +3,6 @@ package org.lithereal.tags;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
@@ -12,8 +11,9 @@ import org.lithereal.Lithereal;
 
 public class ModTags {
     public static <T> TagKey<T> create(String name, ResourceKey<? extends Registry<T>> registry) {
-        return TagKey.create(registry, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name));
+        return TagKey.create(registry, Lithereal.id(name));
     }
+    public static final TagKey<Block> ETHERSTONE_ORE_REPLACEABLES = createBlockTag("etherstone_ore_replaceables");
     public static final TagKey<Block> NEEDS_ODYSIUM_TOOL = createBlockTag("needs_odysium_tool");
     public static final TagKey<Block> NEEDS_LITHERITE_TOOL = createBlockTag("needs_litherite_tool");
     public static final TagKey<Block> INCORRECT_FOR_ODYSIUM_TOOL = createBlockTag("incorrect_for_odysium_tool");

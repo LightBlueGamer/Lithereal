@@ -1,5 +1,5 @@
 {
-  "feature": "lithereal:litherite_ore",
+  "feature": "lithereal:phantom_diamond_ore",
   "placement": [
     {
       "type": "minecraft:count",
@@ -13,12 +13,12 @@
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "above_bottom": 32
+          "above_bottom": 80
         },
         "min_inclusive": {
-          "above_bottom": -56
+          "above_bottom": -128
         },
-        "plateau": 12
+        "plateau": 28
       }
     },
     {
