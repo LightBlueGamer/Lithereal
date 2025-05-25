@@ -6,13 +6,14 @@
   "client": [
   ],
   "mixins": [
-    "MobEffectMixin",
-    "ShapedRecipeMixin",
-    "CraftingInventoryMixin",
-    "ShapelessRecipeMixin",
-    "ServerPlayerMixin",
+    "BaseFireBlockMixin",
+    "BlockEntityMixin",
     "BlockStateBaseMixin",
-    "BlockEntityMixin"
+    "CraftingInventoryMixin",
+    "MobEffectMixin",
+    "ServerPlayerMixin",
+    "ShapedRecipeMixin",
+    "ShapelessRecipeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

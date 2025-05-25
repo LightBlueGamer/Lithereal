@@ -1,0 +1,6 @@
+{
+  "parent": "lithereal:block/fire_crucible_lit_fire_base",
+  "textures": {
+    "fire": "block/fire_0"
+  }
+}

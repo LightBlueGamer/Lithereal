@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/template_fire_side",
+  "parent": "minecraft:block/template_fire_up",
   "textures": {
     "fire": "lithereal:block/blue_fire_0"
   },

@@ -1,13 +1,60 @@
 {
-  "variants": {
-    "heat_state=unlit": {
-      "model": "lithereal:block/fire_crucible"
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "lithereal:block/fire_crucible"
+        }
+      ],
+      "when": {
+        "heat_state": "unlit"
+      }
     },
-    "heat_state=lit": {
-      "model": "lithereal:block/fire_crucible_lit"
+    {
+      "apply": [
+        {
+          "model": "lithereal:block/fire_crucible_lit"
+        }
+      ],
+      "when": {
+        "heat_state": "lit"
+      }
     },
-    "heat_state=blue_lit": {
-      "model": "lithereal:block/fire_crucible_blue_lit"
+    {
+      "apply": [
+        {
+          "model": "lithereal:block/fire_crucible_blue_lit"
+        }
+      ],
+      "when": {
+        "heat_state": "blue_lit"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "lithereal:block/fire_crucible_lit_fire0"
+        },
+        {
+          "model": "lithereal:block/fire_crucible_lit_fire1"
+        }
+      ],
+      "when": {
+        "heat_state": "lit"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "lithereal:block/fire_crucible_lit_blue_fire0"
+        },
+        {
+          "model": "lithereal:block/fire_crucible_lit_blue_fire1"
+        }
+      ],
+      "when": {
+        "heat_state": "blue_lit"
+      }
     }
-  }
+  ]
 }

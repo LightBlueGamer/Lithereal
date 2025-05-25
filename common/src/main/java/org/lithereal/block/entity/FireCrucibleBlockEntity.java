@@ -280,6 +280,9 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
             this.heat = heat;
             this.name = name;
         }
+        public boolean isLit() {
+            return heat > 0;
+        }
 
         public static HeatState fromHeat(int heat) {
             return VALUES[heat];

@@ -99,14 +99,15 @@ public class BlueFireBlock extends BaseFireBlock {
     }
 
     public @NotNull BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return this.getStateForPlacement(blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos());
+        return this.getStateForPlacement(null, blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos());
     }
 
-    protected BlockState getStateForPlacement(BlockGetter blockGetter, BlockPos blockPos) {
+    public BlockState getStateForPlacement(BaseFireBlock block, BlockGetter blockGetter, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.below();
         BlockState blockState = blockGetter.getBlockState(blockPos2);
+        Block newBlock = block == null ? this : block;
         if (!this.canBurn(blockState) && !blockState.isFaceSturdy(blockGetter, blockPos2, Direction.UP)) {
-            BlockState blockState2 = this.defaultBlockState();
+            BlockState blockState2 = newBlock.defaultBlockState();
 
             for (Direction direction : Direction.values()) {
                 BooleanProperty booleanProperty = PROPERTY_BY_DIRECTION.get(direction);
@@ -117,7 +118,7 @@ public class BlueFireBlock extends BaseFireBlock {
 
             return blockState2;
         } else {
-            return this.defaultBlockState();
+            return newBlock.defaultBlockState();
         }
     }
 
@@ -134,9 +135,9 @@ public class BlueFireBlock extends BaseFireBlock {
             }
 
             BlockState blockState2 = serverLevel.getBlockState(blockPos.below());
-            boolean bl = blockState2.is(serverLevel.dimensionType().infiniburn());
+            boolean infiniburn = blockState2.is(serverLevel.dimensionType().infiniburn());
             int i = blockState.getValue(AGE);
-            if (!bl && serverLevel.isRaining() && this.isNearRain(serverLevel, blockPos) && randomSource.nextFloat() < 0.2F + (float)i * 0.03F) {
+            if (!infiniburn && serverLevel.isRaining() && this.isNearRain(serverLevel, blockPos) && randomSource.nextFloat() < 0.2F + (float)i * 0.03F) {
                 serverLevel.removeBlock(blockPos, false);
             } else {
                 int j = Math.min(MAX_AGE, i + randomSource.nextInt(3) / 2);
@@ -145,18 +146,22 @@ public class BlueFireBlock extends BaseFireBlock {
                     serverLevel.setBlock(blockPos, blockState, 4);
                 }
 
-                if (!bl) {
+                if (!infiniburn) {
                     if (!this.isValidFireLocation(serverLevel, blockPos)) {
                         BlockPos blockPos2 = blockPos.below();
                         if (!serverLevel.getBlockState(blockPos2).isFaceSturdy(serverLevel, blockPos2, Direction.UP) || i > 3) {
-                            serverLevel.removeBlock(blockPos, false);
+                            BlockState newState = getStateForPlacement((BaseFireBlock) Blocks.FIRE, serverLevel, blockPos);
+                            newState.setValue(FireBlock.AGE, 0);
+                            serverLevel.setBlock(blockPos, newState, 67);
                         }
 
                         return;
                     }
 
                     if (i == MAX_AGE && randomSource.nextInt(4) == 0 && !this.canBurn(serverLevel.getBlockState(blockPos.below()))) {
-                        serverLevel.removeBlock(blockPos, false);
+                        BlockState newState = getStateForPlacement((BaseFireBlock) Blocks.FIRE, serverLevel, blockPos);
+                        newState.setValue(FireBlock.AGE, 0);
+                        serverLevel.setBlock(blockPos, newState, 67);
                         return;
                     }
                 }
@@ -197,7 +202,6 @@ public class BlueFireBlock extends BaseFireBlock {
                         }
                     }
                 }
-
             }
         }
     }
@@ -207,11 +211,11 @@ public class BlueFireBlock extends BaseFireBlock {
     }
 
     private int getBurnOdds(BlockState blockState) {
-        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.burnOdds.getInt(blockState.getBlock());
+        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.burnOdds.getInt(blockState.getBlock()) / 2;
     }
 
     private int getIgniteOdds(BlockState blockState) {
-        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.igniteOdds.getInt(blockState.getBlock());
+        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.igniteOdds.getInt(blockState.getBlock()) / 2;
     }
 
     private void checkBurnOut(Level level, BlockPos blockPos, int i, RandomSource randomSource, int j) {
@@ -234,8 +238,7 @@ public class BlueFireBlock extends BaseFireBlock {
     }
 
     private BlockState getStateWithAge(LevelAccessor levelAccessor, BlockPos blockPos, int i) {
-        BlockState blockState = getState(levelAccessor, blockPos);
-        return blockState.is(ModBlocks.BLUE_FIRE) ? blockState.setValue(AGE, i) : blockState;
+        return getStateForPlacement(null, levelAccessor, blockPos).setValue(AGE, i);
     }
 
     private boolean isValidFireLocation(BlockGetter blockGetter, BlockPos blockPos) {
@@ -264,7 +267,7 @@ public class BlueFireBlock extends BaseFireBlock {
     }
 
     protected boolean canBurn(BlockState blockState) {
-        return true;
+        return getIgniteOdds(blockState) > 0;
     }
 
     protected void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {

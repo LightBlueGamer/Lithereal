@@ -13,6 +13,7 @@ public class ModTags {
     public static <T> TagKey<T> create(String name, ResourceKey<? extends Registry<T>> registry) {
         return TagKey.create(registry, Lithereal.id(name));
     }
+    public static final TagKey<Block> BLUE_FIRE_BASE_BLOCKS = createBlockTag("blue_fire_base_blocks");
     public static final TagKey<Block> ETHERSTONE_ORE_REPLACEABLES = createBlockTag("etherstone_ore_replaceables");
     public static final TagKey<Block> NEEDS_ODYSIUM_TOOL = createBlockTag("needs_odysium_tool");
     public static final TagKey<Block> NEEDS_LITHERITE_TOOL = createBlockTag("needs_litherite_tool");
