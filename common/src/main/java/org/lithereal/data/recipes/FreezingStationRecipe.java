@@ -22,8 +22,6 @@ import org.lithereal.util.CommonUtils;
 public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
     public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) return false;
-
         return hasCooler(pContainer, 0) && hasCrystal(pContainer, 1);
     }
 

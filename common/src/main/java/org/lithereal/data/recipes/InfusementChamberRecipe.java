@@ -32,8 +32,6 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
 
     @Override
     public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
-        if (pLevel.isClientSide()) return false;
-
         return hasBucket(pContainer, 0) && hasPotion(pContainer, 1);
     }
 

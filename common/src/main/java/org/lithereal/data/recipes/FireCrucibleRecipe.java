@@ -23,8 +23,6 @@ import java.util.Optional;
 public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
     public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) return false;
-
         return hasCrystal(pContainer) && hasBucket(pContainer);
     }
 

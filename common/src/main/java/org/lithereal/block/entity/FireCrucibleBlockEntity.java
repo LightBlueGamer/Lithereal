@@ -171,7 +171,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         boolean isFueledFromBelow = isFireBelow || isBlueFireBelow;
 
         if (getFuelLevel(pEntity) > 0 && !isFueledFromBelow) {
-            pEntity.fuelLevel--;
+            if (!hasSolidFuel || hasRecipe(pEntity)) pEntity.fuelLevel--;
         } else {
             if (isBlueFireBelow) {
                 pEntity.fuelLevel = 100;
@@ -182,7 +182,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
                 pEntity.maxFuel = 75;
                 pEntity.heatState = HeatState.LIT;
             } else if (hasSolidFuel) {
-                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(((Container) pEntity).getItem(1).getItem(), 0);
+                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(pEntity.getItem(1).getItem(), 0);
                 pEntity.maxFuel = fuel;
                 pEntity.fuelLevel = fuel;
                 pEntity.removeItem(1, 1);

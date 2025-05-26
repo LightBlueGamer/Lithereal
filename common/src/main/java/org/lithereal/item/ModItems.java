@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static dev.architectury.platform.Platform.isModLoaded;
-import static org.lithereal.util.CommonUtils.*;
 import static org.lithereal.item.ability.Ability.*;
 
 public class ModItems {
@@ -51,9 +50,9 @@ public class ModItems {
     public static final RegistrySupplier<Item> CHARGED_LITHERITE_CRYSTAL = ITEMS.register("charged_litherite_crystal", () ->
             new Item(new Item.Properties()));
 
-    public static final Tier LITHERITE = ModTier.create("litherite", 5, 1791, 11.0F, 4.0F, 20, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_LITHERITE_TOOL);
+    public static final Tier LITHERITE = ModTier.create("litherite", 4, 1791, 11.0F, 4.0F, 20, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_LITHERITE_TOOL);
 
-    public static final Tier ODYSIUM = ModTier.create("odysium", 6, 2431, 13.0F, 5.0F, 30, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
+    public static final Tier ODYSIUM = ModTier.create("odysium", 5, 2431, 13.0F, 5.0F, 22, () -> Ingredient.of(ODYSIUM_INGOT.get()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
 
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->
             new SwordItem(LITHERITE, new Item.Properties().attributes(SwordItem.createAttributes(LITHERITE, 3, -2.4f))));
