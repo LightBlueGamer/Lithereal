@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "lithereal:litherite_crystal_block"
+    "#lithereal:needs_odysium_tool"
   ]
 }

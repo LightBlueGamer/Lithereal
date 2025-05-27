@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.MapColor;
 import org.lithereal.Lithereal;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.obscured.MysteriousBlockItem;
+import org.lithereal.util.CommonUtils;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -38,10 +39,10 @@ public class ModBlocks {
                     .sound(SoundType.AMETHYST_CLUSTER)
                     .lightLevel(state -> 9)
                     .noOcclusion()
-                    .isValidSpawn(Blocks::never)
-                    .isRedstoneConductor(Blocks::never)
-                    .isSuffocating(Blocks::never)
-                    .isViewBlocking(Blocks::never)));
+                    .isValidSpawn(CommonUtils::never)
+                    .isRedstoneConductor(CommonUtils::never)
+                    .isSuffocating(CommonUtils::never)
+                    .isViewBlocking(CommonUtils::never)));
 
     public static final RegistrySupplier<Block> PURE_ETHEREAL_CRYSTAL_BLOCK = registerBlock("pure_ethereal_crystal_block",
             () -> new PureEtherealCrystalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.END_PORTAL_FRAME), ETHEREAL_CORE_PORTAL.get()));
