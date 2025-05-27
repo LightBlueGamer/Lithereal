@@ -17,6 +17,9 @@ public class ModParticles {
     public static final RegistrySupplier<SimpleParticleType> SOUL = PARTICLE_TYPES.register("ethereal_core_soul", () ->
             LitherealExpectPlatform.createSimpleParticleType(false));
 
+    public static final RegistrySupplier<SimpleParticleType> CRYSTAL_SPARKLE = PARTICLE_TYPES.register("crystal_sparkle", () ->
+            LitherealExpectPlatform.createSimpleParticleType(false));
+
     public static void register() {
         PARTICLE_TYPES.register();
     }

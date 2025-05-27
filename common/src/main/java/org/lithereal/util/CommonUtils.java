@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.item.component.Enhanced;
 
@@ -19,6 +20,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class CommonUtils {
+    public static Block DRIPSTONE_REPLACEMENT;
     public static boolean hasFullSuitOfArmorOn(Player player) {
         boolean bl = true;
         for (ItemStack armorStack : player.getInventory().armor) {

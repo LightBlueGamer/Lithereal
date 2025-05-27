@@ -29,6 +29,20 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> IMPURE_ETHEREAL_CRYSTAL = registerBlock("impure_ethereal_crystal",
             () -> new ImpureEtherealCrystalBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_BLUE).sound(SoundType.AMETHYST_CLUSTER).strength(5, 8)));
 
+    public static final RegistrySupplier<Block> LITHERITE_CRYSTAL_BLOCK = registerBlock("litherite_crystal_block",
+            () -> new TransparentBlock(BlockBehaviour.Properties.of()
+                    .strength(6f)
+                    .requiresCorrectToolForDrops()
+                    .explosionResistance(25)
+                    .mapColor(MapColor.COLOR_GREEN)
+                    .sound(SoundType.AMETHYST_CLUSTER)
+                    .lightLevel(state -> 9)
+                    .noOcclusion()
+                    .isValidSpawn(Blocks::never)
+                    .isRedstoneConductor(Blocks::never)
+                    .isSuffocating(Blocks::never)
+                    .isViewBlocking(Blocks::never)));
+
     public static final RegistrySupplier<Block> PURE_ETHEREAL_CRYSTAL_BLOCK = registerBlock("pure_ethereal_crystal_block",
             () -> new PureEtherealCrystalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.END_PORTAL_FRAME), ETHEREAL_CORE_PORTAL.get()));
 
@@ -125,7 +139,7 @@ public class ModBlocks {
             () -> new ScorchedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM)));
 
     public static final RegistrySupplier<Block> INFINITY_GLASS = registerBlock("infinity_glass",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
     public static final RegistrySupplier<Block> LITHER_LANTERN = registerBlock("lither_lantern",
             () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)));
@@ -143,22 +157,6 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> ETHERSTONE_NERITH_ORE = registerBlock("etherstone_nerith_ore",
             () -> new DropExperienceBlock(UniformInt.of(4,7), BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_NERITH_ORE.get())));
-
-    public static final RegistrySupplier<Block> ELUNITE_ORE = registerBlock("elunite_ore",
-            () -> new DropExperienceBlock(UniformInt.of(4,7), BlockBehaviour.Properties.of()
-                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
-
-    public static final RegistrySupplier<Block> CHRYON_ORE = registerBlock("chryon_ore",
-            () -> new DropExperienceBlock(UniformInt.of(4,7), BlockBehaviour.Properties.of()
-                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
-
-    public static final RegistrySupplier<Block> SATURNITE_ORE = registerBlock("saturnite_ore",
-            () -> new DropExperienceBlock(UniformInt.of(5, 10), BlockBehaviour.Properties.of()
-                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
-
-    public static final RegistrySupplier<Block> HELLIONITE_ORE = registerBlock("hellionite_ore",
-            () -> new DropExperienceBlock(UniformInt.of(0, 3), BlockBehaviour.Properties.of()
-                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
 
     public static final RegistrySupplier<Block> LUMINIUM_ORE = registerBlock("luminium_ore",
             () -> new DropExperienceBlock(UniformInt.of(1, 6), BlockBehaviour.Properties.of()
@@ -203,6 +201,22 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> ETHERSTONE_AURELITE_ORE = registerBlock("etherstone_aurelite_ore",
             () -> new DropExperienceBlock(UniformInt.of(0, 2), BlockBehaviour.Properties.ofFullCopy(ModBlocks.DEEPSLATE_AURELITE_ORE.get())));
+
+    public static final RegistrySupplier<Block> SATURNITE_ORE = registerBlock("saturnite_ore",
+            () -> new DropExperienceBlock(UniformInt.of(5, 10), BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> HELLIONITE_ORE = registerBlock("hellionite_ore",
+            () -> new DropExperienceBlock(UniformInt.of(0, 3), BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> ELUNITE_ORE = registerBlock("elunite_ore",
+            () -> new DropExperienceBlock(UniformInt.of(4,7), BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
+
+    public static final RegistrySupplier<Block> CHRYON_ORE = registerBlock("chryon_ore",
+            () -> new DropExperienceBlock(UniformInt.of(4,7), BlockBehaviour.Properties.of()
+                    .strength(3f).requiresCorrectToolForDrops().explosionResistance(25)));
 
     public static final RegistrySupplier<Block> ALLIAN_ORE = registerBlock("allian_ore",
             () -> new DropExperienceBlock(UniformInt.of(4, 8), BlockBehaviour.Properties.of()

@@ -25,6 +25,7 @@ import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
+import org.lithereal.client.particle.StandardBiomeProvider;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.core.component.ModComponents;
@@ -51,6 +52,7 @@ public class LitherealClient {
         BlockEntityRendererRegistry.register(ModBlockEntities.ETHEREAL_CORE_PORTAL.get(), TheEndPortalRenderer::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.SOUL.get(), EtherealSoulProvider::new);
+        LitherealExpectPlatform.registerParticleProvider(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
         registerKeyBindings();
         registerColorHandlers();
         registerItemsToTab();
@@ -72,6 +74,7 @@ public class LitherealClient {
         ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> blockAndTintGetter != null && blockPos != null ? BiomeColors.getAverageGrassColor(blockAndTintGetter, blockPos) : 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
         ColorHandlerRegistry.registerItemColors((itemStack, i) -> 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
         RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(), ModBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModBlocks.PHANTOM_ICE_FLOWER.get(), ModBlocks.PHANTOM_ROSE.get());
+        RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get());
     }
 
     private static void registerItemsToTab() {

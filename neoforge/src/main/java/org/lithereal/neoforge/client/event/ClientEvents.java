@@ -11,6 +11,7 @@ import org.lithereal.LitherealClient;
 import org.lithereal.client.EtherealCoreSpecialEffects;
 import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
+import org.lithereal.client.particle.StandardBiomeProvider;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
@@ -39,6 +40,7 @@ public class ClientEvents {
         public static void onParticleProviderRegister(RegisterParticleProvidersEvent event) {
             event.registerSpriteSet(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
             event.registerSpriteSet(ModParticles.SOUL.get(), EtherealSoulProvider::new);
+            event.registerSpriteSet(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
         }
         @SubscribeEvent
         public static void onRegisterMenu(RegisterMenuScreensEvent event) {

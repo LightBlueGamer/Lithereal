@@ -6,12 +6,16 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import org.lithereal.Lithereal;
 
 public class ModTags {
     public static <T> TagKey<T> create(String name, ResourceKey<? extends Registry<T>> registry) {
         return TagKey.create(registry, Lithereal.id(name));
+    }
+    public static TagKey<Biome> createBiomeTag(String name) {
+        return create(name, Registries.BIOME);
     }
     public static final TagKey<Block> BLUE_FIRE_BASE_BLOCKS = createBlockTag("blue_fire_base_blocks");
     public static final TagKey<Block> ETHERSTONE_ORE_REPLACEABLES = createBlockTag("etherstone_ore_replaceables");
