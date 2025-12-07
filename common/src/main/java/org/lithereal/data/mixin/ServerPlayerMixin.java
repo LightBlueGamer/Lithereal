@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import org.lithereal.Lithereal;
+import org.lithereal.world.ModDimensions;
 import org.lithereal.world.feature.EtherealCoreArenaFeature;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,7 +34,7 @@ public abstract class ServerPlayerMixin extends Player {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void injectEffectiveAdventure(CallbackInfo ci) {
-        if (level().dimension().location().equals(Lithereal.id("ethereal_core")) && EtherealCoreArenaFeature.UNCHANGEABLE.isInside(blockPosition())) {
+        if (level().dimension().equals(ModDimensions.ETHEREAL_CORE) && EtherealCoreArenaFeature.UNCHANGEABLE.isInside(blockPosition())) {
             if (lithereal$originalGameMode == null) {
                 lithereal$originalGameMode = gameMode.getGameModeForPlayer();
                 boolean mayFly = getAbilities().mayfly;

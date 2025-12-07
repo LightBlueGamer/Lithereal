@@ -1,0 +1,35 @@
+{
+  "values": [
+    "minecraft:phantom",
+    "minecraft:player",
+
+    "minecraft:item",
+    "minecraft:area_effect_cloud",
+    "minecraft:armor_stand",
+    "minecraft:end_crystal",
+    "minecraft:ender_pearl",
+    "minecraft:experience_bottle",
+    "minecraft:experience_orb",
+    "minecraft:eye_of_ender",
+    "minecraft:falling_block",
+    "minecraft:fishing_bobber",
+    "minecraft:glow_item_frame",
+    "minecraft:item_frame",
+    "minecraft:leash_knot",
+    "minecraft:lightning_bolt",
+    "minecraft:painting",
+    "minecraft:potion",
+    "minecraft:shulker_bullet",
+    "minecraft:tnt",
+
+    "minecraft:block_display",
+    "minecraft:interaction",
+    "minecraft:item_display",
+    "minecraft:marker",
+    "minecraft:text_display",
+
+    "#minecraft:impact_projectiles",
+    "#c:boats",
+    "#c:minecarts"
+  ]
+}

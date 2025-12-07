@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -35,6 +36,10 @@ public class ModTags {
     public static final TagKey<MobEffect> PSEUDO_BENEFICIAl = createMobEffectTag("pseudo_beneficial");
     public static TagKey<MobEffect> createMobEffectTag(String name) {
         return create(name, Registries.MOB_EFFECT);
+    }
+    public static final TagKey<EntityType<?>> IS_ETHEREAL = createEntityTypeTag("is_from_ethereal_realm");
+    public static TagKey<EntityType<?>> createEntityTypeTag(String name) {
+        return create(name, Registries.ENTITY_TYPE);
     }
     public static void init() {
 
