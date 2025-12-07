@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.LitheriteItem;
+import org.lithereal.item.ModRawMaterialItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -39,7 +40,7 @@ public abstract class ItemEntityMixin {
 
                 if (blockState.is(Blocks.WITHER_ROSE)) {
                     if (!stack.isEmpty()) {
-                        ItemStack newItemStack = new ItemStack(ModItems.WITHERING_LITHERITE_CRYSTAL.get(), 1);
+                        ItemStack newItemStack = new ItemStack(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), 1);
                         ItemEntity newItemEntity = new ItemEntity(level, entity.getX() + 0.5, entity.getY() + 1.0, entity.getZ() + 0.5, newItemStack);
                         level.addFreshEntity(newItemEntity);
 

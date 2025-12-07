@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "lithereal:charged_litherite_crystal"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "G",
+    "#",
+    "X"
+  ],
+  "result": {
+    "count": 4,
+    "id": "lithereal:lither_torch"
+  }
+}

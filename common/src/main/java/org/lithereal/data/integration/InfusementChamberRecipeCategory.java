@@ -1,6 +1,5 @@
 package org.lithereal.data.integration;
 
-import io.netty.handler.logging.LogLevel;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -9,29 +8,23 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.block.Blocks;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
 import org.lithereal.integration.JEILitherealPlugin;
-import org.lithereal.item.ModItems;
-import org.lithereal.util.CommonUtils;
+import org.lithereal.item.ModRawMaterialItems;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class InfusementChamberRecipeCategory implements IRecipeCategory<InfusementChamberRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "infusing");
@@ -73,7 +66,7 @@ public class InfusementChamberRecipeCategory implements IRecipeCategory<Infuseme
         Field[] fields = Potions.class.getDeclaredFields();
 
         itemStacks.add(Items.POTION.getDefaultInstance());
-        itemStacksOut.add(ModItems.INFUSED_LITHERITE_INGOT.get().getDefaultInstance());
+        itemStacksOut.add(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get().getDefaultInstance());
         for (Potion potion : BuiltInRegistries.POTION) {
             ItemStack potionItem = PotionContents.createItemStack(
                     recipe.getIngredients().get(1).getItems()[0].getItem(),

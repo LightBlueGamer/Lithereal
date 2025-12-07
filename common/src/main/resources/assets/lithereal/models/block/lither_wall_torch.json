@@ -1,0 +1,6 @@
+{
+  "parent": "lithereal:block/template_glass_enclosed_torch_wall",
+  "textures": {
+    "torch": "lithereal:block/lither_torch"
+  }
+}

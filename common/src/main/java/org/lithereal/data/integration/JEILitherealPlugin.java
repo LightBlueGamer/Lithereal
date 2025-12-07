@@ -19,13 +19,15 @@ import org.lithereal.data.integration.FireCrucibleRecipeCategory;
 import org.lithereal.data.integration.FreezingStationRecipeCategory;
 import org.lithereal.data.integration.InfusementChamberRecipeCategory;
 import org.lithereal.data.recipes.ModRecipes;
-import org.lithereal.item.ModItems;
+import org.lithereal.item.ModArmorItems;
 import org.lithereal.data.recipes.FireCrucibleRecipe;
 import org.lithereal.data.recipes.FreezingStationRecipe;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleScreen;
 import org.lithereal.client.gui.screens.inventory.FreezingStationScreen;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberScreen;
+import org.lithereal.item.ModRawMaterialItems;
+import org.lithereal.item.ModToolItems;
 
 import java.util.List;
 import java.util.Objects;
@@ -95,17 +97,17 @@ public class JEILitherealPlugin implements IModPlugin {
 
         // Register the interpreter for all the items
         registration.registerSubtypeInterpreter(LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_INGOT.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_SWORD.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_SHOVEL.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_PICKAXE.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_AXE.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_HOE.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_HAMMER.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_HELMET.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_LEGGINGS.get(), nbtInterpreter);
-        registration.registerSubtypeInterpreter(ModItems.INFUSED_LITHERITE_BOOTS.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SWORD.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_PICKAXE.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_AXE.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_HOE.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_HAMMER.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_HELMET.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_BOOTS.get(), nbtInterpreter);
 
         // Call the superclass method to ensure compatibility
         IModPlugin.super.registerItemSubtypes(registration);

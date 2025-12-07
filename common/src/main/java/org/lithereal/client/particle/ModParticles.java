@@ -11,6 +11,9 @@ import org.lithereal.LitherealExpectPlatform;
 public class ModParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Lithereal.MOD_ID, Registries.PARTICLE_TYPE);
 
+    public static final RegistrySupplier<SimpleParticleType> LITHER_FIRE_FLAME = PARTICLE_TYPES.register("lither_fire_flame", () ->
+            LitherealExpectPlatform.createSimpleParticleType(false));
+
     public static final RegistrySupplier<SimpleParticleType> BLUE_FIRE_FLAME = PARTICLE_TYPES.register("blue_fire_flame", () ->
             LitherealExpectPlatform.createSimpleParticleType(false));
 

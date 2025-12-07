@@ -10,6 +10,8 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,6 +26,7 @@ import org.lithereal.item.WarHammerItem;
 import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
 import org.lithereal.neoforge.world.block.ForgeInfusementChamberBlock;
+import org.lithereal.neoforge.world.block.ForgeStrippableLogBlock;
 import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
 import org.lithereal.neoforge.world.block.entity.ForgeFireCrucibleBlockEntity;
 import org.lithereal.neoforge.world.block.entity.ForgeFreezingStationBlockEntity;
@@ -39,8 +42,12 @@ import org.lithereal.neoforge.world.item.infused.ForgeInfusedLitheriteArmorItem;
 
 import java.nio.file.Path;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class LitherealExpectPlatformImpl {
+    public static RotatedPillarBlock strippableLog(Supplier<Block> stripped, BlockBehaviour.Properties properties) {
+        return new ForgeStrippableLogBlock(stripped.get(), properties);
+    }
     /**
      * This is our actual method to {@link LitherealExpectPlatform#getConfigDirectory()}.
      */

@@ -24,11 +24,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
 import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
 import org.lithereal.data.recipes.ModRecipes;
-import org.lithereal.block.ModBlocks;
 
 import java.util.Optional;
 import java.util.Random;
@@ -110,15 +110,15 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         for (Direction direction : Direction.values()) {
             BlockPos adjacentPos = this.getBlockPos().relative(direction);
             BlockState blockState = this.level.getBlockState(adjacentPos);
-            if(blockState.is(ModBlocks.FROZEN_LITHERITE_BLOCK.get())) {
+            if (blockState.is(ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get())) {
                 this.power -= 0.1f;
                 this.successRate += 0.15f;
                 frozenBlocks++;
-            } else if(blockState.is(ModBlocks.BURNING_LITHERITE_BLOCK.get())) {
+            } else if (blockState.is(ModStorageBlocks.BURNING_LITHERITE_BLOCK.get())) {
                 this.power += 0.15f;
                 this.successRate -= 0.1f;
                 burningBlocks++;
-            } else if(blockState.is(ModBlocks.CHARGED_LITHERITE_BLOCK.get())) {
+            } else if (blockState.is(ModStorageBlocks.CHARGED_LITHERITE_BLOCK.get())) {
                 this.power += 0.2f;
                 this.successRate += 0.2f;
                 chargedBlocks++;

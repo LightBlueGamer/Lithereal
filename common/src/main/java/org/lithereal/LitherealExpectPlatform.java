@@ -15,8 +15,10 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.*;
 import org.lithereal.client.gui.screens.inventory.*;
@@ -24,8 +26,13 @@ import org.lithereal.item.WarHammerItem;
 import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 
 import java.nio.file.Path;
+import java.util.function.Supplier;
 
 public class LitherealExpectPlatform {
+    @ExpectPlatform
+    public static RotatedPillarBlock strippableLog(Supplier<Block> stripped, BlockBehaviour.Properties properties) {
+        throw new AssertionError();
+    }
     @ExpectPlatform
     public static Path getConfigDirectory() {
         // Just throw an error, the content should get replaced at runtime.

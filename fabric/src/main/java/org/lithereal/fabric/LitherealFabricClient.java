@@ -27,6 +27,8 @@ public class LitherealFabricClient implements ClientModInitializer {
         BlockEntityRenderers.register(FabricBlockEntities.INFUSEMENT_CHAMBER_BLOCK_ENTITY, InfusementChamberBlockEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(FabricBlocks.FIRE_CRUCIBLE_BLOCK, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BLUE_FIRE.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_WALL_TORCH.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_TORCH.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_LANTERN.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHEREAL_VAULT.get(), RenderType.cutout());
         DimensionRenderingRegistry.registerDimensionEffects(Lithereal.id("ethereal_core"), new EtherealCoreSpecialEffects());

@@ -13,6 +13,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
 import org.lithereal.data.compat.ModWeaponType;
@@ -76,7 +77,7 @@ public class LitherealFabric implements ModInitializer {
     }
 
     private static LootItem.Builder createEtherstoneEntry(int weight, int min, int max) {
-        return LootItem.lootTableItem(ModBlocks.ETHERSTONE.get())
+        return LootItem.lootTableItem(ModStoneBlocks.ETHERSTONE.get())
                 .setWeight(weight)
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)));
     }

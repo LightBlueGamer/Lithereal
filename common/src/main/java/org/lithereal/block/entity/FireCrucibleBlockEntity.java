@@ -8,7 +8,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -32,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.FireCrucibleBlock;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleMenu;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.data.recipes.ContainerRecipeInput;
@@ -167,7 +167,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         boolean hasSolidFuel = hasSolidFuel(pEntity);
         Block block = level.getBlockState(blockPos.below()).getBlock();
         boolean isBlueFireBelow = block == ModBlocks.BLUE_FIRE.get();
-        boolean isFireBelow = CommonUtils.isAnyOf(block, ModBlocks.BURNING_LITHERITE_BLOCK.get(), Blocks.FIRE, Blocks.SOUL_FIRE);
+        boolean isFireBelow = CommonUtils.isAnyOf(block, ModStorageBlocks.BURNING_LITHERITE_BLOCK.get(), Blocks.FIRE, Blocks.SOUL_FIRE);
         boolean isFueledFromBelow = isFireBelow || isBlueFireBelow;
 
         if (getFuelLevel(pEntity) > 0 && !isFueledFromBelow) {

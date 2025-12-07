@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.EventHooks;
 import org.lithereal.item.LitheriteItem;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.ModRawMaterialItems;
 
 import java.util.Random;
 
@@ -32,7 +33,7 @@ public class ForgeLitheriteItem extends LitheriteItem {
 
                 if (blockState.is(Blocks.WITHER_ROSE)) {
                     if (!stack.isEmpty()) {
-                        ItemStack newItemStack = new ItemStack(ModItems.WITHERING_LITHERITE_CRYSTAL.get(), 1);
+                        ItemStack newItemStack = new ItemStack(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), 1);
                         ItemEntity newItemEntity = new ItemEntity(level, entity.getX() + 0.5, entity.getY() + 1.0, entity.getZ() + 0.5, newItemStack);
                         level.addFreshEntity(newItemEntity);
 

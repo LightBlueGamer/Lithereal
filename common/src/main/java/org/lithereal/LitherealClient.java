@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
+import org.lithereal.block.ModPhantomBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.EtherealSoulProvider;
@@ -29,12 +30,11 @@ import org.lithereal.client.particle.StandardBiomeProvider;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.core.component.ModComponents;
+import org.lithereal.item.*;
 import org.lithereal.item.obscured.ObscuredItem;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
 import org.lithereal.block.ModBlocks;
-import org.lithereal.item.ModCreativeTabs;
-import org.lithereal.item.ModItems;
 import org.lithereal.item.compat.CompatInit;
 import org.lithereal.item.infused.InfusedItem;
 
@@ -50,6 +50,7 @@ public class LitherealClient {
         EntityModelLayerRegistry.register(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
         BlockEntityRendererRegistry.register(ModBlockEntities.ETHEREAL_CORE_PORTAL.get(), TheEndPortalRenderer::new);
+        LitherealExpectPlatform.registerParticleProvider(ModParticles.LITHER_FIRE_FLAME.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.SOUL.get(), EtherealSoulProvider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
@@ -67,13 +68,13 @@ public class LitherealClient {
         ItemColor itemColor = ModItemColors.INFUSED_LITHERITE_COLOR_HANDLER::apply;
         BlockColor blockColor = ModBlockColors.INFUSED_LITHERITE_BLOCK_COLOR;
 
-        ColorHandlerRegistry.registerItemColors(itemColor, LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), ModItems.INFUSED_LITHERITE_INGOT.get(), ModItems.INFUSED_LITHERITE_SWORD.get(), ModItems.INFUSED_LITHERITE_SHOVEL.get(), ModItems.INFUSED_LITHERITE_PICKAXE.get(), ModItems.INFUSED_LITHERITE_AXE.get(), ModItems.INFUSED_LITHERITE_HOE.get(), ModItems.INFUSED_LITHERITE_HAMMER.get(), ModItems.INFUSED_LITHERITE_HELMET.get(), ModItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModItems.INFUSED_LITHERITE_LEGGINGS.get(), ModItems.INFUSED_LITHERITE_BOOTS.get());
+        ColorHandlerRegistry.registerItemColors(itemColor, LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SWORD.get(), ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), ModToolItems.INFUSED_LITHERITE_PICKAXE.get(), ModToolItems.INFUSED_LITHERITE_AXE.get(), ModToolItems.INFUSED_LITHERITE_HOE.get(), ModToolItems.INFUSED_LITHERITE_HAMMER.get(), ModArmorItems.INFUSED_LITHERITE_HELMET.get(), ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), ModArmorItems.INFUSED_LITHERITE_BOOTS.get());
         if (isModLoaded("combatify"))
             CompatInit.setColoursForCombatify(itemColor);
         ColorHandlerRegistry.registerBlockColors(blockColor, LitherealExpectPlatform.getInfusedLitheriteBlock());
         ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> blockAndTintGetter != null && blockPos != null ? BiomeColors.getAverageGrassColor(blockAndTintGetter, blockPos) : 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
         ColorHandlerRegistry.registerItemColors((itemStack, i) -> 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
-        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(), ModBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModBlocks.PHANTOM_ICE_FLOWER.get(), ModBlocks.PHANTOM_ROSE.get());
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(), ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(), ModPhantomBlocks.PHANTOM_ROSE.get());
         RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get());
     }
 
@@ -86,17 +87,17 @@ public class LitherealClient {
                 LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()));
 
         for (Holder<Potion> holder : BuiltInRegistries.POTION.holders().toList()) {
-            List<ItemLike> itemLikes = Arrays.asList(ModItems.INFUSED_LITHERITE_INGOT.get(),
-                    ModItems.INFUSED_LITHERITE_SWORD.get(),
-                    ModItems.INFUSED_LITHERITE_SHOVEL.get(),
-                    ModItems.INFUSED_LITHERITE_PICKAXE.get(),
-                    ModItems.INFUSED_LITHERITE_AXE.get(),
-                    ModItems.INFUSED_LITHERITE_HOE.get(),
-                    ModItems.INFUSED_LITHERITE_HAMMER.get(),
-                    ModItems.INFUSED_LITHERITE_HELMET.get(),
-                    ModItems.INFUSED_LITHERITE_CHESTPLATE.get(),
-                    ModItems.INFUSED_LITHERITE_LEGGINGS.get(),
-                    ModItems.INFUSED_LITHERITE_BOOTS.get(),
+            List<ItemLike> itemLikes = Arrays.asList(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(),
+                    ModToolItems.INFUSED_LITHERITE_SWORD.get(),
+                    ModToolItems.INFUSED_LITHERITE_SHOVEL.get(),
+                    ModToolItems.INFUSED_LITHERITE_PICKAXE.get(),
+                    ModToolItems.INFUSED_LITHERITE_AXE.get(),
+                    ModToolItems.INFUSED_LITHERITE_HOE.get(),
+                    ModToolItems.INFUSED_LITHERITE_HAMMER.get(),
+                    ModArmorItems.INFUSED_LITHERITE_HELMET.get(),
+                    ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(),
+                    ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(),
+                    ModArmorItems.INFUSED_LITHERITE_BOOTS.get(),
                     LitherealExpectPlatform.getInfusedLitheriteBlock());
             for (ItemLike itemLike : itemLikes) {
                 ItemStack current = new ItemStack(itemLike);

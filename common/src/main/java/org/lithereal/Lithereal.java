@@ -32,6 +32,7 @@ public class Lithereal {
 
     public static final Logger LOGGER = Logger.getLogger(MOD_ID);
     public static void init() {
+        ModParticles.register();
         ModBlocks.register();
         ModCreativeTabs.register();
         ModArmorMaterials.register();
@@ -43,7 +44,6 @@ public class Lithereal {
         ModBlockEntities.register();
         ModRecipes.register();
         ModEntities.register();
-        ModParticles.register();
         ModStructureProcessorTypes.register();
         ModFeatures.register();
 

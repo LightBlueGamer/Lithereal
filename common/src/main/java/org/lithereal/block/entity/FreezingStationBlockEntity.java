@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.FreezingStationMenu;
 import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.FreezingStationRecipe;
@@ -158,7 +159,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     private static int getBlockCoolingPower(FreezingStationBlockEntity entity, Block block) {
         int cooling = 0;
         if (CommonUtils.isAnyOf(block, Blocks.PACKED_ICE, Blocks.BLUE_ICE)) cooling += 1;
-        if (block == ModBlocks.FROZEN_LITHERITE_BLOCK.get()) cooling += 2;
+        if (block == ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get()) cooling += 2;
 
         return cooling;
     }

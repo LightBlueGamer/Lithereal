@@ -38,6 +38,7 @@ public class ClientEvents {
         }
         @SubscribeEvent
         public static void onParticleProviderRegister(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(ModParticles.LITHER_FIRE_FLAME.get(), FlameParticle.Provider::new);
             event.registerSpriteSet(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
             event.registerSpriteSet(ModParticles.SOUL.get(), EtherealSoulProvider::new);
             event.registerSpriteSet(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
