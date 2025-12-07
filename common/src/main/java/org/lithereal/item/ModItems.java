@@ -2,6 +2,7 @@ package org.lithereal.item;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.block.ModBlocks;
 import org.lithereal.item.ability.*;
 import org.lithereal.item.burning.*;
 import org.lithereal.item.infused.*;
@@ -57,6 +59,8 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("odysium_upgrade_smithing_template",
             ModSmithingTemplateItem::createOdysiumUpgradeTemplate);
+
+    public static final RegistrySupplier<Item> LITHER_TORCH = ITEMS.register("lither_torch", () -> new StandingAndWallBlockItem(ModBlocks.LITHER_TORCH.get(), ModBlocks.LITHER_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
 
 
 

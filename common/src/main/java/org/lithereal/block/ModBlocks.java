@@ -7,7 +7,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -58,12 +57,11 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
             () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
 
-    public static final RegistrySupplier<Block> LITHER_WALL_TORCH = registerBlockOnly("lither_wall_torch",
-            () -> new WaterloggableWallTorchBlock(ModParticles.LITHER_FIRE_FLAME.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).lightLevel(state -> 15)));
+    public static final RegistrySupplier<Block> LITHER_TORCH = registerBlockOnly("lither_torch",
+            () -> new WaterloggableTorchBlock(ModParticles.LITHER_FIRE_FLAME.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).lightLevel(state -> 15)));
 
-    public static final RegistrySupplier<Block> LITHER_TORCH = registerBlock("lither_torch",
-            () -> new WaterloggableTorchBlock(ModParticles.LITHER_FIRE_FLAME.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).lightLevel(state -> 15)),
-            block -> new StandingAndWallBlockItem(block, LITHER_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistrySupplier<Block> LITHER_WALL_TORCH = registerBlockOnly("lither_wall_torch",
+            () -> new WaterloggableWallTorchBlock(ModParticles.LITHER_FIRE_FLAME.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).lightLevel(state -> 15).dropsLike(LITHER_TORCH.get())));
 
     public static final RegistrySupplier<Block> LITHER_LANTERN = registerBlock("lither_lantern",
             () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)));
