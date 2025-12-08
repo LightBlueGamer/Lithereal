@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.loading.FMLPaths;
@@ -31,6 +32,8 @@ import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
 import org.lithereal.neoforge.world.block.entity.ForgeFireCrucibleBlockEntity;
 import org.lithereal.neoforge.world.block.entity.ForgeFreezingStationBlockEntity;
 import org.lithereal.neoforge.world.block.entity.ForgeInfusementChamberBlockEntity;
+import org.lithereal.entity.ModBoat;
+import org.lithereal.item.ModBoatItem;
 import org.lithereal.neoforge.world.item.ForgeItems;
 import org.lithereal.neoforge.world.item.ForgeWarHammerItem;
 import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
@@ -45,6 +48,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class LitherealExpectPlatformImpl {
+    public static WoodType registerWoodType(WoodType woodType) {
+        return WoodType.register(woodType);
+    }
     public static RotatedPillarBlock strippableLog(Supplier<Block> stripped, BlockBehaviour.Properties properties) {
         return new ForgeStrippableLogBlock(stripped.get(), properties);
     }

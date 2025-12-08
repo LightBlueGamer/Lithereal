@@ -4,8 +4,10 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.block.ModTreeBlocks;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
@@ -20,6 +22,24 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("ethereal_core_portal", () ->
                     BlockEntityType.Builder.of(EtherealCorePortalBlockEntity::new,
                             ModBlocks.ETHEREAL_CORE_PORTAL.get()).build(null));
+
+    public static final RegistrySupplier<BlockEntityType<? extends SignBlockEntity>> SIGN =
+            BLOCK_ENTITIES.register(
+                    "sign",
+                    () -> BlockEntityType.Builder.of(
+                            CustomSignBlockEntity::new,
+                            ModTreeBlocks.PHANTOM_OAK_SIGN.get(),
+                            ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get()
+                    ).build(null));
+
+    public static final RegistrySupplier<BlockEntityType<? extends SignBlockEntity>> HANGING_SIGN =
+            BLOCK_ENTITIES.register(
+                    "hanging_sign",
+                    () -> BlockEntityType.Builder.of(
+                            CustomHangingSignBlockEntity::new,
+                            ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(),
+                            ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get()
+                    ).build(null));
 
     public static void register() {
         BLOCK_ENTITIES.register();

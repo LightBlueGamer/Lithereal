@@ -10,11 +10,13 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
+import org.lithereal.block.ModTreeBlocks;
 import org.lithereal.client.EtherealCoreSpecialEffects;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityRenderer;
+import org.lithereal.client.renderer.ModBoatRenderer;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
@@ -25,14 +27,21 @@ public class LitherealFabricClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockEntityRenderers.register(FabricBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY, InfusedLitheriteBlockEntityRenderer::new);
         BlockEntityRenderers.register(FabricBlockEntities.INFUSEMENT_CHAMBER_BLOCK_ENTITY, InfusementChamberBlockEntityRenderer::new);
+        BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_LEAVES.get(), RenderType.cutoutMipped());
         BlockRenderLayerMap.INSTANCE.putBlock(FabricBlocks.FIRE_CRUCIBLE_BLOCK, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BLUE_FIRE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_WALL_TORCH.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_TORCH.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHER_LANTERN.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LITHEREAL_VAULT.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_DOOR.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), RenderType.cutout());
         DimensionRenderingRegistry.registerDimensionEffects(Lithereal.id("ethereal_core"), new EtherealCoreSpecialEffects());
         EntityRendererRegistry.register(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, false));
+        EntityRendererRegistry.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, true));
 
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);
         MenuScreens.register(FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER, FreezingStationScreen::new);

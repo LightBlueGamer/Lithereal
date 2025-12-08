@@ -12,7 +12,8 @@
     "BlockMixin",
     "ExplosionDamageCalculatorMixin",
     "ItemEntityMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "WoodTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

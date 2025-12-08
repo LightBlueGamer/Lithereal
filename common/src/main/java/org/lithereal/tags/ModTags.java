@@ -28,6 +28,7 @@ public class ModTags {
         return create(name, Registries.BLOCK);
     }
     public static final TagKey<Item> ETHEREAL_CORE_PORTAL_ITEMS = createItemTag("ethereal_realm_portal_items");
+    public static final TagKey<Item> PHANTOM_OAK_LOGS = createItemTag("phantom_oak_logs");
     public static TagKey<Item> createItemTag(String name) {
         return create(name, Registries.ITEM);
     }

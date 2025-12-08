@@ -198,6 +198,7 @@ public class ModBlocks {
     }
 
     public static void register() {
+        ModTreeBlocks.register();
         ModStoneBlocks.register();
         ModStorageBlocks.register();
         ModOreBlocks.register();

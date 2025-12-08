@@ -11,6 +11,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.entity.ModBoat;
 import org.lithereal.item.ability.*;
 import org.lithereal.item.burning.*;
 import org.lithereal.item.infused.*;
@@ -59,6 +61,14 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("odysium_upgrade_smithing_template",
             ModSmithingTemplateItem::createOdysiumUpgradeTemplate);
+
+    public static final RegistrySupplier<Item> PHANTOM_OAK_SIGN = ITEMS.register("phantom_oak_sign", () -> new SignItem(new Item.Properties(), ModTreeBlocks.PHANTOM_OAK_SIGN.get(), ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get()));
+
+    public static final RegistrySupplier<Item> PHANTOM_OAK_HANGING_SIGN = ITEMS.register("phantom_oak_hanging_sign", () -> new HangingSignItem(ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get(), new Item.Properties()));
+
+    public static final RegistrySupplier<Item> PHANTOM_OAK_BOAT = ITEMS.register("phantom_oak_boat", () -> new ModBoatItem(false, ModBoat.Type.PHANTOM_OAK, new Item.Properties().stacksTo(1)));
+
+    public static final RegistrySupplier<Item> PHANTOM_OAK_CHEST_BOAT = ITEMS.register("phantom_oak_chest_boat", () -> new ModBoatItem(true, ModBoat.Type.PHANTOM_OAK, new Item.Properties().stacksTo(1)));
 
     public static final RegistrySupplier<Item> LITHER_TORCH = ITEMS.register("lither_torch", () -> new StandingAndWallBlockItem(ModBlocks.LITHER_TORCH.get(), ModBlocks.LITHER_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
 

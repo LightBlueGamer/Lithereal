@@ -49,6 +49,27 @@ public class ModStoneBlocks {
     public static final RegistrySupplier<Block> PAILITE = registerBlock("pailite",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
 
+    public static final RegistrySupplier<Block> PAILITE_STAIRS = registerBlock("pailite_stairs",
+            () -> new StairBlock(PAILITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS)));
+
+    public static final RegistrySupplier<Block> PAILITE_SLAB = registerBlock("pailite_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+
+    public static final RegistrySupplier<Block> PAILITE_WALL = registerBlock("pailite_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(PAILITE.get()).forceSolidOn()));
+
+    public static final RegistrySupplier<Block> POLISHED_PAILITE = registerBlock("polished_pailite",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
+
+    public static final RegistrySupplier<Block> POLISHED_PAILITE_STAIRS = registerBlock("polished_pailite_stairs",
+            () -> new StairBlock(POLISHED_PAILITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS)));
+
+    public static final RegistrySupplier<Block> POLISHED_PAILITE_SLAB = registerBlock("polished_pailite_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+
+    public static final RegistrySupplier<Block> POLISHED_PAILITE_WALL = registerBlock("polished_pailite_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(POLISHED_PAILITE.get()).forceSolidOn()));
+
     public static void register() {
 
     }

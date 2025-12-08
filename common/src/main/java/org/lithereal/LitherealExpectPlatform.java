@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.*;
 import org.lithereal.client.gui.screens.inventory.*;
@@ -29,6 +30,10 @@ import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public class LitherealExpectPlatform {
+    @ExpectPlatform
+    public static WoodType registerWoodType(WoodType woodType) {
+        throw new AssertionError();
+    }
     @ExpectPlatform
     public static RotatedPillarBlock strippableLog(Supplier<Block> stripped, BlockBehaviour.Properties properties) {
         throw new AssertionError();
