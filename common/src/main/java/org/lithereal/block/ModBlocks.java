@@ -58,10 +58,10 @@ public class ModBlocks {
             () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));
 
     public static final RegistrySupplier<Block> LITHER_TORCH = registerBlockOnly("lither_torch",
-            () -> new WaterloggableTorchBlock(ModParticles.LITHER_FIRE_FLAME.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).lightLevel(state -> 15)));
+            () -> new WaterloggableTorchBlock(ModParticles.LITHER_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).lightLevel(state -> 15)));
 
     public static final RegistrySupplier<Block> LITHER_WALL_TORCH = registerBlockOnly("lither_wall_torch",
-            () -> new WaterloggableWallTorchBlock(ModParticles.LITHER_FIRE_FLAME.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).lightLevel(state -> 15).dropsLike(LITHER_TORCH.get())));
+            () -> new WaterloggableWallTorchBlock(ModParticles.LITHER_FIRE_FLAME, BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).lightLevel(state -> 15).dropsLike(LITHER_TORCH.get())));
 
     public static final RegistrySupplier<Block> LITHER_LANTERN = registerBlock("lither_lantern",
             () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)));

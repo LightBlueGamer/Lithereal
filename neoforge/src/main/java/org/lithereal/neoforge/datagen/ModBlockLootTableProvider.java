@@ -20,9 +20,12 @@ import org.lithereal.block.ModBlocks;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
+    private final List<Block> cachedGeneratedBlocks = new ArrayList<>();
     protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
@@ -58,6 +61,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), this::createSlabItemTable);
     }
 
+    @Override
+    protected void add(Block block, LootTable.Builder builder) {
+        super.add(block, builder);
+        cachedGeneratedBlocks.add(block);
+    }
+
     protected LootTable.Builder createMultipleOreDrops(Block pBlock, Item item, float minDrops, float maxDrops) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return this.createSilkTouchDispatchTable(pBlock,
@@ -68,6 +77,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
+        if (cachedGeneratedBlocks != null) return cachedGeneratedBlocks;
         return Streams.of(ModBlocks.BLOCKS).map(Holder::value)::iterator;
     }
 }

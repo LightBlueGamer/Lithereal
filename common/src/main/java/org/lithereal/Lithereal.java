@@ -28,8 +28,6 @@ public class Lithereal {
     public static final String MOD_ID = "lithereal";
     public static final ResourceKey<LootTable> LITHEREAL_CHAMBERS_REWARD = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "chests/lithereal_chambers/reward"));
 
-    public static final Supplier<RegistrarManager> REGISTRIES = Suppliers.memoize(() -> RegistrarManager.get(MOD_ID));
-
     public static final Logger LOGGER = Logger.getLogger(MOD_ID);
     public static void init() {
         ModParticles.register();

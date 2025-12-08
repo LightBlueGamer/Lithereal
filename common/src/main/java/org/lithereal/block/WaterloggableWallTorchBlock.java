@@ -27,19 +27,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
-public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock implements SimpleWaterloggedBlock {
-    protected static final MapCodec<SimpleParticleType> PARTICLE_OPTIONS_FIELD = BuiltInRegistries.PARTICLE_TYPE
-            .byNameCodec()
-            .<SimpleParticleType>comapFlatMap(
-                    particleType -> particleType instanceof SimpleParticleType simpleParticleType
-                            ? DataResult.success(simpleParticleType)
-                            : DataResult.error(() -> "Not a SimpleParticleType: " + particleType),
-                    simpleParticleType -> simpleParticleType
-            )
-            .fieldOf("particle_options");
+public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock {
     public static final MapCodec<WaterloggableWallTorchBlock> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(PARTICLE_OPTIONS_FIELD.forGetter(torchBlock -> torchBlock.flameParticle), propertiesCodec()).apply(instance, WaterloggableWallTorchBlock::new)
+            instance -> instance.group(PARTICLE_OPTIONS_FIELD.forGetter(torchBlock -> torchBlock.flameParticle.get()), propertiesCodec()).apply(instance, WaterloggableWallTorchBlock::new)
     );
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(
@@ -59,9 +51,13 @@ public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock impleme
     public MapCodec<? extends WaterloggableWallTorchBlock> codec() {
         return CODEC;
     }
-    public WaterloggableWallTorchBlock(SimpleParticleType simpleParticleType, Properties properties) {
-        super(simpleParticleType, properties);
+    public WaterloggableWallTorchBlock(Supplier<SimpleParticleType> typeSupplier, Properties properties) {
+        super(typeSupplier, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));
+    }
+
+    public WaterloggableWallTorchBlock(SimpleParticleType flameParticle, Properties properties) {
+        this(() -> flameParticle, properties);
     }
 
     @Override
@@ -132,7 +128,7 @@ public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock impleme
         double f = (double)blockPos.getZ() + 0.5;
         Direction direction2 = direction.getOpposite();
         level.addParticle(ParticleTypes.SMOKE, d + 0.27 * (double)direction2.getStepX(), e + 0.22, f + 0.27 * (double)direction2.getStepZ(), 0.0, 0.0, 0.0);
-        level.addParticle(this.flameParticle, d + 0.27 * (double)direction2.getStepX(), e + 0.22, f + 0.27 * (double)direction2.getStepZ(), 0.0, 0.0, 0.0);
+        level.addParticle(this.flameParticle.get(), d + 0.27 * (double)direction2.getStepX(), e + 0.22, f + 0.27 * (double)direction2.getStepZ(), 0.0, 0.0, 0.0);
     }
 
     @Override

@@ -5,14 +5,14 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.TorchBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -21,7 +21,9 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
-public class WaterloggableTorchBlock extends TorchBlock implements SimpleWaterloggedBlock {
+import java.util.function.Supplier;
+
+public class WaterloggableTorchBlock extends BaseTorchBlock implements SimpleWaterloggedBlock {
     protected static final MapCodec<SimpleParticleType> PARTICLE_OPTIONS_FIELD = BuiltInRegistries.PARTICLE_TYPE
             .byNameCodec()
             .<SimpleParticleType>comapFlatMap(
@@ -32,17 +34,31 @@ public class WaterloggableTorchBlock extends TorchBlock implements SimpleWaterlo
             )
             .fieldOf("particle_options");
     public static final MapCodec<WaterloggableTorchBlock> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(PARTICLE_OPTIONS_FIELD.forGetter(torchBlock -> torchBlock.flameParticle), propertiesCodec()).apply(instance, WaterloggableTorchBlock::new)
+            instance -> instance.group(PARTICLE_OPTIONS_FIELD.forGetter(torchBlock -> torchBlock.flameParticle.get()), propertiesCodec()).apply(instance, WaterloggableTorchBlock::new)
     );
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    protected final Supplier<SimpleParticleType> flameParticle;
 
     @Override
     public MapCodec<? extends WaterloggableTorchBlock> codec() {
         return CODEC;
     }
-    public WaterloggableTorchBlock(SimpleParticleType simpleParticleType, Properties properties) {
-        super(simpleParticleType, properties);
+    public WaterloggableTorchBlock(Supplier<SimpleParticleType> typeSupplier, Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE));
+        this.flameParticle = typeSupplier;
+    }
+
+    public WaterloggableTorchBlock(SimpleParticleType flameParticle, Properties properties) {
+        this(() -> flameParticle, properties);
+    }
+
+    public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        double d = (double)blockPos.getX() + (double)0.5F;
+        double e = (double)blockPos.getY() + 0.7;
+        double f = (double)blockPos.getZ() + (double)0.5F;
+        level.addParticle(ParticleTypes.SMOKE, d, e, f, 0.0F, 0.0F, 0.0F);
+        level.addParticle(this.flameParticle.get(), d, e, f, 0.0F, 0.0F, 0.0F);
     }
 
     @Nullable

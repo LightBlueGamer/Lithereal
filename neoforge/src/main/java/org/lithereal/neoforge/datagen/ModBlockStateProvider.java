@@ -11,6 +11,8 @@ import org.lithereal.Lithereal;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
 
+import static net.neoforged.neoforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
+
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, Lithereal.MOD_ID, exFileHelper);
@@ -19,21 +21,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModTreeBlocks.PHANTOM_OAK_PLANKS);
-        simpleBlock(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), models().cross("lithereal:phantom_oak_sapling", Lithereal.id("block/phantom_oak_sapling")));
-        simpleBlockItem(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), itemModels().basicItem(ModTreeBlocks.PHANTOM_OAK_SAPLING.getId()));
+        plantWithItem(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), TintState.NOT_TINTED);
         logBlock((RotatedPillarBlock) ModTreeBlocks.PHANTOM_OAK_LOG.get());
         logBlock((RotatedPillarBlock) ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
-        woodBlock((RotatedPillarBlock) ModTreeBlocks.PHANTOM_OAK_WOOD.get());
-        woodBlock((RotatedPillarBlock) ModTreeBlocks.STRIPPED_PHANTOM_OAK_WOOD.get());
+        woodBlock((RotatedPillarBlock) ModTreeBlocks.PHANTOM_OAK_WOOD.get(), Lithereal.id("block/phantom_oak_log"));
+        woodBlock((RotatedPillarBlock) ModTreeBlocks.STRIPPED_PHANTOM_OAK_WOOD.get(), Lithereal.id("block/stripped_phantom_oak_log"));
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_LOG.get());
         itemForBlockModel(ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_WOOD.get());
         itemForBlockModel(ModTreeBlocks.STRIPPED_PHANTOM_OAK_WOOD.get());
         stairsBlock((StairBlock) ModTreeBlocks.PHANTOM_OAK_STAIRS.get(), Lithereal.id("block/phantom_oak_planks"));
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_STAIRS.get());
-        signBlock((StandingSignBlock) ModTreeBlocks.PHANTOM_OAK_SIGN.get(), (WallSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_SIGN, ResourceLocation.withDefaultNamespace("entity/signs/phantom_oak"));
-        hangingSignBlock((CeilingHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), (WallHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN, ResourceLocation.withDefaultNamespace("entity/signs/hanging/phantom_oak"));
-        pressurePlateBlock((PressurePlateBlock) ModTreeBlocks.PHANTOM_OAK_PRESSURE_PLATE.get(), ResourceLocation.withDefaultNamespace("block/phantom_oak_planks"));
+        signBlock((StandingSignBlock) ModTreeBlocks.PHANTOM_OAK_SIGN.get(), (WallSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get(), ResourceLocation.withDefaultNamespace("entity/signs/phantom_oak"));
+        hangingSignBlock((CeilingHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), (WallHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get(), ResourceLocation.withDefaultNamespace("entity/signs/hanging/phantom_oak"));
+        pressurePlateBlock((PressurePlateBlock) ModTreeBlocks.PHANTOM_OAK_PRESSURE_PLATE.get(), Lithereal.id("block/phantom_oak_planks"));
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_PRESSURE_PLATE.get());
         fenceWithItem((FenceBlock) ModTreeBlocks.PHANTOM_OAK_FENCE.get(), Lithereal.id("block/phantom_oak_planks"));
         trapdoorWithItem((TrapDoorBlock) ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(), Lithereal.id("block/phantom_oak_trapdoor"), true);
@@ -41,7 +42,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_FENCE_GATE.get());
         buttonWithItem((ButtonBlock) ModTreeBlocks.PHANTOM_OAK_BUTTON.get(), Lithereal.id("block/phantom_oak_planks"));
         slabBlock((SlabBlock) ModTreeBlocks.PHANTOM_OAK_SLAB.get(), Lithereal.id("block/phantom_oak_planks"), Lithereal.id("block/phantom_oak_planks"));
-        itemForBlockModelWithSuffix(ModTreeBlocks.PHANTOM_OAK_SLAB.get(), "_bottom");
+        itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_SLAB.get());
         doorBlock((DoorBlock) ModTreeBlocks.PHANTOM_OAK_DOOR.get(), Lithereal.id("block/phantom_oak_door_bottom"), Lithereal.id("block/phantom_oak_door_top"));
         leavesBlock(ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
@@ -50,13 +51,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock((StairBlock) ModStoneBlocks.PAILITE_STAIRS.get(), Lithereal.id("block/pailite"));
         itemForBlockModel(ModStoneBlocks.PAILITE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.PAILITE_SLAB.get(), Lithereal.id("block/pailite"), Lithereal.id("block/pailite"));
-        itemForBlockModelWithSuffix(ModStoneBlocks.PAILITE_SLAB.get(), "_bottom");
+        itemForBlockModel(ModStoneBlocks.PAILITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.PAILITE_WALL.get(), Lithereal.id("block/pailite"));
         blockWithItem(ModStoneBlocks.POLISHED_PAILITE);
         stairsBlock((StairBlock) ModStoneBlocks.POLISHED_PAILITE_STAIRS.get(), Lithereal.id("block/polished_pailite"));
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), Lithereal.id("block/polished_pailite"), Lithereal.id("block/polished_pailite"));
-        itemForBlockModelWithSuffix(ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), "_bottom");
+        itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.POLISHED_PAILITE_WALL.get(), Lithereal.id("block/polished_pailite"));
     }
 
@@ -73,7 +74,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void woodBlock(RotatedPillarBlock block) {
-        axisBlock(block, blockTexture(block), blockTexture(block));
+        woodBlock(block, blockTexture(block));
+    }
+
+    private void woodBlock(RotatedPillarBlock block, ResourceLocation texture) {
+        axisBlock(block, texture, texture);
     }
 
     private void itemForBlockModel(Block block) {
@@ -110,5 +115,41 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void buttonWithItem(ButtonBlock buttonBlock, ResourceLocation texture) {
         buttonBlock(buttonBlock, texture);
         simpleBlockItem(buttonBlock, models().buttonInventory(name(buttonBlock) + "_inventory", texture));
+    }
+
+    private void plant(Block normal, Block potted, TintState tintState) {
+        plant(normal, potted, tintState, modLoc("block/" + name(normal)));
+    }
+
+    private void plant(Block normal, Block potted, TintState tintState, ResourceLocation texture) {
+        simpleBlock(normal, models().singleTexture(name(normal), ResourceLocation.parse(tintState.getCross()), tintState.getCrossTexture(), texture));
+        simpleBlock(potted, models().singleTexture(name(potted), ResourceLocation.parse(tintState.getCrossPot()), tintState.getPotTexture(), texture));
+    }
+
+    private void plantWithItem(Block normal, Block potted, TintState tintState) {
+        ResourceLocation texture = modLoc("block/" + name(normal));
+        this.plant(normal, potted, tintState, texture);
+        simpleBlockItem(normal, itemModels().withExistingParent(modLoc(name(normal)).withPrefix("item/").toString(), "item/generated").texture("layer0", texture));
+    }
+
+    enum TintState {
+        TINTED,
+        NOT_TINTED;
+
+        public String getCross() {
+            return BLOCK_FOLDER + (this == TINTED ? "/tinted_cross" : "/cross");
+        }
+
+        public String getCrossPot() {
+            return BLOCK_FOLDER + (this == TINTED ? "/tinted_flower_pot_cross" : "/flower_pot_cross");
+        }
+
+        public String getCrossTexture() {
+            return "cross";
+        }
+
+        public String getPotTexture() {
+            return "plant";
+        }
     }
 }
