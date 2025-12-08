@@ -3,6 +3,8 @@
   "values": [
     "lithereal:etherstone_stairs",
     "lithereal:etherstone_brick_stairs",
-    "lithereal:polished_etherstone_stairs"
+    "lithereal:polished_etherstone_stairs",
+    "lithereal:pailite_stairs",
+    "lithereal:polished_pailite_stairs"
   ]
 }

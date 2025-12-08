@@ -3,6 +3,8 @@
   "values": [
     "lithereal:etherstone_slab",
     "lithereal:etherstone_brick_slab",
-    "lithereal:polished_etherstone_slab"
+    "lithereal:polished_etherstone_slab",
+    "lithereal:pailite_slab",
+    "lithereal:polished_pailite_slab"
   ]
 }
