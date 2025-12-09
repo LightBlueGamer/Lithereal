@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
+import org.lithereal.block.ModPhantomBlocks;
 import org.lithereal.block.ModTreeBlocks;
 import org.lithereal.client.EtherealCoreSpecialEffects;
 import org.lithereal.client.gui.screens.inventory.*;
@@ -38,6 +39,9 @@ public class LitherealFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(), RenderType.cutout());
         DimensionRenderingRegistry.registerDimensionEffects(Lithereal.id("ethereal_core"), new EtherealCoreSpecialEffects());
         EntityRendererRegistry.register(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
         EntityRendererRegistry.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, false));

@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.lithereal.Lithereal;
+import org.lithereal.block.ModPhantomBlocks;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
 
@@ -59,6 +60,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock((SlabBlock) ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), Lithereal.id("block/polished_pailite"), Lithereal.id("block/polished_pailite"));
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.POLISHED_PAILITE_WALL.get(), Lithereal.id("block/polished_pailite"));
+
+        plantWithItem(ModPhantomBlocks.PHANTOM_ROSE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(), TintState.NOT_TINTED);
+        plantWithItem(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(), ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(), TintState.NOT_TINTED);
+        plantWithItem(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(), TintState.NOT_TINTED);
     }
 
     private void blockWithItem(RegistrySupplier<? extends Block> block) {
@@ -129,7 +134,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void plantWithItem(Block normal, Block potted, TintState tintState) {
         ResourceLocation texture = modLoc("block/" + name(normal));
         this.plant(normal, potted, tintState, texture);
-        simpleBlockItem(normal, itemModels().withExistingParent(modLoc(name(normal)).withPrefix("item/").toString(), "item/generated").texture("layer0", texture));
+        itemModels().withExistingParent(modLoc(name(normal)).withPrefix("item/").toString(), "item/generated").texture("layer0", texture);
     }
 
     enum TintState {

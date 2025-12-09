@@ -17,6 +17,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.block.ModPhantomBlocks;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
 
@@ -59,6 +60,13 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModStoneBlocks.POLISHED_PAILITE_STAIRS.get());
         dropSelf(ModStoneBlocks.POLISHED_PAILITE_WALL.get());
         add(ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), this::createSlabItemTable);
+
+        dropSelf(ModPhantomBlocks.PHANTOM_ROSE.get());
+        dropSelf(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get());
+        dropSelf(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get());
+        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ROSE.get());
+        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get());
+        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get());
     }
 
     @Override

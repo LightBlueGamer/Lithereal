@@ -63,8 +63,8 @@ public class ModTreeBlocks {
     public static final RegistrySupplier<Block> PHANTOM_OAK_SAPLING = registerBlock("phantom_oak_sapling", () ->
             new SaplingBlock(TreeGrower.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)), block -> new BlockItem(block, new Item.Properties()));
 
-    public static final RegistrySupplier<Block> POTTED_PHANTOM_OAK_SAPLING = registerBlock("potted_phantom_oak_sapling", () ->
-            new FlowerPotBlock(PHANTOM_OAK_SAPLING.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)), block -> new BlockItem(block, new Item.Properties()));
+    public static final RegistrySupplier<Block> POTTED_PHANTOM_OAK_SAPLING = registerBlockOnly("potted_phantom_oak_sapling", () ->
+            new FlowerPotBlock(PHANTOM_OAK_SAPLING.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)));
 
     public static final RegistrySupplier<Block> STRIPPED_PHANTOM_OAK_LOG = registerBlock("stripped_phantom_oak_log", () ->
             strippedLog(MapColor.TERRACOTTA_PURPLE), block -> new BlockItem(block, new Item.Properties()));
