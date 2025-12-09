@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "lithereal:block/phantom_oak_planks",
+    "side": "lithereal:block/phantom_oak_planks",
+    "top": "lithereal:block/phantom_oak_planks"
+  }
+}

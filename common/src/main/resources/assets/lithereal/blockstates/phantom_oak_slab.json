@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/phantom_oak_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/phantom_oak_planks"
+    },
+    "type=top": {
+      "model": "lithereal:block/phantom_oak_slab_top"
+    }
+  }
+}

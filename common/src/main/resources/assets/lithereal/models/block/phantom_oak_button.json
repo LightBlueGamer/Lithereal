@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "lithereal:block/phantom_oak_planks"
+  }
+}

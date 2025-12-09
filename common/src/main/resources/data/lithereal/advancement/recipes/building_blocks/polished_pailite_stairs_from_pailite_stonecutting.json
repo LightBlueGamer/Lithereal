@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pailite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:pailite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:polished_pailite_stairs_from_pailite_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pailite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:polished_pailite_stairs_from_pailite_stonecutting"
+    ]
+  }
+}

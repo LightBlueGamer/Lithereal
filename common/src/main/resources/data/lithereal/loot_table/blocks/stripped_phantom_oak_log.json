@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lithereal:phantom_oak_log"
+          "name": "lithereal:stripped_phantom_oak_log"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/phantom_oak_log"
+  "random_sequence": "lithereal:blocks/stripped_phantom_oak_log"
 }

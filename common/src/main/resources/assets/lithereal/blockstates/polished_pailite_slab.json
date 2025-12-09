@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/polished_pailite_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/polished_pailite"
+    },
+    "type=top": {
+      "model": "lithereal:block/polished_pailite_slab_top"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_orientable_trapdoor_open",
+  "textures": {
+    "texture": "lithereal:block/phantom_oak_trapdoor"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "lithereal:block/polished_pailite",
+    "side": "lithereal:block/polished_pailite",
+    "top": "lithereal:block/polished_pailite"
+  }
+}

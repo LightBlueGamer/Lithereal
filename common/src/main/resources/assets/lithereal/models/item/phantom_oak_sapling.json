@@ -1,0 +1,6 @@
+{
+  "parent": "lithereal:item/phantom_oak_sapling",
+  "textures": {
+    "layer0": "lithereal:block/phantom_oak_sapling"
+  }
+}

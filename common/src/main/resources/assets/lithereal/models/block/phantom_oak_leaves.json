@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "lithereal:block/phantom_oak_leaves"
+  }
+}

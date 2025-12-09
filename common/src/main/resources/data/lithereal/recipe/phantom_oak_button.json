@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "lithereal:phantom_oak_planks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "lithereal:phantom_oak_button"
+  }
+}
