@@ -9,8 +9,8 @@
   "downfall": 0.8,
   "effects": {
     "fog_color": 665436,
-    "foliage_color": 15233969,
-    "grass_color": 8573157,
+    "foliage_color": 10568447,
+    "grass_color": 3687577,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2,
@@ -56,9 +56,9 @@
     ],
     [
       "lithereal:impure_ethereal_crystal_patch",
-      "lithereal:ethereal_forest_flowers",
-      "lithereal:ethereal_forest_vegetation",
-      "lithereal:trees_ethereal_forest"
+      "lithereal:ethereal_megagrowth_flowers",
+      "lithereal:ethereal_megagrowth_vegetation",
+      "lithereal:trees_ethereal_megagrowth"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -76,5 +76,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.7
+  "temperature": 0.5
 }

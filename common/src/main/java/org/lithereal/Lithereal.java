@@ -1,7 +1,5 @@
 package org.lithereal;
 
-import com.google.common.base.Suppliers;
-import dev.architectury.registry.registries.RegistrarManager;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -19,9 +17,9 @@ import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
 import org.lithereal.world.feature.ModFeatures;
+import org.lithereal.world.feature.tree.trunkplacer.ModTrunkPlacers;
 import org.lithereal.world.structure.ModStructureProcessorTypes;
 
-import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 public class Lithereal {
@@ -44,6 +42,7 @@ public class Lithereal {
         ModEntities.register();
         ModStructureProcessorTypes.register();
         ModFeatures.register();
+        ModTrunkPlacers.register();
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

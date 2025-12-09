@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "lithereal:super_phantom_oak",
+    "features": [
+      {
+        "chance": 0.4,
+        "feature": "lithereal:mega_phantom_oak"
+      }
+    ]
+  }
+}

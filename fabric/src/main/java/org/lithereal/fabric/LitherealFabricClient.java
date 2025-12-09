@@ -12,6 +12,7 @@ import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
 import org.lithereal.block.ModPhantomBlocks;
 import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.client.EtherealCoreSpecialEffects;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.block.ModBlocks;
@@ -39,6 +40,10 @@ public class LitherealFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModVegetationBlocks.MALISHROOM.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModVegetationBlocks.POTTED_MALISHROOM.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModVegetationBlocks.FORTSHROOM.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModVegetationBlocks.POTTED_FORTSHROOM.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(), RenderType.cutout());

@@ -12,12 +12,16 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.mixin.BlockSetTypeAccessor;
+import org.lithereal.world.feature.ModFeatures;
+
+import java.util.Optional;
 
 import static org.lithereal.block.ModBlocks.*;
 
 public class ModTreeBlocks {
+    public static final TreeGrower PHANTOM_OAK = new TreeGrower("phantom_oak", 0.1F, Optional.of(ModFeatures.MEGA_PHANTOM_OAK), Optional.empty(), Optional.of(ModFeatures.PHANTOM_OAK), Optional.of(ModFeatures.FANCY_PHANTOM_OAK), Optional.empty(), Optional.empty());
     public static final BlockSetType PHANTOM_OAK_SET = BlockSetTypeAccessor.callRegister(new BlockSetType("phantom_oak"));
-    public static final WoodType PHANTOM_OAK = LitherealExpectPlatform.registerWoodType(new WoodType("phantom_oak", PHANTOM_OAK_SET));
+    public static final WoodType PHANTOM_OAK_WOOD_TYPE = LitherealExpectPlatform.registerWoodType(new WoodType("phantom_oak", PHANTOM_OAK_SET));
     public static final RegistrySupplier<Block> PHANTOM_OAK_PLANKS = registerBlock("phantom_oak_planks", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)), block -> new BlockItem(block, new Item.Properties()));
 
@@ -31,7 +35,7 @@ public class ModTreeBlocks {
             new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)), block -> new BlockItem(block, new Item.Properties()));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_FENCE_GATE = registerBlock("phantom_oak_fence_gate", () ->
-            new FenceGateBlock(PHANTOM_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE)), block -> new BlockItem(block, new Item.Properties()));
+            new FenceGateBlock(PHANTOM_OAK_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE)), block -> new BlockItem(block, new Item.Properties()));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_PRESSURE_PLATE = registerBlock("phantom_oak_pressure_plate", () ->
             new PressurePlateBlock(PHANTOM_OAK_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE)), block -> new BlockItem(block, new Item.Properties()));
@@ -40,16 +44,16 @@ public class ModTreeBlocks {
             new ButtonBlock(PHANTOM_OAK_SET, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_BUTTON)), block -> new BlockItem(block, new Item.Properties()));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_SIGN = registerBlockOnly("phantom_oak_sign", () ->
-            new CustomStandingSignBlock(PHANTOM_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
+            new CustomStandingSignBlock(PHANTOM_OAK_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_WALL_SIGN = registerBlockOnly("phantom_oak_wall_sign", () ->
-            new CustomWallSignBlock(PHANTOM_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN).dropsLike(PHANTOM_OAK_SIGN.get())));
+            new CustomWallSignBlock(PHANTOM_OAK_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN).dropsLike(PHANTOM_OAK_SIGN.get())));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_HANGING_SIGN = registerBlockOnly("phantom_oak_hanging_sign", () ->
-            new CustomCeilingHangingSignBlock(PHANTOM_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
+            new CustomCeilingHangingSignBlock(PHANTOM_OAK_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_WALL_HANGING_SIGN = registerBlockOnly("phantom_oak_wall_hanging_sign", () ->
-            new CustomWallHangingSignBlock(PHANTOM_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).dropsLike(PHANTOM_OAK_HANGING_SIGN.get())));
+            new CustomWallHangingSignBlock(PHANTOM_OAK_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).dropsLike(PHANTOM_OAK_HANGING_SIGN.get())));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_DOOR = registerBlock("phantom_oak_door", () ->
             new DoorBlock(PHANTOM_OAK_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR)), block -> new DoubleHighBlockItem(block, new Item.Properties()));
@@ -61,7 +65,7 @@ public class ModTreeBlocks {
             new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)), block -> new BlockItem(block, new Item.Properties()));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_SAPLING = registerBlock("phantom_oak_sapling", () ->
-            new SaplingBlock(TreeGrower.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)), block -> new BlockItem(block, new Item.Properties()));
+            new SaplingBlock(PHANTOM_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)), block -> new BlockItem(block, new Item.Properties()));
 
     public static final RegistrySupplier<Block> POTTED_PHANTOM_OAK_SAPLING = registerBlockOnly("potted_phantom_oak_sapling", () ->
             new FlowerPotBlock(PHANTOM_OAK_SAPLING.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)));

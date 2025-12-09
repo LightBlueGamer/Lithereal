@@ -4,8 +4,33 @@
     "type": "minecraft:noise",
     "settings": "lithereal:ethereal_core_noise",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "lithereal:ethereal_forest"
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "lithereal:ethereal_forest",
+          "parameters": {
+            "temperature": 0.2,
+            "humidity": 0.2,
+            "continentalness": 0.03,
+            "erosion": 0.05,
+            "weirdness": 0.2,
+            "depth": 1,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "lithereal:ethereal_megagrowth",
+          "parameters": {
+            "temperature": 0.2,
+            "humidity": 0.3,
+            "continentalness": 0.3,
+            "erosion": 0.45,
+            "weirdness": 0.3,
+            "depth": 1,
+            "offset": 0
+          }
+        }
+      ]
     }
   }
 }

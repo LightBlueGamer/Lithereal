@@ -16,10 +16,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.block.ModBlocks;
-import org.lithereal.block.ModPhantomBlocks;
-import org.lithereal.block.ModStoneBlocks;
-import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.block.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +48,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModTreeBlocks.PHANTOM_OAK_SLAB.get(), this::createSlabItemTable);
         add(ModTreeBlocks.PHANTOM_OAK_DOOR.get(), this::createDoorTable);
         add(ModTreeBlocks.PHANTOM_OAK_LEAVES.get(), block -> createOakLeavesDrops(block, ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        dropPottedContents(ModVegetationBlocks.POTTED_MALISHROOM.get());
+        dropSelf(ModVegetationBlocks.MALISHROOM.get());
+        dropPottedContents(ModVegetationBlocks.POTTED_FORTSHROOM.get());
+        dropSelf(ModVegetationBlocks.FORTSHROOM.get());
 
         dropSelf(ModStoneBlocks.PAILITE.get());
         dropSelf(ModStoneBlocks.PAILITE_STAIRS.get());

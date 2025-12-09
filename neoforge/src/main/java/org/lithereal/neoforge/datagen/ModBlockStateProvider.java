@@ -11,6 +11,7 @@ import org.lithereal.Lithereal;
 import org.lithereal.block.ModPhantomBlocks;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.block.ModVegetationBlocks;
 
 import static net.neoforged.neoforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
 
@@ -47,6 +48,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         doorBlock((DoorBlock) ModTreeBlocks.PHANTOM_OAK_DOOR.get(), Lithereal.id("block/phantom_oak_door_bottom"), Lithereal.id("block/phantom_oak_door_top"));
         leavesBlock(ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
+
+        plantWithItem(ModVegetationBlocks.MALISHROOM.get(), ModVegetationBlocks.POTTED_MALISHROOM.get(), TintState.NOT_TINTED);
+        plantWithItem(ModVegetationBlocks.FORTSHROOM.get(), ModVegetationBlocks.POTTED_FORTSHROOM.get(), TintState.NOT_TINTED);
 
         blockWithItem(ModStoneBlocks.PAILITE);
         stairsBlock((StairBlock) ModStoneBlocks.PAILITE_STAIRS.get(), Lithereal.id("block/pailite"));

@@ -199,6 +199,7 @@ public class ModBlocks {
 
     public static void register() {
         ModTreeBlocks.register();
+        ModVegetationBlocks.register();
         ModStoneBlocks.register();
         ModStorageBlocks.register();
         ModOreBlocks.register();
