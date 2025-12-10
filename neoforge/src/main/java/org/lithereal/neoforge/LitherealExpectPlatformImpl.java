@@ -23,24 +23,16 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.EtherCollectorBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.item.WarHammerItem;
 import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
 import org.lithereal.neoforge.world.block.ForgeInfusementChamberBlock;
 import org.lithereal.neoforge.world.block.ForgeStrippableLogBlock;
-import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
-import org.lithereal.neoforge.world.block.entity.ForgeFireCrucibleBlockEntity;
-import org.lithereal.neoforge.world.block.entity.ForgeFreezingStationBlockEntity;
-import org.lithereal.neoforge.world.block.entity.ForgeInfusementChamberBlockEntity;
-import org.lithereal.entity.ModBoat;
-import org.lithereal.item.ModBoatItem;
+import org.lithereal.neoforge.world.block.entity.*;
 import org.lithereal.neoforge.world.item.ForgeItems;
 import org.lithereal.neoforge.world.item.ForgeWarHammerItem;
 import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
-import org.lithereal.client.gui.screens.inventory.EtherCollectorMenu;
-import org.lithereal.client.gui.screens.inventory.FireCrucibleMenu;
-import org.lithereal.client.gui.screens.inventory.FreezingStationMenu;
-import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
 import org.lithereal.neoforge.world.item.infused.ForgeInfusedLitheriteArmorItem;
 
 import java.nio.file.Path;
@@ -71,6 +63,18 @@ public class LitherealExpectPlatformImpl {
 
     public static BlockEntityType<InfusedLitheriteBlockEntity> getInfusedLitheriteBlockEntity() {
         return ForgeBlockEntities.INFUSED_LITHERITE_BLOCK.get();
+    }
+
+    public static BlockEntityType<ForgeElectricCrucibleBlockEntity> getElectricCrucibleBlockEntity() {
+        return ForgeBlockEntities.ELECTRIC_CRUCIBLE.get();
+    }
+
+    public static ElectricCrucibleBlock getElectricCrucibleBlock() {
+        return ForgeBlocks.ELECTRIC_CRUCIBLE.get();
+    }
+
+    public static MenuType<ElectricCrucibleMenu> getElectricCrucibleMenu() {
+        return ForgeMenuTypes.ELECTRIC_CRUCIBLE_MENU.get();
     }
 
     public static BlockEntityType<ForgeFireCrucibleBlockEntity> getFireCrucibleBlockEntity() {

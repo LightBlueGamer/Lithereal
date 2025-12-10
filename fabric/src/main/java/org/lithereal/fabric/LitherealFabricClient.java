@@ -33,6 +33,7 @@ public class LitherealFabricClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, false));
         EntityRendererRegistry.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, true));
 
+        MenuScreens.register(FabricScreenHandlers.ELECTRIC_CRUCIBLE_SCREEN_HANDLER, ElectricCrucibleScreen::new);
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);
         MenuScreens.register(FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER, FreezingStationScreen::new);
         MenuScreens.register(FabricScreenHandlers.INFUSEMENT_CHAMBER_SCREEN_HANDLER, InfusementChamberScreen::new);

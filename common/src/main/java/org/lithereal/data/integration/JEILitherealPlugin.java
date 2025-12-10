@@ -1,4 +1,4 @@
-package org.lithereal.integration;
+package org.lithereal.data.integration;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -15,9 +15,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.data.integration.FireCrucibleRecipeCategory;
-import org.lithereal.data.integration.FreezingStationRecipeCategory;
-import org.lithereal.data.integration.InfusementChamberRecipeCategory;
+import org.lithereal.client.gui.screens.inventory.ElectricCrucibleScreen;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.item.ModArmorItems;
 import org.lithereal.data.recipes.FireCrucibleRecipe;
@@ -32,6 +30,7 @@ import org.lithereal.item.ModToolItems;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("removal")
 @JeiPlugin
 public class JEILitherealPlugin implements IModPlugin {
     public static RecipeType<FreezingStationRecipe> FREEZING_TYPE =
@@ -118,6 +117,7 @@ public class JEILitherealPlugin implements IModPlugin {
         registration.addRecipeClickArea(InfusementChamberScreen.class, 96, 34, 21, 15, INFUSING_TYPE);
         registration.addRecipeClickArea(FreezingStationScreen.class, 96, 34, 21, 15, FREEZING_TYPE);
         registration.addRecipeClickArea(FireCrucibleScreen.class, 81, 38, 13, 13, BURNING_TYPE);
+        registration.addRecipeClickArea(ElectricCrucibleScreen.class, 81, 38, 13, 13, BURNING_TYPE);
         IModPlugin.super.registerGuiHandlers(registration);
     }
 
@@ -126,6 +126,7 @@ public class JEILitherealPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(LitherealExpectPlatform.getInfusementChamberBlock()), INFUSING_TYPE);
         registration.addRecipeCatalyst(new ItemStack(LitherealExpectPlatform.getFreezingStationBlock()), FREEZING_TYPE);
         registration.addRecipeCatalyst(new ItemStack(LitherealExpectPlatform.getFireCrucibleBlock()), BURNING_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(LitherealExpectPlatform.getElectricCrucibleBlock()), BURNING_TYPE);
         IModPlugin.super.registerRecipeCatalysts(registration);
     }
 }

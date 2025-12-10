@@ -9,9 +9,6 @@ import org.lithereal.item.infused.*;
 
 import static org.lithereal.item.ModItems.*;
 import static org.lithereal.item.ability.Ability.*;
-import static org.lithereal.item.ability.Ability.ENHANCED;
-import static org.lithereal.item.ability.Ability.FROZEN;
-import static org.lithereal.item.ability.Ability.WITHERING;
 
 public class ModToolItems {
     public static final RegistrySupplier<Item> LITHERITE_SWORD = ITEMS.register("litherite_sword", () ->

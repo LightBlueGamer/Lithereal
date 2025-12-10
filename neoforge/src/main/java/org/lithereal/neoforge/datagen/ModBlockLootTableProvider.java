@@ -17,6 +17,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.*;
+import org.lithereal.neoforge.world.block.ForgeBlocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        dropSelf(ForgeBlocks.ELECTRIC_CRUCIBLE.get());
+
         dropSelf(ModTreeBlocks.PHANTOM_OAK_PLANKS.get());
         dropPottedContents(ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get());
         dropSelf(ModTreeBlocks.PHANTOM_OAK_SAPLING.get());

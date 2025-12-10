@@ -17,6 +17,11 @@ public class ForgeBlockEntities {
                     BlockEntityType.Builder.of(InfusedLitheriteBlockEntity::new,
                             ForgeBlocks.INFUSED_LITHERITE_BLOCK.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ForgeElectricCrucibleBlockEntity>> ELECTRIC_CRUCIBLE =
+            BLOCK_ENTITIES.register("electric_crucible", () ->
+                    BlockEntityType.Builder.of(ForgeElectricCrucibleBlockEntity::new,
+                            ForgeBlocks.ELECTRIC_CRUCIBLE.get()).build(null));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ForgeFireCrucibleBlockEntity>> FIRE_CRUCIBLE =
             BLOCK_ENTITIES.register("fire_crucible", () ->
                     BlockEntityType.Builder.of(ForgeFireCrucibleBlockEntity::new,

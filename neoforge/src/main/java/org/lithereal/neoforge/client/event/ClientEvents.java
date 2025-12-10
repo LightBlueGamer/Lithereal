@@ -14,6 +14,7 @@ import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.EtherealCoreSpecialEffects;
+import org.lithereal.client.gui.screens.inventory.ElectricCrucibleScreen;
 import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.particle.StandardBiomeProvider;
@@ -51,6 +52,7 @@ public class ClientEvents {
         }
         @SubscribeEvent
         public static void onRegisterMenu(RegisterMenuScreensEvent event) {
+            event.register(ForgeMenuTypes.ELECTRIC_CRUCIBLE_MENU.get(), ElectricCrucibleScreen::new);
             event.register(ForgeMenuTypes.FIRE_CRUCIBLE_MENU.get(), FireCrucibleScreen::new);
             event.register(ForgeMenuTypes.FREEZING_STATION_MENU.get(), FreezingStationScreen::new);
             event.register(ForgeMenuTypes.INFUSEMENT_CHAMBER_MENU.get(), InfusementChamberScreen::new);

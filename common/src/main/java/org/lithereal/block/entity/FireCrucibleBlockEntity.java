@@ -182,10 +182,10 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
                 pEntity.maxFuel = 75;
                 pEntity.heatState = HeatState.LIT;
             } else if (hasSolidFuel) {
-                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(pEntity.getItem(1).getItem(), 0);
+                int fuel = AbstractFurnaceBlockEntity.getFuel().getOrDefault(pEntity.getItem(3).getItem(), 0);
                 pEntity.maxFuel = fuel;
                 pEntity.fuelLevel = fuel;
-                pEntity.removeItem(1, 1);
+                pEntity.removeItem(3, 1);
                 pEntity.heatState = HeatState.LIT;
             } else {
                 pEntity.maxFuel = 0;
@@ -225,7 +225,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         outputItem.setCount(pEntity.getItem(2).getCount() + outputItem.getCount());
 
         if (crucibleRecipe.isPresent() && crucibleRecipe.get().value().bucket().isPresent())
-            pEntity.removeItem(3, 1);
+            pEntity.removeItem(1, 1);
 
         if(hasRecipe(pEntity) && !outputItem.isEmpty()) craftItem(pEntity, outputItem);
     }
@@ -263,7 +263,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     }
 
     protected static boolean hasSolidFuel(FireCrucibleBlockEntity entity) {
-        ItemStack item = entity.getItem(1);
+        ItemStack item = entity.getItem(3);
         int burnTime = AbstractFurnaceBlockEntity.getFuel().getOrDefault(item.getItem(), 0);
         return burnTime > 0;
     }

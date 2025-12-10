@@ -69,6 +69,18 @@ public class LitherealExpectPlatformImpl {
         return FabricBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY;
     }
 
+    public static BlockEntityType<FabricElectricCrucibleBlockEntity> getElectricCrucibleBlockEntity() {
+        return FabricBlockEntities.ELECTRIC_CRUCIBLE_BLOCK_ENTITY;
+    }
+
+    public static ElectricCrucibleBlock getElectricCrucibleBlock() {
+        return (ElectricCrucibleBlock) FabricBlocks.ELECTRIC_CRUCIBLE_BLOCK;
+    }
+
+    public static MenuType<FabricElectricCrucibleMenu> getElectricCrucibleMenu() {
+        return FabricScreenHandlers.ELECTRIC_CRUCIBLE_SCREEN_HANDLER;
+    }
+
     public static BlockEntityType<FabricFireCrucibleBlockEntity> getFireCrucibleBlockEntity() {
         return FabricBlockEntities.FIRE_CRUCIBLE_BLOCK_ENTITY;
     }

@@ -15,6 +15,11 @@ public class FabricBlockEntities {
                     BlockEntityType.Builder.of(InfusedLitheriteBlockEntity::new,
                             FabricBlocks.INFUSED_LITHERITE_BLOCK).build());
 
+    public static final BlockEntityType<FabricElectricCrucibleBlockEntity> ELECTRIC_CRUCIBLE_BLOCK_ENTITY =
+            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "electric_crucible_block_entity"),
+                    BlockEntityType.Builder.of(FabricElectricCrucibleBlockEntity::new,
+                            FabricBlocks.ELECTRIC_CRUCIBLE_BLOCK).build());
+
     public static final BlockEntityType<FabricFireCrucibleBlockEntity> FIRE_CRUCIBLE_BLOCK_ENTITY =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "fire_crucible_block_entity"),
                     BlockEntityType.Builder.of(FabricFireCrucibleBlockEntity::new,

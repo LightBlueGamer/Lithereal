@@ -6,15 +6,15 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
+import org.lithereal.neoforge.world.block.ForgeBlocks;
 import org.lithereal.tags.ModTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -50,6 +50,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ForgeBlocks.ELECTRIC_CRUCIBLE.get(), 1)
+                .define('S', ModRawMaterialItems.AURELITE_DUST.get())
+                .define('B', ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get())
+                .define('C', ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get())
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('#', Tags.Items.STORAGE_BLOCKS_IRON)
+                .pattern("ISI")
+                .pattern("IBI")
+                .pattern("#C#")
+                .unlockedBy("has_charged_litherite_crystal", has(ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get()))
+                .save(recipeOutput);
+
         generateRecipes(recipeOutput, PAILITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, POLISHED_PAILITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, PHANTOM_OAK_PLANKS, FeatureFlagSet.of(FeatureFlags.VANILLA));

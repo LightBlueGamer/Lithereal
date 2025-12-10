@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.EventHooks;
 import org.lithereal.item.LitheriteItem;
-import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
 
 import java.util.Random;

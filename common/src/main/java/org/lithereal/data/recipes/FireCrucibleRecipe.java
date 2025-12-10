@@ -40,7 +40,7 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
     }
 
     private boolean hasBucket(ContainerRecipeInput container) {
-        return bucket.map(ingredient -> ingredient.test(container.getItem(3)) && container.getItem(3).getCount() >= 1).orElse(container.getItem(3).isEmpty());
+        return bucket.map(ingredient -> ingredient.test(container.getItem(1)) && container.getItem(1).getCount() >= 1).orElse(container.getItem(1).isEmpty());
     }
 
     private boolean hasCrystal(ContainerRecipeInput container) {

@@ -27,7 +27,6 @@ import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.FreezingStationRecipe;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.util.CommonUtils;
-import org.lithereal.block.ModBlocks;
 
 import java.util.Optional;
 

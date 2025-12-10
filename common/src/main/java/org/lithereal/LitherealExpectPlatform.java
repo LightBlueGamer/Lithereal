@@ -58,6 +58,21 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
+    public static BlockEntityType<ElectricCrucibleBlockEntity> getElectricCrucibleBlockEntity() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static ElectricCrucibleBlock getElectricCrucibleBlock() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static MenuType<ElectricCrucibleMenu> getElectricCrucibleMenu() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static BlockEntityType<FireCrucibleBlockEntity> getFireCrucibleBlockEntity() {
         throw new AssertionError();
     }

@@ -23,6 +23,10 @@ public class ForgeBlocks {
             () -> new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
+    public static final DeferredHolder<Block, ForgeElectricCrucibleBlock> ELECTRIC_CRUCIBLE = registerBlock("electric_crucible",
+            () -> new ForgeElectricCrucibleBlock(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops().noOcclusion()));
+
     public static final DeferredHolder<Block, ForgeFireCrucibleBlock> FIRE_CRUCIBLE = registerBlock("fire_crucible",
             () -> new ForgeFireCrucibleBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().noOcclusion()));

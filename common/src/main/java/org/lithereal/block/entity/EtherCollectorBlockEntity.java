@@ -1,6 +1,7 @@
 package org.lithereal.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,18 +13,24 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.gui.screens.inventory.EtherCollectorMenu;
-import org.lithereal.util.EtherEnergyContainer;
+import org.lithereal.util.ether.EtherEnergyContainer;
+import org.lithereal.util.ether.IEnergyUserProvider;
 
-public class EtherCollectorBlockEntity extends BlockEntity implements MenuProvider, IEnergyContainerProvider {
+public class EtherCollectorBlockEntity extends BlockEntity implements MenuProvider, IEnergyUserProvider {
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 200;
 
-    private final EtherEnergyContainer ENERGY_CONTAINER = new EtherEnergyContainer(0, 5000, 20);
+    private final EtherEnergyContainer energyContainer = new EtherEnergyContainer(0, 5000, 20);
 
     @Override
-    public EtherEnergyContainer getEnergyContainer() {
-        return ENERGY_CONTAINER;
+    public EtherEnergyContainer getEnergyUser() {
+        return energyContainer;
+    }
+
+    @Override
+    public TransferMode getTransferModeForDirection(Direction direction) {
+        return TransferMode.BOTH;
     }
 
     public EtherCollectorBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -35,8 +42,8 @@ public class EtherCollectorBlockEntity extends BlockEntity implements MenuProvid
                 return switch (index) {
                     case 0 -> EtherCollectorBlockEntity.this.progress;
                     case 1 -> EtherCollectorBlockEntity.this.maxProgress;
-                    case 2 -> EtherCollectorBlockEntity.this.ENERGY_CONTAINER.energy;
-                    case 3 -> EtherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy;
+                    case 2 -> EtherCollectorBlockEntity.this.energyContainer.energy;
+                    case 3 -> EtherCollectorBlockEntity.this.energyContainer.maxEnergy;
                     default -> 0;
                 };
             }
@@ -46,8 +53,8 @@ public class EtherCollectorBlockEntity extends BlockEntity implements MenuProvid
                 switch (index) {
                     case 0 -> EtherCollectorBlockEntity.this.progress = value;
                     case 1 -> EtherCollectorBlockEntity.this.maxProgress = value;
-                    case 2 -> EtherCollectorBlockEntity.this.ENERGY_CONTAINER.energy = value;
-                    case 3 -> EtherCollectorBlockEntity.this.ENERGY_CONTAINER.maxEnergy = value;
+                    case 2 -> EtherCollectorBlockEntity.this.energyContainer.energy = value;
+                    case 3 -> EtherCollectorBlockEntity.this.energyContainer.maxEnergy = value;
                 }
             }
 
@@ -60,7 +67,7 @@ public class EtherCollectorBlockEntity extends BlockEntity implements MenuProvid
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Ether Collector" + this.ENERGY_CONTAINER.energy + "/" + this.ENERGY_CONTAINER.maxEnergy);
+        return Component.literal("Ether Collector" + this.energyContainer.energy + "/" + this.energyContainer.maxEnergy);
     }
 
     @Nullable

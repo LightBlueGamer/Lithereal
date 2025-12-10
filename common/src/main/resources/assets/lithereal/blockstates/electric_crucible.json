@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
+    "heat_state=unlit": {
       "model": "lithereal:block/electric_crucible"
+    },
+    "heat_state=lit": {
+      "model": "lithereal:block/electric_crucible_on"
+    },
+    "heat_state=blue_lit": {
+      "model": "lithereal:block/electric_crucible_on"
     }
   }
 }

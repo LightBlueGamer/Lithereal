@@ -18,6 +18,9 @@ public class FabricBlocks {
             new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops()));
 
+    public static final Block ELECTRIC_CRUCIBLE_BLOCK = registerBlock("electric_crucible",
+            new FabricElectricCrucibleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
+
     public static final Block FIRE_CRUCIBLE_BLOCK = registerBlock("fire_crucible",
             new FabricFireCrucibleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
 

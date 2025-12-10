@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "bottom": "lithereal:block/electric_crucible_bottom",
-    "side": "lithereal:block/electric_crucible_side_uncharged",
+    "side": "lithereal:block/electric_crucible_side_charged",
     "top": "lithereal:block/electric_crucible_top"
   }
 }

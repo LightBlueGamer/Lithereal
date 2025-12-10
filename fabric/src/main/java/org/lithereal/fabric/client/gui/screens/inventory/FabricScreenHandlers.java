@@ -24,6 +24,10 @@ public class FabricScreenHandlers {
         }
     };
 
+    public static final MenuType<FabricElectricCrucibleMenu> ELECTRIC_CRUCIBLE_SCREEN_HANDLER =
+            Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "electric_crucible"),
+                    new ExtendedScreenHandlerType<>(FabricElectricCrucibleMenu::new, BLOCK_POS));
+
     public static final MenuType<FabricFireCrucibleMenu> FIRE_CRUCIBLE_SCREEN_HANDLER =
             Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "fire_crucible"),
                     new ExtendedScreenHandlerType<>(FabricFireCrucibleMenu::new, BLOCK_POS));

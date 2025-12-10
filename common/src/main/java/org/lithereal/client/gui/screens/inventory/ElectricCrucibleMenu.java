@@ -12,25 +12,25 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.block.entity.ElectricCrucibleBlockEntity;
 
-public class FireCrucibleMenu extends AbstractContainerMenu {
-    public FireCrucibleBlockEntity blockEntity;
+public class ElectricCrucibleMenu extends AbstractContainerMenu {
+    public ElectricCrucibleBlockEntity blockEntity;
     protected Level level;
     protected ContainerData data;
     private final Container inventory;
 
-    public FireCrucibleMenu(int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
+    public ElectricCrucibleMenu(int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
         this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public FireCrucibleMenu(int id, Inventory inv, BlockEntity entity) {
-        super(LitherealExpectPlatform.getFireCrucibleMenu(), id);
-        this.blockEntity = (FireCrucibleBlockEntity) entity;
+    public ElectricCrucibleMenu(int id, Inventory inv, BlockEntity entity) {
+        super(LitherealExpectPlatform.getElectricCrucibleMenu(), id);
+        this.blockEntity = (ElectricCrucibleBlockEntity) entity;
         this.data = blockEntity.getData();
         this.level = entity.getLevel();
 
-        checkContainerSize(inv, 4);
+        checkContainerSize(inv, 3);
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
@@ -42,7 +42,6 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(inventory, 0, 94, 57));
         this.addSlot(new Slot(inventory, 1, 66, 57));
         this.addSlot(new Slot(inventory, 2, 80, 13));
-        this.addSlot(new Slot(inventory, 3, 140, 13));
     }
 
     public boolean isCrafting() {
@@ -57,20 +56,16 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
-    public int getScaledProgressFuel() {
-        int progress = this.data.get(3);
-        int maxProgress = this.data.get(4);
-        int progressArrowSize = 34;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
-
-    public int getHeatLevel() {
-        return this.data.get(2);
+    public boolean isOn() {
+        return blockEntity.isOn();
     }
 
     public boolean hasBucket() {
         return !blockEntity.getItem(1).isEmpty();
+    }
+
+    public boolean hasEnergySourcesAttached() {
+        return blockEntity.getEnergyUser().getConnectionsThatCanProvideEnergy(blockEntity) > 0;
     }
     private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
@@ -115,7 +110,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, LitherealExpectPlatform.getFireCrucibleBlock());
+                player, LitherealExpectPlatform.getElectricCrucibleBlock());
     }
 
     protected void addPlayerInventory(Inventory playerInventory) {

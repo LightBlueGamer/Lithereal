@@ -19,7 +19,6 @@ import net.minecraft.world.item.alchemy.Potions;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
-import org.lithereal.integration.JEILitherealPlugin;
 import org.lithereal.item.ModRawMaterialItems;
 
 import java.lang.reflect.Field;
@@ -49,6 +48,7 @@ public class InfusementChamberRecipeCategory implements IRecipeCategory<Infuseme
         return Component.literal("Infusement Chamber");
     }
 
+    @SuppressWarnings("removal")
     @Override
     public IDrawable getBackground() {
         return this.background;

@@ -14,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.recipes.FreezingStationRecipe;
-import org.lithereal.integration.JEILitherealPlugin;
 
 public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingStationRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "freezing");
@@ -39,6 +38,7 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
         return Component.literal("Freezing Station");
     }
 
+    @SuppressWarnings("removal")
     @Override
     public IDrawable getBackground() {
         return this.background;

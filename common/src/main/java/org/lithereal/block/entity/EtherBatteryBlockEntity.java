@@ -1,6 +1,7 @@
 package org.lithereal.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,16 +13,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.gui.screens.inventory.EtherBatteryMenu;
-import org.lithereal.util.EtherEnergyContainer;
+import org.lithereal.util.ether.EtherEnergyContainer;
+import org.lithereal.util.ether.IEnergyUser;
+import org.lithereal.util.ether.IEnergyUserProvider;
 
-public class EtherBatteryBlockEntity extends BlockEntity implements MenuProvider, IEnergyContainerProvider {
+public class EtherBatteryBlockEntity extends BlockEntity implements MenuProvider, IEnergyUserProvider {
     protected final ContainerData data;
 
-    private final EtherEnergyContainer ENERGY_CONTAINER = new EtherEnergyContainer(0, 100000, 100);
+    private final EtherEnergyContainer energyContainer = new EtherEnergyContainer(0, 100000, 100);
 
     @Override
-    public EtherEnergyContainer getEnergyContainer() {
-        return ENERGY_CONTAINER;
+    public IEnergyUser getEnergyUser() {
+        return energyContainer;
+    }
+
+    @Override
+    public TransferMode getTransferModeForDirection(Direction direction) {
+        return TransferMode.BOTH;
     }
 
     public EtherBatteryBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -31,8 +39,8 @@ public class EtherBatteryBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 1 -> EtherBatteryBlockEntity.this.ENERGY_CONTAINER.energy;
-                    case 2 -> EtherBatteryBlockEntity.this.ENERGY_CONTAINER.maxEnergy;
+                    case 1 -> EtherBatteryBlockEntity.this.energyContainer.energy;
+                    case 2 -> EtherBatteryBlockEntity.this.energyContainer.maxEnergy;
                     default -> 0;
                 };
             }
@@ -40,8 +48,8 @@ public class EtherBatteryBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 1 -> EtherBatteryBlockEntity.this.ENERGY_CONTAINER.energy = value;
-                    case 2 -> EtherBatteryBlockEntity.this.ENERGY_CONTAINER.maxEnergy = value;
+                    case 1 -> EtherBatteryBlockEntity.this.energyContainer.energy = value;
+                    case 2 -> EtherBatteryBlockEntity.this.energyContainer.maxEnergy = value;
                 }
             }
 
@@ -54,7 +62,7 @@ public class EtherBatteryBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Ether Battery" + this.ENERGY_CONTAINER.energy + "/" + this.ENERGY_CONTAINER.maxEnergy);
+        return Component.literal("Ether Battery" + this.energyContainer.energy + "/" + this.energyContainer.maxEnergy);
     }
 
     @Nullable

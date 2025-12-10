@@ -11,12 +11,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.block.ModBlocks;
 import org.lithereal.data.recipes.FireCrucibleRecipe;
-import org.lithereal.integration.JEILitherealPlugin;
 
 public class FireCrucibleRecipeCategory implements IRecipeCategory<FireCrucibleRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "burning");
@@ -41,6 +38,7 @@ public class FireCrucibleRecipeCategory implements IRecipeCategory<FireCrucibleR
         return Component.literal("Fire Crucible");
     }
 
+    @SuppressWarnings("removal")
     @Override
     public IDrawable getBackground() {
         return this.background;

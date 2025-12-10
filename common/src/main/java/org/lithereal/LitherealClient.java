@@ -112,6 +112,7 @@ public class LitherealClient {
         List<ItemStack> litherite = new ArrayList<>();
         List<ItemStack> otherI = new ArrayList<>();
         List<ItemStack> otherB = new ArrayList<>(Arrays.asList(
+                LitherealExpectPlatform.getElectricCrucibleBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getFireCrucibleBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
                 LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()));
