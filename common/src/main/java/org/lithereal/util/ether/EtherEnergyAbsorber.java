@@ -57,12 +57,14 @@ public class EtherEnergyAbsorber implements IEnergyUser {
 
     @Override
     public void save(CompoundTag tag, HolderLookup.Provider provider) {
+        tag.putInt("absorb_rate", this.absorbRate);
         tag.putInt("remaining_energy", this.remainingEnergy);
         tag.putInt("old_energy", this.oldEnergy);
     }
 
     @Override
     public void load(CompoundTag energyUser, HolderLookup.Provider provider) {
+        this.absorbRate = energyUser.getInt("absorb_rate");
         this.remainingEnergy = energyUser.getInt("remaining_energy");
         this.oldEnergy = energyUser.getInt("old_energy");
     }

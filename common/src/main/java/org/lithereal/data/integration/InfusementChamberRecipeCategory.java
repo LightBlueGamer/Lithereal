@@ -48,7 +48,6 @@ public class InfusementChamberRecipeCategory implements IRecipeCategory<Infuseme
         return Component.literal("Infusement Chamber");
     }
 
-    @SuppressWarnings("removal")
     @Override
     public IDrawable getBackground() {
         return this.background;

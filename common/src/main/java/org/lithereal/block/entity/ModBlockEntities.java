@@ -18,6 +18,12 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(LitherealVaultBlockEntity::new,
                             ModBlocks.LITHEREAL_VAULT.get()).build(null));
 
+    public static final RegistrySupplier<BlockEntityType<InfiniteEtherSourceBlockEntity>> INFINITE_ETHER_GENERATOR =
+            BLOCK_ENTITIES.register("infinite_ether_generator", () ->
+                    BlockEntityType.Builder.of(InfiniteEtherSourceBlockEntity::new,
+                            ModBlocks.CREATIVE_ETHER_SOURCE.get(),
+                            ModBlocks.PASSIVE_ETHER_ABSORBER.get()).build(null));
+
     public static final RegistrySupplier<BlockEntityType<EtherealCorePortalBlockEntity>> ETHEREAL_CORE_PORTAL =
             BLOCK_ENTITIES.register("ethereal_core_portal", () ->
                     BlockEntityType.Builder.of(EtherealCorePortalBlockEntity::new,

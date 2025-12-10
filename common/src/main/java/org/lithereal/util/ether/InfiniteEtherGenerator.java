@@ -48,11 +48,11 @@ public class InfiniteEtherGenerator implements IEnergyUser {
 
     @Override
     public void save(CompoundTag tag, HolderLookup.Provider provider) {
-
+        tag.putInt("transfer_rate", transferRate);
     }
 
     @Override
     public void load(CompoundTag energyUser, HolderLookup.Provider provider) {
-
+        transferRate = energyUser.getInt("transfer_rate");
     }
 }

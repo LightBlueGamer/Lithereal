@@ -8,10 +8,7 @@ import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.lithereal.Lithereal;
-import org.lithereal.block.ModPhantomBlocks;
-import org.lithereal.block.ModStoneBlocks;
-import org.lithereal.block.ModTreeBlocks;
-import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.block.*;
 
 import static net.neoforged.neoforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
 
@@ -22,6 +19,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        blockWithItem(ModBlocks.CREATIVE_ETHER_SOURCE);
+        blockWithItem(ModBlocks.PASSIVE_ETHER_ABSORBER);
+
         blockWithItem(ModTreeBlocks.PHANTOM_OAK_PLANKS);
         plantWithItem(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), TintState.NOT_TINTED);
         logBlock((RotatedPillarBlock) ModTreeBlocks.PHANTOM_OAK_LOG.get());

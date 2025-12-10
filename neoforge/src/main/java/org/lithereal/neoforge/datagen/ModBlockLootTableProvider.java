@@ -31,6 +31,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        dropSelf(ModBlocks.CREATIVE_ETHER_SOURCE.get());
+        dropSelf(ModBlocks.PASSIVE_ETHER_ABSORBER.get());
         dropSelf(ForgeBlocks.ELECTRIC_CRUCIBLE.get());
 
         dropSelf(ModTreeBlocks.PHANTOM_OAK_PLANKS.get());

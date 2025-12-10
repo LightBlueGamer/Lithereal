@@ -53,12 +53,14 @@ public class EtherEnergyContainer implements IEnergyUser {
 
     @Override
     public void save(CompoundTag tag, HolderLookup.Provider provider) {
+        tag.putInt("transfer_rate", this.transferRate);
         tag.putInt("energy", this.energy);
         tag.putInt("max_energy", this.maxEnergy);
     }
 
     @Override
     public void load(CompoundTag energyUser, HolderLookup.Provider provider) {
+        this.transferRate = energyUser.getInt("transfer_rate");
         this.energy = energyUser.getInt("energy");
         this.maxEnergy = energyUser.getInt("max_energy");
     }

@@ -10,6 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import org.lithereal.block.ModBlocks;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
 import org.lithereal.item.ModItems;
@@ -50,7 +51,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ForgeBlocks.ELECTRIC_CRUCIBLE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.PASSIVE_ETHER_ABSORBER.get(), 1)
+                .define('C', ModRawMaterialItems.CHRYON_CRYSTAL.get())
+                .define('A', ModRawMaterialItems.ALLIAN_INGOT.get())
+                .define('N', ModRawMaterialItems.NERITH_INGOT.get())
+                .pattern("ACA")
+                .pattern("N N")
+                .pattern("ACA")
+                .unlockedBy("has_allian_ingot", has(ModRawMaterialItems.ALLIAN_INGOT.get()))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ForgeBlocks.ELECTRIC_CRUCIBLE.get(), 1)
                 .define('S', ModRawMaterialItems.AURELITE_DUST.get())
                 .define('B', ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get())
                 .define('C', ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get())

@@ -5,8 +5,10 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -15,6 +17,7 @@ import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.item.ModItems;
+import org.lithereal.tags.ModTags;
 import org.lithereal.util.CommonUtils;
 
 import java.util.function.Function;
@@ -50,6 +53,12 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> PURE_ETHEREAL_CRYSTAL_BLOCK = registerBlock("pure_ethereal_crystal_block",
             () -> new PureEtherealCrystalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.END_PORTAL_FRAME), ETHEREAL_CORE_PORTAL.get()));
+
+    public static final RegistrySupplier<Block> CREATIVE_ETHER_SOURCE = registerBlock("creative_ether_source",
+            () -> new InfiniteEtherSourceBlock(10000, (TagKey<Biome>) null, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+
+    public static final RegistrySupplier<Block> PASSIVE_ETHER_ABSORBER = registerBlock("passive_ether_absorber",
+            () -> new InfiniteEtherSourceBlock(20, ModTags.PROVIDES_ETHER, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     public static final RegistrySupplier<Block> ETHEREAL_DIRT = registerBlock("ethereal_dirt",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));

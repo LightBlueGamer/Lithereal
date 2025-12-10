@@ -8,7 +8,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -184,18 +183,6 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static WarHammerItem createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static TagKey<Block> getTier5Incorrect() {
-        // Await Conventional Tags
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static TagKey<Block> getTier6Incorrect() {
-        // Await Conventional Tags
         throw new AssertionError();
     }
 

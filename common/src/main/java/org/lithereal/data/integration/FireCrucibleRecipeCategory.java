@@ -38,7 +38,6 @@ public class FireCrucibleRecipeCategory implements IRecipeCategory<FireCrucibleR
         return Component.literal("Fire Crucible");
     }
 
-    @SuppressWarnings("removal")
     @Override
     public IDrawable getBackground() {
         return this.background;

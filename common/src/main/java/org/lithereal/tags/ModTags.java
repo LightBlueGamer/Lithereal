@@ -15,6 +15,7 @@ public class ModTags {
     public static <T> TagKey<T> create(String name, ResourceKey<? extends Registry<T>> registry) {
         return TagKey.create(registry, Lithereal.id(name));
     }
+    public static final TagKey<Biome> PROVIDES_ETHER = createBiomeTag("provides_ether");
     public static TagKey<Biome> createBiomeTag(String name) {
         return create(name, Registries.BIOME);
     }

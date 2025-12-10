@@ -45,7 +45,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     protected FireCrucibleBlockEntity.HeatState heatState = FireCrucibleBlockEntity.HeatState.UNLIT;
     protected boolean isOn = true;
 
-    private final EtherEnergyAbsorber energyAbsorber = new EtherEnergyAbsorber(15);
+    private final EtherEnergyAbsorber energyAbsorber = new EtherEnergyAbsorber(100);
 
     public ElectricCrucibleBlockEntity(BlockPos pos, BlockState state) {
         super(LitherealExpectPlatform.getElectricCrucibleBlockEntity(), pos, state);
@@ -107,6 +107,10 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new ElectricCrucibleMenu(i, inventory, this);
+    }
+
+    public void toggleOn() {
+        this.isOn = !this.isOn;
     }
 
     public boolean isOn() {

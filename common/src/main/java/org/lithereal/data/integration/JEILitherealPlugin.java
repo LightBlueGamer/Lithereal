@@ -2,7 +2,8 @@ package org.lithereal.data.integration;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,8 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.gui.screens.inventory.ElectricCrucibleScreen;
@@ -30,7 +33,6 @@ import org.lithereal.item.ModToolItems;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings("removal")
 @JeiPlugin
 public class JEILitherealPlugin implements IModPlugin {
     public static RecipeType<FreezingStationRecipe> FREEZING_TYPE =
@@ -43,7 +45,7 @@ public class JEILitherealPlugin implements IModPlugin {
             new RecipeType<>(InfusementChamberRecipeCategory.UID, InfusementChamberRecipe.class);
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "jei_compat");
     }
 
@@ -83,15 +85,30 @@ public class JEILitherealPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-        IIngredientSubtypeInterpreter<ItemStack> nbtInterpreter = (itemStack, uidContext) -> {
-            if (itemStack.has(DataComponents.POTION_CONTENTS)) {
-                PotionContents potionContents = itemStack.get(DataComponents.POTION_CONTENTS);
+        ISubtypeInterpreter<ItemStack> nbtInterpreter = new ISubtypeInterpreter<>() {
+            @Override
+            public @Nullable Object getSubtypeData(ItemStack ingredient, UidContext context) {
+                if (ingredient.has(DataComponents.POTION_CONTENTS)) {
+                    PotionContents potionContents = ingredient.get(DataComponents.POTION_CONTENTS);
 
-                if (potionContents != null && potionContents.hasEffects()) {
-                    return potionContents.getAllEffects().toString();
+                    if (potionContents != null && potionContents.hasEffects()) {
+                        return potionContents;
+                    }
                 }
+                return null;
             }
-            return IIngredientSubtypeInterpreter.NONE;
+
+            @Override
+            public String getLegacyStringSubtypeInfo(ItemStack ingredient, UidContext context) {
+                if (ingredient.has(DataComponents.POTION_CONTENTS)) {
+                    PotionContents potionContents = ingredient.get(DataComponents.POTION_CONTENTS);
+
+                    if (potionContents != null && potionContents.hasEffects()) {
+                        return potionContents.getAllEffects().toString();
+                    }
+                }
+                return "";
+            }
         };
 
         // Register the interpreter for all the items

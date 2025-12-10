@@ -20,7 +20,7 @@
       "org.lithereal.fabric.LitherealFabricClient"
     ],
     "jei_mod_plugin": [
-      "org.lithereal.integration.JEILitherealPlugin"
+      "org.lithereal.data.integration.JEILitherealPlugin"
     ],
     "terrablender": [
       "org.lithereal.fabric.data.worldgen.FabricTerrablender"

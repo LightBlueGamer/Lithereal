@@ -2,8 +2,6 @@ package org.lithereal.client.gui.screens.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -12,15 +10,6 @@ import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
 
 public class ElectricCrucibleScreen extends AbstractContainerScreen<ElectricCrucibleMenu> {
-    private static final ResourceLocation OFF_BUTTON =
-            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprites/electric_crucible/off_button.png");
-    private static final ResourceLocation ON_BUTTON =
-            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprites/electric_crucible/on_button.png");
-    private static final ResourceLocation OFF_BUTTON_HOVER =
-            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprites/electric_crucible/off_button_hover.png");
-    private static final ResourceLocation ON_BUTTON_HOVER =
-            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprites/electric_crucible/on_button_hover.png");
-    private static final WidgetSprites BUTTON_SPRITE = new WidgetSprites(OFF_BUTTON, ON_BUTTON, OFF_BUTTON_HOVER, ON_BUTTON_HOVER);
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/electric_crucible_gui.png");
     public ElectricCrucibleScreen(ElectricCrucibleMenu menu, Inventory inventory, Component component) {
@@ -30,11 +19,6 @@ public class ElectricCrucibleScreen extends AbstractContainerScreen<ElectricCruc
     @Override
     protected void init() {
         super.init();
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-        addRenderableWidget(new ImageButton(x + 35, y + 36, 18, 18, BUTTON_SPRITE, button -> {
-
-        }));
     }
 
     @Override

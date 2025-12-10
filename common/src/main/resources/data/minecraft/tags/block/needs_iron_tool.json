@@ -21,6 +21,8 @@
     "lithereal:etherstone_cyrum_ore",
     "lithereal:luminium_ore",
     "lithereal:deepslate_luminium_ore",
-    "lithereal:etherstone_luminium_ore"
+    "lithereal:etherstone_luminium_ore",
+    "lithereal:creative_ether_source",
+    "lithereal:passive_ether_absorber"
   ]
 }

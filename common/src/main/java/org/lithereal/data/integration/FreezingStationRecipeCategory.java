@@ -38,7 +38,6 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
         return Component.literal("Freezing Station");
     }
 
-    @SuppressWarnings("removal")
     @Override
     public IDrawable getBackground() {
         return this.background;

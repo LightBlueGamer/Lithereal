@@ -5,6 +5,10 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -16,14 +20,16 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.ElectricCrucibleBlockEntity;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
+import org.lithereal.item.ModToolItems;
 
 public abstract class ElectricCrucibleBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final EnumProperty<FireCrucibleBlockEntity.HeatState> HEAT_STATE = EnumProperty.create("heat_state", FireCrucibleBlockEntity.HeatState.class);
+    public static final EnumProperty<FireCrucibleBlockEntity.HeatState> HEAT_STATE = FireCrucibleBlock.HEAT_STATE;
 
     public ElectricCrucibleBlock(Properties properties) {
         super(properties.sound(SoundType.STONE));
@@ -75,6 +81,18 @@ public abstract class ElectricCrucibleBlock extends BaseEntityBlock {
                 level.addParticle(ParticleTypes.LARGE_SMOKE, d, e, f, 0.0, 0.0, 0.0);
             }
         }
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (player.getItemInHand(interactionHand).is(ModToolItems.LITHERITE_WRENCH)) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof ElectricCrucibleBlockEntity electricCrucibleBlockEntity) {
+                electricCrucibleBlockEntity.toggleOn();
+                return ItemInteractionResult.SUCCESS;
+            }
+        }
+        return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
     /* BLOCK ENTITY */
