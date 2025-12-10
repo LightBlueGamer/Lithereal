@@ -5,7 +5,6 @@ import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
-import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -67,7 +66,6 @@ public class ClientEvents {
         public static void entityRendererInit(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSED_LITHERITE_BLOCK.get(), InfusedLitheriteBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSEMENT_CHAMBER.get(), InfusementChamberBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(ModBlockEntities.ETHEREAL_CORE_PORTAL.get(), TheEndPortalRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SIGN.get(), SignRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
             event.registerEntityRenderer(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);

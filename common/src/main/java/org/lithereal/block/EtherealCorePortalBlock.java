@@ -17,6 +17,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Portal;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,10 +39,10 @@ public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
     public static final BlockPos SPAWN_POINT = new BlockPos(0, 250, 0);
     public static final ResourceKey<Level> ETHEREAL_CORE = ResourceKey.create(Registries.DIMENSION, Lithereal.id("ethereal_core"));
     public static final MapCodec<EtherealCorePortalBlock> CODEC = simpleCodec(EtherealCorePortalBlock::new);
-    protected static final VoxelShape SHAPE = Block.box(0.0F, 6.0F, 0.0F, 16.0F, 12.0F, 16.0F);
+    protected static final VoxelShape SHAPE = Block.box(0.0F, 7.0F, 0.0F, 16.0F, 9.0F, 16.0F);
 
     @Override
-    public @NotNull MapCodec<EtherealCorePortalBlock> codec() {
+    public @NotNull MapCodec<? extends EtherealCorePortalBlock> codec() {
         return CODEC;
     }
 
@@ -104,5 +105,10 @@ public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
     @Override
     protected boolean canBeReplaced(BlockState blockState, Fluid fluid) {
         return false;
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
     }
 }

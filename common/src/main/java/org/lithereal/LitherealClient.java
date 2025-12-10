@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
-import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,6 +27,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.lithereal.block.ModPhantomBlocks;
+import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.EtherealSoulProvider;
@@ -58,7 +59,6 @@ public class LitherealClient {
         EntityModelLayerRegistry.register(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBodyModel);
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
-        BlockEntityRendererRegistry.register(ModBlockEntities.ETHEREAL_CORE_PORTAL.get(), TheEndPortalRenderer::new);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.SIGN.get(), SignRenderer::new);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.LITHER_FIRE_FLAME.get(), FlameParticle.Provider::new);
@@ -85,8 +85,27 @@ public class LitherealClient {
         ColorHandlerRegistry.registerBlockColors(blockColor, LitherealExpectPlatform.getInfusedLitheriteBlock());
         ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> blockAndTintGetter != null && blockPos != null ? BiomeColors.getAverageGrassColor(blockAndTintGetter, blockPos) : 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
         ColorHandlerRegistry.registerItemColors((itemStack, i) -> 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
-        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(), ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(), ModPhantomBlocks.PHANTOM_ROSE.get());
-        RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get());
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(),
+                ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
+        RenderTypeRegistry.register(RenderType.cutout(), ModBlocks.LITHER_WALL_TORCH.get(),
+                ModBlocks.LITHER_TORCH.get(),
+                ModBlocks.LITHER_LANTERN.get(),
+                ModBlocks.LITHEREAL_VAULT.get(),
+                ModTreeBlocks.PHANTOM_OAK_DOOR.get(),
+                ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(),
+                ModTreeBlocks.PHANTOM_OAK_SAPLING.get(),
+                ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(),
+                ModVegetationBlocks.MALISHROOM.get(),
+                ModVegetationBlocks.POTTED_MALISHROOM.get(),
+                ModVegetationBlocks.FORTSHROOM.get(),
+                ModVegetationBlocks.POTTED_FORTSHROOM.get(),
+                ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(),
+                ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(),
+                ModPhantomBlocks.PHANTOM_ROSE.get(),
+                ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(),
+                ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(),
+                ModPhantomBlocks.POTTED_PHANTOM_ROSE.get());
+        RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ModBlocks.ETHEREAL_CORE_PORTAL.get(), ModBlocks.ETHEREAL_RIFT.get());
     }
 
     private static void registerItemsToTab() {

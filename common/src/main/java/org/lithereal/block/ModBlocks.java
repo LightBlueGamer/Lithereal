@@ -28,6 +28,9 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> ETHEREAL_CORE_PORTAL = registerBlock("ethereal_core_portal",
             () -> new EtherealCorePortalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.END_PORTAL)));
 
+    public static final RegistrySupplier<Block> ETHEREAL_RIFT = registerBlock("ethereal_rift",
+            () -> new EtherealRiftBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.END_PORTAL)));
+
     public static final RegistrySupplier<Block> IMPURE_ETHEREAL_CRYSTAL = registerBlock("impure_ethereal_crystal",
             () -> new ImpureEtherealCrystalBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_BLUE).sound(SoundType.AMETHYST_CLUSTER).strength(5, 8)));
 

@@ -23,6 +23,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(EtherealCorePortalBlockEntity::new,
                             ModBlocks.ETHEREAL_CORE_PORTAL.get()).build(null));
 
+    public static final RegistrySupplier<BlockEntityType<EtherealRiftBlockEntity>> ETHEREAL_RIFT =
+            BLOCK_ENTITIES.register("ethereal_rift", () ->
+                    BlockEntityType.Builder.of(EtherealRiftBlockEntity::new,
+                            ModBlocks.ETHEREAL_RIFT.get()).build(null));
+
     public static final RegistrySupplier<BlockEntityType<? extends SignBlockEntity>> SIGN =
             BLOCK_ENTITIES.register(
                     "sign",

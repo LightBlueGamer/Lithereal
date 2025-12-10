@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "lithereal:block/ethereal_rift_vertical",
+      "y": 90
+    },
+    "axis=y": {
+      "model": "lithereal:block/ethereal_rift_horizontal"
+    },
+    "axis=z": {
+      "model": "lithereal:block/ethereal_rift_vertical"
+    }
+  }
+}
