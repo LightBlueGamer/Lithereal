@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "tag": "c:storage_blocks/iron"
+    },
+    "B": {
+      "item": "lithereal:burning_litherite_crystal"
+    },
+    "C": {
+      "item": "lithereal:charged_litherite_crystal"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "S": {
+      "item": "lithereal:aurelite_dust"
+    }
+  },
+  "pattern": [
+    "ISI",
+    "IBI",
+    "#C#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lithereal:electric_crucible"
+  }
+}
