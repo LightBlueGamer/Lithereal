@@ -1,7 +1,6 @@
 package org.lithereal.block;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -12,7 +11,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -37,7 +35,6 @@ import org.lithereal.block.entity.ModBlockEntities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class EtherealRiftBlock extends EtherealCorePortalBlock {
     public static final MapCodec<EtherealRiftBlock> CODEC = simpleCodec(EtherealRiftBlock::new);
