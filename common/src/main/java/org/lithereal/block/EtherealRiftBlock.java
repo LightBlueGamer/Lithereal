@@ -264,23 +264,23 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
             }
         }
 
-        for (int horScale = -2; horScale < 3; horScale++) {
-            for (int yOff = -1; yOff < 4; yOff++) {
-                if (horScale == -1 || horScale == 2 || yOff == -1 || yOff == 3) {
-                    mutableDestPos.setWithOffset(nearestPos, horScale * posAxis.getStepX(), yOff, horScale * posAxis.getStepZ());
-                    level.setBlock(mutableDestPos, Blocks.OBSIDIAN.defaultBlockState(), 3);
-                }
-            }
-        }
-
-        BlockState air = Blocks.AIR.defaultBlockState();
-
-        for (int px = 0; px < 2; px++) {
-            for (int k = 0; k < 3; k++) {
-                mutableDestPos.setWithOffset(nearestPos, px * posAxis.getStepX(), k, px * posAxis.getStepZ());
-                level.setBlock(mutableDestPos, air, 18);
-            }
-        }
+//        for (int horScale = -2; horScale < 3; horScale++) {
+//            for (int yOff = -1; yOff < 4; yOff++) {
+//                if (horScale == -1 || horScale == 2 || yOff == -1 || yOff == 3) {
+//                    mutableDestPos.setWithOffset(nearestPos, horScale * posAxis.getStepX(), yOff, horScale * posAxis.getStepZ());
+//                    level.setBlock(mutableDestPos, Blocks.OBSIDIAN.defaultBlockState(), 3);
+//                }
+//            }
+//        }
+//
+//        BlockState air = Blocks.AIR.defaultBlockState();
+//
+//        for (int horScale = 0; horScale < 2; horScale++) {
+//            for (int yOff = 0; yOff < 3; yOff++) {
+//                mutableDestPos.setWithOffset(nearestPos, horScale * posAxis.getStepX(), yOff, horScale * posAxis.getStepZ());
+//                level.setBlock(mutableDestPos, air, 18);
+//            }
+//        }
 
         return nearestPos.immutable();
     }
