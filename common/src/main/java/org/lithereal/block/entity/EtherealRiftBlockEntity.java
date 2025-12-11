@@ -69,20 +69,14 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
         return this.saveCustomOnly(provider);
     }
 
-    public Vec3 getPortalPosition(ServerLevel serverLevel, BlockPos blockPos) {
+    public BlockPos getPortalPosition(ServerLevel serverLevel, BlockPos blockPos) {
         if (this.exitPortal == null) {
             BlockPos pos = findOrCreateValidTeleportPos(serverLevel, blockPos);
             pos = pos.above(10);
             this.setExitPosition(pos);
         }
 
-        BlockPos portalPos = findExitPosition(serverLevel, this.exitPortal);
-        return portalPos.getBottomCenter();
-    }
-
-    public static BlockPos findExitPosition(Level level, BlockPos blockPos) {
-        BlockPos blockPos2 = findTallestBlock(level, blockPos.offset(0, 2, 0), 5);
-        return blockPos2.above();
+        return this.exitPortal;
     }
 
     private static BlockPos findOrCreateValidTeleportPos(ServerLevel serverLevel, BlockPos blockPos) {
@@ -90,56 +84,31 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
         LevelChunk levelChunk = getChunk(serverLevel, vec3);
         BlockPos pos = findValidSpawnInChunk(levelChunk);
 
-        if (pos == null) {
-            BlockPos fallbackPos = BlockPos.containing(vec3.x + (double)0.5F, 75.0F, vec3.z + (double)0.5F);
-            for (BlockPos newPos : BlockPos.betweenClosed(fallbackPos.west().north(), fallbackPos.east().south()))
-                serverLevel.setBlock(newPos, ModBlocks.PURE_ETHEREAL_CRYSTAL_BLOCK.get().defaultBlockState(), 3);
-            pos = fallbackPos;
-        }
+        if (pos == null) pos = BlockPos.containing(vec3.x + (double)0.5F, 75.0F, vec3.z + (double)0.5F);
 
-        return findTallestBlock(serverLevel, pos, 16);
+        return pos;
     }
 
     private static Vec3 findExitPortalXZPosTentative(ServerLevel serverLevel, BlockPos blockPos) {
         Vec3 posAsVec = new Vec3(blockPos.getX(), 0.0F, blockPos.getZ());
-        Vec3 posCorner = posAsVec.normalize();
+        double yRot = serverLevel.random.nextDouble() * 2 * Math.PI;
+        Vec3 posCorner = new Vec3(-Math.sin(yRot), 0, Math.cos(yRot));
         Vec3 pos = posCorner.scale(96);
 
-        int cntA = 16;
+        int cntA = 8;
         while (!isChunkEmpty(serverLevel, pos) && cntA-- > 0) {
-            pos = pos.add(posCorner.scale(-16));
+            pos = pos.add(posCorner.scale(16));
         }
 
-        int cntB = 16;
+        int cntB = 8;
         while (isChunkEmpty(serverLevel, pos) && cntB-- > 0) {
             pos = pos.add(posCorner.scale(16));
         }
-        return pos.add(posAsVec.scale(-1));
+        return pos.add(posAsVec);
     }
 
     private static boolean isChunkEmpty(ServerLevel serverLevel, Vec3 vec3) {
         return getChunk(serverLevel, vec3).getHighestFilledSectionIndex() == -1;
-    }
-
-    private static BlockPos findTallestBlock(BlockGetter blockGetter, BlockPos blockPos, int i) {
-        BlockPos blockPos2 = null;
-
-        for(int j = -i; j <= i; ++j) {
-            for(int k = -i; k <= i; ++k) {
-                if (j != 0 || k != 0) {
-                    for(int l = blockGetter.getMaxBuildHeight() - 1; l > (blockPos2 == null ? blockGetter.getMinBuildHeight() : blockPos2.getY()); --l) {
-                        BlockPos blockPos3 = new BlockPos(blockPos.getX() + j, l, blockPos.getZ() + k);
-                        BlockState blockState = blockGetter.getBlockState(blockPos3);
-                        if (blockState.isCollisionShapeFullBlock(blockGetter, blockPos3) && !blockState.is(Blocks.BEDROCK)) {
-                            blockPos2 = blockPos3;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        return blockPos2 == null ? blockPos : blockPos2;
     }
 
     private static LevelChunk getChunk(Level level, Vec3 vec3) {

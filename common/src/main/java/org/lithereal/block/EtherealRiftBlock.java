@@ -83,18 +83,23 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
                         WorldBorder worldBorder = toMoveTo.getWorldBorder();
                         double scale = DimensionType.getTeleportationScale(serverLevel.dimensionType(), toMoveTo.dimensionType());
                         BlockPos destBlockPos = worldBorder.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
-                        float newYRot = entity.getYRot();
-                        Vec3 destPos = Vec3.atLowerCornerOf(EtherealRiftBlockEntity.findExitPosition(toMoveTo, blockPos));
+                        BlockState blockState = serverLevel.getBlockState(blockPos);
+                        Direction.Axis axis = blockState.getValue(AXIS);
+                        Vec3 destPos = createSafePos(toMoveTo, destBlockPos, axis.isVertical() ? Direction.Axis.X : axis).getBottomCenter();
 
-                        return new DimensionTransition(toMoveTo, destPos, entity.getDeltaMovement(), newYRot, entity.getXRot(), DimensionTransition.PLAY_PORTAL_SOUND
+                        return new DimensionTransition(toMoveTo, destPos, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot(), DimensionTransition.PLAY_PORTAL_SOUND
                                 .then(DimensionTransition.PLACE_PORTAL_TICKET)
-                                .then(entity1 -> destroyAttachedBlocks(serverLevel, blockPos, serverLevel.getBlockState(blockPos))));
+                                .then(entity1 -> destroyAttachedBlocks(serverLevel, blockPos, blockState)));
                     }
                 }).orElseGet(() -> {
-                    Vec3 destPos = etherealRiftBlockEntity.getPortalPosition(serverLevel, blockPos);
+                    WorldBorder worldBorder = serverLevel.getWorldBorder();
+                    BlockPos destBlockPos = worldBorder.clampToBounds(etherealRiftBlockEntity.getPortalPosition(serverLevel, blockPos));
+                    BlockState blockState = serverLevel.getBlockState(blockPos);
+                    Direction.Axis axis = blockState.getValue(AXIS);
+                    Vec3 destPos = createSafePos(serverLevel, destBlockPos, axis.isVertical() ? Direction.Axis.X : axis).getBottomCenter();
                     return new DimensionTransition(serverLevel, destPos, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot(), DimensionTransition.PLAY_PORTAL_SOUND
                             .then(DimensionTransition.PLACE_PORTAL_TICKET)
-                            .then(entity1 -> destroyAttachedBlocks(serverLevel, blockPos, serverLevel.getBlockState(blockPos))));
+                            .then(entity1 -> destroyAttachedBlocks(serverLevel, blockPos, blockState)));
                 });
     }
 
@@ -250,7 +255,7 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
             nearestPos = worldBorder.clampToBounds(nearestPos);
             Direction clockwiseDir = posAxis.getClockWise();
 
-            for (int opposingHoriScale = -1; opposingHoriScale < 2; opposingHoriScale++) {
+            for (int opposingHoriScale = -2; opposingHoriScale < 3; opposingHoriScale++) {
                 for (int horiScale = -2; horiScale < 3; horiScale++) {
                     for (int vertOff = -1; vertOff < 4; vertOff++) {
                         BlockState blockState = vertOff < 0 ? ModBlocks.PURE_ETHEREAL_CRYSTAL_BLOCK.get().defaultBlockState() : Blocks.AIR.defaultBlockState();
@@ -260,24 +265,6 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
                 }
             }
         }
-
-//        for (int horScale = -2; horScale < 3; horScale++) {
-//            for (int yOff = -1; yOff < 4; yOff++) {
-//                if (horScale == -1 || horScale == 2 || yOff == -1 || yOff == 3) {
-//                    mutableDestPos.setWithOffset(nearestPos, horScale * posAxis.getStepX(), yOff, horScale * posAxis.getStepZ());
-//                    level.setBlock(mutableDestPos, Blocks.OBSIDIAN.defaultBlockState(), 3);
-//                }
-//            }
-//        }
-//
-//        BlockState air = Blocks.AIR.defaultBlockState();
-//
-//        for (int horScale = 0; horScale < 2; horScale++) {
-//            for (int yOff = 0; yOff < 3; yOff++) {
-//                mutableDestPos.setWithOffset(nearestPos, horScale * posAxis.getStepX(), yOff, horScale * posAxis.getStepZ());
-//                level.setBlock(mutableDestPos, air, 18);
-//            }
-//        }
 
         return nearestPos.immutable();
     }
