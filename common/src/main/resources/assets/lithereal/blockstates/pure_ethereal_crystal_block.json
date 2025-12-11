@@ -1,7 +1,34 @@
 {
   "variants": {
-    "": {
+    "corner=false,facing=east": {
+      "model": "lithereal:block/pure_ethereal_crystal_block",
+      "y": 270
+    },
+    "corner=false,facing=north": {
+      "model": "lithereal:block/pure_ethereal_crystal_block",
+      "y": 180
+    },
+    "corner=false,facing=south": {
       "model": "lithereal:block/pure_ethereal_crystal_block"
+    },
+    "corner=false,facing=west": {
+      "model": "lithereal:block/pure_ethereal_crystal_block",
+      "y": 90
+    },
+    "corner=true,facing=east": {
+      "model": "lithereal:block/pure_ethereal_crystal_block_corner",
+      "y": 270
+    },
+    "corner=true,facing=north": {
+      "model": "lithereal:block/pure_ethereal_crystal_block_corner",
+      "y": 180
+    },
+    "corner=true,facing=south": {
+      "model": "lithereal:block/pure_ethereal_crystal_block_corner"
+    },
+    "corner=true,facing=west": {
+      "model": "lithereal:block/pure_ethereal_crystal_block_corner",
+      "y": 90
     }
   }
 }

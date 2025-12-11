@@ -157,7 +157,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, ElectricCrucibleBlockEntity pEntity) {
         if (level.isClientSide()) {
             RandomSource randomSource = level.getRandom();
-            if (pEntity.isOn() && hasRecipe(pEntity) && randomSource.nextBoolean()) {
+            if (hasRecipe(pEntity) && randomSource.nextBoolean()) {
                 Vec3 center = Vec3.upFromBottomCenterOf(blockPos, 0.2);
                 double xDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.075;
                 double zDir = (randomSource.nextDouble() - randomSource.nextDouble()) * 0.075;
@@ -168,14 +168,16 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
 
         if (pEntity.isOn()) pEntity.energyAbsorber.tick(pEntity);
         if (pEntity.energyAbsorber.remainingEnergy == 0 || !pEntity.isOn()) {
-            pEntity.heatState = FireCrucibleBlockEntity.HeatState.UNLIT;
-            level.setBlockAndUpdate(blockPos, blockState.setValue(FireCrucibleBlock.HEAT_STATE, pEntity.heatState));
-        } else if (pEntity.energyAbsorber.oldEnergy == 0 && pEntity.isOn()) {
+            if (pEntity.heatState.isLit()) {
+                pEntity.heatState = FireCrucibleBlockEntity.HeatState.UNLIT;
+                level.setBlockAndUpdate(blockPos, blockState.setValue(FireCrucibleBlock.HEAT_STATE, pEntity.heatState));
+            }
+        } else if (!pEntity.heatState.isLit() && pEntity.isOn()) {
             pEntity.heatState = FireCrucibleBlockEntity.HeatState.BLUE_LIT;
             level.setBlockAndUpdate(blockPos, blockState.setValue(FireCrucibleBlock.HEAT_STATE, pEntity.heatState));
         }
 
-        if(pEntity.isOn() && hasRecipe(pEntity)) {
+        if (hasRecipe(pEntity)) {
             pEntity.progress += pEntity.heatState.heat;
             setChanged(level, blockPos, blockState);
 
@@ -218,6 +220,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     }
 
     protected static boolean hasRecipe(ElectricCrucibleBlockEntity entity) {
+        if (!entity.isOn() || !entity.heatState.isLit()) return false;
         Level level = entity.getLevel();
         boolean hasRecipe = false;
         SimpleContainer inventory = new SimpleContainer(entity.getContainerSize());
@@ -240,6 +243,11 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
         }
 
         return hasRecipe;
+    }
+
+    @Override
+    public <B extends BlockEntity & IEnergyUserProvider> B asBlockEntity() {
+        return (B) this;
     }
 
     @Override

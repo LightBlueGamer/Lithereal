@@ -17,7 +17,8 @@ public class EtherEnergyContainer implements IEnergyUser {
 
     @Override
     public boolean canProvideEnergy(BlockEntity pEntity) {
-        return energy > 0;
+        int requiredTransfer = ((IEnergyUserProvider)pEntity).requiredEnergy();
+        return this.energy >= requiredTransfer;
     }
 
     @Override

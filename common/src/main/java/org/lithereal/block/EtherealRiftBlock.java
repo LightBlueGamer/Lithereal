@@ -1,14 +1,18 @@
 package org.lithereal.block;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -17,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.border.WorldBorder;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -30,6 +37,7 @@ import org.lithereal.block.entity.ModBlockEntities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class EtherealRiftBlock extends EtherealCorePortalBlock {
     public static final MapCodec<EtherealRiftBlock> CODEC = simpleCodec(EtherealRiftBlock::new);
@@ -75,6 +83,9 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
                     if (toMoveTo == null) {
                         return null;
                     } else {
+                        WorldBorder worldBorder = toMoveTo.getWorldBorder();
+                        double scale = DimensionType.getTeleportationScale(serverLevel.dimensionType(), toMoveTo.dimensionType());
+                        BlockPos destBlockPos = worldBorder.clampToBounds(entity.getX() * scale, entity.getY(), entity.getZ() * scale);
                         float newYRot = entity.getYRot();
                         Vec3 destPos = Vec3.atLowerCornerOf(EtherealRiftBlockEntity.findExitPosition(toMoveTo, blockPos));
 
@@ -161,11 +172,140 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return this.defaultBlockState().setValue(AXIS, blockPlaceContext.getClickedFace().getAxis());
+        Direction face = blockPlaceContext.getClickedFace();
+        BlockState clickedOnState = blockPlaceContext.getLevel().getBlockState(blockPlaceContext.getClickedPos().relative(face.getOpposite()));
+        if (!blockPlaceContext.isSecondaryUseActive() && clickedOnState.is(this)) {
+            Direction.Axis axis = clickedOnState.getValue(AXIS);
+            boolean useClickedStateAxis = axis.isHorizontal() ? face.getAxis().isVertical() || face.getClockWise().getAxis() == axis : face.getAxis().isHorizontal();
+            if (useClickedStateAxis) return this.defaultBlockState().setValue(AXIS, axis);
+        }
+        return this.defaultBlockState().setValue(AXIS, face.getAxis());
     }
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
         return createTickerHelper(blockEntityType, ModBlockEntities.ETHEREAL_RIFT.get(), EtherealRiftBlockEntity::tick);
+    }
+
+    public static BlockPos createSafePos(ServerLevel level, BlockPos destBlockPos, Direction.Axis axis) {
+        Direction posAxis = Direction.get(Direction.AxisDirection.POSITIVE, axis);
+        double nearestDist = -1.0;
+        BlockPos nearestPos = null;
+        double fallbackDist = -1.0;
+        BlockPos fallbackPos = null;
+        WorldBorder worldBorder = level.getWorldBorder();
+        int effectiveBuildHeight = Math.min(level.getMaxBuildHeight(), level.getMinBuildHeight() + level.getLogicalHeight()) - 1;
+        BlockPos.MutableBlockPos mutableDestPos = destBlockPos.mutable();
+
+        for (BlockPos.MutableBlockPos curPos : BlockPos.spiralAround(destBlockPos, 16, Direction.EAST, Direction.SOUTH)) {
+            int height = Math.min(effectiveBuildHeight, level.getHeight(Heightmap.Types.MOTION_BLOCKING, curPos.getX(), curPos.getZ()));
+            if (worldBorder.isWithinBounds(curPos) && worldBorder.isWithinBounds(curPos.move(posAxis, 1))) {
+                curPos.move(posAxis.getOpposite(), 1);
+
+                for (int curHeight = height; curHeight >= level.getMinBuildHeight(); curHeight--) {
+                    curPos.setY(curHeight);
+                    if (canPortalReplaceBlock(level, curPos)) {
+                        int m = curHeight;
+
+                        while (curHeight > level.getMinBuildHeight() && canPortalReplaceBlock(level, curPos.move(Direction.DOWN))) {
+                            curHeight--;
+                        }
+
+                        if (curHeight + 4 <= effectiveBuildHeight) {
+                            int n = m - curHeight;
+                            if (n <= 0 || n >= 3) {
+                                curPos.setY(curHeight);
+                                if (canHostFrame(level, curPos, mutableDestPos, posAxis, 0)) {
+                                    double dist = destBlockPos.distSqr(curPos);
+                                    if (canHostFrame(level, curPos, mutableDestPos, posAxis, -1)
+                                            && canHostFrame(level, curPos, mutableDestPos, posAxis, 1)
+                                            && (nearestDist == -1.0 || nearestDist > dist)) {
+                                        nearestDist = dist;
+                                        nearestPos = curPos.immutable();
+                                    }
+
+                                    if (nearestDist == -1.0 && (fallbackDist == -1.0 || fallbackDist > dist)) {
+                                        fallbackDist = dist;
+                                        fallbackPos = curPos.immutable();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (nearestDist == -1.0 && fallbackDist != -1.0) {
+            nearestPos = fallbackPos;
+            nearestDist = fallbackDist;
+        }
+
+        if (nearestDist == -1.0) {
+            int height = Math.max(level.getMinBuildHeight() + 1, 70);
+            int maxHeight = effectiveBuildHeight - 9;
+            if (maxHeight < height) {
+                return destBlockPos;
+            }
+
+            nearestPos = new BlockPos(destBlockPos.getX() - posAxis.getStepX(), Mth.clamp(destBlockPos.getY(), height, maxHeight), destBlockPos.getZ() - posAxis.getStepZ())
+                    .immutable();
+            nearestPos = worldBorder.clampToBounds(nearestPos);
+            Direction clockwiseDir = posAxis.getClockWise();
+
+            for (int opposingHoriScale = -1; opposingHoriScale < 2; opposingHoriScale++) {
+                for (int horiScale = -2; horiScale < 3; horiScale++) {
+                    for (int vertOff = -1; vertOff < 4; vertOff++) {
+                        BlockState blockState = vertOff < 0 ? ModBlocks.PURE_ETHEREAL_CRYSTAL_BLOCK.get().defaultBlockState() : Blocks.AIR.defaultBlockState();
+                        mutableDestPos.setWithOffset(nearestPos, horiScale * posAxis.getStepX() + opposingHoriScale * clockwiseDir.getStepX(), vertOff, horiScale * posAxis.getStepZ() + opposingHoriScale * clockwiseDir.getStepZ());
+                        level.setBlockAndUpdate(mutableDestPos, blockState);
+                    }
+                }
+            }
+        }
+
+        for (int horScale = -2; horScale < 3; horScale++) {
+            for (int yOff = -1; yOff < 4; yOff++) {
+                if (horScale == -1 || horScale == 2 || yOff == -1 || yOff == 3) {
+                    mutableDestPos.setWithOffset(nearestPos, horScale * posAxis.getStepX(), yOff, horScale * posAxis.getStepZ());
+                    level.setBlock(mutableDestPos, Blocks.OBSIDIAN.defaultBlockState(), 3);
+                }
+            }
+        }
+
+        BlockState air = Blocks.AIR.defaultBlockState();
+
+        for (int px = 0; px < 2; px++) {
+            for (int k = 0; k < 3; k++) {
+                mutableDestPos.setWithOffset(nearestPos, px * posAxis.getStepX(), k, px * posAxis.getStepZ());
+                level.setBlock(mutableDestPos, air, 18);
+            }
+        }
+
+        return nearestPos.immutable();
+    }
+
+    private static boolean canPortalReplaceBlock(Level level, BlockPos.MutableBlockPos mutableBlockPos) {
+        BlockState blockState = level.getBlockState(mutableBlockPos);
+        return blockState.canBeReplaced() && blockState.getFluidState().isEmpty();
+    }
+
+    private static boolean canHostFrame(Level level, BlockPos pos, BlockPos.MutableBlockPos mutableBlockPos, Direction dir, int scale) {
+        Direction clockwise = dir.getClockWise();
+
+        for (int horiScale = -2; horiScale < 3; horiScale++) {
+            for (int vertOff = -1; vertOff < 4; vertOff++) {
+                mutableBlockPos.setWithOffset(pos, dir.getStepX() * horiScale + clockwise.getStepX() * scale, vertOff, dir.getStepZ() * horiScale + clockwise.getStepZ() * scale);
+                if (vertOff < 0 && !level.getBlockState(mutableBlockPos).isSolid()) {
+                    return false;
+                }
+
+                if (vertOff >= 0 && !canPortalReplaceBlock(level, mutableBlockPos)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

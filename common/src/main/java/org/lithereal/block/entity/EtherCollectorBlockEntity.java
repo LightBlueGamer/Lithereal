@@ -66,6 +66,11 @@ public class EtherCollectorBlockEntity extends BlockEntity implements MenuProvid
     }
 
     @Override
+    public <B extends BlockEntity & IEnergyUserProvider> B asBlockEntity() {
+        return (B) this;
+    }
+
+    @Override
     public Component getDisplayName() {
         return Component.literal("Ether Collector" + this.energyContainer.energy + "/" + this.energyContainer.maxEnergy);
     }

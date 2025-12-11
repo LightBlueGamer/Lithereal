@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "lithereal:block/pure_ethereal_crystal_block_corner",
+    "side": "lithereal:block/pure_ethereal_crystal_block"
+  }
+}

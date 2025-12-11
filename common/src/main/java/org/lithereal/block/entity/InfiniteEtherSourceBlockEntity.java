@@ -31,7 +31,7 @@ public class InfiniteEtherSourceBlockEntity extends BlockEntity implements IEner
     @Override
     public TransferMode getTransferModeForDirection(Direction direction) {
         if (!isOn()) return TransferMode.NONE;
-        return TransferMode.BOTH;
+        return TransferMode.OUTPUT_ONLY;
     }
 
     public InfiniteEtherSourceBlockEntity(BlockEntityType<? extends InfiniteEtherSourceBlockEntity> entityType, BlockPos blockPos, BlockState blockState, @Nullable TagKey<Biome> inBiomes, int transferRate) {
@@ -48,10 +48,15 @@ public class InfiniteEtherSourceBlockEntity extends BlockEntity implements IEner
         this(ModBlockEntities.INFINITE_ETHER_GENERATOR.get(), blockPos, blockState, null, 10000);
     }
 
+    @Override
+    public <B extends BlockEntity & IEnergyUserProvider> B asBlockEntity() {
+        return (B) this;
+    }
+
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, InfiniteEtherSourceBlockEntity pEntity) {
         if (level.isClientSide()) return;
 
-        pEntity.generator.tick(pEntity);
+        if (pEntity.isOn()) pEntity.generator.tick(pEntity);
     }
 
     @Override

@@ -16,33 +16,65 @@ import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.tags.ModTags;
 
 public class PureEtherealCrystalBlock extends Block {
+    public static final BooleanProperty CORNER = BooleanProperty.create("corner");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private BlockPattern portalShape;
     private final Block portalBlock;
     public PureEtherealCrystalBlock(Properties properties, Block portalBlock) {
         super(properties);
         this.portalBlock = portalBlock;
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CORNER, false));
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, CORNER);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
+        Direction dir = blockPlaceContext.getHorizontalDirection().getOpposite();
+        BlockState sideState = blockPlaceContext.getLevel().getBlockState(blockPlaceContext.getClickedPos().relative(dir));
+        BlockState resultState = this.defaultBlockState().setValue(FACING, dir);
+        if (sideState.is(this)) resultState = resultState.setValue(CORNER, true);
+        return resultState;
     }
     
     public BlockPattern getOrCreatePortalShape() {
         if (portalShape == null) {
-            portalShape = BlockPatternBuilder.start().aisle("?vvv?", ">???<", ">???<", ">???<", "?^^^?").where('?', BlockInWorld.hasState(BlockStatePredicate.ANY)).where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(FACING, Predicates.equalTo(Direction.SOUTH)))).where('>', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(FACING, Predicates.equalTo(Direction.WEST)))).where('v', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(FACING, Predicates.equalTo(Direction.NORTH)))).where('<', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(FACING, Predicates.equalTo(Direction.EAST)))).build();
+            portalShape = BlockPatternBuilder.start().aisle("nvvve", ">???<", ">???<", ">???<", "w^^^s")
+                    .where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
+                    .where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.SOUTH))
+                            .where(CORNER, Predicates.equalTo(Boolean.FALSE))))
+                    .where('>', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.WEST))
+                            .where(CORNER, Predicates.equalTo(Boolean.FALSE))))
+                    .where('v', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.NORTH))
+                            .where(CORNER, Predicates.equalTo(Boolean.FALSE))))
+                    .where('<', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.EAST))
+                            .where(CORNER, Predicates.equalTo(Boolean.FALSE))))
+                    .where('s', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.SOUTH))
+                            .where(CORNER, Predicates.equalTo(Boolean.TRUE))))
+                    .where('w', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.WEST))
+                            .where(CORNER, Predicates.equalTo(Boolean.TRUE))))
+                    .where('n', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.NORTH))
+                            .where(CORNER, Predicates.equalTo(Boolean.TRUE))))
+                    .where('e', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
+                            .where(FACING, Predicates.equalTo(Direction.EAST))
+                            .where(CORNER, Predicates.equalTo(Boolean.TRUE))))
+                    .build();
         }
 
         return portalShape;

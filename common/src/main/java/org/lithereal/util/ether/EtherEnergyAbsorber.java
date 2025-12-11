@@ -14,6 +14,7 @@ public class EtherEnergyAbsorber implements IEnergyUser {
     }
 
     public <B extends BlockEntity & IEnergyUserProvider> void tick(B pEntity) {
+        IEnergyUser.super.tick(pEntity);
         this.oldEnergy = this.remainingEnergy;
         if (this.remainingEnergy > 0) this.remainingEnergy--;
     }

@@ -16,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ElectricCrucibleBlock;
 import org.lithereal.block.entity.ElectricCrucibleBlockEntity;
 import org.lithereal.fabric.world.block.entity.FabricElectricCrucibleBlockEntity;
+import org.lithereal.item.ModToolItems;
 
 public class FabricElectricCrucibleBlock extends ElectricCrucibleBlock implements EntityBlock {
     public static final MapCodec<FabricElectricCrucibleBlock> CODEC = simpleCodec(FabricElectricCrucibleBlock::new);
@@ -62,6 +63,13 @@ public class FabricElectricCrucibleBlock extends ElectricCrucibleBlock implement
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (itemStack.is(ModToolItems.LITHERITE_WRENCH.get())) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof ElectricCrucibleBlockEntity electricCrucibleBlockEntity) {
+                electricCrucibleBlockEntity.toggleOn();
+                return ItemInteractionResult.SUCCESS;
+            }
+        }
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof ElectricCrucibleBlockEntity) {
             MenuProvider screenHandlerFactory = ((ElectricCrucibleBlockEntity) level.getBlockEntity(blockPos));
 

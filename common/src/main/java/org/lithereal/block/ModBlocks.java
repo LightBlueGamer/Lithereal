@@ -58,7 +58,7 @@ public class ModBlocks {
             () -> new InfiniteEtherSourceBlock(10000, (TagKey<Biome>) null, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     public static final RegistrySupplier<Block> PASSIVE_ETHER_ABSORBER = registerBlock("passive_ether_absorber",
-            () -> new InfiniteEtherSourceBlock(20, ModTags.PROVIDES_ETHER, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+            () -> new InfiniteEtherSourceBlock(10, ModTags.PROVIDES_ETHER, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
     public static final RegistrySupplier<Block> ETHEREAL_DIRT = registerBlock("ethereal_dirt",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));

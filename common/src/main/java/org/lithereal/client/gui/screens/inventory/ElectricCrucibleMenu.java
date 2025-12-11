@@ -65,14 +65,14 @@ public class ElectricCrucibleMenu extends AbstractContainerMenu {
     }
 
     public boolean hasEnergySourcesAttached() {
-        return blockEntity.getEnergyUser().getConnectionsThatCanProvideEnergy(blockEntity) > 0;
+        return blockEntity.getEnergyUser().getConnectionsThatCouldProvideEnergy(blockEntity) > 0;
     }
     private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = 36;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

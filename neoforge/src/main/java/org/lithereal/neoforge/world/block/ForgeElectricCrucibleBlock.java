@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.ElectricCrucibleBlock;
 import org.lithereal.block.entity.ElectricCrucibleBlockEntity;
+import org.lithereal.item.ModToolItems;
 import org.lithereal.neoforge.world.block.entity.ForgeElectricCrucibleBlockEntity;
 
 public class ForgeElectricCrucibleBlock extends ElectricCrucibleBlock {
@@ -60,6 +61,13 @@ public class ForgeElectricCrucibleBlock extends ElectricCrucibleBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (itemStack.is(ModToolItems.LITHERITE_WRENCH.get())) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof ElectricCrucibleBlockEntity electricCrucibleBlockEntity) {
+                electricCrucibleBlockEntity.toggleOn();
+                return ItemInteractionResult.SUCCESS;
+            }
+        }
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof ElectricCrucibleBlockEntity) {
             MenuProvider screenHandlerFactory = ((ForgeElectricCrucibleBlockEntity) level.getBlockEntity(blockPos));
 
