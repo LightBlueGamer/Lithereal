@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "lithereal:aurelite_dust"
+    },
+    "B": {
+      "item": "lithereal:burning_litherite_chestplate"
+    },
+    "C": {
+      "item": "lithereal:chryon_crystal"
+    }
+  },
+  "pattern": [
+    " A ",
+    "CBC",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "id": "lithereal:smoldering_litherite_chestplate"
+  }
+}

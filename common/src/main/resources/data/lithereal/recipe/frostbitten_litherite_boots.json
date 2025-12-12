@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "lithereal:aurelite_dust"
+    },
+    "B": {
+      "item": "lithereal:frozen_litherite_boots"
+    },
+    "C": {
+      "item": "lithereal:chryon_crystal"
+    }
+  },
+  "pattern": [
+    " A ",
+    "CBC",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "id": "lithereal:frostbitten_litherite_boots"
+  }
+}
