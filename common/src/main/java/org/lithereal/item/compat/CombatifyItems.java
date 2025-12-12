@@ -2,6 +2,7 @@ package org.lithereal.item.compat;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import org.lithereal.data.compat.CombatifyHooks;
 import org.lithereal.item.ModItems;
 
@@ -20,6 +21,14 @@ public class CombatifyItems {
             CombatifyHooks.generateAbilityLongsword(FROZEN, ModItems.LITHERITE, 4, new Item.Properties()));
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_KNIFE = ModItems.ITEMS.register("frozen_litherite_knife", () ->
             CombatifyHooks.generateAbilityKnife(FROZEN, ModItems.LITHERITE, new Item.Properties()));
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_LONGSWORD = ModItems.ITEMS.register("smoldering_litherite_longsword", () ->
+            CombatifyHooks.generateAbilityLongsword(SMOLDERING, ModItems.LITHERITE, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_KNIFE = ModItems.ITEMS.register("smoldering_litherite_knife", () ->
+            CombatifyHooks.generateAbilityKnife(SMOLDERING, ModItems.LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_LONGSWORD = ModItems.ITEMS.register("frostbitten_litherite_longsword", () ->
+            CombatifyHooks.generateAbilityLongsword(FROSTBITTEN, ModItems.LITHERITE, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_KNIFE = ModItems.ITEMS.register("frostbitten_litherite_knife", () ->
+            CombatifyHooks.generateAbilityKnife(FROSTBITTEN, ModItems.LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_LONGSWORD = ModItems.ITEMS.register("withering_litherite_longsword", () ->
             CombatifyHooks.generateAbilityLongsword(WITHERING, ModItems.LITHERITE, 4, new Item.Properties()));
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_KNIFE = ModItems.ITEMS.register("withering_litherite_knife", () ->
@@ -29,9 +38,9 @@ public class CombatifyItems {
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_KNIFE = ModItems.ITEMS.register("infused_litherite_knife", () ->
             CombatifyHooks.generateInfusedKnife(ModItems.LITHERITE, new Item.Properties()));
     public static final RegistrySupplier<Item> ODYSIUM_LONGSWORD = ModItems.ITEMS.register("odysium_longsword", () ->
-            CombatifyHooks.generateAbilityLongsword(ENHANCED, ModItems.ODYSIUM, 5, new Item.Properties().fireResistant()));
+            CombatifyHooks.generateAbilityLongsword(ENHANCED, ModItems.ODYSIUM, 5, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistrySupplier<Item> ODYSIUM_KNIFE = ModItems.ITEMS.register("odysium_knife", () ->
-            CombatifyHooks.generateAbilityKnife(ENHANCED, ModItems.ODYSIUM, new Item.Properties().fireResistant()));
+            CombatifyHooks.generateAbilityKnife(ENHANCED, ModItems.ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static void init() {
 

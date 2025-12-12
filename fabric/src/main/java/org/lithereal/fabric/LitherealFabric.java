@@ -2,10 +2,14 @@ package org.lithereal.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -13,6 +17,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModStoneBlocks;
+import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
 import org.lithereal.data.compat.ModWeaponType;
@@ -20,6 +25,8 @@ import org.lithereal.fabric.world.item.FabricItems;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
 import org.lithereal.fabric.data.worldgen.FabricWorldGeneration;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.ModRawMaterialItems;
+import org.lithereal.mob_effect.potion.ModPotions;
 
 import java.util.Set;
 
@@ -73,6 +80,17 @@ public class LitherealFabric implements ModInitializer {
         });
 
         Lithereal.init();
+
+        FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+            builder.registerRecipes(Ingredient.of(ModVegetationBlocks.MALISHROOM.get()), Lithereal.asHolder(ModPotions.UNLUCK));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.UNLUCK), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_UNLUCK));
+            builder.registerRecipes(Ingredient.of(ModVegetationBlocks.FORTSHROOM.get()), Potions.LUCK);
+            builder.registerPotionRecipe(Potions.LUCK, Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_LUCK));
+            builder.registerPotionRecipe(Potions.LUCK, Ingredient.of(Items.GLOWSTONE_DUST), Lithereal.asHolder(ModPotions.STRONG_LUCK));
+            builder.registerRecipes(Ingredient.of(ModRawMaterialItems.SATURNITE_CRYSTAL.get()), Lithereal.asHolder(ModPotions.STURDINESS));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_STURDINESS));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.GLOWSTONE_DUST), Lithereal.asHolder(ModPotions.STRONG_STURDINESS));
+        });
     }
 
     private static LootItem.Builder createEtherstoneEntry(int weight, int min, int max) {

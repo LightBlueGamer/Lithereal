@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.item.component.Enhanced;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -41,12 +43,16 @@ public class CommonUtils {
     }
 
     public static boolean hasCorrectArmorOn(Holder<ArmorMaterial> material, Player player) {
+        return hasCorrectArmorOn(Collections.singletonList(material), player);
+    }
+
+    public static boolean hasCorrectArmorOn(List<Holder<ArmorMaterial>> materials, Player player) {
         boolean bl = true;
         for (ItemStack armorStack : player.getInventory().armor) {
             if(!(armorStack.getItem() instanceof ArmorItem)) {
                 return false;
             }
-            bl &= ((ArmorItem)armorStack.getItem()).getMaterial() == material;
+            bl &= materials.contains(((ArmorItem)armorStack.getItem()).getMaterial());
         }
 
         return bl;

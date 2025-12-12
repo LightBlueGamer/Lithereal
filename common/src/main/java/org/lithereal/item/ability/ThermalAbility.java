@@ -1,0 +1,151 @@
+package org.lithereal.item.ability;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import org.lithereal.block.ModBlocks;
+import org.lithereal.client.KeyMapping;
+import org.lithereal.entity.ModDamageTypes;
+
+import java.util.List;
+
+import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
+import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
+
+public record ThermalAbility<I extends AbilityItem>(int extraDamage,
+                                                    float attackAbilityScalar,
+                                                    ArmorType armorType,
+                                                    List<Holder<ArmorMaterial>> armorMaterials,
+                                                    List<MobEffectInstance> effects) implements IAbility<I> {
+    @Override
+    public void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        float bonusDamage = extraDamage();
+        switch (armorType()) {
+            case FROSTBURN -> {
+                attacked.setTicksFrozen((int) (2000 * attackAbilityScalar()));
+                attacked.setRemainingFireTicks((int) (20 * attackAbilityScalar()));
+                attacked.invulnerableTime = 0;
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROSTBURN, attacker), bonusDamage);
+            }
+            case FREEZING -> {
+                if (attacked.isOnFire()) attacked.extinguishFire();
+                attacked.setTicksFrozen((int) (1000 * attackAbilityScalar()));
+                attacked.invulnerableTime = 0;
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROST, attacker), bonusDamage);
+            }
+            case BURNING -> {
+                if (attacked.isFreezing()) attacked.setTicksFrozen(0);
+                attacked.setRemainingFireTicks((int) (20000 * attackAbilityScalar()));
+                attacked.invulnerableTime = 0;
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.BURN, attacker), bonusDamage);
+            }
+        }
+    }
+
+    @Override
+    public void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+
+    }
+
+    @Override
+    public void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
+        ArmorType armorType = armorType();
+        if (armorType.emitsHeat && entity.isInPowderSnow) {
+            for (int i = 0; i < 3; i++) {
+                BlockPos blockPos = entity.blockPosition().above(i - 1);
+                if ((level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || entity instanceof Player) && entity.mayInteract(level, blockPos) && level.getBlockState(blockPos).is(Blocks.POWDER_SNOW))
+                    level.destroyBlock(blockPos, false);
+            }
+        }
+
+        if (entity.isOnFire() && !(entity instanceof Player)) {
+            entity.extinguishFire();
+            entity.setSharedFlagOnFire(false);
+        }
+
+        if (entity.isFreezing() && !(entity instanceof Player))
+            entity.setTicksFrozen(0);
+
+        if (entity instanceof Player player) {
+            if (player.hurtTime > 0 && !player.level().isClientSide) {
+                DamageSource source = player.getLastDamageSource();
+                if (source == null) return;
+                Entity attacker = source.getEntity();
+                if (attacker instanceof LivingEntity) {
+                    if (armorType.causesFreeze) attacker.setTicksFrozen(1000);
+                    if (armorType.causesIgnition) attacker.setRemainingFireTicks(100);
+                }
+            }
+            if(!level.isClientSide()) {
+                if(hasFullSuitOfArmorOn(player)) {
+                    if(hasCorrectArmorOn(armorMaterials(), player)) {
+                        effects.forEach(statusEffect -> addStatusEffect(player, statusEffect));
+                        if (player.isOnFire()) {
+                            player.extinguishFire();
+                            player.setSharedFlagOnFire(false);
+                        }
+                        if (player.isFreezing())
+                            player.setTicksFrozen(0);
+                        BlockPos belowPos = player.blockPosition().below();
+                        BlockState blockBelowState = level.getBlockState(belowPos);
+                        Block blockBelow = blockBelowState.getBlock();
+                        if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown()) {
+                            for (int x = -4; x <= 4; x++) {
+                                for (int z = -4; z <= 4; z++) {
+                                    BlockPos checkPos = belowPos.offset(x, 0, z);
+                                    if (level.getBlockState(checkPos).getBlock() == Blocks.WATER) {
+                                        level.setBlockAndUpdate(checkPos, Blocks.FROSTED_ICE.defaultBlockState());
+                                    }
+                                }
+                            }
+                        }
+                        if (armorType.providesScorch && KeyMapping.SCORCH_KEY.isDown()) {
+                            if (blockBelow == Blocks.NETHERRACK) level.setBlockAndUpdate(belowPos, ModBlocks.SCORCHED_NETHERRACK.get().defaultBlockState());
+                            else if (blockBelow == Blocks.CRIMSON_NYLIUM) level.setBlockAndUpdate(belowPos, ModBlocks.SCORCHED_CRIMSON_NYLIUM.get().defaultBlockState());
+                            else if (blockBelow == Blocks.WARPED_NYLIUM) level.setBlockAndUpdate(belowPos, ModBlocks.SCORCHED_WARPED_NYLIUM.get().defaultBlockState());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void addStatusEffect(Player player, MobEffectInstance mapStatusEffect) {
+        boolean hasPlayerEffect = player.hasEffect(mapStatusEffect.getEffect());
+
+        if (!hasPlayerEffect) {
+            player.addEffect(new MobEffectInstance(mapStatusEffect));
+        }
+    }
+
+    public enum ArmorType {
+        FROSTBURN(false, false, true, true, true),
+        FREEZING(false, true, false, true, false),
+        BURNING(true, false, true, false, true);
+        public final boolean emitsHeat;
+        public final boolean providesScorch;
+        public final boolean providesFreeze;
+        public final boolean causesIgnition;
+        public final boolean causesFreeze;
+
+        ArmorType(boolean emitsHeat, boolean providesScorch, boolean providesFreeze, boolean causesIgnition, boolean causesFreeze) {
+            this.emitsHeat = emitsHeat;
+            this.providesScorch = providesScorch;
+            this.providesFreeze = providesFreeze;
+            this.causesIgnition = causesIgnition;
+            this.causesFreeze = causesFreeze;
+        }
+    }
+}

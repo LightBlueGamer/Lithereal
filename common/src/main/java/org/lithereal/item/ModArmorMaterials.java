@@ -41,6 +41,20 @@ public class ModArmorMaterials {
         map.put(ArmorItem.Type.HELMET, 3);
     }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, () -> Ingredient.of(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get()));
 
+    public static final Holder<ArmorMaterial> SMOLDERING_LITHERITE = registerDiffLayers("smoldering_litherite", "burning_litherite", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 3);
+        map.put(ArmorItem.Type.LEGGINGS, 6);
+        map.put(ArmorItem.Type.CHESTPLATE, 8);
+        map.put(ArmorItem.Type.HELMET, 3);
+    }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, () -> Ingredient.of(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get()));
+
+    public static final Holder<ArmorMaterial> FROSTBITTEN_LITHERITE = registerDiffLayers("frostbitten_litherite", "frozen_litherite", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
+        map.put(ArmorItem.Type.BOOTS, 3);
+        map.put(ArmorItem.Type.LEGGINGS, 6);
+        map.put(ArmorItem.Type.CHESTPLATE, 8);
+        map.put(ArmorItem.Type.HELMET, 3);
+    }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, () -> Ingredient.of(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get()));
+
     public static final Holder<ArmorMaterial> INFUSED_LITHERITE = register("infused_litherite", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
         map.put(ArmorItem.Type.BOOTS, 3);
         map.put(ArmorItem.Type.LEGGINGS, 6);
@@ -64,6 +78,11 @@ public class ModArmorMaterials {
 
 
     public static final BiFunction<ArmorItem.Type, Integer, Integer> HEALTH_FUNCTION_FOR_TYPE = ArmorItem.Type::getDurability;
+
+    private static Holder<ArmorMaterial> registerDiffLayers(String name, String layerName, EnumMap<ArmorItem.Type, Integer> defenseBase, int enchantmentValue, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+        List<ArmorMaterial.Layer> layers = List.of(new ArmorMaterial.Layer(ResourceLocation.parse(layerName)));
+        return register(name, defenseBase, enchantmentValue, equipSound, toughness, knockbackResistance, repairIngredient, layers);
+    }
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> defenseBase, int enchantmentValue, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         List<ArmorMaterial.Layer> layers = List.of(new ArmorMaterial.Layer(ResourceLocation.parse(name)));

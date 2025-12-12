@@ -19,18 +19,18 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.util.CommonUtils;
 
-public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient crystal, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
+public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredient primary, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
     public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
-        return hasCooler(pContainer, 0) && hasCrystal(pContainer, 1);
+        return hasCooler(pContainer, 0) && hasPrimary(pContainer, 1);
     }
 
     private boolean hasCooler(ContainerRecipeInput container, int index) {
         return cooler.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
-    private boolean hasCrystal(ContainerRecipeInput container, int index) {
-        return crystal.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+    private boolean hasPrimary(ContainerRecipeInput container, int index) {
+        return primary.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
@@ -40,7 +40,7 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
-        return CommonUtils.of(cooler, crystal);
+        return CommonUtils.of(cooler, primary);
     }
 
     @Override
@@ -70,7 +70,7 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
         public static final MapCodec<FreezingStationRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
                                 Ingredient.CODEC.fieldOf("cooler").forGetter(freezingStationRecipe -> freezingStationRecipe.cooler),
-                                Ingredient.CODEC.fieldOf("crystal").forGetter(freezingStationRecipe -> freezingStationRecipe.crystal),
+                                Ingredient.CODEC.fieldOf("primary").forGetter(freezingStationRecipe -> freezingStationRecipe.primary),
                                 PrimitiveCodec.INT.fieldOf("max_progress").forGetter(freezingStationRecipe -> freezingStationRecipe.maxProgress))
                         .apply(instance, FreezingStationRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, FreezingStationRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
@@ -86,7 +86,7 @@ public record FreezingStationRecipe(ItemStack output, Ingredient cooler, Ingredi
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FreezingStationRecipe recipe) {
             Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.cooler);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.crystal);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.primary);
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
             ByteBufCodecs.VAR_INT.encode(buf, recipe.maxProgress);
         }

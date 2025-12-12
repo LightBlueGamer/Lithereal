@@ -20,10 +20,10 @@ import org.lithereal.Lithereal;
 
 import java.util.Optional;
 
-public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<Ingredient> bucket, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
+public record FireCrucibleRecipe(ItemStack output, Ingredient primary, Optional<Ingredient> secondary, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
     public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
-        return hasCrystal(pContainer) && hasBucket(pContainer);
+        return hasPrimary(pContainer) && hasSecondary(pContainer);
     }
 
     @Override
@@ -34,17 +34,17 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> ret = NonNullList.withSize(2, Ingredient.EMPTY);
-        ret.set(0, crystal);
-        bucket.ifPresent(ingredient -> ret.set(1, ingredient));
+        ret.set(0, primary);
+        secondary.ifPresent(ingredient -> ret.set(1, ingredient));
         return ret;
     }
 
-    private boolean hasBucket(ContainerRecipeInput container) {
-        return bucket.map(ingredient -> ingredient.test(container.getItem(1)) && container.getItem(1).getCount() >= 1).orElse(container.getItem(1).isEmpty());
+    private boolean hasSecondary(ContainerRecipeInput container) {
+        return secondary.map(ingredient -> ingredient.test(container.getItem(1)) && container.getItem(1).getCount() >= 1).orElse(container.getItem(1).isEmpty());
     }
 
-    private boolean hasCrystal(ContainerRecipeInput container) {
-        return crystal.test(container.getItem(0)) && container.getItem(0).getCount() >= 1;
+    private boolean hasPrimary(ContainerRecipeInput container) {
+        return primary.test(container.getItem(0)) && container.getItem(0).getCount() >= 1;
     }
 
     @Override
@@ -73,8 +73,8 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
                 ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "burning");
         public static final MapCodec<FireCrucibleRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                                Ingredient.CODEC.fieldOf("crystal").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.crystal),
-                                Ingredient.CODEC.optionalFieldOf("bucket").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.bucket),
+                                Ingredient.CODEC.fieldOf("primary").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.primary),
+                                Ingredient.CODEC.optionalFieldOf("secondary").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.secondary),
                                 PrimitiveCodec.INT.fieldOf("max_progress").forGetter(fireCrucibleRecipe -> fireCrucibleRecipe.maxProgress))
                         .apply(instance, FireCrucibleRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, FireCrucibleRecipe> STREAM_CODEC = StreamCodec.of(FireCrucibleRecipe.Serializer::toNetwork, FireCrucibleRecipe.Serializer::fromNetwork);
@@ -92,10 +92,10 @@ public record FireCrucibleRecipe(ItemStack output, Ingredient crystal, Optional<
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, FireCrucibleRecipe recipe) {
-            boolean hasBucket = recipe.bucket.isPresent();
+            boolean hasBucket = recipe.secondary.isPresent();
             buf.writeBoolean(hasBucket);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.crystal);
-            if (hasBucket) Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.bucket.get());
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.primary);
+            if (hasBucket) Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.secondary.get());
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
             ByteBufCodecs.VAR_INT.encode(buf, recipe.maxProgress);
         }

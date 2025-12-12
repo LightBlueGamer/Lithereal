@@ -3,7 +3,7 @@
   "cooler": {
     "item": "minecraft:ice"
   },
-  "crystal": {
+  "primary": {
     "item": "lithereal:litherite_crystal"
   },
   "max_progress": 200,

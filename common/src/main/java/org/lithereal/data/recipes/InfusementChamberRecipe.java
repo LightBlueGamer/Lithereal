@@ -69,7 +69,7 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
                 ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "infusing");
         public static final MapCodec<InfusementChamberRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                                Ingredient.CODEC.fieldOf("bucket").forGetter(infusementChamberRecipe -> infusementChamberRecipe.bucket),
+                                Ingredient.CODEC.fieldOf("secondary").forGetter(infusementChamberRecipe -> infusementChamberRecipe.bucket),
                                 Ingredient.CODEC.fieldOf("potion").forGetter(infusementChamberRecipe -> infusementChamberRecipe.potion),
                                 PrimitiveCodec.INT.fieldOf("max_progress").forGetter(infusementChamberRecipe -> infusementChamberRecipe.maxProgress))
                         .apply(instance, InfusementChamberRecipe::new));

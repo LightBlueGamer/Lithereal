@@ -1,6 +1,6 @@
 {
   "type": "lithereal:burning",
-  "crystal": {
+  "primary": {
     "item": "lithereal:litherite_crystal"
   },
   "max_progress": 200,

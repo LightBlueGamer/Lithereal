@@ -27,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
@@ -50,7 +51,7 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
 
     @Inject(method = "renderArmorPiece", at = @At(value = "HEAD"), cancellable = true)
     public void renderArmorPiece(PoseStack poseStack, MultiBufferSource multiBufferSource, T entity, EquipmentSlot equipmentSlot, int p_117123_, A p_117124_, CallbackInfo ci) {
-        if(entity instanceof Player player && hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(ModArmorMaterials.INFUSED_LITHERITE, player) && armorHasCorrectEffect(player))
+        if(entity instanceof Player player && hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE), player) && armorHasCorrectEffect(player))
             ci.cancel();
     }
     @Inject(method = "renderArmorPiece", at = @At(value = "HEAD"), cancellable = true)

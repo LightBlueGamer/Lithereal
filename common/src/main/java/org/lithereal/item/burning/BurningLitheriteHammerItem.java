@@ -27,8 +27,11 @@ import java.util.List;
 import java.util.Set;
 
 public class BurningLitheriteHammerItem extends AbilityHammerItem implements BurningItem {
+    public BurningLitheriteHammerItem(Ability ability, Tier tier, int i, float f, int weaponLevel, Properties properties) {
+        super(ability, tier, i, f, weaponLevel, properties);
+    }
     public BurningLitheriteHammerItem(Tier tier, int i, float f, int weaponLevel, Properties properties) {
-        super(Ability.BURNING, tier, i, f, weaponLevel, properties);
+        this(Ability.BURNING, tier, i, f, weaponLevel, properties);
     }
 
     @Override

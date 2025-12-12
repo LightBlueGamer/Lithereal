@@ -160,11 +160,13 @@ public class LitherealClient {
             if (descriptionId.startsWith("litherite") || descriptionId.startsWith("deepslate_litherite") || descriptionId.startsWith("etherstone_litherite")) return "1";
             else if (descriptionId.startsWith("burning_litherite")) return "2";
             else if (descriptionId.startsWith("frozen_litherite")) return "3";
-            else if (descriptionId.startsWith("withering_litherite")) return "4";
-            else if (descriptionId.startsWith("infused_litherite")) return "5";
-            else if (descriptionId.startsWith("charged_litherite")) return "6";
-            else if (descriptionId.startsWith("odysium")) return "7";
-            else if (descriptionId.startsWith("phantom")) return "8";
+            else if (descriptionId.startsWith("smoldering_litherite")) return "4";
+            else if (descriptionId.startsWith("frostbitten_litherite")) return "5";
+            else if (descriptionId.startsWith("withering_litherite")) return "6";
+            else if (descriptionId.startsWith("infused_litherite")) return "7";
+            else if (descriptionId.startsWith("charged_litherite")) return "8";
+            else if (descriptionId.startsWith("odysium")) return "9";
+            else if (descriptionId.contains("phantom")) return ":";
 
             return descriptionId;
         }));

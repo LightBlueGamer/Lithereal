@@ -179,7 +179,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
             outputItem.setCount(pEntity.getItem(2).getCount() + resultItem.getCount());
 
             pEntity.removeItem(0, recipe.get().value().cooler().getItems()[0].getCount());
-            pEntity.removeItem(1, recipe.get().value().crystal().getItems()[0].getCount());
+            pEntity.removeItem(1, recipe.get().value().primary().getItems()[0].getCount());
             pEntity.setItem(2, outputItem);
 
             pEntity.resetProgress();

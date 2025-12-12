@@ -1,9 +1,9 @@
 {
   "type": "lithereal:burning",
-  "crystal": {
+  "primary": {
     "item": "lithereal:litherite_crystal"
   },
-  "bucket": {
+  "secondary": {
     "item": "minecraft:bucket"
   },
   "max_progress": 200,

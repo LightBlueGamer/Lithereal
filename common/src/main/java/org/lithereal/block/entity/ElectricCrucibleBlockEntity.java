@@ -206,7 +206,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
         ItemStack outputItem = resultItem.copy();
         outputItem.setCount(pEntity.getItem(2).getCount() + outputItem.getCount());
 
-        if (crucibleRecipe.isPresent() && crucibleRecipe.get().value().bucket().isPresent())
+        if (crucibleRecipe.isPresent() && crucibleRecipe.get().value().secondary().isPresent())
             pEntity.removeItem(1, 1);
 
         if(hasRecipe(pEntity) && !outputItem.isEmpty()) craftItem(pEntity, outputItem);

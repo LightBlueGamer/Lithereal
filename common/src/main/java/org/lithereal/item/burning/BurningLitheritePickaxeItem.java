@@ -21,8 +21,11 @@ import org.lithereal.item.ability.Ability;
 import java.util.List;
 
 public class BurningLitheritePickaxeItem extends AbilityPickaxeItem implements BurningItem {
+    public BurningLitheritePickaxeItem(Ability ability, Tier tier, Properties properties) {
+        super(ability, tier, properties);
+    }
     public BurningLitheritePickaxeItem(Tier tier, Properties properties) {
-        super(Ability.BURNING, tier, properties);
+        this(Ability.BURNING, tier, properties);
     }
 
     @Override

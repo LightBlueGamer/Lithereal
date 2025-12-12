@@ -20,6 +20,12 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_SWORD = ITEMS.register("frozen_litherite_sword", () ->
             new AbilitySwordItem(FROZEN, LITHERITE, new Item.Properties()));
 
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_SWORD = ITEMS.register("smoldering_litherite_sword", () ->
+            new AbilitySwordItem(SMOLDERING, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_SWORD = ITEMS.register("frostbitten_litherite_sword", () ->
+            new AbilitySwordItem(FROSTBITTEN, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_SWORD = ITEMS.register("infused_litherite_sword", () ->
             new InfusedLitheriteSwordItem(LITHERITE, new Item.Properties()));
 
@@ -27,7 +33,7 @@ public class ModToolItems {
             new AbilitySwordItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_SWORD = ITEMS.register("odysium_sword", () ->
-            new AbilitySwordItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
+            new AbilitySwordItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe", () ->
             new PickaxeItem(LITHERITE, new Item.Properties().attributes(PickaxeItem.createAttributes(LITHERITE, 1, -2.8F))));
@@ -38,6 +44,12 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_PICKAXE = ITEMS.register("frozen_litherite_pickaxe", () ->
             new AbilityPickaxeItem(FROZEN, LITHERITE, new Item.Properties()));
 
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_PICKAXE = ITEMS.register("smoldering_litherite_pickaxe", () ->
+            new BurningLitheritePickaxeItem(SMOLDERING, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_PICKAXE = ITEMS.register("frostbitten_litherite_pickaxe", () ->
+            new AbilityPickaxeItem(FROSTBITTEN, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_PICKAXE = ITEMS.register("infused_litherite_pickaxe", () ->
             new InfusedLitheritePickaxeItem(LITHERITE, new Item.Properties()));
 
@@ -45,7 +57,7 @@ public class ModToolItems {
             new AbilityPickaxeItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_PICKAXE = ITEMS.register("odysium_pickaxe", () ->
-            new AbilityPickaxeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
+            new AbilityPickaxeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_AXE = ITEMS.register("litherite_axe", () ->
             new AxeItem(LITHERITE, new Item.Properties().attributes(AxeItem.createAttributes(LITHERITE, 5, -3))));
@@ -56,6 +68,12 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_AXE = ITEMS.register("frozen_litherite_axe", () ->
             new AbilityAxeItem(FROZEN, LITHERITE, new Item.Properties()));
 
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_AXE = ITEMS.register("smoldering_litherite_axe", () ->
+            new BurningLitheriteAxeItem(SMOLDERING, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_AXE = ITEMS.register("frostbitten_litherite_axe", () ->
+            new AbilityAxeItem(FROSTBITTEN, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_AXE = ITEMS.register("infused_litherite_axe", () ->
             new InfusedLitheriteAxeItem(LITHERITE, new Item.Properties()));
 
@@ -63,7 +81,7 @@ public class ModToolItems {
             new AbilityAxeItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_AXE = ITEMS.register("odysium_axe", () ->
-            new AbilityAxeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
+            new AbilityAxeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_SHOVEL = ITEMS.register("litherite_shovel", () ->
             new ShovelItem(LITHERITE, new Item.Properties().attributes(ShovelItem.createAttributes(LITHERITE, 1.5F, -3F))));
@@ -74,6 +92,12 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_SHOVEL = ITEMS.register("frozen_litherite_shovel", () ->
             new AbilityShovelItem(FROZEN, LITHERITE, new Item.Properties()));
 
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_SHOVEL = ITEMS.register("smoldering_litherite_shovel", () ->
+            new BurningLitheriteShovelItem(SMOLDERING, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_SHOVEL = ITEMS.register("frostbitten_litherite_shovel", () ->
+            new AbilityShovelItem(FROSTBITTEN, LITHERITE, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_SHOVEL = ITEMS.register("infused_litherite_shovel", () ->
             new InfusedLitheriteShovelItem(LITHERITE, new Item.Properties()));
 
@@ -81,7 +105,7 @@ public class ModToolItems {
             new AbilityShovelItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_SHOVEL = ITEMS.register("odysium_shovel", () ->
-            new AbilityShovelItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant()));
+            new AbilityShovelItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_HOE = ITEMS.register("litherite_hoe", () ->
             new HoeItem(LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
@@ -92,6 +116,12 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HOE = ITEMS.register("frozen_litherite_hoe", () ->
             new AbilityHoeItem(FROZEN, LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_HOE = ITEMS.register("smoldering_litherite_hoe", () ->
+            new BurningLitheriteHoeItem(SMOLDERING, LITHERITE, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(LITHERITE, -4, 0)).rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_HOE = ITEMS.register("frostbitten_litherite_hoe", () ->
+            new AbilityHoeItem(FROSTBITTEN, LITHERITE, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(LITHERITE, -4, 0)).rarity(Rarity.UNCOMMON)));
+
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HOE = ITEMS.register("infused_litherite_hoe", () ->
             new InfusedLitheriteHoeItem(LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
@@ -99,7 +129,7 @@ public class ModToolItems {
             new AbilityHoeItem(WITHERING, LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
     public static final RegistrySupplier<Item> ODYSIUM_HOE = ITEMS.register("odysium_hoe", () ->
-            new AbilityHoeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0))));
+            new AbilityHoeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0)).rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer", () ->
             new HammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties()));
@@ -110,6 +140,12 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer", () ->
             new AbilityHammerItem(FROZEN, LITHERITE, 5, -3F, 4, new Item.Properties()));
 
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_HAMMER = ITEMS.register("smoldering_litherite_hammer", () ->
+            new BurningLitheriteHammerItem(SMOLDERING, LITHERITE, 5, -3F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_HAMMER = ITEMS.register("frostbitten_litherite_hammer", () ->
+            new AbilityHammerItem(FROSTBITTEN, LITHERITE, 5, -3F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HAMMER = ITEMS.register("infused_litherite_hammer", () ->
             new InfusedLitheriteHammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties()));
 
@@ -117,7 +153,7 @@ public class ModToolItems {
             new AbilityHammerItem(WITHERING, LITHERITE, 5, -3.0F, 4, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ITEMS.register("odysium_hammer", () ->
-            new AbilityHammerItem(ENHANCED, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant()));
+            new AbilityHammerItem(ENHANCED, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
             LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.4F, new Item.Properties().durability(500).fireResistant().rarity(Rarity.EPIC)));

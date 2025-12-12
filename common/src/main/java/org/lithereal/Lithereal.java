@@ -1,5 +1,7 @@
 package org.lithereal;
 
+import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -49,5 +51,9 @@ public class Lithereal {
 
     public static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static <T> Holder<T> asHolder(RegistrySupplier<T> registrySupplier) {
+        return registrySupplier.getRegistrar().getHolder(registrySupplier.getId());
     }
 }

@@ -18,6 +18,7 @@ public class LitherealForge {
         ForgeMenuTypes.register(modEventBus);
 
         Events.ModBusEvents.register(modEventBus);
+        Events.ForgeBusEvents.register();
         ClientEvents.ClientModBusEvents.register(modEventBus);
         ClientEvents.ClientForgeBusEvents.register();
 

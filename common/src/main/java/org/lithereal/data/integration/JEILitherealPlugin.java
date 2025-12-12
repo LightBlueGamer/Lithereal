@@ -88,18 +88,12 @@ public class JEILitherealPlugin implements IModPlugin {
         ISubtypeInterpreter<ItemStack> nbtInterpreter = new ISubtypeInterpreter<>() {
             @Override
             public @Nullable Object getSubtypeData(ItemStack ingredient, UidContext context) {
-                if (ingredient.has(DataComponents.POTION_CONTENTS)) {
-                    PotionContents potionContents = ingredient.get(DataComponents.POTION_CONTENTS);
-
-                    if (potionContents != null && potionContents.hasEffects()) {
-                        return potionContents;
-                    }
-                }
+                if (ingredient.has(DataComponents.POTION_CONTENTS)) return ingredient.get(DataComponents.POTION_CONTENTS);
                 return null;
             }
 
             @Override
-            public String getLegacyStringSubtypeInfo(ItemStack ingredient, UidContext context) {
+            public @NotNull String getLegacyStringSubtypeInfo(ItemStack ingredient, UidContext context) {
                 if (ingredient.has(DataComponents.POTION_CONTENTS)) {
                     PotionContents potionContents = ingredient.get(DataComponents.POTION_CONTENTS);
 
