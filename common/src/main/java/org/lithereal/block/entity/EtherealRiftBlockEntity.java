@@ -10,25 +10,26 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.EtherealRiftBlock;
-import org.lithereal.block.ModBlocks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
     private @Nullable ResourceKey<Level> destination = null;
+    private long maxLifespan = 6000L;
     private long age;
     @Nullable
     private BlockPos exitPortal;
+    private List<BlockPos> attached = new ArrayList<>();
 
     public EtherealRiftBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -42,6 +43,7 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
         super.saveAdditional(compoundTag, provider);
         if (destination != null) compoundTag.putString("destination", destination.location().toString());
         compoundTag.putLong("age", this.age);
+        compoundTag.putLong("max_lifespan", this.maxLifespan);
         if (this.exitPortal != null) {
             compoundTag.put("exit_portal", NbtUtils.writeBlockPos(this.exitPortal));
         }
@@ -51,12 +53,15 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
         super.loadAdditional(compoundTag, provider);
         if (compoundTag.contains("destination")) this.destination = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(compoundTag.getString("destination")));
         this.age = compoundTag.getLong("age");
+        this.maxLifespan = Math.max(compoundTag.getLong("max_lifespan"), 1);
         NbtUtils.readBlockPos(compoundTag, "exit_portal").filter(Level::isInSpawnableBounds).ifPresent((blockPos) -> this.exitPortal = blockPos);
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, EtherealRiftBlockEntity etherealRiftBlockEntity) {
+        if (etherealRiftBlockEntity.attached.isEmpty())
+            EtherealRiftBlock.findAttached(level, blockPos, blockState, etherealRiftBlockEntity.attached);
         ++etherealRiftBlockEntity.age;
-        if (etherealRiftBlockEntity.age % 1200L == 0L && blockState.getBlock() instanceof EtherealRiftBlock) {
+        if (etherealRiftBlockEntity.age % etherealRiftBlockEntity.maxLifespan == 0L && blockState.getBlock() instanceof EtherealRiftBlock) {
             EtherealRiftBlock.destroyAttachedBlocks(level, blockPos, blockState);
         }
     }
@@ -140,16 +145,46 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
         return result;
     }
 
-    public void setExitPosition(BlockPos blockPos) {
-        this.exitPortal = blockPos;
+    public void copyFrom(EtherealRiftBlockEntity etherealRiftBlockEntity) {
+        this.exitPortal = etherealRiftBlockEntity.exitPortal;
+        this.destination = etherealRiftBlockEntity.destination;
         this.setChanged();
+    }
+
+    public void setExitPosition(BlockPos blockPos) {
+        attached.forEach(otherPos -> {
+            if (this.level.getBlockEntity(otherPos) instanceof EtherealRiftBlockEntity etherealRiftBlockEntity) {
+                etherealRiftBlockEntity.exitPortal = blockPos;
+                etherealRiftBlockEntity.setChanged();
+            }
+        });
     }
 
     public Optional<ResourceKey<Level>> getDestination() {
         return Optional.ofNullable(destination);
     }
 
+    public void setMaxLifespan(long maxLifespan) {
+        this.maxLifespan = maxLifespan;
+    }
+
+    public void setAttached(List<BlockPos> attached) {
+        this.attached = attached;
+    }
+
     public void setDestination(@Nullable ResourceKey<Level> destination) {
         this.destination = destination;
+        this.setChanged();
+    }
+
+    public void changeDestination(@Nullable ResourceKey<Level> destination) {
+        attached.forEach(otherPos -> {
+            if (this.level.getBlockEntity(otherPos) instanceof EtherealRiftBlockEntity etherealRiftBlockEntity)
+                etherealRiftBlockEntity.setDestination(destination);
+        });
+    }
+
+    public List<BlockPos> getAttached() {
+        return attached;
     }
 }

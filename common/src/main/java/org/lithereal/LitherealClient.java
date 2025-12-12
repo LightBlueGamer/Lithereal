@@ -33,6 +33,7 @@ import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
+import org.lithereal.client.particle.PortalParticleProvider;
 import org.lithereal.client.particle.StandardBiomeProvider;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
@@ -65,6 +66,8 @@ public class LitherealClient {
         LitherealExpectPlatform.registerParticleProvider(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.SOUL.get(), EtherealSoulProvider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
+        LitherealExpectPlatform.registerParticleProvider(ModParticles.PORTAL_SPARKLE.get(), FlameParticle.Provider::new);
+        LitherealExpectPlatform.registerParticleProvider(ModParticles.PORTAL_EMISSION.get(), PortalParticleProvider::new);
         registerKeyBindings();
         registerColorHandlers();
         registerItemsToTab();

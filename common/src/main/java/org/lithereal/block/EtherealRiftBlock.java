@@ -33,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.entity.EtherealRiftBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EtherealRiftBlock extends EtherealCorePortalBlock {
@@ -61,6 +60,46 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
     protected @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         Direction.Axis axis = blockState.getValue(AXIS);
         return axis.isVertical() ? SHAPE : axis == Direction.Axis.X ? SHAPE_X_AXIS : SHAPE_Z_AXIS;
+    }
+
+    @Override
+    public Direction.Axis getAxis(BlockState blockState) {
+        return blockState.getValue(AXIS);
+    }
+
+    @Override
+    public boolean isTransportPortal(BlockPos blockPos, Level level) {
+        return !(level.getBlockEntity(blockPos) instanceof EtherealRiftBlockEntity etherealRiftBlockEntity) ? super.isTransportPortal(blockPos, level) : etherealRiftBlockEntity.getDestination().filter(levelResourceKey -> !level.dimension().equals(levelResourceKey)).isPresent();
+    }
+
+    @Override
+    protected void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        super.onPlace(blockState, level, blockPos, blockState2, bl);
+        List<BlockPos> positions;
+        if (level.getBlockEntity(blockPos) instanceof EtherealRiftBlockEntity etherealRiftBlockEntity) {
+            positions = etherealRiftBlockEntity.getAttached();
+            findAttached(level, blockPos, level.getBlockState(blockPos), positions);
+            final boolean[] updated = {false};
+            positions.forEach(pos -> {
+                if (pos != blockPos && level.getBlockEntity(pos) instanceof EtherealRiftBlockEntity attachedEntity) {
+                    attachedEntity.getAttached().add(blockPos);
+                    if (!updated[0]) {
+                        etherealRiftBlockEntity.copyFrom(attachedEntity);
+                        updated[0] = true;
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        if (level.getBlockEntity(blockPos) instanceof EtherealRiftBlockEntity etherealRiftBlockEntity) {
+            etherealRiftBlockEntity.getAttached().forEach(pos -> {
+                if (!pos.equals(blockPos)) level.removeBlock(pos, true);
+            });
+        }
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
     }
 
     @Override
@@ -104,9 +143,7 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
     }
 
     public static void destroyAttachedBlocks(Level level, BlockPos blockPos, BlockState blockState) {
-        List<BlockPos> attached = new ArrayList<>();
-        findAttached(level, blockPos, blockState, attached);
-        attached.forEach(pos -> level.removeBlock(pos, true));
+        level.removeBlock(blockPos, true);
     }
 
     public static void findAttached(Level level, BlockPos blockPos, BlockState blockState, List<BlockPos> toEmitTo) {
@@ -178,7 +215,15 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
         BlockState clickedOnState = blockPlaceContext.getLevel().getBlockState(blockPlaceContext.getClickedPos().relative(face.getOpposite()));
         if (!blockPlaceContext.isSecondaryUseActive() && clickedOnState.is(this)) {
             Direction.Axis axis = clickedOnState.getValue(AXIS);
-            boolean useClickedStateAxis = axis.isHorizontal() ? face.getAxis().isVertical() || face.getClockWise().getAxis() == axis : face.getAxis().isHorizontal();
+            Direction.Axis sideAxis = switch (blockPlaceContext.getClickedFace().getAxis()) {
+                case X, Z -> Direction.Axis.Y;
+                case Y -> Direction.Axis.Z;
+            };
+            Direction.Axis otherSideAxis = switch (blockPlaceContext.getClickedFace().getAxis()) {
+                case X, Y -> Direction.Axis.X;
+                case Z -> Direction.Axis.Z;
+            };
+            boolean useClickedStateAxis = axis.equals(sideAxis) || axis.equals(otherSideAxis);
             if (useClickedStateAxis) return this.defaultBlockState().setValue(AXIS, axis);
         }
         return this.defaultBlockState().setValue(AXIS, face.getAxis());

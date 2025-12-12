@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
@@ -32,6 +33,7 @@ public class LitherealFabricClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
         EntityRendererRegistry.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, false));
         EntityRendererRegistry.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, true));
+        EntityRendererRegistry.register(ModEntities.RIFT_SPAWNER.get(), NoopRenderer::new);
 
         MenuScreens.register(FabricScreenHandlers.ELECTRIC_CRUCIBLE_SCREEN_HANDLER, ElectricCrucibleScreen::new);
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);

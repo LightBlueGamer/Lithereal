@@ -5,6 +5,7 @@ import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -17,6 +18,7 @@ import org.lithereal.client.EtherealCoreSpecialEffects;
 import org.lithereal.client.gui.screens.inventory.ElectricCrucibleScreen;
 import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
+import org.lithereal.client.particle.PortalParticleProvider;
 import org.lithereal.client.particle.StandardBiomeProvider;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
@@ -49,6 +51,8 @@ public class ClientEvents {
             event.registerSpriteSet(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
             event.registerSpriteSet(ModParticles.SOUL.get(), EtherealSoulProvider::new);
             event.registerSpriteSet(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
+            event.registerSpriteSet(ModParticles.PORTAL_SPARKLE.get(), FlameParticle.Provider::new);
+            event.registerSpriteSet(ModParticles.PORTAL_EMISSION.get(), PortalParticleProvider::new);
         }
         @SubscribeEvent
         public static void onRegisterMenu(RegisterMenuScreensEvent event) {
@@ -73,6 +77,7 @@ public class ClientEvents {
             event.registerEntityRenderer(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
             event.registerEntityRenderer(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, false));
             event.registerEntityRenderer(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, true));
+            event.registerEntityRenderer(ModEntities.RIFT_SPAWNER.get(), NoopRenderer::new);
         }
     }
     public static class ClientForgeBusEvents {

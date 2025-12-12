@@ -23,6 +23,12 @@ public class ModParticles {
     public static final RegistrySupplier<SimpleParticleType> CRYSTAL_SPARKLE = PARTICLE_TYPES.register("crystal_sparkle", () ->
             LitherealExpectPlatform.createSimpleParticleType(false));
 
+    public static final RegistrySupplier<SimpleParticleType> PORTAL_SPARKLE = PARTICLE_TYPES.register("portal_sparkle", () ->
+            LitherealExpectPlatform.createSimpleParticleType(false));
+
+    public static final RegistrySupplier<SimpleParticleType> PORTAL_EMISSION = PARTICLE_TYPES.register("portal_emission", () ->
+            LitherealExpectPlatform.createSimpleParticleType(false));
+
     public static void register() {
         PARTICLE_TYPES.register();
     }

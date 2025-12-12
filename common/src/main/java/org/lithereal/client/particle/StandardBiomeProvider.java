@@ -18,13 +18,13 @@ public class StandardBiomeProvider implements ParticleProvider<SimpleParticleTyp
 		this.sprite = spriteSet;
 	}
 
-	public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+	public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double posX, double posY, double posZ, double deltaX, double deltaY, double deltaZ) {
 		RandomSource randomSource = clientLevel.random;
-		double j = randomSource.nextGaussian() * 1.0E-6F;
-		double k = randomSource.nextGaussian() * 1.0E-4F;
-		double l = randomSource.nextGaussian() * 1.0E-6F;
+		double dirX = randomSource.nextGaussian() * 1.0E-6F;
+		double dirY = randomSource.nextGaussian() * 1.0E-4F;
+		double dirZ = randomSource.nextGaussian() * 1.0E-6F;
 
-		SuspendedParticle suspendedParticle = new SuspendedParticle(clientLevel, this.sprite, d, e, f, j, k, l);
+		SuspendedParticle suspendedParticle = new SuspendedParticle(clientLevel, this.sprite, posX, posY, posZ, dirX, dirY, dirZ);
 		suspendedParticle.setColor(1, 1, 1);
 		return suspendedParticle;
 	}

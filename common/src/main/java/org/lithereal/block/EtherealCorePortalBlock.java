@@ -3,7 +3,6 @@ package org.lithereal.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -33,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.block.entity.EtherealCorePortalBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
+import org.lithereal.client.particle.ModParticles;
 import org.lithereal.world.feature.ModFeatures;
 
 public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
@@ -91,10 +91,83 @@ public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        double d = (double)blockPos.getX() + randomSource.nextDouble();
-        double e = (double)blockPos.getY() + 0.8;
-        double f = (double)blockPos.getZ() + randomSource.nextDouble();
-        level.addParticle(ParticleTypes.SMOKE, d, e, f, 0.0F, 0.0F, 0.0F);
+        double xPos = randomSource.nextDouble();
+        double yPos = randomSource.nextDouble();
+        double zPos = randomSource.nextDouble();
+        double xDir = randomSource.nextDouble() * 0.05;
+        double yDir = randomSource.nextDouble() * 0.05;
+        double zDir = randomSource.nextDouble() * 0.05;
+        switch (getAxis(blockState)) {
+            case X -> {
+                zPos = 0.8;
+                xDir = randomSource.nextDouble() * 0.01;
+                yDir = randomSource.nextDouble() * 0.01;
+            }
+            case Y -> {
+                yPos = 0.8;
+                xDir = randomSource.nextDouble() * 0.01;
+                zDir = randomSource.nextDouble() * 0.01;
+            }
+            case Z -> {
+                xPos = 0.8;
+                yDir = randomSource.nextDouble() * 0.01;
+                zDir = randomSource.nextDouble() * 0.01;
+            }
+        }
+        level.addParticle(ModParticles.PORTAL_SPARKLE.get(),
+                blockPos.getX() + xPos,
+                blockPos.getY() + yPos,
+                blockPos.getZ() + zPos,
+                xDir,
+                yDir,
+                zDir);
+        level.addParticle(ModParticles.PORTAL_SPARKLE.get(),
+                blockPos.getX() + 1 - xPos,
+                blockPos.getY() + 1 - yPos,
+                blockPos.getZ() + 1 - zPos,
+                -xDir,
+                -yDir,
+                -zDir);
+        if (isTransportPortal(blockPos, level)) {
+            for (int cnt = 0; cnt < 4; cnt++) {
+                xPos = blockPos.getX() + randomSource.nextDouble();
+                yPos = blockPos.getY() + randomSource.nextDouble();
+                zPos = blockPos.getZ() + randomSource.nextDouble();
+                xDir = (randomSource.nextFloat() - 0.5) * 0.5;
+                yDir = (randomSource.nextFloat() - 0.5) * 0.5;
+                zDir = (randomSource.nextFloat() - 0.5) * 0.5;
+                int rand = randomSource.nextInt(2) * 2 - 1;
+                switch (getAxis(blockState)) {
+                    case X -> {
+                        zPos = blockPos.getZ() + 0.5 + 0.25 * rand;
+                        zDir = randomSource.nextFloat() * 2.0F * rand;
+                    }
+                    case Y -> {
+                        yPos = blockPos.getY() + 0.25 * rand;
+                        yDir = randomSource.nextFloat() * rand;
+                    }
+                    case Z -> {
+                        xPos = blockPos.getX() + 0.5 + 0.25 * rand;
+                        xDir = randomSource.nextFloat() * 2.0F * rand;
+                    }
+                }
+                level.addParticle(ModParticles.PORTAL_EMISSION.get(),
+                        xPos,
+                        yPos,
+                        zPos,
+                        xDir,
+                        yDir,
+                        zDir);
+            }
+        }
+    }
+
+    public Direction.Axis getAxis(BlockState blockState) {
+        return Direction.Axis.Y;
+    }
+
+    public boolean isTransportPortal(BlockPos blockPos, Level level) {
+        return true;
     }
 
     @Override

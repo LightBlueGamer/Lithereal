@@ -21,6 +21,10 @@ public class ModEntities {
             ENTITIES.register("mod_chest_boat", () -> EntityType.Builder.<ModChestBoat>of(ModChestBoat::new, MobCategory.MISC)
                     .sized(1.375f, 0.5625f).eyeHeight(0.5625F).clientTrackingRange(10).build("mod_chest_boat"));
 
+    public static final RegistrySupplier<? extends EntityType<RiftSpawner>> RIFT_SPAWNER =
+            ENTITIES.register("rift_spawner", () -> EntityType.Builder.of(RiftSpawner::new, MobCategory.MISC)
+                    .sized(1f, 1f).eyeHeight(0.75F).clientTrackingRange(16).build("rift_spawner"));
+
     public static void register() {
         ENTITIES.register();
     }
