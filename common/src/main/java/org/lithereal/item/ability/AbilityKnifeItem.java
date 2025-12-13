@@ -21,6 +21,12 @@ public class AbilityKnifeItem extends KnifeItem implements AbilityItem {
     }
 
     @Override
+    public void postHurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        getAbility().postAttack(this, itemStack, attacked, attacker);
+        super.hurtEnemy(itemStack, attacked, attacker);
+    }
+
+    @Override
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int i, boolean bl) {
         ability.onItemTick(this, itemStack, level, entity, i, bl);
         super.inventoryTick(itemStack, level, entity, i, bl);

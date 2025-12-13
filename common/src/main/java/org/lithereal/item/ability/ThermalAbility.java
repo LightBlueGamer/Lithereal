@@ -3,7 +3,6 @@ package org.lithereal.item.ability;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,24 +30,29 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
                                                     List<MobEffectInstance> effects) implements IAbility<I> {
     @Override
     public void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        float bonusDamage = extraDamage();
         switch (armorType()) {
-            case FROSTBURN -> {
-                attacked.setTicksFrozen((int) (2000 * attackAbilityScalar()));
-                attacked.setRemainingFireTicks((int) (20 * attackAbilityScalar()));
-                attacked.invulnerableTime = 0;
-                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROSTBURN, attacker), bonusDamage);
-            }
-            case FREEZING -> {
+            case FROSTBURN, FREEZING -> {
                 if (attacked.isOnFire()) attacked.extinguishFire();
                 attacked.setTicksFrozen((int) (1000 * attackAbilityScalar()));
-                attacked.invulnerableTime = 0;
-                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROST, attacker), bonusDamage);
             }
             case BURNING -> {
                 if (attacked.isFreezing()) attacked.setTicksFrozen(0);
                 attacked.setRemainingFireTicks((int) (20000 * attackAbilityScalar()));
-                attacked.invulnerableTime = 0;
+            }
+        }
+    }
+
+    @Override
+    public void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        float bonusDamage = extraDamage();
+        switch (armorType()) {
+            case FROSTBURN -> {
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROSTBURN, attacker), bonusDamage);
+            }
+            case FREEZING -> {
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROST, attacker), bonusDamage);
+            }
+            case BURNING -> {
                 if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.BURN, attacker), bonusDamage);
             }
         }

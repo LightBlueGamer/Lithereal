@@ -69,6 +69,11 @@ public class InfusedAbility<I extends InfusedItem> implements IAbility<I> {
     }
 
     @Override
+    public void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+
+    }
+
+    @Override
     public void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
         Ability.IdentityForPlayer entityID = new Ability.IdentityForPlayer(entity.getUUID(), item);
         if (!untilReadyMap.containsKey(entityID))

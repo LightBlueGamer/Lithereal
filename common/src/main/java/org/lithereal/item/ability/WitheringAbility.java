@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.lithereal.item.ModArmorMaterials;
 
 import java.util.List;
 
@@ -21,6 +20,11 @@ public record WitheringAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>
     @Override
     public void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
         attacked.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
+    }
+
+    @Override
+    public void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+
     }
 
     @Override

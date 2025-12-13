@@ -22,6 +22,11 @@ public interface IAbility<I extends AbilityItem> {
         if (castedItem == null) return;
         onAttack(castedItem, itemStack, attacked, attacker);
     }
+    default void postAttackRaw(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        I castedItem = checkedCast(item);
+        if (castedItem == null) return;
+        postAttack(castedItem, itemStack, attacked, attacker);
+    }
     default void onItemTickRaw(AbilityItem item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
         I castedItem = checkedCast(item);
         if (castedItem == null) return;
@@ -33,6 +38,7 @@ public interface IAbility<I extends AbilityItem> {
         onArmourTick(castedItem, itemStack, level, entity, slot, isSelected);
     }
     void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
+    void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
     void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected);
     void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected);
     record IdentityForPlayer(UUID uuid, AbilityItem abilityItem) {

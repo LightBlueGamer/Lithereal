@@ -23,6 +23,11 @@ public record EnhancedAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>>
     }
 
     @Override
+    public void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+
+    }
+
+    @Override
     public void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
 
     }

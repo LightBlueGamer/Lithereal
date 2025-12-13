@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.lithereal.Lithereal;
 import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.mob_effect.ModMobEffects;
 
@@ -20,11 +21,11 @@ public enum Ability {
             Collections.emptyList())),
     SMOLDERING(new ThermalAbility<>(2, 1.5F, ThermalAbility.ArmorType.BURNING,
             List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE),
-            List.of(new MobEffectInstance(ModMobEffects.PROTECTED, 200, 1),
+            List.of(new MobEffectInstance(Lithereal.asHolder(ModMobEffects.PROTECTED), 200, 0),
                     new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0)))),
-    FROSTBITTEN(new ThermalAbility<>(2, 1.5F, ThermalAbility.ArmorType.FROSTBURN,
+    FROSTBITTEN(new ThermalAbility<>(1, 1.25F, ThermalAbility.ArmorType.FROSTBURN,
             List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE),
-            List.of(new MobEffectInstance(ModMobEffects.PROTECTED, 200, 1)))),
+            List.of(new MobEffectInstance(Lithereal.asHolder(ModMobEffects.PROTECTED), 200, 0)))),
     WITHERING(new WitheringAbility<>(Collections.singletonList(ModArmorMaterials.WITHERING_LITHERITE))),
     INFUSED(new InfusedAbility<>(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE))),
     ENHANCED(new EnhancedAbility<>(Collections.singletonList(ModArmorMaterials.ODYSIUM)));
@@ -34,6 +35,9 @@ public enum Ability {
     }
     public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
         ability.onAttackRaw(item, itemStack, attacked, attacker);
+    }
+    public void postAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        ability.postAttackRaw(item, itemStack, attacked, attacker);
     }
     public void onItemTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
         ability.onItemTickRaw(item, itemStack, level, entity, slot, isSelected);

@@ -178,6 +178,6 @@ public class LitherealClient {
 
     }
     public static boolean isEquipment(String id) {
-        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("etherstone_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite") || id.startsWith("odysium") || id.startsWith("phantom");
+        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("etherstone_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("smoldering_litherite") || id.startsWith("frostbitten_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite") || id.startsWith("odysium") || id.contains("phantom");
     }
 }

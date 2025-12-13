@@ -45,7 +45,7 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
         AtomicBoolean bl = new AtomicBoolean(false);
         for (ItemStack armorStack : player.getInventory().armor) {
             if(!(armorStack.getItem() instanceof InfusedLitheriteArmorItem)) return false;
-            armorStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).forEachEffect(mobEffectInstance -> bl.set(bl.get() || mobEffectInstance.getEffect() == MobEffects.INVISIBILITY));
+            armorStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).forEachEffect(mobEffectInstance -> bl.set(bl.get() || mobEffectInstance.getEffect().is(MobEffects.INVISIBILITY)));
         }
         return bl.get();
     }
