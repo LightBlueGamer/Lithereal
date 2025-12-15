@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.EtherealRiftBlock;
 
@@ -70,7 +71,7 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
         return this.saveCustomOnly(provider);
     }
 

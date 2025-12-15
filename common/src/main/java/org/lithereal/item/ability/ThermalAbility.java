@@ -136,8 +136,8 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
 
     public enum ArmorType {
         FROSTBURN(false, false, true, true, true),
-        FREEZING(false, true, false, true, false),
-        BURNING(true, false, true, false, true);
+        FREEZING(false, false, true, false, true),
+        BURNING(true, true, false, true, false);
         public final boolean emitsHeat;
         public final boolean providesScorch;
         public final boolean providesFreeze;

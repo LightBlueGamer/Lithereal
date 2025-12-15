@@ -77,7 +77,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     @Override
-    protected void add(Block block, LootTable.Builder builder) {
+    protected void add(@NotNull Block block, LootTable.@NotNull Builder builder) {
         super.add(block, builder);
         cachedGeneratedBlocks.add(block);
     }

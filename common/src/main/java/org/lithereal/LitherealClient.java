@@ -11,6 +11,9 @@ import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
+import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
@@ -38,6 +41,7 @@ import org.lithereal.client.particle.StandardBiomeProvider;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.client.renderer.ModBoatRenderer;
+import org.lithereal.client.renderer.zombie.BetterZombieModel;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.item.*;
 import org.lithereal.item.obscured.ObscuredItem;
@@ -58,6 +62,9 @@ public class LitherealClient {
     public static void init() {
         EntityModelLayerRegistry.register(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
+        EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
+        EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
+        EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE_INNER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBodyModel);
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.SIGN.get(), SignRenderer::new);

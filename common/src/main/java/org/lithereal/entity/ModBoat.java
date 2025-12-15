@@ -11,6 +11,7 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.ModTreeBlocks;
 import org.lithereal.item.ModItems;
 
@@ -32,7 +33,7 @@ public class ModBoat extends Boat implements CustomBoat {
     }
 
     @Override
-    public Item getDropItem() {
+    public @NotNull Item getDropItem() {
         return switch (getModVariant()) {
             case PHANTOM_OAK -> ModItems.PHANTOM_OAK_BOAT.get();
         };
@@ -79,7 +80,7 @@ public class ModBoat extends Boat implements CustomBoat {
             this.setType = blockSetType;
         }
 
-        public String getSerializedName() {
+        public @NotNull String getSerializedName() {
             return this.name;
         }
 

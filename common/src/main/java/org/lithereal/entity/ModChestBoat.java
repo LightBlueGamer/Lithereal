@@ -9,6 +9,7 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ModItems;
 
 public class ModChestBoat extends ChestBoat implements CustomBoat {
@@ -27,7 +28,7 @@ public class ModChestBoat extends ChestBoat implements CustomBoat {
     }
 
     @Override
-    public Item getDropItem() {
+    public @NotNull Item getDropItem() {
         switch (getModVariant()) {
             case PHANTOM_OAK -> {
                 return ModItems.PHANTOM_OAK_CHEST_BOAT.get();

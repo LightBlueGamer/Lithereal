@@ -16,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
@@ -39,12 +40,12 @@ public class InfusementChamberRecipeCategory implements IRecipeCategory<Infuseme
     }
 
     @Override
-    public RecipeType<InfusementChamberRecipe> getRecipeType() {
+    public @NotNull RecipeType<InfusementChamberRecipe> getRecipeType() {
         return JEILitherealPlugin.INFUSING_TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.literal("Infusement Chamber");
     }
 

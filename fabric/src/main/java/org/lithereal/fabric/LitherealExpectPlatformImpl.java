@@ -24,10 +24,11 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.*;
 import org.lithereal.fabric.client.gui.screens.inventory.*;
-import org.lithereal.fabric.data.mixin.WoodTypeAccessor;
+import org.lithereal.fabric.data.mixin.accessor.WoodTypeAccessor;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.FabricInfusementChamberBlock;
 import org.lithereal.fabric.world.block.entity.*;
@@ -147,12 +148,12 @@ public class LitherealExpectPlatformImpl {
             }
 
             @Override
-            public TextureAtlasSprite get(int i, int j) {
+            public @NotNull TextureAtlasSprite get(int i, int j) {
                 return provider.get(i, j);
             }
 
             @Override
-            public TextureAtlasSprite get(RandomSource randomSource) {
+            public @NotNull TextureAtlasSprite get(RandomSource randomSource) {
                 return provider.get(randomSource);
             }
         }));

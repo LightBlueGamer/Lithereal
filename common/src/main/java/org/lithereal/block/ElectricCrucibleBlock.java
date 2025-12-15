@@ -1,10 +1,6 @@
 package org.lithereal.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -16,6 +12,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.ElectricCrucibleBlockEntity;
@@ -37,12 +34,12 @@ public abstract class ElectricCrucibleBlock extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
+    public @NotNull BlockState rotate(BlockState pState, Rotation pRotation) {
         return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
+    public @NotNull BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
@@ -54,7 +51,7 @@ public abstract class ElectricCrucibleBlock extends BaseEntityBlock {
     /* BLOCK ENTITY */
 
     @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
+    public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
     }
 

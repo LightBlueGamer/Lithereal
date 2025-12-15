@@ -16,6 +16,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.entity.CustomBoat;
 import org.lithereal.entity.ModBoat;
 import org.lithereal.entity.ModBoat.Type;
@@ -36,7 +37,7 @@ public class ModBoatItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+	public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
 		ItemStack itemStack = player.getItemInHand(interactionHand);
 		HitResult hitResult = getPlayerPOVHitResult(level, player, Fluid.ANY);
 		if (hitResult.getType() == HitResult.Type.MISS) {

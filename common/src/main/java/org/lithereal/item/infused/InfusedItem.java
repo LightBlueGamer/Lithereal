@@ -8,7 +8,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import org.apache.commons.compress.utils.Lists;
 import org.lithereal.item.ability.AbilityItem;
-import org.lithereal.item.ability.Ability;
 
 import java.util.List;
 
@@ -28,10 +27,5 @@ public interface InfusedItem extends AbilityItem {
     }
     static MobEffectInstance transformInstance(MobEffectInstance mobEffectInstance) {
         return new MobEffectInstance(mobEffectInstance.getEffect(), mobEffectInstance.getEffect().value().isInstantenous() ? 1 : Math.max(mobEffectInstance.getDuration() / 10, 100), mobEffectInstance.getAmplifier(), mobEffectInstance.isAmbient(), mobEffectInstance.isVisible(), mobEffectInstance.showIcon());
-    }
-
-    @Override
-    default Ability getAbility() {
-        return Ability.INFUSED;
     }
 }

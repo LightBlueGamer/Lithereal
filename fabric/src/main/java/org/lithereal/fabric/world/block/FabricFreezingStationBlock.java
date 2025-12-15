@@ -48,7 +48,7 @@ public class FabricFreezingStationBlock extends FreezingStationBlock implements 
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FreezingStationBlockEntity) {
             MenuProvider screenHandlerFactory = ((FabricFreezingStationBlockEntity) level.getBlockEntity(blockPos));
 
@@ -61,7 +61,7 @@ public class FabricFreezingStationBlock extends FreezingStationBlock implements 
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FreezingStationBlockEntity) {
             MenuProvider screenHandlerFactory = ((FabricFreezingStationBlockEntity) level.getBlockEntity(blockPos));
 

@@ -8,6 +8,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ability.Ability;
 import org.lithereal.item.ability.AbilitySwordItem;
 
@@ -19,7 +20,7 @@ public class InfusedLitheriteSwordItem extends AbilitySwordItem implements Infus
         super(Ability.INFUSED, tier, properties);
     }
 
-    public ItemStack getDefaultInstance() {
+    public @NotNull ItemStack getDefaultInstance() {
         ItemStack itemStack = super.getDefaultInstance();
         itemStack.set(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         return itemStack;
@@ -34,12 +35,12 @@ public class InfusedLitheriteSwordItem extends AbilitySwordItem implements Infus
         }
     }
 
-    public String getDescriptionId(ItemStack itemStack) {
+    public @NotNull String getDescriptionId(ItemStack itemStack) {
         return Potion.getName(itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).potion(), this.getDescriptionId() + ".effect.");
     }
 
     @Override
-    public Component getName(ItemStack itemStack) {
+    public @NotNull Component getName(ItemStack itemStack) {
         return getModifiedName(itemStack);
     }
 

@@ -7,6 +7,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.PortalParticle;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
 public class PortalParticleProvider extends PortalParticle.Provider {
@@ -14,7 +15,7 @@ public class PortalParticleProvider extends PortalParticle.Provider {
         super(arg);
     }
 
-    public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+    public @NotNull Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
         Particle output = super.createParticle(simpleParticleType, clientLevel, d, e, f, g, h, i);
         float color = clientLevel.random.nextFloat() * 0.4F + 0.6F;
         output.setColor(color, color, color);

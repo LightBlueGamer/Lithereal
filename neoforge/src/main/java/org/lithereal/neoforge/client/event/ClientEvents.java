@@ -2,6 +2,9 @@ package org.lithereal.neoforge.client.event;
 
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
+import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -20,12 +23,11 @@ import org.lithereal.client.particle.EtherealSoulProvider;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.client.particle.PortalParticleProvider;
 import org.lithereal.client.particle.StandardBiomeProvider;
-import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
-import org.lithereal.client.renderer.InfusedLitheriteBlockEntityRenderer;
-import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
-import org.lithereal.client.renderer.InfusementChamberBlockEntityRenderer;
+import org.lithereal.client.renderer.*;
+import org.lithereal.client.renderer.zombie.BetterZombieModel;
+import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
+import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
 import org.lithereal.entity.ModEntities;
-import org.lithereal.client.renderer.ModBoatRenderer;
 import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
 import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleScreen;
@@ -65,6 +67,9 @@ public class ClientEvents {
         public static void modelLayerLocationInit(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
             event.registerLayerDefinition(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
+            event.registerLayerDefinition(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
+            event.registerLayerDefinition(BetterZombieModel.ZOMBIE_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
+            event.registerLayerDefinition(BetterZombieModel.ZOMBIE_INNER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
             event.registerLayerDefinition(ModBoatRenderer.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBodyModel);
             event.registerLayerDefinition(ModBoatRenderer.PHANTOM_OAK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
         }
@@ -75,6 +80,8 @@ public class ClientEvents {
             event.registerBlockEntityRenderer(ModBlockEntities.SIGN.get(), SignRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
             event.registerEntityRenderer(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);
+            event.registerEntityRenderer(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombieRenderer::new);
+            event.registerEntityRenderer(ModEntities.PHANTOM_DROWNED.get(), PhantomDrownedRenderer::new);
             event.registerEntityRenderer(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, false));
             event.registerEntityRenderer(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, true));
             event.registerEntityRenderer(ModEntities.RIFT_SPAWNER.get(), NoopRenderer::new);

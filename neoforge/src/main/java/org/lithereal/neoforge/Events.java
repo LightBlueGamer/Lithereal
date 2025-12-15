@@ -8,8 +8,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.entity.ModEntities;
+import org.lithereal.entity.phantom.PhantomDrowned;
+import org.lithereal.entity.phantom.PhantomZombie;
 import org.lithereal.item.ModRawMaterialItems;
 import org.lithereal.mob_effect.potion.ModPotions;
 import org.lithereal.neoforge.data.worldgen.LitherealOverworldRegion;
@@ -42,6 +46,11 @@ public class Events {
             builder.addStartMix(ModRawMaterialItems.SATURNITE_CRYSTAL.get(), Lithereal.asHolder(ModPotions.STURDINESS));
             builder.addMix(Lithereal.asHolder(ModPotions.STURDINESS), Items.REDSTONE, Lithereal.asHolder(ModPotions.LONG_STURDINESS));
             builder.addMix(Lithereal.asHolder(ModPotions.STURDINESS), Items.GLOWSTONE_DUST, Lithereal.asHolder(ModPotions.STRONG_STURDINESS));
+        }
+        @SubscribeEvent
+        public static void onDefaultAttributesRegistry(EntityAttributeCreationEvent event) {
+            event.put(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombie.createAttributes().build());
+            event.put(ModEntities.PHANTOM_DROWNED.get(), PhantomDrowned.createAttributes().build());
         }
     }
 }

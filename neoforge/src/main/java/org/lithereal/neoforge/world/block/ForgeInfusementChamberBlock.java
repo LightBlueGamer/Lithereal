@@ -29,12 +29,12 @@ public class ForgeInfusementChamberBlock extends InfusementChamberBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new ForgeInfusementChamberBlockEntity(pos, state);
     }
 
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+    public void onRemove(BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof ForgeInfusementChamberBlockEntity) {
@@ -46,7 +46,7 @@ public class ForgeInfusementChamberBlock extends InfusementChamberBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState blockState, Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
             MenuProvider screenHandlerFactory = ((ForgeInfusementChamberBlockEntity) level.getBlockEntity(blockPos));
 
@@ -59,7 +59,7 @@ public class ForgeInfusementChamberBlock extends InfusementChamberBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack itemStack, @NotNull BlockState blockState, Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand interactionHand, @NotNull BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
             MenuProvider screenHandlerFactory = ((ForgeInfusementChamberBlockEntity) level.getBlockEntity(blockPos));
 

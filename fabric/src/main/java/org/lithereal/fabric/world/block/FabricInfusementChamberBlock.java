@@ -48,7 +48,7 @@ public class FabricInfusementChamberBlock extends InfusementChamberBlock impleme
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
             MenuProvider screenHandlerFactory = ((FabricInfusementChamberBlockEntity) level.getBlockEntity(blockPos));
 
@@ -61,7 +61,7 @@ public class FabricInfusementChamberBlock extends InfusementChamberBlock impleme
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
             MenuProvider screenHandlerFactory = ((FabricInfusementChamberBlockEntity) level.getBlockEntity(blockPos));
 

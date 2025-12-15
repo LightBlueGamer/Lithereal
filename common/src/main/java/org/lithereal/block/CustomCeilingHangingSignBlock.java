@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.entity.CustomHangingSignBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -22,7 +23,7 @@ public class CustomCeilingHangingSignBlock extends CeilingHangingSignBlock {
     );
 
     @Override
-    public MapCodec<CeilingHangingSignBlock> codec() {
+    public @NotNull MapCodec<CeilingHangingSignBlock> codec() {
         return CODEC;
     }
     public CustomCeilingHangingSignBlock(WoodType woodType, Properties properties) {
@@ -30,7 +31,7 @@ public class CustomCeilingHangingSignBlock extends CeilingHangingSignBlock {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public @NotNull BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new CustomHangingSignBlockEntity(blockPos, blockState);
     }
     @Nullable

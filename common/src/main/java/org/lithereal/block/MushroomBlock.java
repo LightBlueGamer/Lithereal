@@ -14,12 +14,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class MushroomBlock extends BushBlock {
     public static final MapCodec<MushroomBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(propertiesCodec()).apply(instance, MushroomBlock::new));
     protected static final VoxelShape SHAPE = Block.box(5.0F, 0.0F, 5.0F, 11.0F, 6.0F, 11.0F);
 
-    public MapCodec<MushroomBlock> codec() {
+    public @NotNull MapCodec<MushroomBlock> codec() {
         return CODEC;
     }
 
@@ -27,7 +28,7 @@ public class MushroomBlock extends BushBlock {
         super(properties);
     }
 
-    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    protected @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return SHAPE;
     }
 

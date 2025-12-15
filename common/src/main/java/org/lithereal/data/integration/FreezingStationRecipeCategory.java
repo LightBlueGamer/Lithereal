@@ -11,6 +11,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.recipes.FreezingStationRecipe;
@@ -29,12 +30,12 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
     }
 
     @Override
-    public RecipeType<FreezingStationRecipe> getRecipeType() {
+    public @NotNull RecipeType<FreezingStationRecipe> getRecipeType() {
         return JEILitherealPlugin.FREEZING_TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.literal("Freezing Station");
     }
 

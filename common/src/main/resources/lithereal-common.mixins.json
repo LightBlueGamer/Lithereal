@@ -4,14 +4,12 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [
-    "LevelRendererMixin",
-    "LocalPlayerMixin",
-    "RenderBuffersMixin"
+    "client.LocalPlayerMixin"
   ],
   "mixins": [
     "BaseFireBlockMixin",
     "BlockEntityMixin",
-    "BlockSetTypeAccessor",
+    "accessor.BlockSetTypeAccessor",
     "BlockStateBaseMixin",
     "CraftingInventoryMixin",
     "DripstoneClusterFeatureMixin",

@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class WitheringLitheriteBlock extends Block {
     public static final MapCodec<WitheringLitheriteBlock> CODEC = simpleCodec(WitheringLitheriteBlock::new);
@@ -25,7 +26,7 @@ public class WitheringLitheriteBlock extends Block {
     }
 
     @Override
-    protected MapCodec<? extends Block> codec() {
+    protected @NotNull MapCodec<? extends Block> codec() {
         return CODEC;
     }
 }

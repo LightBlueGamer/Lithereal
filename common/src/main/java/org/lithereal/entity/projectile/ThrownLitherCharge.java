@@ -25,6 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModItems;
@@ -41,7 +42,7 @@ public class ThrownLitherCharge extends ThrowableItemProjectile {
         super(ModEntities.LITHER_CHARGE.get(), livingEntity, level);
     }
 
-    protected Item getDefaultItem() {
+    protected @NotNull Item getDefaultItem() {
         return ModItems.LITHER_CHARGE.get();
     }
 

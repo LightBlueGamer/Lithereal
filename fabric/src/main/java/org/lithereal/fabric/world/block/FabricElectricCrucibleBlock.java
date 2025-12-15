@@ -49,7 +49,7 @@ public class FabricElectricCrucibleBlock extends ElectricCrucibleBlock implement
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof ElectricCrucibleBlockEntity) {
             MenuProvider screenHandlerFactory = ((ElectricCrucibleBlockEntity) level.getBlockEntity(blockPos));
 
@@ -62,7 +62,7 @@ public class FabricElectricCrucibleBlock extends ElectricCrucibleBlock implement
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (itemStack.is(ModToolItems.LITHERITE_WRENCH.get())) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
             if (blockEntity instanceof ElectricCrucibleBlockEntity electricCrucibleBlockEntity) {

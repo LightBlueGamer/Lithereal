@@ -1,5 +1,6 @@
 package org.lithereal.entity.attack;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -7,7 +8,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-public class ExpandingBoundingBoxAttack<E extends Entity, AE extends AttackingEntity<E>> extends Attack<E, AE> {
+public class ExpandingBoundingBoxAttack<E extends Entity & AttackingEntity<E>> extends Attack<E> {
     private float initialWidth;
     private float initialHeight;
     private float resultingWidth;
@@ -15,7 +16,7 @@ public class ExpandingBoundingBoxAttack<E extends Entity, AE extends AttackingEn
     private int startTime;
     private int destTime;
 
-    public ExpandingBoundingBoxAttack(AE parent,
+    public ExpandingBoundingBoxAttack(E parent,
                                       Vec3 position,
                                       AttackType<E> attackType,
                                       float initialWidth,
@@ -30,6 +31,12 @@ public class ExpandingBoundingBoxAttack<E extends Entity, AE extends AttackingEn
         this.resultingHeight = resultingHeight;
         this.startTime = parent.self().tickCount;
         this.destTime = destTime;
+    }
+
+    public ExpandingBoundingBoxAttack(E parent,
+                                      Vec3 position,
+                                      AttackType<E> attackType) {
+        super(parent, position, attackType);
     }
 
     public EntityDimensions getDimensions(int baseTime) {
@@ -53,7 +60,7 @@ public class ExpandingBoundingBoxAttack<E extends Entity, AE extends AttackingEn
         attackType().checkEntitiesAttacked(parent().self(), originalBoundingBox, newBoundingBox);
     }
 
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {
+    protected void readAdditionalSaveData(CompoundTag compoundTag, HolderLookup.Provider provider) {
         initialWidth = compoundTag.getFloat("initial_width");
         initialHeight = compoundTag.getFloat("initial_height");
         resultingWidth = compoundTag.getFloat("resulting_width");
@@ -62,7 +69,7 @@ public class ExpandingBoundingBoxAttack<E extends Entity, AE extends AttackingEn
         destTime = compoundTag.getInt("dest_time");
     }
 
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {
+    protected void addAdditionalSaveData(CompoundTag compoundTag, HolderLookup.Provider provider) {
         compoundTag.putFloat("initial_width", initialWidth);
         compoundTag.putFloat("initial_height", initialHeight);
         compoundTag.putFloat("resulting_width", resultingWidth);

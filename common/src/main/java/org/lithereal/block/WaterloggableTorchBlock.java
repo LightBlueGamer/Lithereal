@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -40,7 +41,7 @@ public class WaterloggableTorchBlock extends BaseTorchBlock implements SimpleWat
     protected final Supplier<SimpleParticleType> flameParticle;
 
     @Override
-    public MapCodec<? extends WaterloggableTorchBlock> codec() {
+    public @NotNull MapCodec<? extends WaterloggableTorchBlock> codec() {
         return CODEC;
     }
     public WaterloggableTorchBlock(Supplier<SimpleParticleType> typeSupplier, Properties properties) {
@@ -86,7 +87,7 @@ public class WaterloggableTorchBlock extends BaseTorchBlock implements SimpleWat
     }
 
     @Override
-    protected BlockState updateShape(
+    protected @NotNull BlockState updateShape(
             BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2
     ) {
         if (blockState.getValue(WATERLOGGED)) {
@@ -97,7 +98,7 @@ public class WaterloggableTorchBlock extends BaseTorchBlock implements SimpleWat
     }
 
     @Override
-    protected FluidState getFluidState(BlockState blockState) {
+    protected @NotNull FluidState getFluidState(BlockState blockState) {
         return blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 }

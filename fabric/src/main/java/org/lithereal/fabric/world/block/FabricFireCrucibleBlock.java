@@ -48,7 +48,7 @@ public class FabricFireCrucibleBlock extends FireCrucibleBlock implements Entity
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FireCrucibleBlockEntity) {
             MenuProvider screenHandlerFactory = ((FabricFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
 
@@ -61,7 +61,7 @@ public class FabricFireCrucibleBlock extends FireCrucibleBlock implements Entity
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof FireCrucibleBlockEntity) {
             MenuProvider screenHandlerFactory = ((FabricFireCrucibleBlockEntity) level.getBlockEntity(blockPos));
 

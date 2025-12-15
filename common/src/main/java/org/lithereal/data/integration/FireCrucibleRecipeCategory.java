@@ -11,6 +11,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.recipes.FireCrucibleRecipe;
@@ -29,12 +30,12 @@ public class FireCrucibleRecipeCategory implements IRecipeCategory<FireCrucibleR
     }
 
     @Override
-    public RecipeType<FireCrucibleRecipe> getRecipeType() {
+    public @NotNull RecipeType<FireCrucibleRecipe> getRecipeType() {
         return JEILitherealPlugin.BURNING_TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.literal("Fire Crucible");
     }
 

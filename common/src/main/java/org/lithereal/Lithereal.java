@@ -1,14 +1,19 @@
 package org.lithereal;
 
+import dev.architectury.registry.level.entity.SpawnPlacementsRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.data.recipes.ModRecipes;
+import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.mob_effect.ModMobEffects;
 import org.lithereal.mob_effect.potion.ModPotions;
 import org.lithereal.tags.ModTags;
@@ -45,6 +50,9 @@ public class Lithereal {
         ModStructureProcessorTypes.register();
         ModFeatures.register();
         ModTrunkPlacers.register();
+
+        SpawnPlacementsRegistry.register(ModEntities.PHANTOM_ZOMBIE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Monster::checkMonsterSpawnRules);
+        SpawnPlacementsRegistry.register(ModEntities.PHANTOM_DROWNED, SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING, PhantomDrowned::checkPhantomDrownedSpawnRules);
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

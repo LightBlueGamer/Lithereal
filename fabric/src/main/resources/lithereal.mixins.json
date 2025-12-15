@@ -4,16 +4,16 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [
-    "ArmorLayerMixin",
-    "LevelRendererMixin",
-    "RendererMixin"
+    "client.ArmorLayerMixin",
+    "client.LevelRendererMixin",
+    "client.RendererMixin"
   ],
   "mixins": [
     "BlockMixin",
     "ExplosionDamageCalculatorMixin",
     "ItemEntityMixin",
     "PlayerMixin",
-    "WoodTypeAccessor"
+    "accessor.WoodTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

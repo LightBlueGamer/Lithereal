@@ -8,6 +8,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import org.jetbrains.annotations.NotNull;
 
 public class WaterReplaceProcessor extends StructureProcessor {
 	public static final MapCodec<WaterReplaceProcessor> CODEC = MapCodec.unit(() -> WaterReplaceProcessor.INSTANCE);
@@ -34,7 +35,7 @@ public class WaterReplaceProcessor extends StructureProcessor {
 	}
 
 	@Override
-	protected StructureProcessorType<?> getType() {
+	protected @NotNull StructureProcessorType<?> getType() {
 		return StructureProcessorType.BLACKSTONE_REPLACE;
 	}
 }

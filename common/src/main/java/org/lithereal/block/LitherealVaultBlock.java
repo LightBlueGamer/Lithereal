@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.trialspawner.PlayerDetector;
 import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
 import net.minecraft.world.level.block.entity.vault.VaultConfig;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.Lithereal;
 import org.lithereal.block.entity.LitherealVaultBlockEntity;
@@ -24,7 +25,7 @@ import java.util.Optional;
 public class LitherealVaultBlock extends VaultBlock {
     public static final MapCodec<VaultBlock> CODEC = simpleCodec(LitherealVaultBlock::new);
 
-    public MapCodec<VaultBlock> codec() {
+    public @NotNull MapCodec<VaultBlock> codec() {
         return CODEC;
     }
 

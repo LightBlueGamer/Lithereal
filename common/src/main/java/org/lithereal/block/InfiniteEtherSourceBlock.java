@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.block.entity.InfiniteEtherSourceBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -42,7 +43,7 @@ public class InfiniteEtherSourceBlock extends EtherBatteryBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 

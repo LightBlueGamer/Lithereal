@@ -1,4 +1,4 @@
-package org.lithereal.fabric.data.mixin;
+package org.lithereal.fabric.data.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;
@@ -84,9 +84,9 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
     private boolean armorHasCorrectEffect(Player player) {
         AtomicBoolean bl = new AtomicBoolean(false);
         for (ItemStack armorStack : player.getInventory().armor) {
-            if(!(armorStack.getItem() instanceof InfusedLitheriteArmorItem)) return false;
             armorStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).forEachEffect(mobEffectInstance -> bl.set(bl.get() || mobEffectInstance.getEffect().is(MobEffects.INVISIBILITY)));
+            if (bl.get()) return true;
         }
-        return bl.get();
+        return false;
     }
 }

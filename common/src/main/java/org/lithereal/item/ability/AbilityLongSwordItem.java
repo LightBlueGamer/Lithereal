@@ -22,8 +22,8 @@ public class AbilityLongSwordItem extends LongSwordItem implements AbilityItem {
 
     @Override
     public void postHurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        getAbility().postAttack(this, itemStack, attacked, attacker);
-        super.hurtEnemy(itemStack, attacked, attacker);
+        ability.postAttack(this, itemStack, attacked, attacker);
+        super.postHurtEnemy(itemStack, attacked, attacker);
     }
 
     @Override

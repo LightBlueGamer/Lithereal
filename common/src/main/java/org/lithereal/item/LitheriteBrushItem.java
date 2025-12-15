@@ -30,6 +30,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.HitResult.Type;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class LitheriteBrushItem extends BrushItem {
     public static final int ANIMATION_DURATION = 10;
@@ -39,7 +40,7 @@ public class LitheriteBrushItem extends BrushItem {
         super(properties);
     }
 
-    public InteractionResult useOn(UseOnContext useOnContext) {
+    public @NotNull InteractionResult useOn(UseOnContext useOnContext) {
         Player player = useOnContext.getPlayer();
         if (player != null && this.calculateHitResult(player).getType() == Type.BLOCK) {
             player.startUsingItem(useOnContext.getHand());
@@ -48,7 +49,7 @@ public class LitheriteBrushItem extends BrushItem {
         return InteractionResult.CONSUME;
     }
 
-    public UseAnim getUseAnimation(ItemStack itemStack) {
+    public @NotNull UseAnim getUseAnimation(ItemStack itemStack) {
         return UseAnim.BRUSH;
     }
 

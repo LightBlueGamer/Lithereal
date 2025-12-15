@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.data.mixin.BlockSetTypeAccessor;
+import org.lithereal.data.mixin.accessor.BlockSetTypeAccessor;
 import org.lithereal.world.feature.ModFeatures;
 
 import java.util.Optional;

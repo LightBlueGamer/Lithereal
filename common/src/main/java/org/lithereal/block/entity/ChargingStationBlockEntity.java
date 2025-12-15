@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.gui.screens.inventory.ChargingStationMenu;
@@ -51,7 +52,7 @@ public class ChargingStationBlockEntity extends BlockEntity implements MenuProvi
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.literal("Charging Station");
     }
 

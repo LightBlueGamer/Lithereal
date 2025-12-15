@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
 
@@ -26,7 +27,7 @@ public class LitherealBlockEntityWithoutLevelRenderer extends BlockEntityWithout
     }
 
     @Override
-    public void renderByItem(ItemStack itemStack, ItemDisplayContext context, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
+    public void renderByItem(ItemStack itemStack, @NotNull ItemDisplayContext context, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int i, int j) {
         Item item = itemStack.getItem();
         if (item instanceof BlockItem) {
             Block block = ((BlockItem) item).getBlock();

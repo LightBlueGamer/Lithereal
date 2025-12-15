@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.EtherCollectorBlockEntity;
 
@@ -59,7 +60,7 @@ public class EtherCollectorMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_SLOT_COUNT = 1;  // Must be the number of slots you have!
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public @NotNull ItemStack quickMoveStack(Player playerIn, int index) {
         Slot sourceSlot = slots.get(index);
         if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();

@@ -18,6 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jetbrains.annotations.NotNull;
 
 public class MegaOakTrunkPlacer extends TrunkPlacer {
     public static final MapCodec<MegaOakTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> trunkPlacerParts(instance).apply(instance, MegaOakTrunkPlacer::new));
@@ -26,11 +27,11 @@ public class MegaOakTrunkPlacer extends TrunkPlacer {
         super(i, j, k);
     }
 
-    protected TrunkPlacerType<?> type() {
+    protected @NotNull TrunkPlacerType<?> type() {
         return ModTrunkPlacers.MEGA_OAK.get();
     }
 
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader levelSimulatedReader, BiConsumer<BlockPos, BlockState> biConsumer, RandomSource randomSource, int height, BlockPos blockPos, TreeConfiguration treeConfiguration) {
+    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader levelSimulatedReader, BiConsumer<BlockPos, BlockState> biConsumer, RandomSource randomSource, int height, BlockPos blockPos, TreeConfiguration treeConfiguration) {
         BlockPos[] positions = new BlockPos[] {blockPos, blockPos.east(), blockPos.south(), blockPos.east().south()};
         BlockPos belowPos = blockPos.below();
         setDirtAt(levelSimulatedReader, biConsumer, randomSource, belowPos, treeConfiguration);

@@ -5,12 +5,12 @@ import net.minecraft.world.entity.Entity;
 
 import java.util.List;
 
-public interface AttackingEntity<E extends Entity> {
+public interface AttackingEntity<E extends Entity & AttackingEntity<E>> {
     E self();
     AttackType<E> getAttackType(ResourceLocation id);
     void addAttackType(ResourceLocation id, AttackType<E> attackType);
-    <AE extends AttackingEntity<E>> List<Attack<E, AE>> getAttacks();
-    <AE extends AttackingEntity<E>> void addRunnableAttack(Attack<E, AE> attack);
+    List<Attack<E>> getAttacks();
+    void addRunnableAttack(Attack<E> attack);
     void cullAttacks();
     default void onTick() {
         getAttacks().forEach(Attack::tick);

@@ -71,7 +71,20 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "lithereal:phantom_zombie",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 95
+      },
+      {
+        "type": "lithereal:phantom_drowned",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 45
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

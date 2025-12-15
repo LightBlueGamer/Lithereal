@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class CustomHangingSignBlockEntity extends SignBlockEntity {
     public CustomHangingSignBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -26,7 +27,7 @@ public class CustomHangingSignBlockEntity extends SignBlockEntity {
     }
 
     @Override
-    public SoundEvent getSignInteractionFailedSoundEvent() {
+    public @NotNull SoundEvent getSignInteractionFailedSoundEvent() {
         return SoundEvents.WAXED_HANGING_SIGN_INTERACT_FAIL;
     }
 }

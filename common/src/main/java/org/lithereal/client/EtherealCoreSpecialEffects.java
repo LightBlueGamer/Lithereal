@@ -35,7 +35,7 @@ public class EtherealCoreSpecialEffects extends DimensionSpecialEffects {
     }
 
     @Override
-    public float[] getSunriseColor(float f, float g) {
+    public float @NotNull [] getSunriseColor(float f, float g) {
         return null;
     }
     public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f modelViewMatrix, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {

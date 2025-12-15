@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
@@ -53,7 +54,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput recipeOutput) {
+    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.PASSIVE_ETHER_ABSORBER.get(), 1)
                 .define('C', ModRawMaterialItems.CHRYON_CRYSTAL.get())
                 .define('A', ModRawMaterialItems.ALLIAN_INGOT.get())

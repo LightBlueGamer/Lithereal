@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.client.gui.screens.inventory.EtherBatteryMenu;
@@ -66,7 +67,7 @@ public class EtherBatteryBlockEntity extends BlockEntity implements MenuProvider
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.literal("Ether Battery" + this.energyContainer.energy + "/" + this.energyContainer.maxEnergy);
     }
 

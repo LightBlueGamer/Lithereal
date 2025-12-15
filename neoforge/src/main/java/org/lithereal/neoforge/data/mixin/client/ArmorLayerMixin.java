@@ -1,4 +1,4 @@
-package org.lithereal.neoforge.data.mixin;
+package org.lithereal.neoforge.data.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;

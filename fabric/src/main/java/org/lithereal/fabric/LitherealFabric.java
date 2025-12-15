@@ -2,6 +2,7 @@ package org.lithereal.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.Registries;
@@ -18,6 +19,9 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.entity.ModEntities;
+import org.lithereal.entity.phantom.PhantomDrowned;
+import org.lithereal.entity.phantom.PhantomZombie;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
 import org.lithereal.data.compat.ModWeaponType;
@@ -80,6 +84,9 @@ public class LitherealFabric implements ModInitializer {
         });
 
         Lithereal.init();
+
+        FabricDefaultAttributeRegistry.register(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombie.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.PHANTOM_DROWNED.get(), PhantomDrowned.createAttributes());
 
         FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
             builder.registerRecipes(Ingredient.of(ModVegetationBlocks.MALISHROOM.get()), Lithereal.asHolder(ModPotions.UNLUCK));

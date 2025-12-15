@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.EventHooks;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.LitheriteItem;
 import org.lithereal.item.ModRawMaterialItems;
 
@@ -22,7 +23,7 @@ public class ForgeLitheriteItem extends LitheriteItem {
     }
 
     @Override
-    public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
+    public boolean onEntityItemUpdate(ItemStack stack, @NotNull ItemEntity entity) {
         Item item = stack.getItem();
 
         if (item instanceof LitheriteItem) {

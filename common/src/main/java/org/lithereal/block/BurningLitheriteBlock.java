@@ -31,7 +31,7 @@ public class BurningLitheriteBlock extends Block {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
+    public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
     }
 

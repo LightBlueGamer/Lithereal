@@ -1,4 +1,4 @@
-package org.lithereal.fabric.data.mixin;
+package org.lithereal.fabric.data.mixin.accessor;
 
 import net.minecraft.world.level.block.state.properties.WoodType;
 import org.spongepowered.asm.mixin.Mixin;

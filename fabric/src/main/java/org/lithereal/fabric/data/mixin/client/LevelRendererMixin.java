@@ -1,4 +1,4 @@
-package org.lithereal.fabric.data.mixin;
+package org.lithereal.fabric.data.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

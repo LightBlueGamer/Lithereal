@@ -148,6 +148,8 @@
   "enchantment.lithereal.heros_edge": "Hero's Edge",
 
   "entity.lithereal.lither_charge": "Thrown Lither Charge",
+  "entity.lithereal.phantom_zombie": "Phantom Zombie",
+  "entity.lithereal.phantom_drowned": "Phantom Drowned",
   "entity.lithereal.mod_boat": "Boat",
   "entity.lithereal.mod_chest_boat": "Boat with Chest",
   "entity.lithereal.rift_spawner": "Rift Spawner",

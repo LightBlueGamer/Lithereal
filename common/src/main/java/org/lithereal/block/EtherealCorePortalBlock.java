@@ -181,7 +181,7 @@ public class EtherealCorePortalBlock extends BaseEntityBlock implements Portal {
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState blockState) {
+    protected @NotNull RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
 }

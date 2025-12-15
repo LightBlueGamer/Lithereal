@@ -22,6 +22,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -46,7 +47,7 @@ public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock {
     );
 
     @Override
-    public MapCodec<? extends WaterloggableWallTorchBlock> codec() {
+    public @NotNull MapCodec<? extends WaterloggableWallTorchBlock> codec() {
         return CODEC;
     }
     public WaterloggableWallTorchBlock(Supplier<SimpleParticleType> typeSupplier, Properties properties) {
@@ -59,12 +60,12 @@ public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock {
     }
 
     @Override
-    public String getDescriptionId() {
+    public @NotNull String getDescriptionId() {
         return this.asItem().getDescriptionId();
     }
 
     @Override
-    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    protected @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return getShape(blockState);
     }
 
@@ -106,7 +107,7 @@ public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock {
     }
 
     @Override
-    protected BlockState updateShape(
+    protected @NotNull BlockState updateShape(
             BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2
     ) {
         if (blockState.getValue(WATERLOGGED)) {
@@ -130,12 +131,12 @@ public class WaterloggableWallTorchBlock extends WaterloggableTorchBlock {
     }
 
     @Override
-    protected BlockState rotate(BlockState blockState, Rotation rotation) {
+    protected @NotNull BlockState rotate(BlockState blockState, Rotation rotation) {
         return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
     }
 
     @Override
-    protected BlockState mirror(BlockState blockState, Mirror mirror) {
+    protected @NotNull BlockState mirror(BlockState blockState, Mirror mirror) {
         return blockState.rotate(mirror.getRotation(blockState.getValue(FACING)));
     }
 

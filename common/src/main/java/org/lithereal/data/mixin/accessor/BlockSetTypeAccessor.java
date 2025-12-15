@@ -1,4 +1,4 @@
-package org.lithereal.data.mixin;
+package org.lithereal.data.mixin.accessor;
 
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import org.spongepowered.asm.mixin.Mixin;

@@ -35,7 +35,7 @@ public class ForgeElectricCrucibleBlock extends ElectricCrucibleBlock {
     }
 
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+    public void onRemove(BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof ForgeElectricCrucibleBlockEntity) {
@@ -47,7 +47,7 @@ public class ForgeElectricCrucibleBlock extends ElectricCrucibleBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState blockState, Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull BlockHitResult blockHitResult) {
         if (!level.isClientSide && level.getBlockEntity(blockPos) instanceof ElectricCrucibleBlockEntity) {
             MenuProvider screenHandlerFactory = ((ForgeElectricCrucibleBlockEntity) level.getBlockEntity(blockPos));
 
@@ -60,7 +60,7 @@ public class ForgeElectricCrucibleBlock extends ElectricCrucibleBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, @NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand interactionHand, @NotNull BlockHitResult blockHitResult) {
         if (itemStack.is(ModToolItems.LITHERITE_WRENCH.get())) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
             if (blockEntity instanceof ElectricCrucibleBlockEntity electricCrucibleBlockEntity) {

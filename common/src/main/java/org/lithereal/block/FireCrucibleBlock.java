@@ -63,12 +63,12 @@ public abstract class FireCrucibleBlock extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
+    public @NotNull BlockState rotate(BlockState pState, Rotation pRotation) {
         return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
+    public @NotNull BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
@@ -106,7 +106,7 @@ public abstract class FireCrucibleBlock extends BaseEntityBlock {
     /* BLOCK ENTITY */
 
     @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
+    public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
     }
 

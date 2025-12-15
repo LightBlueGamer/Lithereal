@@ -194,7 +194,7 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
     }
 
     @Override
-    protected BlockState rotate(BlockState blockState, Rotation rotation) {
+    protected @NotNull BlockState rotate(BlockState blockState, Rotation rotation) {
         return rotatePillar(blockState, rotation);
     }
 

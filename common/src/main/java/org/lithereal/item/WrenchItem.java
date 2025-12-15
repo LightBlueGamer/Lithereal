@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.*;
 
 import java.util.ArrayList;
@@ -163,7 +164,7 @@ public class WrenchItem extends Item {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public @NotNull InteractionResult useOn(UseOnContext context) {
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);

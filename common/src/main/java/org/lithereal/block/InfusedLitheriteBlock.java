@@ -48,12 +48,12 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
+    public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState p_287732_, LootParams.Builder params) {
+    public @NotNull List<ItemStack> getDrops(BlockState p_287732_, LootParams.Builder params) {
         List<ItemStack> drops = super.getDrops(p_287732_, params);
         BlockEntity blockentity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if(blockentity instanceof InfusedLitheriteBlockEntity infusedLitheriteBlockEntity) {
@@ -63,7 +63,7 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+    public @NotNull ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         ItemStack stack = super.getCloneItemStack(levelReader, blockPos, blockState);
         levelReader.getBlockEntity(blockPos, LitherealExpectPlatform.getInfusedLitheriteBlockEntity()).ifPresent(infusedLitheriteBlockEntity -> infusedLitheriteBlockEntity.saveToItem(stack, levelReader.registryAccess()));
         return stack;
