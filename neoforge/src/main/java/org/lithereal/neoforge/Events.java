@@ -30,6 +30,11 @@ public class Events {
                 Regions.register(new LitherealOverworldRegion(2));
             });
         }
+        @SubscribeEvent
+        public static void onDefaultAttributesRegistry(EntityAttributeCreationEvent event) {
+            event.put(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombie.createAttributes().build());
+            event.put(ModEntities.PHANTOM_DROWNED.get(), PhantomDrowned.createAttributes().build());
+        }
     }
     public static class ForgeBusEvents {
         public static void register() {
@@ -46,11 +51,6 @@ public class Events {
             builder.addStartMix(ModRawMaterialItems.SATURNITE_CRYSTAL.get(), Lithereal.asHolder(ModPotions.STURDINESS));
             builder.addMix(Lithereal.asHolder(ModPotions.STURDINESS), Items.REDSTONE, Lithereal.asHolder(ModPotions.LONG_STURDINESS));
             builder.addMix(Lithereal.asHolder(ModPotions.STURDINESS), Items.GLOWSTONE_DUST, Lithereal.asHolder(ModPotions.STRONG_STURDINESS));
-        }
-        @SubscribeEvent
-        public static void onDefaultAttributesRegistry(EntityAttributeCreationEvent event) {
-            event.put(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombie.createAttributes().build());
-            event.put(ModEntities.PHANTOM_DROWNED.get(), PhantomDrowned.createAttributes().build());
         }
     }
 }
