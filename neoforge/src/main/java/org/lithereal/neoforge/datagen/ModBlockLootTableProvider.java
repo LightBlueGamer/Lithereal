@@ -17,6 +17,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.*;
+import org.lithereal.item.ModRawMaterialItems;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.CREATIVE_ETHER_SOURCE.get());
         dropSelf(ModBlocks.PASSIVE_ETHER_ABSORBER.get());
         dropSelf(ForgeBlocks.ELECTRIC_CRUCIBLE.get());
+        createMultipleOreDropsNoFortune(ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), 7, 9);
 
         dropSelf(ModTreeBlocks.PHANTOM_OAK_PLANKS.get());
         dropPottedContents(ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get());
@@ -80,6 +82,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected void add(@NotNull Block block, LootTable.@NotNull Builder builder) {
         super.add(block, builder);
         cachedGeneratedBlocks.add(block);
+    }
+
+    protected LootTable.Builder createMultipleOreDropsNoFortune(Block pBlock, Item item, float minDrops, float maxDrops) {
+        return this.createSilkTouchDispatchTable(pBlock,
+                this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDrops, maxDrops)))));
     }
 
     protected LootTable.Builder createMultipleOreDrops(Block pBlock, Item item, float minDrops, float maxDrops) {
