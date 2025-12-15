@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "lithereal:ethereal_crystal_block",
     "lithereal:litherite_crystal_block"
   ]
 }
