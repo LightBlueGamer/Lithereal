@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.util.CommonUtils;
 
-public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingredient potion, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
+public record InfusementChamberRecipe(ItemStack output, Ingredient secondary, Ingredient primary, Integer maxProgress) implements Recipe<ContainerRecipeInput> {
     @Override
     public @NotNull ItemStack assemble(ContainerRecipeInput container, HolderLookup.Provider provider) {
         return output;
@@ -32,20 +32,20 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
 
     @Override
     public boolean matches(ContainerRecipeInput pContainer, Level pLevel) {
-        return hasBucket(pContainer, 0) && hasPotion(pContainer, 1);
+        return hasSecondary(pContainer, 0) && hasPrimary(pContainer, 1);
     }
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
-        return CommonUtils.of(bucket, potion);
+        return CommonUtils.of(secondary, primary);
     }
 
-    private boolean hasBucket(ContainerRecipeInput container, int index) {
-        return bucket.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+    private boolean hasSecondary(ContainerRecipeInput container, int index) {
+        return secondary.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
-    private boolean hasPotion(ContainerRecipeInput container, int index) {
-        return potion.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
+    private boolean hasPrimary(ContainerRecipeInput container, int index) {
+        return primary.test(container.getItem(index)) && container.getItem(index).getCount() >= 1;
     }
 
     @Override
@@ -69,8 +69,8 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
                 ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "infusing");
         public static final MapCodec<InfusementChamberRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(ItemStack.STRICT_CODEC.fieldOf("output").forGetter((arg) -> arg.output),
-                                Ingredient.CODEC.fieldOf("secondary").forGetter(infusementChamberRecipe -> infusementChamberRecipe.bucket),
-                                Ingredient.CODEC.fieldOf("potion").forGetter(infusementChamberRecipe -> infusementChamberRecipe.potion),
+                                Ingredient.CODEC.fieldOf("secondary").forGetter(infusementChamberRecipe -> infusementChamberRecipe.secondary),
+                                Ingredient.CODEC.fieldOf("primary").forGetter(infusementChamberRecipe -> infusementChamberRecipe.primary),
                                 PrimitiveCodec.INT.fieldOf("max_progress").forGetter(infusementChamberRecipe -> infusementChamberRecipe.maxProgress))
                         .apply(instance, InfusementChamberRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, InfusementChamberRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
@@ -85,8 +85,8 @@ public record InfusementChamberRecipe(ItemStack output, Ingredient bucket, Ingre
         }
 
         public static void toNetwork(RegistryFriendlyByteBuf buf, InfusementChamberRecipe recipe) {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.bucket);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.potion);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.secondary);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.primary);
             ItemStack.STREAM_CODEC.encode(buf, recipe.output);
             ByteBufCodecs.VAR_INT.encode(buf, recipe.maxProgress);
         }

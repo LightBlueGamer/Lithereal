@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "minecraft:entity/signs/phantom_oak"
+    "particle": "lithereal:block/phantom_oak_planks"
   }
 }

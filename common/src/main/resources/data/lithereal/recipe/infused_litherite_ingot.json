@@ -1,9 +1,9 @@
 {
   "type": "lithereal:infusing",
-  "bucket": {
+  "secondary": {
     "item": "lithereal:molten_litherite_bucket"
   },
-  "potion": {
+  "primary": {
     "item": "minecraft:potion"
   },
   "max_progress": 6000,

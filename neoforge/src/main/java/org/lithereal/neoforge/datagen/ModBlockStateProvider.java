@@ -34,8 +34,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         itemForBlockModel(ModTreeBlocks.STRIPPED_PHANTOM_OAK_WOOD.get());
         stairsBlock((StairBlock) ModTreeBlocks.PHANTOM_OAK_STAIRS.get(), Lithereal.id("block/phantom_oak_planks"));
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_STAIRS.get());
-        signBlock((StandingSignBlock) ModTreeBlocks.PHANTOM_OAK_SIGN.get(), (WallSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get(), ResourceLocation.withDefaultNamespace("entity/signs/phantom_oak"));
-        hangingSignBlock((CeilingHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), (WallHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get(), ResourceLocation.withDefaultNamespace("entity/signs/hanging/phantom_oak"));
+        signBlock((StandingSignBlock) ModTreeBlocks.PHANTOM_OAK_SIGN.get(), (WallSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get(), Lithereal.id("block/phantom_oak_planks"));
+        hangingSignBlock((CeilingHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), (WallHangingSignBlock) ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get(), Lithereal.id("block/stripped_phantom_oak_log"));
         pressurePlateBlock((PressurePlateBlock) ModTreeBlocks.PHANTOM_OAK_PRESSURE_PLATE.get(), Lithereal.id("block/phantom_oak_planks"));
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_PRESSURE_PLATE.get());
         fenceWithItem((FenceBlock) ModTreeBlocks.PHANTOM_OAK_FENCE.get(), Lithereal.id("block/phantom_oak_planks"));
