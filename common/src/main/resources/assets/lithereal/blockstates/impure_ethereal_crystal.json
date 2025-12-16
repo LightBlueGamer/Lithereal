@@ -1,7 +1,29 @@
 {
   "variants": {
-    "": {
+    "facing=up": {
       "model": "lithereal:block/impure_ethereal_crystal"
+    },
+    "facing=down": {
+      "model": "lithereal:block/impure_ethereal_crystal",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "lithereal:block/impure_ethereal_crystal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west": {
+      "model": "lithereal:block/impure_ethereal_crystal",
+      "x": 270,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "lithereal:block/impure_ethereal_crystal",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "lithereal:block/impure_ethereal_crystal",
+      "x": 270
     }
   }
 }

@@ -33,7 +33,9 @@
       "lithereal:lake_lava_underground",
       "lithereal:lake_lava_surface"
     ],
-    [],
+    [
+      "lithereal:ethereal_crystal_spikes"
+    ],
     [],
     [],
     [],
@@ -49,7 +51,9 @@
       "lithereal:phantom_diamond_ore_buried",
       "lithereal:phantom_diamond_ore_large"
     ],
-    [],
+    [
+      "lithereal:ethereal_crystal_cluster"
+    ],
     [
       "lithereal:spring_water",
       "lithereal:spring_lava"

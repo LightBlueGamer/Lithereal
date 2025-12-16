@@ -115,7 +115,7 @@ public class LitherealClient {
                 ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(),
                 ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(),
                 ModPhantomBlocks.POTTED_PHANTOM_ROSE.get());
-        RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ModBlocks.ETHEREAL_CORE_PORTAL.get(), ModBlocks.ETHEREAL_RIFT.get());
+        RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.PURE_ETHER_SOURCE.get(), ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ModBlocks.ETHEREAL_CORE_PORTAL.get(), ModBlocks.ETHEREAL_RIFT.get());
     }
 
     private static void registerItemsToTab() {

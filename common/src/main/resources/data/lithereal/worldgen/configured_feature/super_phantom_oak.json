@@ -1,7 +1,73 @@
 {
   "type": "minecraft:tree",
   "config": {
-    "decorators": [],
+    "decorators": [
+      {
+        "type": "lithereal:attached_to_trunk",
+        "probability": 0.65,
+        "exclusion_radius_xz": 3,
+        "exclusion_radius_y": 2,
+        "required_empty_blocks": 1,
+        "block_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "weight": 2,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "down"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "north"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "south"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "east"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "west"
+                }
+              }
+            }
+          ]
+        },
+        "directions": [
+          "up",
+          "down",
+          "north",
+          "south",
+          "east",
+          "west"
+        ]
+      }
+    ],
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {

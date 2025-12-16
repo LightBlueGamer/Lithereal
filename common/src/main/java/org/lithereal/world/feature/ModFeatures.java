@@ -8,6 +8,10 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import org.lithereal.Lithereal;
+import org.lithereal.world.feature.generic.ClusterFeature;
+import org.lithereal.world.feature.generic.LargeSpikeFeature;
+import org.lithereal.world.feature.generic.configurations.ClusterConfiguration;
+import org.lithereal.world.feature.generic.configurations.LargeSpikeConfiguration;
 
 import java.util.function.Supplier;
 
@@ -19,6 +23,8 @@ public class ModFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Lithereal.MOD_ID, Registries.FEATURE);
 
     public static final RegistrySupplier<EtherealCoreArenaFeature> ETHEREAL_CORE_ARENA = registerFeature("ethereal_core_arena", EtherealCoreArenaFeature::new);
+    public static final RegistrySupplier<ClusterFeature> CLUSTER = registerFeature("cluster", () -> new ClusterFeature(ClusterConfiguration.CODEC));
+    public static final RegistrySupplier<LargeSpikeFeature> LARGE_SPIKE = registerFeature("large_spike", () -> new LargeSpikeFeature(LargeSpikeConfiguration.CODEC));
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> RegistrySupplier<F> registerFeature(String name, Supplier<F> feature) {
         return FEATURES.register(name, feature);
     }

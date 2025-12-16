@@ -34,6 +34,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.CREATIVE_ETHER_SOURCE.get());
         dropSelf(ModBlocks.PASSIVE_ETHER_ABSORBER.get());
+        dropSelf(ModBlocks.PURE_ETHER_SOURCE.get());
         dropSelf(ForgeBlocks.ELECTRIC_CRUCIBLE.get());
         createMultipleOreDropsNoFortune(ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), 7, 9);
 

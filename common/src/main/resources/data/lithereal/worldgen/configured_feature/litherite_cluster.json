@@ -1,34 +1,38 @@
 {
-  "type": "lithereal:large_spike",
+  "type": "lithereal:cluster",
   "config": {
-    "column_radius": {
+    "chance_of_column_at_max_distance_from_center": 0.1,
+    "density": {
       "type": "minecraft:uniform",
-      "max_inclusive": 9,
+      "max_exclusive": 0.7,
+      "min_inclusive": 0.3
+    },
+    "block_layer_thickness": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 4,
       "min_inclusive": 2
     },
-    "floor_to_ceiling_search_range": 30,
-    "height_scale": {
+    "floor_to_ceiling_search_range": 12,
+    "height": {
       "type": "minecraft:uniform",
-      "max_exclusive": 3,
-      "min_inclusive": 0.4
+      "max_inclusive": 6,
+      "min_inclusive": 3
     },
-    "max_column_radius_to_cave_height_ratio": 0.33,
-    "min_bluntness_for_wind": 0.6,
-    "min_radius_for_wind": 4,
-    "stalactite_bluntness": {
+    "height_deviation": 3,
+    "max_distance_from_center_affecting_height_bias": 8,
+    "max_distance_from_edge_affecting_chance_of_column": 3,
+    "max_stalagmite_stalactite_height_diff": 1,
+    "radius": {
       "type": "minecraft:uniform",
-      "max_exclusive": 1.2,
-      "min_inclusive": 0.5
+      "max_inclusive": 8,
+      "min_inclusive": 2
     },
-    "stalagmite_bluntness": {
-      "type": "minecraft:uniform",
-      "max_exclusive": 1.2,
-      "min_inclusive": 0.6
-    },
-    "wind_speed": {
-      "type": "minecraft:uniform",
-      "max_exclusive": 0.3,
-      "min_inclusive": 0
+    "wetness": {
+      "type": "minecraft:clamped_normal",
+      "deviation": 0.3,
+      "max": 0.9,
+      "mean": 0.1,
+      "min": 0.1
     },
     "core_percentage": 0,
     "core_block": {

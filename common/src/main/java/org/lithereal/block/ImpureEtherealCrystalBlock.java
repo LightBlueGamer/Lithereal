@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -21,8 +22,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class ImpureEtherealCrystalBlock extends Block implements SimpleWaterloggedBlock {
-    public static final VoxelShape SHAPE = box(2, 0, 2, 14, 11, 14);
+    public static final VoxelShape SHAPE_UP = box(2, 0, 2, 14, 11, 14);
+    public static final VoxelShape SHAPE_DOWN = box(2, 5, 2, 14, 16, 14);
+    public static final VoxelShape SHAPE_NORTH = box(2, 2, 5, 14, 14, 16);
+    public static final VoxelShape SHAPE_SOUTH = box(2, 2, 0, 14, 14, 11);
+    public static final VoxelShape SHAPE_EAST = box(0, 2, 2, 11, 14, 14);
+    public static final VoxelShape SHAPE_WEST = box(5, 2, 2, 16, 14, 14);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final MapCodec<ImpureEtherealCrystalBlock> CODEC = simpleCodec(ImpureEtherealCrystalBlock::new);
 
     @Override
@@ -32,18 +39,26 @@ public class ImpureEtherealCrystalBlock extends Block implements SimpleWaterlogg
 
     public ImpureEtherealCrystalBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false).setValue(FACING, Direction.UP));
     }
 
     @Override
     protected @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return SHAPE;
+        Direction direction = blockState.getValue(FACING);
+        return switch (direction) {
+            case NORTH -> SHAPE_NORTH;
+            case SOUTH -> SHAPE_SOUTH;
+            case EAST -> SHAPE_EAST;
+            case WEST -> SHAPE_WEST;
+            case DOWN -> SHAPE_DOWN;
+            default -> SHAPE_UP;
+        };
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
-        return this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        return this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER).setValue(FACING, blockPlaceContext.getClickedFace());
     }
 
     @Override
@@ -52,9 +67,6 @@ public class ImpureEtherealCrystalBlock extends Block implements SimpleWaterlogg
         if (blockState.getValue(WATERLOGGED)) {
             levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
             fallback = Blocks.WATER;
-            if (!levelAccessor.isClientSide()) {
-                levelAccessor.destroyBlock(blockPos, true);
-            }
         }
 
         return !blockState.canSurvive(levelAccessor, blockPos) ? fallback.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
@@ -67,11 +79,13 @@ public class ImpureEtherealCrystalBlock extends Block implements SimpleWaterlogg
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(WATERLOGGED, FACING);
     }
 
     @Override
     protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return levelReader.getBlockState(blockPos.below()).isCollisionShapeFullBlock(levelReader, blockPos.below());
+        Direction oppositeDir = blockState.getValue(FACING).getOpposite();
+        BlockPos attachedPos = blockPos.relative(oppositeDir);
+        return levelReader.getBlockState(attachedPos).isFaceSturdy(levelReader, attachedPos, oppositeDir);
     }
 }

@@ -30,12 +30,12 @@
       "max_exclusive": 0.3,
       "min_inclusive": 0
     },
-    "core_percentage": 0,
+    "core_percentage": 0.4,
     "core_block": {
       "fallback": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "lithereal:litherite_crystal_block"
+          "Name": "lithereal:pure_ether_source"
         }
       },
       "rules": [
@@ -46,19 +46,28 @@
       "fallback": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "lithereal:litherite_crystal_block"
+          "Name": "lithereal:ethereal_crystal_block"
         }
       },
       "rules": [
 
       ]
     },
-    "replaceable": "#minecraft:dripstone_replaceable_blocks",
+    "attached": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:impure_ethereal_crystal"
+      }
+    },
+    "replaceable": "#lithereal:base_stone_ethereal_core",
     "placed_ignore_blocks": [
-      "lithereal:litherite_crystal_block"
+      "lithereal:impure_ethereal_crystal",
+      "lithereal:ethereal_crystal_block",
+      "lithereal:pure_ether_source"
     ],
     "base_blocks": [
-      "lithereal:litherite_crystal_block"
+      "lithereal:ethereal_crystal_block",
+      "lithereal:pure_ether_source"
     ]
   }
 }

@@ -38,7 +38,7 @@ public class ModBlocks {
             () -> new ImpureEtherealCrystalBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_BLUE).sound(SoundType.AMETHYST_CLUSTER).strength(5, 8)));
 
     public static final RegistrySupplier<Block> ETHEREAL_CRYSTAL_BLOCK = registerBlock("ethereal_crystal_block",
-            () -> new TransparentBlock(BlockBehaviour.Properties.of()
+            () -> new HalfTransparentBlock(BlockBehaviour.Properties.of()
                     .strength(6f)
                     .requiresCorrectToolForDrops()
                     .explosionResistance(25)
@@ -51,8 +51,20 @@ public class ModBlocks {
                     .isSuffocating(CommonUtils::never)
                     .isViewBlocking(CommonUtils::never)));
 
+    public static final RegistrySupplier<Block> PURE_ETHER_SOURCE = registerBlock("pure_ether_source",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(180f)
+                    .requiresCorrectToolForDrops()
+                    .explosionResistance(1000)
+                    .mapColor(MapColor.COLOR_BLUE)
+                    .sound(SoundType.AMETHYST_CLUSTER)
+                    .lightLevel(state -> 15)
+                    .noOcclusion()
+                    .isValidSpawn(CommonUtils::never)
+                    .isRedstoneConductor(CommonUtils::never)));
+
     public static final RegistrySupplier<Block> LITHERITE_CRYSTAL_BLOCK = registerBlock("litherite_crystal_block",
-            () -> new TransparentBlock(BlockBehaviour.Properties.of()
+            () -> new HalfTransparentBlock(BlockBehaviour.Properties.of()
                     .strength(6f)
                     .requiresCorrectToolForDrops()
                     .explosionResistance(25)

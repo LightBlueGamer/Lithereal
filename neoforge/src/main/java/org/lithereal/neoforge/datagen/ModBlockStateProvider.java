@@ -21,6 +21,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.CREATIVE_ETHER_SOURCE);
         blockWithItem(ModBlocks.PASSIVE_ETHER_ABSORBER);
+        blockWithItem(ModBlocks.PURE_ETHER_SOURCE);
         blockWithItem(ModBlocks.ETHEREAL_CRYSTAL_BLOCK);
 
         blockWithItem(ModTreeBlocks.PHANTOM_OAK_PLANKS);

@@ -11,6 +11,7 @@
       }
     },
     "valid_blocks": [
+      "lithereal:pailite",
       "lithereal:etherstone",
       "lithereal:ethereal_dirt"
     ]

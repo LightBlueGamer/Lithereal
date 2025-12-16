@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
@@ -18,10 +19,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -39,6 +43,7 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
     public static final MapCodec<EtherealRiftBlock> CODEC = simpleCodec(EtherealRiftBlock::new);
     protected static final VoxelShape SHAPE_X_AXIS = Block.box(0.0F, 0.0F, 7.0F, 16.0F, 16.0F, 9.0F);
     protected static final VoxelShape SHAPE_Z_AXIS = Block.box(7.0F, 0.0F, 0.0F, 9.0F, 16.0F, 16.0F);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
     @Override
@@ -48,7 +53,7 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
 
     public EtherealRiftBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X));
+        this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X).setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -189,7 +194,7 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AXIS);
+        builder.add(AXIS, WATERLOGGED);
         super.createBlockStateDefinition(builder);
     }
 
@@ -211,8 +216,10 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
+        FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
         Direction face = blockPlaceContext.getClickedFace();
         BlockState clickedOnState = blockPlaceContext.getLevel().getBlockState(blockPlaceContext.getClickedPos().relative(face.getOpposite()));
+        BlockState resultState = this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
         if (!blockPlaceContext.isSecondaryUseActive() && clickedOnState.is(this)) {
             Direction.Axis axis = clickedOnState.getValue(AXIS);
             Direction.Axis sideAxis = switch (blockPlaceContext.getClickedFace().getAxis()) {
@@ -224,9 +231,25 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
                 case Z -> Direction.Axis.Z;
             };
             boolean useClickedStateAxis = axis.equals(sideAxis) || axis.equals(otherSideAxis);
-            if (useClickedStateAxis) return this.defaultBlockState().setValue(AXIS, axis);
+            if (useClickedStateAxis) return resultState.setValue(AXIS, axis);
         }
-        return this.defaultBlockState().setValue(AXIS, face.getAxis());
+        return resultState.setValue(AXIS, face.getAxis());
+    }
+
+    @Override
+    protected @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if (blockState.getValue(WATERLOGGED)) {
+            levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
+            if (!levelAccessor.isClientSide())
+                levelAccessor.destroyBlock(blockPos, true);
+        }
+
+        return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
+    }
+
+    @Override
+    protected @NotNull FluidState getFluidState(BlockState blockState) {
+        return blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 
     @Override
