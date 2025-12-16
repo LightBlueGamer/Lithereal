@@ -9,10 +9,8 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
-import org.lithereal.client.renderer.IvRenderHelper;
 import org.lithereal.entity.phantom.PhantomMob;
 
 public class AbstractPhantomZombieRenderer<T extends Zombie & PhantomMob<T>, M extends ZombieModel<T>, AM extends ZombieModel<T>> extends HumanoidMobRenderer<T, M> {
@@ -37,12 +35,6 @@ public class AbstractPhantomZombieRenderer<T extends Zombie & PhantomMob<T>, M e
             poseStack.translate(0, progress * (Mth.sin(bob * 0.067F) * 0.125F + 0.125F), 0);
         }
         super.render(livingEntity, f, partialTicks, poseStack, multiBufferSource, packedLightIn);
-        if (livingEntity.isPhasing()) {
-            double height = livingEntity.getBbHeight() * 0.5;
-            poseStack.translate(0, height, 0);
-            Vec3 deltaMovement = livingEntity.getDeltaMovement();
-            IvRenderHelper.renderTrail(deltaMovement.reverse(), height, (float) (livingEntity.getScale() * deltaMovement.length()), 0x6600AA, 1, poseStack, multiBufferSource);
-        }
         poseStack.popPose();
     }
 
