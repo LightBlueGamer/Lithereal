@@ -40,6 +40,7 @@ import org.lithereal.client.particle.PortalParticleProvider;
 import org.lithereal.client.particle.StandardBiomeProvider;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
+import org.lithereal.client.renderer.LitherealArmorModel;
 import org.lithereal.client.renderer.ModBoatRenderer;
 import org.lithereal.client.renderer.zombie.BetterZombieModel;
 import org.lithereal.core.component.ModComponents;
@@ -65,6 +66,8 @@ public class LitherealClient {
         EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
         EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
         EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE_INNER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
+        EntityModelLayerRegistry.register(LitherealArmorModel.OUTER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
+        EntityModelLayerRegistry.register(LitherealArmorModel.INNER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBodyModel);
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.SIGN.get(), SignRenderer::new);
