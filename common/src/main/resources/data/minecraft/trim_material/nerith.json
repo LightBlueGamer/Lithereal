@@ -1,0 +1,9 @@
+{
+  "asset_name": "nerith",
+  "description": {
+    "color": "#d8608d",
+    "translate": "trim_material.lithereal.nerith"
+  },
+  "ingredient": "lithereal:nerith_ingot",
+  "item_model_index": 0.4
+}

@@ -1,0 +1,9 @@
+{
+  "asset_name": "hellionite",
+  "description": {
+    "color": "#b73f3f",
+    "translate": "trim_material.lithereal.hellionite"
+  },
+  "ingredient": "lithereal:hellionite_crystal",
+  "item_model_index": 0.4
+}

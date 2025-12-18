@@ -29,6 +29,7 @@ public class PhantomZombie extends Zombie implements PhantomMob<PhantomZombie> {
     public PhantomZombie(EntityType<? extends Zombie> entityType, Level level) {
         super(entityType, level);
         init();
+        this.xpReward = 20;
     }
 
     public PhantomZombie(Level level) {

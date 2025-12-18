@@ -1,0 +1,9 @@
+{
+  "asset_name": "luminium",
+  "description": {
+    "color": "#ff9600",
+    "translate": "trim_material.lithereal.luminium"
+  },
+  "ingredient": "lithereal:luminium_crystal",
+  "item_model_index": 0.5
+}

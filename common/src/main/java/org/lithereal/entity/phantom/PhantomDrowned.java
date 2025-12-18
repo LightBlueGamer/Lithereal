@@ -41,6 +41,7 @@ public class PhantomDrowned extends Drowned implements PhantomMob<PhantomDrowned
     public PhantomDrowned(EntityType<? extends Drowned> entityType, Level level) {
         super(entityType, level);
         init();
+        this.xpReward = 20;
     }
 
     public PhantomDrowned(Level level) {

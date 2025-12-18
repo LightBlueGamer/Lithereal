@@ -1,0 +1,9 @@
+{
+  "asset_name": "aurelite",
+  "description": {
+    "color": "#dfd367",
+    "translate": "trim_material.lithereal.aurelite"
+  },
+  "ingredient": "lithereal:aurelite_ingot",
+  "item_model_index": 0.6
+}

@@ -1,0 +1,9 @@
+{
+  "asset_name": "saturnite",
+  "description": {
+    "color": "#8f34d0",
+    "translate": "trim_material.lithereal.saturnite"
+  },
+  "ingredient": "lithereal:saturnite_crystal",
+  "item_model_index": 1.0
+}

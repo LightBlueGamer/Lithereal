@@ -1,0 +1,12 @@
+{
+  "asset_name": "elunite",
+  "description": {
+    "color": "#c2c2c2",
+    "translate": "trim_material.lithereal.elunite"
+  },
+  "ingredient": "lithereal:elunite_crystal",
+  "item_model_index": 0.2,
+  "override_armor_materials": {
+    "minecraft:iron": "elunite_darker"
+  }
+}

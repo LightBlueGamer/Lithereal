@@ -1,0 +1,12 @@
+{
+  "asset_name": "allium",
+  "description": {
+    "color": "#28899c",
+    "translate": "trim_material.lithereal.allium"
+  },
+  "ingredient": "lithereal:allian_ingot",
+  "item_model_index": 0.8,
+  "override_armor_materials": {
+    "minecraft:diamond": "allium_darker"
+  }
+}

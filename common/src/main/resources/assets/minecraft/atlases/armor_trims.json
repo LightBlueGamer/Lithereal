@@ -44,7 +44,24 @@
       "permutations": {
         "litherite": "trims/color_palettes/litherite",
         "litherite_darker": "trims/color_palettes/litherite_darker",
-        "phantom_diamond": "trims/color_palettes/phantom_diamond"
+        "odysium": "trims/color_palettes/odysium",
+        "odysium_darker": "trims/color_palettes/odysium_darker",
+        "phantom_diamond": "trims/color_palettes/phantom_diamond",
+        "allium": "trims/color_palettes/allium",
+        "allium_darker": "trims/color_palettes/allium_darker",
+        "aurelite": "trims/color_palettes/aurelite",
+        "chryon": "trims/color_palettes/chryon",
+        "copalite": "trims/color_palettes/copalite",
+        "cyrum": "trims/color_palettes/cyrum",
+        "elcrum": "trims/color_palettes/elcrum",
+        "elunite": "trims/color_palettes/elunite",
+        "elunite_darker": "trims/color_palettes/elunite_darker",
+        "hellionite": "trims/color_palettes/hellionite",
+        "impure_ethereal_crystal": "trims/color_palettes/impure_ethereal_crystal",
+        "luminium": "trims/color_palettes/luminium",
+        "nerith": "trims/color_palettes/nerith",
+        "saturnite": "trims/color_palettes/saturnite",
+        "soliumite": "trims/color_palettes/soliumite"
       }
     }
   ]

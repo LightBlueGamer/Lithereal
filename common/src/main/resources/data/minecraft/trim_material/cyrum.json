@@ -1,0 +1,9 @@
+{
+  "asset_name": "cyrum",
+  "description": {
+    "color": "#477d81",
+    "translate": "trim_material.lithereal.cyrum"
+  },
+  "ingredient": "lithereal:cyrum_crystal",
+  "item_model_index": 0.1
+}

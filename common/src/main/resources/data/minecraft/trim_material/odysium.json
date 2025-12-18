@@ -1,0 +1,12 @@
+{
+  "asset_name": "odysium",
+  "description": {
+    "color": "#4380b9",
+    "translate": "trim_material.lithereal.odysium"
+  },
+  "ingredient": "lithereal:odysium_ingot",
+  "item_model_index": 0.9,
+  "override_armor_materials": {
+    "lithereal:odysium": "odysium_darker"
+  }
+}

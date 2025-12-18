@@ -2,6 +2,20 @@
   "replace": false,
   "values": [
     "lithereal:litherite_crystal",
-    "lithereal:phantom_diamond"
+    "lithereal:odysium_ingot",
+    "lithereal:phantom_diamond",
+    "lithereal:allian_ingot",
+    "lithereal:aurelite_ingot",
+    "lithereal:chryon_crystal",
+    "lithereal:copalite_ingot",
+    "lithereal:cyrum_crystal",
+    "lithereal:elcrum_ingot",
+    "lithereal:elunite_crystal",
+    "lithereal:hellionite_crystal",
+    "lithereal:luminium_crystal",
+    "lithereal:saturnite_crystal",
+    "lithereal:soliumite_ingot",
+    "lithereal:impure_ethereal_crystal_shard",
+    "lithereal:nerith_ingot"
   ]
 }

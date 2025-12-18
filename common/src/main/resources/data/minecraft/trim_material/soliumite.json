@@ -1,0 +1,9 @@
+{
+  "asset_name": "soliumite",
+  "description": {
+    "color": "#c54e42",
+    "translate": "trim_material.lithereal.soliumite"
+  },
+  "ingredient": "lithereal:soliumite_ingot",
+  "item_model_index": 0.5
+}

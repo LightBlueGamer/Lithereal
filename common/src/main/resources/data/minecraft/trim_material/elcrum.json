@@ -1,0 +1,9 @@
+{
+  "asset_name": "elcrum",
+  "description": {
+    "color": "#57717a",
+    "translate": "trim_material.lithereal.elcrum"
+  },
+  "ingredient": "lithereal:elcrum_ingot",
+  "item_model_index": 0.1
+}

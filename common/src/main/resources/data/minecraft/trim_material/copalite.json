@@ -1,0 +1,9 @@
+{
+  "asset_name": "copalite",
+  "description": {
+    "color": "#187a34",
+    "translate": "trim_material.lithereal.copalite"
+  },
+  "ingredient": "lithereal:copalite_ingot",
+  "item_model_index": 0.7
+}

@@ -43,6 +43,34 @@
       "id": "lithereal:frozen_litherite_knife",
       "required": false
     },
+    "lithereal:smoldering_litherite_axe",
+    "lithereal:smoldering_litherite_hammer",
+    "lithereal:smoldering_litherite_hoe",
+    "lithereal:smoldering_litherite_pickaxe",
+    "lithereal:smoldering_litherite_shovel",
+    "lithereal:smoldering_litherite_sword",
+    {
+      "id": "lithereal:smoldering_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:smoldering_litherite_knife",
+      "required": false
+    },
+    "lithereal:frostbitten_litherite_axe",
+    "lithereal:frostbitten_litherite_hammer",
+    "lithereal:frostbitten_litherite_hoe",
+    "lithereal:frostbitten_litherite_pickaxe",
+    "lithereal:frostbitten_litherite_shovel",
+    "lithereal:frostbitten_litherite_sword",
+    {
+      "id": "lithereal:frostbitten_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:frostbitten_litherite_knife",
+      "required": false
+    },
     "lithereal:infused_litherite_axe",
     "lithereal:infused_litherite_hammer",
     "lithereal:infused_litherite_hoe",

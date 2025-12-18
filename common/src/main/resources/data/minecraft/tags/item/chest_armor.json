@@ -3,8 +3,11 @@
   "values": [
     "lithereal:burning_litherite_chestplate",
     "lithereal:frozen_litherite_chestplate",
+    "lithereal:smoldering_litherite_chestplate",
+    "lithereal:frostbitten_litherite_chestplate",
     "lithereal:infused_litherite_chestplate",
     "lithereal:litherite_chestplate",
+    "lithereal:odysium_chestplate",
     "lithereal:withering_litherite_chestplate"
   ]
 }

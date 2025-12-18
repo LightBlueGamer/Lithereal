@@ -1,0 +1,9 @@
+{
+  "asset_name": "impure_ethereal_crystal",
+  "description": {
+    "color": "#71c1f3",
+    "translate": "trim_material.lithereal.impure_ethereal_crystal"
+  },
+  "ingredient": "lithereal:impure_ethereal_crystal_shard",
+  "item_model_index": 0.8
+}

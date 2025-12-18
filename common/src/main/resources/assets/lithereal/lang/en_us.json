@@ -676,7 +676,21 @@
   "jukebox_song.lithereal.sparkle": "Lithereal - Sparkle",
 
   "trim_material.lithereal.litherite": "Litherite Material",
+  "trim_material.lithereal.odysium": "Odysium Material",
   "trim_material.lithereal.phantom_diamond": "Phantom Diamond Material",
+  "trim_material.lithereal.allium": "Allium Material",
+  "trim_material.lithereal.aurelite": "Aurelite Material",
+  "trim_material.lithereal.chryon": "Chryon Material",
+  "trim_material.lithereal.copalite": "Copalite Material",
+  "trim_material.lithereal.cyrum": "Cyrum Material",
+  "trim_material.lithereal.elcrum": "Elcrum Material",
+  "trim_material.lithereal.elunite": "Elunite Material",
+  "trim_material.lithereal.hellionite": "Hellionite Material",
+  "trim_material.lithereal.impure_ethereal_crystal": "Impure Ethereal Crystal Material",
+  "trim_material.lithereal.luminium": "Luminium Material",
+  "trim_material.lithereal.nerith": "Nerith Material",
+  "trim_material.lithereal.saturnite": "Saturnite Material",
+  "trim_material.lithereal.soliumite": "Soliumite Material",
 
   "upgrade.lithereal.odysium_upgrade": "Odysium Upgrade"
 }

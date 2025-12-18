@@ -1,0 +1,9 @@
+{
+  "asset_name": "chryon",
+  "description": {
+    "color": "#22699d",
+    "translate": "trim_material.lithereal.chryon"
+  },
+  "ingredient": "lithereal:chryon_crystal",
+  "item_model_index": 0.9
+}
