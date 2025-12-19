@@ -28,7 +28,8 @@ public enum Ability {
             List.of(new MobEffectInstance(Lithereal.asHolder(ModMobEffects.PROTECTED), 200, 0)))),
     WITHERING(new WitheringAbility<>(Collections.singletonList(ModArmorMaterials.WITHERING_LITHERITE))),
     INFUSED(new InfusedAbility<>(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE))),
-    ENHANCED(new EnhancedAbility<>(Collections.singletonList(ModArmorMaterials.ODYSIUM)));
+    ODYSIUM(new StandardAbility<>(List.of(ModArmorMaterials.ODYSIUM, ModArmorMaterials.ENHANCED_ODYSIUM), Collections.emptyList(), List.of(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 0), new MobEffectInstance(MobEffects.DIG_SPEED, 200, 0)))),
+    ENHANCED_ODYSIUM(new StandardAbility<>(Collections.singletonList(ModArmorMaterials.ENHANCED_ODYSIUM), Collections.singletonList(new MobEffectInstance(MobEffects.WITHER, 150)), List.of(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 1), new MobEffectInstance(MobEffects.DIG_SPEED, 200, 0), new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 200, 2))));
     public final IAbility<?> ability;
     Ability(IAbility<?> ability) {
         this.ability = ability;

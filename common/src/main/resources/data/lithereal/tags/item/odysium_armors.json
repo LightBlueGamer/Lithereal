@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "lithereal:odysium_helmet",
+    "lithereal:odysium_chestplate",
+    "lithereal:odysium_leggings",
+    "lithereal:odysium_boots",
+    "lithereal:enhanced_odysium_helmet",
+    "lithereal:enhanced_odysium_chestplate",
+    "lithereal:enhanced_odysium_leggings",
+    "lithereal:enhanced_odysium_boots"
+  ]
+}

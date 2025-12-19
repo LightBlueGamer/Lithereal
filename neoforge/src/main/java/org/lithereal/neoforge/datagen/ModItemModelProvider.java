@@ -65,6 +65,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModToolItems.ODYSIUM_SHOVEL.get());
         handheldItem(ModToolItems.ODYSIUM_HOE.get());
         handheldItem(ModToolItems.ODYSIUM_HAMMER.get());
+        handheldItem(ModToolItems.ENHANCED_ODYSIUM_SWORD.get());
+        handheldItem(ModToolItems.ENHANCED_ODYSIUM_PICKAXE.get());
+        handheldItem(ModToolItems.ENHANCED_ODYSIUM_AXE.get());
+        handheldItem(ModToolItems.ENHANCED_ODYSIUM_SHOVEL.get());
+        handheldItem(ModToolItems.ENHANCED_ODYSIUM_HOE.get());
+        handheldItem(ModToolItems.ENHANCED_ODYSIUM_HAMMER.get());
 
         basicItem(ModArmorItems.LITHERITE_HELMET.get());
         basicItem(ModArmorItems.LITHERITE_CHESTPLATE.get());
@@ -94,5 +100,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModArmorItems.ODYSIUM_CHESTPLATE.get());
         basicItem(ModArmorItems.ODYSIUM_LEGGINGS.get());
         basicItem(ModArmorItems.ODYSIUM_BOOTS.get());
+        basicItem(ModArmorItems.ENHANCED_ODYSIUM_HELMET.get());
+        basicItem(ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get());
+        basicItem(ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get());
+        basicItem(ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get());
     }
 }

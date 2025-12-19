@@ -8,6 +8,7 @@ import org.lithereal.item.burning.*;
 import org.lithereal.item.infused.*;
 
 import static org.lithereal.item.ModItems.*;
+import static org.lithereal.item.ModItems.ODYSIUM;
 import static org.lithereal.item.ability.Ability.*;
 
 public class ModToolItems {
@@ -33,7 +34,10 @@ public class ModToolItems {
             new AbilitySwordItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_SWORD = ITEMS.register("odysium_sword", () ->
-            new AbilitySwordItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilitySwordItem(Ability.ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_SWORD = ITEMS.register("enhanced_odysium_sword", () ->
+            new AbilitySwordItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_PICKAXE = ITEMS.register("litherite_pickaxe", () ->
             new PickaxeItem(LITHERITE, new Item.Properties().attributes(PickaxeItem.createAttributes(LITHERITE, 1, -2.8F))));
@@ -57,7 +61,10 @@ public class ModToolItems {
             new AbilityPickaxeItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_PICKAXE = ITEMS.register("odysium_pickaxe", () ->
-            new AbilityPickaxeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilityPickaxeItem(Ability.ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_PICKAXE = ITEMS.register("enhanced_odysium_pickaxe", () ->
+            new AbilityPickaxeItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_AXE = ITEMS.register("litherite_axe", () ->
             new AxeItem(LITHERITE, new Item.Properties().attributes(AxeItem.createAttributes(LITHERITE, 5, -3))));
@@ -81,7 +88,10 @@ public class ModToolItems {
             new AbilityAxeItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_AXE = ITEMS.register("odysium_axe", () ->
-            new AbilityAxeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilityAxeItem(Ability.ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_AXE = ITEMS.register("enhanced_odysium_axe", () ->
+            new AbilityAxeItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_SHOVEL = ITEMS.register("litherite_shovel", () ->
             new ShovelItem(LITHERITE, new Item.Properties().attributes(ShovelItem.createAttributes(LITHERITE, 1.5F, -3F))));
@@ -105,7 +115,10 @@ public class ModToolItems {
             new AbilityShovelItem(WITHERING, LITHERITE, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_SHOVEL = ITEMS.register("odysium_shovel", () ->
-            new AbilityShovelItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilityShovelItem(Ability.ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_SHOVEL = ITEMS.register("enhanced_odysium_shovel", () ->
+            new AbilityShovelItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_HOE = ITEMS.register("litherite_hoe", () ->
             new HoeItem(LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
@@ -129,7 +142,10 @@ public class ModToolItems {
             new AbilityHoeItem(WITHERING, LITHERITE, new Item.Properties().attributes(HoeItem.createAttributes(LITHERITE, -4, 0))));
 
     public static final RegistrySupplier<Item> ODYSIUM_HOE = ITEMS.register("odysium_hoe", () ->
-            new AbilityHoeItem(ENHANCED, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0)).rarity(Rarity.UNCOMMON)));
+            new AbilityHoeItem(Ability.ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0)).rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_HOE = ITEMS.register("enhanced_odysium_hoe", () ->
+            new AbilityHoeItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0)).rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer", () ->
             new HammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties()));
@@ -153,7 +169,10 @@ public class ModToolItems {
             new AbilityHammerItem(WITHERING, LITHERITE, 5, -3.0F, 4, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ITEMS.register("odysium_hammer", () ->
-            new AbilityHammerItem(ENHANCED, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilityHammerItem(Ability.ODYSIUM, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_HAMMER = ITEMS.register("enhanced_odysium_hammer", () ->
+            new AbilityHammerItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
             LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.4F, new Item.Properties().durability(500).fireResistant().rarity(Rarity.EPIC)));

@@ -5,6 +5,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.item.ability.Ability;
 import org.lithereal.item.ability.AbilityArmorItem;
 import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 
@@ -34,7 +35,10 @@ public class ModArmorItems {
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.HELMET, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_HELMET = ITEMS.register("odysium_helmet", () ->
-            new ArmorItem(ModArmorMaterials.ODYSIUM, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(50)).rarity(Rarity.UNCOMMON)));
+            new AbilityArmorItem(ODYSIUM, ModArmorMaterials.ODYSIUM, ArmorItem.Type.HELMET, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_HELMET = ITEMS.register("enhanced_odysium_helmet", () ->
+            new AbilityArmorItem(ENHANCED_ODYSIUM, ModArmorMaterials.ENHANCED_ODYSIUM, ArmorItem.Type.HELMET, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_CHESTPLATE = ITEMS.register("litherite_chestplate", () ->
             new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(25))));
@@ -58,7 +62,10 @@ public class ModArmorItems {
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.CHESTPLATE, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_CHESTPLATE = ITEMS.register("odysium_chestplate", () ->
-            new ArmorItem(ModArmorMaterials.ODYSIUM, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(50)).rarity(Rarity.UNCOMMON)));
+            new AbilityArmorItem(ODYSIUM, ModArmorMaterials.ODYSIUM, ArmorItem.Type.CHESTPLATE, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_CHESTPLATE = ITEMS.register("enhanced_odysium_chestplate", () ->
+            new AbilityArmorItem(ENHANCED_ODYSIUM, ModArmorMaterials.ENHANCED_ODYSIUM, ArmorItem.Type.CHESTPLATE, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_LEGGINGS = ITEMS.register("litherite_leggings", () ->
             new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(25))));
@@ -82,7 +89,10 @@ public class ModArmorItems {
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.LEGGINGS, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_LEGGINGS = ITEMS.register("odysium_leggings", () ->
-            new ArmorItem(ModArmorMaterials.ODYSIUM, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(50)).rarity(Rarity.UNCOMMON)));
+            new AbilityArmorItem(ODYSIUM, ModArmorMaterials.ODYSIUM, ArmorItem.Type.LEGGINGS, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_LEGGINGS = ITEMS.register("enhanced_odysium_leggings", () ->
+            new AbilityArmorItem(ENHANCED_ODYSIUM, ModArmorMaterials.ENHANCED_ODYSIUM, ArmorItem.Type.LEGGINGS, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_BOOTS = ITEMS.register("litherite_boots", () ->
             new ArmorItem(ModArmorMaterials.LITHERITE, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(25))));
@@ -106,7 +116,10 @@ public class ModArmorItems {
             new AbilityArmorItem(WITHERING, ModArmorMaterials.WITHERING_LITHERITE, ArmorItem.Type.BOOTS, 25, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_BOOTS = ITEMS.register("odysium_boots", () ->
-            new ArmorItem(ModArmorMaterials.ODYSIUM, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(50)).rarity(Rarity.UNCOMMON)));
+            new AbilityArmorItem(ODYSIUM, ModArmorMaterials.ODYSIUM, ArmorItem.Type.BOOTS, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_BOOTS = ITEMS.register("enhanced_odysium_boots", () ->
+            new AbilityArmorItem(ENHANCED_ODYSIUM, ModArmorMaterials.ENHANCED_ODYSIUM, ArmorItem.Type.BOOTS, 50, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static void register() {
 

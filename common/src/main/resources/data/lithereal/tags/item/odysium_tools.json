@@ -14,6 +14,20 @@
     {
       "id": "lithereal:odysium_knife",
       "required": false
+    },
+    "lithereal:enhanced_odysium_axe",
+    "lithereal:enhanced_odysium_hammer",
+    "lithereal:enhanced_odysium_hoe",
+    "lithereal:enhanced_odysium_pickaxe",
+    "lithereal:enhanced_odysium_shovel",
+    "lithereal:enhanced_odysium_sword",
+    {
+      "id": "lithereal:enhanced_odysium_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:enhanced_odysium_knife",
+      "required": false
     }
   ]
 }

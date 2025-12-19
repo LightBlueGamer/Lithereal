@@ -23,28 +23,29 @@ import org.lithereal.util.CommonUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
 public class InfusedAbility<I extends InfusedItem> implements IAbility<I> {
-    public final Map<Ability.IdentityForPlayer, Integer> degradationTickerMap = new HashMap<>();
-    public final Map<Ability.IdentityForPlayer, Integer> healTickerMap = new HashMap<>();
-    public final Map<Ability.IdentityForPlayer, Map<Holder<MobEffect>, Integer>> untilReadyMap = new HashMap<>();
+    public final Map<Ability.IdentityForPlayer, Integer> degradationTickerMap = new WeakHashMap<>();
+    public final Map<Ability.IdentityForPlayer, Integer> healTickerMap = new WeakHashMap<>();
+    public final Map<Ability.IdentityForPlayer, Map<Holder<MobEffect>, Integer>> untilReadyMap = new WeakHashMap<>();
     public final List<Holder<ArmorMaterial>> supportedMaterials;
 
     public InfusedAbility(List<Holder<ArmorMaterial>> supportedMaterials) {
         this.supportedMaterials = supportedMaterials;
     }
 
-    private void applyEffectToTarget(MobEffectInstance mobEffectInstance, LivingEntity target, LivingEntity attacker, AtomicInteger count, boolean swapEffects) {
+    public static void applyEffectToTarget(MobEffectInstance mobEffectInstance, LivingEntity target, LivingEntity attacker, int count, boolean swapEffects) {
         Holder<MobEffect> effect = mobEffectInstance.getEffect();
         boolean isBeneficial = effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl);
         boolean effectivelyHarm = target.isInvertedHealAndHarm() && effect.is(MobEffects.HEAL);
         if(!isBeneficial || effectivelyHarm) {
             if (!(effect.is(MobEffects.HARM) && target.isInvertedHealAndHarm())) {
-                if (swapEffects && attacker.hasEffect(effect) && count.get() == 1) attacker.removeEffect(effect);
+                if (swapEffects && attacker.hasEffect(effect) && count == 1) attacker.removeEffect(effect);
                 if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(attacker, attacker, target, mobEffectInstance.getAmplifier(), 0.25);
                 else target.addEffect(new MobEffectInstance(mobEffectInstance.getEffect(), Math.max(mobEffectInstance.getDuration() / 10, 100), mobEffectInstance.getAmplifier()));
             }
@@ -65,7 +66,7 @@ public class InfusedAbility<I extends InfusedItem> implements IAbility<I> {
     public void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
         PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         AtomicInteger count = getCount(potionContents);
-        potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(mobEffectInstance, attacked, attacker, count, true));
+        potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(mobEffectInstance, attacked, attacker, count.get(), true));
     }
 
     @Override
@@ -125,7 +126,7 @@ public class InfusedAbility<I extends InfusedItem> implements IAbility<I> {
                     if (source != null) {
                         Entity attacker = source.getEntity();
                         if (attacker instanceof LivingEntity newTarget) {
-                            potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(mobEffectInstance, newTarget, player, count, false));
+                            potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(mobEffectInstance, newTarget, player, count.get(), false));
                         }
                     }
                 }

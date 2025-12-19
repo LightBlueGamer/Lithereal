@@ -1,13 +1,10 @@
 package org.lithereal.util;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -15,18 +12,13 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.lithereal.core.component.ModComponents;
-import org.lithereal.item.component.Enhanced;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 public class CommonUtils {
-    public static Block DRIPSTONE_REPLACEMENT;
     public static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;
     }
@@ -72,28 +64,6 @@ public class CommonUtils {
 
     public static NonNullList<Ingredient> of(Ingredient... values) {
         return NonNullList.of(Ingredient.EMPTY, values);
-    }
-
-    public static boolean isEnhanced(ItemStack stack) {
-        return stack.has(ModComponents.ENHANCED.get());
-    }
-
-    public static boolean isEnhanced(CompoundTag tag) {
-        return tag != null && tag.getBoolean("Enhanced");
-    }
-
-    public static ItemStack setEnhanced(ItemStack stack, boolean showInTooltip, MutableComponent component) {
-        stack.set(ModComponents.ENHANCED.get(), new Enhanced(showInTooltip, Optional.of(component.withStyle(ChatFormatting.BLUE))));
-        return stack;
-    }
-
-    public static ItemStack removeEnhanced(ItemStack stack) {
-        stack.remove(ModComponents.ENHANCED.get());
-        return stack;
-    }
-
-    public static void setEnhanced(CompoundTag tag, boolean bl) {
-        tag.putBoolean("Enhanced", bl);
     }
 
     public static <T extends TooltipProvider> void addToTooltip(ItemStack stack, DataComponentType<T> dataComponentType, Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag) {

@@ -2,6 +2,7 @@ package org.lithereal.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -17,10 +18,12 @@ import org.lithereal.block.ModBlocks;
 import org.lithereal.client.renderer.*;
 import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
 import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
+import org.lithereal.fabric.client.armor.LitheriteArmorRenderer;
 import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.entity.FabricBlockEntities;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
 import org.lithereal.entity.ModEntities;
+import org.lithereal.item.ModArmorItems;
 
 public class LitherealFabricClient implements ClientModInitializer {
     @Override
@@ -41,6 +44,16 @@ public class LitherealFabricClient implements ClientModInitializer {
         MenuScreens.register(FabricScreenHandlers.FIRE_CRUCIBLE_SCREEN_HANDLER, FireCrucibleScreen::new);
         MenuScreens.register(FabricScreenHandlers.FREEZING_STATION_SCREEN_HANDLER, FreezingStationScreen::new);
         MenuScreens.register(FabricScreenHandlers.INFUSEMENT_CHAMBER_SCREEN_HANDLER, InfusementChamberScreen::new);
+
+        ArmorRenderer.register(new LitheriteArmorRenderer(), ModArmorItems.LITHERITE_HELMET.get(), ModArmorItems.LITHERITE_CHESTPLATE.get(), ModArmorItems.LITHERITE_LEGGINGS.get(), ModArmorItems.LITHERITE_BOOTS.get(),
+                ModArmorItems.BURNING_LITHERITE_HELMET.get(), ModArmorItems.BURNING_LITHERITE_CHESTPLATE.get(), ModArmorItems.BURNING_LITHERITE_LEGGINGS.get(), ModArmorItems.BURNING_LITHERITE_BOOTS.get(),
+                ModArmorItems.FROZEN_LITHERITE_HELMET.get(), ModArmorItems.FROZEN_LITHERITE_CHESTPLATE.get(), ModArmorItems.FROZEN_LITHERITE_LEGGINGS.get(), ModArmorItems.FROZEN_LITHERITE_BOOTS.get(),
+                ModArmorItems.SMOLDERING_LITHERITE_HELMET.get(), ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE.get(), ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS.get(), ModArmorItems.SMOLDERING_LITHERITE_BOOTS.get(),
+                ModArmorItems.FROSTBITTEN_LITHERITE_HELMET.get(), ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE.get(), ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS.get(),
+                ModArmorItems.INFUSED_LITHERITE_HELMET.get(), ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), ModArmorItems.INFUSED_LITHERITE_BOOTS.get(),
+                ModArmorItems.WITHERING_LITHERITE_HELMET.get(), ModArmorItems.WITHERING_LITHERITE_CHESTPLATE.get(), ModArmorItems.WITHERING_LITHERITE_LEGGINGS.get(), ModArmorItems.WITHERING_LITHERITE_BOOTS.get(),
+                ModArmorItems.ODYSIUM_HELMET.get(), ModArmorItems.ODYSIUM_CHESTPLATE.get(), ModArmorItems.ODYSIUM_LEGGINGS.get(), ModArmorItems.ODYSIUM_BOOTS.get(),
+                ModArmorItems.ENHANCED_ODYSIUM_HELMET.get(), ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get(), ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get(), ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get());
 
         LitherealClient.init();
     }

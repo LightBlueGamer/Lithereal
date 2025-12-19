@@ -8,12 +8,8 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.lithereal.core.component.ModComponents;
 
 import java.util.List;
-import java.util.function.Consumer;
-
-import static org.lithereal.util.CommonUtils.addToTooltip;
 
 public class AbilityShovelItem extends ShovelItem implements AbilityItem {
     final Ability ability;
@@ -43,8 +39,6 @@ public class AbilityShovelItem extends ShovelItem implements AbilityItem {
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
-        Consumer<Component> consumer = list::add;
-        addToTooltip(itemStack, ModComponents.ENHANCED.get(), tooltipContext, consumer, tooltipFlag);
     }
 
     @Override
