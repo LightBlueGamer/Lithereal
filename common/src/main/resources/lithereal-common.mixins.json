@@ -9,13 +9,13 @@
   "mixins": [
     "BaseFireBlockMixin",
     "BlockEntityMixin",
-    "accessor.BlockSetTypeAccessor",
     "BlockStateBaseMixin",
     "CraftingInventoryMixin",
     "MobEffectMixin",
     "ServerPlayerMixin",
     "ShapedRecipeMixin",
-    "ShapelessRecipeMixin"
+    "ShapelessRecipeMixin",
+    "accessor.BlockSetTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

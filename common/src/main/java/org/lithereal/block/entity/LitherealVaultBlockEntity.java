@@ -10,4 +10,9 @@ public class LitherealVaultBlockEntity extends VaultBlockEntity {
         super(blockPos, blockState);
         ((IBlockEntity) this).setType(ModBlockEntities.LITHEREAL_VAULT.get());
     }
+
+    @Override
+    public boolean isValidBlockState(BlockState blockState) {
+        return super.isValidBlockState(blockState) || ModBlockEntities.LITHEREAL_VAULT.get().isValid(blockState);
+    }
 }

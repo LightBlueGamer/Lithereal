@@ -1,13 +1,10 @@
 package org.lithereal.neoforge;
 
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.Block;
@@ -25,7 +22,6 @@ import org.lithereal.block.entity.EtherCollectorBlockEntity;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.item.WarHammerItem;
-import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
 import org.lithereal.neoforge.world.block.ForgeInfusementChamberBlock;
 import org.lithereal.neoforge.world.block.ForgeStrippableLogBlock;
@@ -33,7 +29,6 @@ import org.lithereal.neoforge.world.block.entity.*;
 import org.lithereal.neoforge.world.item.ForgeItems;
 import org.lithereal.neoforge.world.item.ForgeWarHammerItem;
 import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
-import org.lithereal.neoforge.world.item.infused.ForgeInfusedLitheriteArmorItem;
 
 import java.nio.file.Path;
 import java.util.function.Function;
@@ -51,10 +46,6 @@ public class LitherealExpectPlatformImpl {
      */
     public static Path getConfigDirectory() {
         return FMLPaths.CONFIGDIR.get();
-    }
-
-    public static InfusedLitheriteArmorItem createInfusedLitheriteArmorItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, int durability, Item.Properties properties) {
-        return new ForgeInfusedLitheriteArmorItem(armorMaterial, type, durability, properties);
     }
 
     public static InfusedLitheriteBlock getInfusedLitheriteBlock() {

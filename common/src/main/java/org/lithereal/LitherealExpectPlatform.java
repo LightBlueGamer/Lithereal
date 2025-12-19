@@ -4,13 +4,10 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +20,6 @@ import org.lithereal.block.*;
 import org.lithereal.block.entity.*;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.item.WarHammerItem;
-import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
@@ -42,10 +38,7 @@ public class LitherealExpectPlatform {
         // Just throw an error, the content should get replaced at runtime.
         throw new AssertionError();
     }
-    @ExpectPlatform
-    public static InfusedLitheriteArmorItem createInfusedLitheriteArmorItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, int durability, Item.Properties properties) {
-        throw new AssertionError();
-    }
+
     @ExpectPlatform
     public static InfusedLitheriteBlock getInfusedLitheriteBlock() {
         throw new AssertionError();

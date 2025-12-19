@@ -58,10 +58,6 @@ public class LitherealExpectPlatformImpl {
         return FabricLoader.getInstance().getConfigDir();
     }
 
-    public static InfusedLitheriteArmorItem createInfusedLitheriteArmorItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, int durability, Item.Properties properties) {
-        return new InfusedLitheriteArmorItem(armorMaterial, type, durability, properties);
-    }
-
     public static InfusedLitheriteBlock getInfusedLitheriteBlock() {
         return (InfusedLitheriteBlock) FabricBlocks.INFUSED_LITHERITE_BLOCK;
     }

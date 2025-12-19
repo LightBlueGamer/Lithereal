@@ -3,6 +3,7 @@ package org.lithereal.neoforge.client.event;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.particle.FlameParticle;
@@ -10,10 +11,19 @@ import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -28,6 +38,7 @@ import org.lithereal.client.renderer.zombie.BetterZombieModel;
 import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
 import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
 import org.lithereal.entity.ModEntities;
+import org.lithereal.item.ModArmorItems;
 import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
 import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleScreen;
@@ -70,10 +81,15 @@ public class ClientEvents {
             event.registerLayerDefinition(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
             event.registerLayerDefinition(BetterZombieModel.ZOMBIE_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
             event.registerLayerDefinition(BetterZombieModel.ZOMBIE_INNER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
-            event.registerLayerDefinition(LitherealArmorModel.OUTER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
-            event.registerLayerDefinition(LitherealArmorModel.INNER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
+            event.registerLayerDefinition(LitherealArmorModel.OUTER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(1.0F), 0), 64, 32));
+            event.registerLayerDefinition(LitherealArmorModel.INNER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(0.5F), 0), 64, 32));
             event.registerLayerDefinition(ModBoatRenderer.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBodyModel);
             event.registerLayerDefinition(ModBoatRenderer.PHANTOM_OAK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+        }
+        @SubscribeEvent
+        public static void modelLayersInit(EntityRenderersEvent.AddLayers event) {
+            LitherealArmorModel.OUTER = new LitherealArmorModel(event.getEntityModels().bakeLayer(LitherealArmorModel.OUTER_ARMOR));
+            LitherealArmorModel.INNER = new LitherealArmorModel(event.getEntityModels().bakeLayer(LitherealArmorModel.INNER_ARMOR));
         }
         @SubscribeEvent
         public static void entityRendererInit(EntityRenderersEvent.RegisterRenderers event) {
@@ -87,6 +103,31 @@ public class ClientEvents {
             event.registerEntityRenderer(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, false));
             event.registerEntityRenderer(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer<>(pContext, true));
             event.registerEntityRenderer(ModEntities.RIFT_SPAWNER.get(), NoopRenderer::new);
+        }
+        @SubscribeEvent
+        public static void registerClientExtensionsEvent(RegisterClientExtensionsEvent event) {
+            event.registerItem(new IClientItemExtensions() {
+                @Override
+                public int getArmorLayerTintColor(@NotNull ItemStack stack, @NotNull LivingEntity entity, ArmorMaterial.@NotNull Layer layer, int layerIdx, int fallbackColor) {
+                    return stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor();
+                }
+                @Override
+                public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                    return equipmentSlot == EquipmentSlot.LEGS ? LitherealArmorModel.INNER : LitherealArmorModel.OUTER;
+                }
+            }, ModArmorItems.INFUSED_LITHERITE_HELMET, ModArmorItems.INFUSED_LITHERITE_CHESTPLATE, ModArmorItems.INFUSED_LITHERITE_LEGGINGS, ModArmorItems.INFUSED_LITHERITE_BOOTS);
+            event.registerItem(new IClientItemExtensions() {
+                @Override
+                public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                    return equipmentSlot == EquipmentSlot.LEGS ? LitherealArmorModel.INNER : LitherealArmorModel.OUTER;
+                }
+            }, ModArmorItems.LITHERITE_HELMET, ModArmorItems.LITHERITE_CHESTPLATE, ModArmorItems.LITHERITE_LEGGINGS, ModArmorItems.LITHERITE_BOOTS,
+                    ModArmorItems.BURNING_LITHERITE_HELMET, ModArmorItems.BURNING_LITHERITE_CHESTPLATE, ModArmorItems.BURNING_LITHERITE_LEGGINGS, ModArmorItems.BURNING_LITHERITE_BOOTS,
+                    ModArmorItems.FROZEN_LITHERITE_HELMET, ModArmorItems.FROZEN_LITHERITE_CHESTPLATE, ModArmorItems.FROZEN_LITHERITE_LEGGINGS, ModArmorItems.FROZEN_LITHERITE_BOOTS,
+                    ModArmorItems.SMOLDERING_LITHERITE_HELMET, ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE, ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS, ModArmorItems.SMOLDERING_LITHERITE_BOOTS,
+                    ModArmorItems.FROSTBITTEN_LITHERITE_HELMET, ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE, ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS, ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS,
+                    ModArmorItems.WITHERING_LITHERITE_HELMET, ModArmorItems.WITHERING_LITHERITE_CHESTPLATE, ModArmorItems.WITHERING_LITHERITE_LEGGINGS, ModArmorItems.WITHERING_LITHERITE_BOOTS,
+                    ModArmorItems.ODYSIUM_HELMET, ModArmorItems.ODYSIUM_CHESTPLATE, ModArmorItems.ODYSIUM_LEGGINGS, ModArmorItems.ODYSIUM_BOOTS);
         }
     }
     public static class ClientForgeBusEvents {
