@@ -165,7 +165,7 @@ public class LitherealClient {
     }
 
     private static void registerItemsToBuildingBlocksTab() {
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.BUILDING_BLOCKS_TAB.get(), ModItems.LITHER_TORCH.get(),
+        CreativeTabRegistry.append(ModCreativeTabs.BUILDING_BLOCKS_TAB, ModItems.LITHER_TORCH.get(),
                 ModBlocks.LITHER_LANTERN.get(),
                 ModBlocks.CREATIVE_ETHER_SOURCE.get(),
                 ModBlocks.PASSIVE_ETHER_ABSORBER.get(),
@@ -213,7 +213,7 @@ public class LitherealClient {
     }
 
     private static void registerItemsToNaturalTab() {
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.NATURAL_BLOCKS_TAB.get(), ModOreBlocks.LITHERITE_ORE,
+        CreativeTabRegistry.append(ModCreativeTabs.NATURAL_BLOCKS_TAB, ModOreBlocks.LITHERITE_ORE,
                 ModOreBlocks.DEEPSLATE_LITHERITE_ORE,
                 ModBlocks.LITHERITE_CRYSTAL_BLOCK,
                 ModOreBlocks.NERITH_ORE,
@@ -273,7 +273,7 @@ public class LitherealClient {
                 litherite.add(current);
             }
         }
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.MATERIALS_TAB.get(), ModItems.MOLTEN_LITHERITE_BUCKET.get(),
+        CreativeTabRegistry.append(ModCreativeTabs.MATERIALS_TAB, ModItems.MOLTEN_LITHERITE_BUCKET.get(),
                 LitherealExpectPlatform.getLitheriteItem(),
                 ModStorageBlocks.LITHERITE_BLOCK.get(),
                 ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(),
@@ -282,8 +282,8 @@ public class LitherealClient {
                 ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get(),
                 ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(),
                 ModStorageBlocks.WITHERING_LITHERITE_BLOCK.get());
-        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.MATERIALS_TAB.get(), litherite.toArray(new ItemStack[0]));
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.MATERIALS_TAB.get(), ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get(),
+        CreativeTabRegistry.appendStack(ModCreativeTabs.MATERIALS_TAB, litherite.toArray(new ItemStack[0]));
+        CreativeTabRegistry.append(ModCreativeTabs.MATERIALS_TAB, ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get(),
                 ModStorageBlocks.CHARGED_LITHERITE_BLOCK.get(),
                 ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(),
                 ModItems.MYSTERIOUS_ROD.get(),
@@ -330,7 +330,7 @@ public class LitherealClient {
                 litherite.add(current);
             }
         }
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.TOOLS_TAB.get(), ModToolItems.LITHERITE_SHOVEL,
+        CreativeTabRegistry.append(ModCreativeTabs.TOOLS_TAB, ModToolItems.LITHERITE_SHOVEL,
                 ModToolItems.LITHERITE_PICKAXE,
                 ModToolItems.LITHERITE_AXE,
                 ModToolItems.LITHERITE_HOE,
@@ -362,8 +362,8 @@ public class LitherealClient {
                 ModToolItems.WITHERING_LITHERITE_AXE,
                 ModToolItems.WITHERING_LITHERITE_HOE,
                 ModToolItems.WITHERING_LITHERITE_HAMMER);
-        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.TOOLS_TAB.get(), litherite.toArray(new ItemStack[0]));
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.TOOLS_TAB.get(), ModToolItems.ODYSIUM_SHOVEL,
+        CreativeTabRegistry.appendStack(ModCreativeTabs.TOOLS_TAB, litherite.toArray(new ItemStack[0]));
+        CreativeTabRegistry.append(ModCreativeTabs.TOOLS_TAB, ModToolItems.ODYSIUM_SHOVEL,
                 ModToolItems.ODYSIUM_PICKAXE,
                 ModToolItems.ODYSIUM_AXE,
                 ModToolItems.ODYSIUM_HOE,
@@ -396,7 +396,7 @@ public class LitherealClient {
             if (isModLoaded("combatify"))
                 litherite = CompatInit.populateInfusedForCombatify(litherite, holder);
         }
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.COMBAT_TAB.get(), ModToolItems.LITHERITE_SWORD,
+        CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.LITHERITE_SWORD,
                 ModToolItems.LITHERITE_AXE,
                 ModArmorItems.LITHERITE_HELMET,
                 ModArmorItems.LITHERITE_CHESTPLATE,
@@ -432,8 +432,8 @@ public class LitherealClient {
                 ModArmorItems.WITHERING_LITHERITE_CHESTPLATE,
                 ModArmorItems.WITHERING_LITHERITE_LEGGINGS,
                 ModArmorItems.WITHERING_LITHERITE_BOOTS);
-        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.COMBAT_TAB.get(), litherite.toArray(new ItemStack[0]));
-        CreativeTabRegistry.appendBuiltin(ModCreativeTabs.COMBAT_TAB.get(), ModToolItems.ODYSIUM_SWORD,
+        CreativeTabRegistry.appendStack(ModCreativeTabs.COMBAT_TAB, litherite.toArray(new ItemStack[0]));
+        CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.ODYSIUM_SWORD,
                 ModToolItems.ODYSIUM_AXE,
                 ModArmorItems.ODYSIUM_HELMET,
                 ModArmorItems.ODYSIUM_CHESTPLATE,
@@ -447,6 +447,8 @@ public class LitherealClient {
                 ModArmorItems.ENHANCED_ODYSIUM_BOOTS,
                 ModToolItems.WAR_HAMMER,
                 ModItems.LITHER_CHARGE);
+        if (isModLoaded("combatify"))
+            CompatInit.populateCombatTabForCombatify();
     }
     public static boolean isEquipment(String id) {
         return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("etherstone_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("smoldering_litherite") || id.startsWith("frostbitten_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite") || id.startsWith("odysium") || id.contains("phantom");
