@@ -16,7 +16,6 @@ import org.lithereal.entity.ModBoat;
 import org.lithereal.sounds.ModSounds;
 import org.lithereal.tags.ModTags;
 import org.lithereal.item.compat.CompatInit;
-import org.lithereal.item.obscured.MysteriousItem;
 import org.lithereal.util.BaseBossEssence;
 
 
@@ -33,7 +32,7 @@ public class ModItems {
     public static final Tier ODYSIUM = ModTier.create("odysium", 5, 2431, 13.0F, 5.0F, 22, () -> Ingredient.of(ModRawMaterialItems.ODYSIUM_INGOT.get()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
 
     public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
-            new MysteriousItem(new Item.Properties().fireResistant()));
+            new Item(new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
             new Item(new Item.Properties().stacksTo(1)));

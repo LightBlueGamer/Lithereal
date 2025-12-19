@@ -5,13 +5,12 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import org.lithereal.item.infused.InfusedLitheriteItem;
-import org.lithereal.item.obscured.MysteriousItem;
 
 import static org.lithereal.item.ModItems.ITEMS;
 
 public class ModRawMaterialItems {
     public static final RegistrySupplier<Item> PHANTOM_DIAMOND = ITEMS.register("phantom_diamond", () ->
-            new MysteriousItem(new Item.Properties()));
+            new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_INGOT = ITEMS.register("odysium_ingot", () ->
             new Item(new Item.Properties().fireResistant()));
