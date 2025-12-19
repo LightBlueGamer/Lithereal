@@ -41,6 +41,10 @@ public class CombatifyItems {
             CombatifyHooks.generateAbilityLongsword(ODYSIUM, ModItems.ODYSIUM, 5, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistrySupplier<Item> ODYSIUM_KNIFE = ModItems.ITEMS.register("odysium_knife", () ->
             CombatifyHooks.generateAbilityKnife(ODYSIUM, ModItems.ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_LONGSWORD = ModItems.ITEMS.register("enhanced_odysium_longsword", () ->
+            CombatifyHooks.generateAbilityLongsword(ENHANCED_ODYSIUM, ModItems.ODYSIUM, 5, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_KNIFE = ModItems.ITEMS.register("enhanced_odysium_knife", () ->
+            CombatifyHooks.generateAbilityKnife(ENHANCED_ODYSIUM, ModItems.ODYSIUM, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static void init() {
 
