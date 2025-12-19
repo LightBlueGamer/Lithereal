@@ -32,6 +32,7 @@ public class ModMobEffects {
     public static final RegistrySupplier<MobEffect> WEAK_ARMOUR = EFFECTS.register("weak_armour", () ->
             new CustomMobEffect(MobEffectCategory.HARMFUL, 11350042)
                     .addAttributeModifier(Attributes.ARMOR, Lithereal.id("effect.weak_armour"), -2, AttributeModifier.Operation.ADD_VALUE));
+    public static final RegistrySupplier<MobEffect> RETRIBUTION = EFFECTS.register("retribution", () -> new RetributionMobEffect(MobEffectCategory.HARMFUL, 0x8FCDFC));
 
     public static void register() {
         EFFECTS.register();

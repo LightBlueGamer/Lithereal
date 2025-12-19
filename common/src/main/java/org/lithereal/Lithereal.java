@@ -1,5 +1,6 @@
 package org.lithereal;
 
+import dev.architectury.networking.NetworkManager;
 import dev.architectury.registry.level.entity.SpawnPlacementsRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Holder;
@@ -8,14 +9,17 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.phys.Vec3;
 import org.lithereal.client.particle.ModParticles;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.mob_effect.ModMobEffects;
 import org.lithereal.mob_effect.potion.ModPotions;
+import org.lithereal.networking.ClientboundRetributionDeathPacket;
 import org.lithereal.tags.ModTags;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -55,6 +59,14 @@ public class Lithereal {
 
         SpawnPlacementsRegistry.register(ModEntities.PHANTOM_ZOMBIE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Monster::checkMonsterSpawnRules);
         SpawnPlacementsRegistry.register(ModEntities.PHANTOM_DROWNED, SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING, PhantomDrowned::checkPhantomDrownedSpawnRules);
+
+        NetworkManager.registerReceiver(NetworkManager.Side.S2C, ClientboundRetributionDeathPacket.TYPE, ClientboundRetributionDeathPacket.STREAM_CODEC, (value, context) -> {
+            Level level = context.getPlayer().level();
+            Vec3 pos = value.position();
+            for (int cnt = 0; cnt < 250; cnt++) {
+                level.addParticle(ModParticles.RETRIBUTION_LIGHT_BURST.get(), pos.x, pos.y, pos.z, 0, 0, 0);
+            }
+        });
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

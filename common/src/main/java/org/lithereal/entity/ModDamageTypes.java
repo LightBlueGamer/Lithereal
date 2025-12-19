@@ -9,4 +9,5 @@ public class ModDamageTypes {
     public static final ResourceKey<DamageType> BURN = ResourceKey.create(Registries.DAMAGE_TYPE, Lithereal.id("burn"));
     public static final ResourceKey<DamageType> FROSTBURN = ResourceKey.create(Registries.DAMAGE_TYPE, Lithereal.id("frostburn"));
     public static final ResourceKey<DamageType> FROST = ResourceKey.create(Registries.DAMAGE_TYPE, Lithereal.id("frost"));
+    public static final ResourceKey<DamageType> HOLY = ResourceKey.create(Registries.DAMAGE_TYPE, Lithereal.id("holy"));
 }

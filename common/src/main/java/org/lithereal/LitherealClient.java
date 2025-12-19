@@ -1,12 +1,12 @@
 package org.lithereal;
 
+import dev.architectury.networking.NetworkManager;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
-import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.model.BoatModel;
@@ -22,34 +22,32 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.phys.Vec3;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
-import org.lithereal.client.particle.EtherealSoulProvider;
-import org.lithereal.client.particle.ModParticles;
-import org.lithereal.client.particle.PortalParticleProvider;
-import org.lithereal.client.particle.StandardBiomeProvider;
+import org.lithereal.client.particle.*;
 import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
 import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.client.renderer.LitherealArmorModel;
 import org.lithereal.client.renderer.ModBoatRenderer;
 import org.lithereal.client.renderer.zombie.BetterZombieModel;
 import org.lithereal.item.*;
+import org.lithereal.networking.ClientboundRetributionDeathPacket;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
 import org.lithereal.item.compat.CompatInit;
-import org.lithereal.item.infused.InfusedItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 import static dev.architectury.platform.Platform.isModLoaded;
@@ -70,12 +68,13 @@ public class LitherealClient {
         LitherealExpectPlatform.registerParticleProvider(ModParticles.LITHER_FIRE_FLAME.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.SOUL.get(), EtherealSoulProvider::new);
+        LitherealExpectPlatform.registerParticleProvider(ModParticles.RETRIBUTION_HOLY_BEAM.get(), BeamParticle.RetributionBeamProvider::new);
+        LitherealExpectPlatform.registerParticleProvider(ModParticles.RETRIBUTION_LIGHT_BURST.get(), BeamParticle.RetributionBurstProvider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.PORTAL_SPARKLE.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.PORTAL_EMISSION.get(), PortalParticleProvider::new);
         registerKeyBindings();
         registerColorHandlers();
-        registerItemsToTab();
         registerItemsToBuildingBlocksTab();
         registerItemsToNaturalTab();
         registerItemsToMaterialsTab();
@@ -119,49 +118,6 @@ public class LitherealClient {
                 ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(),
                 ModPhantomBlocks.POTTED_PHANTOM_ROSE.get());
         RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.PURE_ETHER_SOURCE.get(), ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ModBlocks.ETHEREAL_CORE_PORTAL.get(), ModBlocks.ETHEREAL_RIFT.get());
-    }
-
-    private static void registerItemsToTab() {
-        List<ItemStack> litherite = new ArrayList<>();
-        List<ItemStack> otherI = new ArrayList<>();
-        List<ItemStack> otherB = new ArrayList<>(Arrays.asList(
-                LitherealExpectPlatform.getElectricCrucibleBlock().asItem().getDefaultInstance(),
-                LitherealExpectPlatform.getFireCrucibleBlock().asItem().getDefaultInstance(),
-                LitherealExpectPlatform.getFreezingStationBlock().asItem().getDefaultInstance(),
-                LitherealExpectPlatform.getInfusementChamberBlock().asItem().getDefaultInstance()));
-
-        litherite.add(LitherealExpectPlatform.getLitheriteItem().getDefaultInstance());
-
-        for (RegistrySupplier<Item> itemRegistrySupplier : ModItems.ITEMS) {
-            if (itemRegistrySupplier.is(ModBlocks.ETHEREAL_CORE_PORTAL_LOC)) continue;
-            ItemStack item = new ItemStack(itemRegistrySupplier.get());
-
-            if (!(item.getItem() instanceof InfusedItem) && !litherite.contains(item) && isEquipment(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath())) {
-                litherite.add(item);
-            } else if (!(item.getItem() instanceof InfusedItem)) otherI.add(item);
-        }
-
-        litherite.sort(Comparator.comparing(itemStack -> {
-            String descriptionId = BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getPath();
-
-            if (descriptionId.startsWith("litherite") || descriptionId.startsWith("deepslate_litherite") || descriptionId.startsWith("etherstone_litherite")) return "1";
-            else if (descriptionId.startsWith("burning_litherite")) return "2";
-            else if (descriptionId.startsWith("frozen_litherite")) return "3";
-            else if (descriptionId.startsWith("smoldering_litherite")) return "4";
-            else if (descriptionId.startsWith("frostbitten_litherite")) return "5";
-            else if (descriptionId.startsWith("withering_litherite")) return "6";
-            else if (descriptionId.startsWith("infused_litherite")) return "7";
-            else if (descriptionId.startsWith("charged_litherite")) return "8";
-            else if (descriptionId.contains("odysium")) return "9";
-            else if (descriptionId.contains("phantom")) return ":";
-
-            return descriptionId;
-        }));
-        litherite.addAll(otherI);
-        litherite.addAll(otherB);
-        litherite = litherite.stream().filter(stack -> !stack.isEmpty()).toList();
-
-        CreativeTabRegistry.appendBuiltinStack(ModCreativeTabs.LITHEREAL_TAB.get(), litherite.toArray(new ItemStack[0]));
     }
 
     private static void registerItemsToBuildingBlocksTab() {
@@ -449,8 +405,5 @@ public class LitherealClient {
                 ModItems.LITHER_CHARGE);
         if (isModLoaded("combatify"))
             CompatInit.populateCombatTabForCombatify();
-    }
-    public static boolean isEquipment(String id) {
-        return id.startsWith("litherite") || id.startsWith("deepslate_litherite") || id.startsWith("etherstone_litherite") || id.startsWith("burning_litherite") || id.startsWith("frozen_litherite") || id.startsWith("smoldering_litherite") || id.startsWith("frostbitten_litherite") || id.startsWith("withering_litherite") || id.startsWith("infused_litherite") || id.startsWith("charged_litherite") || id.startsWith("odysium") || id.contains("phantom");
     }
 }

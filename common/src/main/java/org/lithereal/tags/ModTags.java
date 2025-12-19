@@ -44,6 +44,7 @@ public class ModTags {
         return create(name, Registries.MOB_EFFECT);
     }
     public static final TagKey<EntityType<?>> IS_ETHEREAL = createEntityTypeTag("is_from_ethereal_realm");
+    public static final TagKey<EntityType<?>> WEAK_TO_HOLY_MAGIC = createEntityTypeTag("weak_to_holy_magic");
     public static TagKey<EntityType<?>> createEntityTypeTag(String name) {
         return create(name, Registries.ENTITY_TYPE);
     }

@@ -135,12 +135,12 @@
 
   "death.attack.burn": "%1$s was burnt to a crisp",
   "death.attack.burn.player": "%1$s was burnt to a crisp by %2$s",
-
   "death.attack.frostburn": "%1$s died to frostburn",
   "death.attack.frostburn.player": "%1$s died to frostburn by %2$s",
-
   "death.attack.frost": "%1$s could not withstand the cold",
   "death.attack.frost.player": "%1$s was frozen by %2$s",
+  "death.attack.holy": "%1$s was judged by the gods",
+  "death.attack.holy.player": "%1$s fell to judgement at the hands of %2$s",
 
   "enchantment.lithereal.heros_edge": "Hero's Edge",
 

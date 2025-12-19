@@ -33,7 +33,7 @@
             "base": 2.5,
             "per_level_above_first": 0.833333
           },
-          "to_apply": "minecraft:wither"
+          "to_apply": "lithereal:retribution"
         },
         "enchanted": "attacker"
       }

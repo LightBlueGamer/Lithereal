@@ -20,6 +20,12 @@ public class ModParticles {
     public static final RegistrySupplier<SimpleParticleType> SOUL = PARTICLE_TYPES.register("ethereal_core_soul", () ->
             LitherealExpectPlatform.createSimpleParticleType(false));
 
+    public static final RegistrySupplier<SimpleParticleType> RETRIBUTION_HOLY_BEAM = PARTICLE_TYPES.register("retribution_holy_beam", () ->
+            LitherealExpectPlatform.createSimpleParticleType(false));
+
+    public static final RegistrySupplier<SimpleParticleType> RETRIBUTION_LIGHT_BURST = PARTICLE_TYPES.register("retribution_light_burst", () ->
+            LitherealExpectPlatform.createSimpleParticleType(true));
+
     public static final RegistrySupplier<SimpleParticleType> CRYSTAL_SPARKLE = PARTICLE_TYPES.register("crystal_sparkle", () ->
             LitherealExpectPlatform.createSimpleParticleType(false));
 

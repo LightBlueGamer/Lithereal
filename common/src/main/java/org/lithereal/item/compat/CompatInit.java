@@ -26,14 +26,14 @@ public class CompatInit {
 
     public static void populateCombatTabForCombatify() {
         CreativeTabRegistry.modify(ModCreativeTabs.COMBAT_TAB, (flags, output, canUseGameMasterBlocks) -> {
-            output.acceptAllAfter(ModToolItems.LITHERITE_AXE.get(), List.of(CombatifyItems.LITHERITE_LONGSWORD.get().getDefaultInstance(), CombatifyItems.LITHERITE_KNIFE.get().getDefaultInstance()));
-            output.acceptAllAfter(ModToolItems.BURNING_LITHERITE_AXE.get(), List.of(CombatifyItems.BURNING_LITHERITE_LONGSWORD.get().getDefaultInstance(), CombatifyItems.BURNING_LITHERITE_KNIFE.get().getDefaultInstance()));
-            output.acceptAllAfter(ModToolItems.FROZEN_LITHERITE_AXE.get(), List.of(CombatifyItems.FROZEN_LITHERITE_LONGSWORD.get().getDefaultInstance(), CombatifyItems.FROZEN_LITHERITE_KNIFE.get().getDefaultInstance()));
-            output.acceptAllAfter(ModToolItems.SMOLDERING_LITHERITE_AXE.get(), List.of(CombatifyItems.SMOLDERING_LITHERITE_LONGSWORD.get().getDefaultInstance(), CombatifyItems.SMOLDERING_LITHERITE_KNIFE.get().getDefaultInstance()));
-            output.acceptAllAfter(ModToolItems.FROSTBITTEN_LITHERITE_AXE.get(), List.of(CombatifyItems.FROSTBITTEN_LITHERITE_LONGSWORD.get().getDefaultInstance(), CombatifyItems.FROSTBITTEN_LITHERITE_KNIFE.get().getDefaultInstance()));
-            output.acceptAllAfter(ModToolItems.WITHERING_LITHERITE_AXE.get(), List.of(CombatifyItems.WITHERING_LITHERITE_LONGSWORD.get().getDefaultInstance(), CombatifyItems.WITHERING_LITHERITE_KNIFE.get().getDefaultInstance()));
-            output.acceptAllAfter(ModToolItems.ODYSIUM_AXE.get(), List.of(CombatifyItems.ODYSIUM_LONGSWORD.get().getDefaultInstance(), CombatifyItems.ODYSIUM_KNIFE.get().getDefaultInstance()));
-            output.acceptAllAfter(ModToolItems.ENHANCED_ODYSIUM_AXE.get(), List.of(CombatifyItems.ENHANCED_ODYSIUM_LONGSWORD.get().getDefaultInstance(), CombatifyItems.ENHANCED_ODYSIUM_KNIFE.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.LITHERITE_SWORD.get(), List.of(CombatifyItems.LITHERITE_KNIFE.get().getDefaultInstance(), CombatifyItems.LITHERITE_LONGSWORD.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.BURNING_LITHERITE_SWORD.get(), List.of(CombatifyItems.BURNING_LITHERITE_KNIFE.get().getDefaultInstance(), CombatifyItems.BURNING_LITHERITE_LONGSWORD.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.FROZEN_LITHERITE_SWORD.get(), List.of(CombatifyItems.FROZEN_LITHERITE_KNIFE.get().getDefaultInstance(), CombatifyItems.FROZEN_LITHERITE_LONGSWORD.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.SMOLDERING_LITHERITE_SWORD.get(), List.of(CombatifyItems.SMOLDERING_LITHERITE_KNIFE.get().getDefaultInstance(), CombatifyItems.SMOLDERING_LITHERITE_LONGSWORD.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.FROSTBITTEN_LITHERITE_SWORD.get(), List.of(CombatifyItems.FROSTBITTEN_LITHERITE_KNIFE.get().getDefaultInstance(), CombatifyItems.FROSTBITTEN_LITHERITE_LONGSWORD.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.WITHERING_LITHERITE_SWORD.get(), List.of(CombatifyItems.WITHERING_LITHERITE_KNIFE.get().getDefaultInstance(), CombatifyItems.WITHERING_LITHERITE_LONGSWORD.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.ODYSIUM_SWORD.get(), List.of(CombatifyItems.ODYSIUM_KNIFE.get().getDefaultInstance(), CombatifyItems.ODYSIUM_LONGSWORD.get().getDefaultInstance()));
+            output.acceptAllAfter(ModToolItems.ENHANCED_ODYSIUM_SWORD.get(), List.of(CombatifyItems.ENHANCED_ODYSIUM_KNIFE.get().getDefaultInstance(), CombatifyItems.ENHANCED_ODYSIUM_LONGSWORD.get().getDefaultInstance()));
         });
     }
 

@@ -1,6 +1,8 @@
 {
   "values": [
     "minecraft:phantom",
+    "lithereal:phantom_zombie",
+    "lithereal:phantom_drowned",
     "minecraft:player",
 
     "minecraft:item",
