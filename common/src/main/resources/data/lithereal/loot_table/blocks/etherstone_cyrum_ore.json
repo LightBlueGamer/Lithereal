@@ -35,8 +35,8 @@
                     "add": false,
                     "count": {
                       "type": "minecraft:uniform",
-                      "max": 4,
-                      "min": 3
+                      "max": 1,
+                      "min": 1
                     },
                     "function": "minecraft:set_count"
                   },
@@ -52,7 +52,7 @@
                     "function": "minecraft:explosion_decay"
                   }
                 ],
-                "name": "lithereal:aurelite_dust"
+                "name": "lithereal:cyrum_crystal"
               }
             ]
           }
@@ -60,5 +60,5 @@
         "rolls": 1
       }
     ],
-    "random_sequence": "lithereal:blocks/aurelite_ore"
+    "random_sequence": "lithereal:blocks/etherstone_cyrum_ore"
   }
