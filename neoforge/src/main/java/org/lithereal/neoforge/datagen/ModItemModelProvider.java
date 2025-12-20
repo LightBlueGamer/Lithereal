@@ -1,7 +1,12 @@
 package org.lithereal.neoforge.datagen;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModTreeBlocks;
@@ -65,12 +70,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModToolItems.ODYSIUM_SHOVEL.get());
         handheldItem(ModToolItems.ODYSIUM_HOE.get());
         handheldItem(ModToolItems.ODYSIUM_HAMMER.get());
+        bowItem(ModToolItems.ODYSIUM_BOW.get());
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_SWORD.get());
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_PICKAXE.get());
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_AXE.get());
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_SHOVEL.get());
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_HOE.get());
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_HAMMER.get());
+        bowItem(ModToolItems.ENHANCED_ODYSIUM_BOW.get());
 
         basicItem(ModArmorItems.LITHERITE_HELMET.get());
         basicItem(ModArmorItems.LITHERITE_CHESTPLATE.get());
@@ -104,5 +111,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get());
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get());
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get());
+    }
+
+    public void bowItem(Item bowItem) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(bowItem);
+        ItemModelBuilder builder = baseBow(location);
+        builder.override().model(baseBow(location.withSuffix("_pulling_0")))
+                .predicate(ResourceLocation.withDefaultNamespace("pulling"), 1);
+        builder.override().model(baseBow(location.withSuffix("_pulling_1")))
+                .predicate(ResourceLocation.withDefaultNamespace("pulling"), 1)
+                .predicate(ResourceLocation.withDefaultNamespace("pull"), 0.65F);
+        builder.override().model(baseBow(location.withSuffix("_pulling_2")))
+                .predicate(ResourceLocation.withDefaultNamespace("pulling"), 1)
+                .predicate(ResourceLocation.withDefaultNamespace("pull"), 0.9F);
+    }
+    public ItemModelBuilder baseBow(ResourceLocation item) {
+        return getBuilder(item.toString())
+                .parent(new ModelFile.UncheckedModelFile("lithereal:item/template_bow"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + item.getPath()));
     }
 }

@@ -1,12 +1,12 @@
 package org.lithereal;
 
-import dev.architectury.networking.NetworkManager;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
+import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.model.BoatModel;
@@ -22,15 +22,13 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
-import net.minecraft.world.phys.Vec3;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
@@ -41,7 +39,6 @@ import org.lithereal.client.renderer.LitherealArmorModel;
 import org.lithereal.client.renderer.ModBoatRenderer;
 import org.lithereal.client.renderer.zombie.BetterZombieModel;
 import org.lithereal.item.*;
-import org.lithereal.networking.ClientboundRetributionDeathPacket;
 import org.lithereal.util.ModBlockColors;
 import org.lithereal.util.ModItemColors;
 import org.lithereal.item.compat.CompatInit;
@@ -80,6 +77,21 @@ public class LitherealClient {
         registerItemsToMaterialsTab();
         registerItemsToToolsTab();
         registerItemsToCombatTab();
+        registerBowProperties(ModToolItems.ODYSIUM_BOW.get());
+        registerBowProperties(ModToolItems.ENHANCED_ODYSIUM_BOW.get());
+    }
+
+    private static void registerBowProperties(ItemLike bow) {
+        ItemPropertiesRegistry.register(bow, ResourceLocation.withDefaultNamespace("pull"), (itemStack, clientLevel, livingEntity, i) -> {
+            if (livingEntity == null) {
+                return 0.0F;
+            } else {
+                return livingEntity.getUseItem() != itemStack ? 0.0F : (itemStack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / 20.0F;
+            }
+        });
+        ItemPropertiesRegistry.register(bow,
+                ResourceLocation.withDefaultNamespace("pulling"),
+                (itemStack, clientLevel, livingEntity, i) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F);
     }
 
     private static void registerKeyBindings() {
@@ -391,12 +403,14 @@ public class LitherealClient {
         CreativeTabRegistry.appendStack(ModCreativeTabs.COMBAT_TAB, litherite.toArray(new ItemStack[0]));
         CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.ODYSIUM_SWORD,
                 ModToolItems.ODYSIUM_AXE,
+                ModToolItems.ODYSIUM_BOW,
                 ModArmorItems.ODYSIUM_HELMET,
                 ModArmorItems.ODYSIUM_CHESTPLATE,
                 ModArmorItems.ODYSIUM_LEGGINGS,
                 ModArmorItems.ODYSIUM_BOOTS,
                 ModToolItems.ENHANCED_ODYSIUM_SWORD,
                 ModToolItems.ENHANCED_ODYSIUM_AXE,
+                ModToolItems.ENHANCED_ODYSIUM_BOW,
                 ModArmorItems.ENHANCED_ODYSIUM_HELMET,
                 ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE,
                 ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS,

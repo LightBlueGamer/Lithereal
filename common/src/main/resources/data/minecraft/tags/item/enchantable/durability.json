@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "lithereal:odysium_bow",
+    "lithereal:enhanced_odysium_bow",
     "lithereal:litherite_brush",
     "lithereal:litherite_wrench",
     "lithereal:war_hammer",
