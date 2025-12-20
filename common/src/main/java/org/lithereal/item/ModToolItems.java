@@ -175,10 +175,10 @@ public class ModToolItems {
             new AbilityHammerItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> ODYSIUM_BOW = ITEMS.register("odysium_bow", () ->
-            new ModBowItem(new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON), 3, 0.2F));
+            new ModBowItem(new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON).durability(2431), 2, 0.2F, 1));
 
     public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_BOW = ITEMS.register("enhanced_odysium_bow", () ->
-            new ModBowItem(new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON), 5, 0.1F));
+            new ModBowItem(new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON).durability(2431), 3, 0.1F, 1.5F));
 
     public static final RegistrySupplier<Item> WAR_HAMMER = ITEMS.register("war_hammer", () ->
             LitherealExpectPlatform.createWarHammer(ODYSIUM, 1, -3.4F, new Item.Properties().durability(500).fireResistant().rarity(Rarity.EPIC)));
