@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
+    "B": {
       "item": "lithereal:withering_litherite_crystal"
     },
-    "S": {
+    "R": {
       "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "LLL",
-    " S ",
-    " S "
+    "BBB",
+    " R ",
+    " R "
   ],
   "result": {
+    "count": 1,
     "id": "lithereal:withering_litherite_pickaxe"
-  },
-  "show_notification": true
+  }
 }

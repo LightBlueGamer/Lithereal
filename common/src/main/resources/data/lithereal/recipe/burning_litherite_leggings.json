@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
+    "B": {
       "item": "lithereal:burning_litherite_crystal"
     }
   },
   "pattern": [
-    "LLL",
-    "L L",
-    "L L"
+    "BBB",
+    "B B",
+    "B B"
   ],
   "result": {
+    "count": 1,
     "id": "lithereal:burning_litherite_leggings"
-  },
-  "show_notification": true
+  }
 }

@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
+    "B": {
       "item": "lithereal:withering_litherite_crystal"
     }
   },
   "pattern": [
-    "L L",
-    "LLL",
-    "LLL"
+    "B B",
+    "BBB",
+    "BBB"
   ],
   "result": {
+    "count": 1,
     "id": "lithereal:withering_litherite_chestplate"
-  },
-  "show_notification": true
+  }
 }

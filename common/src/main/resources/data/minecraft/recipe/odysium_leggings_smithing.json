@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_leggings"
+  },
+  "base": {
+    "item": "lithereal:odysium_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:odysium_leggings"
+  },
+  "template": {
+    "item": "lithereal:odysium_upgrade_smithing_template"
+  }
+}

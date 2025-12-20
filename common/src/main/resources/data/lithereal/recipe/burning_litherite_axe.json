@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
+    "B": {
       "item": "lithereal:burning_litherite_crystal"
     },
-    "S": {
+    "R": {
       "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "LL",
-    "LS",
-    " S"
+    "BB",
+    "BR",
+    " R"
   ],
   "result": {
+    "count": 1,
     "id": "lithereal:burning_litherite_axe"
-  },
-  "show_notification": true
+  }
 }

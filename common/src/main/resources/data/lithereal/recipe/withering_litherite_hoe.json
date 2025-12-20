@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
-      "item": "lithereal:litherite_crystal"
+    "B": {
+      "item": "lithereal:withering_litherite_crystal"
     },
-    "S": {
+    "R": {
       "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "LL",
-    " S",
-    " S"
+    "BB",
+    " R",
+    " R"
   ],
   "result": {
+    "count": 1,
     "id": "lithereal:withering_litherite_hoe"
-  },
-  "show_notification": true
+  }
 }

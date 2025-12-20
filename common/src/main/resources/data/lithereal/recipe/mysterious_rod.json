@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "item": "lithereal:odysium_ingot"
+    }
+  },
+  "pattern": [
+    "O",
+    "O"
+  ],
+  "result": {
+    "count": 8,
+    "id": "lithereal:mysterious_rod"
+  }
+}

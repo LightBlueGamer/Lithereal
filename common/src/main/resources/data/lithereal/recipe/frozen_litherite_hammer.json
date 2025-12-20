@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "lithereal:frozen_litherite_crystal"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BBB",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "lithereal:frozen_litherite_hammer"
+  }
+}

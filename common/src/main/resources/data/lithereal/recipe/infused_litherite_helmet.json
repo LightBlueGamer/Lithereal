@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
+    "B": {
       "item": "lithereal:infused_litherite_ingot"
     }
   },
   "pattern": [
-    "LLL",
-    "L L"
+    "BBB",
+    "B B"
   ],
   "result": {
+    "count": 1,
     "id": "lithereal:infused_litherite_helmet"
-  },
-  "show_notification": true
+  }
 }
