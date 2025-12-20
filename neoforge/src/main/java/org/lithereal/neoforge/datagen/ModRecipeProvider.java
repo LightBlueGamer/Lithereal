@@ -108,26 +108,26 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("O")
                 .unlockedBy("has_odysium", has(ModRawMaterialItems.ODYSIUM_INGOT.get()))
                 .save(recipeOutput);
-        improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_SWORD.get(), ModToolItems.SMOLDERING_LITHERITE_SWORD.get());
-        improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_PICKAXE.get(), ModToolItems.SMOLDERING_LITHERITE_PICKAXE.get());
-        improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_AXE.get(), ModToolItems.SMOLDERING_LITHERITE_AXE.get());
-        improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_SHOVEL.get(), ModToolItems.SMOLDERING_LITHERITE_SHOVEL.get());
-        improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_HOE.get(), ModToolItems.SMOLDERING_LITHERITE_HOE.get());
-        improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_HAMMER.get(), ModToolItems.SMOLDERING_LITHERITE_HAMMER.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.BURNING_LITHERITE_HELMET.get(), ModArmorItems.SMOLDERING_LITHERITE_HELMET.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.BURNING_LITHERITE_CHESTPLATE.get(), ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.BURNING_LITHERITE_LEGGINGS.get(), ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.BURNING_LITHERITE_BOOTS.get(), ModArmorItems.SMOLDERING_LITHERITE_BOOTS.get());
-        improvedThermalItem(recipeOutput, ModToolItems.FROZEN_LITHERITE_SWORD.get(), ModToolItems.FROSTBITTEN_LITHERITE_SWORD.get());
-        improvedThermalItem(recipeOutput, ModToolItems.FROZEN_LITHERITE_PICKAXE.get(), ModToolItems.FROSTBITTEN_LITHERITE_PICKAXE.get());
-        improvedThermalItem(recipeOutput, ModToolItems.FROZEN_LITHERITE_AXE.get(), ModToolItems.FROSTBITTEN_LITHERITE_AXE.get());
-        improvedThermalItem(recipeOutput, ModToolItems.FROZEN_LITHERITE_SHOVEL.get(), ModToolItems.FROSTBITTEN_LITHERITE_SHOVEL.get());
-        improvedThermalItem(recipeOutput, ModToolItems.FROZEN_LITHERITE_HOE.get(), ModToolItems.FROSTBITTEN_LITHERITE_HOE.get());
-        improvedThermalItem(recipeOutput, ModToolItems.FROZEN_LITHERITE_HAMMER.get(), ModToolItems.FROSTBITTEN_LITHERITE_HAMMER.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.FROZEN_LITHERITE_HELMET.get(), ModArmorItems.FROSTBITTEN_LITHERITE_HELMET.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.FROZEN_LITHERITE_CHESTPLATE.get(), ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.FROZEN_LITHERITE_LEGGINGS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS.get());
-        improvedThermalItem(recipeOutput, ModArmorItems.FROZEN_LITHERITE_BOOTS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModToolItems.BURNING_LITHERITE_SWORD.get(), ModToolItems.SMOLDERING_LITHERITE_SWORD.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_PICKAXE.get(), ModToolItems.SMOLDERING_LITHERITE_PICKAXE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_AXE.get(), ModToolItems.SMOLDERING_LITHERITE_AXE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_SHOVEL.get(), ModToolItems.SMOLDERING_LITHERITE_SHOVEL.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_HOE.get(), ModToolItems.SMOLDERING_LITHERITE_HOE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_HAMMER.get(), ModToolItems.SMOLDERING_LITHERITE_HAMMER.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_HELMET.get(), ModArmorItems.SMOLDERING_LITHERITE_HELMET.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_CHESTPLATE.get(), ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_LEGGINGS.get(), ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_BOOTS.get(), ModArmorItems.SMOLDERING_LITHERITE_BOOTS.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModToolItems.FROZEN_LITHERITE_SWORD.get(), ModToolItems.FROSTBITTEN_LITHERITE_SWORD.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_PICKAXE.get(), ModToolItems.FROSTBITTEN_LITHERITE_PICKAXE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_AXE.get(), ModToolItems.FROSTBITTEN_LITHERITE_AXE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_SHOVEL.get(), ModToolItems.FROSTBITTEN_LITHERITE_SHOVEL.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_HOE.get(), ModToolItems.FROSTBITTEN_LITHERITE_HOE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_HAMMER.get(), ModToolItems.FROSTBITTEN_LITHERITE_HAMMER.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_HELMET.get(), ModArmorItems.FROSTBITTEN_LITHERITE_HELMET.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_CHESTPLATE.get(), ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_LEGGINGS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS.get());
+        improvedThermalItem(recipeOutput, RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_BOOTS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS.get());
         swordItem(recipeOutput, Items.STICK, ForgeItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_SWORD.get());
         swordItem(recipeOutput, Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_SWORD.get());
         swordItem(recipeOutput, Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_SWORD.get());
@@ -228,8 +228,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         recipeBuilder.save(recipeOutput, "lithereal:" + convertName + "_stonecutting");
     }
 
-    protected static void improvedThermalItem(RecipeOutput recipeOutput, Item base, Item improved) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, improved, 1)
+    protected static void improvedThermalItem(RecipeOutput recipeOutput, RecipeCategory recipeCategory, Item base, Item improved) {
+        ShapedRecipeBuilder.shaped(recipeCategory, improved, 1)
                 .define('A', ModRawMaterialItems.AURELITE_DUST.get())
                 .define('B', base)
                 .define('C', ModRawMaterialItems.CHRYON_CRYSTAL.get())
