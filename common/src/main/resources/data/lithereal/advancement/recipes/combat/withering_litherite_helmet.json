@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:withering_litherite_helmet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_withering_litherite_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:withering_litherite_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_withering_litherite_crystal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:withering_litherite_helmet"
+    ]
+  }
+}
