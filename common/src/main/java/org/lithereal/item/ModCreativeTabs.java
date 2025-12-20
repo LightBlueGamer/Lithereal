@@ -29,7 +29,7 @@ public class ModCreativeTabs {
 
     public static final RegistrySupplier<CreativeModeTab> MATERIALS_TAB = TABS.register("materials_tab", () ->
             CreativeTabRegistry.create(Component.translatable("itemGroup." + Lithereal.MOD_ID + ".materials.tab"),
-                    () -> new ItemStack(ModRawMaterialItems.BOSS_ESSENCE_NETHER_STAR.get())));
+                    () -> new ItemStack(ModRawMaterialItems.UNIFIER.get())));
 
     public static final RegistrySupplier<CreativeModeTab> TOOLS_TAB = TABS.register("tools_tab", () ->
             CreativeTabRegistry.create(Component.translatable("itemGroup." + Lithereal.MOD_ID + ".tools.tab"),

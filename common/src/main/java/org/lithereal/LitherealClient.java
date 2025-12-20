@@ -280,7 +280,6 @@ public class LitherealClient {
                 ModItems.BOSS_ESSENCE.get(),
                 ModItems.AWAKENED_BOSS_ESSENCE.get(),
                 ModItems.PURE_BOSS_ESSENCE.get(),
-                ModRawMaterialItems.BOSS_ESSENCE_NETHER_STAR.get(),
                 ModRawMaterialItems.UNIFIER.get());
     }
 

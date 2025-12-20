@@ -92,6 +92,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" OI")
                 .unlockedBy("has_odysium", has(ModRawMaterialItems.ODYSIUM_INGOT.get()))
                 .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModRawMaterialItems.UNIFIER.get(), 1)
+                .define('A', ModRawMaterialItems.ALLIAN_INGOT.get())
+                .define('N', Items.NETHER_STAR)
+                .define('B', ModItems.BOSS_ESSENCE.get())
+                .pattern("ABA")
+                .pattern("ANA")
+                .pattern(" A ")
+                .unlockedBy("has_boss_essence", has(ModItems.BOSS_ESSENCE.get()))
+                .save(recipeOutput);
         improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_SWORD.get(), ModToolItems.SMOLDERING_LITHERITE_SWORD.get());
         improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_PICKAXE.get(), ModToolItems.SMOLDERING_LITHERITE_PICKAXE.get());
         improvedThermalItem(recipeOutput, ModToolItems.BURNING_LITHERITE_AXE.get(), ModToolItems.SMOLDERING_LITHERITE_AXE.get());
