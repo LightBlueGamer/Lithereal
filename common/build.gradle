@@ -10,6 +10,7 @@ dependencies {
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modCompileOnly "maven.modrinth:atlas-core:${rootProject.atlas_core_version}-Fabric"
     modCompileOnly "maven.modrinth:defaulted:$rootProject.defaulted_version-1.21.1-Fabric"
     modImplementation 'com.github.glitchfiend:TerraBlender-fabric:1.21.1-4.1.0.8'
     modImplementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
