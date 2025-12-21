@@ -4,6 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
@@ -27,9 +28,9 @@ import static dev.architectury.platform.Platform.isModLoaded;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Lithereal.MOD_ID, Registries.ITEM);
 
-    public static final Tier LITHERITE = ModTier.create("litherite", 4, 1791, 11.0F, 4.0F, 20, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), ModTags.INCORRECT_FOR_LITHERITE_TOOL);
+    public static final Tier LITHERITE = ModTier.create("litherite", 1791, 11.0F, 3.0F, 20, () -> Ingredient.of(LitherealExpectPlatform.getLitheriteItem()), BlockTags.INCORRECT_FOR_DIAMOND_TOOL);
 
-    public static final Tier ODYSIUM = ModTier.create("odysium", 5, 2431, 13.0F, 5.0F, 22, () -> Ingredient.of(ModRawMaterialItems.ODYSIUM_INGOT.get()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
+    public static final Tier ODYSIUM = ModTier.create("odysium", 2431, 13.0F, 5.0F, 22, () -> Ingredient.of(ModRawMaterialItems.ODYSIUM_INGOT.get()), ModTags.INCORRECT_FOR_ODYSIUM_TOOL);
 
     public static final RegistrySupplier<Item> MYSTERIOUS_ROD = ITEMS.register("mysterious_rod", () ->
             new Item(new Item.Properties().fireResistant()));

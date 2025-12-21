@@ -5,7 +5,7 @@
     "patch_generators": [
         {
             "generator": "defaulted:tool_material",
-            "weapon_level": 4,
+            "weapon_level": 3,
             "base_tier": "litherite"
         }
     ],

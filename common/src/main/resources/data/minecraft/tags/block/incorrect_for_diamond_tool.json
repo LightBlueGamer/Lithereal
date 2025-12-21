@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "#lithereal:needs_odysium_tool",
-    "#lithereal:needs_litherite_tool",
     "#lithereal:needs_apex_tool"
   ]
 }

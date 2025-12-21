@@ -1,5 +1,6 @@
 package org.lithereal.data.compat;
 
+import net.atlas.combatify.Combatify;
 import net.atlas.combatify.item.KnifeItem;
 import net.atlas.combatify.item.LongSwordItem;
 import net.minecraft.world.item.Item;
@@ -28,5 +29,9 @@ public class CombatifyHooks {
     }
     public static Item generateInfusedKnife(Tier tier, Item.Properties properties) {
         return new InfusedLitheriteKnifeItem(tier, properties);
+    }
+
+    public static float getTierDamageNerf() {
+        return Combatify.CONFIG.tierDamageNerf() ? -1 : 0;
     }
 }

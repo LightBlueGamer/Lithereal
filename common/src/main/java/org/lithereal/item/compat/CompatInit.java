@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
+import org.lithereal.data.compat.CombatifyHooks;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModToolItems;
 
@@ -18,6 +19,10 @@ import java.util.List;
 public class CompatInit {
     public static void initCombatify() {
         CombatifyItems.init();
+    }
+
+    public static float getTierDamageNerf() {
+        return CombatifyHooks.getTierDamageNerf();
     }
 
     public static void setColoursForCombatify(ItemColor itemColor) {
