@@ -126,11 +126,12 @@ public class HammerItem extends DiggerItem implements MultiMiningItem {
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState, Player player, BlockGetter blockGetter, BlockPos blockPos, TriFunction<BlockState, BlockGetter, BlockPos, Float> destroySpeedFunc) {
         HitResult pick = player.pick(player.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE) + 2, 1F, false);
-        float[] totalDestroySpeed = new float[] {destroySpeedFunc.apply(blockState, blockGetter, blockPos)};
+        float baseSpeed = destroySpeedFunc.apply(blockState, blockGetter, blockPos);
+        float[] totalDestroySpeed = new float[] {baseSpeed};
         forEachMineableBlock(blockGetter, (BlockHitResult) pick, blockPos, itemStack, (pos, targetState) -> {
             totalDestroySpeed[0] += destroySpeedFunc.apply(targetState, blockGetter, pos);
             return false;
         });
-        return totalDestroySpeed[0] * 0.75F;
+        return Math.max(totalDestroySpeed[0] * 0.25F, baseSpeed * 0.75F);
     }
 }
