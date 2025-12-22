@@ -8,7 +8,7 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -232,9 +232,37 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_WALL.get(), ModStoneBlocks.POLISHED_PAILITE.get());
     }
 
+    protected static void oreSmeltingFromBaseModNamespace(RecipeOutput arg, List<ItemLike> list, RecipeCategory arg2, ItemLike arg3, float f, int i, String string) {
+        oreCookingFromBaseModNamespace(arg, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, list, arg2, arg3, f, i, string, "_from_smelting");
+    }
+
+    protected static void oreBlastingFromBaseModNamespace(RecipeOutput arg, List<ItemLike> list, RecipeCategory arg2, ItemLike arg3, float f, int i, String string) {
+        oreCookingFromBaseModNamespace(arg, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, list, arg2, arg3, f, i, string, "_from_blasting");
+    }
+
+    protected static <T extends AbstractCookingRecipe> void oreCookingFromBaseModNamespace(
+            RecipeOutput arg,
+            RecipeSerializer<T> arg2,
+            AbstractCookingRecipe.Factory<T> arg3,
+            List<ItemLike> list,
+            RecipeCategory arg4,
+            ItemLike arg5,
+            float f,
+            int i,
+            String string,
+            String string2
+    ) {
+        for (ItemLike itemlike : list) {
+            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), arg4, arg5, f, i, arg2, arg3)
+                    .group(string)
+                    .unlockedBy(getHasName(itemlike), has(itemlike))
+                    .save(arg, "lithereal:" + getItemName(arg5) + string2 + "_" + getItemName(itemlike));
+        }
+    }
+
     public static void oreDual(RecipeOutput recipeOutput, List<ItemLike> list, RecipeCategory recipeCategory, ItemLike itemLike, float f, int i, String string) {
-        oreSmelting(recipeOutput, list, recipeCategory, itemLike, f, i, string);
-        oreBlasting(recipeOutput, list, recipeCategory, itemLike, f, i, string);
+        oreSmeltingFromBaseModNamespace(recipeOutput, list, recipeCategory, itemLike, f, i, string);
+        oreBlastingFromBaseModNamespace(recipeOutput, list, recipeCategory, itemLike, f, i, string);
     }
 
     protected static void stonecutterResultFromBaseModNamespace(RecipeOutput recipeOutput, RecipeCategory category, ItemLike to, ItemLike from) {
@@ -366,6 +394,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected static void upgradeRecipe(RecipeOutput recipeOutput, boolean tool, Item template, Item base, Item addition, Item result) {
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(template), Ingredient.of(base), Ingredient.of(addition), tool ? RecipeCategory.TOOLS : RecipeCategory.COMBAT, result)
                 .unlocks("has_" + getSimpleRecipeName(base), has(base))
-                .save(recipeOutput, getItemName(result) + "_smithing");
+                .save(recipeOutput, "lithereal:" + getItemName(result) + "_smithing");
     }
 }

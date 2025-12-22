@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_etherstone_copalite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:etherstone_copalite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:copalite_ingot_from_smelting_etherstone_copalite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_etherstone_copalite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:copalite_ingot_from_smelting_etherstone_copalite_ore"
+    ]
+  }
+}

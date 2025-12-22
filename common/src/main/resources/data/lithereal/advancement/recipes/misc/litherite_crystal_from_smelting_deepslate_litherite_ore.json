@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deepslate_litherite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:deepslate_litherite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:litherite_crystal_from_smelting_deepslate_litherite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_deepslate_litherite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:litherite_crystal_from_smelting_deepslate_litherite_ore"
+    ]
+  }
+}
