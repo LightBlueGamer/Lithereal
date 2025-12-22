@@ -69,6 +69,7 @@ shadowJar {
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
+    atAccessWideners.add('lithereal.accesswidener')
 }
 
 sourcesJar {
