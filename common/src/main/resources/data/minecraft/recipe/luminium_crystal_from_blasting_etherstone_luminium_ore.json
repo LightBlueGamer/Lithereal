@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.6,
+  "group": "luminium_crystal",
+  "ingredient": {
+    "item": "lithereal:etherstone_luminium_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:luminium_crystal"
+  }
+}

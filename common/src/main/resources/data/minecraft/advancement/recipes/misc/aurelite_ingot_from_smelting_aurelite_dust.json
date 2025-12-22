@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aurelite_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:aurelite_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:aurelite_ingot_from_smelting_aurelite_dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_aurelite_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:aurelite_ingot_from_smelting_aurelite_dust"
+    ]
+  }
+}

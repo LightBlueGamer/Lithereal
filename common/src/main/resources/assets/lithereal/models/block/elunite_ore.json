@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/cube_all",
-    "textures": {
-      "all": "lithereal:block/elunite_ore"
-    }
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "lithereal:block/elunite_ore"
   }
+}

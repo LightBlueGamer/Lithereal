@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/cube_all",
-    "textures": {
-      "all": "lithereal:block/etherstone_luminium_ore"
-    }
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "lithereal:block/etherstone_luminium_ore"
   }
+}

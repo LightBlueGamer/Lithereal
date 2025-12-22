@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "copalite_ingot",
+  "ingredient": {
+    "item": "lithereal:etherstone_copalite_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:copalite_ingot"
+  }
+}

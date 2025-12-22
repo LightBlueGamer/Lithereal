@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 2.0,
+  "group": "nerith_ingot",
+  "ingredient": {
+    "item": "lithereal:etherstone_nerith_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:nerith_ingot"
+  }
+}

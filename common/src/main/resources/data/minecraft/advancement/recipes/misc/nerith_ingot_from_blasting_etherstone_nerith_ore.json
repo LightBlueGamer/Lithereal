@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_etherstone_nerith_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:etherstone_nerith_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:nerith_ingot_from_blasting_etherstone_nerith_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_etherstone_nerith_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:nerith_ingot_from_blasting_etherstone_nerith_ore"
+    ]
+  }
+}

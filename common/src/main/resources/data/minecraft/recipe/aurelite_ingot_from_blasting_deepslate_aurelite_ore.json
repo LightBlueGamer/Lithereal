@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "aurelite_ingot",
+  "ingredient": {
+    "item": "lithereal:deepslate_aurelite_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:aurelite_ingot"
+  }
+}

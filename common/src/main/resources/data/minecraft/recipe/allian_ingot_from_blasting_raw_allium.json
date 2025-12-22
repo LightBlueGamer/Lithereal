@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 2.0,
+  "group": "allian_ingot",
+  "ingredient": {
+    "item": "lithereal:raw_allium"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:allian_ingot"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.4,
+  "group": "chryon_crystal",
+  "ingredient": {
+    "item": "lithereal:chryon_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:chryon_crystal"
+  }
+}

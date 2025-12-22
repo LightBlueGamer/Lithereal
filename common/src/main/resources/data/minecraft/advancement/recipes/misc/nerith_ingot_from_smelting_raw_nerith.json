@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_nerith": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:raw_nerith"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:nerith_ingot_from_smelting_raw_nerith"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_nerith"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:nerith_ingot_from_smelting_raw_nerith"
+    ]
+  }
+}
