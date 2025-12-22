@@ -8,6 +8,7 @@
   ],
   "mixins": [
     "BaseFireBlockMixin",
+    "BlockBehaviourMixin",
     "BlockEntityMixin",
     "BlockStateBaseMixin",
     "CraftingInventoryMixin",
