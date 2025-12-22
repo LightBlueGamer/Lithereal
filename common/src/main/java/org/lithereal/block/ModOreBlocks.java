@@ -18,6 +18,10 @@ public class ModOreBlocks {
             () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
 
+    public static final RegistrySupplier<Block> ETHERSTONE_LITHERITE_ORE = registerBlock("etherstone_litherite_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2, 6), BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.DEEPSLATE)));
+
     public static final RegistrySupplier<Block> NERITH_ORE = registerBlock("nerith_ore",
             () -> new DropExperienceBlock(UniformInt.of(4,7), BlockBehaviour.Properties.of()
                     .strength(5f).requiresCorrectToolForDrops().explosionResistance(25)));

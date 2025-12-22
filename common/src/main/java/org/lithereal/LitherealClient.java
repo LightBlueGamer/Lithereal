@@ -183,6 +183,7 @@ public class LitherealClient {
     private static void registerItemsToNaturalTab() {
         CreativeTabRegistry.append(ModCreativeTabs.NATURAL_BLOCKS_TAB, ModOreBlocks.LITHERITE_ORE,
                 ModOreBlocks.DEEPSLATE_LITHERITE_ORE,
+                ModOreBlocks.ETHERSTONE_LITHERITE_ORE,
                 ModBlocks.LITHERITE_CRYSTAL_BLOCK,
                 ModOreBlocks.NERITH_ORE,
                 ModOreBlocks.DEEPSLATE_NERITH_ORE,

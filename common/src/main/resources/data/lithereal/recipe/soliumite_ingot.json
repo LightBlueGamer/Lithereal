@@ -1,14 +1,13 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "lithereal:hellionite_crystal"
-    },
-    {
-      "item": "lithereal:luminium_crystal"
-    }
-  ],
-  "result": {
+  "type": "lithereal:burning",
+  "primary": {
+    "item": "lithereal:hellionite_crystal"
+  },
+  "secondary": {
+    "item": "lithereal:luminium_crystal"
+  },
+  "max_progress": 250,
+  "output": {
     "id": "lithereal:soliumite_ingot"
   }
 }

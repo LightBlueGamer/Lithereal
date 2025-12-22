@@ -67,6 +67,30 @@ public class ModBlockStateProvider extends BlockStateProvider {
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.POLISHED_PAILITE_WALL.get(), Lithereal.id("block/polished_pailite"));
 
+        blockWithItem(ModOreBlocks.LITHERITE_ORE);
+        blockWithItem(ModOreBlocks.DEEPSLATE_LITHERITE_ORE);
+        blockWithItem(ModOreBlocks.ETHERSTONE_LITHERITE_ORE);
+        blockWithItem(ModOreBlocks.NERITH_ORE);
+        blockWithItem(ModOreBlocks.DEEPSLATE_NERITH_ORE);
+        blockWithItem(ModOreBlocks.ETHERSTONE_NERITH_ORE);
+        blockWithItem(ModOreBlocks.LUMINIUM_ORE);
+        blockWithItem(ModOreBlocks.DEEPSLATE_LUMINIUM_ORE);
+        blockWithItem(ModOreBlocks.ETHERSTONE_LUMINIUM_ORE);
+        blockWithItem(ModOreBlocks.CYRUM_ORE);
+        blockWithItem(ModOreBlocks.DEEPSLATE_CYRUM_ORE);
+        blockWithItem(ModOreBlocks.ETHERSTONE_CYRUM_ORE);
+        blockWithItem(ModOreBlocks.COPALITE_ORE);
+        blockWithItem(ModOreBlocks.DEEPSLATE_COPALITE_ORE);
+        blockWithItem(ModOreBlocks.ETHERSTONE_COPALITE_ORE);
+        blockWithItem(ModOreBlocks.AURELITE_ORE);
+        blockWithItem(ModOreBlocks.DEEPSLATE_AURELITE_ORE);
+        blockWithItem(ModOreBlocks.ETHERSTONE_AURELITE_ORE);
+        blockWithItem(ModOreBlocks.SATURNITE_ORE);
+        blockWithItem(ModOreBlocks.HELLIONITE_ORE);
+        blockWithItem(ModOreBlocks.ELUNITE_ORE);
+        blockWithItem(ModOreBlocks.CHRYON_ORE);
+        blockWithItem(ModOreBlocks.ALLIAN_ORE);
+
         plantWithItem(ModPhantomBlocks.PHANTOM_ROSE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(), TintState.NOT_TINTED);
         plantWithItem(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(), ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(), TintState.NOT_TINTED);
         plantWithItem(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(), TintState.NOT_TINTED);

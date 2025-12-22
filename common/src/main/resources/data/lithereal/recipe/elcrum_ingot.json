@@ -1,14 +1,13 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "lithereal:elunite_crystal"
-    },
-    {
-      "item": "lithereal:cyrum_crystal"
-    }
-  ],
-  "result": {
+  "type": "lithereal:burning",
+  "primary": {
+    "item": "lithereal:elunite_crystal"
+  },
+  "secondary": {
+    "item": "lithereal:cyrum_crystal"
+  },
+  "max_progress": 250,
+  "output": {
     "id": "lithereal:elcrum_ingot"
   }
 }

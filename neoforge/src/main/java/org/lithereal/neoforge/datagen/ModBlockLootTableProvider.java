@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.*;
 import org.lithereal.item.ModRawMaterialItems;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
+import org.lithereal.neoforge.world.item.ForgeItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.PASSIVE_ETHER_ABSORBER.get());
         dropSelf(ModBlocks.PURE_ETHER_SOURCE.get());
         dropSelf(ForgeBlocks.ELECTRIC_CRUCIBLE.get());
+        createMultipleOreDrops(ModBlocks.IMPURE_ETHEREAL_CRYSTAL.get(), ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), 3, 5);
         createMultipleOreDropsNoFortune(ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), 7, 9);
 
         dropSelf(ModTreeBlocks.PHANTOM_OAK_PLANKS.get());
@@ -71,6 +73,31 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModStoneBlocks.POLISHED_PAILITE_WALL.get());
         add(ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), this::createSlabItemTable);
 
+        createMultipleOreDrops(ModOreBlocks.ALLIAN_ORE.get(), ModRawMaterialItems.RAW_ALLIUM.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.AURELITE_ORE.get(), ModRawMaterialItems.AURELITE_DUST.get(), 3, 4);
+        createMultipleOreDrops(ModOreBlocks.DEEPSLATE_AURELITE_ORE.get(), ModRawMaterialItems.AURELITE_DUST.get(), 3, 4);
+        createMultipleOreDrops(ModOreBlocks.ETHERSTONE_AURELITE_ORE.get(), ModRawMaterialItems.AURELITE_DUST.get(), 3, 4);
+        createMultipleOreDrops(ModOreBlocks.CHRYON_ORE.get(), ModRawMaterialItems.CHRYON_CRYSTAL.get(), 2, 3);
+        createMultipleOreDrops(ModOreBlocks.COPALITE_ORE.get(), ModRawMaterialItems.COPALITE_DUST.get(), 4, 5);
+        createMultipleOreDrops(ModOreBlocks.DEEPSLATE_COPALITE_ORE.get(), ModRawMaterialItems.COPALITE_DUST.get(), 4, 5);
+        createMultipleOreDrops(ModOreBlocks.ETHERSTONE_COPALITE_ORE.get(), ModRawMaterialItems.COPALITE_DUST.get(), 4, 5);
+        createMultipleOreDrops(ModOreBlocks.CYRUM_ORE.get(), ModRawMaterialItems.CYRUM_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.DEEPSLATE_CYRUM_ORE.get(), ModRawMaterialItems.CYRUM_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.ETHERSTONE_CYRUM_ORE.get(), ModRawMaterialItems.CYRUM_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.ELUNITE_ORE.get(), ModRawMaterialItems.ELUNITE_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.HELLIONITE_ORE.get(), ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.LITHERITE_ORE.get(), ForgeItems.LITHERITE_CRYSTAL.get(), 1, 2);
+        createMultipleOreDrops(ModOreBlocks.DEEPSLATE_LITHERITE_ORE.get(), ForgeItems.LITHERITE_CRYSTAL.get(), 1, 2);
+        createMultipleOreDrops(ModOreBlocks.ETHERSTONE_LITHERITE_ORE.get(), ForgeItems.LITHERITE_CRYSTAL.get(), 1, 2);
+        createMultipleOreDrops(ModOreBlocks.LUMINIUM_ORE.get(), ModRawMaterialItems.LUMINIUM_CRYSTAL.get(), 1, 2);
+        createMultipleOreDrops(ModOreBlocks.DEEPSLATE_LUMINIUM_ORE.get(), ModRawMaterialItems.LUMINIUM_CRYSTAL.get(), 1, 2);
+        createMultipleOreDrops(ModOreBlocks.ETHERSTONE_LUMINIUM_ORE.get(), ModRawMaterialItems.LUMINIUM_CRYSTAL.get(), 1, 2);
+        createMultipleOreDrops(ModOreBlocks.NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.DEEPSLATE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.ETHERSTONE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.SATURNITE_ORE.get(), ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 2);
+
+        createMultipleOreDrops(ModPhantomBlocks.PHANTOM_DIAMOND_ORE.get(), ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 1);
         dropSelf(ModPhantomBlocks.PHANTOM_ROSE.get());
         dropSelf(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get());
         dropSelf(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get());
