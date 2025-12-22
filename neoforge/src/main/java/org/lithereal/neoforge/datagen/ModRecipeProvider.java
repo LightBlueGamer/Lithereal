@@ -277,13 +277,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     protected static void improvedThermalItem(RecipeOutput recipeOutput, RecipeCategory recipeCategory, Item base, Item improved) {
         ShapedRecipeBuilder.shaped(recipeCategory, improved, 1)
-                .define('A', ModRawMaterialItems.AURELITE_DUST.get())
+                .define('A', ModRawMaterialItems.AURELITE_INGOT.get())
                 .define('B', base)
                 .define('C', ModRawMaterialItems.CHRYON_CRYSTAL.get())
                 .pattern(" A ")
                 .pattern("CBC")
                 .pattern(" A ")
-                .unlockedBy("has_aurelite_dust", has(ModRawMaterialItems.AURELITE_DUST.get()))
+                .unlockedBy("has_aurelite_ingot", has(ModRawMaterialItems.AURELITE_INGOT.get()))
                 .save(recipeOutput);
     }
 

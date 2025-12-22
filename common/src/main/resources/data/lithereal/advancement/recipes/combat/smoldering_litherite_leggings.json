@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_aurelite_dust": {
+    "has_aurelite_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:aurelite_dust"
+            "items": "lithereal:aurelite_ingot"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_aurelite_dust"
+      "has_aurelite_ingot"
     ]
   ],
   "rewards": {

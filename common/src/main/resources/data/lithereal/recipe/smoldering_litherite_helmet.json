@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "lithereal:aurelite_dust"
+      "item": "lithereal:aurelite_ingot"
     },
     "B": {
       "item": "lithereal:burning_litherite_helmet"
