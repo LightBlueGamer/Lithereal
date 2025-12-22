@@ -262,7 +262,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     public static void oreDual(RecipeOutput recipeOutput, List<ItemLike> list, RecipeCategory recipeCategory, ItemLike itemLike, float f, int i, String string) {
         oreSmeltingFromBaseModNamespace(recipeOutput, list, recipeCategory, itemLike, f, i, string);
-        oreBlastingFromBaseModNamespace(recipeOutput, list, recipeCategory, itemLike, f, i, string);
+        oreBlastingFromBaseModNamespace(recipeOutput, list, recipeCategory, itemLike, f, i / 2, string);
     }
 
     protected static void stonecutterResultFromBaseModNamespace(RecipeOutput recipeOutput, RecipeCategory category, ItemLike to, ItemLike from) {
