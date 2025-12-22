@@ -148,31 +148,31 @@ public class ModToolItems {
             new AbilityHoeItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, new Item.Properties().fireResistant().attributes(HoeItem.createAttributes(ODYSIUM, -5, 0)).rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> LITHERITE_HAMMER = ITEMS.register("litherite_hammer", () ->
-            new HammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties()));
+            new HammerItem(LITHERITE, 5, -3.0F, 3, new Item.Properties()));
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HAMMER = ITEMS.register("burning_litherite_hammer", () ->
-            new BurningLitheriteHammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties().fireResistant()));
+            new BurningLitheriteHammerItem(LITHERITE, 5, -3.0F, 3, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ITEMS.register("frozen_litherite_hammer", () ->
-            new AbilityHammerItem(FROZEN, LITHERITE, 5, -3F, 4, new Item.Properties()));
+            new AbilityHammerItem(FROZEN, LITHERITE, 5, -3F, 3, new Item.Properties()));
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_HAMMER = ITEMS.register("smoldering_litherite_hammer", () ->
-            new BurningLitheriteHammerItem(SMOLDERING, LITHERITE, 5, -3F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new BurningLitheriteHammerItem(SMOLDERING, LITHERITE, 5, -3F, 3, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_HAMMER = ITEMS.register("frostbitten_litherite_hammer", () ->
-            new AbilityHammerItem(FROSTBITTEN, LITHERITE, 5, -3F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilityHammerItem(FROSTBITTEN, LITHERITE, 5, -3F, 3, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HAMMER = ITEMS.register("infused_litherite_hammer", () ->
-            new InfusedLitheriteHammerItem(LITHERITE, 5, -3.0F, 4, new Item.Properties()));
+            new InfusedLitheriteHammerItem(LITHERITE, 5, -3.0F, 3, new Item.Properties()));
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_HAMMER = ITEMS.register("withering_litherite_hammer", () ->
-            new AbilityHammerItem(WITHERING, LITHERITE, 5, -3.0F, 4, new Item.Properties()));
+            new AbilityHammerItem(WITHERING, LITHERITE, 5, -3.0F, 3, new Item.Properties()));
 
     public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ITEMS.register("odysium_hammer", () ->
-            new AbilityHammerItem(Ability.ODYSIUM, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilityHammerItem(Ability.ODYSIUM, ODYSIUM, 5, -3.0F, 3, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_HAMMER = ITEMS.register("enhanced_odysium_hammer", () ->
-            new AbilityHammerItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, 5, -3.0F, 4, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
+            new AbilityHammerItem(Ability.ENHANCED_ODYSIUM, ODYSIUM, 5, -3.0F, 3, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)));
 
     public static final RegistrySupplier<Item> ODYSIUM_BOW = ITEMS.register("odysium_bow", () ->
             new ModBowItem(new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON).durability(2431), 2, 0.2F, 1));

@@ -32,6 +32,6 @@ public class CombatifyHooks {
     }
 
     public static float getTierDamageNerf() {
-        return Combatify.CONFIG.tierDamageNerf() ? -1 : 0;
+        return Combatify.CONFIG.tierDamageNerf() ? 1 : 0;
     }
 }

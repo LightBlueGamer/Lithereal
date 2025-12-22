@@ -1,14 +1,14 @@
 {
-    "tags": [
-        "lithereal:litherite_tools"
-    ],
-    "patch_generators": [
-        {
-            "generator": "defaulted:tool_material",
-            "weapon_level": 3,
-            "base_tier": "litherite"
-        }
-    ],
-    "patch": {},
-    "priority": 800
+  "tags": [
+    "lithereal:litherite_tools"
+  ],
+  "patch_generators": [
+    {
+      "generator": "defaulted:tool_material",
+      "weapon_level": 3,
+      "base_tier": "litherite"
+    }
+  ],
+  "patch": {},
+  "priority": 800
 }
