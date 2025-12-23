@@ -64,7 +64,7 @@ public interface IEnergyUser {
     }
 
     default <B extends BlockEntity & IEnergyUserProvider> void onSuccess(B pEntity, int remainingEnergy, TransferDirection direction) {
-
+        pEntity.onSuccess(remainingEnergy, direction);
     }
 
     void absorbEnergy(int transferred);
