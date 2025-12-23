@@ -18,7 +18,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.block.ModBlocks;
 import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModRawMaterialItems;

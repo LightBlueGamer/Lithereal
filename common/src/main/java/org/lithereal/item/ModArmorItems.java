@@ -4,8 +4,6 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import org.lithereal.LitherealExpectPlatform;
-import org.lithereal.item.ability.Ability;
 import org.lithereal.item.ability.AbilityArmorItem;
 import org.lithereal.item.infused.InfusedLitheriteArmorItem;
 
