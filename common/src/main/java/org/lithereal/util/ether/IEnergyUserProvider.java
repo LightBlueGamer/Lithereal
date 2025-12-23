@@ -10,6 +10,9 @@ public interface IEnergyUserProvider {
     <B extends BlockEntity & IEnergyUserProvider> B asBlockEntity();
     IEnergyUser getEnergyUser();
     TransferMode getTransferModeForDirection(Direction direction);
+    default void onSuccess(int remainingEnergy, IEnergyUser.TransferDirection direction) {
+
+    }
     default int requiredEnergy() {
         return getEnergyUser().getAbsorbRate() == -1 ? 1 : getEnergyUser().getAbsorbRate();
     }

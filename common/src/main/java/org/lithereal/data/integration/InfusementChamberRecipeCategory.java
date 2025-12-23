@@ -12,30 +12,26 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
-import org.lithereal.item.ModRawMaterialItems;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InfusementChamberRecipeCategory implements IRecipeCategory<InfusementChamberRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "infusing");
     public final static ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/infusement_chamber_gui.png");
+            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/infusement_chamber_jei.png");
 
     private final IDrawable background;
     private final IDrawable icon;
 
     public InfusementChamberRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 83);
+        this.background = helper.drawableBuilder(TEXTURE, 0, 0, 68, 76).setTextureSize(68, 76).build();
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(LitherealExpectPlatform.getInfusementChamberBlock()));
     }
 
@@ -63,17 +59,16 @@ public class InfusementChamberRecipeCategory implements IRecipeCategory<Infuseme
     public void setRecipe(IRecipeLayoutBuilder builder, InfusementChamberRecipe recipe, IFocusGroup focuses) {
         List<ItemStack> itemStacks = new ArrayList<>();
         List<ItemStack> itemStacksOut = new ArrayList<>();
-        Field[] fields = Potions.class.getDeclaredFields();
 
-        itemStacks.add(Items.POTION.getDefaultInstance());
-        itemStacksOut.add(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get().getDefaultInstance());
         for (Potion potion : BuiltInRegistries.POTION) {
-            ItemStack potionItem = PotionContents.createItemStack(
-                    recipe.getIngredients().get(1).getItems()[0].getItem(),
-                    BuiltInRegistries.POTION.getHolderOrThrow(
-                            BuiltInRegistries.POTION.getResourceKey(potion).orElseThrow()
-                    ));
-            itemStacks.add(potionItem);
+            for (ItemStack primary : recipe.primary().getItems()) {
+                ItemStack potionItem = PotionContents.createItemStack(
+                        primary.getItem(),
+                BuiltInRegistries.POTION.getHolderOrThrow(
+                        BuiltInRegistries.POTION.getResourceKey(potion).orElseThrow()
+                ));
+                itemStacks.add(potionItem);
+            }
 
             ItemStack itemOut = PotionContents.createItemStack(
                     recipe.output().getItem(),
@@ -83,9 +78,9 @@ public class InfusementChamberRecipeCategory implements IRecipeCategory<Infuseme
             itemStacksOut.add(itemOut);
         }
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 80, 57).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 80, 13).addItemStacks(itemStacks);
+        builder.addSlot(RecipeIngredientRole.INPUT, 8, 8).addItemStacks(itemStacks);
+        builder.addSlot(RecipeIngredientRole.INPUT, 44, 8).addIngredients(recipe.secondary());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 101, 57).addItemStacks(itemStacksOut);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 26, 52).addItemStacks(itemStacksOut);
     }
 }

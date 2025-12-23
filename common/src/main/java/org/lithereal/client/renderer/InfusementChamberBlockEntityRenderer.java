@@ -27,7 +27,7 @@ public class InfusementChamberBlockEntityRenderer implements BlockEntityRenderer
     @Override
     public void render(InfusementChamberBlockEntity blockEntity, float p_112308_, PoseStack matrixStack, MultiBufferSource multiBufferSource, int packedLight, int p_112312_) {
         VertexConsumer builder = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(textureEmpty));
-        if(!blockEntity.getStoredItem().isEmpty()) builder = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(textureFilled));
+        if (!blockEntity.getStoredItem().isEmpty()) builder = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(textureFilled));
         matrixStack.pushPose();
         matrixStack.translate(0.5f, 1.5f, 0.5f);
         matrixStack.mulPose(Axis.ZP.rotationDegrees(180.0f));

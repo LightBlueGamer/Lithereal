@@ -6,6 +6,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -152,6 +155,17 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
         maxProgress = nbt.getInt("electric_crucible.max_progress");
         heatState = FireCrucibleBlockEntity.HeatState.fromHeat(nbt.getInt("electric_crucible.heat_level"));
         isOn = nbt.getBoolean("electric_crucible.is_on");
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, ElectricCrucibleBlockEntity pEntity) {

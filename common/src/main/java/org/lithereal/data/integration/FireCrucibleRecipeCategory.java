@@ -19,13 +19,13 @@ import org.lithereal.data.recipes.FireCrucibleRecipe;
 public class FireCrucibleRecipeCategory implements IRecipeCategory<FireCrucibleRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "burning");
     public final static ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png");
+            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/crucible_recipe_jei.png");
 
     private final IDrawable background;
     private final IDrawable icon;
 
     public FireCrucibleRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 83);
+        this.background = helper.drawableBuilder(TEXTURE, 0, 0, 60, 80).setTextureSize(60, 80).build();
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(LitherealExpectPlatform.getFireCrucibleBlock()));
     }
 
@@ -51,16 +51,15 @@ public class FireCrucibleRecipeCategory implements IRecipeCategory<FireCrucibleR
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FireCrucibleRecipe recipe, IFocusGroup focuses) {
-        if(recipe.getIngredients().size() > 1) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 94, 57).addIngredients(recipe.getIngredients().getFirst());
-            builder.addSlot(RecipeIngredientRole.INPUT, 66, 57).addIngredients(recipe.getIngredients().get(1));
+        if (recipe.getIngredients().size() > 1) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 36, 56).addIngredients(recipe.getIngredients().getFirst());
+            builder.addSlot(RecipeIngredientRole.INPUT, 8, 56).addIngredients(recipe.getIngredients().get(1));
 
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 13).addItemStack(recipe.output());
-
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 22, 12).addItemStack(recipe.output());
         } else {
-            builder.addSlot(RecipeIngredientRole.INPUT, 94, 57).addIngredients(recipe.getIngredients().getFirst());
+            builder.addSlot(RecipeIngredientRole.INPUT, 36, 56).addIngredients(recipe.getIngredients().getFirst());
 
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 13).addItemStack(recipe.output());
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 22, 12).addItemStack(recipe.output());
         }
     }
 }

@@ -29,7 +29,7 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
     public InfusementChamberMenu(int id, Inventory inv, BlockEntity entity) {
         super(LitherealExpectPlatform.getInfusementChamberMenu(), id);
 
-        checkContainerSize(inv, 2);
+        checkContainerSize(inv, 3);
         blockEntity = (InfusementChamberBlockEntity) entity;
         this.level = inv.player.level();
         this.data = blockEntity.getData();
@@ -42,8 +42,14 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
         this.inventory = blockEntity;
         inventory.startOpen(inv.player);
 
-        this.addSlot(new Slot(inventory, 0, 80, 57));
-        this.addSlot(new Slot(inventory, 1, 80, 13));
+        this.addSlot(new Slot(inventory, 0, 98, 13) {
+            @Override
+            public int getMaxStackSize() {
+                return 1;
+            }
+        });
+        this.addSlot(new Slot(inventory, 1, 62, 13));
+        this.addSlot(new Slot(inventory, 2, 80, 57));
     }
 
     public boolean isCrafting() {
@@ -53,7 +59,7 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 22;
+        int progressArrowSize = 31;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -67,7 +73,7 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = 36;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
     @Override
     public @NotNull ItemStack quickMoveStack(Player playerIn, int index) {

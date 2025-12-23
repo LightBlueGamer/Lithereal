@@ -6,6 +6,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.MenuProvider;
@@ -96,12 +99,9 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         this.progress = 0;
     }
 
-    protected static boolean canInsertItemIntoOutput(SimpleContainer inventory, ItemStack itemStack) {
-        return inventory.getItem(2).getItem() == itemStack.getItem() || inventory.getItem(2).isEmpty();
-    }
-
-    protected static boolean canInsertAmountIntoOutput(SimpleContainer inventory) {
-        return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
+    public static boolean canInsertItemInto(int slot, SimpleContainer inventory, ItemStack itemStack) {
+        ItemStack baseStack = inventory.getItem(slot);
+        return baseStack.isEmpty() || (ItemStack.isSameItemSameComponents(baseStack, itemStack) && baseStack.getMaxStackSize() > itemStack.getCount() + baseStack.getCount());
     }
 
     protected static int getFuelLevel(FireCrucibleBlockEntity entity) {
@@ -137,6 +137,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         nbt.putInt("fire_crucible.max_progress", maxProgress);
         nbt.putInt("fire_crucible.heat_level", heatState.heat);
         nbt.putInt("fire_crucible.fuel_level", fuelLevel);
+        nbt.putInt("fire_crucible.max_fuel_level", maxFuel);
     }
 
     @Override
@@ -147,6 +148,18 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         maxProgress = nbt.getInt("fire_crucible.max_progress");
         heatState = HeatState.fromHeat(nbt.getInt("fire_crucible.heat_level"));
         fuelLevel = nbt.getInt("fire_crucible.fuel_level");
+        maxFuel = nbt.getInt("fire_crucible.max_fuel_level");
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FireCrucibleBlockEntity pEntity) {
@@ -255,7 +268,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
             ItemStack resultItem = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().getResultItem(level.registryAccess())).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().getResultItem(level.registryAccess())).orElse(ItemStack.EMPTY));
             if (entity.progress == 0)
                 entity.maxProgress = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().maxProgress()).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().getCookingTime()).orElse(200));
-            if (canInsertAmountIntoOutput(inventory) && canInsertItemIntoOutput(inventory, resultItem))
+            if (canInsertItemInto(2, inventory, resultItem))
                 hasRecipe = true;
         }
 

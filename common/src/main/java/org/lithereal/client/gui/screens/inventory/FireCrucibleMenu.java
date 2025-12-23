@@ -43,7 +43,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(inventory, 0, 94, 57));
         this.addSlot(new Slot(inventory, 1, 66, 57));
         this.addSlot(new Slot(inventory, 2, 80, 13));
-        this.addSlot(new Slot(inventory, 3, 140, 13));
+        this.addSlot(new Slot(inventory, 3, 43, 35));
     }
 
     public boolean isCrafting() {
@@ -61,7 +61,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     public int getScaledProgressFuel() {
         int progress = this.data.get(3);
         int maxProgress = this.data.get(4);
-        int progressArrowSize = 34;
+        int progressArrowSize = 64;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }

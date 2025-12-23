@@ -1,14 +1,13 @@
 package org.lithereal.client.gui.screens.inventory;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
+import org.lithereal.client.gui.screens.CommonAssets;
 
 public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu> {
     private static final ResourceLocation TEXTURE =
@@ -24,17 +23,13 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        int xPos = this.leftPos;
+        int yPos = (this.height - this.imageHeight) / 2;
+        guiGraphics.blit(TEXTURE, xPos, yPos, 0, 0, this.imageWidth, this.imageHeight);
 
-        guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-
-        renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
-        renderHeatSource(guiGraphics.pose(), x, y, guiGraphics);
-        renderBucketProcessing(guiGraphics.pose(), x, y, guiGraphics);
+        renderProgressArrow(guiGraphics.pose(), xPos, yPos, guiGraphics);
+        renderHeatSource(guiGraphics.pose(), xPos, yPos, guiGraphics);
+        renderBucketProcessing(guiGraphics.pose(), xPos, yPos, guiGraphics);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
@@ -47,8 +42,9 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
     }
 
     private void renderHeatSource(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if (menu.getHeatLevel() == 2) guiGraphics.blit(TEXTURE, x + 131, y + 41, 176, 39, menu.getScaledProgressFuel(), 9);
-        else if (menu.getHeatLevel() == 1) guiGraphics.blit(TEXTURE, x + 131, y + 41, 176, 30, menu.getScaledProgressFuel(), 9);
+        int fuelProgress = menu.getScaledProgressFuel();
+        if (menu.getHeatLevel() == 2) guiGraphics.blitSprite(CommonAssets.BLUE_FIRE_FUEL_BAR, 10, 64, 0, 64 - fuelProgress, x + 23, y + 11 + 64 - fuelProgress, 10, fuelProgress);
+        else if (menu.getHeatLevel() == 1) guiGraphics.blitSprite(CommonAssets.FIRE_FUEL_BAR, 10, 64, 0, 64 - fuelProgress, x + 23, y + 11 + 64 - fuelProgress, 10, fuelProgress);
     }
 
     private void renderBucketProcessing(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {

@@ -1,12 +1,18 @@
 package org.lithereal.block.entity;
 
+import dev.architectury.hooks.item.ItemStackHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,19 +35,28 @@ import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
 import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
 import org.lithereal.data.recipes.ModRecipes;
+import org.lithereal.util.ether.EtherEnergyAbsorber;
+import org.lithereal.util.ether.IEnergyUser;
+import org.lithereal.util.ether.IEnergyUserProvider;
 
 import java.util.Optional;
 import java.util.Random;
 
-public abstract class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory {
+import static org.lithereal.block.entity.FireCrucibleBlockEntity.canInsertItemInto;
+
+public abstract class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, IEnergyUserProvider {
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 6000;
     protected PowerState powerState = PowerState.UNPOWERED;
+    protected int attachedFrozenBlocks = 0;
+    protected int attachedBurningBlocks = 0;
+    protected float basePower = 1.0f;
+    protected float baseSuccessRate = 0.4f;
     protected float power = 1.0f;
     protected float successRate = 0.4f;
-    protected int usedPotions = 0;
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
+    protected ItemStack held = ItemStack.EMPTY;
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
 
     public PotionContents getStoredPotion() {
         return getItem(1).getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
@@ -49,6 +64,23 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
 
     public ItemStack getStoredItem() {
         return getItem(0);
+    }
+
+    private final EtherEnergyAbsorber energyAbsorber = new EtherEnergyAbsorber(100);
+
+    @Override
+    public IEnergyUser getEnergyUser() {
+        return energyAbsorber;
+    }
+
+    @Override
+    public TransferMode getTransferModeForDirection(Direction direction) {
+        return TransferMode.BOTH;
+    }
+
+    @Override
+    public <B extends BlockEntity & IEnergyUserProvider> B asBlockEntity() {
+        return (B) this;
     }
 
     public InfusementChamberBlockEntity(BlockPos pos, BlockState state) {
@@ -60,7 +92,6 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
                     case 0 -> InfusementChamberBlockEntity.this.progress;
                     case 1 -> InfusementChamberBlockEntity.this.maxProgress;
                     case 2 -> InfusementChamberBlockEntity.this.powerState.id;
-                    case 3 -> InfusementChamberBlockEntity.this.usedPotions;
                     default -> 0;
                 };
             }
@@ -71,13 +102,12 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
                     case 0 -> InfusementChamberBlockEntity.this.progress = value;
                     case 1 -> InfusementChamberBlockEntity.this.maxProgress = value;
                     case 2 -> InfusementChamberBlockEntity.this.powerState = PowerState.fromId(value);
-                    case 3 -> InfusementChamberBlockEntity.this.usedPotions = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 4;
+                return 3;
             }
         };
     }
@@ -102,30 +132,43 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     }
 
     public void setEmpowerments() {
-        this.power = 1.0f;
-        this.successRate = 0.4f;
+        this.basePower = 1.0f;
+        this.baseSuccessRate = 0.4f;
         int frozenBlocks = 0;
         int burningBlocks = 0;
-        int chargedBlocks = 0;
         for (Direction direction : Direction.values()) {
             BlockPos adjacentPos = this.getBlockPos().relative(direction);
             BlockState blockState = this.level.getBlockState(adjacentPos);
             if (blockState.is(ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get())) {
-                this.power -= 0.1f;
-                this.successRate += 0.15f;
+                this.basePower -= 0.1f;
+                this.baseSuccessRate += 0.15f;
                 frozenBlocks++;
             } else if (blockState.is(ModStorageBlocks.BURNING_LITHERITE_BLOCK.get())) {
-                this.power += 0.15f;
-                this.successRate -= 0.1f;
+                this.basePower += 0.15f;
+                this.baseSuccessRate -= 0.1f;
                 burningBlocks++;
-            } else if (blockState.is(ModStorageBlocks.CHARGED_LITHERITE_BLOCK.get())) {
-                this.power += 0.2f;
-                this.successRate += 0.2f;
-                chargedBlocks++;
             }
-            powerState = PowerState.fromSurrounding(new SurroundingBlocks(frozenBlocks, burningBlocks, chargedBlocks));
         }
+        this.attachedFrozenBlocks = frozenBlocks;
+        this.attachedBurningBlocks = burningBlocks;
+        int attached = getEnergyUser().getConnectionsThatCouldProvideEnergy(this);
+        if (attached == 0) {
+            this.power = this.basePower;
+            this.successRate = this.baseSuccessRate;
+            this.powerState = PowerState.fromSurrounding(new SurroundingBlocks(this.attachedFrozenBlocks, this.attachedBurningBlocks, attached));
+            setChanged();
+        }
+    }
 
+    @Override
+    public void onSuccess(int remainingEnergy, IEnergyUser.TransferDirection direction) {
+        this.power = this.basePower;
+        this.successRate = this.baseSuccessRate;
+        int attached = getEnergyUser().getConnectionsThatCouldProvideEnergy(this);
+        this.power += 0.2f * attached;
+        this.successRate += 0.2f * attached;
+        this.powerState = PowerState.fromSurrounding(new SurroundingBlocks(this.attachedFrozenBlocks, this.attachedBurningBlocks, attached));
+        setChanged();
     }
 
     @Override
@@ -147,24 +190,40 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.saveAdditional(nbt, provider);
         saveItems(nbt, provider);
+        saveEnergy(nbt, provider);
         nbt.putInt("infusement_chamber.progress", progress);
         nbt.putInt("infusement_chamber.max_progress", maxProgress);
         nbt.putInt("infusement_chamber.power_state", powerState.id);
         nbt.putFloat("infusement_chamber.power", power);
         nbt.putFloat("infusement_chamber.success_rate", successRate);
-        nbt.putInt("infusement_chamber.used_potions", usedPotions);
+        basePower = -10;
+        baseSuccessRate = -10;
+        Tag tag = ItemStack.OPTIONAL_CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), held).getOrThrow();
+        nbt.put("infusement_chamber.held_stack", tag);
     }
 
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
         super.loadAdditional(nbt, provider);
         loadItems(nbt, provider);
+        loadEnergy(nbt, provider);
         progress = nbt.getInt("infusement_chamber.progress");
         maxProgress = nbt.getInt("infusement_chamber.max_progress");
         powerState = PowerState.fromId(nbt.getInt("infusement_chamber.power_state"));
         power = nbt.getFloat("infusement_chamber.power");
         successRate = nbt.getFloat("infusement_chamber.success_rate");
-        usedPotions = nbt.getInt("infusement_chamber.used_potions");
+        held = ItemStack.parseOptional(provider, nbt.getCompound("infusement_chamber.held_stack"));
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     private static void craftItem(InfusementChamberBlockEntity pEntity) {
@@ -196,18 +255,23 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     private static void craftItem(InfusementChamberBlockEntity entity, ItemStack outputItem) {
         Random random = new Random();
 
-        entity.removeItem(0, 1);
-        if(entity.getItem(1).getCount() - 1 > 0) {
-            if (entity.usedPotions <= 99)
-                entity.usedPotions++;
-            entity.removeItem(1, 1);
-        } else {
-            if (entity.getItem(1).is(Items.POTION)) entity.setItem(1, new ItemStack(Items.GLASS_BOTTLE, entity.usedPotions+1));
-            else entity.removeItem(1, 1);
-            entity.usedPotions = 0;
+        ItemStack originalBucket = entity.removeItem(0, 1);
+        ItemStack bucketRemainder = ItemStackHooks.getCraftingRemainingItem(originalBucket);
+        if (!bucketRemainder.isEmpty()) entity.setItem(0, bucketRemainder);
+        ItemStack stack = entity.removeItem(1, 1);
+        ItemStack remainder = ItemStackHooks.getCraftingRemainingItem(stack);
+        if (remainder.isEmpty() && stack.is(Items.POTION)) remainder = Items.GLASS_BOTTLE.getDefaultInstance();
+        if (entity.held.isEmpty() && !remainder.isEmpty())
+            entity.held = remainder.copy();
+        else if (!remainder.isEmpty()) entity.held.grow(1);
+        if (entity.getItem(1).getCount() - 1 <= 0) {
+            if (!entity.held.isEmpty()) entity.setItem(1, entity.held);
+            entity.held = ItemStack.EMPTY;
         }
-        if (random.nextFloat() < entity.successRate) {
-            entity.setItem(0, outputItem);
+        if (random.nextFloat() < entity.baseSuccessRate) {
+            ItemStack originalResultStack = entity.getItem(2);
+            if (originalResultStack.isEmpty()) entity.setItem(2, outputItem);
+            else originalResultStack.grow(outputItem.getCount());
         } else {
             boolean mobGriefingEnabled = entity.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
             BlockPos blockPos = entity.getBlockPos();
@@ -227,20 +291,28 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
 
         Optional<RecipeHolder<InfusementChamberRecipe>> infusingRecipe = level.getRecipeManager()
                 .getRecipeFor(ModRecipes.INFUSING_TYPE.get(), new ContainerRecipeInput(inventory), level);
-        if (entity.progress == 0)
-            entity.maxProgress = infusingRecipe.map(infusementChamberRecipeRecipeHolder -> infusementChamberRecipeRecipeHolder.value().maxProgress()).orElse(200);
 
-        if (infusingRecipe.isPresent()) hasRecipe = true;
+        if (infusingRecipe.isPresent()) {
+            ItemStack resultItem = infusingRecipe.map(infusementChamberRecipeHolder -> infusementChamberRecipeHolder.value().getResultItem(level.registryAccess())).orElse(ItemStack.EMPTY);
+            if (entity.progress == 0)
+                entity.maxProgress = infusingRecipe.map(infusementChamberRecipeHolder -> infusementChamberRecipeHolder.value().maxProgress()).orElse(200);
+            if (canInsertItemInto(2, inventory, resultItem))
+                hasRecipe = true;
+        }
 
         return hasRecipe;
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, InfusementChamberBlockEntity pEntity) {
-        if(level.isClientSide()) return;
+        if (level.isClientSide()) return;
 
-        SimpleContainer inventory = new SimpleContainer(pEntity.getContainerSize());
-        for (int i = 0; i < pEntity.getContainerSize(); i++) {
-            inventory.setItem(i, pEntity.getItem(i));
+        if (pEntity.baseSuccessRate == -10 || pEntity.basePower == -10) pEntity.setEmpowerments();
+
+        pEntity.getEnergyUser().tick(pEntity);
+
+        if (pEntity.getItem(1).isEmpty() && !pEntity.held.isEmpty()) {
+            pEntity.setItem(1, pEntity.held);
+            pEntity.held = ItemStack.EMPTY;
         }
 
         if(hasRecipe(pEntity)) {
@@ -282,17 +354,14 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
     }
 
     public record SurroundingBlocks(int frozen, int burning, int charged) {
-        public SurroundingBlocks(int[] values) {
-            this(values[0], values[1], values[2]);
-        }
         public boolean isGreatestCharged() {
-            return charged >= frozen && charged >= burning;
+            return charged >= frozen && charged >= burning && charged > 0;
         }
         public boolean isGreatestFrozen() {
-            return frozen >= burning && frozen >= charged;
+            return frozen >= burning && frozen >= charged && frozen > 0;
         }
         public boolean isGreatestBurning() {
-            return burning >= frozen && burning >= charged;
+            return burning >= frozen && burning >= charged && burning > 0;
         }
 
     }

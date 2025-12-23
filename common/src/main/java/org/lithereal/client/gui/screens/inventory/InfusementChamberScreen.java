@@ -1,15 +1,14 @@
 package org.lithereal.client.gui.screens.inventory;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.lithereal.Lithereal;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
+import org.lithereal.client.gui.screens.CommonAssets;
 
 public class InfusementChamberScreen extends AbstractContainerScreen<InfusementChamberMenu> {
     private static final ResourceLocation TEXTURE =
@@ -25,21 +24,17 @@ public class InfusementChamberScreen extends AbstractContainerScreen<InfusementC
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        int xPos = this.leftPos;
+        int yPos = (this.height - this.imageHeight) / 2;
+        guiGraphics.blit(TEXTURE, xPos, yPos, 0, 0, this.imageWidth, this.imageHeight);
 
-        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x, y, 0, 0, imageWidth, imageHeight);
-
-        renderProgressArrow(guiGraphics.pose(), x, y, guiGraphics);
-        renderPowerArrow(guiGraphics.pose(), x, y, guiGraphics);
+        renderProgressArrow(guiGraphics.pose(), xPos, yPos, guiGraphics);
+        renderPowerArrow(guiGraphics.pose(), xPos, yPos, guiGraphics);
     }
 
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
-        if(menu.isCrafting()) {
-            guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 84, y + 32, 176, 3, 8, menu.getScaledProgress());
+        if (menu.isCrafting()) {
+            guiGraphics.blit(TEXTURE, x + 81, y + 19, 176, 3, 14, menu.getScaledProgress() + 4);
         }
     }
 
@@ -52,14 +47,13 @@ public class InfusementChamberScreen extends AbstractContainerScreen<InfusementC
 
     public void renderPowerArrow(PoseStack pPoseStack, int x, int y, GuiGraphics guiGraphics) {
         if(menu.getPowerState() != InfusementChamberBlockEntity.PowerState.UNPOWERED) {
-            guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 98, y + 35, 176, 25, 28, 16);
-            int u = switch (menu.getPowerState()) {
-                case UNPOWERED -> 0; // Impossible
-                case FROZEN -> 50;
-                case BURNING -> 41;
-                case CHARGED -> 59;
+            ResourceLocation sprite = switch (menu.getPowerState()) {
+                case UNPOWERED -> CommonAssets.FIRE_FUEL_BAR; // Impossible
+                case FROZEN -> CommonAssets.FREEZING_POWER;
+                case BURNING -> CommonAssets.BLUE_FIRE_FUEL_BAR;
+                case CHARGED -> CommonAssets.CHARGING_BAR;
             };
-            guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png"), x + 130, y + 38, 176, u, 33, 9);
+            guiGraphics.blitSprite(sprite, 10, 64, 0, 0, x + 23, y + 11, 10, 64);
         }
     }
 }

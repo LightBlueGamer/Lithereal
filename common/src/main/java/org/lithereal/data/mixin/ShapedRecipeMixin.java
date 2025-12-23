@@ -25,17 +25,17 @@ public class ShapedRecipeMixin {
 
     @Inject(method = "assemble(Lnet/minecraft/world/item/crafting/CraftingInput;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
     public void assemble(CraftingInput craftingInput, HolderLookup.Provider provider, CallbackInfoReturnable<ItemStack> cir) {
-        AtomicBoolean bl = new AtomicBoolean(true);
+        AtomicBoolean success = new AtomicBoolean(true);
         ItemStack result = this.result.copy();
-        if(result.getItem() instanceof InfusedItem) craftingInput.items().forEach(itemStack -> {
+        if (result.getItem() instanceof InfusedItem) craftingInput.items().forEach(itemStack -> {
             if (itemStack.getItem() instanceof InfusedItem) {
                 PotionContents oldContents = result.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
                 PotionContents newContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
                 if(oldContents == PotionContents.EMPTY) result.set(DataComponents.POTION_CONTENTS, newContents);
-                else if(oldContents != newContents) bl.set(false);
+                else if(oldContents != newContents) success.set(false);
             }
         });
-        if(!bl.get()) cir.setReturnValue(ItemStack.EMPTY);
+        if(!success.get()) cir.setReturnValue(ItemStack.EMPTY);
         else cir.setReturnValue(result);
     }
 }

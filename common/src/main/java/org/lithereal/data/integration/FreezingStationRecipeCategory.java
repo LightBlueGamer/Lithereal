@@ -19,13 +19,13 @@ import org.lithereal.data.recipes.FreezingStationRecipe;
 public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingStationRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "freezing");
     public final static ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/freezing_station_gui.png");
+            ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/freezing_recipe_jei.png");
 
     private final IDrawable background;
     private final IDrawable icon;
 
     public FreezingStationRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 83);
+        this.background = helper.drawableBuilder(TEXTURE, 0, 0, 102, 32).setTextureSize(102, 32).build();
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(LitherealExpectPlatform.getFreezingStationBlock()));
     }
 
@@ -51,9 +51,9 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FreezingStationRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 43, 34).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 68, 34).addIngredients(recipe.getIngredients().get(1));
+        builder.addSlot(RecipeIngredientRole.INPUT, 8, 8).addIngredients(recipe.cooler());
+        builder.addSlot(RecipeIngredientRole.INPUT, 33, 8).addIngredients(recipe.primary());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 129, 34).addItemStack(recipe.output());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 78, 8).addItemStack(recipe.output());
     }
 }

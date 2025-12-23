@@ -36,7 +36,7 @@ public class ModItems {
             new Item(new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = ITEMS.register("molten_litherite_bucket", () ->
-            new Item(new Item.Properties().stacksTo(1)));
+            new Item(new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(16)));
 
     public static final RegistrySupplier<Item> LITHER_CHARGE = ITEMS.register("lither_charge", () ->
             new LitherChargeItem(new Item.Properties()));
@@ -48,13 +48,13 @@ public class ModItems {
             new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).jukeboxPlayable(ModSounds.SPARKLE)));
 
     public static final RegistrySupplier<Item> BOSS_ESSENCE = ITEMS.register("boss_essence", () ->
-            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), new BaseBossEssence(14100520, 0, Collections.emptyList())));
+            new BossEssenceItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).rarity(Rarity.RARE), new BaseBossEssence(14100520, 0, Collections.emptyList())));
 
     public static final RegistrySupplier<Item> AWAKENED_BOSS_ESSENCE = ITEMS.register("awakened_boss_essence", () ->
-            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), new BaseBossEssence(4726207, 1, Collections.emptyList())));
+            new BossEssenceItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).rarity(Rarity.RARE), new BaseBossEssence(4726207, 1, Collections.emptyList())));
 
     public static final RegistrySupplier<Item> PURE_BOSS_ESSENCE = ITEMS.register("pure_boss_essence", () ->
-            new BossEssenceItem(new Item.Properties().rarity(Rarity.RARE), new BaseBossEssence(13985849, 2, List.of(new MobEffectInstance(MobEffects.REGENERATION, 6000)))));
+            new BossEssenceItem(new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).rarity(Rarity.RARE), new BaseBossEssence(13985849, 2, List.of(new MobEffectInstance(MobEffects.REGENERATION, 6000)))));
 
     public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("odysium_upgrade_smithing_template",
             ModSmithingTemplateItem::createOdysiumUpgradeTemplate);
