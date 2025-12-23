@@ -237,14 +237,14 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
         ItemStack outputItem = resultItem.copy();
         outputItem.setCount(pEntity.getItem(2).getCount() + outputItem.getCount());
 
-        if (crucibleRecipe.isPresent() && crucibleRecipe.get().value().secondary().isPresent())
-            pEntity.removeItem(1, 1);
+        boolean shouldRemoveSecondary = crucibleRecipe.isPresent() && crucibleRecipe.get().value().secondary().isPresent();
 
-        if(hasRecipe(pEntity) && !outputItem.isEmpty()) craftItem(pEntity, outputItem);
+        if(hasRecipe(pEntity) && !outputItem.isEmpty()) craftItem(pEntity, outputItem, shouldRemoveSecondary);
     }
 
-    protected static void craftItem(FireCrucibleBlockEntity entity, ItemStack outputItem) {
+    protected static void craftItem(FireCrucibleBlockEntity entity, ItemStack outputItem, boolean shouldRemoveSecondary) {
         entity.removeItem(0, 1);
+        if (shouldRemoveSecondary) entity.removeItem(1, 1);
         entity.setItem(2, outputItem);
 
         entity.resetProgress();
