@@ -64,14 +64,38 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropPottedContents(ModVegetationBlocks.POTTED_FORTSHROOM.get());
         dropSelf(ModVegetationBlocks.FORTSHROOM.get());
 
+        dropSelf(ModStoneBlocks.ETHERSTONE.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_WALL.get());
+        add(ModStoneBlocks.ETHERSTONE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.CHISELED_ETHERSTONE.get());
+        dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE.get());
+        dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get());
+        add(ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.ETHERSTONE_BRICKS.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_BRICK_WALL.get());
+        add(ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
         dropSelf(ModStoneBlocks.PAILITE.get());
         dropSelf(ModStoneBlocks.PAILITE_STAIRS.get());
         dropSelf(ModStoneBlocks.PAILITE_WALL.get());
         add(ModStoneBlocks.PAILITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.PAILITE_BUTTON.get());
+        dropSelf(ModStoneBlocks.PAILITE_PRESSURE_PLATE.get());
         dropSelf(ModStoneBlocks.POLISHED_PAILITE.get());
         dropSelf(ModStoneBlocks.POLISHED_PAILITE_STAIRS.get());
         dropSelf(ModStoneBlocks.POLISHED_PAILITE_WALL.get());
         add(ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BUTTON.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get());
+        add(ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_BUTTON.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get());
 
         createMultipleOreDrops(ModOreBlocks.ALLIAN_ORE.get(), ModRawMaterialItems.RAW_ALLIUM.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.AURELITE_ORE.get(), ModRawMaterialItems.AURELITE_DUST.get(), 3, 4);

@@ -42,16 +42,47 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
+    public static final BlockFamily ETHERSTONE = new BlockFamily.Builder(ModStoneBlocks.ETHERSTONE.get())
+            .wall(ModStoneBlocks.ETHERSTONE_WALL.get())
+            .stairs(ModStoneBlocks.ETHERSTONE_STAIRS.get())
+            .slab(ModStoneBlocks.ETHERSTONE_SLAB.get())
+            .polished(ModStoneBlocks.POLISHED_ETHERSTONE.get())
+            .chiseled(ModStoneBlocks.CHISELED_ETHERSTONE.get())
+            .getFamily();
+    public static final BlockFamily POLISHED_ETHERSTONE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_ETHERSTONE.get())
+            .wall(ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get())
+            .stairs(ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get())
+            .slab(ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get())
+            .polished(ModStoneBlocks.ETHERSTONE_BRICKS.get())
+            .getFamily();
+    public static final BlockFamily ETHERSTONE_BRICKS = new BlockFamily.Builder(ModStoneBlocks.ETHERSTONE_BRICKS.get())
+            .wall(ModStoneBlocks.ETHERSTONE_BRICK_WALL.get())
+            .stairs(ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get())
+            .slab(ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get())
+            .getFamily();
     public static final BlockFamily PAILITE = new BlockFamily.Builder(ModStoneBlocks.PAILITE.get())
             .wall(ModStoneBlocks.PAILITE_WALL.get())
             .stairs(ModStoneBlocks.PAILITE_STAIRS.get())
             .slab(ModStoneBlocks.PAILITE_SLAB.get())
+            .button(ModStoneBlocks.PAILITE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.PAILITE_PRESSURE_PLATE.get())
             .polished(ModStoneBlocks.POLISHED_PAILITE.get())
             .getFamily();
     public static final BlockFamily POLISHED_PAILITE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_PAILITE.get())
             .wall(ModStoneBlocks.POLISHED_PAILITE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_PAILITE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_PAILITE_SLAB.get())
+            .button(ModStoneBlocks.POLISHED_PAILITE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.POLISHED_PAILITE_PRESSURE_PLATE.get())
+            .polished(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get())
+            .getFamily();
+    public static final BlockFamily POLISHED_PAILITE_BRICKS = new BlockFamily.Builder(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get())
+            .wall(ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get())
+            .stairs(ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get())
+            .slab(ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get())
+            .button(ModStoneBlocks.POLISHED_PAILITE_BRICK_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get())
+            .chiseled(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get())
             .getFamily();
     public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
@@ -203,8 +234,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreDual(recipeOutput, List.of(ModOreBlocks.CHRYON_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.CHRYON_CRYSTAL.get(), 1.4F, 200, "chryon_crystal");
         oreDual(recipeOutput, List.of(ModOreBlocks.ALLIAN_ORE.get(), ModRawMaterialItems.RAW_ALLIUM.get()), RecipeCategory.MISC, ModRawMaterialItems.ALLIAN_INGOT.get(), 2, 300, "allian_ingot");
 
+        generateRecipes(recipeOutput, ETHERSTONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, POLISHED_ETHERSTONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, ETHERSTONE_BRICKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, PAILITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, POLISHED_PAILITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, POLISHED_PAILITE_BRICKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, PHANTOM_OAK_PLANKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
         planksFromLog(recipeOutput, ModTreeBlocks.PHANTOM_OAK_PLANKS.get(), ModTags.PHANTOM_OAK_LOGS, 4);
         woodFromLogs(recipeOutput, ModTreeBlocks.PHANTOM_OAK_WOOD.get(), ModTreeBlocks.PHANTOM_OAK_LOG.get());
@@ -220,6 +255,29 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("CE")
                 .unlockedBy("has_etherstone", has(ModStoneBlocks.ETHERSTONE.get()))
                 .save(recipeOutput);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_SLAB.get(), ModStoneBlocks.ETHERSTONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_STAIRS.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_WALL.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_ETHERSTONE.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), ModStoneBlocks.ETHERSTONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICKS.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), ModStoneBlocks.ETHERSTONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_BRICK_WALL.get(), ModStoneBlocks.ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICKS.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_BRICK_WALL.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), ModStoneBlocks.ETHERSTONE_BRICKS.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get(), ModStoneBlocks.ETHERSTONE_BRICKS.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_BRICK_WALL.get(), ModStoneBlocks.ETHERSTONE_BRICKS.get());
+
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE_SLAB.get(), ModStoneBlocks.PAILITE.get(), 2);
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE_STAIRS.get(), ModStoneBlocks.PAILITE.get());
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.PAILITE_WALL.get(), ModStoneBlocks.PAILITE.get());
@@ -227,9 +285,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), ModStoneBlocks.PAILITE.get(), 2);
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_STAIRS.get(), ModStoneBlocks.PAILITE.get());
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_WALL.get(), ModStoneBlocks.PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), ModStoneBlocks.PAILITE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), ModStoneBlocks.PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), ModStoneBlocks.PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.PAILITE.get());
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), ModStoneBlocks.POLISHED_PAILITE.get(), 2);
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_STAIRS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_WALL.get(), ModStoneBlocks.POLISHED_PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), ModStoneBlocks.POLISHED_PAILITE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), ModStoneBlocks.POLISHED_PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
     }
 
     protected static void oreSmeltingFromBaseModNamespace(RecipeOutput arg, List<ItemLike> list, RecipeCategory arg2, ItemLike arg3, float f, int i, String string) {

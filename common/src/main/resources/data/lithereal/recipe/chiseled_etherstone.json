@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "pattern": [
-    "_",
-    "_"
-  ],
   "key": {
-    "_": {
+    "#": {
       "item": "lithereal:etherstone_slab"
     }
   },
+  "pattern": [
+    "#",
+    "#"
+  ],
   "result": {
+    "count": 1,
     "id": "lithereal:chiseled_etherstone"
   }
 }

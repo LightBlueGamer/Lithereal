@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "lithereal:pailite"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "lithereal:pailite_button"
+  }
+}

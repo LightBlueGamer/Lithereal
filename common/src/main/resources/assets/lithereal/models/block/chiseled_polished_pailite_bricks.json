@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "lithereal:block/chiseled_polished_pailite_bricks_top",
+    "side": "lithereal:block/chiseled_polished_pailite_bricks"
+  }
+}

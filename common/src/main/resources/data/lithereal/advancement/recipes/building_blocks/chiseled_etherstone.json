@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_etherstone_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:etherstone_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:chiseled_etherstone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_etherstone_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:chiseled_etherstone"
+    ]
+  }
+}

@@ -54,18 +54,56 @@ public class ModBlockStateProvider extends BlockStateProvider {
         plantWithItem(ModVegetationBlocks.MALISHROOM.get(), ModVegetationBlocks.POTTED_MALISHROOM.get(), TintState.NOT_TINTED);
         plantWithItem(ModVegetationBlocks.FORTSHROOM.get(), ModVegetationBlocks.POTTED_FORTSHROOM.get(), TintState.NOT_TINTED);
 
+        blockWithItem(ModStoneBlocks.ETHERSTONE);
+        stairsBlock((StairBlock) ModStoneBlocks.ETHERSTONE_STAIRS.get(), Lithereal.id("block/etherstone"));
+        itemForBlockModel(ModStoneBlocks.ETHERSTONE_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.ETHERSTONE_SLAB.get(), Lithereal.id("block/etherstone"), Lithereal.id("block/etherstone"));
+        itemForBlockModel(ModStoneBlocks.ETHERSTONE_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.ETHERSTONE_WALL.get(), Lithereal.id("block/etherstone"));
+        cubeColumn(ModStoneBlocks.CHISELED_ETHERSTONE.get(), Lithereal.id("block/chiseled_etherstone_side"), Lithereal.id("block/chiseled_etherstone_top"));
+        itemForBlockModel(ModStoneBlocks.CHISELED_ETHERSTONE.get());
+        blockWithItem(ModStoneBlocks.POLISHED_ETHERSTONE);
+        stairsBlock((StairBlock) ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get(), Lithereal.id("block/polished_etherstone"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), Lithereal.id("block/polished_etherstone"), Lithereal.id("block/polished_etherstone"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get(), Lithereal.id("block/polished_etherstone"));
+        blockWithItem(ModStoneBlocks.ETHERSTONE_BRICKS);
+        stairsBlock((StairBlock) ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get(), Lithereal.id("block/etherstone_bricks"));
+        itemForBlockModel(ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), Lithereal.id("block/etherstone_bricks"), Lithereal.id("block/etherstone_bricks"));
+        itemForBlockModel(ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.ETHERSTONE_BRICK_WALL.get(), Lithereal.id("block/etherstone_bricks"));
+
         blockWithItem(ModStoneBlocks.PAILITE);
         stairsBlock((StairBlock) ModStoneBlocks.PAILITE_STAIRS.get(), Lithereal.id("block/pailite"));
         itemForBlockModel(ModStoneBlocks.PAILITE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.PAILITE_SLAB.get(), Lithereal.id("block/pailite"), Lithereal.id("block/pailite"));
         itemForBlockModel(ModStoneBlocks.PAILITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.PAILITE_WALL.get(), Lithereal.id("block/pailite"));
+        buttonWithItem((ButtonBlock) ModStoneBlocks.PAILITE_BUTTON.get(), Lithereal.id("block/pailite"));
+        pressurePlateBlock((PressurePlateBlock) ModStoneBlocks.PAILITE_PRESSURE_PLATE.get(), Lithereal.id("block/pailite"));
+        itemForBlockModel(ModStoneBlocks.PAILITE_PRESSURE_PLATE.get());
         blockWithItem(ModStoneBlocks.POLISHED_PAILITE);
         stairsBlock((StairBlock) ModStoneBlocks.POLISHED_PAILITE_STAIRS.get(), Lithereal.id("block/polished_pailite"));
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), Lithereal.id("block/polished_pailite"), Lithereal.id("block/polished_pailite"));
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.POLISHED_PAILITE_WALL.get(), Lithereal.id("block/polished_pailite"));
+        buttonWithItem((ButtonBlock) ModStoneBlocks.POLISHED_PAILITE_BUTTON.get(), Lithereal.id("block/polished_pailite"));
+        pressurePlateBlock((PressurePlateBlock) ModStoneBlocks.POLISHED_PAILITE_PRESSURE_PLATE.get(), Lithereal.id("block/polished_pailite"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_PRESSURE_PLATE.get());
+        cubeColumn(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), Lithereal.id("block/chiseled_polished_pailite_bricks"), Lithereal.id("block/chiseled_polished_pailite_bricks_top"));
+        itemForBlockModel(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get());
+        blockWithItem(ModStoneBlocks.POLISHED_PAILITE_BRICKS);
+        stairsBlock((StairBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), Lithereal.id("block/polished_pailite_bricks"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), Lithereal.id("block/polished_pailite_bricks"), Lithereal.id("block/polished_pailite_bricks"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), Lithereal.id("block/polished_pailite_bricks"));
+        buttonWithItem((ButtonBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_BUTTON.get(), Lithereal.id("block/polished_pailite_bricks"));
+        pressurePlateBlock((PressurePlateBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get(), Lithereal.id("block/polished_pailite_bricks"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get());
 
         blockWithItem(ModOreBlocks.LITHERITE_ORE);
         blockWithItem(ModOreBlocks.DEEPSLATE_LITHERITE_ORE);
@@ -106,6 +144,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void leavesBlock(Block block, ResourceLocation texture) {
         simpleBlock(block, models().leaves(name(block), texture));
+    }
+
+    private void cubeColumn(Block block, ResourceLocation side, ResourceLocation end) {
+        simpleBlock(block, models().cubeColumn(name(block), side, end));
     }
 
     private void woodBlock(RotatedPillarBlock block) {

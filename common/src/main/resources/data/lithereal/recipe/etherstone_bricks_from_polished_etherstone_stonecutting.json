@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "lithereal:polished_etherstone"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:etherstone_bricks"
+  }
+}

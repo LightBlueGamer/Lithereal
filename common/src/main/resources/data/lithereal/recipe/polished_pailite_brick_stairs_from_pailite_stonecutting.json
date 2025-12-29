@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "lithereal:pailite"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:polished_pailite_brick_stairs"
+  }
+}
