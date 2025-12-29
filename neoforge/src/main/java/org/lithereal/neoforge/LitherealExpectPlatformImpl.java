@@ -19,7 +19,6 @@ import net.neoforged.fml.loading.FMLPaths;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.EtherCollectorBlockEntity;
-import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.item.WarHammerItem;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
@@ -46,14 +45,6 @@ public class LitherealExpectPlatformImpl {
      */
     public static Path getConfigDirectory() {
         return FMLPaths.CONFIGDIR.get();
-    }
-
-    public static InfusedLitheriteBlock getInfusedLitheriteBlock() {
-        return ForgeBlocks.INFUSED_LITHERITE_BLOCK.get();
-    }
-
-    public static BlockEntityType<InfusedLitheriteBlockEntity> getInfusedLitheriteBlockEntity() {
-        return ForgeBlockEntities.INFUSED_LITHERITE_BLOCK.get();
     }
 
     public static BlockEntityType<ForgeElectricCrucibleBlockEntity> getElectricCrucibleBlockEntity() {

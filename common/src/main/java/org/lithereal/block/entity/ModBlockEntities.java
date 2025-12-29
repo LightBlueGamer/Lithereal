@@ -7,11 +7,18 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.block.ModTreeBlocks;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Lithereal.MOD_ID, Registries.BLOCK_ENTITY_TYPE);
+
+
+    public static final RegistrySupplier<BlockEntityType<InfusedLitheriteBlockEntity>> INFUSED_LITHERITE_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("infused_litherite_block", () ->
+                    BlockEntityType.Builder.of(InfusedLitheriteBlockEntity::new,
+                            ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get()).build(null));
 
     public static final RegistrySupplier<BlockEntityType<LitherealVaultBlockEntity>> LITHEREAL_VAULT =
             BLOCK_ENTITIES.register("lithereal_vault", () ->

@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.ElectricCrucibleScreen;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.item.ModArmorItems;
@@ -102,7 +103,7 @@ public class JEILitherealPlugin implements IModPlugin {
         };
 
         // Register the interpreter for all the items
-        registration.registerSubtypeInterpreter(LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), nbtInterpreter);
+        registration.registerSubtypeInterpreter(ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get().asItem(), nbtInterpreter);
         registration.registerSubtypeInterpreter(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), nbtInterpreter);
         registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SWORD.get(), nbtInterpreter);
         registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), nbtInterpreter);

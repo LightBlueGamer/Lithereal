@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -26,15 +27,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.lithereal.block.*;
+import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.*;
-import org.lithereal.client.renderer.InfusedLitheriteBlockEntityModel;
-import org.lithereal.client.renderer.InfusementChamberBlockEntityModel;
 import org.lithereal.client.renderer.LitherealArmorModel;
 import org.lithereal.client.renderer.ModBoatRenderer;
 import org.lithereal.client.renderer.zombie.BetterZombieModel;
@@ -51,8 +54,6 @@ import static dev.architectury.platform.Platform.isModLoaded;
 
 public class LitherealClient {
     public static void init() {
-        EntityModelLayerRegistry.register(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
-        EntityModelLayerRegistry.register(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
         EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
         EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE_INNER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
@@ -103,10 +104,18 @@ public class LitherealClient {
         ItemColor itemColor = ModItemColors.INFUSED_LITHERITE_COLOR_HANDLER::apply;
         BlockColor blockColor = ModBlockColors.INFUSED_LITHERITE_BLOCK_COLOR;
 
-        ColorHandlerRegistry.registerItemColors(itemColor, LitherealExpectPlatform.getInfusedLitheriteBlock().asItem(), ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SWORD.get(), ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), ModToolItems.INFUSED_LITHERITE_PICKAXE.get(), ModToolItems.INFUSED_LITHERITE_AXE.get(), ModToolItems.INFUSED_LITHERITE_HOE.get(), ModToolItems.INFUSED_LITHERITE_HAMMER.get(), ModArmorItems.INFUSED_LITHERITE_HELMET.get(), ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), ModArmorItems.INFUSED_LITHERITE_BOOTS.get());
+        ColorHandlerRegistry.registerItemColors(itemColor, ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get().asItem(), ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SWORD.get(), ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), ModToolItems.INFUSED_LITHERITE_PICKAXE.get(), ModToolItems.INFUSED_LITHERITE_AXE.get(), ModToolItems.INFUSED_LITHERITE_HOE.get(), ModToolItems.INFUSED_LITHERITE_HAMMER.get(), ModArmorItems.INFUSED_LITHERITE_HELMET.get(), ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), ModArmorItems.INFUSED_LITHERITE_BOOTS.get());
         if (isModLoaded("combatify"))
             CompatInit.setColoursForCombatify(itemColor);
-        ColorHandlerRegistry.registerBlockColors(blockColor, LitherealExpectPlatform.getInfusedLitheriteBlock());
+        ColorHandlerRegistry.registerBlockColors(blockColor, ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get());
+        ColorHandlerRegistry.registerBlockColors((BlockState state, BlockAndTintGetter world, BlockPos pos, int tintIndex) -> {
+            BlockEntity entity = world.getBlockEntity(pos);
+            int color = 0;
+            if (entity instanceof InfusementChamberBlockEntity infusementChamberBlockEntity)
+                color = infusementChamberBlockEntity.getStoredPotion().getColor();
+
+            return tintIndex == 0 ? color : -1;
+        }, LitherealExpectPlatform.getInfusementChamberBlock());
         ColorHandlerRegistry.registerBlockColors((blockState, blockAndTintGetter, blockPos, i) -> blockAndTintGetter != null && blockPos != null ? BiomeColors.getAverageGrassColor(blockAndTintGetter, blockPos) : 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
         ColorHandlerRegistry.registerItemColors((itemStack, i) -> 8573157, ModBlocks.ETHEREAL_GRASS_BLOCK);
         RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(),
@@ -128,7 +137,8 @@ public class LitherealClient {
                 ModPhantomBlocks.PHANTOM_ROSE.get(),
                 ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(),
                 ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(),
-                ModPhantomBlocks.POTTED_PHANTOM_ROSE.get());
+                ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(),
+                LitherealExpectPlatform.getInfusementChamberBlock());
         RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.PURE_ETHER_SOURCE.get(), ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ModBlocks.ETHEREAL_CORE_PORTAL.get(), ModBlocks.ETHEREAL_RIFT.get());
     }
 
@@ -235,7 +245,7 @@ public class LitherealClient {
 
         for (Holder<Potion> holder : BuiltInRegistries.POTION.holders().toList()) {
             List<ItemLike> itemLikes = Arrays.asList(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(),
-                    LitherealExpectPlatform.getInfusedLitheriteBlock());
+                    ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get());
             for (ItemLike itemLike : itemLikes) {
                 ItemStack current = new ItemStack(itemLike);
                 current.set(DataComponents.POTION_CONTENTS, new PotionContents(holder));

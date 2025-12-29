@@ -40,16 +40,6 @@ public class LitherealExpectPlatform {
     }
 
     @ExpectPlatform
-    public static InfusedLitheriteBlock getInfusedLitheriteBlock() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static BlockEntityType<InfusedLitheriteBlockEntity> getInfusedLitheriteBlockEntity() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static BlockEntityType<ElectricCrucibleBlockEntity> getElectricCrucibleBlockEntity() {
         throw new AssertionError();
     }

@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.lithereal.item.infused.InfusedLitheriteBlockItem;
 
 import static org.lithereal.block.ModBlocks.registerBlock;
 
@@ -28,6 +29,11 @@ public class ModStorageBlocks {
     public static final RegistrySupplier<Block> WITHERING_LITHERITE_BLOCK = registerBlock("withering_litherite_block",
             () -> new WitheringLitheriteBlock(BlockBehaviour.Properties.of()
                     .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)), () -> new Item.Properties().fireResistant());
+
+    public static final RegistrySupplier<Block> INFUSED_LITHERITE_BLOCK = registerBlock("infused_litherite_block",
+            () -> new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
+                    .strength(6f).requiresCorrectToolForDrops().explosionResistance(25).sound(SoundType.METAL)),
+            finalBlock -> new InfusedLitheriteBlockItem(finalBlock, new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Block> CHARGED_LITHERITE_BLOCK = registerBlock("charged_litherite_block",
             () -> new Block(BlockBehaviour.Properties.of()

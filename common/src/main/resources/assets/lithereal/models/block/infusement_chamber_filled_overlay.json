@@ -1,0 +1,7 @@
+{
+  "parent": "lithereal:block/template_infusement_chamber_overlay",
+  "textures": {
+    "front": "lithereal:block/infusement_chamber_litherite_filled",
+    "front_overlay": "lithereal:block/infusement_chamber_potion_overlay"
+  }
+}

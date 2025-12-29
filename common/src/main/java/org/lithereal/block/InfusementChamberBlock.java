@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,10 +20,13 @@ import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 
 public abstract class InfusementChamberBlock extends BaseEntityBlock {
+    public static final BooleanProperty PRIMARY_FILLED = BooleanProperty.create("primary_filled");
+    public static final BooleanProperty SECONDARY_FILLED = BooleanProperty.create("secondary_filled");
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public InfusementChamberBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PRIMARY_FILLED, false).setValue(SECONDARY_FILLED, false));
     }
 
     @Override
@@ -43,7 +47,7 @@ public abstract class InfusementChamberBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, PRIMARY_FILLED, SECONDARY_FILLED);
     }
 
     /* BLOCK ENTITY */

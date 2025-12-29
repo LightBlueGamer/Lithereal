@@ -5,8 +5,7 @@
   "minVersion": "0.8",
   "client": [
     "client.EntityRenderDispatcherMixin",
-    "client.LevelRendererMixin",
-    "client.RendererMixin"
+    "client.LevelRendererMixin"
   ],
   "mixins": [
     "BlockMixin",

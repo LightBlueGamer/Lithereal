@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.LitherealExpectPlatform;
+import org.lithereal.block.InfusementChamberBlock;
 import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
 import org.lithereal.data.recipes.ContainerRecipeInput;
@@ -268,7 +269,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
             if (!entity.held.isEmpty()) entity.setItem(1, entity.held);
             entity.held = ItemStack.EMPTY;
         }
-        if (random.nextFloat() < entity.baseSuccessRate) {
+        if (random.nextFloat() < entity.successRate) {
             ItemStack originalResultStack = entity.getItem(2);
             if (originalResultStack.isEmpty()) entity.setItem(2, outputItem);
             else originalResultStack.grow(outputItem.getCount());
@@ -313,6 +314,14 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         if (pEntity.getItem(1).isEmpty() && !pEntity.held.isEmpty()) {
             pEntity.setItem(1, pEntity.held);
             pEntity.held = ItemStack.EMPTY;
+        }
+        boolean nowHoldsInside = !pEntity.getStoredItem().isEmpty();
+        if (blockState.hasProperty(InfusementChamberBlock.SECONDARY_FILLED) && blockState.getValue(InfusementChamberBlock.SECONDARY_FILLED) != nowHoldsInside) {
+            level.setBlockAndUpdate(blockPos, blockState.setValue(InfusementChamberBlock.SECONDARY_FILLED, nowHoldsInside));
+        }
+        boolean nowHoldsPotionInside = pEntity.getStoredPotion() != PotionContents.EMPTY;
+        if (blockState.hasProperty(InfusementChamberBlock.PRIMARY_FILLED) && blockState.getValue(InfusementChamberBlock.PRIMARY_FILLED) != nowHoldsPotionInside) {
+            level.setBlockAndUpdate(blockPos, blockState.setValue(InfusementChamberBlock.PRIMARY_FILLED, nowHoldsPotionInside));
         }
 
         if(hasRecipe(pEntity)) {

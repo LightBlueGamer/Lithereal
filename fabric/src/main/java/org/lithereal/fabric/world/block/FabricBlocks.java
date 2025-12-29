@@ -9,15 +9,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.lithereal.Lithereal;
-import org.lithereal.block.InfusedLitheriteBlock;
-import org.lithereal.item.infused.InfusedLitheriteBlockItem;
 
 public class FabricBlocks {
-
-    public static final Block INFUSED_LITHERITE_BLOCK = registerColoredBlock("infused_litherite_block",
-            new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
-
     public static final Block ELECTRIC_CRUCIBLE_BLOCK = registerBlock("electric_crucible",
             new FabricElectricCrucibleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
 
@@ -38,16 +31,6 @@ public class FabricBlocks {
     private static void registerBlockItem(String name, Block block) {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name),
                 new BlockItem(block, new Item.Properties()));
-    }
-
-    private static Block registerColoredBlock(String name, Block block) {
-        registerColoredBlockItem(name, block);
-        return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name), block);
-    }
-
-    private static void registerColoredBlockItem(String name, Block block) {
-        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(Lithereal.MOD_ID, name),
-                new InfusedLitheriteBlockItem(block, new Item.Properties()));
     }
 
     public static void registerModBlocks() {

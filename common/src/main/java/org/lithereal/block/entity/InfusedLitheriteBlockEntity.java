@@ -14,7 +14,6 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.LitherealExpectPlatform;
 
 import java.util.function.Function;
 
@@ -22,7 +21,7 @@ public class InfusedLitheriteBlockEntity extends BlockEntity {
     public PotionContents potion = PotionContents.EMPTY;
 
     public InfusedLitheriteBlockEntity(BlockPos pos, BlockState state) {
-        super(LitherealExpectPlatform.getInfusedLitheriteBlockEntity(), pos, state);
+        super(ModBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

@@ -1,6 +1,6 @@
 {
   "parent": "lithereal:block/template_infusement_chamber",
   "textures": {
-    "front": "lithereal:block/infusement_chamber_empty"
+    "front": "lithereal:block/infusement_chamber_litherite_filled"
   }
 }

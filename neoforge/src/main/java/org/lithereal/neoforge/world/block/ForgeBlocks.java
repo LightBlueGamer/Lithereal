@@ -9,19 +9,14 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.lithereal.Lithereal;
-import org.lithereal.block.InfusedLitheriteBlock;
+import org.lithereal.item.infused.InfusedLitheriteBlockItem;
 import org.lithereal.neoforge.world.item.ForgeItems;
-import org.lithereal.neoforge.world.item.infused.ForgeInfusedLitheriteBlockItem;
 
 import java.util.function.Supplier;
 
 public class ForgeBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(BuiltInRegistries.BLOCK, Lithereal.MOD_ID);
-
-    public static final DeferredHolder<Block, InfusedLitheriteBlock> INFUSED_LITHERITE_BLOCK = registerColoredBlock("infused_litherite_block",
-            () -> new InfusedLitheriteBlock(BlockBehaviour.Properties.of()
-                    .strength(6f).requiresCorrectToolForDrops()));
 
     public static final DeferredHolder<Block, ForgeElectricCrucibleBlock> ELECTRIC_CRUCIBLE = registerBlock("electric_crucible",
             () -> new ForgeElectricCrucibleBlock(BlockBehaviour.Properties.of()
@@ -45,8 +40,8 @@ public class ForgeBlocks {
         return toReturn;
     }
 
-    private static <T extends Block> DeferredHolder<Item, ForgeInfusedLitheriteBlockItem> registerColoredBlockItem(String name, DeferredHolder<Block, T> block) {
-        return ForgeItems.ITEMS.register(name, () -> new ForgeInfusedLitheriteBlockItem(block.get(),
+    private static <T extends Block> DeferredHolder<Item, InfusedLitheriteBlockItem> registerColoredBlockItem(String name, DeferredHolder<Block, T> block) {
+        return ForgeItems.ITEMS.register(name, () -> new InfusedLitheriteBlockItem(block.get(),
                 new Item.Properties()));
     }
 

@@ -7,15 +7,10 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.lithereal.Lithereal;
 import org.lithereal.neoforge.world.block.ForgeBlocks;
-import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 
 public class ForgeBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Lithereal.MOD_ID);
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<InfusedLitheriteBlockEntity>> INFUSED_LITHERITE_BLOCK =
-            BLOCK_ENTITIES.register("infused_litherite_block", () ->
-                    BlockEntityType.Builder.of(InfusedLitheriteBlockEntity::new,
-                            ForgeBlocks.INFUSED_LITHERITE_BLOCK.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ForgeElectricCrucibleBlockEntity>> ELECTRIC_CRUCIBLE =
             BLOCK_ENTITIES.register("electric_crucible", () ->

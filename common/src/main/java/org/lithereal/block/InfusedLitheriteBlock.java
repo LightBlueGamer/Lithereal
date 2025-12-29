@@ -19,8 +19,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
+import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.item.infused.InfusedItem;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
 
     @Override
     public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.MODEL;
     }
 
     @Override
@@ -65,14 +65,14 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
     @Override
     public @NotNull ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         ItemStack stack = super.getCloneItemStack(levelReader, blockPos, blockState);
-        levelReader.getBlockEntity(blockPos, LitherealExpectPlatform.getInfusedLitheriteBlockEntity()).ifPresent(infusedLitheriteBlockEntity -> infusedLitheriteBlockEntity.saveToItem(stack, levelReader.registryAccess()));
+        levelReader.getBlockEntity(blockPos, ModBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY.get()).ifPresent(infusedLitheriteBlockEntity -> infusedLitheriteBlockEntity.saveToItem(stack, levelReader.registryAccess()));
         return stack;
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-        return LitherealExpectPlatform.getInfusedLitheriteBlockEntity().create(p_153215_, p_153216_);
+        return ModBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY.get().create(p_153215_, p_153216_);
     }
 
     @Override

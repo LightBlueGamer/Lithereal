@@ -36,7 +36,6 @@ import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
 import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModArmorItems;
-import org.lithereal.neoforge.world.block.entity.ForgeBlockEntities;
 import org.lithereal.neoforge.client.gui.screens.inventory.ForgeMenuTypes;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleScreen;
 import org.lithereal.client.gui.screens.inventory.FreezingStationScreen;
@@ -75,8 +74,6 @@ public class ClientEvents {
         }
         @SubscribeEvent
         public static void modelLayerLocationInit(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(InfusedLitheriteBlockEntityModel.LAYER_LOCATION, InfusedLitheriteBlockEntityModel::createBodyLayer);
-            event.registerLayerDefinition(InfusementChamberBlockEntityModel.LAYER_LOCATION, InfusementChamberBlockEntityModel::createBodyLayer);
             event.registerLayerDefinition(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
             event.registerLayerDefinition(BetterZombieModel.ZOMBIE_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
             event.registerLayerDefinition(BetterZombieModel.ZOMBIE_INNER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
@@ -92,8 +89,6 @@ public class ClientEvents {
         }
         @SubscribeEvent
         public static void entityRendererInit(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSED_LITHERITE_BLOCK.get(), InfusedLitheriteBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(ForgeBlockEntities.INFUSEMENT_CHAMBER.get(), InfusementChamberBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SIGN.get(), SignRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
             event.registerEntityRenderer(ModEntities.LITHER_CHARGE.get(), ThrownItemRenderer::new);

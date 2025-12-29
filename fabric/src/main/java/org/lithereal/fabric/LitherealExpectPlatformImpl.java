@@ -54,14 +54,6 @@ public class LitherealExpectPlatformImpl {
         return FabricLoader.getInstance().getConfigDir();
     }
 
-    public static InfusedLitheriteBlock getInfusedLitheriteBlock() {
-        return (InfusedLitheriteBlock) FabricBlocks.INFUSED_LITHERITE_BLOCK;
-    }
-
-    public static BlockEntityType<InfusedLitheriteBlockEntity> getInfusedLitheriteBlockEntity() {
-        return FabricBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY;
-    }
-
     public static BlockEntityType<FabricElectricCrucibleBlockEntity> getElectricCrucibleBlockEntity() {
         return FabricBlockEntities.ELECTRIC_CRUCIBLE_BLOCK_ENTITY;
     }
