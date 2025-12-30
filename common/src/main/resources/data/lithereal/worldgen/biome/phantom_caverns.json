@@ -48,7 +48,11 @@
       "lithereal:spring_water",
       "lithereal:spring_lava"
     ],
-    [],
+    [
+      "lithereal:ethereal_forest_flowers",
+      "lithereal:ethereal_forest_vegetation",
+      "lithereal:trees_ethereal_forest"
+    ],
     [
       "minecraft:freeze_top_layer"
     ]
