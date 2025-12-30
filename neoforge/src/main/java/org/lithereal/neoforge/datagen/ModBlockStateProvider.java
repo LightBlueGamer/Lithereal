@@ -105,6 +105,32 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pressurePlateBlock((PressurePlateBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get(), Lithereal.id("block/polished_pailite_bricks"));
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get());
 
+        blockWithItem(ModStoneBlocks.LUMINITE);
+        stairsBlock((StairBlock) ModStoneBlocks.LUMINITE_STAIRS.get(), Lithereal.id("block/luminite"));
+        itemForBlockModel(ModStoneBlocks.LUMINITE_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.LUMINITE_SLAB.get(), Lithereal.id("block/luminite"), Lithereal.id("block/luminite"));
+        itemForBlockModel(ModStoneBlocks.LUMINITE_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.LUMINITE_WALL.get(), Lithereal.id("block/luminite"));
+        blockWithItem(ModStoneBlocks.POLISHED_LUMINITE);
+        stairsBlock((StairBlock) ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get(), Lithereal.id("block/polished_luminite"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), Lithereal.id("block/polished_luminite"), Lithereal.id("block/polished_luminite"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.POLISHED_LUMINITE_WALL.get(), Lithereal.id("block/polished_luminite"));
+
+        blockWithItem(ModStoneBlocks.VERDONE);
+        stairsBlock((StairBlock) ModStoneBlocks.VERDONE_STAIRS.get(), Lithereal.id("block/verdone"));
+        itemForBlockModel(ModStoneBlocks.VERDONE_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.VERDONE_SLAB.get(), Lithereal.id("block/verdone"), Lithereal.id("block/verdone"));
+        itemForBlockModel(ModStoneBlocks.VERDONE_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.VERDONE_WALL.get(), Lithereal.id("block/verdone"));
+        blockWithItem(ModStoneBlocks.POLISHED_VERDONE);
+        stairsBlock((StairBlock) ModStoneBlocks.POLISHED_VERDONE_STAIRS.get(), Lithereal.id("block/polished_verdone"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_VERDONE_STAIRS.get());
+        slabBlock((SlabBlock) ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), Lithereal.id("block/polished_verdone"), Lithereal.id("block/polished_verdone"));
+        itemForBlockModel(ModStoneBlocks.POLISHED_VERDONE_SLAB.get());
+        wallWithItem((WallBlock) ModStoneBlocks.POLISHED_VERDONE_WALL.get(), Lithereal.id("block/polished_verdone"));
+
         blockWithItem(ModOreBlocks.LITHERITE_ORE);
         blockWithItem(ModOreBlocks.DEEPSLATE_LITHERITE_ORE);
         blockWithItem(ModOreBlocks.ETHERSTONE_LITHERITE_ORE);

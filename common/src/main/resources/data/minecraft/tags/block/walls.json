@@ -4,8 +4,12 @@
     "lithereal:etherstone_wall",
     "lithereal:etherstone_brick_wall",
     "lithereal:polished_etherstone_wall",
+    "lithereal:luminite_wall",
+    "lithereal:polished_luminite_wall",
     "lithereal:pailite_wall",
     "lithereal:polished_pailite_wall",
-    "lithereal:polished_pailite_brick_wall"
+    "lithereal:polished_pailite_brick_wall",
+    "lithereal:verdone_wall",
+    "lithereal:polished_verdone_wall"
   ]
 }

@@ -84,6 +84,28 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             .pressurePlate(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get())
             .chiseled(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get())
             .getFamily();
+    public static final BlockFamily LUMINITE = new BlockFamily.Builder(ModStoneBlocks.LUMINITE.get())
+            .wall(ModStoneBlocks.LUMINITE_WALL.get())
+            .stairs(ModStoneBlocks.LUMINITE_STAIRS.get())
+            .slab(ModStoneBlocks.LUMINITE_SLAB.get())
+            .polished(ModStoneBlocks.POLISHED_LUMINITE.get())
+            .getFamily();
+    public static final BlockFamily POLISHED_LUMINITE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_LUMINITE.get())
+            .wall(ModStoneBlocks.POLISHED_LUMINITE_WALL.get())
+            .stairs(ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get())
+            .slab(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get())
+            .getFamily();
+    public static final BlockFamily VERDONE = new BlockFamily.Builder(ModStoneBlocks.VERDONE.get())
+            .wall(ModStoneBlocks.VERDONE_WALL.get())
+            .stairs(ModStoneBlocks.VERDONE_STAIRS.get())
+            .slab(ModStoneBlocks.VERDONE_SLAB.get())
+            .polished(ModStoneBlocks.POLISHED_VERDONE.get())
+            .getFamily();
+    public static final BlockFamily POLISHED_VERDONE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_VERDONE.get())
+            .wall(ModStoneBlocks.POLISHED_VERDONE_WALL.get())
+            .stairs(ModStoneBlocks.POLISHED_VERDONE_STAIRS.get())
+            .slab(ModStoneBlocks.POLISHED_VERDONE_SLAB.get())
+            .getFamily();
     public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
@@ -240,6 +262,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         generateRecipes(recipeOutput, PAILITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, POLISHED_PAILITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, POLISHED_PAILITE_BRICKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, LUMINITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, POLISHED_LUMINITE, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, VERDONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, POLISHED_VERDONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, PHANTOM_OAK_PLANKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
         planksFromLog(recipeOutput, ModTreeBlocks.PHANTOM_OAK_PLANKS.get(), ModTags.PHANTOM_OAK_LOGS, 4);
         woodFromLogs(recipeOutput, ModTreeBlocks.PHANTOM_OAK_WOOD.get(), ModTreeBlocks.PHANTOM_OAK_LOG.get());
@@ -254,6 +280,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("EC")
                 .pattern("CE")
                 .unlockedBy("has_etherstone", has(ModStoneBlocks.ETHERSTONE.get()))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.LUMINITE.get(), 2)
+                .define('Q', Items.QUARTZ)
+                .define('P', ModStoneBlocks.PAILITE.get())
+                .pattern("PQ")
+                .pattern("QP")
+                .unlockedBy("has_pailite", has(ModStoneBlocks.PAILITE.get()))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.VERDONE.get(), 2)
+                .define('C', ModRawMaterialItems.COPALITE_INGOT.get())
+                .define('P', ModStoneBlocks.PAILITE.get())
+                .pattern("PC")
+                .pattern("CP")
+                .unlockedBy("has_pailite", has(ModStoneBlocks.PAILITE.get()))
                 .save(recipeOutput);
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_SLAB.get(), ModStoneBlocks.ETHERSTONE.get(), 2);
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_STAIRS.get(), ModStoneBlocks.ETHERSTONE.get());
@@ -302,6 +342,28 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
+
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.LUMINITE_SLAB.get(), ModStoneBlocks.LUMINITE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.LUMINITE_STAIRS.get(), ModStoneBlocks.LUMINITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.LUMINITE_WALL.get(), ModStoneBlocks.LUMINITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE.get(), ModStoneBlocks.LUMINITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), ModStoneBlocks.LUMINITE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get(), ModStoneBlocks.LUMINITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_LUMINITE_WALL.get(), ModStoneBlocks.LUMINITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), ModStoneBlocks.POLISHED_LUMINITE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get(), ModStoneBlocks.POLISHED_LUMINITE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_LUMINITE_WALL.get(), ModStoneBlocks.POLISHED_LUMINITE.get());
+
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.VERDONE_SLAB.get(), ModStoneBlocks.VERDONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.VERDONE_STAIRS.get(), ModStoneBlocks.VERDONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.VERDONE_WALL.get(), ModStoneBlocks.VERDONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE.get(), ModStoneBlocks.VERDONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), ModStoneBlocks.VERDONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_STAIRS.get(), ModStoneBlocks.VERDONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_VERDONE_WALL.get(), ModStoneBlocks.VERDONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), ModStoneBlocks.POLISHED_VERDONE.get(), 2);
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_STAIRS.get(), ModStoneBlocks.POLISHED_VERDONE.get());
+        stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_VERDONE_WALL.get(), ModStoneBlocks.POLISHED_VERDONE.get());
     }
 
     protected static void oreSmeltingFromBaseModNamespace(RecipeOutput arg, List<ItemLike> list, RecipeCategory arg2, ItemLike arg3, float f, int i, String string) {

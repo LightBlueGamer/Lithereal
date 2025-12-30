@@ -88,7 +88,7 @@ public class ModStoneBlocks {
             () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(POLISHED_PAILITE.get()).forceSolidOn()));
 
     public static final RegistrySupplier<Block> CHISELED_POLISHED_PAILITE_BRICKS = registerBlock("chiseled_polished_pailite_bricks",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS)));
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).lightLevel(blockState -> 1)));
 
     public static final RegistrySupplier<Block> POLISHED_PAILITE_BRICKS = registerBlock("polished_pailite_bricks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS)));
@@ -107,6 +107,54 @@ public class ModStoneBlocks {
 
     public static final RegistrySupplier<Block> POLISHED_PAILITE_BRICK_WALL = registerBlock("polished_pailite_brick_wall",
             () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(POLISHED_PAILITE_BRICKS.get()).forceSolidOn()));
+
+    public static final RegistrySupplier<Block> LUMINITE = registerBlock("luminite",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
+
+    public static final RegistrySupplier<Block> LUMINITE_STAIRS = registerBlock("luminite_stairs",
+            () -> new StairBlock(LUMINITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS)));
+
+    public static final RegistrySupplier<Block> LUMINITE_SLAB = registerBlock("luminite_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+
+    public static final RegistrySupplier<Block> LUMINITE_WALL = registerBlock("luminite_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(LUMINITE.get()).forceSolidOn()));
+
+    public static final RegistrySupplier<Block> POLISHED_LUMINITE = registerBlock("polished_luminite",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DIORITE)));
+
+    public static final RegistrySupplier<Block> POLISHED_LUMINITE_STAIRS = registerBlock("polished_luminite_stairs",
+            () -> new StairBlock(POLISHED_LUMINITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DIORITE_STAIRS)));
+
+    public static final RegistrySupplier<Block> POLISHED_LUMINITE_SLAB = registerBlock("polished_luminite_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DIORITE_SLAB)));
+
+    public static final RegistrySupplier<Block> POLISHED_LUMINITE_WALL = registerBlock("polished_luminite_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(POLISHED_LUMINITE.get()).forceSolidOn()));
+
+    public static final RegistrySupplier<Block> VERDONE = registerBlock("verdone",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
+
+    public static final RegistrySupplier<Block> VERDONE_STAIRS = registerBlock("verdone_stairs",
+            () -> new StairBlock(VERDONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS)));
+
+    public static final RegistrySupplier<Block> VERDONE_SLAB = registerBlock("verdone_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+
+    public static final RegistrySupplier<Block> VERDONE_WALL = registerBlock("verdone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(VERDONE.get()).forceSolidOn()));
+
+    public static final RegistrySupplier<Block> POLISHED_VERDONE = registerBlock("polished_verdone",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DIORITE)));
+
+    public static final RegistrySupplier<Block> POLISHED_VERDONE_STAIRS = registerBlock("polished_verdone_stairs",
+            () -> new StairBlock(POLISHED_VERDONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DIORITE_STAIRS)));
+
+    public static final RegistrySupplier<Block> POLISHED_VERDONE_SLAB = registerBlock("polished_verdone_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DIORITE_SLAB)));
+
+    public static final RegistrySupplier<Block> POLISHED_VERDONE_WALL = registerBlock("polished_verdone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(POLISHED_VERDONE.get()).forceSolidOn()));
 
     public static void register() {
 

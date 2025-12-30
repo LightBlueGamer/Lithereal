@@ -4,8 +4,12 @@
     "lithereal:etherstone_slab",
     "lithereal:etherstone_brick_slab",
     "lithereal:polished_etherstone_slab",
+    "lithereal:luminite_slab",
+    "lithereal:polished_luminite_slab",
     "lithereal:pailite_slab",
     "lithereal:polished_pailite_slab",
-    "lithereal:polished_pailite_brick_slab"
+    "lithereal:polished_pailite_brick_slab",
+    "lithereal:verdone_slab",
+    "lithereal:polished_verdone_slab"
   ]
 }

@@ -96,6 +96,22 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), this::createSlabItemTable);
         dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_BUTTON.get());
         dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.LUMINITE.get());
+        dropSelf(ModStoneBlocks.LUMINITE_STAIRS.get());
+        dropSelf(ModStoneBlocks.LUMINITE_WALL.get());
+        add(ModStoneBlocks.LUMINITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_LUMINITE.get());
+        dropSelf(ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_LUMINITE_WALL.get());
+        add(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.VERDONE.get());
+        dropSelf(ModStoneBlocks.VERDONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.VERDONE_WALL.get());
+        add(ModStoneBlocks.VERDONE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_VERDONE.get());
+        dropSelf(ModStoneBlocks.POLISHED_VERDONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_VERDONE_WALL.get());
+        add(ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), this::createSlabItemTable);
 
         createMultipleOreDrops(ModOreBlocks.ALLIAN_ORE.get(), ModRawMaterialItems.RAW_ALLIUM.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.AURELITE_ORE.get(), ModRawMaterialItems.AURELITE_DUST.get(), 3, 4);
