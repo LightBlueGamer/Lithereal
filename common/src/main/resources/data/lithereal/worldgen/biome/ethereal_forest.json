@@ -42,6 +42,10 @@
     [
       "lithereal:ore_pailite_lower",
       "lithereal:ore_pailite_upper",
+      "lithereal:ore_luminite_lower",
+      "lithereal:ore_luminite_upper",
+      "lithereal:ore_verdone_lower",
+      "lithereal:ore_verdone_upper",
       "lithereal:aurelite_ore_placed",
       "lithereal:copalite_ore_placed",
       "lithereal:cyrum_ore_placed",

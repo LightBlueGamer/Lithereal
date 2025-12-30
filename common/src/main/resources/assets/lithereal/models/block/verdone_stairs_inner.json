@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "lithereal:block/verdone",
+    "side": "lithereal:block/verdone",
+    "top": "lithereal:block/verdone"
+  }
+}

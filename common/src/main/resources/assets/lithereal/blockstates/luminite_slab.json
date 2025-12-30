@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/luminite_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/luminite"
+    },
+    "type=top": {
+      "model": "lithereal:block/luminite_slab_top"
+    }
+  }
+}

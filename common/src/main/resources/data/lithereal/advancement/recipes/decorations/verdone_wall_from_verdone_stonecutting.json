@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:verdone_wall_from_verdone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_verdone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:verdone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_verdone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:verdone_wall_from_verdone_stonecutting"
+    ]
+  }
+}

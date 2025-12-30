@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/polished_verdone_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/polished_verdone"
+    },
+    "type=top": {
+      "model": "lithereal:block/polished_verdone_slab_top"
+    }
+  }
+}

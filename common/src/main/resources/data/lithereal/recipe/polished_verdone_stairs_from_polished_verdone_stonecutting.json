@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "lithereal:polished_verdone"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:polished_verdone_stairs"
+  }
+}

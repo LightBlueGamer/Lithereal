@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/polished_luminite_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/polished_luminite"
+    },
+    "type=top": {
+      "model": "lithereal:block/polished_luminite_slab_top"
+    }
+  }
+}
