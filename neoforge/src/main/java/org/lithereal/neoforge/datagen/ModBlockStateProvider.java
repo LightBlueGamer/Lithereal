@@ -6,6 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.lithereal.Lithereal;
 import org.lithereal.block.*;
@@ -118,7 +120,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         itemForBlockModel(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.POLISHED_LUMINITE_WALL.get(), Lithereal.id("block/polished_luminite"));
 
-        blockWithItem(ModStoneBlocks.VERDONE);
+        randomRotatedBlock(ModStoneBlocks.VERDONE.get());
+        itemForBlockModel(ModStoneBlocks.VERDONE.get());
         stairsBlock((StairBlock) ModStoneBlocks.VERDONE_STAIRS.get(), Lithereal.id("block/verdone"));
         itemForBlockModel(ModStoneBlocks.VERDONE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.VERDONE_SLAB.get(), Lithereal.id("block/verdone"), Lithereal.id("block/verdone"));
@@ -162,6 +165,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockWithItem(RegistrySupplier<? extends Block> block) {
         simpleBlockWithItem(block.get(), cubeAll(block.get()));
+    }
+
+    private void randomRotatedBlock(Block block) {
+        ModelFile model = cubeAll(block);
+        simpleBlock(block, new ConfiguredModel(model),
+                new ConfiguredModel(model, 0, 90, false),
+                new ConfiguredModel(model, 0, 180, false),
+                new ConfiguredModel(model, 0, 270, false));
     }
 
     private void leavesBlock(Block block) {

@@ -1,7 +1,21 @@
 {
   "variants": {
-    "": {
-      "model": "lithereal:block/verdone"
-    }
+    "": [
+      {
+        "model": "lithereal:block/verdone"
+      },
+      {
+        "model": "lithereal:block/verdone",
+        "y": 90
+      },
+      {
+        "model": "lithereal:block/verdone",
+        "y": 180
+      },
+      {
+        "model": "lithereal:block/verdone",
+        "y": 270
+      }
+    ]
   }
 }
