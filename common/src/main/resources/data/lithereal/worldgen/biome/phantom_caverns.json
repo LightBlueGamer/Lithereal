@@ -1,0 +1,82 @@
+{
+  "carvers": {
+    "air": [
+      "lithereal:ethereal_core_cave",
+      "lithereal:ethereal_core_cave_extra",
+      "lithereal:ethereal_core_canyon"
+    ]
+  },
+  "downfall": 0.8,
+  "effects": {
+    "fog_color": 665436,
+    "foliage_color": 15233969,
+    "grass_color": 8573157,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "sky_color": 1464748,
+    "water_color": 1580186,
+    "water_fog_color": 1574496,
+    "particle": {
+      "options": {
+        "type": "lithereal:ethereal_core_soul"
+      },
+      "probability": 0.025
+    }
+  },
+  "features": [
+    [],
+    [
+      "lithereal:lake_lava_underground",
+      "lithereal:lake_lava_surface"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "lithereal:ore_luminite_lower",
+      "lithereal:ore_luminite_upper",
+      "lithereal:ore_verdone_lower",
+      "lithereal:ore_verdone_upper"
+    ],
+    [],
+    [
+      "lithereal:spring_water",
+      "lithereal:spring_lava"
+    ],
+    [],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "lithereal:phantom_zombie",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 95
+      },
+      {
+        "type": "lithereal:phantom_drowned",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 45
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.6
+}
