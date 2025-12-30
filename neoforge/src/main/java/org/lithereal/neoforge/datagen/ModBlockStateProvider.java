@@ -107,7 +107,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pressurePlateBlock((PressurePlateBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get(), Lithereal.id("block/polished_pailite_bricks"));
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get());
 
-        blockWithItem(ModStoneBlocks.LUMINITE);
+        randomRotatedBlockXY(ModStoneBlocks.LUMINITE.get());
+        itemForBlockModel(ModStoneBlocks.LUMINITE.get());
         stairsBlock((StairBlock) ModStoneBlocks.LUMINITE_STAIRS.get(), Lithereal.id("block/luminite"));
         itemForBlockModel(ModStoneBlocks.LUMINITE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.LUMINITE_SLAB.get(), Lithereal.id("block/luminite"), Lithereal.id("block/luminite"));
@@ -120,8 +121,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         itemForBlockModel(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get());
         wallWithItem((WallBlock) ModStoneBlocks.POLISHED_LUMINITE_WALL.get(), Lithereal.id("block/polished_luminite"));
 
-        randomRotatedBlock(ModStoneBlocks.VERDONE.get());
-        itemForBlockModel(ModStoneBlocks.VERDONE.get());
+        blockWithItem(ModStoneBlocks.VERDONE);
         stairsBlock((StairBlock) ModStoneBlocks.VERDONE_STAIRS.get(), Lithereal.id("block/verdone"));
         itemForBlockModel(ModStoneBlocks.VERDONE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.VERDONE_SLAB.get(), Lithereal.id("block/verdone"), Lithereal.id("block/verdone"));
@@ -167,12 +167,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(block.get(), cubeAll(block.get()));
     }
 
-    private void randomRotatedBlock(Block block) {
+    private void randomRotatedBlockXY(Block block) {
         ModelFile model = cubeAll(block);
         simpleBlock(block, new ConfiguredModel(model),
                 new ConfiguredModel(model, 0, 90, false),
                 new ConfiguredModel(model, 0, 180, false),
-                new ConfiguredModel(model, 0, 270, false));
+                new ConfiguredModel(model, 0, 270, false),
+                new ConfiguredModel(model, 90, 0, false),
+                new ConfiguredModel(model, 90, 90, false),
+                new ConfiguredModel(model, 90, 180, false),
+                new ConfiguredModel(model, 90, 270, false),
+                new ConfiguredModel(model, 180, 0, false),
+                new ConfiguredModel(model, 180, 90, false),
+                new ConfiguredModel(model, 180, 180, false),
+                new ConfiguredModel(model, 180, 270, false),
+                new ConfiguredModel(model, 270, 0, false),
+                new ConfiguredModel(model, 270, 90, false),
+                new ConfiguredModel(model, 270, 180, false),
+                new ConfiguredModel(model, 270, 270, false));
     }
 
     private void leavesBlock(Block block) {

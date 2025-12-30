@@ -1,7 +1,78 @@
 {
   "variants": {
-    "": {
-      "model": "lithereal:block/luminite"
-    }
+    "": [
+      {
+        "model": "lithereal:block/luminite"
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "y": 90
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "y": 180
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "y": 270
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 90
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 90,
+        "y": 180
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 90,
+        "y": 270
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 180
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 270
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 270,
+        "y": 90
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 270,
+        "y": 180
+      },
+      {
+        "model": "lithereal:block/luminite",
+        "x": 270,
+        "y": 270
+      }
+    ]
   }
 }
