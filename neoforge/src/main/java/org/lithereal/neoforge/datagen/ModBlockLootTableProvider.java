@@ -138,7 +138,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         createMultipleOreDrops(ModOreBlocks.DEEPSLATE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.ETHERSTONE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.SATURNITE_ORE.get(), ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 2);
-        createMultipleOreDrops(ModOreBlocks.PAILITE_SATURNITE_ORE.get(), ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.PAILITE_SATURNITE_ORE.get(), ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.PAILITE_NETHERITE_ORE.get(), ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 3, 4);
 
         createMultipleOreDrops(ModPhantomBlocks.PHANTOM_DIAMOND_ORE.get(), ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 1);
