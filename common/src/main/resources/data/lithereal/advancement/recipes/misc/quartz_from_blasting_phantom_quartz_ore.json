@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_phantom_quartz_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:phantom_quartz_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:quartz_from_blasting_phantom_quartz_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_phantom_quartz_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:quartz_from_blasting_phantom_quartz_ore"
+    ]
+  }
+}

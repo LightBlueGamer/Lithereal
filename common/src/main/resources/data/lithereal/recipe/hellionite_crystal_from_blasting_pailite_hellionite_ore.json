@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.8,
+  "group": "hellionite_crystal",
+  "ingredient": {
+    "item": "lithereal:pailite_hellionite_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "lithereal:hellionite_crystal"
+  }
+}

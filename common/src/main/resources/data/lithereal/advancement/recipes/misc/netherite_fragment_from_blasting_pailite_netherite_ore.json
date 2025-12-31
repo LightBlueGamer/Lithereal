@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pailite_netherite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:pailite_netherite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:netherite_fragment_from_blasting_pailite_netherite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pailite_netherite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:netherite_fragment_from_blasting_pailite_netherite_ore"
+    ]
+  }
+}

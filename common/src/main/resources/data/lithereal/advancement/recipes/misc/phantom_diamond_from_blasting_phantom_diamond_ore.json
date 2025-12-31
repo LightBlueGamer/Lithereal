@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_phantom_diamond_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:phantom_diamond_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:phantom_diamond_from_blasting_phantom_diamond_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_phantom_diamond_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:phantom_diamond_from_blasting_phantom_diamond_ore"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "charged_litherite_crystal",
+  "ingredients": [
+    {
+      "item": "lithereal:charged_litherite_crystal"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "lithereal:charged_litherite_block"
+  }
+}

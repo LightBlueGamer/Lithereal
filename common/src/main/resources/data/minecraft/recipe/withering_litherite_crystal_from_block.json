@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "withering_litherite_crystal",
+  "ingredients": [
+    {
+      "item": "lithereal:withering_litherite_crystal"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "lithereal:withering_litherite_block"
+  }
+}
