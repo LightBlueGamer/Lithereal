@@ -131,13 +131,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#C#")
                 .unlockedBy("has_charged_litherite_crystal", has(ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get()))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), 1)
-                .define('C', ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get())
-                .pattern("CCC")
-                .pattern("CCC")
-                .pattern("CCC")
-                .unlockedBy("has_impure_ethereal_crystal", has(ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get()))
-                .save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModToolItems.ODYSIUM_BOW.get(), 1)
                 .define('O', ModRawMaterialItems.ODYSIUM_INGOT.get())
                 .define('I', Items.IRON_NUGGET)
