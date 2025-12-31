@@ -2,6 +2,10 @@
   "feature": "lithereal:ore_ethereal_netherite_small",
   "placement": [
     {
+      "type": "minecraft:count",
+      "count": 4
+    },
+    {
       "type": "minecraft:in_square"
     },
     {
