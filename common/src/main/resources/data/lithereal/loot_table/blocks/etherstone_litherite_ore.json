@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "lithereal:cyrum_ore"
+              "name": "lithereal:etherstone_litherite_ore"
             },
             {
               "type": "minecraft:item",
@@ -35,7 +35,7 @@
                   "add": false,
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 1.0,
+                    "max": 2.0,
                     "min": 1.0
                   },
                   "function": "minecraft:set_count"
@@ -49,7 +49,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "lithereal:cyrum_crystal"
+              "name": "lithereal:litherite_crystal"
             }
           ]
         }
@@ -57,5 +57,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/cyrum_ore"
+  "random_sequence": "lithereal:blocks/etherstone_litherite_ore"
 }

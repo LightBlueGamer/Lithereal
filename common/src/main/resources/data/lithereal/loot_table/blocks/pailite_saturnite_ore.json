@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "lithereal:cyrum_ore"
+              "name": "lithereal:pailite_saturnite_ore"
             },
             {
               "type": "minecraft:item",
@@ -49,7 +49,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "lithereal:cyrum_crystal"
+              "name": "lithereal:saturnite_crystal"
             }
           ]
         }
@@ -57,5 +57,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "lithereal:blocks/cyrum_ore"
+  "random_sequence": "lithereal:blocks/pailite_saturnite_ore"
 }
