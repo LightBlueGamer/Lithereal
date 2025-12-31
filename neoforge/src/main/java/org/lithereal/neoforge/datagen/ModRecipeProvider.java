@@ -4,7 +4,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -14,6 +13,7 @@ import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.lithereal.Lithereal;
 import org.lithereal.block.*;
 import org.lithereal.item.ModArmorItems;
 import org.lithereal.item.ModItems;
@@ -23,6 +23,7 @@ import org.lithereal.neoforge.world.block.ForgeBlocks;
 import org.lithereal.neoforge.world.item.ForgeItems;
 import org.lithereal.tags.ModTags;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -311,13 +312,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(ModBlocks.LITHERITE_CRYSTAL_BLOCK.get())
                 .group("litherite_crystal")
                 .unlockedBy("has_litherite_crystal_block", has(ModBlocks.LITHERITE_CRYSTAL_BLOCK.get()))
-                .save(recipeOutput, ResourceLocation.parse("litherite_crystal_from_natural_crystal_block"));
+                .save(recipeOutput, Lithereal.id("litherite_crystal_from_natural_crystal_block"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModRawMaterialItems.NETHERITE_NUGGET.get(), 1)
                 .requires(ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 4)
                 .requires(Items.GOLD_NUGGET, 4)
                 .group("netherite_nugget")
                 .unlockedBy("has_netherite_fragment", has(ModRawMaterialItems.NETHERITE_FRAGMENT.get()))
-                .save(recipeOutput, ResourceLocation.parse("netherite_nugget_from_fragments"));
+                .save(recipeOutput, Lithereal.id("netherite_nugget_from_fragments"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE.get(), 2)
                 .define('C', ModRawMaterialItems.CYRUM_CRYSTAL.get())
@@ -409,6 +410,49 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), ModStoneBlocks.POLISHED_VERDONE.get(), 2);
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_STAIRS.get(), ModStoneBlocks.POLISHED_VERDONE.get());
         stonecutterResultFromBaseModNamespace(recipeOutput, RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_VERDONE_WALL.get(), ModStoneBlocks.POLISHED_VERDONE.get());
+    }
+
+
+    protected static void nineBlockStorageRecipesFromBaseModNamespace(RecipeOutput arg, RecipeCategory arg2, ItemLike arg3, RecipeCategory arg4, ItemLike arg5) {
+        nineBlockStorageRecipes(arg, arg2, arg3, arg4, arg5, getSimpleRecipeName(arg5), null, getSimpleRecipeName(arg3), null);
+    }
+
+    protected static void nineBlockStorageRecipesWithCustomPackingFromBaseModNamespace(
+            RecipeOutput arg, RecipeCategory arg2, ItemLike arg3, RecipeCategory arg4, ItemLike arg5, String string, String string2
+    ) {
+        nineBlockStorageRecipes(arg, arg2, arg3, arg4, arg5, string, string2, getSimpleRecipeName(arg3), null);
+    }
+
+    protected static void nineBlockStorageRecipesRecipesWithCustomUnpackingFromBaseModNamespace(
+            RecipeOutput arg, RecipeCategory arg2, ItemLike arg3, RecipeCategory arg4, ItemLike arg5, String string, String string2
+    ) {
+        nineBlockStorageRecipes(arg, arg2, arg3, arg4, arg5, getSimpleRecipeName(arg5), null, string, string2);
+    }
+
+    protected static void nineBlockStorageRecipesFromBaseModNamespace(
+            RecipeOutput arg,
+            RecipeCategory arg2,
+            ItemLike arg3,
+            RecipeCategory arg4,
+            ItemLike arg5,
+            String string,
+            @Nullable String string2,
+            String string3,
+            @Nullable String string4
+    ) {
+        ShapelessRecipeBuilder.shapeless(arg2, arg3, 9)
+                .requires(arg5)
+                .group(string4)
+                .unlockedBy(getHasName(arg5), has(arg5))
+                .save(arg, Lithereal.id(string3));
+        ShapedRecipeBuilder.shaped(arg4, arg5)
+                .define('#', arg3)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .group(string2)
+                .unlockedBy(getHasName(arg3), has(arg3))
+                .save(arg, Lithereal.id(string));
     }
 
     protected static void oreSmeltingFromBaseModNamespace(RecipeOutput arg, List<ItemLike> list, RecipeCategory arg2, ItemLike arg3, float f, int i, String string) {
