@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_impure_ethereal_crystal_shard": {
+    "has_ethereal_crystal_block": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:impure_ethereal_crystal_shard"
+            "items": "lithereal:ethereal_crystal_block"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:impure_ethereal_crystal_shard_from_block"
+        "recipe": "lithereal:impure_ethereal_crystal_shard"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_impure_ethereal_crystal_shard"
+      "has_ethereal_crystal_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:impure_ethereal_crystal_shard_from_block"
+      "lithereal:impure_ethereal_crystal_shard"
     ]
   }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_frozen_litherite_block": {
+    "has_phantom_diamond": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:frozen_litherite_block"
+            "items": "lithereal:phantom_diamond"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:frozen_litherite_crystal"
+        "recipe": "lithereal:phantom_diamond_from_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_frozen_litherite_block"
+      "has_phantom_diamond"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:frozen_litherite_crystal"
+      "lithereal:phantom_diamond_from_block"
     ]
   }
 }

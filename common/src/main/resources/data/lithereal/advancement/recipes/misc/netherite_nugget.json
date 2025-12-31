@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_litherite_block": {
+    "has_netherite_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:litherite_block"
+            "items": "minecraft:netherite_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:litherite_crystal"
+        "recipe": "lithereal:netherite_nugget"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_litherite_block"
+      "has_netherite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:litherite_crystal"
+      "lithereal:netherite_nugget"
     ]
   }
 }

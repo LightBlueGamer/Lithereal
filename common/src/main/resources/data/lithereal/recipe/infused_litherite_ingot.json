@@ -1,13 +1,18 @@
 {
-  "type": "lithereal:infusing",
-  "secondary": {
-    "item": "lithereal:molten_litherite_bucket"
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "lithereal:infused_litherite_block"
+    }
   },
-  "primary": {
-    "item": "minecraft:potion"
-  },
-  "max_progress": 6000,
-  "output": {
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
     "id": "lithereal:infused_litherite_ingot"
   }
 }

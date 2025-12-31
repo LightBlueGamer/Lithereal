@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_charged_litherite_block": {
+    "has_odysium_block": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:charged_litherite_block"
+            "items": "lithereal:odysium_block"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:charged_litherite_crystal"
+        "recipe": "lithereal:odysium_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_charged_litherite_block"
+      "has_odysium_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:charged_litherite_crystal"
+      "lithereal:odysium_ingot"
     ]
   }
 }
