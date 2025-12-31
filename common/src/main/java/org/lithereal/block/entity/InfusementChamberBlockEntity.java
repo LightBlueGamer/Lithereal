@@ -265,7 +265,7 @@ public abstract class InfusementChamberBlockEntity extends BlockEntity implement
         if (entity.held.isEmpty() && !remainder.isEmpty())
             entity.held = remainder.copy();
         else if (!remainder.isEmpty()) entity.held.grow(1);
-        if (entity.getItem(1).getCount() - 1 <= 0) {
+        if (entity.getItem(1).getCount() <= 0) {
             if (!entity.held.isEmpty()) entity.setItem(1, entity.held);
             entity.held = ItemStack.EMPTY;
         }
