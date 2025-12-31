@@ -14,7 +14,9 @@
     "lithereal:litherite_ore",
     "lithereal:withering_litherite_block",
     "lithereal:hellionite_ore",
+    "lithereal:pailite_hellionite_ore",
     "lithereal:saturnite_ore",
+    "lithereal:pailite_saturnite_ore",
     "lithereal:nerith_ore",
     "lithereal:deepslate_nerith_ore",
     "lithereal:etherstone_nerith_ore",
@@ -26,6 +28,7 @@
     "lithereal:etherstone_copalite_ore",
     "lithereal:chryon_ore",
     "lithereal:elunite_ore",
-    "lithereal:allian_ore"
+    "lithereal:allian_ore",
+    "lithereal:pailite_netherite_ore"
   ]
 }

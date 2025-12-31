@@ -41,7 +41,12 @@
       "lithereal:ore_luminite_lower",
       "lithereal:ore_luminite_upper",
       "lithereal:ore_verdone_lower",
-      "lithereal:ore_verdone_upper"
+      "lithereal:ore_verdone_upper",
+      "lithereal:ore_ethereal_netherite_large",
+      "lithereal:ore_ethereal_netherite_small",
+      "lithereal:ore_phantom_quartz",
+      "lithereal:hellionite_ore_placed",
+      "lithereal:saturnite_ore_placed"
     ],
     [],
     [

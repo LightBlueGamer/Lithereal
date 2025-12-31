@@ -153,11 +153,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModOreBlocks.DEEPSLATE_AURELITE_ORE);
         blockWithItem(ModOreBlocks.ETHERSTONE_AURELITE_ORE);
         blockWithItem(ModOreBlocks.SATURNITE_ORE);
+        blockWithItem(ModOreBlocks.PAILITE_SATURNITE_ORE);
         blockWithItem(ModOreBlocks.HELLIONITE_ORE);
+        blockWithItem(ModOreBlocks.PAILITE_HELLIONITE_ORE);
         blockWithItem(ModOreBlocks.ELUNITE_ORE);
         blockWithItem(ModOreBlocks.CHRYON_ORE);
         blockWithItem(ModOreBlocks.ALLIAN_ORE);
+        blockWithItem(ModOreBlocks.PAILITE_NETHERITE_ORE);
 
+        blockWithItem(ModPhantomBlocks.PHANTOM_DIAMOND_ORE);
+        blockWithItem(ModPhantomBlocks.PHANTOM_QUARTZ_ORE);
         plantWithItem(ModPhantomBlocks.PHANTOM_ROSE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(), TintState.NOT_TINTED);
         plantWithItem(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(), ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(), TintState.NOT_TINTED);
         plantWithItem(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(), TintState.NOT_TINTED);

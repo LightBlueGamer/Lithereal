@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -13,10 +14,7 @@ import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.block.ModBlocks;
-import org.lithereal.block.ModOreBlocks;
-import org.lithereal.block.ModStoneBlocks;
-import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.block.*;
 import org.lithereal.item.ModArmorItems;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
@@ -250,11 +248,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreDual(recipeOutput, List.of(ModOreBlocks.CYRUM_ORE.get(), ModOreBlocks.DEEPSLATE_CYRUM_ORE.get(), ModOreBlocks.ETHERSTONE_CYRUM_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.CYRUM_CRYSTAL.get(), 0.1F, 200, "cyrum_crystal");
         oreDual(recipeOutput, List.of(ModOreBlocks.COPALITE_ORE.get(), ModOreBlocks.DEEPSLATE_COPALITE_ORE.get(), ModOreBlocks.ETHERSTONE_COPALITE_ORE.get(), ModRawMaterialItems.COPALITE_DUST.get()), RecipeCategory.MISC, ModRawMaterialItems.COPALITE_INGOT.get(), 0.5F, 200, "copalite_ingot");
         oreDual(recipeOutput, List.of(ModOreBlocks.AURELITE_ORE.get(), ModOreBlocks.DEEPSLATE_AURELITE_ORE.get(), ModOreBlocks.ETHERSTONE_AURELITE_ORE.get(), ModRawMaterialItems.AURELITE_DUST.get()), RecipeCategory.MISC, ModRawMaterialItems.AURELITE_INGOT.get(), 0.5F, 200, "aurelite_ingot");
-        oreDual(recipeOutput, List.of(ModOreBlocks.SATURNITE_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 0.7F, 200, "saturnite_crystal");
-        oreDual(recipeOutput, List.of(ModOreBlocks.HELLIONITE_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 0.8F, 200, "hellionite_crystal");
+        oreDual(recipeOutput, List.of(ModOreBlocks.SATURNITE_ORE.get(), ModOreBlocks.PAILITE_SATURNITE_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 0.7F, 200, "saturnite_crystal");
+        oreDual(recipeOutput, List.of(ModOreBlocks.HELLIONITE_ORE.get(), ModOreBlocks.PAILITE_HELLIONITE_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 0.8F, 200, "hellionite_crystal");
         oreDual(recipeOutput, List.of(ModOreBlocks.ELUNITE_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.ELUNITE_CRYSTAL.get(), 1, 200, "elunite_crystal");
         oreDual(recipeOutput, List.of(ModOreBlocks.CHRYON_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.CHRYON_CRYSTAL.get(), 1.4F, 200, "chryon_crystal");
         oreDual(recipeOutput, List.of(ModOreBlocks.ALLIAN_ORE.get(), ModRawMaterialItems.RAW_ALLIUM.get()), RecipeCategory.MISC, ModRawMaterialItems.ALLIAN_INGOT.get(), 2, 300, "allian_ingot");
+        oreDual(recipeOutput, List.of(ModOreBlocks.PAILITE_NETHERITE_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 1.2F, 400, "netherite_fragment");
+        oreDual(recipeOutput, List.of(ModPhantomBlocks.PHANTOM_DIAMOND_ORE.get()), RecipeCategory.MISC, ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 200, "phantom_diamond");
+        oreDual(recipeOutput, List.of(ModPhantomBlocks.PHANTOM_QUARTZ_ORE.get()), RecipeCategory.MISC, Items.QUARTZ, 0.2F, 200, "quartz");
 
         generateRecipes(recipeOutput, ETHERSTONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, POLISHED_ETHERSTONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
@@ -273,6 +274,50 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         woodenBoat(recipeOutput, ModItems.PHANTOM_OAK_BOAT.get(), ModTreeBlocks.PHANTOM_OAK_PLANKS.get());
         chestBoat(recipeOutput, ModItems.PHANTOM_OAK_CHEST_BOAT.get(), ModItems.PHANTOM_OAK_BOAT.get());
         hangingSign(recipeOutput, ModItems.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.LITHERITE_BLOCK.get(), RecipeCategory.MISC, ForgeItems.LITHERITE_CRYSTAL.get(), "litherite_crystal_from_block", "litherite_crystal"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.BURNING_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), "burning_litherite_crystal_from_block", "burning_litherite_crystal"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), "frozen_litherite_crystal_from_block", "frozen_litherite_crystal"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), "infused_litherite_ingot_from_block", "infused_litherite_ingot"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.WITHERING_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), "withering_litherite_crystal_from_block", "withering_litherite_crystal"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.CHARGED_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get(), "charged_litherite_crystal_from_block", "charged_litherite_crystal"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.ODYSIUM_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.ODYSIUM_INGOT.get(), "odysium_ingot_from_block", "odysium_ingot"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModPhantomBlocks.PHANTOM_DIAMOND_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.PHANTOM_DIAMOND.get(), "phantom_diamond_from_block", "phantom_diamond"
+        );
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                recipeOutput, RecipeCategory.MISC, ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), "impure_ethereal_crystal_shard_from_block", "impure_ethereal_crystal_shard"
+        );
+        nineBlockStorageRecipesWithCustomPacking(
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.NETHERITE_NUGGET.get(), RecipeCategory.MISC, Items.NETHERITE_INGOT, "netherite_ingot_from_nuggets", "netherite_ingot"
+        );
+        twoByTwoPacker(
+                recipeOutput, RecipeCategory.MISC, ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ForgeItems.LITHERITE_CRYSTAL.get()
+        );
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ForgeItems.LITHERITE_CRYSTAL.get(), 4)
+                .requires(ModBlocks.LITHERITE_CRYSTAL_BLOCK.get())
+                .group("litherite_crystal")
+                .unlockedBy("has_litherite_crystal_block", has(ModBlocks.LITHERITE_CRYSTAL_BLOCK.get()))
+                .save(recipeOutput, ResourceLocation.parse("litherite_crystal_from_natural_crystal_block"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModRawMaterialItems.NETHERITE_NUGGET.get(), 1)
+                .requires(ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 4)
+                .requires(Items.GOLD_NUGGET, 4)
+                .group("netherite_nugget")
+                .unlockedBy("has_netherite_fragment", has(ModRawMaterialItems.NETHERITE_FRAGMENT.get()))
+                .save(recipeOutput, ResourceLocation.parse("netherite_nugget_from_fragments"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE.get(), 2)
                 .define('C', ModRawMaterialItems.CYRUM_CRYSTAL.get())

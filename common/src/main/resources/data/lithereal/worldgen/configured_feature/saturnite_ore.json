@@ -12,6 +12,15 @@
           "block": "minecraft:netherrack",
           "predicate_type": "minecraft:block_match"
         }
+      },
+      {
+        "state": {
+          "Name": "lithereal:pailite_saturnite_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "lithereal:etherstone_ore_replaceables"
+        }
       }
     ]
   }

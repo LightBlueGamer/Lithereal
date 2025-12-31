@@ -70,7 +70,10 @@ public class ModRawMaterialItems {
             new Item(new Item.Properties()));
 
     public static final RegistrySupplier<Item> NETHERITE_NUGGET = ITEMS.register("netherite_nugget", () ->
-            new Item(new Item.Properties()));
+            new Item(new Item.Properties().fireResistant()));
+
+    public static final RegistrySupplier<Item> NETHERITE_FRAGMENT = ITEMS.register("netherite_fragment", () ->
+            new Item(new Item.Properties().fireResistant()));
 
     public static final RegistrySupplier<Item> RAW_ALLIUM = ITEMS.register("raw_allium", () ->
             new Item(new Item.Properties()));

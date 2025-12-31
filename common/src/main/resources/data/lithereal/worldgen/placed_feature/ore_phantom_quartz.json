@@ -1,9 +1,9 @@
 {
-  "feature": "lithereal:saturnite_ore",
+  "feature": "lithereal:ore_phantom_quartz",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 5
+      "count": 40
     },
     {
       "type": "minecraft:in_square"
@@ -11,14 +11,13 @@
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:trapezoid",
+        "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 48
+          "below_top": 128
         },
         "min_inclusive": {
-          "above_bottom": 0
-        },
-        "plateau": 4
+          "above_bottom": 12
+        }
       }
     },
     {

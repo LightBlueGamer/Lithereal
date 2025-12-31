@@ -12,7 +12,9 @@ import org.lithereal.Lithereal;
 import org.lithereal.block.ModTreeBlocks;
 import org.lithereal.item.ModArmorItems;
 import org.lithereal.item.ModItems;
+import org.lithereal.item.ModRawMaterialItems;
 import org.lithereal.item.ModToolItems;
+import org.lithereal.neoforge.world.item.ForgeItems;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -27,6 +29,35 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.PHANTOM_OAK_CHEST_BOAT.get());
         basicItem(ModItems.PHANTOM_OAK_SIGN.get());
         basicItem(ModItems.PHANTOM_OAK_HANGING_SIGN.get());
+
+        basicItem(ForgeItems.LITHERITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.PHANTOM_DIAMOND.get());
+        basicItem(ModRawMaterialItems.ODYSIUM_INGOT.get());
+        basicItem(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get());
+        basicItem(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.UNIFIER.get());
+        basicItem(ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get());
+        basicItem(ModRawMaterialItems.NERITH_INGOT.get());
+        basicItem(ModRawMaterialItems.ALLIAN_INGOT.get());
+        basicItem(ModRawMaterialItems.AURELITE_DUST.get());
+        basicItem(ModRawMaterialItems.AURELITE_INGOT.get());
+        basicItem(ModRawMaterialItems.CHRYON_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.COPALITE_DUST.get());
+        basicItem(ModRawMaterialItems.COPALITE_INGOT.get());
+        basicItem(ModRawMaterialItems.CYRUM_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.ELUNITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.HELLIONITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.LUMINIUM_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.NETHERITE_NUGGET.get());
+        basicItem(ModRawMaterialItems.NETHERITE_FRAGMENT.get());
+        basicItem(ModRawMaterialItems.RAW_ALLIUM.get());
+        basicItem(ModRawMaterialItems.RAW_NERITH.get());
+        basicItem(ModRawMaterialItems.SATURNITE_CRYSTAL.get());
+        basicItem(ModRawMaterialItems.SOLIUMITE_INGOT.get());
+        basicItem(ModRawMaterialItems.ELCRUM_INGOT.get());
 
         handheldItem(ModToolItems.LITHERITE_SWORD.get());
         handheldItem(ModToolItems.LITHERITE_PICKAXE.get());

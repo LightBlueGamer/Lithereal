@@ -13,13 +13,13 @@ import static org.lithereal.block.ModBlocks.registerBlockOnly;
 
 public class ModVegetationBlocks {
     public static final RegistrySupplier<Block> MALISHROOM = registerBlock("malishroom", () ->
-            new MushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RED_MUSHROOM)), block -> new BlockItem(block, new Item.Properties()));
+            new MushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RED_MUSHROOM)));
 
     public static final RegistrySupplier<Block> POTTED_MALISHROOM = registerBlockOnly("potted_malishroom", () ->
             new FlowerPotBlock(MALISHROOM.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_RED_MUSHROOM)));
 
     public static final RegistrySupplier<Block> FORTSHROOM = registerBlock("fortshroom", () ->
-            new MushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)), block -> new BlockItem(block, new Item.Properties()));
+            new MushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
 
     public static final RegistrySupplier<Block> POTTED_FORTSHROOM = registerBlockOnly("potted_fortshroom", () ->
             new FlowerPotBlock(FORTSHROOM.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_BROWN_MUSHROOM)));

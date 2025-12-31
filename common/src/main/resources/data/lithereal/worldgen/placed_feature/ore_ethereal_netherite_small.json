@@ -1,10 +1,6 @@
 {
-  "feature": "lithereal:saturnite_ore",
+  "feature": "lithereal:ore_ethereal_netherite_small",
   "placement": [
-    {
-      "type": "minecraft:count",
-      "count": 5
-    },
     {
       "type": "minecraft:in_square"
     },
@@ -13,12 +9,11 @@
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "absolute": 48
+          "below_top": 128
         },
         "min_inclusive": {
-          "above_bottom": 0
-        },
-        "plateau": 4
+          "above_bottom": 4
+        }
       }
     },
     {

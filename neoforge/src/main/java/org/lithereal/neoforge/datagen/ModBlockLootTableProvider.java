@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
@@ -126,6 +127,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         createMultipleOreDrops(ModOreBlocks.ETHERSTONE_CYRUM_ORE.get(), ModRawMaterialItems.CYRUM_CRYSTAL.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.ELUNITE_ORE.get(), ModRawMaterialItems.ELUNITE_CRYSTAL.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.HELLIONITE_ORE.get(), ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.PAILITE_HELLIONITE_ORE.get(), ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.LITHERITE_ORE.get(), ForgeItems.LITHERITE_CRYSTAL.get(), 1, 2);
         createMultipleOreDrops(ModOreBlocks.DEEPSLATE_LITHERITE_ORE.get(), ForgeItems.LITHERITE_CRYSTAL.get(), 1, 2);
         createMultipleOreDrops(ModOreBlocks.ETHERSTONE_LITHERITE_ORE.get(), ForgeItems.LITHERITE_CRYSTAL.get(), 1, 2);
@@ -136,8 +138,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         createMultipleOreDrops(ModOreBlocks.DEEPSLATE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.ETHERSTONE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get(), 1, 1);
         createMultipleOreDrops(ModOreBlocks.SATURNITE_ORE.get(), ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 2);
+        createMultipleOreDrops(ModOreBlocks.PAILITE_SATURNITE_ORE.get(), ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 1, 1);
+        createMultipleOreDrops(ModOreBlocks.PAILITE_NETHERITE_ORE.get(), ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 3, 4);
 
         createMultipleOreDrops(ModPhantomBlocks.PHANTOM_DIAMOND_ORE.get(), ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 1);
+        createMultipleOreDrops(ModPhantomBlocks.PHANTOM_QUARTZ_ORE.get(), Items.QUARTZ, 1, 1);
         dropSelf(ModPhantomBlocks.PHANTOM_ROSE.get());
         dropSelf(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get());
         dropSelf(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get());
