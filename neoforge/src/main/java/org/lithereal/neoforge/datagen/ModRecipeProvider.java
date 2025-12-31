@@ -313,21 +313,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_netherite_fragment", has(ModRawMaterialItems.NETHERITE_FRAGMENT.get()))
                 .save(recipeOutput, Lithereal.id("netherite_nugget_from_fragments"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE.get(), 4)
                 .define('C', ModRawMaterialItems.CYRUM_CRYSTAL.get())
                 .define('E', ModStoneBlocks.ETHERSTONE.get())
                 .pattern("EC")
                 .pattern("CE")
                 .unlockedBy("has_etherstone", has(ModStoneBlocks.ETHERSTONE.get()))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.LUMINITE.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.LUMINITE.get(), 4)
                 .define('Q', Items.QUARTZ)
                 .define('P', ModStoneBlocks.PAILITE.get())
                 .pattern("PQ")
                 .pattern("QP")
                 .unlockedBy("has_pailite", has(ModStoneBlocks.PAILITE.get()))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.VERDONE.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.VERDONE.get(), 4)
                 .define('C', ModRawMaterialItems.COPALITE_INGOT.get())
                 .define('P', ModStoneBlocks.PAILITE.get())
                 .pattern("PC")
