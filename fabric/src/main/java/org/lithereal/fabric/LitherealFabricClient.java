@@ -2,6 +2,7 @@ package org.lithereal.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
 import org.lithereal.client.EtherealCoreSpecialEffects;
+import org.lithereal.client.KeyMapping;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.client.renderer.*;
@@ -52,5 +54,8 @@ public class LitherealFabricClient implements ClientModInitializer {
                 ModArmorItems.ENHANCED_ODYSIUM_HELMET.get(), ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get(), ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get(), ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get());
 
         LitherealClient.init();
+
+        KeyBindingHelper.registerKeyBinding(KeyMapping.FREEZE_KEY);
+        KeyBindingHelper.registerKeyBinding(KeyMapping.SCORCH_KEY);
     }
 }

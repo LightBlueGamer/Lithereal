@@ -28,6 +28,7 @@ import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.EtherealCoreSpecialEffects;
+import org.lithereal.client.KeyMapping;
 import org.lithereal.client.gui.screens.inventory.ElectricCrucibleScreen;
 import org.lithereal.client.particle.*;
 import org.lithereal.client.renderer.*;
@@ -123,6 +124,12 @@ public class ClientEvents {
                     ModArmorItems.WITHERING_LITHERITE_HELMET, ModArmorItems.WITHERING_LITHERITE_CHESTPLATE, ModArmorItems.WITHERING_LITHERITE_LEGGINGS, ModArmorItems.WITHERING_LITHERITE_BOOTS,
                     ModArmorItems.ODYSIUM_HELMET, ModArmorItems.ODYSIUM_CHESTPLATE, ModArmorItems.ODYSIUM_LEGGINGS, ModArmorItems.ODYSIUM_BOOTS,
                     ModArmorItems.ENHANCED_ODYSIUM_HELMET, ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE, ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS, ModArmorItems.ENHANCED_ODYSIUM_BOOTS);
+        }
+
+        @SubscribeEvent
+        public static void registerKeyMappingsEvent(RegisterKeyMappingsEvent event) {
+            event.register(KeyMapping.FREEZE_KEY);
+            event.register(KeyMapping.SCORCH_KEY);
         }
     }
     public static class ClientForgeBusEvents {

@@ -1,7 +1,6 @@
 package org.lithereal;
 
 import dev.architectury.registry.CreativeTabRegistry;
-import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
@@ -36,7 +35,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
-import org.lithereal.client.KeyMapping;
 import org.lithereal.client.particle.*;
 import org.lithereal.client.renderer.LitherealArmorModel;
 import org.lithereal.client.renderer.ModBoatRenderer;
@@ -71,7 +69,6 @@ public class LitherealClient {
         LitherealExpectPlatform.registerParticleProvider(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.PORTAL_SPARKLE.get(), FlameParticle.Provider::new);
         LitherealExpectPlatform.registerParticleProvider(ModParticles.PORTAL_EMISSION.get(), PortalParticleProvider::new);
-        registerKeyBindings();
         registerColorHandlers();
         registerItemsToBuildingBlocksTab();
         registerItemsToNaturalTab();
@@ -93,11 +90,6 @@ public class LitherealClient {
         ItemPropertiesRegistry.register(bow,
                 ResourceLocation.withDefaultNamespace("pulling"),
                 (itemStack, clientLevel, livingEntity, i) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F);
-    }
-
-    private static void registerKeyBindings() {
-        KeyMappingRegistry.register(KeyMapping.FREEZE_KEY);
-        KeyMappingRegistry.register(KeyMapping.SCORCH_KEY);
     }
 
     private static void registerColorHandlers() {
