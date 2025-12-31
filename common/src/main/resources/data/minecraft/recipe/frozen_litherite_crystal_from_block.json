@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "frozen_litherite_crystal",
+  "ingredients": [
+    {
+      "item": "lithereal:frozen_litherite_crystal"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "lithereal:frozen_litherite_block"
+  }
+}

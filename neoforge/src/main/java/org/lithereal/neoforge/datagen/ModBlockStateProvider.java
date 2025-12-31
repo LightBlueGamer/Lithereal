@@ -107,8 +107,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pressurePlateBlock((PressurePlateBlock) ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get(), Lithereal.id("block/polished_pailite_bricks"));
         itemForBlockModel(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get());
 
-        randomRotatedBlockXY(ModStoneBlocks.LUMINITE.get());
-        itemForBlockModel(ModStoneBlocks.LUMINITE.get());
+        blockWithItem(ModStoneBlocks.LUMINITE);
         stairsBlock((StairBlock) ModStoneBlocks.LUMINITE_STAIRS.get(), Lithereal.id("block/luminite"));
         itemForBlockModel(ModStoneBlocks.LUMINITE_STAIRS.get());
         slabBlock((SlabBlock) ModStoneBlocks.LUMINITE_SLAB.get(), Lithereal.id("block/luminite"), Lithereal.id("block/luminite"));

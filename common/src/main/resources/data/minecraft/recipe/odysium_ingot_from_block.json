@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "odysium_ingot",
+  "ingredients": [
+    {
+      "item": "lithereal:odysium_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "lithereal:odysium_block"
+  }
+}
