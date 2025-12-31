@@ -276,31 +276,31 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         chestBoat(recipeOutput, ModItems.PHANTOM_OAK_CHEST_BOAT.get(), ModItems.PHANTOM_OAK_BOAT.get());
         hangingSign(recipeOutput, ModItems.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.LITHERITE_BLOCK.get(), RecipeCategory.MISC, ForgeItems.LITHERITE_CRYSTAL.get(), "litherite_crystal_from_block", "litherite_crystal"
+                recipeOutput, RecipeCategory.MISC, ForgeItems.LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.LITHERITE_BLOCK.get(), "litherite_crystal_from_block", "litherite_crystal"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.BURNING_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), "burning_litherite_crystal_from_block", "burning_litherite_crystal"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.BURNING_LITHERITE_BLOCK.get(), "burning_litherite_crystal_from_block", "burning_litherite_crystal"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), "frozen_litherite_crystal_from_block", "frozen_litherite_crystal"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get(), "frozen_litherite_crystal_from_block", "frozen_litherite_crystal"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), "infused_litherite_ingot_from_block", "infused_litherite_ingot"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), RecipeCategory.MISC, ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get(), "infused_litherite_ingot_from_block", "infused_litherite_ingot"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.WITHERING_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), "withering_litherite_crystal_from_block", "withering_litherite_crystal"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.WITHERING_LITHERITE_BLOCK.get(), "withering_litherite_crystal_from_block", "withering_litherite_crystal"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.CHARGED_LITHERITE_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get(), "charged_litherite_crystal_from_block", "charged_litherite_crystal"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.CHARGED_LITHERITE_BLOCK.get(), "charged_litherite_crystal_from_block", "charged_litherite_crystal"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModStorageBlocks.ODYSIUM_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.ODYSIUM_INGOT.get(), "odysium_ingot_from_block", "odysium_ingot"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.ODYSIUM_INGOT.get(), RecipeCategory.MISC, ModStorageBlocks.ODYSIUM_BLOCK.get(), "odysium_ingot_from_block", "odysium_ingot"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModPhantomBlocks.PHANTOM_DIAMOND_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.PHANTOM_DIAMOND.get(), "phantom_diamond_from_block", "phantom_diamond"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.PHANTOM_DIAMOND.get(), RecipeCategory.MISC, ModPhantomBlocks.PHANTOM_DIAMOND_BLOCK.get(), "phantom_diamond_from_block", "phantom_diamond"
         );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                recipeOutput, RecipeCategory.MISC, ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), RecipeCategory.MISC, ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), "impure_ethereal_crystal_shard_from_block", "impure_ethereal_crystal_shard"
+                recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), RecipeCategory.MISC, ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), "impure_ethereal_crystal_shard_from_block", "impure_ethereal_crystal_shard"
         );
         nineBlockStorageRecipesWithCustomPackingFromBaseModNamespace(
                 recipeOutput, RecipeCategory.MISC, ModRawMaterialItems.NETHERITE_NUGGET.get(), RecipeCategory.MISC, Items.NETHERITE_INGOT, "netherite_ingot_from_nuggets", "netherite_ingot"
