@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_odysium_ingot": {
+    "has_odysium_block": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:odysium_ingot"
+            "items": "lithereal:odysium_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_odysium_ingot"
+      "has_odysium_block"
     ]
   ],
   "rewards": {

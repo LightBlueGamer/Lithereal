@@ -4,11 +4,11 @@
   "group": "impure_ethereal_crystal_shard",
   "ingredients": [
     {
-      "item": "lithereal:impure_ethereal_crystal_shard"
+      "item": "lithereal:ethereal_crystal_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:ethereal_crystal_block"
+    "id": "lithereal:impure_ethereal_crystal_shard"
   }
 }

@@ -4,11 +4,11 @@
   "group": "burning_litherite_crystal",
   "ingredients": [
     {
-      "item": "lithereal:burning_litherite_crystal"
+      "item": "lithereal:burning_litherite_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:burning_litherite_block"
+    "id": "lithereal:burning_litherite_crystal"
   }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_frozen_litherite_crystal": {
+    "has_frozen_litherite_block": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:frozen_litherite_crystal"
+            "items": "lithereal:frozen_litherite_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_frozen_litherite_crystal"
+      "has_frozen_litherite_block"
     ]
   ],
   "rewards": {

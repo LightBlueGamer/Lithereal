@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "lithereal:ethereal_crystal_block"
+      "item": "lithereal:litherite_crystal"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "lithereal:impure_ethereal_crystal_shard"
+    "id": "lithereal:litherite_block"
   }
 }

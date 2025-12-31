@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "lithereal:litherite_block"
+      "item": "lithereal:frozen_litherite_crystal"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "lithereal:litherite_crystal"
+    "id": "lithereal:frozen_litherite_block"
   }
 }

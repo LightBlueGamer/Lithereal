@@ -4,11 +4,11 @@
   "group": "phantom_diamond",
   "ingredients": [
     {
-      "item": "lithereal:phantom_diamond"
+      "item": "lithereal:phantom_diamond_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:phantom_diamond_block"
+    "id": "lithereal:phantom_diamond"
   }
 }

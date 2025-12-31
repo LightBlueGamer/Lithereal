@@ -4,11 +4,11 @@
   "group": "odysium_ingot",
   "ingredients": [
     {
-      "item": "lithereal:odysium_ingot"
+      "item": "lithereal:odysium_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:odysium_block"
+    "id": "lithereal:odysium_ingot"
   }
 }

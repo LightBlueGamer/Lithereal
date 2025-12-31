@@ -4,11 +4,11 @@
   "group": "charged_litherite_crystal",
   "ingredients": [
     {
-      "item": "lithereal:charged_litherite_crystal"
+      "item": "lithereal:charged_litherite_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:charged_litherite_block"
+    "id": "lithereal:charged_litherite_crystal"
   }
 }

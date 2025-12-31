@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_infused_litherite_block": {
+    "has_frozen_litherite_crystal": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:infused_litherite_block"
+            "items": "lithereal:frozen_litherite_crystal"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lithereal:infused_litherite_ingot"
+        "recipe": "lithereal:frozen_litherite_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_infused_litherite_block"
+      "has_frozen_litherite_crystal"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lithereal:infused_litherite_ingot"
+      "lithereal:frozen_litherite_block"
     ]
   }
 }

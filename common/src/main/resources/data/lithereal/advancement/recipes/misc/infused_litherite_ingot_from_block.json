@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_infused_litherite_ingot": {
+    "has_infused_litherite_block": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:infused_litherite_ingot"
+            "items": "lithereal:infused_litherite_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_infused_litherite_ingot"
+      "has_infused_litherite_block"
     ]
   ],
   "rewards": {

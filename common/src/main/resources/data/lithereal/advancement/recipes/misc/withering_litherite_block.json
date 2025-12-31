@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lithereal:withering_litherite_crystal"
+        "recipe": "lithereal:withering_litherite_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_withering_litherite_block": {
+    "has_withering_litherite_crystal": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:withering_litherite_block"
+            "items": "lithereal:withering_litherite_crystal"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_withering_litherite_block"
+      "has_withering_litherite_crystal"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lithereal:withering_litherite_crystal"
+      "lithereal:withering_litherite_block"
     ]
   }
 }

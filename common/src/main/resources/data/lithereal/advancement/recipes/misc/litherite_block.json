@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_burning_litherite_block": {
+    "has_litherite_crystal": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:burning_litherite_block"
+            "items": "lithereal:litherite_crystal"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lithereal:burning_litherite_crystal"
+        "recipe": "lithereal:litherite_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_burning_litherite_block"
+      "has_litherite_crystal"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lithereal:burning_litherite_crystal"
+      "lithereal:litherite_block"
     ]
   }
 }

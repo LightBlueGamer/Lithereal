@@ -4,11 +4,11 @@
   "group": "infused_litherite_ingot",
   "ingredients": [
     {
-      "item": "lithereal:infused_litherite_ingot"
+      "item": "lithereal:infused_litherite_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:infused_litherite_block"
+    "id": "lithereal:infused_litherite_ingot"
   }
 }

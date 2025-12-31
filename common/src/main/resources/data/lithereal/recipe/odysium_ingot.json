@@ -1,18 +1,35 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "#": {
-      "item": "lithereal:odysium_block"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lithereal:allian_ingot"
+    },
+    {
+      "item": "lithereal:nerith_ingot"
+    },
+    {
+      "item": "lithereal:copalite_ingot"
+    },
+    {
+      "item": "lithereal:aurelite_ingot"
+    },
+    {
+      "item": "lithereal:unifier"
+    },
+    {
+      "item": "lithereal:elcrum_ingot"
+    },
+    {
+      "item": "lithereal:soliumite_ingot"
+    },
+    {
+      "item": "lithereal:chryon_crystal"
+    },
+    {
+      "item": "lithereal:saturnite_crystal"
     }
-  },
-  "pattern": [
-    "###",
-    "###",
-    "###"
   ],
   "result": {
-    "count": 1,
     "id": "lithereal:odysium_ingot"
   }
 }

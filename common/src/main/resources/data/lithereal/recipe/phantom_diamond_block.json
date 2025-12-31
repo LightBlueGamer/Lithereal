@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "lithereal:charged_litherite_block"
+      "item": "lithereal:phantom_diamond"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "lithereal:charged_litherite_crystal"
+    "id": "lithereal:phantom_diamond_block"
   }
 }

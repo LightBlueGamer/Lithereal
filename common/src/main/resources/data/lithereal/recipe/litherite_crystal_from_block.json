@@ -4,11 +4,11 @@
   "group": "litherite_crystal",
   "ingredients": [
     {
-      "item": "lithereal:litherite_crystal"
+      "item": "lithereal:litherite_block"
     }
   ],
   "result": {
     "count": 9,
-    "id": "lithereal:litherite_block"
+    "id": "lithereal:litherite_crystal"
   }
 }

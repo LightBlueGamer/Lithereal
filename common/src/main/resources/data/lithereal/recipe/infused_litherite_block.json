@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "lithereal:withering_litherite_block"
+      "item": "lithereal:infused_litherite_ingot"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "lithereal:withering_litherite_crystal"
+    "id": "lithereal:infused_litherite_block"
   }
 }
