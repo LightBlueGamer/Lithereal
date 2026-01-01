@@ -49,17 +49,4 @@ public interface IAbility<I extends AbilityItem> {
     default float getLavaMovementEfficiency(I castedItem, ItemStack itemStack, LivingEntity user, float efficiency) {
         return efficiency;
     }
-
-    record IdentityForPlayer(UUID uuid, AbilityItem abilityItem) {
-        @Override
-        public boolean equals(Object o) {
-            if (!(o instanceof IdentityForPlayer that)) return false;
-            return Objects.equals(uuid(), that.uuid()) && Objects.equals(abilityItem(), that.abilityItem());
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(uuid(), abilityItem());
-        }
-    }
 }
