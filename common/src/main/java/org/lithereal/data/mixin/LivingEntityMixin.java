@@ -45,7 +45,6 @@ public abstract class LivingEntityMixin extends Entity {
     public double useFasterMovementThroughLavaForArmor(double original, @Share("lavaMovementEfficiency") LocalFloatRef scalarRef) {
         float scalar = scalarRef.get();
         if (scalar > 0) {
-            original = 0.7;
             original += (0.54600006F - original) * scalar;
         }
         return original;
