@@ -37,10 +37,19 @@ public interface IAbility<I extends AbilityItem> {
         if (castedItem == null) return;
         onArmourTick(castedItem, itemStack, level, entity, slot, isSelected);
     }
+    default boolean providesEasierLavaMovementRaw(AbilityItem item, ItemStack itemStack, LivingEntity user) {
+        I castedItem = checkedCast(item);
+        if (castedItem == null) return false;
+        return providesEasierLavaMovement(castedItem, itemStack, user);
+    }
     void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
     void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
     void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected);
     void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected);
+    default boolean providesEasierLavaMovement(I item, ItemStack itemStack, LivingEntity user) {
+        return false;
+    }
+
     record IdentityForPlayer(UUID uuid, AbilityItem abilityItem) {
         @Override
         public boolean equals(Object o) {

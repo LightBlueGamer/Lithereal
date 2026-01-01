@@ -6,7 +6,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -46,8 +45,8 @@ public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>>
         if (!healTickerMap.containsKey(entityID))
             healTickerMap.put(entityID, 0);
         AtomicInteger healTicker = new AtomicInteger(healTickerMap.get(entityID));
-        if (entity instanceof Player player && !level.isClientSide()) {
-            if (hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(armorMaterials, player) && level.getGameTime() % 80 == 0) {
+        if (entity instanceof LivingEntity user && !level.isClientSide()) {
+            if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials, user) && level.getGameTime() % 80 == 0) {
                 boolean multiEffect = passiveEffects.size() > 1;
                 passiveEffects.forEach((mobEffectInstance) -> {
                     Holder<MobEffect> effect = mobEffectInstance.getEffect();
@@ -55,11 +54,11 @@ public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>>
                     if (effectivelyBeneficial || multiEffect) {
                         if (!effect.is(MobEffects.HEAL) || healTicker.get() >= 400) {
                             if (effect.value().isInstantenous())
-                                effect.value().applyInstantenousEffect(null, null, player, mobEffectInstance.getAmplifier(), 0.25);
-                            else player.addEffect(InfusedItem.transformInstance(mobEffectInstance));
+                                effect.value().applyInstantenousEffect(null, null, user, mobEffectInstance.getAmplifier(), 0.25);
+                            else user.addEffect(InfusedItem.transformInstance(mobEffectInstance));
                             if (effect.is(MobEffects.HEAL)) healTicker.set(0);
                         }
-                    } else if (player.hasEffect(effect)) player.removeEffect(effect);
+                    } else if (user.hasEffect(effect)) user.removeEffect(effect);
                 });
             }
         }

@@ -12,6 +12,7 @@
     "BlockEntityMixin",
     "BlockStateBaseMixin",
     "CraftingInventoryMixin",
+    "LivingEntityMixin",
     "MobEffectMixin",
     "ServerPlayerMixin",
     "ShapedRecipeMixin",

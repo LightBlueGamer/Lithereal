@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LocalPlayer.class)
-public class LocalPlayerMixin {
+public abstract class LocalPlayerMixin {
     @WrapOperation(method = "openTextEdit", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;setScreen(Lnet/minecraft/client/gui/screens/Screen;)V", ordinal = 1))
     public void swapScreen(Minecraft instance, Screen old, Operation<Void> original, @Local(ordinal = 0, argsOnly = true) SignBlockEntity entity, @Local(ordinal = 0, argsOnly = true) boolean bl) {
         if (entity instanceof CustomHangingSignBlockEntity) original.call(instance, new HangingSignEditScreen(entity, bl, instance.isTextFilteringEnabled()));

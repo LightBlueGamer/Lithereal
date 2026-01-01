@@ -7,7 +7,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -25,22 +25,22 @@ public class CommonUtils {
     public static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
     }
-    public static boolean hasFullSuitOfArmorOn(Player player) {
+    public static boolean hasFullSuitOfArmorOn(LivingEntity livingEntity) {
         boolean bl = true;
-        for (ItemStack armorStack : player.getInventory().armor) {
+        for (ItemStack armorStack : livingEntity.getArmorSlots()) {
             bl &= !armorStack.isEmpty();
         }
 
         return bl;
     }
 
-    public static boolean hasCorrectArmorOn(Holder<ArmorMaterial> material, Player player) {
-        return hasCorrectArmorOn(Collections.singletonList(material), player);
+    public static boolean hasCorrectArmorOn(Holder<ArmorMaterial> material, LivingEntity livingEntity) {
+        return hasCorrectArmorOn(Collections.singletonList(material), livingEntity);
     }
 
-    public static boolean hasCorrectArmorOn(List<Holder<ArmorMaterial>> materials, Player player) {
+    public static boolean hasCorrectArmorOn(List<Holder<ArmorMaterial>> materials, LivingEntity livingEntity) {
         boolean bl = true;
-        for (ItemStack armorStack : player.getInventory().armor) {
+        for (ItemStack armorStack : livingEntity.getArmorSlots()) {
             if(!(armorStack.getItem() instanceof ArmorItem)) {
                 return false;
             }

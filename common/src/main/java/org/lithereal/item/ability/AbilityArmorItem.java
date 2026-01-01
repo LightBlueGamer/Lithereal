@@ -1,8 +1,10 @@
 package org.lithereal.item.ability;
 
+import com.google.common.collect.Streams;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +23,7 @@ public class AbilityArmorItem extends ArmorItem implements AbilityItem {
 
     @Override
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
-        getAbility().onArmourTick(this, itemStack, level, entity, slot, isSelected);
+        if (entity instanceof LivingEntity user && Streams.stream(user.getArmorSlots()).anyMatch(itemStack::equals)) getAbility().onArmourTick(this, itemStack, level, entity, slot, isSelected);
         super.inventoryTick(itemStack, level, entity, slot, isSelected);
     }
 

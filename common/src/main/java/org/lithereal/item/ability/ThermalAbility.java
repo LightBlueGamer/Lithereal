@@ -82,9 +82,9 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
         if (entity.isFreezing() && !(entity instanceof Player))
             entity.setTicksFrozen(0);
 
-        if (entity instanceof Player player) {
-            if (player.hurtTime > 0 && !player.level().isClientSide) {
-                DamageSource source = player.getLastDamageSource();
+        if (entity instanceof LivingEntity user) {
+            if (user.hurtTime > 0 && !user.level().isClientSide) {
+                DamageSource source = user.getLastDamageSource();
                 if (source == null) return;
                 Entity attacker = source.getEntity();
                 if (attacker instanceof LivingEntity) {
@@ -93,16 +93,16 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
                 }
             }
             if(!level.isClientSide()) {
-                if(hasFullSuitOfArmorOn(player)) {
-                    if(hasCorrectArmorOn(armorMaterials(), player)) {
-                        effects.forEach(statusEffect -> addStatusEffect(player, statusEffect));
-                        if (player.isOnFire()) {
-                            player.extinguishFire();
-                            player.setSharedFlagOnFire(false);
+                if(hasFullSuitOfArmorOn(user)) {
+                    if(hasCorrectArmorOn(armorMaterials(), user)) {
+                        effects.forEach(statusEffect -> addStatusEffect(user, statusEffect));
+                        if (user.isOnFire()) {
+                            user.extinguishFire();
+                            user.setSharedFlagOnFire(false);
                         }
-                        if (player.isFreezing())
-                            player.setTicksFrozen(0);
-                        BlockPos belowPos = player.blockPosition().below();
+                        if (user.isFreezing())
+                            user.setTicksFrozen(0);
+                        BlockPos belowPos = user.blockPosition().below();
                         BlockState blockBelowState = level.getBlockState(belowPos);
                         Block blockBelow = blockBelowState.getBlock();
                         if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown()) {
@@ -125,31 +125,37 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
             }
         }
     }
+    public boolean providesEasierLavaMovement(I item, ItemStack itemStack, LivingEntity user) {
+        ArmorType armorType = armorType();
+        return hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user) && armorType.movesEasilyThroughLava;
+    }
 
-    private void addStatusEffect(Player player, MobEffectInstance mapStatusEffect) {
-        boolean hasPlayerEffect = player.hasEffect(mapStatusEffect.getEffect());
+    private void addStatusEffect(LivingEntity user, MobEffectInstance mapStatusEffect) {
+        boolean hasEffect = user.hasEffect(mapStatusEffect.getEffect());
 
-        if (!hasPlayerEffect) {
-            player.addEffect(new MobEffectInstance(mapStatusEffect));
+        if (!hasEffect) {
+            user.addEffect(new MobEffectInstance(mapStatusEffect));
         }
     }
 
     public enum ArmorType {
-        FROSTBURN(false, false, true, true, true),
-        FREEZING(false, false, true, false, true),
-        BURNING(true, true, false, true, false);
+        FROSTBURN(false, false, true, true, true, true),
+        FREEZING(false, false, true, false, true, false),
+        BURNING(true, true, false, true, false, true);
         public final boolean emitsHeat;
         public final boolean providesScorch;
         public final boolean providesFreeze;
         public final boolean causesIgnition;
         public final boolean causesFreeze;
+        public final boolean movesEasilyThroughLava;
 
-        ArmorType(boolean emitsHeat, boolean providesScorch, boolean providesFreeze, boolean causesIgnition, boolean causesFreeze) {
+        ArmorType(boolean emitsHeat, boolean providesScorch, boolean providesFreeze, boolean causesIgnition, boolean causesFreeze, boolean movesEasilyThroughLava) {
             this.emitsHeat = emitsHeat;
             this.providesScorch = providesScorch;
             this.providesFreeze = providesFreeze;
             this.causesIgnition = causesIgnition;
             this.causesFreeze = causesFreeze;
+            this.movesEasilyThroughLava = movesEasilyThroughLava;
         }
     }
 }

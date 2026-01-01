@@ -9,7 +9,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
@@ -117,36 +116,36 @@ public class InfusedAbility<I extends InfusedItem> implements IAbility<I> {
             healTickerMap.put(entityID, 0);
         AtomicInteger degradationTicker = new AtomicInteger(degradationTickerMap.get(entityID));
         AtomicInteger healTicker = new AtomicInteger(healTickerMap.get(entityID));
-        if (entity instanceof Player player && player.getInventory().armor.contains(itemStack)) {
+        if (entity instanceof LivingEntity user) {
             if(!level.isClientSide()) {
                 PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
                 AtomicInteger count = getCount(potionContents);
-                if (player.hurtTime > 0) {
-                    DamageSource source = player.getLastDamageSource();
+                if (user.hurtTime > 0) {
+                    DamageSource source = user.getLastDamageSource();
                     if (source != null) {
                         Entity attacker = source.getEntity();
                         if (attacker instanceof LivingEntity newTarget) {
-                            potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(mobEffectInstance, newTarget, player, count.get(), false));
+                            potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(mobEffectInstance, newTarget, user, count.get(), false));
                         }
                     }
                 }
-                if(hasFullSuitOfArmorOn(player)) {
-                    if(hasCorrectArmorOn(supportedMaterials, player) && level.getGameTime() % 80 == 0) {
+                if(hasFullSuitOfArmorOn(user)) {
+                    if(hasCorrectArmorOn(supportedMaterials, user) && level.getGameTime() % 80 == 0) {
                         boolean multiEffect = count.get() > 1;
                         potionContents.forEachEffect((mobEffectInstance) -> {
                             Holder<MobEffect> effect = mobEffectInstance.getEffect();
                             boolean effectivelyBeneficial = effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl);
                             if (effectivelyBeneficial || multiEffect) {
                                 if(!effect.is(MobEffects.HEAL) || healTicker.get() >= 400) {
-                                    if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(null, null, player, mobEffectInstance.getAmplifier(), 0.25);
-                                    else player.addEffect(InfusedItem.transformInstance(mobEffectInstance));
+                                    if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(null, null, user, mobEffectInstance.getAmplifier(), 0.25);
+                                    else user.addEffect(InfusedItem.transformInstance(mobEffectInstance));
                                     if (effect.is(MobEffects.HEAL)) healTicker.set(0);
                                 }
                             } else {
-                                if (player.hasEffect(effect)) player.removeEffect(effect);
+                                if (user.hasEffect(effect)) user.removeEffect(effect);
                             }
                             if (itemStack.isDamageableItem() && degradationTicker.get() >= 200 && effect.is(ModTags.DEGRADES_LITHERITE_GEAR)) {
-                                itemStack.hurtAndBreak(mobEffectInstance.getAmplifier(), player, item instanceof Equipable equipable ? equipable.getEquipmentSlot() : EquipmentSlot.MAINHAND);
+                                itemStack.hurtAndBreak(mobEffectInstance.getAmplifier(), user, item instanceof Equipable equipable ? equipable.getEquipmentSlot() : EquipmentSlot.MAINHAND);
                                 degradationTicker.set(0);
                             }
                         });
