@@ -125,9 +125,12 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
             }
         }
     }
-    public boolean providesEasierLavaMovement(I item, ItemStack itemStack, LivingEntity user) {
+
+    @Override
+    public float getLavaMovementEfficiency(I castedItem, ItemStack itemStack, LivingEntity user, float efficiency) {
         ArmorType armorType = armorType();
-        return hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user) && armorType.movesEasilyThroughLava;
+        if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) return efficiency + armorType.lavaMovementEfficiency * this.attackAbilityScalar;
+        return efficiency;
     }
 
     private void addStatusEffect(LivingEntity user, MobEffectInstance mapStatusEffect) {
@@ -139,23 +142,23 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
     }
 
     public enum ArmorType {
-        FROSTBURN(false, false, true, true, true, true),
-        FREEZING(false, false, true, false, true, false),
-        BURNING(true, true, false, true, false, true);
+        FROSTBURN(0.05F, false, false, true, true, true),
+        FREEZING(0, false, false, true, false, true),
+        BURNING(0.1F, true, true, false, true, false);
+        public final float lavaMovementEfficiency;
         public final boolean emitsHeat;
         public final boolean providesScorch;
         public final boolean providesFreeze;
         public final boolean causesIgnition;
         public final boolean causesFreeze;
-        public final boolean movesEasilyThroughLava;
 
-        ArmorType(boolean emitsHeat, boolean providesScorch, boolean providesFreeze, boolean causesIgnition, boolean causesFreeze, boolean movesEasilyThroughLava) {
+        ArmorType(float lavaMovementEfficiency, boolean emitsHeat, boolean providesScorch, boolean providesFreeze, boolean causesIgnition, boolean causesFreeze) {
+            this.lavaMovementEfficiency = lavaMovementEfficiency;
             this.emitsHeat = emitsHeat;
             this.providesScorch = providesScorch;
             this.providesFreeze = providesFreeze;
             this.causesIgnition = causesIgnition;
             this.causesFreeze = causesFreeze;
-            this.movesEasilyThroughLava = movesEasilyThroughLava;
         }
     }
 }

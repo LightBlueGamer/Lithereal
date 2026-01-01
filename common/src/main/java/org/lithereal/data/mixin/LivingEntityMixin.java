@@ -30,8 +30,8 @@ public abstract class LivingEntityMixin extends Entity {
     public void useFasterMovementInLavaIfArmorSaysSo(LivingEntity instance, float v, Vec3 vec3, Operation<Void> original, @Share("lavaMovementEfficiency") LocalFloatRef scalarRef) {
         float scalar = 0;
         for (ItemStack armorItem : instance.getArmorSlots()) {
-            if (armorItem.getItem() instanceof AbilityItem abilityItem && abilityItem.getAbility().providesEasierLavaMovement(abilityItem, armorItem, instance))
-                scalar += 0.1F;
+            if (armorItem.getItem() instanceof AbilityItem abilityItem)
+                scalar = abilityItem.getAbility().getLavaMovementEfficiency(abilityItem, armorItem, instance, scalar);
         }
         if (!this.onGround())
             scalar *= 0.5F;

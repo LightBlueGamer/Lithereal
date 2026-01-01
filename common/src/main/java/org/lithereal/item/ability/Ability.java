@@ -46,9 +46,10 @@ public enum Ability {
     public void onArmourTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
         ability.onArmourTickRaw(item, itemStack, level, entity, slot, isSelected);
     }
-    public boolean providesEasierLavaMovement(AbilityItem item, ItemStack itemStack, LivingEntity user) {
-        return ability.providesEasierLavaMovementRaw(item, itemStack, user);
+    public float getLavaMovementEfficiency(AbilityItem item, ItemStack itemStack, LivingEntity instance, float efficiency) {
+        return ability.getLavaMovementEfficiencyRaw(item, itemStack, instance, efficiency);
     }
+
     public record IdentityForPlayer(UUID uuid, AbilityItem abilityItem) {
         @Override
         public boolean equals(Object o) {

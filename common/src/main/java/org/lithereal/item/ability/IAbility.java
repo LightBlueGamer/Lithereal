@@ -37,17 +37,17 @@ public interface IAbility<I extends AbilityItem> {
         if (castedItem == null) return;
         onArmourTick(castedItem, itemStack, level, entity, slot, isSelected);
     }
-    default boolean providesEasierLavaMovementRaw(AbilityItem item, ItemStack itemStack, LivingEntity user) {
+    default float getLavaMovementEfficiencyRaw(AbilityItem item, ItemStack itemStack, LivingEntity user, float efficiency) {
         I castedItem = checkedCast(item);
-        if (castedItem == null) return false;
-        return providesEasierLavaMovement(castedItem, itemStack, user);
+        if (castedItem == null) return efficiency;
+        return getLavaMovementEfficiency(castedItem, itemStack, user, efficiency);
     }
     void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
     void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
     void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected);
     void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected);
-    default boolean providesEasierLavaMovement(I item, ItemStack itemStack, LivingEntity user) {
-        return false;
+    default float getLavaMovementEfficiency(I castedItem, ItemStack itemStack, LivingEntity user, float efficiency) {
+        return efficiency;
     }
 
     record IdentityForPlayer(UUID uuid, AbilityItem abilityItem) {
