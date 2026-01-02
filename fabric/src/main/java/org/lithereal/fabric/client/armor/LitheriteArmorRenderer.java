@@ -42,7 +42,7 @@ import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 public class LitheriteArmorRenderer implements ArmorRenderer {
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, ItemStack stack, LivingEntity entity, EquipmentSlot equipmentSlot, int light, HumanoidModel<LivingEntity> contextModel) {
-        if (entity instanceof Player player && hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE), player) && armorHasCorrectEffect(player))
+        if (entity instanceof Player player && hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE), player) && armorHasCorrectEffect(player))
             return;
         ItemStack itemStack = entity.getItemBySlot(equipmentSlot);
         Item item = itemStack.getItem();

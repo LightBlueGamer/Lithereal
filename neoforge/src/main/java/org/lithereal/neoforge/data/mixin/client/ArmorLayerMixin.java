@@ -36,7 +36,7 @@ public abstract class ArmorLayerMixin<T extends LivingEntity, M extends Humanoid
 
     @Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;FFFFFF)V", at = @At(value = "HEAD"), cancellable = true)
     public void renderArmorPiece(PoseStack arg, MultiBufferSource arg2, LivingEntity entity, EquipmentSlot arg4, int i, HumanoidModel<LivingEntity> arg5, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
-        if(entity instanceof Player player && hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE), player) && lithereal$armorHasCorrectEffect(player))
+        if(entity instanceof Player player && hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE), player) && lithereal$armorHasCorrectEffect(player))
             ci.cancel();
     }
 
