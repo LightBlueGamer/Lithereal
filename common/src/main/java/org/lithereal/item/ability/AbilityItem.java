@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public interface AbilityItem {
     Ability getAbility();
-    Map<UUID, Integer> getDegradationTicker();
-    Map<UUID, Integer> getHealTicker();
+    Map<UUID, Map<Holder<MobEffect>, Integer>> getDegradationTicker();
+    Map<UUID, Map<Holder<MobEffect>, Integer>> getHealTicker();
     Map<UUID, Map<Holder<MobEffect>, Integer>> getUntilReady();
     Map<UUID, Integer> getLastUpdatedMap();
 }

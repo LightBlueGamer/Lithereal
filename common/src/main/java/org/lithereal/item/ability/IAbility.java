@@ -1,10 +1,14 @@
 package org.lithereal.item.ability;
 
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public interface IAbility<I extends AbilityItem> {
     default boolean canCast(AbilityItem abilityItem) {
@@ -45,5 +49,10 @@ public interface IAbility<I extends AbilityItem> {
     void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected);
     default float getLavaMovementEfficiency(I castedItem, ItemStack itemStack, LivingEntity user, float efficiency) {
         return efficiency;
+    }
+
+    static int getValueFromMapForEffect(Map<Holder<MobEffect>, Integer> effectMap, Holder<MobEffect> effectHolder) {
+        if (!effectMap.containsKey(effectHolder)) effectMap.put(effectHolder, 0);
+        return effectMap.getOrDefault(effectHolder, -1);
     }
 }

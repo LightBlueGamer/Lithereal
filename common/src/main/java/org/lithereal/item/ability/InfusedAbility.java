@@ -106,8 +106,8 @@ public record InfusedAbility<I extends InfusedItem>(
     @Override
     public void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
         UUID entityID = entity.getUUID();
-        AtomicInteger degradationTicker = new AtomicInteger(item.getDegradationTicker().getOrDefault(entityID, 0));
-        AtomicInteger healTicker = new AtomicInteger(item.getHealTicker().getOrDefault(entityID, 0));
+        Map<Holder<MobEffect>, Integer> degradationTicker = Optionull.mapOrElse(item.getDegradationTicker().get(entityID), Function.identity(), HashMap::new);
+        Map<Holder<MobEffect>, Integer> healTicker = Optionull.mapOrElse(item.getHealTicker().get(entityID), Function.identity(), HashMap::new);
         if (entity instanceof LivingEntity user) {
             if (!level.isClientSide()) {
                 PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
@@ -128,18 +128,18 @@ public record InfusedAbility<I extends InfusedItem>(
                             Holder<MobEffect> effect = mobEffectInstance.getEffect();
                             boolean effectivelyBeneficial = effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl);
                             if (effectivelyBeneficial || multiEffect) {
-                                if (!effect.is(MobEffects.HEAL) || healTicker.get() >= 400) {
+                                if (!effect.is(MobEffects.HEAL) || IAbility.getValueFromMapForEffect(healTicker, effect) >= 400) {
                                     if (effect.value().isInstantenous())
                                         effect.value().applyInstantenousEffect(null, null, user, mobEffectInstance.getAmplifier(), 0.25);
                                     else user.addEffect(InfusedItem.transformInstance(mobEffectInstance));
-                                    if (effect.is(MobEffects.HEAL)) healTicker.set(0);
+                                    if (effect.is(MobEffects.HEAL)) healTicker.put(effect, 0);
                                 }
                             } else {
                                 if (user.hasEffect(effect)) user.removeEffect(effect);
                             }
-                            if (itemStack.isDamageableItem() && degradationTicker.get() >= 200 && effect.is(ModTags.DEGRADES_LITHERITE_GEAR)) {
+                            if (itemStack.isDamageableItem() && IAbility.getValueFromMapForEffect(degradationTicker, effect) >= 200 && effect.is(ModTags.DEGRADES_LITHERITE_GEAR)) {
                                 itemStack.hurtAndBreak(mobEffectInstance.getAmplifier(), user, item instanceof Equipable equipable ? equipable.getEquipmentSlot() : EquipmentSlot.MAINHAND);
-                                degradationTicker.set(0);
+                                degradationTicker.put(effect, 0);
                             }
                         });
                     }
@@ -147,12 +147,12 @@ public record InfusedAbility<I extends InfusedItem>(
             }
         }
         if (item.getLastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
-            degradationTicker.set(degradationTicker.get() + 1);
-            healTicker.set(healTicker.get() + 1);
+            degradationTicker.replaceAll((mobEffect, integer) -> integer + 1);
+            healTicker.replaceAll((mobEffect, integer) -> integer + 1);
             item.getLastUpdatedMap().put(entityID, entity.tickCount);
         }
-        item.getDegradationTicker().put(entityID, degradationTicker.get());
-        item.getHealTicker().put(entityID, healTicker.get());
+        item.getDegradationTicker().put(entityID, degradationTicker);
+        item.getHealTicker().put(entityID, healTicker);
     }
 
     private @NotNull AtomicInteger getCount(PotionContents potionContents) {

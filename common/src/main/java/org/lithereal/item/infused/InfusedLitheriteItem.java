@@ -52,18 +52,18 @@ public class InfusedLitheriteItem extends Item implements InfusedItem {
         return Ability.INFUSED;
     }
 
-    public final Map<UUID, Integer> degradationTickerMap = new WeakHashMap<>();
-    public final Map<UUID, Integer> healTickerMap = new WeakHashMap<>();
+    public final Map<UUID, Map<Holder<MobEffect>, Integer>> degradationTickerMap = new WeakHashMap<>();
+    public final Map<UUID, Map<Holder<MobEffect>, Integer>> healTickerMap = new WeakHashMap<>();
     public final Map<UUID, Map<Holder<MobEffect>, Integer>> untilReadyMap = new WeakHashMap<>();
     public final Map<UUID, Integer> lastUpdatedMap = new WeakHashMap<>();
 
     @Override
-    public Map<UUID, Integer> getDegradationTicker() {
+    public Map<UUID, Map<Holder<MobEffect>, Integer>> getDegradationTicker() {
         return degradationTickerMap;
     }
 
     @Override
-    public Map<UUID, Integer> getHealTicker() {
+    public Map<UUID, Map<Holder<MobEffect>, Integer>> getHealTicker() {
         return healTickerMap;
     }
 
