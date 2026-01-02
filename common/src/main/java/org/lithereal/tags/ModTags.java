@@ -40,6 +40,9 @@ public class ModTags {
     public static final TagKey<MobEffect> APPLY_HASTE_ON_INFUSED = createMobEffectTag("applies_haste_on_litherite_gear");
     public static final TagKey<MobEffect> DEGRADES_LITHERITE_GEAR = createMobEffectTag("degrades_litherite_gear");
     public static final TagKey<MobEffect> PSEUDO_BENEFICIAl = createMobEffectTag("pseudo_beneficial");
+    public static final TagKey<MobEffect> DELAYED_INSTANT = createMobEffectTag("delayed_instant");
+    public static final TagKey<MobEffect> CAN_BE_INVERTED_HEAL = createMobEffectTag("can_be_inverted_heal");
+    public static final TagKey<MobEffect> CAN_BE_INVERTED_HARM = createMobEffectTag("can_be_inverted_harm");
     public static TagKey<MobEffect> createMobEffectTag(String name) {
         return create(name, Registries.MOB_EFFECT);
     }

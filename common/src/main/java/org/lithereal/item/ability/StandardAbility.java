@@ -4,7 +4,6 @@ import net.minecraft.Optionull;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
@@ -47,13 +46,14 @@ public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>>
                 boolean multiEffect = passiveEffects.size() > 1;
                 passiveEffects.forEach((mobEffectInstance) -> {
                     Holder<MobEffect> effect = mobEffectInstance.getEffect();
-                    boolean effectivelyBeneficial = effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl);
+                    boolean effectivelyBeneficial = (effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl) || (user.isInvertedHealAndHarm() && effect.is(ModTags.CAN_BE_INVERTED_HARM))) &&
+                            (!user.isInvertedHealAndHarm() || !effect.is(ModTags.CAN_BE_INVERTED_HEAL));
                     if (effectivelyBeneficial || multiEffect) {
-                        if (!effect.is(MobEffects.HEAL) || IAbility.getValueFromMapForEffect(healTicker, effect) == 400) {
+                        if (!effect.is(ModTags.DELAYED_INSTANT) || IAbility.getValueFromMapForEffect(healTicker, effect) >= 400) {
                             if (effect.value().isInstantenous())
                                 effect.value().applyInstantenousEffect(null, null, user, mobEffectInstance.getAmplifier(), 0.25);
                             else user.addEffect(InfusedItem.transformInstance(mobEffectInstance));
-                            if (effect.is(MobEffects.HEAL)) healTicker.put(effect, 0);
+                            if (effect.is(ModTags.DELAYED_INSTANT)) healTicker.put(effect, 0);
                         }
                     } else if (user.hasEffect(effect)) user.removeEffect(effect);
                 });
