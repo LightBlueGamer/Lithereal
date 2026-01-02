@@ -13,17 +13,13 @@ import org.lithereal.item.infused.InfusedItem;
 import org.lithereal.tags.ModTags;
 
 import java.util.List;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
-public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>> armorMaterials, List<MobEffectInstance> attackEffects, List<MobEffectInstance> passiveEffects, Map<Ability.IdentityForPlayer, Integer> healTickerMap) implements IAbility<I> {
-    public StandardAbility(List<Holder<ArmorMaterial>> armorMaterials, List<MobEffectInstance> attackEffects, List<MobEffectInstance> passiveEffects) {
-        this(armorMaterials, attackEffects, passiveEffects, new WeakHashMap<>());
-    }
+public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>> armorMaterials, List<MobEffectInstance> attackEffects, List<MobEffectInstance> passiveEffects) implements IAbility<I> {
     @Override
     public void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
         attackEffects.forEach(mobEffectInstance -> InfusedAbility.applyEffectToTarget(mobEffectInstance, attacked, attacker, attackEffects.size(), false));
@@ -41,10 +37,8 @@ public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>>
 
     @Override
     public void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, int slot, boolean isSelected) {
-        Ability.IdentityForPlayer entityID = new Ability.IdentityForPlayer(entity.getUUID(), item);
-        if (!healTickerMap.containsKey(entityID))
-            healTickerMap.put(entityID, 0);
-        AtomicInteger healTicker = new AtomicInteger(healTickerMap.get(entityID));
+        UUID entityID = entity.getUUID();
+        AtomicInteger healTicker = new AtomicInteger(item.getHealTicker().getOrDefault(entityID, 0));
         if (entity instanceof LivingEntity user && !level.isClientSide()) {
             if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials, user) && level.getGameTime() % 80 == 0) {
                 boolean multiEffect = passiveEffects.size() > 1;
@@ -62,6 +56,6 @@ public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>>
                 });
             }
         }
-        healTickerMap.put(entityID, healTicker.incrementAndGet());
+        item.getHealTicker().put(entityID, healTicker.incrementAndGet());
     }
 }

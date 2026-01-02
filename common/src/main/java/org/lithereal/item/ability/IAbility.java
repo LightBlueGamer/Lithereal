@@ -6,9 +6,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-import java.util.UUID;
-
 public interface IAbility<I extends AbilityItem> {
     default boolean canCast(AbilityItem abilityItem) {
         return true;

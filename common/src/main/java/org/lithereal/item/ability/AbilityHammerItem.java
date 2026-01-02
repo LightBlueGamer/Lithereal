@@ -1,6 +1,8 @@
 package org.lithereal.item.ability;
 
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -10,6 +12,9 @@ import net.minecraft.world.level.Level;
 import org.lithereal.item.HammerItem;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.WeakHashMap;
 
 public class AbilityHammerItem extends HammerItem implements AbilityItem {
     final Ability ability;
@@ -44,5 +49,24 @@ public class AbilityHammerItem extends HammerItem implements AbilityItem {
     @Override
     public Ability getAbility() {
         return ability;
+    }
+
+    public final Map<UUID, Integer> degradationTickerMap = new WeakHashMap<>();
+    public final Map<UUID, Integer> healTickerMap = new WeakHashMap<>();
+    public final Map<UUID, Map<Holder<MobEffect>, Integer>> untilReadyMap = new WeakHashMap<>();
+
+    @Override
+    public Map<UUID, Integer> getDegradationTicker() {
+        return degradationTickerMap;
+    }
+
+    @Override
+    public Map<UUID, Integer> getHealTicker() {
+        return healTickerMap;
+    }
+
+    @Override
+    public Map<UUID, Map<Holder<MobEffect>, Integer>> getUntilReady() {
+        return untilReadyMap;
     }
 }

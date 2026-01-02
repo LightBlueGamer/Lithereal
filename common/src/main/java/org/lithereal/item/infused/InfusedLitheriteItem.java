@@ -1,7 +1,9 @@
 package org.lithereal.item.infused;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -10,8 +12,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ability.Ability;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class InfusedLitheriteItem extends Item implements InfusedItem {
     public InfusedLitheriteItem(Properties properties) {
@@ -49,5 +50,24 @@ public class InfusedLitheriteItem extends Item implements InfusedItem {
     @Override
     public Ability getAbility() {
         return Ability.INFUSED;
+    }
+
+    public final Map<UUID, Integer> degradationTickerMap = new WeakHashMap<>();
+    public final Map<UUID, Integer> healTickerMap = new WeakHashMap<>();
+    public final Map<UUID, Map<Holder<MobEffect>, Integer>> untilReadyMap = new WeakHashMap<>();
+
+    @Override
+    public Map<UUID, Integer> getDegradationTicker() {
+        return degradationTickerMap;
+    }
+
+    @Override
+    public Map<UUID, Integer> getHealTicker() {
+        return healTickerMap;
+    }
+
+    @Override
+    public Map<UUID, Map<Holder<MobEffect>, Integer>> getUntilReady() {
+        return untilReadyMap;
     }
 }
