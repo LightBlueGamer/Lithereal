@@ -48,7 +48,7 @@ public abstract class ItemEntityMixin {
                         Random random = new Random();
                         int witherCount = 0;
                         for (int i = 0; i < 3; i++) {
-                            if (random.nextInt(100) < 20) {
+                            if (random.nextInt(6) == 0) {
                                 spawnWitherSkeleton(level, entity.getX(), entity.getY(), entity.getZ());
                                 witherCount++;
                             }
@@ -56,7 +56,7 @@ public abstract class ItemEntityMixin {
 
                         if (stack.isEmpty()) entity.discard();
 
-                        if(witherCount > 0) level.removeBlock(entity.blockPosition(), false);
+                        if (witherCount > 1) level.removeBlock(entity.blockPosition(), false);
                     }
                 }
             }
