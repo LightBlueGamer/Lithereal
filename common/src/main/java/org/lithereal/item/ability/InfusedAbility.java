@@ -32,7 +32,6 @@ import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
 public record InfusedAbility<I extends InfusedItem>(
         List<Holder<ArmorMaterial>> supportedMaterials) implements IAbility<I> {
-
     public static void applyEffectToTarget(MobEffectInstance mobEffectInstance, LivingEntity target, LivingEntity attacker, int count, boolean swapEffects) {
         Holder<MobEffect> effect = mobEffectInstance.getEffect();
         boolean isBeneficial = effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl);
@@ -97,7 +96,10 @@ public record InfusedAbility<I extends InfusedItem>(
                     itemStack.hurtAndBreak(mobEffectInstance.getAmplifier() + 1, livingEntity, EquipmentSlot.MAINHAND);
             });
         }
-        untilReady.replaceAll((mobEffect, integer) -> integer - 1);
+        if (item.getLastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
+            untilReady.replaceAll((mobEffect, integer) -> integer - 1);
+            item.getLastUpdatedMap().put(entityID, entity.tickCount);
+        }
         item.getUntilReady().put(entityID, untilReady);
     }
 
@@ -144,8 +146,13 @@ public record InfusedAbility<I extends InfusedItem>(
                 }
             }
         }
-        item.getDegradationTicker().put(entityID, degradationTicker.incrementAndGet());
-        item.getHealTicker().put(entityID, healTicker.incrementAndGet());
+        if (item.getLastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
+            degradationTicker.set(degradationTicker.get() + 1);
+            healTicker.set(healTicker.get() + 1);
+            item.getLastUpdatedMap().put(entityID, entity.tickCount);
+        }
+        item.getDegradationTicker().put(entityID, degradationTicker.get());
+        item.getHealTicker().put(entityID, healTicker.get());
     }
 
     private @NotNull AtomicInteger getCount(PotionContents potionContents) {

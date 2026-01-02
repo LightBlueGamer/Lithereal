@@ -46,6 +46,7 @@ public class AbilityLongSwordItem extends LongSwordItem implements AbilityItem {
     public final Map<UUID, Integer> degradationTickerMap = new WeakHashMap<>();
     public final Map<UUID, Integer> healTickerMap = new WeakHashMap<>();
     public final Map<UUID, Map<Holder<MobEffect>, Integer>> untilReadyMap = new WeakHashMap<>();
+    public final Map<UUID, Integer> lastUpdatedMap = new WeakHashMap<>();
 
     @Override
     public Map<UUID, Integer> getDegradationTicker() {
@@ -60,5 +61,10 @@ public class AbilityLongSwordItem extends LongSwordItem implements AbilityItem {
     @Override
     public Map<UUID, Map<Holder<MobEffect>, Integer>> getUntilReady() {
         return untilReadyMap;
+    }
+
+    @Override
+    public Map<UUID, Integer> getLastUpdatedMap() {
+        return lastUpdatedMap;
     }
 }

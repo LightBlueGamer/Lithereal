@@ -11,4 +11,5 @@ public interface AbilityItem {
     Map<UUID, Integer> getDegradationTicker();
     Map<UUID, Integer> getHealTicker();
     Map<UUID, Map<Holder<MobEffect>, Integer>> getUntilReady();
+    Map<UUID, Integer> getLastUpdatedMap();
 }

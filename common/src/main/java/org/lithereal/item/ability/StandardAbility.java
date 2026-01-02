@@ -56,6 +56,10 @@ public record StandardAbility<I extends AbilityItem>(List<Holder<ArmorMaterial>>
                 });
             }
         }
-        item.getHealTicker().put(entityID, healTicker.incrementAndGet());
+        if (item.getLastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
+            healTicker.set(healTicker.get() + 1);
+            item.getLastUpdatedMap().put(entityID, entity.tickCount);
+        }
+        item.getHealTicker().put(entityID, healTicker.get());
     }
 }
