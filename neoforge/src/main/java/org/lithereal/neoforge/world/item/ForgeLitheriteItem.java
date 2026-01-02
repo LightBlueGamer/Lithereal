@@ -50,7 +50,7 @@ public class ForgeLitheriteItem extends LitheriteItem {
 
                         if (stack.isEmpty()) entity.discard();
 
-                        if(witherCount > 0) level.removeBlock(entity.blockPosition(), false);
+                        if (witherCount > 1) level.removeBlock(entity.blockPosition(), false);
                     }
                 }
             }
