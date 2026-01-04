@@ -20,6 +20,7 @@ import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.mob_effect.ModMobEffects;
 import org.lithereal.mob_effect.potion.ModPotions;
 import org.lithereal.networking.ClientboundRetributionDeathPacket;
+import org.lithereal.networking.ServerboundSpecialKeyAbilityPacket;
 import org.lithereal.tags.ModTags;
 import org.lithereal.block.ModBlocks;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -66,6 +67,9 @@ public class Lithereal {
             for (int cnt = 0; cnt < 250; cnt++) {
                 level.addParticle(ModParticles.RETRIBUTION_LIGHT_BURST.get(), pos.x, pos.y, pos.z, 0, 0, 0);
             }
+        });
+        NetworkManager.registerReceiver(NetworkManager.Side.C2S, ServerboundSpecialKeyAbilityPacket.TYPE, ServerboundSpecialKeyAbilityPacket.STREAM_CODEC, (value, context) -> {
+            value.handleAbility(context.getPlayer().level(), context.getPlayer());
         });
 
         System.out.println(LitherealExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());

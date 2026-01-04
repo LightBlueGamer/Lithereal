@@ -19,8 +19,6 @@ public class LitherealForge {
 
         Events.ModBusEvents.register(modEventBus);
         Events.ForgeBusEvents.register();
-        ClientEvents.ClientModBusEvents.register(modEventBus);
-        ClientEvents.ClientForgeBusEvents.register();
 
         Lithereal.init();
     }

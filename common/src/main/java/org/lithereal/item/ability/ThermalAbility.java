@@ -1,5 +1,6 @@
 package org.lithereal.item.ability;
 
+import dev.architectury.networking.NetworkManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,12 +12,10 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import org.lithereal.block.ModBlocks;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.entity.ModDamageTypes;
+import org.lithereal.networking.ServerboundSpecialKeyAbilityPacket;
 
 import java.util.List;
 
@@ -102,24 +101,15 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
                         }
                         if (user.isFreezing())
                             user.setTicksFrozen(0);
-                        BlockPos belowPos = user.blockPosition().below();
-                        BlockState blockBelowState = level.getBlockState(belowPos);
-                        Block blockBelow = blockBelowState.getBlock();
-                        if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown()) {
-                            for (int x = -4; x <= 4; x++) {
-                                for (int z = -4; z <= 4; z++) {
-                                    BlockPos checkPos = belowPos.offset(x, 0, z);
-                                    if (level.getBlockState(checkPos).getBlock() == Blocks.WATER) {
-                                        level.setBlockAndUpdate(checkPos, Blocks.FROSTED_ICE.defaultBlockState());
-                                    }
-                                }
-                            }
-                        }
-                        if (armorType.providesScorch && KeyMapping.SCORCH_KEY.isDown()) {
-                            if (blockBelow == Blocks.NETHERRACK) level.setBlockAndUpdate(belowPos, ModBlocks.SCORCHED_NETHERRACK.get().defaultBlockState());
-                            else if (blockBelow == Blocks.CRIMSON_NYLIUM) level.setBlockAndUpdate(belowPos, ModBlocks.SCORCHED_CRIMSON_NYLIUM.get().defaultBlockState());
-                            else if (blockBelow == Blocks.WARPED_NYLIUM) level.setBlockAndUpdate(belowPos, ModBlocks.SCORCHED_WARPED_NYLIUM.get().defaultBlockState());
-                        }
+                    }
+                }
+            } else {
+                if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) {
+                    if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown()) {
+                        NetworkManager.sendToServer(new ServerboundSpecialKeyAbilityPacket(ServerboundSpecialKeyAbilityPacket.SpecialKeyType.FREEZE));
+                    }
+                    if (armorType.providesScorch && KeyMapping.SCORCH_KEY.isDown()) {
+                        NetworkManager.sendToServer(new ServerboundSpecialKeyAbilityPacket(ServerboundSpecialKeyAbilityPacket.SpecialKeyType.SCORCH));
                     }
                 }
             }
