@@ -1,21 +1,33 @@
 package org.lithereal.fabric;
 
+import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.NotNull;
 import org.lithereal.Lithereal;
 import org.lithereal.LitherealClient;
 import org.lithereal.client.EtherealCoreSpecialEffects;
 import org.lithereal.client.KeyMapping;
 import org.lithereal.client.gui.screens.inventory.*;
 import org.lithereal.block.ModBlocks;
+import org.lithereal.client.particle.*;
 import org.lithereal.client.renderer.*;
 import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
 import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
@@ -24,6 +36,8 @@ import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.client.gui.screens.inventory.FabricScreenHandlers;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModArmorItems;
+
+import java.util.List;
 
 public class LitherealFabricClient implements ClientModInitializer {
     @Override
@@ -53,9 +67,41 @@ public class LitherealFabricClient implements ClientModInitializer {
                 ModArmorItems.ODYSIUM_HELMET.get(), ModArmorItems.ODYSIUM_CHESTPLATE.get(), ModArmorItems.ODYSIUM_LEGGINGS.get(), ModArmorItems.ODYSIUM_BOOTS.get(),
                 ModArmorItems.ENHANCED_ODYSIUM_HELMET.get(), ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get(), ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get(), ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get());
 
+        registerParticleProvider(ModParticles.LITHER_FIRE_FLAME.get(), FlameParticle.Provider::new);
+        registerParticleProvider(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
+        registerParticleProvider(ModParticles.SOUL.get(), EtherealSoulProvider::new);
+        registerParticleProvider(ModParticles.RETRIBUTION_HOLY_BEAM.get(), BeamParticle.RetributionBeamProvider::new);
+        registerParticleProvider(ModParticles.RETRIBUTION_LIGHT_BURST.get(), BeamParticle.RetributionBurstProvider::new);
+        registerParticleProvider(ModParticles.CRYSTAL_SPARKLE.get(), StandardBiomeProvider::new);
+        registerParticleProvider(ModParticles.PORTAL_SPARKLE.get(), FlameParticle.Provider::new);
+        registerParticleProvider(ModParticles.PORTAL_EMISSION.get(), PortalParticleProvider::new);
         LitherealClient.init();
 
         KeyBindingHelper.registerKeyBinding(KeyMapping.FREEZE_KEY);
         KeyBindingHelper.registerKeyBinding(KeyMapping.SCORCH_KEY);
+    }
+    @Environment(EnvType.CLIENT)
+    public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
+        ParticleFactoryRegistry.getInstance().register(type, (provider) -> particleProvider.create(new ParticleProviderRegistry.ExtendedSpriteSet() {
+            @Override
+            public TextureAtlas getAtlas() {
+                return provider.getAtlas();
+            }
+
+            @Override
+            public List<TextureAtlasSprite> getSprites() {
+                return provider.getSprites();
+            }
+
+            @Override
+            public @NotNull TextureAtlasSprite get(int i, int j) {
+                return provider.get(i, j);
+            }
+
+            @Override
+            public @NotNull TextureAtlasSprite get(RandomSource randomSource) {
+                return provider.get(randomSource);
+            }
+        }));
     }
 }

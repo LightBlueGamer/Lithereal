@@ -25,7 +25,4 @@ public class ScorchedBlock extends MagmaBlock {
         super.stepOn(level, blockPos, blockState, entity);
     }
 
-    protected void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        level.scheduleTick(blockPos, this, 20);
-    }
 }

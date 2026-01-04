@@ -1,9 +1,5 @@
 package org.lithereal.neoforge;
 
-import dev.architectury.registry.client.particle.ParticleProviderRegistry;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
@@ -13,8 +9,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.loading.FMLPaths;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.*;
@@ -121,14 +115,5 @@ public class LitherealExpectPlatformImpl {
 
     public static WarHammerItem createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
         return new ForgeWarHammerItem(tier, damage, speed, properties);
-    }
-
-    public static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
-        return new SimpleParticleType(alwaysSpawn);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
-        // Ignore
     }
 }

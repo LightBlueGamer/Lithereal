@@ -1,18 +1,7 @@
 package org.lithereal.fabric;
 
-import dev.architectury.registry.client.particle.ParticleProviderRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
@@ -21,7 +10,6 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import org.jetbrains.annotations.NotNull;
 import org.lithereal.LitherealExpectPlatform;
 import org.lithereal.block.*;
 import org.lithereal.fabric.client.gui.screens.inventory.*;
@@ -30,11 +18,9 @@ import org.lithereal.fabric.world.block.FabricBlocks;
 import org.lithereal.fabric.world.block.FabricInfusementChamberBlock;
 import org.lithereal.fabric.world.block.entity.*;
 import org.lithereal.fabric.world.item.FabricItems;
-import org.lithereal.block.entity.InfusedLitheriteBlockEntity;
 import org.lithereal.item.WarHammerItem;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -112,34 +98,5 @@ public class LitherealExpectPlatformImpl {
 
     public static WarHammerItem createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
         return new WarHammerItem(tier, damage, speed, properties);
-    }
-
-    public static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
-        return FabricParticleTypes.simple(alwaysSpawn);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
-        ParticleFactoryRegistry.getInstance().register(type, (provider) -> particleProvider.create(new ParticleProviderRegistry.ExtendedSpriteSet() {
-            @Override
-            public TextureAtlas getAtlas() {
-                return provider.getAtlas();
-            }
-
-            @Override
-            public List<TextureAtlasSprite> getSprites() {
-                return provider.getSprites();
-            }
-
-            @Override
-            public @NotNull TextureAtlasSprite get(int i, int j) {
-                return provider.get(i, j);
-            }
-
-            @Override
-            public @NotNull TextureAtlasSprite get(RandomSource randomSource) {
-                return provider.get(randomSource);
-            }
-        }));
     }
 }

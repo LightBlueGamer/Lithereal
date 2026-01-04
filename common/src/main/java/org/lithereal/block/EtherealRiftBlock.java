@@ -28,9 +28,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -105,12 +103,6 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
             });
         }
         super.onRemove(blockState, level, blockPos, blockState2, bl);
-    }
-
-    @Override
-    protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
-        if (entity.canUsePortal(false) && Shapes.joinIsNotEmpty(Shapes.create(entity.getBoundingBox().move(-blockPos.getX(), -blockPos.getY(), -blockPos.getZ())), blockState.getShape(level, blockPos), BooleanOp.AND))
-            entity.setAsInsidePortal(this, blockPos);
     }
 
     @Override

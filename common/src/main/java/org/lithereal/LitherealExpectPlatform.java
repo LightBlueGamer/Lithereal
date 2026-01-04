@@ -1,12 +1,6 @@
 package org.lithereal;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import dev.architectury.registry.client.particle.ParticleProviderRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
@@ -166,17 +160,6 @@ public class LitherealExpectPlatform {
 
     @ExpectPlatform
     public static WarHammerItem createWarHammer(Tier tier, int damage, float speed, Item.Properties properties) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static SimpleParticleType createSimpleParticleType(boolean alwaysSpawn) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    @Environment(EnvType.CLIENT)
-    public static <T extends ParticleOptions> void registerParticleProvider(ParticleType<T> type, ParticleProviderRegistry.DeferredParticleProvider<T> particleProvider) {
         throw new AssertionError();
     }
 }
