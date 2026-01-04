@@ -91,26 +91,22 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
                     if (armorType.causesIgnition) attacker.setRemainingFireTicks(100);
                 }
             }
-            if(!level.isClientSide()) {
-                if(hasFullSuitOfArmorOn(user)) {
-                    if(hasCorrectArmorOn(armorMaterials(), user)) {
-                        effects.forEach(statusEffect -> addStatusEffect(user, statusEffect));
-                        if (user.isOnFire()) {
-                            user.extinguishFire();
-                            user.setSharedFlagOnFire(false);
-                        }
-                        if (user.isFreezing())
-                            user.setTicksFrozen(0);
+            if (!level.isClientSide()) {
+                if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) {
+                    effects.forEach(statusEffect -> addStatusEffect(user, statusEffect));
+                    if (user.isOnFire()) {
+                        user.extinguishFire();
+                        user.setSharedFlagOnFire(false);
                     }
+                    if (user.isFreezing())
+                        user.setTicksFrozen(0);
                 }
             } else {
                 if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) {
-                    if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown()) {
+                    if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown())
                         NetworkManager.sendToServer(new ServerboundSpecialKeyAbilityPacket(ServerboundSpecialKeyAbilityPacket.SpecialKeyType.FREEZE));
-                    }
-                    if (armorType.providesScorch && KeyMapping.SCORCH_KEY.isDown()) {
+                    if (armorType.providesScorch && KeyMapping.SCORCH_KEY.isDown())
                         NetworkManager.sendToServer(new ServerboundSpecialKeyAbilityPacket(ServerboundSpecialKeyAbilityPacket.SpecialKeyType.SCORCH));
-                    }
                 }
             }
         }
