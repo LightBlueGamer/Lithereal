@@ -24,11 +24,21 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ModTreeBlocks.PHANTOM_OAK_DOOR.get().asItem());
+        basicItem(ModTreeBlocks.FORTSHROOM_DOOR.get().asItem());
+        basicItem(ModTreeBlocks.MALISHROOM_DOOR.get().asItem());
 
         basicItem(ModItems.PHANTOM_OAK_BOAT.get());
         basicItem(ModItems.PHANTOM_OAK_CHEST_BOAT.get());
         basicItem(ModItems.PHANTOM_OAK_SIGN.get());
         basicItem(ModItems.PHANTOM_OAK_HANGING_SIGN.get());
+        basicItem(ModItems.FORTSHROOM_BOAT.get());
+        basicItem(ModItems.FORTSHROOM_CHEST_BOAT.get());
+        basicItem(ModItems.FORTSHROOM_SIGN.get());
+        basicItem(ModItems.FORTSHROOM_HANGING_SIGN.get());
+        basicItem(ModItems.MALISHROOM_BOAT.get());
+        basicItem(ModItems.MALISHROOM_CHEST_BOAT.get());
+        basicItem(ModItems.MALISHROOM_SIGN.get());
+        basicItem(ModItems.MALISHROOM_HANGING_SIGN.get());
 
         basicItem(ForgeItems.LITHERITE_CRYSTAL.get());
         basicItem(ModRawMaterialItems.PHANTOM_DIAMOND.get());

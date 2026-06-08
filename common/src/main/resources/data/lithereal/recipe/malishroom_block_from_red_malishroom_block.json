@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "malishroom_block",
+  "ingredients": [
+    {
+      "item": "lithereal:red_malishroom_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "lithereal:malishroom_block"
+  }
+}

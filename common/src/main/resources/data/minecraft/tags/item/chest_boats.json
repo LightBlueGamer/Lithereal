@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "lithereal:phantom_oak_chest_boat"
+    "lithereal:phantom_oak_chest_boat",
+    "lithereal:fortshroom_chest_boat",
+    "lithereal:malishroom_chest_boat"
   ]
 }

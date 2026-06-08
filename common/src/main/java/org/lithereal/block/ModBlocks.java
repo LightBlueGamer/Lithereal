@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -86,11 +87,17 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> PASSIVE_ETHER_ABSORBER = registerBlock("passive_ether_absorber",
             () -> new InfiniteEtherSourceBlock(10, ModTags.PROVIDES_ETHER, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
 
+    public static final RegistrySupplier<Block> COARSE_ETHEREAL_DIRT = registerBlock("coarse_ethereal_dirt",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COARSE_DIRT)));
+
     public static final RegistrySupplier<Block> ETHEREAL_DIRT = registerBlock("ethereal_dirt",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
 
     public static final RegistrySupplier<Block> ETHEREAL_GRASS_BLOCK = registerBlock("ethereal_grass_block",
             () -> new ExtendedGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK), ETHEREAL_DIRT));
+
+    public static final RegistrySupplier<Block> PHANTOM_GRAVEL = registerBlock("phantom_gravel",
+            () -> new ColoredFallingBlock(new ColorRGBA(0x6d8aa6ff), BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL)));
 
     public static final RegistrySupplier<Block> BLUE_FIRE = registerBlockOnly("blue_fire",
             () -> new BlueFireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE)));

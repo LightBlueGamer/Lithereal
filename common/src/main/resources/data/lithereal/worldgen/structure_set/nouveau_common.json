@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 902842625,
+    "separation": 10,
+    "spacing": 30
+  },
+  "structures": [
+    {
+      "structure": "lithereal:nouveau/data_point",
+      "weight": 45
+    },
+    {
+      "structure": "lithereal:nouveau/exit_vaults",
+      "weight": 5
+    }
+  ]
+}

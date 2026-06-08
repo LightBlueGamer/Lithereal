@@ -36,6 +36,8 @@ public class ModBoat extends Boat implements CustomBoat {
     public @NotNull Item getDropItem() {
         return switch (getModVariant()) {
             case PHANTOM_OAK -> ModItems.PHANTOM_OAK_BOAT.get();
+            case FORTSHROOM -> ModItems.FORTSHROOM_BOAT.get();
+            case MALISHROOM -> ModItems.MALISHROOM_BOAT.get();
         };
     }
 
@@ -68,12 +70,14 @@ public class ModBoat extends Boat implements CustomBoat {
     }
 
     public enum Type implements StringRepresentable {
-        PHANTOM_OAK(ModTreeBlocks.PHANTOM_OAK_SET, "phantom_oak");
+        PHANTOM_OAK(ModTreeBlocks.PHANTOM_OAK_SET, "phantom_oak"),
+        FORTSHROOM(ModTreeBlocks.FORTSHROOM_SET, "fortshroom"),
+        MALISHROOM(ModTreeBlocks.MALISHROOM_SET, "malishroom");
 
         private final String name;
         private final BlockSetType setType;
-        public static final StringRepresentable.EnumCodec<ModBoat.Type> CODEC = StringRepresentable.fromEnum(ModBoat.Type::values);
-        private static final IntFunction<ModBoat.Type> BY_ID = ByIdMap.continuous(Enum::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+        public static final EnumCodec<Type> CODEC = StringRepresentable.fromEnum(Type::values);
+        private static final IntFunction<Type> BY_ID = ByIdMap.continuous(Enum::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
 
         Type(BlockSetType blockSetType, String name) {
             this.name = name;
@@ -99,11 +103,11 @@ public class ModBoat extends Boat implements CustomBoat {
         /**
          * Get a boat type by its enum ordinal
          */
-        public static ModBoat.Type byId(int pId) {
+        public static Type byId(int pId) {
             return BY_ID.apply(pId);
         }
 
-        public static ModBoat.Type byName(String pName) {
+        public static Type byName(String pName) {
             return CODEC.byName(pName, PHANTOM_OAK);
         }
     }

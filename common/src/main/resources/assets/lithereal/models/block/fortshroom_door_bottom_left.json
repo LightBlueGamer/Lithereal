@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "lithereal:block/fortshroom_door_bottom",
+    "top": "lithereal:block/fortshroom_door_top"
+  }
+}

@@ -82,6 +82,10 @@ public class ClientEvents {
             event.registerLayerDefinition(LitherealArmorModel.INNER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(0.5F), 0), 64, 32));
             event.registerLayerDefinition(ModBoatRenderer.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBodyModel);
             event.registerLayerDefinition(ModBoatRenderer.PHANTOM_OAK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+            event.registerLayerDefinition(ModBoatRenderer.FORTSHROOM_BOAT_LAYER, BoatModel::createBodyModel);
+            event.registerLayerDefinition(ModBoatRenderer.FORTSHROOM_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+            event.registerLayerDefinition(ModBoatRenderer.MALISHROOM_BOAT_LAYER, BoatModel::createBodyModel);
+            event.registerLayerDefinition(ModBoatRenderer.MALISHROOM_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
         }
         @SubscribeEvent
         public static void modelLayersInit(EntityRenderersEvent.AddLayers event) {

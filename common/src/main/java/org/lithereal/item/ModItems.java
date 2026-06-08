@@ -67,6 +67,22 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> PHANTOM_OAK_CHEST_BOAT = ITEMS.register("phantom_oak_chest_boat", () -> new ModBoatItem(true, ModBoat.Type.PHANTOM_OAK, new Item.Properties().stacksTo(1)));
 
+    public static final RegistrySupplier<Item> FORTSHROOM_SIGN = ITEMS.register("fortshroom_sign", () -> new SignItem(new Item.Properties(), ModTreeBlocks.FORTSHROOM_SIGN.get(), ModTreeBlocks.FORTSHROOM_WALL_SIGN.get()));
+
+    public static final RegistrySupplier<Item> FORTSHROOM_HANGING_SIGN = ITEMS.register("fortshroom_hanging_sign", () -> new HangingSignItem(ModTreeBlocks.FORTSHROOM_HANGING_SIGN.get(), ModTreeBlocks.FORTSHROOM_WALL_HANGING_SIGN.get(), new Item.Properties()));
+
+    public static final RegistrySupplier<Item> FORTSHROOM_BOAT = ITEMS.register("fortshroom_boat", () -> new ModBoatItem(false, ModBoat.Type.FORTSHROOM, new Item.Properties().stacksTo(1)));
+
+    public static final RegistrySupplier<Item> FORTSHROOM_CHEST_BOAT = ITEMS.register("fortshroom_chest_boat", () -> new ModBoatItem(true, ModBoat.Type.FORTSHROOM, new Item.Properties().stacksTo(1)));
+
+    public static final RegistrySupplier<Item> MALISHROOM_SIGN = ITEMS.register("malishroom_sign", () -> new SignItem(new Item.Properties(), ModTreeBlocks.MALISHROOM_SIGN.get(), ModTreeBlocks.MALISHROOM_WALL_SIGN.get()));
+
+    public static final RegistrySupplier<Item> MALISHROOM_HANGING_SIGN = ITEMS.register("malishroom_hanging_sign", () -> new HangingSignItem(ModTreeBlocks.MALISHROOM_HANGING_SIGN.get(), ModTreeBlocks.MALISHROOM_WALL_HANGING_SIGN.get(), new Item.Properties()));
+
+    public static final RegistrySupplier<Item> MALISHROOM_BOAT = ITEMS.register("malishroom_boat", () -> new ModBoatItem(false, ModBoat.Type.MALISHROOM, new Item.Properties().stacksTo(1)));
+
+    public static final RegistrySupplier<Item> MALISHROOM_CHEST_BOAT = ITEMS.register("malishroom_chest_boat", () -> new ModBoatItem(true, ModBoat.Type.MALISHROOM, new Item.Properties().stacksTo(1)));
+
     public static final RegistrySupplier<Item> LITHER_TORCH = ITEMS.register("lither_torch", () -> new StandingAndWallBlockItem(ModBlocks.LITHER_TORCH.get(), ModBlocks.LITHER_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
 
 

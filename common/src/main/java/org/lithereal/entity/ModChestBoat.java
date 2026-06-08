@@ -33,6 +33,12 @@ public class ModChestBoat extends ChestBoat implements CustomBoat {
             case PHANTOM_OAK -> {
                 return ModItems.PHANTOM_OAK_CHEST_BOAT.get();
             }
+            case FORTSHROOM -> {
+                return ModItems.FORTSHROOM_CHEST_BOAT.get();
+            }
+            case MALISHROOM -> {
+                return ModItems.MALISHROOM_CHEST_BOAT.get();
+            }
         }
         return super.getDropItem();
     }

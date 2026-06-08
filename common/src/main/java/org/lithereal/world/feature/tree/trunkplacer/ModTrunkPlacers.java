@@ -13,6 +13,7 @@ public class ModTrunkPlacers {
     public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACERS = DeferredRegister.create(Lithereal.MOD_ID, Registries.TRUNK_PLACER_TYPE);
 
     public static final RegistrySupplier<TrunkPlacerType<MegaOakTrunkPlacer>> MEGA_OAK = registerTrunkPlacerType("mega_oak_trunk_placer", () -> new TrunkPlacerType<>(MegaOakTrunkPlacer.CODEC));
+    public static final RegistrySupplier<TrunkPlacerType<RootedStraightTrunkPlacer>> ROOTED_STRAIGHT = registerTrunkPlacerType("rooted_straight_trunk_placer", () -> new TrunkPlacerType<>(RootedStraightTrunkPlacer.CODEC));
     private static <T extends TrunkPlacer> RegistrySupplier<TrunkPlacerType<T>> registerTrunkPlacerType(String name, Supplier<TrunkPlacerType<T>> trunkPlacerType) {
         return TRUNK_PLACERS.register(name, trunkPlacerType);
     }

@@ -41,6 +41,32 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
+    public static final BlockFamily FORTSHROOM_PLANKS = new BlockFamily.Builder(ModTreeBlocks.FORTSHROOM_PLANKS.get())
+            .button(ModTreeBlocks.FORTSHROOM_BUTTON.get())
+            .fence(ModTreeBlocks.FORTSHROOM_FENCE.get())
+            .fenceGate(ModTreeBlocks.FORTSHROOM_FENCE_GATE.get())
+            .pressurePlate(ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get())
+            .sign(ModTreeBlocks.FORTSHROOM_SIGN.get(), ModTreeBlocks.FORTSHROOM_WALL_SIGN.get())
+            .slab(ModTreeBlocks.FORTSHROOM_SLAB.get())
+            .stairs(ModTreeBlocks.FORTSHROOM_STAIRS.get())
+            .door(ModTreeBlocks.FORTSHROOM_DOOR.get())
+            .trapdoor(ModTreeBlocks.FORTSHROOM_TRAPDOOR.get())
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
+    public static final BlockFamily MALISHROOM_PLANKS = new BlockFamily.Builder(ModTreeBlocks.MALISHROOM_PLANKS.get())
+            .button(ModTreeBlocks.MALISHROOM_BUTTON.get())
+            .fence(ModTreeBlocks.MALISHROOM_FENCE.get())
+            .fenceGate(ModTreeBlocks.MALISHROOM_FENCE_GATE.get())
+            .pressurePlate(ModTreeBlocks.MALISHROOM_PRESSURE_PLATE.get())
+            .sign(ModTreeBlocks.MALISHROOM_SIGN.get(), ModTreeBlocks.MALISHROOM_WALL_SIGN.get())
+            .slab(ModTreeBlocks.MALISHROOM_SLAB.get())
+            .stairs(ModTreeBlocks.MALISHROOM_STAIRS.get())
+            .door(ModTreeBlocks.MALISHROOM_DOOR.get())
+            .trapdoor(ModTreeBlocks.MALISHROOM_TRAPDOOR.get())
+            .recipeGroupPrefix("wooden")
+            .recipeUnlockedBy("has_planks")
+            .getFamily();
     public static final BlockFamily ETHERSTONE = new BlockFamily.Builder(ModStoneBlocks.ETHERSTONE.get())
             .wall(ModStoneBlocks.ETHERSTONE_WALL.get())
             .stairs(ModStoneBlocks.ETHERSTONE_STAIRS.get())
@@ -262,12 +288,34 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         generateRecipes(recipeOutput, VERDONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, POLISHED_VERDONE, FeatureFlagSet.of(FeatureFlags.VANILLA));
         generateRecipes(recipeOutput, PHANTOM_OAK_PLANKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, FORTSHROOM_PLANKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
+        generateRecipes(recipeOutput, MALISHROOM_PLANKS, FeatureFlagSet.of(FeatureFlags.VANILLA));
         planksFromLog(recipeOutput, ModTreeBlocks.PHANTOM_OAK_PLANKS.get(), ModTags.PHANTOM_OAK_LOGS, 4);
         woodFromLogs(recipeOutput, ModTreeBlocks.PHANTOM_OAK_WOOD.get(), ModTreeBlocks.PHANTOM_OAK_LOG.get());
         woodFromLogs(recipeOutput, ModTreeBlocks.STRIPPED_PHANTOM_OAK_WOOD.get(), ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
         woodenBoat(recipeOutput, ModItems.PHANTOM_OAK_BOAT.get(), ModTreeBlocks.PHANTOM_OAK_PLANKS.get());
         chestBoat(recipeOutput, ModItems.PHANTOM_OAK_CHEST_BOAT.get(), ModItems.PHANTOM_OAK_BOAT.get());
         hangingSign(recipeOutput, ModItems.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
+
+        planksFromLog(recipeOutput, ModTreeBlocks.FORTSHROOM_PLANKS.get(), ModTags.FORTSHROOM_STEMS, 4);
+        woodFromLogs(recipeOutput, ModTreeBlocks.FORTSHROOM_HYPHAE.get(), ModTreeBlocks.FORTSHROOM_STEM.get());
+        woodFromLogs(recipeOutput, ModTreeBlocks.STRIPPED_FORTSHROOM_HYPHAE.get(), ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
+        woodenBoat(recipeOutput, ModItems.FORTSHROOM_BOAT.get(), ModTreeBlocks.FORTSHROOM_PLANKS.get());
+        chestBoat(recipeOutput, ModItems.FORTSHROOM_CHEST_BOAT.get(), ModItems.FORTSHROOM_BOAT.get());
+        hangingSign(recipeOutput, ModItems.FORTSHROOM_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
+        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
+                recipeOutput, RecipeCategory.MISC, ModVegetationBlocks.FORTSHROOM.get(), RecipeCategory.MISC, ModTreeBlocks.FORTSHROOM_BLOCK.get(), "fortshroom_from_block", "fortshroom"
+        );
+
+        planksFromLog(recipeOutput, ModTreeBlocks.MALISHROOM_PLANKS.get(), ModTags.MALISHROOM_STEMS, 4);
+        woodFromLogs(recipeOutput, ModTreeBlocks.MALISHROOM_HYPHAE.get(), ModTreeBlocks.MALISHROOM_STEM.get());
+        woodFromLogs(recipeOutput, ModTreeBlocks.STRIPPED_MALISHROOM_HYPHAE.get(), ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
+        woodenBoat(recipeOutput, ModItems.MALISHROOM_BOAT.get(), ModTreeBlocks.MALISHROOM_PLANKS.get());
+        chestBoat(recipeOutput, ModItems.MALISHROOM_CHEST_BOAT.get(), ModItems.MALISHROOM_BOAT.get());
+        hangingSign(recipeOutput, ModItems.MALISHROOM_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
+        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
+                recipeOutput, RecipeCategory.MISC, ModVegetationBlocks.MALISHROOM.get(), RecipeCategory.MISC, ModTreeBlocks.MALISHROOM_BLOCK.get(), "malishroom_from_block", "malishroom"
+        );
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
                 recipeOutput, RecipeCategory.MISC, ForgeItems.LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.LITHERITE_BLOCK.get(), "litherite_crystal_from_block", "litherite_crystal"
         );
@@ -301,6 +349,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         twoByTwoPacker(
                 recipeOutput, RecipeCategory.MISC, ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ForgeItems.LITHERITE_CRYSTAL.get()
         );
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModTreeBlocks.RED_MALISHROOM_BLOCK.get(), 3)
+                .requires(ModTreeBlocks.MALISHROOM_BLOCK.get(), 3)
+                .requires(Items.RED_DYE)
+                .group("red_malishroom_block")
+                .unlockedBy("has_malishroom_block", has(ModTreeBlocks.RED_MALISHROOM_BLOCK.get()))
+                .save(recipeOutput, Lithereal.id("red_malishroom_block"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModTreeBlocks.MALISHROOM_BLOCK.get())
+                .requires(ModTreeBlocks.RED_MALISHROOM_BLOCK.get())
+                .group("malishroom_block")
+                .unlockedBy("has_red_malishroom_block", has(ModTreeBlocks.RED_MALISHROOM_BLOCK.get()))
+                .save(recipeOutput, Lithereal.id("malishroom_block_from_red_malishroom_block"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ForgeItems.LITHERITE_CRYSTAL.get(), 4)
                 .requires(ModBlocks.LITHERITE_CRYSTAL_BLOCK.get())
                 .group("litherite_crystal")
@@ -312,6 +371,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .group("netherite_nugget")
                 .unlockedBy("has_netherite_fragment", has(ModRawMaterialItems.NETHERITE_FRAGMENT.get()))
                 .save(recipeOutput, Lithereal.id("netherite_nugget_from_fragments"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COARSE_ETHEREAL_DIRT.get(), 4)
+                .define('D', ModBlocks.ETHEREAL_DIRT.get())
+                .define('G', ModBlocks.PHANTOM_GRAVEL.get())
+                .pattern("DG")
+                .pattern("GD")
+                .unlockedBy("has_phantom_gravel", has(ModBlocks.PHANTOM_GRAVEL.get()))
+                .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE.get(), 4)
                 .define('C', ModRawMaterialItems.CYRUM_CRYSTAL.get())

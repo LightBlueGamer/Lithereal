@@ -14,6 +14,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +35,19 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        dropSelf(ModBlocks.COARSE_ETHEREAL_DIRT.get());
+        this.add(
+                ModBlocks.PHANTOM_GRAVEL.get(),
+                block -> this.createSilkTouchDispatchTable(
+                        block,
+                        this.applyExplosionCondition(
+                                block,
+                                LootItem.lootTableItem(Items.FLINT)
+                                        .when(BonusLevelTableCondition.bonusLevelFlatChance(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE), 0.1F, 0.14285715F, 0.25F, 1.0F))
+                                        .otherwise(LootItem.lootTableItem(block))
+                        )
+                )
+        );
         dropSelf(ModBlocks.CREATIVE_ETHER_SOURCE.get());
         dropSelf(ModBlocks.PASSIVE_ETHER_ABSORBER.get());
         dropSelf(ModBlocks.PURE_ETHER_SOURCE.get());
@@ -59,6 +73,41 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModTreeBlocks.PHANTOM_OAK_SLAB.get(), this::createSlabItemTable);
         add(ModTreeBlocks.PHANTOM_OAK_DOOR.get(), this::createDoorTable);
         add(ModTreeBlocks.PHANTOM_OAK_LEAVES.get(), block -> createOakLeavesDrops(block, ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        dropSelf(ModTreeBlocks.MALISHROOM_PLANKS.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.STRIPPED_MALISHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_STAIRS.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_SIGN.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_HANGING_SIGN.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_PRESSURE_PLATE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_FENCE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_TRAPDOOR.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_FENCE_GATE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_BUTTON.get());
+        add(ModTreeBlocks.MALISHROOM_SLAB.get(), this::createSlabItemTable);
+        add(ModTreeBlocks.MALISHROOM_DOOR.get(), this::createDoorTable);
+        dropSelf(ModTreeBlocks.MALISHROOM_BLOCK.get());
+        dropSelf(ModTreeBlocks.RED_MALISHROOM_BLOCK.get());
+
+        dropSelf(ModTreeBlocks.FORTSHROOM_PLANKS.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.STRIPPED_FORTSHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_STAIRS.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_SIGN.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_HANGING_SIGN.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_FENCE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_TRAPDOOR.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_FENCE_GATE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_BUTTON.get());
+        add(ModTreeBlocks.FORTSHROOM_SLAB.get(), this::createSlabItemTable);
+        add(ModTreeBlocks.FORTSHROOM_DOOR.get(), this::createDoorTable);
+        dropSelf(ModTreeBlocks.FORTSHROOM_BLOCK.get());
 
         dropPottedContents(ModVegetationBlocks.POTTED_MALISHROOM.get());
         dropSelf(ModVegetationBlocks.MALISHROOM.get());

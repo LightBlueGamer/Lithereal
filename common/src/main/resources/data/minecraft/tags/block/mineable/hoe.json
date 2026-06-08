@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "lithereal:phantom_oak_leaves"
+    "lithereal:phantom_oak_leaves",
+    "lithereal:fortshroom_block",
+    "lithereal:malishroom_block",
+    "lithereal:red_malishroom_block"
   ]
 }

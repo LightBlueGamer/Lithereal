@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "lithereal:phantom_oak_stairs"
+    "lithereal:phantom_oak_stairs",
+    "lithereal:fortshroom_stairs",
+    "lithereal:malishroom_stairs"
   ]
 }

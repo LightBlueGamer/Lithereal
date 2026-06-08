@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/malishroom_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/malishroom_planks"
+    },
+    "type=top": {
+      "model": "lithereal:block/malishroom_slab_top"
+    }
+  }
+}

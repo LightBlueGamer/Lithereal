@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "lithereal:ethereal_forest",
-    "lithereal:ethereal_megagrowth"
+    "#lithereal:ethereal_core/is_forest",
+    "lithereal:phantom_caverns"
   ]
 }

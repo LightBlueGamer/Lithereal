@@ -57,6 +57,10 @@ public class LitherealClient {
         EntityModelLayerRegistry.register(LitherealArmorModel.INNER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(0.5F), 0), 64, 32));
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBodyModel);
         EntityModelLayerRegistry.register(ModBoatRenderer.PHANTOM_OAK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+        EntityModelLayerRegistry.register(ModBoatRenderer.FORTSHROOM_BOAT_LAYER, BoatModel::createBodyModel);
+        EntityModelLayerRegistry.register(ModBoatRenderer.FORTSHROOM_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+        EntityModelLayerRegistry.register(ModBoatRenderer.MALISHROOM_BOAT_LAYER, BoatModel::createBodyModel);
+        EntityModelLayerRegistry.register(ModBoatRenderer.MALISHROOM_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.SIGN.get(), SignRenderer::new);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
         registerColorHandlers();
@@ -110,8 +114,12 @@ public class LitherealClient {
                 ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(),
                 ModTreeBlocks.PHANTOM_OAK_SAPLING.get(),
                 ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(),
+                ModTreeBlocks.MALISHROOM_DOOR.get(),
+                ModTreeBlocks.MALISHROOM_TRAPDOOR.get(),
                 ModVegetationBlocks.MALISHROOM.get(),
                 ModVegetationBlocks.POTTED_MALISHROOM.get(),
+                ModTreeBlocks.FORTSHROOM_DOOR.get(),
+                ModTreeBlocks.FORTSHROOM_TRAPDOOR.get(),
                 ModVegetationBlocks.FORTSHROOM.get(),
                 ModVegetationBlocks.POTTED_FORTSHROOM.get(),
                 ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(),
@@ -196,7 +204,37 @@ public class LitherealClient {
                 ModTreeBlocks.PHANTOM_OAK_DOOR.get(),
                 ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(),
                 ModItems.PHANTOM_OAK_SIGN.get(),
-                ModItems.PHANTOM_OAK_HANGING_SIGN.get());
+                ModItems.PHANTOM_OAK_HANGING_SIGN.get(),
+                ModTreeBlocks.FORTSHROOM_STEM.get(),
+                ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get(),
+                ModTreeBlocks.FORTSHROOM_HYPHAE.get(),
+                ModTreeBlocks.STRIPPED_FORTSHROOM_HYPHAE.get(),
+                ModTreeBlocks.FORTSHROOM_PLANKS.get(),
+                ModTreeBlocks.FORTSHROOM_SLAB.get(),
+                ModTreeBlocks.FORTSHROOM_STAIRS.get(),
+                ModTreeBlocks.FORTSHROOM_FENCE.get(),
+                ModTreeBlocks.FORTSHROOM_FENCE_GATE.get(),
+                ModTreeBlocks.FORTSHROOM_BUTTON.get(),
+                ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get(),
+                ModTreeBlocks.FORTSHROOM_DOOR.get(),
+                ModTreeBlocks.FORTSHROOM_TRAPDOOR.get(),
+                ModItems.FORTSHROOM_SIGN.get(),
+                ModItems.FORTSHROOM_HANGING_SIGN.get(),
+                ModTreeBlocks.MALISHROOM_STEM.get(),
+                ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get(),
+                ModTreeBlocks.MALISHROOM_HYPHAE.get(),
+                ModTreeBlocks.STRIPPED_MALISHROOM_HYPHAE.get(),
+                ModTreeBlocks.MALISHROOM_PLANKS.get(),
+                ModTreeBlocks.MALISHROOM_SLAB.get(),
+                ModTreeBlocks.MALISHROOM_STAIRS.get(),
+                ModTreeBlocks.MALISHROOM_FENCE.get(),
+                ModTreeBlocks.MALISHROOM_FENCE_GATE.get(),
+                ModTreeBlocks.MALISHROOM_BUTTON.get(),
+                ModTreeBlocks.MALISHROOM_PRESSURE_PLATE.get(),
+                ModTreeBlocks.MALISHROOM_DOOR.get(),
+                ModTreeBlocks.MALISHROOM_TRAPDOOR.get(),
+                ModItems.MALISHROOM_SIGN.get(),
+                ModItems.MALISHROOM_HANGING_SIGN.get());
     }
 
     private static void registerItemsToNaturalTab() {
@@ -230,13 +268,20 @@ public class LitherealClient {
                 ModPhantomBlocks.PHANTOM_DIAMOND_ORE,
                 ModPhantomBlocks.PHANTOM_QUARTZ_ORE,
                 ModBlocks.ETHEREAL_CORE_PORTAL,
+                ModBlocks.COARSE_ETHEREAL_DIRT,
                 ModBlocks.ETHEREAL_DIRT,
                 ModBlocks.ETHEREAL_GRASS_BLOCK,
+                ModBlocks.PHANTOM_GRAVEL,
                 ModTreeBlocks.PHANTOM_OAK_LEAVES,
                 ModTreeBlocks.PHANTOM_OAK_LOG,
                 ModTreeBlocks.PHANTOM_OAK_SAPLING,
                 ModVegetationBlocks.FORTSHROOM,
+                ModTreeBlocks.FORTSHROOM_BLOCK,
+                ModTreeBlocks.FORTSHROOM_STEM,
                 ModVegetationBlocks.MALISHROOM,
+                ModTreeBlocks.MALISHROOM_BLOCK,
+                ModTreeBlocks.RED_MALISHROOM_BLOCK,
+                ModTreeBlocks.MALISHROOM_STEM,
                 ModPhantomBlocks.PHANTOM_ROSE,
                 ModPhantomBlocks.PHANTOM_ICE_FLOWER,
                 ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE,
@@ -370,7 +415,11 @@ public class LitherealClient {
                 ModItems.MUSIC_DISC_SPARKLE,
                 ModItems.LITHEREAL_KEY,
                 ModItems.PHANTOM_OAK_BOAT,
-                ModItems.PHANTOM_OAK_CHEST_BOAT);
+                ModItems.PHANTOM_OAK_CHEST_BOAT,
+                ModItems.FORTSHROOM_BOAT,
+                ModItems.FORTSHROOM_CHEST_BOAT,
+                ModItems.MALISHROOM_BOAT,
+                ModItems.MALISHROOM_CHEST_BOAT);
     }
 
     private static void registerItemsToCombatTab() {

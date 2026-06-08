@@ -33,6 +33,14 @@ public class ModBoatRenderer<T extends Boat & CustomBoat> extends EntityRenderer
             Lithereal.id("boat/phantom_oak"), "main");
     public static final ModelLayerLocation PHANTOM_OAK_CHEST_BOAT_LAYER = new ModelLayerLocation(
             Lithereal.id("chest_boat/phantom_oak"), "main");
+    public static final ModelLayerLocation FORTSHROOM_BOAT_LAYER = new ModelLayerLocation(
+            Lithereal.id("boat/fortshroom"), "main");
+    public static final ModelLayerLocation FORTSHROOM_CHEST_BOAT_LAYER = new ModelLayerLocation(
+            Lithereal.id("chest_boat/fortshroom"), "main");
+    public static final ModelLayerLocation MALISHROOM_BOAT_LAYER = new ModelLayerLocation(
+            Lithereal.id("boat/malishroom"), "main");
+    public static final ModelLayerLocation MALISHROOM_CHEST_BOAT_LAYER = new ModelLayerLocation(
+            Lithereal.id("chest_boat/malishroom"), "main");
     private final Map<ModBoat.Type, Pair<ResourceLocation, ListModel<Boat>>> boatResources;
 
     public ModBoatRenderer(EntityRendererProvider.Context pContext, boolean pChestBoat) {

@@ -40,6 +40,8 @@
     [],
     [],
     [
+      "lithereal:ore_phantom_gravel",
+      "lithereal:ore_coarse_ethereal_dirt",
       "lithereal:ore_pailite_lower",
       "lithereal:ore_pailite_upper",
       "lithereal:ore_luminite_lower",

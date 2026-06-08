@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "lithereal:block/malishroom_planks",
+    "side": "lithereal:block/malishroom_planks",
+    "top": "lithereal:block/malishroom_planks"
+  }
+}

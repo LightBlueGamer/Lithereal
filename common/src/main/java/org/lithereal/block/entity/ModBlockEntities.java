@@ -47,7 +47,11 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(
                             CustomSignBlockEntity::new,
                             ModTreeBlocks.PHANTOM_OAK_SIGN.get(),
-                            ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get()
+                            ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get(),
+                            ModTreeBlocks.FORTSHROOM_SIGN.get(),
+                            ModTreeBlocks.FORTSHROOM_WALL_SIGN.get(),
+                            ModTreeBlocks.MALISHROOM_SIGN.get(),
+                            ModTreeBlocks.MALISHROOM_WALL_SIGN.get()
                     ).build(null));
 
     public static final RegistrySupplier<BlockEntityType<? extends SignBlockEntity>> HANGING_SIGN =
@@ -56,7 +60,11 @@ public class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(
                             CustomHangingSignBlockEntity::new,
                             ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(),
-                            ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get()
+                            ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get(),
+                            ModTreeBlocks.FORTSHROOM_HANGING_SIGN.get(),
+                            ModTreeBlocks.FORTSHROOM_WALL_HANGING_SIGN.get(),
+                            ModTreeBlocks.MALISHROOM_HANGING_SIGN.get(),
+                            ModTreeBlocks.MALISHROOM_WALL_HANGING_SIGN.get()
                     ).build(null));
 
     public static void register() {

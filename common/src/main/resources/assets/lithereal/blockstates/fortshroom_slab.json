@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lithereal:block/fortshroom_slab"
+    },
+    "type=double": {
+      "model": "lithereal:block/fortshroom_planks"
+    },
+    "type=top": {
+      "model": "lithereal:block/fortshroom_slab_top"
+    }
+  }
+}

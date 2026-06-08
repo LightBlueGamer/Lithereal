@@ -1,0 +1,117 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "decorators": [
+      {
+        "type": "lithereal:attached_to_trunk",
+        "probability": 0.65,
+        "exclusion_radius_xz": 3,
+        "exclusion_radius_y": 2,
+        "required_empty_blocks": 1,
+        "block_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "weight": 2,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "down"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "north"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "south"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "east"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "west"
+                }
+              }
+            }
+          ]
+        },
+        "directions": [
+          "up",
+          "down",
+          "north",
+          "south",
+          "east",
+          "west"
+        ]
+      }
+    ],
+    "dirt_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:ethereal_dirt"
+      }
+    },
+    "foliage_placer": {
+      "type": "lithereal:cap_foliage_placer",
+      "max_height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 2,
+        "max_inclusive": 3
+      },
+      "offset": 0,
+      "radius": 8
+    },
+    "foliage_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:fortshroom_block"
+      }
+    },
+    "force_dirt": false,
+    "ignore_vines": true,
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 1,
+      "lower_size": 0,
+      "upper_size": 1
+    },
+    "trunk_placer": {
+      "type": "lithereal:rooted_straight_trunk_placer",
+      "base_height": 10,
+      "height_rand_a": 2,
+      "height_rand_b": 0
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:fortshroom_stem",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

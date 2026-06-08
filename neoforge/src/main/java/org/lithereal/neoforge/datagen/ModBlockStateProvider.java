@@ -21,6 +21,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        blockWithItem(ModBlocks.COARSE_ETHEREAL_DIRT);
+        blockWithItem(ModBlocks.PHANTOM_GRAVEL);
         blockWithItem(ModBlocks.CREATIVE_ETHER_SOURCE);
         blockWithItem(ModBlocks.PASSIVE_ETHER_ABSORBER);
         blockWithItem(ModBlocks.PURE_ETHER_SOURCE);
@@ -52,6 +54,57 @@ public class ModBlockStateProvider extends BlockStateProvider {
         doorBlock((DoorBlock) ModTreeBlocks.PHANTOM_OAK_DOOR.get(), Lithereal.id("block/phantom_oak_door_bottom"), Lithereal.id("block/phantom_oak_door_top"));
         leavesBlock(ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
+
+        blockWithItem(ModTreeBlocks.MALISHROOM_PLANKS);
+        blockWithItem(ModTreeBlocks.MALISHROOM_BLOCK);
+        blockWithItem(ModTreeBlocks.RED_MALISHROOM_BLOCK);
+        logBlock((RotatedPillarBlock) ModTreeBlocks.MALISHROOM_STEM.get());
+        logBlock((RotatedPillarBlock) ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
+        woodBlock((RotatedPillarBlock) ModTreeBlocks.MALISHROOM_HYPHAE.get(), Lithereal.id("block/malishroom_stem"));
+        woodBlock((RotatedPillarBlock) ModTreeBlocks.STRIPPED_MALISHROOM_HYPHAE.get(), Lithereal.id("block/stripped_malishroom_stem"));
+        itemForBlockModel(ModTreeBlocks.MALISHROOM_STEM.get());
+        itemForBlockModel(ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
+        itemForBlockModel(ModTreeBlocks.MALISHROOM_HYPHAE.get());
+        itemForBlockModel(ModTreeBlocks.STRIPPED_MALISHROOM_HYPHAE.get());
+        stairsBlock((StairBlock) ModTreeBlocks.MALISHROOM_STAIRS.get(), Lithereal.id("block/malishroom_planks"));
+        itemForBlockModel(ModTreeBlocks.MALISHROOM_STAIRS.get());
+        signBlock((StandingSignBlock) ModTreeBlocks.MALISHROOM_SIGN.get(), (WallSignBlock) ModTreeBlocks.MALISHROOM_WALL_SIGN.get(), Lithereal.id("block/malishroom_planks"));
+        hangingSignBlock((CeilingHangingSignBlock) ModTreeBlocks.MALISHROOM_HANGING_SIGN.get(), (WallHangingSignBlock) ModTreeBlocks.MALISHROOM_WALL_HANGING_SIGN.get(), Lithereal.id("block/stripped_malishroom_stem"));
+        pressurePlateBlock((PressurePlateBlock) ModTreeBlocks.MALISHROOM_PRESSURE_PLATE.get(), Lithereal.id("block/malishroom_planks"));
+        itemForBlockModel(ModTreeBlocks.MALISHROOM_PRESSURE_PLATE.get());
+        fenceWithItem((FenceBlock) ModTreeBlocks.MALISHROOM_FENCE.get(), Lithereal.id("block/malishroom_planks"));
+        trapdoorWithItem((TrapDoorBlock) ModTreeBlocks.MALISHROOM_TRAPDOOR.get(), Lithereal.id("block/malishroom_trapdoor"), true);
+        fenceGateBlock((FenceGateBlock) ModTreeBlocks.MALISHROOM_FENCE_GATE.get(), Lithereal.id("block/malishroom_planks"));
+        itemForBlockModel(ModTreeBlocks.MALISHROOM_FENCE_GATE.get());
+        buttonWithItem((ButtonBlock) ModTreeBlocks.MALISHROOM_BUTTON.get(), Lithereal.id("block/malishroom_planks"));
+        slabBlock((SlabBlock) ModTreeBlocks.MALISHROOM_SLAB.get(), Lithereal.id("block/malishroom_planks"), Lithereal.id("block/malishroom_planks"));
+        itemForBlockModel(ModTreeBlocks.MALISHROOM_SLAB.get());
+        doorBlock((DoorBlock) ModTreeBlocks.MALISHROOM_DOOR.get(), Lithereal.id("block/malishroom_door_bottom"), Lithereal.id("block/malishroom_door_top"));
+
+        blockWithItem(ModTreeBlocks.FORTSHROOM_PLANKS);
+        blockWithItem(ModTreeBlocks.FORTSHROOM_BLOCK);
+        logBlock((RotatedPillarBlock) ModTreeBlocks.FORTSHROOM_STEM.get());
+        logBlock((RotatedPillarBlock) ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
+        woodBlock((RotatedPillarBlock) ModTreeBlocks.FORTSHROOM_HYPHAE.get(), Lithereal.id("block/fortshroom_stem"));
+        woodBlock((RotatedPillarBlock) ModTreeBlocks.STRIPPED_FORTSHROOM_HYPHAE.get(), Lithereal.id("block/stripped_fortshroom_stem"));
+        itemForBlockModel(ModTreeBlocks.FORTSHROOM_STEM.get());
+        itemForBlockModel(ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
+        itemForBlockModel(ModTreeBlocks.FORTSHROOM_HYPHAE.get());
+        itemForBlockModel(ModTreeBlocks.STRIPPED_FORTSHROOM_HYPHAE.get());
+        stairsBlock((StairBlock) ModTreeBlocks.FORTSHROOM_STAIRS.get(), Lithereal.id("block/fortshroom_planks"));
+        itemForBlockModel(ModTreeBlocks.FORTSHROOM_STAIRS.get());
+        signBlock((StandingSignBlock) ModTreeBlocks.FORTSHROOM_SIGN.get(), (WallSignBlock) ModTreeBlocks.FORTSHROOM_WALL_SIGN.get(), Lithereal.id("block/fortshroom_planks"));
+        hangingSignBlock((CeilingHangingSignBlock) ModTreeBlocks.FORTSHROOM_HANGING_SIGN.get(), (WallHangingSignBlock) ModTreeBlocks.FORTSHROOM_WALL_HANGING_SIGN.get(), Lithereal.id("block/stripped_fortshroom_stem"));
+        pressurePlateBlock((PressurePlateBlock) ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get(), Lithereal.id("block/fortshroom_planks"));
+        itemForBlockModel(ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get());
+        fenceWithItem((FenceBlock) ModTreeBlocks.FORTSHROOM_FENCE.get(), Lithereal.id("block/fortshroom_planks"));
+        trapdoorWithItem((TrapDoorBlock) ModTreeBlocks.FORTSHROOM_TRAPDOOR.get(), Lithereal.id("block/fortshroom_trapdoor"), true);
+        fenceGateBlock((FenceGateBlock) ModTreeBlocks.FORTSHROOM_FENCE_GATE.get(), Lithereal.id("block/fortshroom_planks"));
+        itemForBlockModel(ModTreeBlocks.FORTSHROOM_FENCE_GATE.get());
+        buttonWithItem((ButtonBlock) ModTreeBlocks.FORTSHROOM_BUTTON.get(), Lithereal.id("block/fortshroom_planks"));
+        slabBlock((SlabBlock) ModTreeBlocks.FORTSHROOM_SLAB.get(), Lithereal.id("block/fortshroom_planks"), Lithereal.id("block/fortshroom_planks"));
+        itemForBlockModel(ModTreeBlocks.FORTSHROOM_SLAB.get());
+        doorBlock((DoorBlock) ModTreeBlocks.FORTSHROOM_DOOR.get(), Lithereal.id("block/fortshroom_door_bottom"), Lithereal.id("block/fortshroom_door_top"));
 
         plantWithItem(ModVegetationBlocks.MALISHROOM.get(), ModVegetationBlocks.POTTED_MALISHROOM.get(), TintState.NOT_TINTED);
         plantWithItem(ModVegetationBlocks.FORTSHROOM.get(), ModVegetationBlocks.POTTED_FORTSHROOM.get(), TintState.NOT_TINTED);

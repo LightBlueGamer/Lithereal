@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "item": "lithereal:ethereal_dirt"
+    },
+    "G": {
+      "item": "lithereal:phantom_gravel"
+    }
+  },
+  "pattern": [
+    "DG",
+    "GD"
+  ],
+  "result": {
+    "count": 4,
+    "id": "lithereal:coarse_ethereal_dirt"
+  }
+}

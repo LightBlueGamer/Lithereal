@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_malishroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:malishroom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:malishroom_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_malishroom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:malishroom_block"
+    ]
+  }
+}

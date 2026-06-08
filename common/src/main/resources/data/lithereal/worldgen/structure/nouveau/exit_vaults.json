@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#lithereal:has_structure/exit_vaults",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_thin",
+  "start_pool": "lithereal:nouveau/exit_vault_puzzle",
+  "size": 10,
+  "start_height": {
+    "absolute": 1
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": true
+}

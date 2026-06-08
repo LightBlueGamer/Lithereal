@@ -6,6 +6,14 @@
       {
         "chance": 0.4,
         "feature": "lithereal:mega_phantom_oak"
+      },
+      {
+        "chance": 0.3,
+        "feature": "lithereal:huge_fortshroom"
+      },
+      {
+        "chance": 0.3,
+        "feature": "lithereal:huge_malishroom"
       }
     ]
   }

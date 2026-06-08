@@ -30,6 +30,7 @@ import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
 import org.lithereal.world.feature.ModFeatures;
 import org.lithereal.world.feature.tree.decorator.ModDecorators;
+import org.lithereal.world.feature.tree.foliageplacer.ModFoliagePlacers;
 import org.lithereal.world.feature.tree.trunkplacer.ModTrunkPlacers;
 import org.lithereal.world.structure.ModStructureProcessorTypes;
 
@@ -56,6 +57,7 @@ public class Lithereal {
         ModStructureProcessorTypes.register();
         ModFeatures.register();
         ModDecorators.register();
+        ModFoliagePlacers.register();
         ModTrunkPlacers.register();
 
         SpawnPlacementsRegistry.register(ModEntities.PHANTOM_ZOMBIE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Monster::checkMonsterSpawnRules);

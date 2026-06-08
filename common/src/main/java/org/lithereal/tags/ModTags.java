@@ -34,6 +34,8 @@ public class ModTags {
     public static final TagKey<Item> ODYSIUM_ARMORS = createItemTag("odysium_armors");
     public static final TagKey<Item> ETHEREAL_CORE_PORTAL_ITEMS = createItemTag("ethereal_realm_portal_items");
     public static final TagKey<Item> PHANTOM_OAK_LOGS = createItemTag("phantom_oak_logs");
+    public static final TagKey<Item> FORTSHROOM_STEMS = createItemTag("fortshroom_stems");
+    public static final TagKey<Item> MALISHROOM_STEMS = createItemTag("malishroom_stems");
     public static TagKey<Item> createItemTag(String name) {
         return create(name, Registries.ITEM);
     }

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "lithereal:phantom_oak_trapdoor"
+    "lithereal:phantom_oak_trapdoor",
+    "lithereal:fortshroom_trapdoor",
+    "lithereal:malishroom_trapdoor"
   ]
 }
