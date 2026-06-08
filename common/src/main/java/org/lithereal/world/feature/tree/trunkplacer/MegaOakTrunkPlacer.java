@@ -11,6 +11,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,10 +23,16 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.jetbrains.annotations.NotNull;
 
 public class MegaOakTrunkPlacer extends TrunkPlacer {
-    public static final MapCodec<MegaOakTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> trunkPlacerParts(instance).apply(instance, MegaOakTrunkPlacer::new));
+    public static final MapCodec<MegaOakTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> trunkPlacerParts(instance).and(IntProvider.CODEC.optionalFieldOf("branch_foliage_radius_offset", ConstantInt.ZERO).forGetter(MegaOakTrunkPlacer::branchFoliageRadiusOffset)).apply(instance, MegaOakTrunkPlacer::new));
 
-    public MegaOakTrunkPlacer(int i, int j, int k) {
+    public final IntProvider branchFoliageRadiusOffset;
+    public MegaOakTrunkPlacer(int i, int j, int k, IntProvider branchFoliageRadiusOffset) {
         super(i, j, k);
+        this.branchFoliageRadiusOffset = branchFoliageRadiusOffset;
+    }
+
+    public IntProvider branchFoliageRadiusOffset() {
+        return branchFoliageRadiusOffset;
     }
 
     protected @NotNull TrunkPlacerType<?> type() {
@@ -72,7 +80,7 @@ public class MegaOakTrunkPlacer extends TrunkPlacer {
                         int raisedY = maxY > (double) branchBase ? branchBase : (int) maxY;
                         BlockPos finalPos = new BlockPos(basePos.getX(), raisedY, basePos.getZ());
                         if (this.makeLimb(levelSimulatedReader, biConsumer, randomSource, finalPos, newPos, false, treeConfiguration)) {
-                            retCoords.add(new FoliageCoords(newPos, basePos, finalPos.getY(), false));
+                            retCoords.add(new FoliageCoords(newPos, basePos, finalPos.getY(), this.branchFoliageRadiusOffset.sample(randomSource), false));
                         }
                     }
                 }
@@ -185,11 +193,11 @@ public class MegaOakTrunkPlacer extends TrunkPlacer {
         private final int branchBase;
 
         public FoliageCoords(BlockPos blockPos, int branchBase, boolean doubleTrunk) {
-            this(blockPos, blockPos, branchBase, doubleTrunk);
+            this(blockPos, blockPos, branchBase, 0, doubleTrunk);
         }
 
-        public FoliageCoords(BlockPos blockPos, BlockPos base, int branchBase, boolean doubleTrunk) {
-            this.attachment = new FoliagePlacer.FoliageAttachment(blockPos, 0, doubleTrunk);
+        public FoliageCoords(BlockPos blockPos, BlockPos base, int branchBase, int branchFoliageRadiusOffset, boolean doubleTrunk) {
+            this.attachment = new FoliagePlacer.FoliageAttachment(blockPos, branchFoliageRadiusOffset, doubleTrunk);
             this.branchBase = branchBase;
             this.basePos = base;
         }

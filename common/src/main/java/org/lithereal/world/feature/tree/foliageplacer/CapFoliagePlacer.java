@@ -50,15 +50,14 @@ public class CapFoliagePlacer extends FoliagePlacer {
 		int foliageRadiusOffset = 0;
 		int pass = 0;
 		for (int yOff = -(foliageHeight - 1); yOff <= 0; yOff++) {
-			if (pass == foliageHeight / 6)
+			++pass;
+			if (pass == (foliageHeight / 6) + 1)
 				foliageRadiusOffset += 1;
 			if (pass == (foliageHeight / 3) * 2)
 				foliageRadiusOffset += 1;
 			if (yOff == 0)
 				foliageRadiusOffset += 1;
-			this.placeLeavesRow(levelSimulatedReader, foliageSetter, randomSource, treeConfiguration, blockPos, foliageRadius - foliageRadiusOffset, yOff, doubleTrunk);
 			this.placeLeavesRow(levelSimulatedReader, foliageSetter, randomSource, treeConfiguration, blockPos, foliageRadius + foliageAttachment.radiusOffset() - foliageRadiusOffset, yOff, doubleTrunk);
-			pass++;
 		}
 	}
 

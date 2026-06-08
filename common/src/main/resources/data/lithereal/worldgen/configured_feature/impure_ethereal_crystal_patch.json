@@ -17,8 +17,19 @@
         {
           "type": "minecraft:block_predicate_filter",
           "predicate": {
-            "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:air"
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal"
+                }
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:air"
+              }
+            ]
           }
         }
       ]
