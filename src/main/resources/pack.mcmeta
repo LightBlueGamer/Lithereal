@@ -1,6 +1,7 @@
 {
-  "pack": {
-    "description": "Resources used for the Lithereal mod. (built-in)",
-    "pack_format": 33
-  }
+    "pack": {
+        "min_format": 84,
+        "max_format": 84,
+        "description": "Resources used for the Lithereal mod. (built-in)"
+    }
 }
