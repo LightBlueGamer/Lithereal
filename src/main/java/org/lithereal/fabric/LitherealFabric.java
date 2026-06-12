@@ -1,0 +1,102 @@
+package org.lithereal.fabric;
+
+//? fabric {
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import org.lithereal.Lithereal;
+import org.lithereal.block.ModStoneBlocks;
+import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.entity.ModEntities;
+import org.lithereal.entity.phantom.PhantomDrowned;
+import org.lithereal.entity.phantom.PhantomZombie;
+import org.lithereal.data.compat.ModWeaponType;
+import org.lithereal.fabric.data.worldgen.FabricWorldGeneration;
+import org.lithereal.item.ModItems;
+import org.lithereal.item.ModRawMaterialItems;
+import org.lithereal.mob_effect.potion.ModPotions;
+
+import java.util.Set;
+
+public class LitherealFabric implements ModInitializer {
+
+    public static final ResourceKey<LootTable> WITHER_LOOT_TABLE_KEY = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "entities/wither"));
+    public static final ResourceKey<LootTable> BASTION_TREASURE_LOOT_TABLE_KEY = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/bastion_treasure"));
+
+    private static final Set<ResourceKey<LootTable>> TARGET_LOOT_TABLE_KEYS = Set.of(
+            ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/woodland_mansion")),
+            ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/buried_treasure")),
+            ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/desert_pyramid")),
+            ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/igloo_chest")),
+            ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/jungle_temple")),
+            ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/village/village_mason"))
+    );
+
+    @Override
+    public void onInitialize() {
+        if (FabricLoader.getInstance().isModLoaded("combatify"))
+            ModWeaponType.init();
+        FabricWorldGeneration.generateModWorldGen();
+
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+            if(source.isBuiltin() && WITHER_LOOT_TABLE_KEY.equals(key)) {
+                LootPool.Builder poolBuilder = LootPool.lootPool().add(LootItem.lootTableItem(ModItems.BOSS_ESSENCE.get()));
+                tableBuilder.pool(poolBuilder.build());
+            }
+        });
+
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+            if(source.isBuiltin() && BASTION_TREASURE_LOOT_TABLE_KEY.equals(key)) {
+                LootPool.Builder poolBuilder = LootPool.lootPool().add(LootItem.lootTableItem(ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get()));
+                tableBuilder.pool(poolBuilder.build());
+            }
+        });
+
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+            if (source.isBuiltin() && TARGET_LOOT_TABLE_KEYS.contains(key)) {
+                LootPool.Builder poolBuilder = LootPool.lootPool()
+                        .add(createEtherstoneEntry(75, 0, 2))
+                        .add(createEtherstoneEntry(32, 1, 4))
+                        .add(createEtherstoneEntry(18, 3, 7))
+                        .add(createEtherstoneEntry(5, 5, 12));
+                tableBuilder.pool(poolBuilder.build());
+            }
+        });
+
+        Lithereal.init();
+
+        FabricDefaultAttributeRegistry.register(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombie.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.PHANTOM_DROWNED.get(), PhantomDrowned.createAttributes());
+
+        FabricPotionBrewingBuilder.BUILD.register(builder -> {
+            builder.registerRecipes(Ingredient.of(ModVegetationBlocks.MALISHROOM.get()), Lithereal.asHolder(ModPotions.UNLUCK));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.UNLUCK), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_UNLUCK));
+            builder.registerRecipes(Ingredient.of(ModVegetationBlocks.FORTSHROOM.get()), Potions.LUCK);
+            builder.registerPotionRecipe(Potions.LUCK, Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_LUCK));
+            builder.registerPotionRecipe(Potions.LUCK, Ingredient.of(Items.GLOWSTONE_DUST), Lithereal.asHolder(ModPotions.STRONG_LUCK));
+            builder.registerRecipes(Ingredient.of(ModRawMaterialItems.SATURNITE_CRYSTAL.get()), Lithereal.asHolder(ModPotions.STURDINESS));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_STURDINESS));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.GLOWSTONE_DUST), Lithereal.asHolder(ModPotions.STRONG_STURDINESS));
+        });
+    }
+
+    private static LootItem.Builder createEtherstoneEntry(int weight, int min, int max) {
+        return LootItem.lootTableItem(ModStoneBlocks.ETHERSTONE.get())
+                .setWeight(weight)
+                .apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)));
+    }
+}
+//?}

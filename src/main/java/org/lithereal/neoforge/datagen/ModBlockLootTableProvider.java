@@ -1,0 +1,228 @@
+package org.lithereal.neoforge.datagen;
+
+//? neoforge {
+/*import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import org.apache.commons.lang3.stream.Streams;
+import org.jetbrains.annotations.NotNull;
+import org.lithereal.block.*;
+import org.lithereal.item.ModRawMaterialItems;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+public class ModBlockLootTableProvider extends BlockLootSubProvider {
+    private final List<Block> cachedGeneratedBlocks = new ArrayList<>();
+    protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+    }
+
+    @Override
+    public void generate() {
+        dropSelf(ModBlocks.COARSE_ETHEREAL_DIRT.get());
+        this.add(
+                ModBlocks.PHANTOM_GRAVEL.get(),
+                block -> this.createSilkTouchDispatchTable(
+                        block,
+                        this.applyExplosionCondition(
+                                block,
+                                LootItem.lootTableItem(Items.FLINT)
+                                        .when(BonusLevelTableCondition.bonusLevelFlatChance(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE), 0.1F, 0.14285715F, 0.25F, 1.0F))
+                                        .otherwise(LootItem.lootTableItem(block))
+                        )
+                )
+        );
+        dropSelf(ModBlocks.CREATIVE_ETHER_SOURCE.get());
+        dropSelf(ModBlocks.PASSIVE_ETHER_ABSORBER.get());
+        dropSelf(ModBlocks.PURE_ETHER_SOURCE.get());
+        dropSelf(ModBlocks.ELECTRIC_CRUCIBLE.get());
+        add(ModBlocks.IMPURE_ETHEREAL_CRYSTAL.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), 3, 5));
+        add(ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), block -> createMultipleOreDropsNoFortune(block, ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), 7, 9));
+
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_PLANKS.get());
+        dropPottedContents(ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_SAPLING.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_LOG.get());
+        dropSelf(ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_WOOD.get());
+        dropSelf(ModTreeBlocks.STRIPPED_PHANTOM_OAK_WOOD.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_STAIRS.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_SIGN.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_PRESSURE_PLATE.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_FENCE.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_FENCE_GATE.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_BUTTON.get());
+        add(ModTreeBlocks.PHANTOM_OAK_SLAB.get(), this::createSlabItemTable);
+        add(ModTreeBlocks.PHANTOM_OAK_DOOR.get(), this::createDoorTable);
+        add(ModTreeBlocks.PHANTOM_OAK_LEAVES.get(), block -> createOakLeavesDrops(block, ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        dropSelf(ModTreeBlocks.MALISHROOM_PLANKS.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.STRIPPED_MALISHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_STAIRS.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_SIGN.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_HANGING_SIGN.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_PRESSURE_PLATE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_FENCE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_TRAPDOOR.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_FENCE_GATE.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_BUTTON.get());
+        add(ModTreeBlocks.MALISHROOM_SLAB.get(), this::createSlabItemTable);
+        add(ModTreeBlocks.MALISHROOM_DOOR.get(), this::createDoorTable);
+        dropSelf(ModTreeBlocks.MALISHROOM_BLOCK.get());
+        dropSelf(ModTreeBlocks.RED_MALISHROOM_BLOCK.get());
+
+        dropSelf(ModTreeBlocks.FORTSHROOM_PLANKS.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.STRIPPED_FORTSHROOM_HYPHAE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_STAIRS.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_SIGN.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_HANGING_SIGN.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_FENCE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_TRAPDOOR.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_FENCE_GATE.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_BUTTON.get());
+        add(ModTreeBlocks.FORTSHROOM_SLAB.get(), this::createSlabItemTable);
+        add(ModTreeBlocks.FORTSHROOM_DOOR.get(), this::createDoorTable);
+        dropSelf(ModTreeBlocks.FORTSHROOM_BLOCK.get());
+
+        dropPottedContents(ModVegetationBlocks.POTTED_MALISHROOM.get());
+        dropSelf(ModVegetationBlocks.MALISHROOM.get());
+        dropPottedContents(ModVegetationBlocks.POTTED_FORTSHROOM.get());
+        dropSelf(ModVegetationBlocks.FORTSHROOM.get());
+
+        dropSelf(ModStoneBlocks.ETHERSTONE.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_WALL.get());
+        add(ModStoneBlocks.ETHERSTONE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.CHISELED_ETHERSTONE.get());
+        dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE.get());
+        dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get());
+        add(ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.ETHERSTONE_BRICKS.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get());
+        dropSelf(ModStoneBlocks.ETHERSTONE_BRICK_WALL.get());
+        add(ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.PAILITE.get());
+        dropSelf(ModStoneBlocks.PAILITE_STAIRS.get());
+        dropSelf(ModStoneBlocks.PAILITE_WALL.get());
+        add(ModStoneBlocks.PAILITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.PAILITE_BUTTON.get());
+        dropSelf(ModStoneBlocks.PAILITE_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_WALL.get());
+        add(ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BUTTON.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get());
+        add(ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_BUTTON.get());
+        dropSelf(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.LUMINITE.get());
+        dropSelf(ModStoneBlocks.LUMINITE_STAIRS.get());
+        dropSelf(ModStoneBlocks.LUMINITE_WALL.get());
+        add(ModStoneBlocks.LUMINITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_LUMINITE.get());
+        dropSelf(ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_LUMINITE_WALL.get());
+        add(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.VERDONE.get());
+        dropSelf(ModStoneBlocks.VERDONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.VERDONE_WALL.get());
+        add(ModStoneBlocks.VERDONE_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.POLISHED_VERDONE.get());
+        dropSelf(ModStoneBlocks.POLISHED_VERDONE_STAIRS.get());
+        dropSelf(ModStoneBlocks.POLISHED_VERDONE_WALL.get());
+        add(ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), this::createSlabItemTable);
+
+        add(ModOreBlocks.ALLIAN_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.RAW_ALLIUM.get(), 1, 1));
+        add(ModOreBlocks.AURELITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.AURELITE_DUST.get(), 3, 4));
+        add(ModOreBlocks.DEEPSLATE_AURELITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.AURELITE_DUST.get(), 3, 4));
+        add(ModOreBlocks.ETHERSTONE_AURELITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.AURELITE_DUST.get(), 3, 4));
+        add(ModOreBlocks.CHRYON_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.CHRYON_CRYSTAL.get(), 2, 3));
+        add(ModOreBlocks.COPALITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.COPALITE_DUST.get(), 4, 5));
+        add(ModOreBlocks.DEEPSLATE_COPALITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.COPALITE_DUST.get(), 4, 5));
+        add(ModOreBlocks.ETHERSTONE_COPALITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.COPALITE_DUST.get(), 4, 5));
+        add(ModOreBlocks.CYRUM_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.CYRUM_CRYSTAL.get(), 1, 1));
+        add(ModOreBlocks.DEEPSLATE_CYRUM_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.CYRUM_CRYSTAL.get(), 1, 1));
+        add(ModOreBlocks.ETHERSTONE_CYRUM_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.CYRUM_CRYSTAL.get(), 1, 1));
+        add(ModOreBlocks.ELUNITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.ELUNITE_CRYSTAL.get(), 1, 1));
+        add(ModOreBlocks.HELLIONITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 1, 1));
+        add(ModOreBlocks.PAILITE_HELLIONITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), 1, 1));
+        add(ModOreBlocks.LITHERITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), 1, 2));
+        add(ModOreBlocks.DEEPSLATE_LITHERITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), 1, 2));
+        add(ModOreBlocks.ETHERSTONE_LITHERITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), 1, 2));
+        add(ModOreBlocks.LUMINIUM_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.LUMINIUM_CRYSTAL.get(), 1, 2));
+        add(ModOreBlocks.DEEPSLATE_LUMINIUM_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.LUMINIUM_CRYSTAL.get(), 1, 2));
+        add(ModOreBlocks.ETHERSTONE_LUMINIUM_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.LUMINIUM_CRYSTAL.get(), 1, 2));
+        add(ModOreBlocks.NERITH_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.RAW_NERITH.get(), 1, 1));
+        add(ModOreBlocks.DEEPSLATE_NERITH_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.RAW_NERITH.get(), 1, 1));
+        add(ModOreBlocks.ETHERSTONE_NERITH_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.RAW_NERITH.get(), 1, 1));
+        add(ModOreBlocks.SATURNITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 2));
+        add(ModOreBlocks.PAILITE_SATURNITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 1));
+        add(ModOreBlocks.PAILITE_NETHERITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 3, 4));
+
+        add(ModPhantomBlocks.PHANTOM_DIAMOND_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 1));
+        add(ModPhantomBlocks.PHANTOM_QUARTZ_ORE.get(), block -> createMultipleOreDrops(block, Items.QUARTZ, 1, 1));
+        dropSelf(ModPhantomBlocks.PHANTOM_ROSE.get());
+        dropSelf(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get());
+        dropSelf(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get());
+        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ROSE.get());
+        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get());
+        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get());
+    }
+
+    @Override
+    public void add(@NotNull Block block, LootTable.@NotNull Builder builder) {
+        super.add(block, builder);
+        cachedGeneratedBlocks.add(block);
+    }
+
+    protected LootTable.Builder createMultipleOreDropsNoFortune(Block pBlock, Item item, float minDrops, float maxDrops) {
+        return this.createSilkTouchDispatchTable(pBlock,
+                this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDrops, maxDrops)))));
+    }
+
+    protected LootTable.Builder createMultipleOreDrops(Block pBlock, Item item, float minDrops, float maxDrops) {
+        HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        return this.createSilkTouchDispatchTable(pBlock,
+                this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDrops, maxDrops)))
+                        .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))));
+    }
+
+    @Override
+    protected @NotNull Iterable<Block> getKnownBlocks() {
+        if (cachedGeneratedBlocks != null) return cachedGeneratedBlocks;
+        return Streams.of(ModBlocks.BLOCKS).map(Holder::value)::iterator;
+    }
+}
+*///?}

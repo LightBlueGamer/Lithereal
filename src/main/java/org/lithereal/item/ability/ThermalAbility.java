@@ -1,0 +1,152 @@
+package org.lithereal.item.ability;
+
+import dev.architectury.networking.NetworkManager;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.gamerules.GameRules;
+import org.jspecify.annotations.Nullable;
+import org.lithereal.client.KeyMapping;
+import org.lithereal.entity.ModDamageTypes;
+import org.lithereal.networking.ServerboundSpecialKeyAbilityPacket;
+
+import java.util.List;
+
+import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
+import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
+
+public record ThermalAbility<I extends AbilityItem>(int extraDamage,
+                                                    float attackAbilityScalar,
+                                                    ArmorType armorType,
+                                                    List<ArmorMaterial> armorMaterials,
+                                                    List<MobEffectInstance> effects) implements IAbility<I> {
+    @Override
+    public void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        switch (armorType()) {
+            case FROSTBURN, FREEZING -> {
+                if (attacked.isOnFire()) attacked.extinguishFire();
+                attacked.setTicksFrozen((int) (1000 * attackAbilityScalar()));
+            }
+            case BURNING -> {
+                if (attacked.isFreezing()) attacked.clearFreeze();
+                attacked.setRemainingFireTicks((int) (20000 * attackAbilityScalar()));
+            }
+        }
+    }
+
+    @Override
+    public void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        float bonusDamage = extraDamage();
+        switch (armorType()) {
+            case FROSTBURN -> {
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROSTBURN, attacker), bonusDamage);
+            }
+            case FREEZING -> {
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.FROST, attacker), bonusDamage);
+            }
+            case BURNING -> {
+                if (bonusDamage > 0) attacked.hurt(attacker.damageSources().source(ModDamageTypes.BURN, attacker), bonusDamage);
+            }
+        }
+    }
+
+    @Override
+    public void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
+
+    }
+
+    @Override
+    public void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
+        ArmorType armorType = armorType();
+        if (armorType.emitsHeat && entity.isInPowderSnow) {
+            for (int i = 0; i < 3; i++) {
+                BlockPos blockPos = entity.blockPosition().above(i - 1);
+                if (level instanceof ServerLevel serverLevel && (serverLevel.getGameRules().get(GameRules.MOB_GRIEFING) || entity instanceof Player) && entity.mayInteract(serverLevel, blockPos) && level.getBlockState(blockPos).is(Blocks.POWDER_SNOW))
+                    level.destroyBlock(blockPos, false);
+            }
+        }
+
+        if (entity.isOnFire() && !(entity instanceof Player)) {
+            entity.extinguishFire();
+            entity.setSharedFlagOnFire(false);
+        }
+
+        if (entity.isFreezing() && !(entity instanceof Player))
+            entity.clearFreeze();
+
+        if (entity instanceof LivingEntity user) {
+            if (user.hurtTime > 0 && !user.level().isClientSide()) {
+                DamageSource source = user.getLastDamageSource();
+                if (source == null) return;
+                Entity attacker = source.getEntity();
+                if (attacker instanceof LivingEntity) {
+                    if (armorType.causesFreeze) attacker.setTicksFrozen(1000);
+                    if (armorType.causesIgnition) attacker.igniteForTicks(100);
+                }
+            }
+            if (!level.isClientSide()) {
+                if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) {
+                    effects.forEach(statusEffect -> addStatusEffect(user, statusEffect));
+                    if (user.isOnFire()) {
+                        user.extinguishFire();
+                        user.setSharedFlagOnFire(false);
+                    }
+                    if (user.isFreezing())
+                        user.clearFreeze();
+                }
+            } else {
+                if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) {
+                    if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown())
+                        NetworkManager.sendToServer(new ServerboundSpecialKeyAbilityPacket(ServerboundSpecialKeyAbilityPacket.SpecialKeyType.FREEZE));
+                    if (armorType.providesScorch && KeyMapping.SCORCH_KEY.isDown())
+                        NetworkManager.sendToServer(new ServerboundSpecialKeyAbilityPacket(ServerboundSpecialKeyAbilityPacket.SpecialKeyType.SCORCH));
+                }
+            }
+        }
+    }
+
+    @Override
+    public float getLavaMovementEfficiency(I castedItem, ItemStack itemStack, LivingEntity user, float efficiency) {
+        ArmorType armorType = armorType();
+        if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) return efficiency + armorType.lavaMovementEfficiency * this.attackAbilityScalar;
+        return efficiency;
+    }
+
+    private void addStatusEffect(LivingEntity user, MobEffectInstance mapStatusEffect) {
+        boolean hasEffect = user.hasEffect(mapStatusEffect.getEffect());
+
+        if (!hasEffect) {
+            user.addEffect(new MobEffectInstance(mapStatusEffect));
+        }
+    }
+
+    public enum ArmorType {
+        FROSTBURN(0.1F, false, false, true, true, true),
+        FREEZING(0, false, false, true, false, true),
+        BURNING(0.2F, true, true, false, true, false);
+        public final float lavaMovementEfficiency;
+        public final boolean emitsHeat;
+        public final boolean providesScorch;
+        public final boolean providesFreeze;
+        public final boolean causesIgnition;
+        public final boolean causesFreeze;
+
+        ArmorType(float lavaMovementEfficiency, boolean emitsHeat, boolean providesScorch, boolean providesFreeze, boolean causesIgnition, boolean causesFreeze) {
+            this.lavaMovementEfficiency = lavaMovementEfficiency;
+            this.emitsHeat = emitsHeat;
+            this.providesScorch = providesScorch;
+            this.providesFreeze = providesFreeze;
+            this.causesIgnition = causesIgnition;
+            this.causesFreeze = causesFreeze;
+        }
+    }
+}

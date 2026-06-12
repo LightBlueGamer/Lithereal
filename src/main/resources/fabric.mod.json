@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "lithereal",
+  "version": "${version}",
+  "name": "Lithereal",
+  "description": "A mod about mysterious metals and crystals with magical properties.",
+  "authors": [
+    "Light, Stunf, Alexandra"
+  ],
+  "contact": {
+    "sources": "https://github.com/LightBlueGamer/Lithereal"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.lithereal.fabric.LitherealFabric"
+    ],
+    "client": [
+      "org.lithereal.fabric.LitherealFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "org.lithereal.data.integration.JEILitherealPlugin"
+    ],
+    "terrablender": [
+      "org.lithereal.fabric.data.worldgen.FabricTerrablender"
+    ]
+  },
+  "depends": {
+    "fabric-api": "*",
+    "minecraft": ">=26.1",
+    "architectury": "*"
+  },
+  "mixins": [
+    "lithereal-fabric.mixins.json",
+    "lithereal-common.mixins.json"
+  ],
+  "accessWidener": "lithereal.classtweaker",
+  "loom:injected_interfaces": {
+    "net/minecraft/world/effect/MobEffect": ["org/lithereal/data/extension/MobEffectExtension"]
+  }
+}

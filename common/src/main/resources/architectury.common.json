@@ -1,6 +1,0 @@
-{
-  "accessWidener": "lithereal.accesswidener",
-  "injected_interfaces": {
-    "net/minecraft/class_1291": ["org/lithereal/data/extension/MobEffectExtension"]
-  }
-}
