@@ -1,7 +1,7 @@
 package org.lithereal.fabric;
 
 //? fabric {
-import dev.architectury.registry.client.particle.ParticleProviderRegistry;
+/*import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -107,4 +107,4 @@ public class LitherealFabricClient implements ClientModInitializer {
         }));
     }
 }
-//?}
+*///?}

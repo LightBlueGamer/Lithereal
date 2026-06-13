@@ -1,7 +1,5 @@
 package org.lithereal.client.particle;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -11,7 +9,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import org.jspecify.annotations.Nullable;
 
-@Environment(EnvType.CLIENT)
 public class StandardBiomeProvider implements ParticleProvider<SimpleParticleType> {
 	private final SpriteSet sprite;
 

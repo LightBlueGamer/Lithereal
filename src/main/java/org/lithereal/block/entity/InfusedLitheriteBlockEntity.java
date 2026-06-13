@@ -33,7 +33,7 @@ public class InfusedLitheriteBlockEntity extends BlockEntity implements PotionSt
     @Override
     protected void loadAdditional(@NonNull ValueInput valueInput) {
         super.loadAdditional(valueInput);
-        if (valueInput.contains("Potion"))
+        if (valueInput.child("Potion").isPresent())
             setPotion(valueInput.read("Potion", PotionContents.CODEC).orElse(PotionContents.EMPTY));
     }
 

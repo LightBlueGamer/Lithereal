@@ -1,6 +1,5 @@
-package org.lithereal.fabric.data.worldgen;
+package org.lithereal.world;
 
-//? fabric {
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -26,4 +25,3 @@ public class LitherealOverworldRegion extends Region {
         addModifiedVanillaOverworldBiomes(mapper, modifiedVanillaOverworldBuilder -> modifiedVanillaOverworldBuilder.replaceBiome(Biomes.LUSH_CAVES, ModBiomes.LITHERITE_CAVES));
     }
 }
-//?}

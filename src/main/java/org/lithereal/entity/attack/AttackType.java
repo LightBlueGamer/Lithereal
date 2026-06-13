@@ -2,7 +2,6 @@ package org.lithereal.entity.attack;
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -11,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface AttackType<E extends Entity & AttackingEntity<E>> {
+public interface AttackType<E extends LivingEntity & AttackingEntity<E>> {
     default void checkEntitiesAttacked(E causalEntity, @Nullable AABB originalBoundingBox, AABB newBoundingBox) {
         Level level = causalEntity.level();
         if (!(level instanceof ServerLevel serverLevel)) return;

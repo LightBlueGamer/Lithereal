@@ -1,7 +1,5 @@
 package org.lithereal.client.particle;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.PortalParticle;
@@ -10,7 +8,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import org.jspecify.annotations.NonNull;
 
-@Environment(EnvType.CLIENT)
 public class PortalParticleProvider extends PortalParticle.Provider {
     public PortalParticleProvider(SpriteSet arg) {
         super(arg);

@@ -69,7 +69,7 @@ public class InfiniteEtherSourceBlockEntity extends BlockEntity implements IEner
     public void loadAdditional(@NotNull ValueInput valueInput) {
         super.loadAdditional(valueInput);
         loadEnergy(valueInput);
-        if (valueInput.contains("biomes")) this.inBiomes = valueInput.read("biomes", TagKey.codec(Registries.BIOME)).orElse(null);
+        if (valueInput.child("biomes").isPresent()) this.inBiomes = valueInput.read("biomes", TagKey.codec(Registries.BIOME)).orElse(null);
     }
 
     public boolean isOn() {

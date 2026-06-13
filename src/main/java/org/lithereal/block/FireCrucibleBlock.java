@@ -151,11 +151,11 @@ public class FireCrucibleBlock extends BaseEntityBlock {
 
             if (screenHandlerFactory != null) {
                 //? fabric {
-                player.openMenu(screenHandlerFactory);
-                //?}
+                /*player.openMenu(screenHandlerFactory);
+                *///?}
                 //? neoforge {
-                /*player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
-                 *///?}
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
+                 //?}
             }
         }
 
@@ -169,11 +169,11 @@ public class FireCrucibleBlock extends BaseEntityBlock {
 
             if (screenHandlerFactory != null) {
                 //? fabric {
-                player.openMenu(screenHandlerFactory);
-                //?}
+                /*player.openMenu(screenHandlerFactory);
+                *///?}
                 //? neoforge {
-                /*player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
-                 *///?}
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
+                 //?}
             }
         }
 

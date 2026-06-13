@@ -1,7 +1,5 @@
 package org.lithereal.client.particle;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -87,7 +85,6 @@ public class BeamParticle extends SingleQuadParticle {
         return Layer.TRANSLUCENT;
     }
 
-    @Environment(EnvType.CLIENT)
     public static class RetributionBeamProvider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprite;
 
@@ -106,7 +103,6 @@ public class BeamParticle extends SingleQuadParticle {
         }
     }
 
-    @Environment(EnvType.CLIENT)
     public static class RetributionBurstProvider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprite;
 

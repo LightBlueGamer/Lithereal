@@ -3,8 +3,8 @@ package org.lithereal.block.entity;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 //? fabric {
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-//?}
+/*import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+*///?}
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -17,6 +17,9 @@ import org.lithereal.block.ModBlocks;
 import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.block.ModTreeBlocks;
 
+//? neoforge {
+import java.util.Set;
+//?}
 import java.util.function.BiFunction;
 
 public class ModBlockEntities {
@@ -98,11 +101,11 @@ public class ModBlockEntities {
 
     public static <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(final BiFunction<BlockPos, BlockState, T> factory, final Block... validBlocks) {
         //? fabric {
-        return FabricBlockEntityTypeBuilder.create(factory::apply, validBlocks).build();
-        //?}
-        //? neoforge {
-        /*return new BlockEntityType<>(factory, Set.of(validBlocks));
+        /*return FabricBlockEntityTypeBuilder.create(factory::apply, validBlocks).build();
         *///?}
+        //? neoforge {
+        return new BlockEntityType<>(factory::apply, Set.of(validBlocks));
+        //?}
     }
 
     public static void register() {

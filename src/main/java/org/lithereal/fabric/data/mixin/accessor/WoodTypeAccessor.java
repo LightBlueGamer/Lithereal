@@ -1,7 +1,7 @@
 package org.lithereal.fabric.data.mixin.accessor;
 
 //? fabric {
-import net.minecraft.world.level.block.state.properties.WoodType;
+/*import net.minecraft.world.level.block.state.properties.WoodType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -12,4 +12,4 @@ public interface WoodTypeAccessor {
         return woodType;
     }
 }
-//?}
+*///?}

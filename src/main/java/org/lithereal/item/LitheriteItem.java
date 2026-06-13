@@ -4,21 +4,21 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 //? neoforge {
-/*import net.minecraft.world.entity.item.ItemEntity;
-*///?}
+import net.minecraft.world.entity.item.ItemEntity;
+//?}
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 import net.minecraft.world.item.Item;
 //? neoforge {
-/*import net.minecraft.world.item.ItemStack;
-*///?}
+import net.minecraft.world.item.ItemStack;
+//?}
 import net.minecraft.world.level.Level;
 //? neoforge {
-/*import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
-*///?}
+//?}
 
 public class LitheriteItem extends Item {
     public LitheriteItem(Properties properties) {
@@ -26,7 +26,7 @@ public class LitheriteItem extends Item {
     }
 
     //? neoforge {
-    /*@Override
+    @Override
     public boolean onEntityItemUpdate(ItemStack stack, @NotNull ItemEntity entity) {
         Item item = stack.getItem();
 
@@ -61,7 +61,7 @@ public class LitheriteItem extends Item {
         }
         return super.onEntityItemUpdate(stack, entity);
     }
-    *///?}
+    //?}
     public static void spawnWitherSkeleton(Level level, double x, double y, double z) {
         WitherSkeleton skeleton = EntityType.WITHER_SKELETON.create(level, EntitySpawnReason.TRIGGERED);
         skeleton.setPos(x, y, z);

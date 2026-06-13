@@ -163,10 +163,46 @@ neoForge {
         register("client") {
             gameDirectory = file("run/")
             client()
+
+            systemProperty("neoforge.enabledGameTestNamespaces", rootProject.property("mod.id") as String)
+        }
+        // This run config launches GameTestServer and runs all registered gametests, then exits.
+        // By default, the server will crash when no gametests are provided.
+        // The gametest system is also enabled by default for other run configs under the /test command.
+        register("gameTestServer") {
+            type = "gameTestServer"
+            systemProperty("neoforge.enabledGameTestNamespaces", rootProject.property("mod.id") as String)
+        }
+        register("data") {
+            clientData()
+
+            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // gameDirectory = project.file("run-data")
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll("--mod", rootProject.property("mod.id") as String, "--all", "--output", file("src/generated/resources/").getAbsolutePath(), "--existing", file("src/main/resources/").getAbsolutePath())
         }
         register("server") {
             gameDirectory = file("run/")
             server()
+
+            programArgument("--nogui")
+            systemProperty("neoforge.enabledGameTestNamespaces", rootProject.property("mod.id") as String)
+        }
+
+        // applies to all the run configs above
+        configureEach {
+            // Recommended logging data for a userdev environment
+            // The markers can be added/remove as needed separated by commas.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            systemProperty("forge.logging.markers", "REGISTRIES")
+
+            // Recommended logging level for the console
+            // You can set various levels here.
+            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            logLevel = org.slf4j.event.Level.DEBUG
         }
     }
 
@@ -179,12 +215,16 @@ neoForge {
 }
 
 dependencies {
-    compileOnly("maven.modrinth:atlas-core:${property("deps.atlas_core")}-Fabric")
-    compileOnly("maven.modrinth:defaulted:${property("deps.defaulted")}")
+    compileOnly("maven.modrinth:atlas-core:${property("deps.atlas_core")}-Fabric") {
+        exclude("net.fabricmc")
+    }
+    implementation("maven.modrinth:defaulted:${property("deps.defaulted")}")
     api("dev.architectury:architectury:${property("deps.architectury")}")
     api("dev.architectury:architectury-neoforge:${property("deps.architectury")}")
 
-    compileOnly("maven.modrinth:combatify:${property("deps.combatify")}")
+    compileOnly("maven.modrinth:combatify:${property("deps.combatify")}") {
+        exclude("net.fabricmc")
+    }
 
     compileOnlyApi("mezz.jei:jei-${property("deps.minecraft")}-common-api:${property("deps.jei")}")
     compileOnlyApi("mezz.jei:jei-${property("deps.minecraft")}-neoforge-api:${property("deps.jei")}")
@@ -196,7 +236,7 @@ dependencies {
 
 tasks {
     processResources {
-        exclude("**/fabric.mod.json", "**/*.accesswidener", "**/mods.toml")
+        exclude("**/fabric.mod.json", "**/*.classtweaker", "**/mods.toml")
     }
 
     named("createMinecraftArtifacts") {

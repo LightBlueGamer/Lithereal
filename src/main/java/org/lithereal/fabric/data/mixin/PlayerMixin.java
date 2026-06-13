@@ -1,7 +1,7 @@
 package org.lithereal.fabric.data.mixin;
 
 //? fabric {
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+/*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -25,4 +25,4 @@ public abstract class PlayerMixin extends LivingEntity {
         return original.call(instance, tagKey) || original.call(instance, ModTags.WAR_HAMMERS);
     }
 }
-//?}
+*///?}

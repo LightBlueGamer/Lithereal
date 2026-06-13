@@ -11,10 +11,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
@@ -30,7 +28,6 @@ import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.LitherealPlatform;
 import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
@@ -131,11 +128,11 @@ public class InfusementChamberBlock extends BaseEntityBlock {
 
             if (screenHandlerFactory != null) {
                 //? fabric {
-                player.openMenu(screenHandlerFactory);
-                //?}
+                /*player.openMenu(screenHandlerFactory);
+                *///?}
                 //? neoforge {
-                /*player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
-                 *///?}
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
+                 //?}
             }
         }
 
@@ -149,11 +146,11 @@ public class InfusementChamberBlock extends BaseEntityBlock {
 
             if (screenHandlerFactory != null) {
                 //? fabric {
-                player.openMenu(screenHandlerFactory);
-                //?}
+                /*player.openMenu(screenHandlerFactory);
+                *///?}
                 //? neoforge {
-                /*player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
-                 *///?}
+                player.openMenu(screenHandlerFactory, (buf) -> buf.writeBlockPos(blockPos));
+                 //?}
             }
         }
 

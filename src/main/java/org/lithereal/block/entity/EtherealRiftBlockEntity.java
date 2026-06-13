@@ -53,7 +53,7 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
 
     protected void loadAdditional(@NonNull ValueInput valueInput) {
         super.loadAdditional(valueInput);
-        if (valueInput.contains("destination")) this.destination = valueInput.read("destination", ResourceKey.codec(Registries.DIMENSION)).orElse(null);
+        if (valueInput.child("destination").isPresent()) this.destination = valueInput.read("destination", ResourceKey.codec(Registries.DIMENSION)).orElse(null);
         this.age = valueInput.getLongOr("age", 0);
         this.maxLifespan = Math.max(valueInput.getLongOr("max_lifespan", 6000), 1);
         valueInput.read("exit_portal", BlockPos.CODEC).filter(Level::isInSpawnableBounds).ifPresent(blockPos -> this.exitPortal = blockPos);

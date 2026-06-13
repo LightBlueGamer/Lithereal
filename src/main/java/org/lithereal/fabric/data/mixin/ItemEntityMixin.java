@@ -1,7 +1,7 @@
 package org.lithereal.fabric.data.mixin;
 
 //? fabric {
-import net.minecraft.world.entity.item.ItemEntity;
+/*import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -61,4 +61,4 @@ public abstract class ItemEntityMixin {
         }
     }
 }
-//?}
+*///?}

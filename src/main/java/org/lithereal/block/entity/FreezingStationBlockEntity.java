@@ -1,11 +1,13 @@
 package org.lithereal.block.entity;
 
 //? fabric {
-import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
-//?}
+/*import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
+*///?}
 //? neoforge {
-/*import org.lithereal.neoforge.util.NeoForgeInventory;
- *///?}
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import org.lithereal.neoforge.util.ImplementedItemHandler;
+import org.lithereal.neoforge.util.NeoForgeInventory;
+ //?}
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -42,13 +44,18 @@ import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.util.CommonUtils;
 
 import java.util.Optional;
+//? neoforge {
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static net.neoforged.neoforge.transfer.transaction.Transaction.openRoot;
+//?}
 
 //? fabric {
-public class FreezingStationBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, ExtendedMenuProvider<BlockPos> {
-//?}
-//? neoforge {
-/*public class FreezingStationBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, NeoForgeInventory {
+/*public class FreezingStationBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, ExtendedMenuProvider<BlockPos> {
 *///?}
+//? neoforge {
+public class FreezingStationBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, NeoForgeInventory {
+//?}
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
     protected final ContainerData data;
     protected int progress = 0;
@@ -94,12 +101,22 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     }
 
     //? fabric {
-    @Override
+    /*@Override
     public void setChanged() {
         level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
         super.setChanged();
     }
-    //?}
+
+    @Override
+    public NonNullList<ItemStack> getItems() {
+        return inventory;
+    }
+
+    @Override
+    public void setItems(NonNullList<ItemStack> items) {
+        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
+    }
+    *///?}
 
     protected void resetProgress() {
         this.progress = 0;
@@ -117,16 +134,6 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new FreezingStationMenu(i, inventory, this);
-    }
-
-    @Override
-    public NonNullList<ItemStack> getItems() {
-        return inventory;
-    }
-
-    @Override
-    public void setItems(NonNullList<ItemStack> items) {
-        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
     }
 
     @Override
@@ -246,18 +253,13 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
      * @return the screen opening data
      */
     //? fabric {
-    @Override
+    /*@Override
     public BlockPos getScreenOpeningData(@NonNull ServerPlayer player) {
         return worldPosition;
     }
-    //?}
+    *///?}
     //? neoforge {
-    /*private final ImplementedItemHandler itemHandler = new ImplementedItemHandler(3, this);
-
-    @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new ForgeFreezingStationMenu(i, inventory, this);
-    }
+    private final ImplementedItemHandler itemHandler = new ImplementedItemHandler(3, this);
 
     @Override
     public NonNullList<ItemStack> getItems() {
@@ -268,10 +270,9 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     public void setItems(NonNullList<ItemStack> items) {
         AtomicInteger index = new AtomicInteger();
         items.forEach(itemStack -> {
-            if (index.get() > getHandler().getSlots())
-                // Die
-                throw new IllegalStateException();
-            itemHandler.setStackInSlot(index.getAndIncrement(), itemStack);
+            if (index.get() > getHandler().size())
+                return;
+            itemHandler.set(index.getAndIncrement(), ItemResource.of(itemStack), itemStack.getCount());
         });
     }
 
@@ -282,12 +283,12 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
 
     @Override
     public void saveItems(@NotNull ValueOutput valueOutput) {
-        nbt.put("Items", getHandler().serializeNBT(provider));
+        getHandler().serialize(valueOutput.child("Items"));
     }
 
     @Override
     public void loadItems(@NotNull ValueInput valueInput) {
-        itemHandler.deserializeNBT(provider, nbt.getCompound("Items"));
+        getHandler().deserialize(valueInput.childOrEmpty("Items"));
     }
 
     @Override
@@ -297,7 +298,12 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
 
     @Override
     public @NotNull ItemStack removeItem(int slot, int count) {
-        return itemHandler.extractItem(slot, count, false);
+        ItemResource resource = itemHandler.getResource(slot);
+        int oldCount = itemHandler.getAmountAsInt(slot);
+        try (var tx = openRoot()) {
+            itemHandler.extract(slot, resource, count, tx);
+        }
+        return resource.toStack(oldCount);
     }
 
     @Override
@@ -305,24 +311,24 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         if (stack.getCount() > getMaxStackSize()) {
             stack.setCount(getMaxStackSize());
         }
-        itemHandler.setStackInSlot(slot, stack);
+        itemHandler.set(slot, ItemResource.of(stack), stack.getCount());
     }
 
     @Override
     public @NotNull ItemStack getItem(int slot) {
-        return itemHandler.getStackInSlot(slot);
+        return itemHandler.getResource(slot).toStack(itemHandler.getAmountAsInt(slot));
     }
 
     @Override
     public void clearContent() {
-        for (int index = 0; index < itemHandler.getSlots(); index++) {
+        for (int index = 0; index < itemHandler.size(); index++) {
             removeItemNoUpdate(index);
         }
     }
 
     @Override
     public int getContainerSize() {
-        return itemHandler.getSlots();
+        return itemHandler.size();
     }
-    *///?}
+    //?}
 }

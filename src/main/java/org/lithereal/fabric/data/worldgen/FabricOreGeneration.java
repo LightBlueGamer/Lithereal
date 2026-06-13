@@ -1,7 +1,7 @@
 package org.lithereal.fabric.data.worldgen;
 
 //? fabric {
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+/*import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import org.lithereal.data.worldgen.PlacedFeatures;
@@ -49,4 +49,4 @@ public class FabricOreGeneration {
 
     }
 }
-//?}
+*///?}

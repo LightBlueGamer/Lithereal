@@ -1,7 +1,7 @@
 package org.lithereal.neoforge;
 
 //? neoforge {
-/*import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import org.lithereal.Lithereal;
@@ -14,4 +14,4 @@ public class LitherealForgeClient {
         ClientEvents.ClientForgeBusEvents.register();
     }
 }
-*///?}
+//?}

@@ -1,7 +1,7 @@
 package org.lithereal.neoforge.datagen;
 
 //? neoforge {
-/*import net.minecraft.core.Holder;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -225,4 +225,4 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         return Streams.of(ModBlocks.BLOCKS).map(Holder::value)::iterator;
     }
 }
-*///?}
+//?}

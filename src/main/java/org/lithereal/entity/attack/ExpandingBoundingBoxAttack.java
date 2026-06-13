@@ -1,14 +1,14 @@
 package org.lithereal.entity.attack;
 
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-public class ExpandingBoundingBoxAttack<E extends Entity & AttackingEntity<E>> extends Attack<E> {
+public class ExpandingBoundingBoxAttack<E extends LivingEntity & AttackingEntity<E>> extends Attack<E> {
     private float initialWidth;
     private float initialHeight;
     private float resultingWidth;

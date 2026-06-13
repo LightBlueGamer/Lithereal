@@ -1,7 +1,7 @@
 package org.lithereal.fabric;
 
 //? fabric {
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+/*import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -27,4 +27,4 @@ public class FabricLitherealPlatformImpl implements LitherealPlatform {
         return FabricLoader.getInstance().getConfigDir();
     }
 }
-//?}
+*///?}

@@ -1,7 +1,7 @@
 package org.lithereal.neoforge;
 
 //? neoforge {
-/*import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.bus.api.IEventBus;
@@ -17,7 +17,7 @@ import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.entity.phantom.PhantomZombie;
 import org.lithereal.item.ModRawMaterialItems;
 import org.lithereal.mob_effect.potion.ModPotions;
-import org.lithereal.neoforge.data.worldgen.LitherealOverworldRegion;
+import org.lithereal.world.LitherealOverworldRegion;
 import terrablender.api.Regions;
 
 public class Events {
@@ -55,4 +55,4 @@ public class Events {
         }
     }
 }
-*///?}
+//?}

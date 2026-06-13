@@ -1,7 +1,7 @@
 package org.lithereal.fabric.data.mixin.client;
 
 //? fabric {
-import net.minecraft.client.model.geom.EntityModelSet;
+/*import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.lithereal.client.model.LitherealArmorModel;
@@ -26,4 +26,4 @@ public class EntityRenderDispatcherMixin {
         LitherealArmorModel.INNER = new LitherealArmorModel(this.entityModels.get().bakeLayer(LitherealArmorModel.INNER_ARMOR));
     }
 }
-//?}
+*///?}

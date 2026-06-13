@@ -2,11 +2,13 @@ package org.lithereal.block.entity;
 
 import dev.architectury.hooks.item.ItemStackHooks;
 //? fabric {
-import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
-//?}
+/*import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
+*///?}
 //? neoforge {
-/*import org.lithereal.neoforge.util.NeoForgeInventory;
- *///?}
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import org.lithereal.neoforge.util.ImplementedItemHandler;
+import org.lithereal.neoforge.util.NeoForgeInventory;
+ //?}
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -49,15 +51,19 @@ import org.lithereal.util.ether.IEnergyUser;
 import org.lithereal.util.ether.IEnergyUserProvider;
 
 import java.util.Optional;
+//? neoforge {
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static net.neoforged.neoforge.transfer.transaction.Transaction.openRoot;
+//?}
 import static org.lithereal.block.entity.FireCrucibleBlockEntity.canInsertItemInto;
 
 //? fabric {
-public class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, IEnergyUserProvider, PotionStorage, ExtendedMenuProvider<BlockPos> {
-//?}
-//? neoforge {
-/*public class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, IEnergyUserProvider, PotionStorage, NeoForgeInventory {
+/*public class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, IEnergyUserProvider, PotionStorage, ExtendedMenuProvider<BlockPos> {
 *///?}
+//? neoforge {
+public class InfusementChamberBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, IEnergyUserProvider, PotionStorage, NeoForgeInventory {
+//?}
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 6000;
@@ -143,12 +149,22 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
     }
 
     //? fabric {
-    @Override
+    /*@Override
     public void setChanged() {
         level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);
         super.setChanged();
     }
-    //?}
+
+    @Override
+    public NonNullList<ItemStack> getItems() {
+        return inventory;
+    }
+
+    @Override
+    public void setItems(NonNullList<ItemStack> items) {
+        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
+    }
+    *///?}
 
     protected void resetProgress() {
         this.progress = 0;
@@ -198,16 +214,6 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         this.successRate += 0.2f * attached;
         this.powerState = PowerState.fromSurrounding(new SurroundingBlocks(this.attachedFrozenBlocks, this.attachedBurningBlocks, attached));
         setChanged();
-    }
-
-    @Override
-    public NonNullList<ItemStack> getItems() {
-        return inventory;
-    }
-
-    @Override
-    public void setItems(NonNullList<ItemStack> items) {
-        inventory.replaceAll(item -> items.get(inventory.indexOf(item)));
     }
 
     @Override
@@ -336,19 +342,14 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
      * @return the screen opening data
      */
     //? fabric {
-    @Override
+    /*@Override
     public BlockPos getScreenOpeningData(@NonNull ServerPlayer player) {
         return worldPosition;
     }
-    //?}
+    *///?}
 
     //? neoforge {
-    /*private final ImplementedItemHandler itemHandler = new ImplementedItemHandler(3, this);
-
-    @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new ForgeInfusementChamberMenu(i, inventory, this);
-    }
+    private final ImplementedItemHandler itemHandler = new ImplementedItemHandler(3, this);
 
     @Override
     public NonNullList<ItemStack> getItems() {
@@ -359,10 +360,9 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
     public void setItems(NonNullList<ItemStack> items) {
         AtomicInteger index = new AtomicInteger();
         items.forEach(itemStack -> {
-            if (index.get() > getHandler().getSlots())
-                // Die
-                throw new IllegalStateException();
-            itemHandler.setStackInSlot(index.getAndIncrement(), itemStack);
+            if (index.get() > getHandler().size())
+                return;
+            itemHandler.set(index.getAndIncrement(), ItemResource.of(itemStack), itemStack.getCount());
         });
     }
 
@@ -373,12 +373,12 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
 
     @Override
     public void saveItems(@NotNull ValueOutput valueOutput) {
-        nbt.put("Items", getHandler().serializeNBT(provider));
+        getHandler().serialize(valueOutput.child("Items"));
     }
 
     @Override
     public void loadItems(@NotNull ValueInput valueInput) {
-        itemHandler.deserializeNBT(provider, nbt.getCompound("Items"));
+        getHandler().deserialize(valueInput.childOrEmpty("Items"));
     }
 
     @Override
@@ -388,7 +388,12 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
 
     @Override
     public @NotNull ItemStack removeItem(int slot, int count) {
-        return itemHandler.extractItem(slot, count, false);
+        ItemResource resource = itemHandler.getResource(slot);
+        int oldCount = itemHandler.getAmountAsInt(slot);
+        try (var tx = openRoot()) {
+            itemHandler.extract(slot, resource, count, tx);
+        }
+        return resource.toStack(oldCount);
     }
 
     @Override
@@ -396,26 +401,26 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         if (stack.getCount() > getMaxStackSize()) {
             stack.setCount(getMaxStackSize());
         }
-        itemHandler.setStackInSlot(slot, stack);
+        itemHandler.set(slot, ItemResource.of(stack), stack.getCount());
     }
 
     @Override
     public @NotNull ItemStack getItem(int slot) {
-        return itemHandler.getStackInSlot(slot);
+        return itemHandler.getResource(slot).toStack(itemHandler.getAmountAsInt(slot));
     }
 
     @Override
     public void clearContent() {
-        for (int index = 0; index < itemHandler.getSlots(); index++) {
+        for (int index = 0; index < itemHandler.size(); index++) {
             removeItemNoUpdate(index);
         }
     }
 
     @Override
     public int getContainerSize() {
-        return itemHandler.getSlots();
+        return itemHandler.size();
     }
-    *///?}
+    //?}
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, InfusementChamberBlockEntity pEntity) {
         if (level.isClientSide()) return;

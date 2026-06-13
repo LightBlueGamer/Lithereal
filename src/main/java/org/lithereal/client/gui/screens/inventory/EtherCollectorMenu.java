@@ -1,7 +1,6 @@
 package org.lithereal.client.gui.screens.inventory;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;

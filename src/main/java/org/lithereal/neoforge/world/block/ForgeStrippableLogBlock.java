@@ -1,7 +1,7 @@
 package org.lithereal.neoforge.world.block;
 
 //? neoforge {
-/*import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -36,4 +36,4 @@ public class ForgeStrippableLogBlock extends RotatedPillarBlock {
         return super.getToolModifiedState(state, context, itemAbility, simulate);
     }
 }
-*///?}
+//?}

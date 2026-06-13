@@ -1,7 +1,7 @@
 package org.lithereal.neoforge.datagen;
 
 //? neoforge {
-/*import net.minecraft.core.Holder;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.resources.ResourceKey;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWit
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
-import org.jetbrains.annotations.NotNull;
 import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModRawMaterialItems;
@@ -86,9 +85,9 @@ public class ModEntityLootTableProvider extends EntityLootSubProvider {
     }
 
     @Override
-    protected @NotNull Stream<EntityType<?>> knownEntityTypes() {
+    protected Stream<EntityType<?>> getKnownEntityTypes() {
         if (cachedGeneratedEntityTypes != null) return cachedGeneratedEntityTypes.stream();
         return Streams.of(ModEntities.ENTITIES).map(Holder::value);
     }
 }
-*///?}
+//?}

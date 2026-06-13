@@ -1,7 +1,7 @@
 package org.lithereal.fabric;
 
 //? fabric {
-import net.fabricmc.api.ModInitializer;
+/*import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
@@ -99,4 +99,4 @@ public class LitherealFabric implements ModInitializer {
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)));
     }
 }
-//?}
+*///?}

@@ -1,7 +1,7 @@
 package org.lithereal.fabric.client.armor;
 
 //? fabric {
-import com.mojang.blaze3d.vertex.PoseStack;
+/*import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
@@ -165,4 +165,4 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
         }
     }
 }
-//?}
+*///?}

@@ -25,7 +25,7 @@ public class ModStoneBlocks {
             resourceKey -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.COBBLED_DEEPSLATE_WALL).setId(resourceKey)));
 
     public static final RegistrySupplier<Block> CHISELED_ETHERSTONE = registerBlock("chiseled_etherstone",
-            resourceKey -> new Block(BlockBehaviour.Properties.ofLegacyCopy(Blocks.CHISELED_DEEPSLATE).setId(resourceKey)));
+            resourceKey -> new RotatedPillarBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.CHISELED_DEEPSLATE).setId(resourceKey)));
 
     public static final RegistrySupplier<Block> POLISHED_ETHERSTONE = registerBlock("polished_etherstone",
             resourceKey -> new Block(BlockBehaviour.Properties.ofLegacyCopy(Blocks.POLISHED_DEEPSLATE).setId(resourceKey)));
