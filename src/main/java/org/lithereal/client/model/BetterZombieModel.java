@@ -62,9 +62,9 @@ public class BetterZombieModel<T extends ZombieRenderState> extends PhantomZombi
     public static LayerDefinition createBabyBodyLayer(final CubeDeformation scale) {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
-        float overlayScale = 0.25F;
+        float overlayScale = 0.1F;
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-2.0F, -2.5F, -1.0F, 4.0F, 5.0F, 2.0F, scale), PartPose.offset(0.0F, 17.5F, 0.0F));
-        body.addOrReplaceChild("jacket", CubeListBuilder.create().texOffs(16, 32).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, scale.extend(overlayScale)), PartPose.ZERO);
+        body.addOrReplaceChild("jacket", CubeListBuilder.create().texOffs(16, 23).addBox(-2.0F, -2.5F, -1.0F, 4.0F, 5.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO);
         PartDefinition head = root.addOrReplaceChild(
                 "head",
                 CubeListBuilder.create()
@@ -88,16 +88,16 @@ public class BetterZombieModel<T extends ZombieRenderState> extends PhantomZombi
                 "right_leg", CubeListBuilder.create().texOffs(8, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, scale), PartPose.offset(-1.0F, 20.0F, 0.0F)
         );
         leftArm.addOrReplaceChild(
-                "left_sleeve", CubeListBuilder.create().texOffs(48, 48).addBox(-1.0F, -0.5F, -1.0F, 2.0F, 5.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
+                "left_sleeve", CubeListBuilder.create().texOffs(28, 23).addBox(-1.0F, -0.5F, -1.0F, 2.0F, 5.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
         );
         rightArm.addOrReplaceChild(
-                "right_sleeve", CubeListBuilder.create().texOffs(40, 32).addBox(-1.0F, -0.5F, -1.0F, 2.0F, 5.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
+                "right_sleeve", CubeListBuilder.create().texOffs(36, 23).addBox(-1.0F, -0.5F, -1.0F, 2.0F, 5.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
         );
         leftLeg.addOrReplaceChild(
-                "left_pants", CubeListBuilder.create().texOffs(0, 48).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
+                "left_pants", CubeListBuilder.create().texOffs(0, 22).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
         );
         rightLeg.addOrReplaceChild(
-                "right_pants", CubeListBuilder.create().texOffs(0, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
+                "right_pants", CubeListBuilder.create().texOffs(8, 22).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO
         );
         return LayerDefinition.create(mesh, 64, 64);
     }

@@ -1,0 +1,112 @@
+{
+  "type": "minecraft:fallen_tree",
+  "config": {
+    "log_decorators": [
+      {
+        "type": "minecraft:attached_to_logs",
+        "block_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "weight": 2,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "down"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "north"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "south"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "east"
+                }
+              }
+            },
+            {
+              "weight": 1,
+              "data": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "west"
+                }
+              }
+            }
+          ]
+        },
+        "directions": [
+          "up",
+          "down",
+          "north",
+          "south",
+          "east",
+          "west"
+        ],
+        "probability": 0.1
+      },
+      {
+        "type": "minecraft:attached_to_logs",
+        "block_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "lithereal:malishroom"
+              },
+              "weight": 2
+            },
+            {
+              "data": {
+                "Name": "lithereal:fortshroom"
+              },
+              "weight": 1
+            }
+          ]
+        },
+        "directions": [
+          "up"
+        ],
+        "probability": 0.1
+      }
+    ],
+    "log_length": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 11,
+      "min_inclusive": 8
+    },
+    "stump_decorators": [
+      {
+        "type": "minecraft:trunk_vine"
+      }
+    ],
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:phantom_oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

@@ -23,8 +23,8 @@ import org.lithereal.client.renderer.state.PhantomRenderState;
 import org.lithereal.entity.phantom.PhantomMob;
 
 public abstract class AbstractPhantomZombieRenderer<T extends Zombie & PhantomMob<T>, S extends ZombieRenderState & PhantomRenderState, M extends ZombieModel<S>, AM  extends ZombieModel<S>> extends HumanoidMobRenderer<T, S, M> {
-    private static final Identifier ZOMBIE_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_zombie.png");
-    private static final Identifier BABY_ZOMBIE_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_zombie_baby.png");
+    private static final Identifier ZOMBIE_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_zombie");
+    private static final Identifier BABY_ZOMBIE_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_zombie_baby");
 
     protected AbstractPhantomZombieRenderer(
             final EntityRendererProvider.Context context, final M model, final M babyModel, final ArmorModelSet<AM> armorSet, final ArmorModelSet<AM> babyArmorSet
@@ -34,7 +34,7 @@ public abstract class AbstractPhantomZombieRenderer<T extends Zombie & PhantomMo
     }
 
     public @NonNull Identifier getTextureLocation(final S state) {
-        return getBaseTexture(state).withSuffix(state.isPhasing() ? "_phasing" : "");
+        return getBaseTexture(state).withSuffix(state.isPhasing() ? "_phasing.png" : ".png");
     }
 
     public Identifier getBaseTexture(final S state) {

@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "lithereal:frostbitten_litherite"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "lithereal:frostbitten_litherite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "lithereal:frostbitten_litherite"
+      }
+    ]
+  }
+}

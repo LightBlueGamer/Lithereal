@@ -1,5 +1,5 @@
 {
-  "ambient_light": 0.25,
+  "ambient_light": 0.2,
   "attributes": {
     "minecraft:audio/ambient_sounds": {
       "mood": {
@@ -17,6 +17,7 @@
         "sound": "minecraft:music.end"
       }
     },
+    "minecraft:gameplay/sky_light_level": 7,
     "minecraft:gameplay/bed_rule": {
       "can_set_spawn": "always",
       "can_sleep": "always",
@@ -25,11 +26,15 @@
     "minecraft:gameplay/respawn_anchor_works": false,
     "minecraft:visual/ambient_light_color": "#3f473f",
     "minecraft:visual/fog_color": "#0A275C",
+    "minecraft:visual/fog_end_distance": 96,
+    "minecraft:visual/fog_start_distance": 64,
     "minecraft:visual/sky_color": "#1659AC",
     "minecraft:visual/sky_light_color": "#c8dffe",
-    "minecraft:visual/sky_light_factor": 0.6,
-    "minecraft:visual/block_light_tint": "#94ffa6",
+    "minecraft:visual/sky_light_factor": 0.4,
+    "minecraft:visual/block_light_tint": "#82f395",
     "minecraft:visual/water_fog_color": "#180660",
+    "minecraft:visual/water_fog_end_distance": 96,
+    "minecraft:visual/water_fog_start_distance": 12,
     "minecraft:visual/ambient_particles": [
       {
         "particle": {

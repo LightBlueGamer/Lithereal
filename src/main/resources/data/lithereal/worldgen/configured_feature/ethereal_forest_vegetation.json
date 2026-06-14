@@ -6,21 +6,6 @@
       "entries": [
         {
           "data": {
-            "Name": "minecraft:short_grass"
-          },
-          "weight": 75
-        },
-        {
-          "data": {
-            "Name": "minecraft:tall_grass",
-            "Properties": {
-              "half": "lower"
-            }
-          },
-          "weight": 20
-        },
-        {
-          "data": {
             "Name": "lithereal:phantom_rose"
           },
           "weight": 5

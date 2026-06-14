@@ -2,12 +2,14 @@ package org.lithereal.neoforge.client.event;
 
 //? neoforge {
 import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.object.boat.BoatModel;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
+import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -42,6 +44,11 @@ import org.lithereal.item.ModArmorItems;
 
 import java.util.*;
 
+import static net.minecraft.client.model.geom.LayerDefinitions.INNER_ARMOR_DEFORMATION;
+import static net.minecraft.client.model.geom.LayerDefinitions.OUTER_ARMOR_DEFORMATION;
+import static org.lithereal.LitherealClient.BABY_INNER_ARMOR_DEFORMATION;
+import static org.lithereal.LitherealClient.BABY_OUTER_ARMOR_DEFORMATION;
+
 public class ClientEvents {
     public static class ClientModBusEvents {
         public static void register(IEventBus bus) {
@@ -73,8 +80,18 @@ public class ClientEvents {
         public static void modelLayerLocationInit(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
             event.registerLayerDefinition(BetterZombieModel.BABY_ZOMBIE,  () -> BetterZombieModel.createBabyBodyLayer(CubeDeformation.NONE));
-            event.registerLayerDefinition(LitherealArmorModel.OUTER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(1.0F), 0), 64, 32));
-            event.registerLayerDefinition(LitherealArmorModel.INNER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(0.5F), 0), 64, 32));
+            ArmorModelSet<LayerDefinition> litherealArmorLayerDefinition = LitherealArmorModel.createArmorMeshSet(INNER_ARMOR_DEFORMATION, OUTER_ARMOR_DEFORMATION)
+                    .map(mesh -> LayerDefinition.create(mesh, 64, 32));
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET.head(), litherealArmorLayerDefinition::head);
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET.chest(), litherealArmorLayerDefinition::chest);
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET.legs(), litherealArmorLayerDefinition::legs);
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET.feet(), litherealArmorLayerDefinition::feet);
+            ArmorModelSet<LayerDefinition> babyLitherealArmorLayerDefinition = LitherealArmorModel.createBabyArmorMeshSet(BABY_INNER_ARMOR_DEFORMATION, BABY_OUTER_ARMOR_DEFORMATION, PartPose.ZERO)
+                    .map(mesh -> LayerDefinition.create(mesh, 64, 32));
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.head(), babyLitherealArmorLayerDefinition::head);
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.chest(), babyLitherealArmorLayerDefinition::chest);
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.legs(), babyLitherealArmorLayerDefinition::legs);
+            event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.feet(), babyLitherealArmorLayerDefinition::feet);
             event.registerLayerDefinition(LitherealClient.PHANTOM_OAK_BOAT_LAYER, BoatModel::createBoatModel);
             event.registerLayerDefinition(LitherealClient.PHANTOM_OAK_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
             event.registerLayerDefinition(LitherealClient.FORTSHROOM_BOAT_LAYER, BoatModel::createBoatModel);
@@ -84,8 +101,8 @@ public class ClientEvents {
         }
         @SubscribeEvent
         public static void modelLayersInit(EntityRenderersEvent.AddLayers event) {
-            LitherealArmorModel.OUTER = new LitherealArmorModel(event.getEntityModels().bakeLayer(LitherealArmorModel.OUTER_ARMOR));
-            LitherealArmorModel.INNER = new LitherealArmorModel(event.getEntityModels().bakeLayer(LitherealArmorModel.INNER_ARMOR));
+            LitherealArmorModel.ARMOR_MODEL_SET = ArmorModelSet.bake(LitherealArmorModel.LITHEREAL_ARMOR_SET, event.getEntityModels(), LitherealArmorModel::new);
+            LitherealArmorModel.BABY_ARMOR_MODEL_SET = ArmorModelSet.bake(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY, event.getEntityModels(), LitherealArmorModel::new);
         }
         @SubscribeEvent
         public static void entityRendererInit(EntityRenderersEvent.RegisterRenderers event) {
@@ -112,13 +129,13 @@ public class ClientEvents {
 
                 @Override
                 public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
-                    return layerType == EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS ? LitherealArmorModel.INNER : LitherealArmorModel.OUTER;
+                    return (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot());
                 }
             }, ModArmorItems.INFUSED_LITHERITE_HELMET, ModArmorItems.INFUSED_LITHERITE_CHESTPLATE, ModArmorItems.INFUSED_LITHERITE_LEGGINGS, ModArmorItems.INFUSED_LITHERITE_BOOTS);
             event.registerItem(new IClientItemExtensions() {
                @Override
                public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
-                   return layerType == EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS ? LitherealArmorModel.INNER : LitherealArmorModel.OUTER;
+                   return (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot());
                }
             }, ModArmorItems.LITHERITE_HELMET, ModArmorItems.LITHERITE_CHESTPLATE, ModArmorItems.LITHERITE_LEGGINGS, ModArmorItems.LITHERITE_BOOTS,
                     ModArmorItems.BURNING_LITHERITE_HELMET, ModArmorItems.BURNING_LITHERITE_CHESTPLATE, ModArmorItems.BURNING_LITHERITE_LEGGINGS, ModArmorItems.BURNING_LITHERITE_BOOTS,

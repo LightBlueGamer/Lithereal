@@ -47,6 +47,11 @@
       "lithereal:spring_lava"
     ],
     [
+      "minecraft:patch_grass_forest",
+      "minecraft:patch_tall_grass",
+      "minecraft:patch_bush",
+      "minecraft:patch_firefly_bush_near_water",
+      "minecraft:patch_leaf_litter",
       "lithereal:impure_ethereal_crystal_patch",
       "lithereal:ethereal_forest_flowers",
       "lithereal:ethereal_forest_vegetation",

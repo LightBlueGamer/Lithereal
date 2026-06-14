@@ -110,7 +110,7 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
             HumanoidModel<HumanoidRenderState> usedModel;
             EquipmentClientInfo.LayerType layerType;
             if (stack.is(ModTags.LITHERITE_ARMORS) || stack.is(ModTags.ODYSIUM_ARMORS)) {
-                usedModel = innerModel ? LitherealArmorModel.INNER : LitherealArmorModel.OUTER;
+                usedModel = (state.isBaby ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(equippable.slot());
                 layerType = state.isBaby ? EquipmentClientInfo.LayerType.HUMANOID_BABY : innerModel ? EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS : EquipmentClientInfo.LayerType.HUMANOID;
             } else return;
             setPartVisibility(usedModel, slot);

@@ -1,0 +1,29 @@
+{
+  "layers": {
+    "horse_body": [
+      {
+        "texture": "lithereal:enhanced_odysium"
+      }
+    ],
+    "humanoid": [
+      {
+        "texture": "lithereal:enhanced_odysium"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "lithereal:enhanced_odysium"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "lithereal:enhanced_odysium"
+      }
+    ],
+    "nautilus_body": [
+      {
+        "texture": "lithereal:enhanced_odysium"
+      }
+    ]
+  }
+}

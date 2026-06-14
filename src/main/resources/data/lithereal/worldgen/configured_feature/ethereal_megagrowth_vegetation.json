@@ -6,36 +6,6 @@
       "entries": [
         {
           "data": {
-            "Name": "minecraft:short_grass"
-          },
-          "weight": 75
-        },
-        {
-          "data": {
-            "Name": "minecraft:tall_grass",
-            "Properties": {
-              "half": "lower"
-            }
-          },
-          "weight": 20
-        },
-        {
-          "data": {
-            "Name": "minecraft:fern"
-          },
-          "weight": 40
-        },
-        {
-          "data": {
-            "Name": "minecraft:large_fern",
-            "Properties": {
-              "half": "lower"
-            }
-          },
-          "weight": 10
-        },
-        {
-          "data": {
             "Name": "lithereal:phantom_rose_ethereal_core"
           },
           "weight": 10

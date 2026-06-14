@@ -96,16 +96,6 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
     }
 
     @Override
-    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos blockPos, boolean movedByPiston) {
-        if (level.getBlockEntity(blockPos) instanceof EtherealRiftBlockEntity etherealRiftBlockEntity) {
-            etherealRiftBlockEntity.getAttached().forEach(pos -> {
-                if (!pos.equals(blockPos)) level.removeBlock(pos, true);
-            });
-        }
-        super.affectNeighborsAfterRemoval(state, level, blockPos, movedByPiston);
-    }
-
-    @Override
     public TeleportTransition getPortalDestination(ServerLevel currentLevel, Entity entity, BlockPos blockPos) {
         BlockEntity blockEntity = currentLevel.getBlockEntity(blockPos);
         if (!(blockEntity instanceof EtherealRiftBlockEntity etherealRiftBlockEntity)) return null;

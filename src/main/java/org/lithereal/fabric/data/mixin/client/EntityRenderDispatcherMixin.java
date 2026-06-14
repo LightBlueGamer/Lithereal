@@ -2,6 +2,7 @@ package org.lithereal.fabric.data.mixin.client;
 
 //? fabric {
 /*import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.lithereal.client.model.LitherealArmorModel;
@@ -22,8 +23,8 @@ public class EntityRenderDispatcherMixin {
 
     @Inject(method = "onResourceManagerReload", at = @At(value = "TAIL"))
     public void injectModelCapture(ResourceManager resourceManager, CallbackInfo ci) {
-        LitherealArmorModel.OUTER = new LitherealArmorModel(this.entityModels.get().bakeLayer(LitherealArmorModel.OUTER_ARMOR));
-        LitherealArmorModel.INNER = new LitherealArmorModel(this.entityModels.get().bakeLayer(LitherealArmorModel.INNER_ARMOR));
+        LitherealArmorModel.ARMOR_MODEL_SET = ArmorModelSet.bake(LitherealArmorModel.LITHEREAL_ARMOR_SET, this.entityModels.get(), LitherealArmorModel::new);
+        LitherealArmorModel.BABY_ARMOR_MODEL_SET = ArmorModelSet.bake(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY, this.entityModels.get(), LitherealArmorModel::new);
     }
 }
 *///?}

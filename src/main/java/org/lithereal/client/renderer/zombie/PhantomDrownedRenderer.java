@@ -20,8 +20,8 @@ import org.lithereal.client.renderer.state.PhantomZombieRenderState;
 import org.lithereal.entity.phantom.PhantomMob;
 
 public class PhantomDrownedRenderer<T extends Drowned & PhantomMob<T>> extends AbstractPhantomZombieRenderer<T, PhantomZombieRenderState, BetterDrownedModel<PhantomZombieRenderState>, PhantomDrownedModel<PhantomZombieRenderState>> {
-    private static final Identifier DROWNED_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_drowned.png");
-    private static final Identifier BABY_DROWNED_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_drowned_baby.png");
+    private static final Identifier DROWNED_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_drowned");
+    private static final Identifier BABY_DROWNED_LOCATION = Lithereal.id("textures/entity/phantom_zombie/phantom_drowned_baby");
 
     public PhantomDrownedRenderer(final EntityRendererProvider.Context context) {
         super(

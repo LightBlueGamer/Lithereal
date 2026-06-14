@@ -2,7 +2,7 @@
   "feature": "lithereal:impure_ethereal_crystal_patch",
   "placement": [
     {
-      "type": "minecraft:count_on_every_layer",
+      "type": "minecraft:count",
       "count": 45
     },
     {

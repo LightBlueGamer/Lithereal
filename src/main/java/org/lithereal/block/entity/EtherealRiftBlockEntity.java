@@ -68,6 +68,14 @@ public class EtherealRiftBlockEntity extends EtherealCorePortalBlockEntity {
         }
     }
 
+    @Override
+    public void preRemoveSideEffects(BlockPos blockPos, BlockState state) {
+        getAttached().forEach(pos -> {
+            if (!pos.equals(blockPos)) level.removeBlock(pos, true);
+        });
+        super.preRemoveSideEffects(blockPos, state);
+    }
+
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }

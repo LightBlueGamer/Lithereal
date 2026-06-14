@@ -48,6 +48,11 @@
       "lithereal:spring_lava"
     ],
     [
+      "minecraft:patch_grass_taiga",
+      "minecraft:patch_tall_grass",
+      "minecraft:patch_large_fern",
+      "minecraft:patch_bush",
+      "minecraft:patch_leaf_litter",
       "lithereal:impure_ethereal_crystal_patch",
       "lithereal:ethereal_megagrowth_flowers",
       "lithereal:ethereal_megagrowth_vegetation",

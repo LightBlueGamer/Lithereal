@@ -4,6 +4,10 @@
     "default": "lithereal:super_phantom_oak",
     "features": [
       {
+        "chance": 0.05,
+        "feature": "lithereal:fallen_super_phantom_oak_tree"
+      },
+      {
         "chance": 0.4,
         "feature": "lithereal:mega_phantom_oak"
       },

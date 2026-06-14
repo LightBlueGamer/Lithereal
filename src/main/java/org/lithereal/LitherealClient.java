@@ -6,11 +6,13 @@ import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.object.boat.BoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
+import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -35,8 +37,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static dev.architectury.platform.Platform.isModLoaded;
+import static net.minecraft.client.model.geom.LayerDefinitions.INNER_ARMOR_DEFORMATION;
+import static net.minecraft.client.model.geom.LayerDefinitions.OUTER_ARMOR_DEFORMATION;
 
 public class LitherealClient {
+    public static final CubeDeformation BABY_OUTER_ARMOR_DEFORMATION = new CubeDeformation(-0.1F, 0.5F, 0.3F);
+    public static final CubeDeformation BABY_INNER_ARMOR_DEFORMATION = new CubeDeformation(-0.1F, 0.3F, 0.3F);
     public static final ModelLayerLocation PHANTOM_OAK_BOAT_LAYER = new ModelLayerLocation(
             Lithereal.id("boat/phantom_oak"), "main");
     public static final ModelLayerLocation PHANTOM_OAK_CHEST_BOAT_LAYER = new ModelLayerLocation(
@@ -52,8 +58,18 @@ public class LitherealClient {
     public static void init() {
         EntityModelLayerRegistry.register(BetterZombieModel.ZOMBIE, () -> BetterZombieModel.createBodyLayer(CubeDeformation.NONE));
         EntityModelLayerRegistry.register(BetterZombieModel.BABY_ZOMBIE, () -> BetterZombieModel.createBabyBodyLayer(CubeDeformation.NONE));
-        EntityModelLayerRegistry.register(LitherealArmorModel.OUTER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(1.0F), 0), 64, 32));
-        EntityModelLayerRegistry.register(LitherealArmorModel.INNER_ARMOR, () -> LayerDefinition.create(LitherealArmorModel.createBodyLayer(new CubeDeformation(0.5F), 0), 64, 32));
+        ArmorModelSet<LayerDefinition> litherealArmorLayerDefinition = LitherealArmorModel.createArmorMeshSet(INNER_ARMOR_DEFORMATION, OUTER_ARMOR_DEFORMATION)
+                .map(mesh -> LayerDefinition.create(mesh, 64, 32));
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET.head(), litherealArmorLayerDefinition::head);
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET.chest(), litherealArmorLayerDefinition::chest);
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET.legs(), litherealArmorLayerDefinition::legs);
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET.feet(), litherealArmorLayerDefinition::feet);
+        ArmorModelSet<LayerDefinition> babyLitherealArmorLayerDefinition = LitherealArmorModel.createBabyArmorMeshSet(BABY_INNER_ARMOR_DEFORMATION, BABY_OUTER_ARMOR_DEFORMATION, PartPose.ZERO)
+                .map(mesh -> LayerDefinition.create(mesh, 64, 32));
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.head(), babyLitherealArmorLayerDefinition::head);
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.chest(), babyLitherealArmorLayerDefinition::chest);
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.legs(), babyLitherealArmorLayerDefinition::legs);
+        EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.feet(), babyLitherealArmorLayerDefinition::feet);
         EntityModelLayerRegistry.register(PHANTOM_OAK_BOAT_LAYER, BoatModel::createBoatModel);
         EntityModelLayerRegistry.register(PHANTOM_OAK_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
         EntityModelLayerRegistry.register(FORTSHROOM_BOAT_LAYER, BoatModel::createBoatModel);
