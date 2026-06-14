@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "lithereal:pailite"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "lithereal:pailite_pressure_plate"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "lithereal:polished_pailite",
+  "result": {
+    "id": "lithereal:polished_pailite_wall"
+  }
+}

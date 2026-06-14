@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "phantom_diamond",
+  "ingredients": [
+    "lithereal:phantom_diamond_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "lithereal:phantom_diamond"
+  }
+}

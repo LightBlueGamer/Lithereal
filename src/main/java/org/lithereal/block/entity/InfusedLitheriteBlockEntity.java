@@ -20,6 +20,7 @@ import org.lithereal.util.PotionStorage;
 
 public class InfusedLitheriteBlockEntity extends BlockEntity implements PotionStorage {
     public PotionContents potion = PotionContents.EMPTY;
+    public float potionDurationScale = 0.1F;
 
     public InfusedLitheriteBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.INFUSED_LITHERITE_BLOCK_ENTITY.get(), pos, state);
@@ -27,11 +28,13 @@ public class InfusedLitheriteBlockEntity extends BlockEntity implements PotionSt
 
     @Override
     protected void saveAdditional(@NonNull ValueOutput valueOutput) {
-        super.saveAdditional(PotionStorage.setPotion(valueOutput, potion));
+        valueOutput.putFloat("potion_duration_scale", this.potionDurationScale);
+        super.saveAdditional(PotionStorage.setPotion(valueOutput, this.potion));
     }
 
     @Override
     protected void loadAdditional(@NonNull ValueInput valueInput) {
+        this.potionDurationScale = valueInput.getFloatOr("potion_duration_scale", 0.1F);
         super.loadAdditional(valueInput);
         if (valueInput.child("Potion").isPresent())
             setPotion(valueInput.read("Potion", PotionContents.CODEC).orElse(PotionContents.EMPTY));
@@ -62,16 +65,19 @@ public class InfusedLitheriteBlockEntity extends BlockEntity implements PotionSt
     protected void applyImplicitComponents(@NonNull DataComponentGetter components) {
         super.applyImplicitComponents(components);
         this.potion = components.get(DataComponents.POTION_CONTENTS);
+        this.potionDurationScale = components.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F);
     }
 
     @Override
     protected void collectImplicitComponents(DataComponentMap.@NonNull Builder builder) {
         super.collectImplicitComponents(builder);
         builder.set(DataComponents.POTION_CONTENTS, this.potion);
+        builder.set(DataComponents.POTION_DURATION_SCALE, this.potionDurationScale);
     }
 
     @Override
     public void removeComponentsFromTag(ValueOutput output) {
+        output.discard("potion_duration_scale");
         output.discard("Potion");
         super.removeComponentsFromTag(output);
     }

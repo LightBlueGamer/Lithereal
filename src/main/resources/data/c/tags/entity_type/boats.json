@@ -1,6 +1,10 @@
 {
   "values": [
-    "lithereal:mod_boat",
-    "lithereal:mod_chest_boat"
+    "lithereal:phantom_oak_boat",
+    "lithereal:phantom_oak_chest_boat",
+    "lithereal:fortshroom_boat",
+    "lithereal:fortshroom_chest_boat",
+    "lithereal:malishroom_boat",
+    "lithereal:malishroom_chest_boat"
   ]
 }

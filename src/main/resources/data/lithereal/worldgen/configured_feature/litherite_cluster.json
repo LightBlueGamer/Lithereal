@@ -36,26 +36,16 @@
     },
     "core_percentage": 0,
     "core_block": {
-      "fallback": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "lithereal:litherite_crystal_block"
-        }
-      },
-      "rules": [
-
-      ]
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:litherite_crystal_block"
+      }
     },
     "outer_block": {
-      "fallback": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "lithereal:litherite_crystal_block"
-        }
-      },
-      "rules": [
-
-      ]
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:litherite_crystal_block"
+      }
     },
     "replaceable": "#minecraft:dripstone_replaceable_blocks",
     "placed_ignore_blocks": [

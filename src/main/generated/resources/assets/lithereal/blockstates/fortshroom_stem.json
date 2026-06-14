@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "lithereal:block/fortshroom_stem",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "lithereal:block/fortshroom_stem"
+    },
+    "axis=z": {
+      "model": "lithereal:block/fortshroom_stem",
+      "x": 90
+    }
+  }
+}

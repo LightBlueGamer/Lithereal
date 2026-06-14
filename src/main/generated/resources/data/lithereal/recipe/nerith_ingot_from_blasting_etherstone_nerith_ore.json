@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 150,
+  "experience": 2.0,
+  "group": "nerith_ingot",
+  "ingredient": "lithereal:etherstone_nerith_ore",
+  "result": {
+    "id": "lithereal:nerith_ingot"
+  }
+}

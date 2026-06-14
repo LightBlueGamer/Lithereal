@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "lithereal:etherstone",
+  "result": {
+    "id": "lithereal:etherstone_brick_wall"
+  }
+}

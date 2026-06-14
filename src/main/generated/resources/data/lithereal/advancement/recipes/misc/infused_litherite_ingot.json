@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_molten_litherite_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:molten_litherite_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:infused_litherite_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_molten_litherite_bucket"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:infused_litherite_ingot"
+    ]
+  }
+}

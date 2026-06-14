@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_phantom_rose_ethereal_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:phantom_rose_ethereal_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:blue_dye_from_phantom_rose_ethereal_core"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_phantom_rose_ethereal_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:blue_dye_from_phantom_rose_ethereal_core"
+    ]
+  }
+}

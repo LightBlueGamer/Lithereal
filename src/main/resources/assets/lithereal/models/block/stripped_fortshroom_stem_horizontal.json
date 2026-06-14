@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "lithereal:block/stripped_fortshroom_stem_top",
-    "side": "lithereal:block/stripped_fortshroom_stem"
-  }
-}

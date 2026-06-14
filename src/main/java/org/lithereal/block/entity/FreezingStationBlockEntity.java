@@ -3,6 +3,7 @@ package org.lithereal.block.entity;
 //? fabric {
 /*import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 *///?}
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 //? neoforge {
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.lithereal.neoforge.util.ImplementedItemHandler;
@@ -38,16 +39,14 @@ import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.FreezingStationMenu;
-import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.FreezingStationRecipe;
 import org.lithereal.data.recipes.ModRecipes;
+import org.lithereal.tags.ModTags;
 import org.lithereal.util.CommonUtils;
 
 import java.util.Optional;
 //? neoforge {
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static net.neoforged.neoforge.transfer.transaction.Transaction.openRoot;
 //?}
 
 //? fabric {
@@ -60,6 +59,8 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     protected final ContainerData data;
     protected int progress = 0;
     protected int maxProgress = 200;
+    protected int chillLevel = 0;
+    protected int maxChill = 0;
     protected int coldness = 0;
 
     public FreezingStationBlockEntity(BlockPos pos, BlockState state) {
@@ -70,7 +71,9 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 return switch (index) {
                     case 0 -> FreezingStationBlockEntity.this.progress;
                     case 1 -> FreezingStationBlockEntity.this.maxProgress;
-                    case 2 -> FreezingStationBlockEntity.this.coldness;
+                    case 2 -> FreezingStationBlockEntity.this.chillLevel;
+                    case 3 -> FreezingStationBlockEntity.this.maxChill;
+                    case 4 -> FreezingStationBlockEntity.this.coldness;
                     default -> 0;
                 };
             }
@@ -80,13 +83,15 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 switch (index) {
                     case 0 -> FreezingStationBlockEntity.this.progress = value;
                     case 1 -> FreezingStationBlockEntity.this.maxProgress = value;
-                    case 2 -> FreezingStationBlockEntity.this.coldness = value;
+                    case 2 -> FreezingStationBlockEntity.this.chillLevel = value;
+                    case 3 -> FreezingStationBlockEntity.this.maxChill = value;
+                    case 4 -> FreezingStationBlockEntity.this.coldness = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 3;
+                return 5;
             }
         };
     }
@@ -147,6 +152,9 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         saveItems(valueOutput);
         valueOutput.putInt("freezing_station.progress", progress);
         valueOutput.putInt("freezing_station.max_progress", maxProgress);
+        valueOutput.putInt("freezing_station.chill_level", chillLevel);
+        valueOutput.putInt("freezing_station.max_chill", maxChill);
+        valueOutput.putInt("freezing_station.coldness", coldness);
     }
 
     @Override
@@ -155,6 +163,9 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         loadItems(valueInput);
         progress = valueInput.getIntOr("freezing_station.progress", 0);
         maxProgress = valueInput.getIntOr("freezing_station.max_progress", 200);
+        chillLevel = valueInput.getIntOr("freezing_station.chill_level", 0);
+        maxChill = valueInput.getIntOr("freezing_station.max_chill", 0);
+        coldness = valueInput.getIntOr("freezing_station.coldness", 0);
     }
 
     @Nullable
@@ -169,10 +180,34 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, FreezingStationBlockEntity pEntity) {
-        if(level.isClientSide()) return;
+        if (level.isClientSide()) return;
 
-        if(hasRecipe(pEntity)) {
-            pEntity.progress += getCoolingPower(pEntity);
+        boolean hasChiller = hasChiller(pEntity);
+        int belowPower = getCoolingPower(pEntity);
+        if (getChillLevel(pEntity) > 0 && belowPower <= 0) {
+            if (hasRecipe(pEntity)) pEntity.chillLevel--;
+        } else {
+            if (belowPower == 2) {
+                pEntity.chillLevel = 100;
+                pEntity.maxChill = 100;
+                pEntity.coldness = 2;
+            } else if (belowPower == 1) {
+                pEntity.chillLevel = 75;
+                pEntity.maxChill = 75;
+                pEntity.coldness = 1;
+            } else if (hasChiller) {
+                pEntity.chillLevel = 400;
+                pEntity.maxChill = 400;
+                pEntity.coldness = 1;
+                pEntity.removeItemWithRemainder(0, 1);
+            } else {
+                pEntity.chillLevel = 0;
+                pEntity.maxChill = 0;
+                pEntity.coldness = 0;
+            }
+        }
+        if (pEntity.coldness > 0 && hasRecipe(pEntity)) {
+            pEntity.progress += pEntity.coldness;
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress) {
@@ -182,6 +217,15 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
             if(pEntity.progress > 0) pEntity.heat(1);
             setChanged(level, blockPos, blockState);
         }
+    }
+
+    public static int getChillLevel(FreezingStationBlockEntity pEntity) {
+        return pEntity.chillLevel;
+    }
+
+    protected static boolean hasChiller(FreezingStationBlockEntity entity) {
+        ItemStack item = entity.getItem(0);
+        return item.is(ModTags.CHILLERS);
     }
 
     private void heat(int multiplier) {
@@ -195,7 +239,6 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         Block block = level.getBlockState(entity.getBlockPos().below()).getBlock();
         cooling += getBlockCoolingPower(entity, block);
 
-        entity.coldness = cooling;
         return cooling;
     }
 
@@ -209,12 +252,8 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
 
     private static void craftItem(FreezingStationBlockEntity pEntity) {
         Level level = pEntity.getLevel();
-        SimpleContainer inventory = new SimpleContainer(pEntity.getContainerSize());
-        for (int i = 0; i < pEntity.getContainerSize(); i++) {
-            inventory.setItem(i, pEntity.getItem(i));
-        }
 
-        ContainerRecipeInput freezingInput = new ContainerRecipeInput(inventory);
+        SingleRecipeInput freezingInput = new SingleRecipeInput(pEntity.getItem(1));
         Optional<RecipeHolder<FreezingStationRecipe>> recipe = ((ServerLevel)level).recipeAccess()
                 .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), freezingInput, level);
 
@@ -223,8 +262,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
             ItemStack outputItem = resultItem.copy();
             outputItem.setCount(pEntity.getItem(2).getCount() + resultItem.getCount());
 
-            pEntity.removeItem(0, 1);
-            pEntity.removeItem(1, 1);
+            pEntity.removeItemWithRemainder(1, 1);
             pEntity.setItem(2, outputItem);
 
             pEntity.resetProgress();
@@ -237,7 +275,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         for (int i = 0; i < entity.getContainerSize(); i++)
             inventory.setItem(i, entity.getItem(i));
 
-        ContainerRecipeInput freezingInput = new ContainerRecipeInput(inventory);
+        SingleRecipeInput freezingInput = new SingleRecipeInput(entity.getItem(1));
         Optional<RecipeHolder<FreezingStationRecipe>> recipe = ((ServerLevel)level).recipeAccess()
                 .getRecipeFor(ModRecipes.FREEZING_TYPE.get(), freezingInput, level);
         if (entity.progress == 0)
@@ -298,12 +336,9 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
 
     @Override
     public @NotNull ItemStack removeItem(int slot, int count) {
-        ItemResource resource = itemHandler.getResource(slot);
-        int oldCount = itemHandler.getAmountAsInt(slot);
-        try (var tx = openRoot()) {
-            itemHandler.extract(slot, resource, count, tx);
-        }
-        return resource.toStack(oldCount);
+        ItemStack originalStack = itemHandler.getStacks().get(slot);
+        itemHandler.set(slot, itemHandler.getResourceFrom(originalStack), originalStack.getCount() - count);
+        return originalStack;
     }
 
     @Override

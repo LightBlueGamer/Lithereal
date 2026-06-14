@@ -2,17 +2,20 @@ package org.lithereal.neoforge.datagen;
 
 //? neoforge {
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import org.lithereal.Lithereal;
 import org.lithereal.block.*;
+import org.lithereal.data.recipes.FireCrucibleRecipeBuilder;
+import org.lithereal.data.recipes.FreezingStationRecipeBuilder;
+import org.lithereal.data.recipes.InfusementChamberRecipeBuilder;
 import org.lithereal.item.ModArmorItems;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
@@ -60,7 +63,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(packed)
                 .group(unpackingGroup)
                 .unlockedBy(getHasName(packed), has(packed))
-                .save(this.output, Lithereal.id(forUnpacking).toString());
+                .save(this.output, Lithereal.key(Registries.RECIPE, forUnpacking));
         ShapedRecipeBuilder.shaped(this.items, packCategory, packed)
                 .define('#', unpacked)
                 .pattern("###")
@@ -68,15 +71,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("###")
                 .group(packingGroup)
                 .unlockedBy(getHasName(unpacked), has(unpacked))
-                .save(this.output, Lithereal.id(forPacking).toString());
+                .save(this.output, Lithereal.key(Registries.RECIPE, forPacking));
     }
 
     protected void oreSmeltingFromBaseModNamespace(List<ItemLike> itemsToSmelt, RecipeCategory recipeCategory, CookingBookCategory cookingBookCategory, ItemLike result, float experience, int cookingTime, String group) {
-        oreCookingFromBaseModNamespace(SmeltingRecipe::new, itemsToSmelt, recipeCategory, cookingBookCategory, new ItemStack(result), experience, cookingTime, group, "_from_smelting");
+        oreCookingFromBaseModNamespace(SmeltingRecipe::new, itemsToSmelt, recipeCategory, cookingBookCategory, result, experience, cookingTime, group, "_from_smelting");
     }
 
     protected void oreBlastingFromBaseModNamespace(List<ItemLike> itemsToSmelt, RecipeCategory recipeCategory, CookingBookCategory cookingBookCategory, ItemLike result, float experience, int cookingTime, String group) {
-        oreCookingFromBaseModNamespace(BlastingRecipe::new, itemsToSmelt, recipeCategory, cookingBookCategory, new ItemStack(result), experience, cookingTime, group, "_from_blasting");
+        oreCookingFromBaseModNamespace(BlastingRecipe::new, itemsToSmelt, recipeCategory, cookingBookCategory, result, experience, cookingTime, group, "_from_blasting");
     }
 
     protected <T extends AbstractCookingRecipe> void oreCookingFromBaseModNamespace(
@@ -84,7 +87,7 @@ public class ModRecipeProvider extends RecipeProvider {
             List<ItemLike> itemsToSmelt,
             RecipeCategory recipeCategory,
             CookingBookCategory cookingBookCategory,
-            ItemStack result,
+            ItemLike result,
             float experience,
             int cookingTime,
             String group,
@@ -94,7 +97,7 @@ public class ModRecipeProvider extends RecipeProvider {
             SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), recipeCategory, cookingBookCategory, result, experience, cookingTime, factory)
                     .group(group)
                     .unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(this.output, "lithereal:" + getItemName(result.getItem()) + method + "_" + getItemName(itemlike));
+                    .save(this.output, "lithereal:" + getItemName(result) + method + "_" + getItemName(itemlike));
         }
     }
 
@@ -237,7 +240,99 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        ModBlockFamilies.MOD_BLOCK_FAMILIES.forEach(blockFamily -> generateRecipes(blockFamily, FeatureFlagSet.of()));
+        ModBlockFamilies.MOD_BLOCK_FAMILIES.forEach(blockFamily ->
+                generateRecipes(blockFamily, FeatureFlags.VANILLA_SET));
+        FireCrucibleRecipeBuilder.noSecondary(RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get())
+                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
+                .save(this.output);
+        FireCrucibleRecipeBuilder.noSecondary(RecipeCategory.MISC, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModRawMaterialItems.LITHERITE_CRYSTAL.get())
+                .cookingTime(400)
+                .unlockedBy("has_frozen_litherite_crystal", has(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get()))
+                .save(this.output, "litherite_crystal_from_reversing_freezing");
+        FireCrucibleRecipeBuilder.fullRecipe(RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), Items.BUCKET, ModItems.MOLTEN_LITHERITE_BUCKET.get())
+                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
+                .save(this.output);
+        FireCrucibleRecipeBuilder.fullRecipe(RecipeCategory.MISC, ModRawMaterialItems.ELUNITE_CRYSTAL.get(), ModRawMaterialItems.CYRUM_CRYSTAL.get(), ModRawMaterialItems.ELCRUM_INGOT.get())
+                .cookingTime(250)
+                .unlockedBy("has_elunite_crystal", has(ModRawMaterialItems.ELUNITE_CRYSTAL.get()))
+                .save(this.output);
+        FireCrucibleRecipeBuilder.fullRecipe(RecipeCategory.MISC, ModRawMaterialItems.HELLIONITE_CRYSTAL.get(), ModRawMaterialItems.LUMINIUM_CRYSTAL.get(), ModRawMaterialItems.SOLIUMITE_INGOT.get())
+                .cookingTime(250)
+                .unlockedBy("has_hellionite_crystal", has(ModRawMaterialItems.HELLIONITE_CRYSTAL.get()))
+                .save(this.output);
+        FreezingStationRecipeBuilder.freezing(RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get())
+                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
+                .save(this.output);
+        FreezingStationRecipeBuilder.freezing(RecipeCategory.MISC, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModRawMaterialItems.LITHERITE_CRYSTAL.get())
+                .recipeTime(400)
+                .unlockedBy("has_burning_litherite_crystal", has(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get()))
+                .save(this.output, "litherite_crystal_from_reversing_burning");
+        InfusementChamberRecipeBuilder.infusing(RecipeCategory.MISC, Items.POTION, ModItems.MOLTEN_LITHERITE_BUCKET.get(), ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get())
+                .unlockedBy("has_molten_litherite_bucket", has(ModItems.MOLTEN_LITHERITE_BUCKET.get()))
+                .save(this.output);
+        InfusementChamberRecipeBuilder.infusing(RecipeCategory.FOOD, Items.POTION, Items.HONEY_BOTTLE, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get())
+                .unlockedBy("has_potion", has(Items.POTION))
+                .save(this.output, "honey_bottle_concoction");
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModBlocks.FIRE_CRUCIBLE.get())
+                .define('T', Items.TERRACOTTA)
+                .define('C', Items.CAULDRON)
+                .pattern("T T")
+                .pattern("TCT")
+                .pattern("TTT")
+                .unlockedBy("has_cauldron", has(Items.CAULDRON))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModBlocks.FREEZING_STATION.get())
+                .define('T', Items.IRON_TRAPDOOR)
+                .define('I', Items.IRON_INGOT)
+                .define('B', Items.BUCKET)
+                .pattern("ITI")
+                .pattern("IBI")
+                .pattern("III")
+                .unlockedBy("has_bucket", has(Items.BUCKET))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModBlocks.INFUSEMENT_CHAMBER.get())
+                .define('L', ModRawMaterialItems.LITHERITE_CRYSTAL.get())
+                .define('I', Items.IRON_INGOT)
+                .define('O', Items.OBSERVER)
+                .pattern("ILI")
+                .pattern("LOL")
+                .pattern("ILI")
+                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, ModToolItems.LITHERITE_BRUSH.get())
+                .define('#', ModRawMaterialItems.LITHERITE_CRYSTAL.get())
+                .define('I', Tags.Items.RODS_WOODEN)
+                .define('X', Items.FEATHER)
+                .pattern("X")
+                .pattern("#")
+                .pattern("I")
+                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, ModToolItems.LITHERITE_WRENCH.get())
+                .define('#', ModRawMaterialItems.LITHERITE_CRYSTAL.get())
+                .define('I', Items.IRON_INGOT)
+                .pattern(" II")
+                .pattern(" #I")
+                .pattern("I  ")
+                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.BUILDING_BLOCKS, ModItems.LITHER_TORCH.get(), 4)
+                .define('G', Tags.Items.GLASS_BLOCKS_COLORLESS)
+                .define('#', ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get())
+                .define('X', Tags.Items.RODS_WOODEN)
+                .pattern("G")
+                .pattern("#")
+                .pattern("X")
+                .unlockedBy("has_charged_litherite_crystal", has(ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LITHER_LANTERN.get(), 1)
+                .define('X', ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get())
+                .define('#', ModItems.LITHER_TORCH.get())
+                .pattern(" X ")
+                .pattern("X#X")
+                .pattern(" X ")
+                .unlockedBy("has_impure_ethereal_crystal_shard", has(ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get()))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModBlocks.PASSIVE_ETHER_ABSORBER.get(), 1)
                 .define('C', ModRawMaterialItems.CHRYON_CRYSTAL.get())
                 .define('A', ModRawMaterialItems.ALLIAN_INGOT.get())
@@ -281,6 +376,22 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("O")
                 .pattern("O")
                 .unlockedBy("has_odysium", has(ModRawMaterialItems.ODYSIUM_INGOT.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), 2)
+                .define('#', ModRawMaterialItems.LITHERITE_CRYSTAL.get())
+                .define('C', ModStoneBlocks.ETHERSTONE.get())
+                .define('S', ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get())
+                .pattern("#S#")
+                .pattern("#C#")
+                .pattern("###")
+                .unlockedBy("has_odysium_upgrade_smithing_template", has(ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get()))
+                .save(this.output);
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModToolItems.WAR_HAMMER.get())
+                .define('#', Items.HEAVY_CORE)
+                .define('O', ModItems.MYSTERIOUS_ROD.get())
+                .pattern("#")
+                .pattern("O")
+                .unlockedBy("has_odysium_rod", has(ModItems.MYSTERIOUS_ROD.get()))
                 .save(this.output);
         improvedThermalItem(RecipeCategory.COMBAT, ModToolItems.BURNING_LITHERITE_SWORD.get(), ModToolItems.SMOLDERING_LITHERITE_SWORD.get());
         improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_PICKAXE.get(), ModToolItems.SMOLDERING_LITHERITE_PICKAXE.get());
@@ -437,28 +548,62 @@ public class ModRecipeProvider extends RecipeProvider {
         twoByTwoPacker(
                 RecipeCategory.MISC, ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ModRawMaterialItems.LITHERITE_CRYSTAL.get()
         );
-        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, ModTreeBlocks.RED_MALISHROOM_BLOCK.get(), 3)
+        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), 1)
+                .requires(ModItems.MOLTEN_LITHERITE_BUCKET.get())
+                .requires(Items.WATER_BUCKET)
+                .group("litherite_crystal")
+                .unlockedBy("has_molten_litherite_bucket", has(ModItems.MOLTEN_LITHERITE_BUCKET.get()))
+                .save(this.output, Lithereal.key(Registries.RECIPE, "litherite_crystal_from_cooling_molten_litherite_bucket"));
+        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, Items.BLUE_DYE, 1)
+                .requires(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get())
+                .group("blue_dye")
+                .unlockedBy("has_phantom_rose_ethereal_core", has(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get()))
+                .save(this.output, Lithereal.key(Registries.RECIPE, "blue_dye_from_phantom_rose_ethereal_core"));
+        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, Items.LIGHT_BLUE_DYE, 1)
+                .requires(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get())
+                .group("light_blue_dye")
+                .unlockedBy("has_phantom_ice_flower", has(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get()))
+                .save(this.output, Lithereal.key(Registries.RECIPE, "light_blue_dye_from_phantom_ice_flower"));
+        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, Items.RED_DYE, 1)
+                .requires(ModPhantomBlocks.PHANTOM_ROSE.get())
+                .group("red_dye")
+                .unlockedBy("has_phantom_rose", has(ModPhantomBlocks.PHANTOM_ROSE.get()))
+                .save(this.output, Lithereal.key(Registries.RECIPE, "red_dye_from_phantom_rose"));
+        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, ModRawMaterialItems.ODYSIUM_INGOT.get(), 2)
+                .requires(ModRawMaterialItems.ALLIAN_INGOT.get())
+                .requires(ModRawMaterialItems.NERITH_INGOT.get())
+                .requires(ModRawMaterialItems.COPALITE_INGOT.get())
+                .requires(ModRawMaterialItems.AURELITE_INGOT.get())
+                .requires(ModRawMaterialItems.UNIFIER.get())
+                .requires(ModRawMaterialItems.ELCRUM_INGOT.get())
+                .requires(ModRawMaterialItems.SOLIUMITE_INGOT.get())
+                .requires(ModRawMaterialItems.CHRYON_CRYSTAL.get())
+                .requires(ModRawMaterialItems.SATURNITE_CRYSTAL.get())
+                .group("odysium_ingot")
+                .unlockedBy("has_unifier", has(ModRawMaterialItems.UNIFIER.get()))
+                .save(this.output, Lithereal.key(Registries.RECIPE, "odysium_ingot"));
+        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.BUILDING_BLOCKS, ModTreeBlocks.RED_MALISHROOM_BLOCK.get(), 3)
                 .requires(ModTreeBlocks.MALISHROOM_BLOCK.get(), 3)
                 .requires(Items.RED_DYE)
                 .group("red_malishroom_block")
                 .unlockedBy("has_malishroom_block", has(ModTreeBlocks.RED_MALISHROOM_BLOCK.get()))
-                .save(this.output, Lithereal.id("red_malishroom_block").toString());
-        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, ModTreeBlocks.MALISHROOM_BLOCK.get())
+                .save(this.output, Lithereal.key(Registries.RECIPE, "red_malishroom_block"));
+        ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.BUILDING_BLOCKS, ModTreeBlocks.MALISHROOM_BLOCK.get())
                 .requires(ModTreeBlocks.RED_MALISHROOM_BLOCK.get())
                 .group("malishroom_block")
                 .unlockedBy("has_red_malishroom_block", has(ModTreeBlocks.RED_MALISHROOM_BLOCK.get()))
-                .save(this.output, Lithereal.id("malishroom_block_from_red_malishroom_block").toString());
+                .save(this.output, Lithereal.key(Registries.RECIPE, "malishroom_block_from_red_malishroom_block"));
         ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), 4)
                 .requires(ModBlocks.LITHERITE_CRYSTAL_BLOCK.get())
                 .group("litherite_crystal")
                 .unlockedBy("has_litherite_crystal_block", has(ModBlocks.LITHERITE_CRYSTAL_BLOCK.get()))
-                .save(this.output, Lithereal.id("litherite_crystal_from_natural_crystal_block").toString());
+                .save(this.output, Lithereal.key(Registries.RECIPE, "litherite_crystal_from_natural_crystal_block"));
         ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, ModRawMaterialItems.NETHERITE_NUGGET.get(), 1)
                 .requires(ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 4)
                 .requires(Items.GOLD_NUGGET, 4)
                 .group("netherite_nugget")
                 .unlockedBy("has_netherite_fragment", has(ModRawMaterialItems.NETHERITE_FRAGMENT.get()))
-                .save(this.output, Lithereal.id("netherite_nugget_from_fragments").toString());
+                .save(this.output, Lithereal.key(Registries.RECIPE, "netherite_nugget_from_fragments"));
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.BUILDING_BLOCKS, ModBlocks.COARSE_ETHEREAL_DIRT.get(), 4)
                 .define('D', ModBlocks.ETHEREAL_DIRT.get())
@@ -489,75 +634,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("CP")
                 .unlockedBy("has_pailite", has(ModStoneBlocks.PAILITE.get()))
                 .save(this.output);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_SLAB.get(), ModStoneBlocks.ETHERSTONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_STAIRS.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_WALL.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_ETHERSTONE.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), ModStoneBlocks.ETHERSTONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICKS.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), ModStoneBlocks.ETHERSTONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_BRICK_WALL.get(), ModStoneBlocks.ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICKS.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_BRICK_WALL.get(), ModStoneBlocks.POLISHED_ETHERSTONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get(), ModStoneBlocks.ETHERSTONE_BRICKS.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get(), ModStoneBlocks.ETHERSTONE_BRICKS.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.ETHERSTONE_BRICK_WALL.get(), ModStoneBlocks.ETHERSTONE_BRICKS.get());
-
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE_SLAB.get(), ModStoneBlocks.PAILITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.PAILITE_STAIRS.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.PAILITE_WALL.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), ModStoneBlocks.PAILITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_STAIRS.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_WALL.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), ModStoneBlocks.PAILITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_SLAB.get(), ModStoneBlocks.POLISHED_PAILITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_STAIRS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_WALL.get(), ModStoneBlocks.POLISHED_PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), ModStoneBlocks.POLISHED_PAILITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), ModStoneBlocks.POLISHED_PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.POLISHED_PAILITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), ModStoneBlocks.POLISHED_PAILITE_BRICKS.get());
-
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.LUMINITE_SLAB.get(), ModStoneBlocks.LUMINITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.LUMINITE_STAIRS.get(), ModStoneBlocks.LUMINITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.LUMINITE_WALL.get(), ModStoneBlocks.LUMINITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE.get(), ModStoneBlocks.LUMINITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), ModStoneBlocks.LUMINITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get(), ModStoneBlocks.LUMINITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_LUMINITE_WALL.get(), ModStoneBlocks.LUMINITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), ModStoneBlocks.POLISHED_LUMINITE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get(), ModStoneBlocks.POLISHED_LUMINITE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_LUMINITE_WALL.get(), ModStoneBlocks.POLISHED_LUMINITE.get());
-
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.VERDONE_SLAB.get(), ModStoneBlocks.VERDONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.VERDONE_STAIRS.get(), ModStoneBlocks.VERDONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.VERDONE_WALL.get(), ModStoneBlocks.VERDONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE.get(), ModStoneBlocks.VERDONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), ModStoneBlocks.VERDONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_STAIRS.get(), ModStoneBlocks.VERDONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_VERDONE_WALL.get(), ModStoneBlocks.VERDONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), ModStoneBlocks.POLISHED_VERDONE.get(), 2);
-        stonecutterResultFromBaseModNamespace(RecipeCategory.BUILDING_BLOCKS, ModStoneBlocks.POLISHED_VERDONE_STAIRS.get(), ModStoneBlocks.POLISHED_VERDONE.get());
-        stonecutterResultFromBaseModNamespace(RecipeCategory.DECORATIONS, ModStoneBlocks.POLISHED_VERDONE_WALL.get(), ModStoneBlocks.POLISHED_VERDONE.get());
     }
 
     public static final class Runner extends RecipeProvider.Runner {

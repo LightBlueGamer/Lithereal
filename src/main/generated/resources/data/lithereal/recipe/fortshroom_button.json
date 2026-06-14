@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    "lithereal:fortshroom_planks"
+  ],
+  "result": {
+    "id": "lithereal:fortshroom_button"
+  }
+}

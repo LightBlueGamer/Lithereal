@@ -7,13 +7,14 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.JukeboxSong;
+import org.lithereal.Lithereal;
 
 public class ModSounds {
 
     public static final SoundEvent MUSIC_DISC_SPARKLE = register();
-    public static final ResourceKey<JukeboxSong> SPARKLE = ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.fromNamespaceAndPath("lithereal", "sparkle"));
+    public static final ResourceKey<JukeboxSong> SPARKLE = Lithereal.key(Registries.JUKEBOX_SONG, "sparkle");
     private static SoundEvent register() {
-        return register(Identifier.fromNamespaceAndPath("lithereal", "music_disc_sparkle"));
+        return register(Lithereal.id("music_disc_sparkle"));
     }
 
     private static SoundEvent register(Identifier identifier) {

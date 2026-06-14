@@ -42,10 +42,10 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         this.inventory = blockEntity;
         inventory.startOpen(inv.player);
 
-        this.addSlot(new Slot(inventory, 0, 94, 57));
-        this.addSlot(new Slot(inventory, 1, 66, 57));
-        this.addSlot(new Slot(inventory, 2, 80, 13));
-        this.addSlot(new Slot(inventory, 3, 43, 35));
+        this.addSlot(new FireCrucibleFuelSlot(this, inventory, 0, 43, 35));
+        this.addSlot(new Slot(inventory, 1, 94, 57));
+        this.addSlot(new Slot(inventory, 2, 66, 57));
+        this.addSlot(new CommonResultSlot(inventory, 3, 80, 13));
     }
 
     public boolean isCrafting() {
@@ -73,7 +73,7 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
     }
 
     public boolean hasBucket() {
-        return !blockEntity.getItem(1).isEmpty();
+        return !blockEntity.getItem(2).isEmpty();
     }
     private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
@@ -133,5 +133,9 @@ public class FireCrucibleMenu extends AbstractContainerMenu {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
+    }
+
+    public boolean isFuel(ItemStack itemStack) {
+        return this.level.fuelValues().isFuel(itemStack);
     }
 }

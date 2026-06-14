@@ -22,6 +22,6 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> HELLIONITE_PLACED_KEY = createKey("hellionite_ore_placed");
 
     private static ResourceKey<PlacedFeature> createKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, name));
+        return Lithereal.key(Registries.PLACED_FEATURE, name);
     }
 }

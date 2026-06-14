@@ -1,31 +1,14 @@
 {
-  "carvers": {
-    "air": [
-      "lithereal:ethereal_core_cave",
-      "lithereal:ethereal_core_cave_extra",
-      "lithereal:ethereal_core_canyon"
-    ]
-  },
+  "carvers": [
+    "lithereal:ethereal_core_cave",
+    "lithereal:ethereal_core_cave_extra",
+    "lithereal:ethereal_core_canyon"
+  ],
   "downfall": 0.8,
   "effects": {
-    "fog_color": 665436,
-    "foliage_color": 10568447,
-    "grass_color": 3687577,
-    "mood_sound": {
-      "block_search_extent": 8,
-      "offset": 2,
-      "sound": "minecraft:ambient.cave",
-      "tick_delay": 6000
-    },
-    "sky_color": 1464748,
-    "water_color": 1580186,
-    "water_fog_color": 1574496,
-    "particle": {
-      "options": {
-        "type": "lithereal:ethereal_core_soul"
-      },
-      "probability": 0.025
-    }
+    "foliage_color": "#A142FF",
+    "grass_color": "#384499",
+    "water_color": "#181C9A"
   },
   "features": [
     [],

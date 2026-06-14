@@ -1,6 +1,0 @@
-{
-  "parent": "lithereal:item/template_bow",
-  "textures": {
-    "layer0": "lithereal:item/enhanced_odysium_bow_pulling_2"
-  }
-}

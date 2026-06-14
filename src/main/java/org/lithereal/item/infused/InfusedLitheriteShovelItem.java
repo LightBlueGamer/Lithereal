@@ -4,15 +4,11 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ability.Ability;
 import org.lithereal.item.ability.AbilityShovelItem;
-
-import java.util.function.Consumer;
 
 public class InfusedLitheriteShovelItem extends AbilityShovelItem implements InfusedItem {
     public InfusedLitheriteShovelItem(ToolMaterial toolMaterial, Properties properties) {
@@ -23,13 +19,6 @@ public class InfusedLitheriteShovelItem extends AbilityShovelItem implements Inf
         ItemStack itemStack = super.getDefaultInstance();
         itemStack.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER));
         return itemStack;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-        PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-        PotionContents.addPotionTooltip(potionContents.getAllEffects(), builder, 1.0F, context.tickRate());
     }
 
     @Override

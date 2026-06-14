@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hellionite_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:hellionite_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:soliumite_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hellionite_crystal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:soliumite_ingot"
+    ]
+  }
+}

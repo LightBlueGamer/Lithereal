@@ -86,7 +86,7 @@ public class InfusedLitheriteBlock extends BaseEntityBlock {
                     Holder<MobEffect> effect = mobEffectInstance.getEffect();
                     if (effect.value().isInstantenous()) effect.value().applyInstantenousEffect(serverLevel, null, null, livingEntity, mobEffectInstance.getAmplifier(), 0.25);
                     else if (!livingEntity.hasEffect(effect)) livingEntity.addEffect(InfusedItem.transformInstance(mobEffectInstance, 1.0F));
-                }, 0.1F);
+                }, infusedLitheriteBlockEntity.potionDurationScale);
             }
         }
     }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "lithereal:withering_litherite_crystal",
+    "R": "minecraft:stick"
+  },
+  "pattern": [
+    "BB",
+    "BR",
+    " R"
+  ],
+  "result": {
+    "id": "lithereal:withering_litherite_axe"
+  }
+}

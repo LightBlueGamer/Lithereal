@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "netherite_nugget",
+  "ingredients": [
+    "lithereal:netherite_fragment",
+    "lithereal:netherite_fragment",
+    "lithereal:netherite_fragment",
+    "lithereal:netherite_fragment",
+    "minecraft:gold_nugget",
+    "minecraft:gold_nugget",
+    "minecraft:gold_nugget",
+    "minecraft:gold_nugget"
+  ],
+  "result": {
+    "id": "lithereal:netherite_nugget"
+  }
+}

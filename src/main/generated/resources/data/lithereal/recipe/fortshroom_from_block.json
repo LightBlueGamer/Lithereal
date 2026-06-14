@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "fortshroom",
+  "ingredients": [
+    "lithereal:fortshroom_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "lithereal:fortshroom"
+  }
+}

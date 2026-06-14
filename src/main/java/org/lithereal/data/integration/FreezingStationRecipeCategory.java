@@ -27,7 +27,7 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
     private final IDrawable icon;
 
     public FreezingStationRecipeCategory(IGuiHelper helper) {
-        this.background = helper.drawableBuilder(TEXTURE, 0, 0, 102, 32).setTextureSize(102, 32).build();
+        this.background = helper.drawableBuilder(TEXTURE, 0, 0, 98, 40).setTextureSize(98, 40).build();
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.FREEZING_STATION.get()));
     }
 
@@ -43,12 +43,12 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
 
     @Override
     public int getWidth() {
-        return 102;
+        return 98;
     }
 
     @Override
     public int getHeight() {
-        return 32;
+        return 40;
     }
 
     @Override
@@ -64,9 +64,8 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FreezingStationRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 8, 8).add(recipe.cooler());
-        builder.addSlot(RecipeIngredientRole.INPUT, 33, 8).add(recipe.primary());
+        builder.addSlot(RecipeIngredientRole.INPUT, 9, 12).add(recipe.primary());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 78, 8).add(recipe.output());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 70, 8).add(recipe.output());
     }
 }

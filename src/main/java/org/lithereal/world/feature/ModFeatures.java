@@ -33,7 +33,7 @@ public class ModFeatures {
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> createConfiguredFeatureKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Lithereal.id(name));
+        return Lithereal.key(Registries.CONFIGURED_FEATURE, name);
     }
 
     public static void register() {

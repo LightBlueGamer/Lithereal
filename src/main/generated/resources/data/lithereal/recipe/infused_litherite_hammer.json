@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "lithereal:infused_litherite_ingot",
+    "R": "minecraft:stick"
+  },
+  "pattern": [
+    "BBB",
+    "BBB",
+    " R "
+  ],
+  "result": {
+    "id": "lithereal:infused_litherite_hammer"
+  }
+}

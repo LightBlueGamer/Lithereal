@@ -149,27 +149,27 @@ public class ModBlocks {
     }
 
     static <T extends Block> RegistrySupplier<T> registerBlock(String name, Function<ResourceKey<Block>, T> block, Supplier<Item.Properties> properties) {
-        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, Lithereal.id(name));
+        ResourceKey<Block> resourceKey = Lithereal.key(Registries.BLOCK, name);
         RegistrySupplier<T> toReturn = BLOCKS.register(name, () -> block.apply(resourceKey));
         registerBlockItem(name, toReturn, properties);
         return toReturn;
     }
     static <T extends Block> RegistrySupplier<T> registerBlock(String name, Function<ResourceKey<Block>, T> block, BiFunction<Block, Item.Properties, BlockItem> blockItem) {
-        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, Lithereal.id(name));
-        ResourceKey<Item> itemResourceKey = ResourceKey.create(Registries.ITEM, Lithereal.id(name));
+        ResourceKey<Block> resourceKey = Lithereal.key(Registries.BLOCK, name);
+        ResourceKey<Item> itemResourceKey = Lithereal.key(Registries.ITEM, name);
         RegistrySupplier<T> toReturn = BLOCKS.register(name, () -> block.apply(resourceKey));
-        ModItems.ITEMS.register(name, () -> blockItem.apply(toReturn.get(), new Item.Properties().setId(itemResourceKey)));
+        ModItems.ITEMS.register(name, () -> blockItem.apply(toReturn.get(), new Item.Properties().setId(itemResourceKey).useBlockDescriptionPrefix()));
         return toReturn;
     }
 
     static <T extends Block> RegistrySupplier<Item> registerBlockItem(String name, RegistrySupplier<T> block, Supplier<Item.Properties> propertiesSupplier) {
-        ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, Lithereal.id(name));
+        ResourceKey<Item> resourceKey = Lithereal.key(Registries.ITEM, name);
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                propertiesSupplier.get().setId(resourceKey)));
+                propertiesSupplier.get().setId(resourceKey).useBlockDescriptionPrefix()));
     }
 
     static <T extends Block> RegistrySupplier<T> registerBlockOnly(String name, Function<ResourceKey<Block>, T> block) {
-        ResourceKey<Block> resourceKey = ResourceKey.create(Registries.BLOCK, Lithereal.id(name));
+        ResourceKey<Block> resourceKey = Lithereal.key(Registries.BLOCK, name);
         return BLOCKS.register(name, () -> block.apply(resourceKey));
     }
 

@@ -4,11 +4,12 @@ import com.google.common.collect.Lists;
 import net.minecraft.data.BlockFamily;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.data.mixin.accessor.BlockFamiliesAccessor;
 
 import java.util.List;
 
 public class ModBlockFamilies {
-    public static final BlockFamily PHANTOM_OAK_PLANKS = new BlockFamily.Builder(ModTreeBlocks.PHANTOM_OAK_PLANKS.get())
+    public static final BlockFamily PHANTOM_OAK_PLANKS = BlockFamiliesAccessor.callFamilyBuilder(ModTreeBlocks.PHANTOM_OAK_PLANKS.get())
             .button(ModTreeBlocks.PHANTOM_OAK_BUTTON.get())
             .fence(ModTreeBlocks.PHANTOM_OAK_FENCE.get())
             .fenceGate(ModTreeBlocks.PHANTOM_OAK_FENCE_GATE.get())
@@ -21,7 +22,7 @@ public class ModBlockFamilies {
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
-    public static final BlockFamily FORTSHROOM_PLANKS = new BlockFamily.Builder(ModTreeBlocks.FORTSHROOM_PLANKS.get())
+    public static final BlockFamily FORTSHROOM_PLANKS = BlockFamiliesAccessor.callFamilyBuilder(ModTreeBlocks.FORTSHROOM_PLANKS.get())
             .button(ModTreeBlocks.FORTSHROOM_BUTTON.get())
             .fence(ModTreeBlocks.FORTSHROOM_FENCE.get())
             .fenceGate(ModTreeBlocks.FORTSHROOM_FENCE_GATE.get())
@@ -34,7 +35,7 @@ public class ModBlockFamilies {
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
-    public static final BlockFamily MALISHROOM_PLANKS = new BlockFamily.Builder(ModTreeBlocks.MALISHROOM_PLANKS.get())
+    public static final BlockFamily MALISHROOM_PLANKS = BlockFamiliesAccessor.callFamilyBuilder(ModTreeBlocks.MALISHROOM_PLANKS.get())
             .button(ModTreeBlocks.MALISHROOM_BUTTON.get())
             .fence(ModTreeBlocks.MALISHROOM_FENCE.get())
             .fenceGate(ModTreeBlocks.MALISHROOM_FENCE_GATE.get())
@@ -47,69 +48,81 @@ public class ModBlockFamilies {
             .recipeGroupPrefix("wooden")
             .recipeUnlockedBy("has_planks")
             .getFamily();
-    public static final BlockFamily ETHERSTONE = new BlockFamily.Builder(ModStoneBlocks.ETHERSTONE.get())
+    public static final BlockFamily ETHERSTONE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.ETHERSTONE.get())
             .wall(ModStoneBlocks.ETHERSTONE_WALL.get())
             .stairs(ModStoneBlocks.ETHERSTONE_STAIRS.get())
             .slab(ModStoneBlocks.ETHERSTONE_SLAB.get())
             .polished(ModStoneBlocks.POLISHED_ETHERSTONE.get())
             .chiseled(ModStoneBlocks.CHISELED_ETHERSTONE.get())
+            .generateStonecutterRecipe()
+            .dontGenerateModel()
             .getFamily();
-    public static final BlockFamily POLISHED_ETHERSTONE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_ETHERSTONE.get())
+    public static final BlockFamily POLISHED_ETHERSTONE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.POLISHED_ETHERSTONE.get())
             .wall(ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get())
             .polished(ModStoneBlocks.ETHERSTONE_BRICKS.get())
+            .generateStonecutterRecipe()
             .getFamily();
-    public static final BlockFamily ETHERSTONE_BRICKS = new BlockFamily.Builder(ModStoneBlocks.ETHERSTONE_BRICKS.get())
+    public static final BlockFamily ETHERSTONE_BRICKS = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.ETHERSTONE_BRICKS.get())
             .wall(ModStoneBlocks.ETHERSTONE_BRICK_WALL.get())
             .stairs(ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get())
             .slab(ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get())
+            .generateStonecutterRecipe()
             .getFamily();
-    public static final BlockFamily PAILITE = new BlockFamily.Builder(ModStoneBlocks.PAILITE.get())
+    public static final BlockFamily PAILITE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.PAILITE.get())
             .wall(ModStoneBlocks.PAILITE_WALL.get())
             .stairs(ModStoneBlocks.PAILITE_STAIRS.get())
             .slab(ModStoneBlocks.PAILITE_SLAB.get())
             .button(ModStoneBlocks.PAILITE_BUTTON.get())
             .pressurePlate(ModStoneBlocks.PAILITE_PRESSURE_PLATE.get())
             .polished(ModStoneBlocks.POLISHED_PAILITE.get())
+            .generateStonecutterRecipe()
             .getFamily();
-    public static final BlockFamily POLISHED_PAILITE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_PAILITE.get())
+    public static final BlockFamily POLISHED_PAILITE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.POLISHED_PAILITE.get())
             .wall(ModStoneBlocks.POLISHED_PAILITE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_PAILITE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_PAILITE_SLAB.get())
             .button(ModStoneBlocks.POLISHED_PAILITE_BUTTON.get())
             .pressurePlate(ModStoneBlocks.POLISHED_PAILITE_PRESSURE_PLATE.get())
             .polished(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get())
+            .generateStonecutterRecipe()
             .getFamily();
-    public static final BlockFamily POLISHED_PAILITE_BRICKS = new BlockFamily.Builder(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get())
+    public static final BlockFamily POLISHED_PAILITE_BRICKS = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get())
             .wall(ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get())
             .button(ModStoneBlocks.POLISHED_PAILITE_BRICK_BUTTON.get())
             .pressurePlate(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get())
             .chiseled(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get())
+            .generateStonecutterRecipe()
+            .dontGenerateModel()
             .getFamily();
-    public static final BlockFamily LUMINITE = new BlockFamily.Builder(ModStoneBlocks.LUMINITE.get())
+    public static final BlockFamily LUMINITE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.LUMINITE.get())
             .wall(ModStoneBlocks.LUMINITE_WALL.get())
             .stairs(ModStoneBlocks.LUMINITE_STAIRS.get())
             .slab(ModStoneBlocks.LUMINITE_SLAB.get())
             .polished(ModStoneBlocks.POLISHED_LUMINITE.get())
+            .generateStonecutterRecipe()
             .getFamily();
-    public static final BlockFamily POLISHED_LUMINITE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_LUMINITE.get())
+    public static final BlockFamily POLISHED_LUMINITE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.POLISHED_LUMINITE.get())
             .wall(ModStoneBlocks.POLISHED_LUMINITE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get())
+            .generateStonecutterRecipe()
             .getFamily();
-    public static final BlockFamily VERDONE = new BlockFamily.Builder(ModStoneBlocks.VERDONE.get())
+    public static final BlockFamily VERDONE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.VERDONE.get())
             .wall(ModStoneBlocks.VERDONE_WALL.get())
             .stairs(ModStoneBlocks.VERDONE_STAIRS.get())
             .slab(ModStoneBlocks.VERDONE_SLAB.get())
             .polished(ModStoneBlocks.POLISHED_VERDONE.get())
+            .generateStonecutterRecipe()
             .getFamily();
-    public static final BlockFamily POLISHED_VERDONE = new BlockFamily.Builder(ModStoneBlocks.POLISHED_VERDONE.get())
+    public static final BlockFamily POLISHED_VERDONE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.POLISHED_VERDONE.get())
             .wall(ModStoneBlocks.POLISHED_VERDONE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_VERDONE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_VERDONE_SLAB.get())
+            .generateStonecutterRecipe()
             .getFamily();
     public static final List<BlockFamily> MOD_BLOCK_FAMILIES = Lists.newArrayList(PHANTOM_OAK_PLANKS,
             FORTSHROOM_PLANKS,

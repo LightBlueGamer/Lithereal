@@ -32,6 +32,7 @@ public class ModTags {
     public static TagKey<Block> createBlockTag(String name) {
         return create(name, Registries.BLOCK);
     }
+    public static final TagKey<Item> CHILLERS = createItemTag("chillers");
     public static final TagKey<Item> WAR_HAMMERS = createItemTag("war_hammers");
     public static final TagKey<Item> LITHERITE_REPAIR_ITEMS = createItemTag("litherite_repair_items");
     public static final TagKey<Item> BURNING_LITHERITE_REPAIR_ITEMS = createItemTag("burning_litherite_repair_items");

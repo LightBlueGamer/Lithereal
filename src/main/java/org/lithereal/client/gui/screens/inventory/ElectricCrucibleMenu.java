@@ -47,7 +47,7 @@ public class ElectricCrucibleMenu extends AbstractContainerMenu {
 
         this.addSlot(new Slot(inventory, 0, 94, 57));
         this.addSlot(new Slot(inventory, 1, 66, 57));
-        this.addSlot(new Slot(inventory, 2, 80, 13));
+        this.addSlot(new CommonResultSlot(inventory, 2, 80, 13));
     }
 
     public boolean isCrafting() {

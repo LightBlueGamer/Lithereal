@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 
 public class InfusedLitheriteBlockItem extends BlockItem implements InfusedItem {
     public InfusedLitheriteBlockItem(Block p_40565_, Properties p_40566_) {
-        super(p_40565_, p_40566_);
+        super(p_40565_, p_40566_.component(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.POTION_CONTENTS, true)));
     }
 
     public @NotNull ItemStack getDefaultInstance() {

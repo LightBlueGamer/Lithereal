@@ -4,6 +4,7 @@ import dev.architectury.hooks.item.ItemStackHooks;
 //? fabric {
 /*import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 *///?}
+import net.minecraft.world.item.ItemStackTemplate;
 //? neoforge {
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.lithereal.neoforge.util.ImplementedItemHandler;
@@ -53,9 +54,8 @@ import org.lithereal.util.ether.IEnergyUserProvider;
 import java.util.Optional;
 //? neoforge {
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static net.neoforged.neoforge.transfer.transaction.Transaction.openRoot;
 //?}
+
 import static org.lithereal.block.entity.FireCrucibleBlockEntity.canInsertItemInto;
 
 //? fabric {
@@ -288,14 +288,12 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
     }
 
     private static void craftItem(InfusementChamberBlockEntity entity, ItemStack outputItem, Level level) {
-        ItemStack originalBucket = entity.removeItem(0, 1);
-        ItemStack bucketRemainder = ItemStackHooks.getCraftingRemainingItem(originalBucket);
-        if (!bucketRemainder.isEmpty()) entity.setItem(0, bucketRemainder);
+        entity.removeItemWithRemainder(0, 1);
         ItemStack stack = entity.removeItem(1, 1);
-        ItemStack remainder = ItemStackHooks.getCraftingRemainingItem(stack);
+        ItemStack remainder = Optional.ofNullable(stack.getCraftingRemainder()).map(ItemStackTemplate::create).orElse(ItemStack.EMPTY);
         if (remainder.isEmpty() && stack.is(Items.POTION)) remainder = Items.GLASS_BOTTLE.getDefaultInstance();
         if (entity.held.isEmpty() && !remainder.isEmpty())
-            entity.held = remainder.copy();
+            entity.held = remainder;
         else if (!remainder.isEmpty()) entity.held.grow(1);
         if (entity.getItem(1).getCount() <= 0) {
             if (!entity.held.isEmpty()) entity.setItem(1, entity.held);
@@ -388,12 +386,9 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
 
     @Override
     public @NotNull ItemStack removeItem(int slot, int count) {
-        ItemResource resource = itemHandler.getResource(slot);
-        int oldCount = itemHandler.getAmountAsInt(slot);
-        try (var tx = openRoot()) {
-            itemHandler.extract(slot, resource, count, tx);
-        }
-        return resource.toStack(oldCount);
+        ItemStack originalStack = itemHandler.getStacks().get(slot);
+        itemHandler.set(slot, itemHandler.getResourceFrom(originalStack), originalStack.getCount() - count);
+        return originalStack;
     }
 
     @Override

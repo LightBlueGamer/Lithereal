@@ -1,0 +1,8 @@
+{
+  "type": "lithereal:freezing",
+  "max_progress": 400,
+  "output": {
+    "id": "lithereal:litherite_crystal"
+  },
+  "primary": "lithereal:burning_litherite_crystal"
+}

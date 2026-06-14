@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 2.0,
+  "group": "allian_ingot",
+  "ingredient": "lithereal:allian_ore",
+  "result": {
+    "id": "lithereal:allian_ingot"
+  }
+}

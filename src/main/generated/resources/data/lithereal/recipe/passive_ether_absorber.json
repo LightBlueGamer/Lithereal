@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "lithereal:allian_ingot",
+    "C": "lithereal:chryon_crystal",
+    "N": "lithereal:nerith_ingot"
+  },
+  "pattern": [
+    "ACA",
+    "N N",
+    "ACA"
+  ],
+  "result": {
+    "id": "lithereal:passive_ether_absorber"
+  }
+}

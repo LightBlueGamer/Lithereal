@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "lithereal:pailite",
+  "result": {
+    "id": "lithereal:chiseled_polished_pailite_bricks"
+  }
+}

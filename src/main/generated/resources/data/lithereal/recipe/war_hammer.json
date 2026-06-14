@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:heavy_core",
+    "O": "lithereal:mysterious_rod"
+  },
+  "pattern": [
+    "#",
+    "O"
+  ],
+  "result": {
+    "id": "lithereal:war_hammer"
+  }
+}

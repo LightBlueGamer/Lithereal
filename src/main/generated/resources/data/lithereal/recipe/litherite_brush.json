@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "lithereal:litherite_crystal",
+    "I": "#c:rods/wooden",
+    "X": "minecraft:feather"
+  },
+  "pattern": [
+    "X",
+    "#",
+    "I"
+  ],
+  "result": {
+    "id": "lithereal:litherite_brush"
+  }
+}

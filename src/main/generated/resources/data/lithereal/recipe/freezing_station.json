@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:bucket",
+    "I": "minecraft:iron_ingot",
+    "T": "minecraft:iron_trapdoor"
+  },
+  "pattern": [
+    "ITI",
+    "IBI",
+    "III"
+  ],
+  "result": {
+    "id": "lithereal:freezing_station"
+  }
+}

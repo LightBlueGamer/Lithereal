@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "lithereal:item/infused_litherite_hammer",
+    "layer1": "lithereal:item/infused_litherite_hammer_overlay"
+  }
+}

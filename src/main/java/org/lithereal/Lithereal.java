@@ -4,6 +4,7 @@ import dev.architectury.networking.NetworkManager;
 import dev.architectury.registry.level.entity.SpawnPlacementsRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
@@ -39,7 +40,7 @@ import java.util.logging.Logger;
 
 public class Lithereal {
     public static final String MOD_ID = "lithereal";
-    public static final ResourceKey<LootTable> LITHEREAL_CHAMBERS_REWARD = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "chests/lithereal_chambers/reward"));
+    public static final ResourceKey<LootTable> LITHEREAL_CHAMBERS_REWARD = key(Registries.LOOT_TABLE, "chests/lithereal_chambers/reward");
 
     public static final Logger LOGGER = Logger.getLogger(MOD_ID);
     public static void init() {
@@ -81,6 +82,10 @@ public class Lithereal {
 
     public static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static <T> ResourceKey<T> key(ResourceKey<Registry<T>> registry, String path) {
+        return ResourceKey.create(registry, Identifier.fromNamespaceAndPath(MOD_ID, path));
     }
 
     public static <T> Holder<T> asHolder(RegistrySupplier<T> registrySupplier) {

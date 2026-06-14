@@ -2,6 +2,7 @@ package org.lithereal.item.ability;
 
 import net.minecraft.Optionull;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -47,6 +48,7 @@ public record StandardAbility<I extends AbilityItem>(List<ArmorMaterial> armorMa
         if (entity instanceof LivingEntity user && !level.isClientSide()) {
             if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials, user) && level.getGameTime() % 80 == 0) {
                 boolean multiEffect = passiveEffects.size() > 1;
+                float durationFactor = itemStack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F);
                 passiveEffects.forEach((mobEffectInstance) -> {
                     Holder<MobEffect> effect = mobEffectInstance.getEffect();
                     boolean effectivelyBeneficial = (effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl) || (user.isInvertedHealAndHarm() && effect.is(ModTags.CAN_BE_INVERTED_HARM))) &&
@@ -55,7 +57,7 @@ public record StandardAbility<I extends AbilityItem>(List<ArmorMaterial> armorMa
                         if (!effect.is(ModTags.DELAYED_INSTANT) || IAbility.getValueFromMapForEffect(healTicker, effect) >= 400) {
                             if (effect.value().isInstantenous())
                                 effect.value().applyInstantenousEffect((ServerLevel) level, null, null, user, mobEffectInstance.getAmplifier(), 0.25);
-                            else user.addEffect(InfusedItem.transformInstance(mobEffectInstance, 0.1F));
+                            else user.addEffect(InfusedItem.transformInstance(mobEffectInstance, durationFactor));
                             if (effect.is(ModTags.DELAYED_INSTANT)) healTicker.put(effect, 0);
                         }
                     } else if (user.hasEffect(effect)) user.removeEffect(effect);

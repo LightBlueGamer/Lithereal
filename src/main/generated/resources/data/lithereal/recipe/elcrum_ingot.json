@@ -1,0 +1,9 @@
+{
+  "type": "lithereal:burning",
+  "max_progress": 250,
+  "output": {
+    "id": "lithereal:elcrum_ingot"
+  },
+  "primary": "lithereal:elunite_crystal",
+  "secondary": "lithereal:cyrum_crystal"
+}

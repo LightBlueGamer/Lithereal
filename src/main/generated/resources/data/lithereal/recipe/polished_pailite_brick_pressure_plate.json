@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "lithereal:polished_pailite_bricks"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "lithereal:polished_pailite_brick_pressure_plate"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "odysium_ingot",
+  "ingredients": [
+    "lithereal:allian_ingot",
+    "lithereal:nerith_ingot",
+    "lithereal:copalite_ingot",
+    "lithereal:aurelite_ingot",
+    "lithereal:unifier",
+    "lithereal:elcrum_ingot",
+    "lithereal:soliumite_ingot",
+    "lithereal:chryon_crystal",
+    "lithereal:saturnite_crystal"
+  ],
+  "result": {
+    "count": 2,
+    "id": "lithereal:odysium_ingot"
+  }
+}

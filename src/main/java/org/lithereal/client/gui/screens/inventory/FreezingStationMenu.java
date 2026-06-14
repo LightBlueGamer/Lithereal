@@ -5,10 +5,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -42,12 +39,12 @@ public class FreezingStationMenu extends AbstractContainerMenu {
 
         addDataSlots(data);
 
-        this.inventory = ((Container) blockEntity);
+        this.inventory = blockEntity;
         inventory.startOpen(inv.player);
 
-        this.addSlot(new Slot(inventory, 0, 43, 34));
-        this.addSlot(new Slot(inventory, 1, 68, 34));
-        this.addSlot(new Slot(inventory, 2, 129, 34));
+        this.addSlot(new FreezingStationChillersSlot(inventory, 0, 43, 35));
+        this.addSlot(new Slot(inventory, 1, 68, 35));
+        this.addSlot(new CommonResultSlot(inventory, 2, 129, 35));
     }
 
     public boolean isCrafting() {
@@ -55,13 +52,21 @@ public class FreezingStationMenu extends AbstractContainerMenu {
     }
 
     protected int getCooling() {
-        return data.get(2);
+        return data.get(4);
     }
 
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
         int progressArrowSize = 22;
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getScaledProgressChill() {
+        int progress = this.data.get(2);
+        int maxProgress = this.data.get(3);
+        int progressArrowSize = 64;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }

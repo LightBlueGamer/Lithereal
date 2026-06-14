@@ -2,8 +2,14 @@
   "feature": "lithereal:ethereal_forest_flowers",
   "placement": [
     {
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 4,
+      "below_noise": 15,
+      "noise_level": -0.8
+    },
+    {
       "type": "minecraft:rarity_filter",
-      "chance": 5
+      "chance": 32
     },
     {
       "type": "minecraft:in_square"
@@ -13,20 +19,33 @@
       "heightmap": "MOTION_BLOCKING"
     },
     {
+      "type": "minecraft:biome"
+    },
+    {
       "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:clamped",
-        "max_inclusive": 4,
-        "min_inclusive": 0,
-        "source": {
-          "type": "minecraft:uniform",
-          "max_inclusive": 4,
-          "min_inclusive": -1
-        }
+      "count": 96
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 6,
+        "min": -6,
+        "plateau": 0
+      },
+      "y_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 2,
+        "min": -2,
+        "plateau": 0
       }
     },
     {
-      "type": "minecraft:biome"
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:air"
+      }
     }
   ]
 }

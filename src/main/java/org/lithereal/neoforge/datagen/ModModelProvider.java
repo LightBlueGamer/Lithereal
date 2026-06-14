@@ -8,6 +8,8 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Holder;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -22,12 +24,15 @@ import org.lithereal.item.ModToolItems;
 import org.lithereal.util.ModBlockFamilies;
 
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import static net.minecraft.client.data.models.ItemModelGenerators.BLANK_LAYER;
 import static net.minecraft.client.data.models.model.ModelTemplates.createItem;
 
 public class ModModelProvider extends ModelProvider {
     public static final ModelTemplate TWO_LAYERED_HANDHELD_ITEM = createItem("handheld",TextureSlot.LAYER0, TextureSlot.LAYER1);
+    public static final ModelTemplate HANDHELD_WAR_HAMMER_ITEM = createItem("lithereal:handheld_war_hammer", TextureSlot.LAYER0);
+    public static final ModelTemplate BRUSH = createItem("brush", TextureSlot.LAYER0);
     public ModModelProvider(PackOutput output) {
         super(output, Lithereal.MOD_ID);
     }
@@ -36,11 +41,10 @@ public class ModModelProvider extends ModelProvider {
     protected void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
         registerBlockModels(blockModels);
         registerItemModels(itemModels);
-        super.registerModels(blockModels, itemModels);
     }
 
     public void registerBlockModels(BlockModelGenerators blockModels) {
-        ModBlockFamilies.MOD_BLOCK_FAMILIES.forEach(blockFamily -> blockModels.family(blockFamily.getBaseBlock()).generateFor(blockFamily));
+        ModBlockFamilies.MOD_BLOCK_FAMILIES.stream().filter(BlockFamily::shouldGenerateModel).forEach(blockFamily -> blockModels.family(blockFamily.getBaseBlock()).generateFor(blockFamily));
         blockWithItem(ModBlocks.COARSE_ETHEREAL_DIRT, blockModels);
         blockWithItem(ModBlocks.PHANTOM_GRAVEL, blockModels);
         blockWithItem(ModBlocks.CREATIVE_ETHER_SOURCE, blockModels);
@@ -69,9 +73,22 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(ModVegetationBlocks.MALISHROOM.get(), ModVegetationBlocks.POTTED_MALISHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(ModVegetationBlocks.FORTSHROOM.get(), ModVegetationBlocks.POTTED_FORTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        blockModels.createAxisAlignedPillarBlock(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), TexturedModel.COLUMN);
+        blockModels.family(ModStoneBlocks.ETHERSTONE.get()).generateFor(new BlockFamily.Builder(ModStoneBlocks.ETHERSTONE.get())
+                .wall(ModStoneBlocks.ETHERSTONE_WALL.get())
+                .stairs(ModStoneBlocks.ETHERSTONE_STAIRS.get())
+                .slab(ModStoneBlocks.ETHERSTONE_SLAB.get())
+                .polished(ModStoneBlocks.POLISHED_ETHERSTONE.get())
+                .getFamily());
+        blockModels.createAxisAlignedPillarBlock(ModStoneBlocks.CHISELED_ETHERSTONE.get(), TexturedModel.COLUMN);
         itemForBlockModel(ModStoneBlocks.CHISELED_ETHERSTONE.get(), blockModels);
 
+        blockModels.family(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get()).generateFor(new BlockFamily.Builder(ModStoneBlocks.POLISHED_PAILITE_BRICKS.get())
+                .wall(ModStoneBlocks.POLISHED_PAILITE_BRICK_WALL.get())
+                .stairs(ModStoneBlocks.POLISHED_PAILITE_BRICK_STAIRS.get())
+                .slab(ModStoneBlocks.POLISHED_PAILITE_BRICK_SLAB.get())
+                .button(ModStoneBlocks.POLISHED_PAILITE_BRICK_BUTTON.get())
+                .pressurePlate(ModStoneBlocks.POLISHED_PAILITE_BRICK_PRESSURE_PLATE.get())
+                .getFamily());
         blockModels.createAxisAlignedPillarBlock(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), TexturedModel.COLUMN);
         itemForBlockModel(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), blockModels);
 
@@ -114,29 +131,19 @@ public class ModModelProvider extends ModelProvider {
     }
 
     public void registerItemModels(ItemModelGenerators itemModels) {
-        basicItem(ModTreeBlocks.PHANTOM_OAK_DOOR.get().asItem(), itemModels);
-        basicItem(ModTreeBlocks.FORTSHROOM_DOOR.get().asItem(), itemModels);
-        basicItem(ModTreeBlocks.MALISHROOM_DOOR.get().asItem(), itemModels);
-
         basicItem(ModItems.PHANTOM_OAK_BOAT.get(), itemModels);
         basicItem(ModItems.PHANTOM_OAK_CHEST_BOAT.get(), itemModels);
-        basicItem(ModItems.PHANTOM_OAK_SIGN.get(), itemModels);
-        basicItem(ModItems.PHANTOM_OAK_HANGING_SIGN.get(), itemModels);
         basicItem(ModItems.FORTSHROOM_BOAT.get(), itemModels);
         basicItem(ModItems.FORTSHROOM_CHEST_BOAT.get(), itemModels);
-        basicItem(ModItems.FORTSHROOM_SIGN.get(), itemModels);
-        basicItem(ModItems.FORTSHROOM_HANGING_SIGN.get(), itemModels);
         basicItem(ModItems.MALISHROOM_BOAT.get(), itemModels);
         basicItem(ModItems.MALISHROOM_CHEST_BOAT.get(), itemModels);
-        basicItem(ModItems.MALISHROOM_SIGN.get(), itemModels);
-        basicItem(ModItems.MALISHROOM_HANGING_SIGN.get(), itemModels);
 
         basicItem(ModRawMaterialItems.LITHERITE_CRYSTAL.get(), itemModels);
         basicItem(ModRawMaterialItems.PHANTOM_DIAMOND.get(), itemModels);
         basicItem(ModRawMaterialItems.ODYSIUM_INGOT.get(), itemModels);
         basicItem(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), itemModels);
         basicItem(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), itemModels);
-        basicItem(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), itemModels);
+        basicPotionItemNoOverlay(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), itemModels);
         basicItem(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), itemModels);
         basicItem(ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get(), itemModels);
         basicItem(ModRawMaterialItems.UNIFIER.get(), itemModels);
@@ -166,6 +173,8 @@ public class ModModelProvider extends ModelProvider {
         handheldItem(ModToolItems.LITHERITE_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.LITHERITE_HOE.get(), itemModels);
         handheldItem(ModToolItems.LITHERITE_HAMMER.get(), itemModels);
+        handheldItem(ModToolItems.LITHERITE_WRENCH.get(), itemModels);
+        brushItem(ModToolItems.LITHERITE_BRUSH.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_SWORD.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_PICKAXE.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_AXE.get(), itemModels);
@@ -217,6 +226,8 @@ public class ModModelProvider extends ModelProvider {
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_HAMMER.get(), itemModels);
         bowItem(ModToolItems.ENHANCED_ODYSIUM_BOW.get(), itemModels);
 
+        itemModels.generateFlatItem(ModToolItems.WAR_HAMMER.get(), HANDHELD_WAR_HAMMER_ITEM);
+
         basicItem(ModArmorItems.LITHERITE_HELMET.get(), itemModels);
         basicItem(ModArmorItems.LITHERITE_CHESTPLATE.get(), itemModels);
         basicItem(ModArmorItems.LITHERITE_LEGGINGS.get(), itemModels);
@@ -237,10 +248,10 @@ public class ModModelProvider extends ModelProvider {
         basicItem(ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE.get(), itemModels);
         basicItem(ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS.get(), itemModels);
         basicItem(ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS.get(), itemModels);
-        basicPotionItem(ModArmorItems.INFUSED_LITHERITE_HELMET.get(), itemModels);
-        basicPotionItem(ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), itemModels);
-        basicPotionItem(ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), itemModels);
-        basicPotionItem(ModArmorItems.INFUSED_LITHERITE_BOOTS.get(), itemModels);
+        basicPotionItemNoOverlay(ModArmorItems.INFUSED_LITHERITE_HELMET.get(), itemModels);
+        basicPotionItemNoOverlay(ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), itemModels);
+        basicPotionItemNoOverlay(ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), itemModels);
+        basicPotionItemNoOverlay(ModArmorItems.INFUSED_LITHERITE_BOOTS.get(), itemModels);
         basicItem(ModArmorItems.WITHERING_LITHERITE_HELMET.get(), itemModels);
         basicItem(ModArmorItems.WITHERING_LITHERITE_CHESTPLATE.get(), itemModels);
         basicItem(ModArmorItems.WITHERING_LITHERITE_LEGGINGS.get(), itemModels);
@@ -265,7 +276,16 @@ public class ModModelProvider extends ModelProvider {
     }
 
     public void basicItem(Item item, ItemModelGenerators itemModels) {
-        itemModels.createFlatItemModel(item, ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
+    }
+
+    public void basicPotionItemNoOverlay(Item item, ItemModelGenerators itemModels) {
+        generateItemWithTint(item, new Potion(), itemModels);
+    }
+
+    public void generateItemWithTint(Item item, ItemTintSource overlayTint, ItemModelGenerators itemModels) {
+        Identifier model = itemModels.createFlatItemModel(item, ModelTemplates.FLAT_ITEM);
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.tintedModel(model, overlayTint));
     }
 
     public void basicPotionItem(Item item, ItemModelGenerators itemModels) {
@@ -290,11 +310,29 @@ public class ModModelProvider extends ModelProvider {
     }
 
     public void handheldItem(Item item, ItemModelGenerators itemModels) {
-        itemModels.createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM);
+    }
+
+    public void brushItem(Item item, ItemModelGenerators itemModels) {
+        itemModels.createFlatItemModel(item, BRUSH);
+        itemModels.generateBrush(item);
     }
 
     public void bowItem(Item bowItem, ItemModelGenerators itemModels) {
+        itemModels.createFlatItemModel(bowItem, ModelTemplates.BOW);
         itemModels.generateBow(bowItem);
+    }
+
+    @Override
+    protected Stream<? extends Holder<Block>> getKnownBlocks() {
+        return Stream.empty();
+//        return Streams.of(ModBlocks.BLOCKS);
+    }
+
+    @Override
+    protected Stream<? extends Holder<Item>> getKnownItems() {
+        return Stream.empty();
+//        return Streams.of(ModItems.ITEMS);
     }
 }
 //?}

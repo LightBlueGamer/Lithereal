@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 public class InfusedLitheriteArmorItem extends AbilityArmorItem implements InfusedItem {
     public InfusedLitheriteArmorItem(ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
-        super(Ability.INFUSED, armorMaterial, type, properties);
+        super(Ability.INFUSED, armorMaterial, type, properties.component(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.POTION_CONTENTS, true)));
     }
 
     public @NotNull ItemStack getDefaultInstance() {

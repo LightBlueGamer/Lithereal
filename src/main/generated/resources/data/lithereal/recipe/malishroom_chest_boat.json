@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    "minecraft:chest",
+    "lithereal:malishroom_boat"
+  ],
+  "result": {
+    "id": "lithereal:malishroom_chest_boat"
+  }
+}

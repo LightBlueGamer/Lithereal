@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "lithereal:lither_torch",
+    "X": "lithereal:impure_ethereal_crystal_shard"
+  },
+  "pattern": [
+    " X ",
+    "X#X",
+    " X "
+  ],
+  "result": {
+    "id": "lithereal:lither_lantern"
+  }
+}

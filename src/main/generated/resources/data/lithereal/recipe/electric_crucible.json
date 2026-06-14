@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "#c:storage_blocks/iron",
+    "B": "lithereal:burning_litherite_crystal",
+    "C": "lithereal:charged_litherite_crystal",
+    "I": "#c:ingots/iron",
+    "S": "lithereal:aurelite_dust"
+  },
+  "pattern": [
+    "ISI",
+    "IBI",
+    "#C#"
+  ],
+  "result": {
+    "id": "lithereal:electric_crucible"
+  }
+}

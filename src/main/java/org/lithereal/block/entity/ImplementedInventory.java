@@ -6,6 +6,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
@@ -93,6 +94,15 @@ public interface ImplementedInventory extends WorldlyContainer {
     @Override
     default @NotNull ItemStack removeItemNoUpdate(int slot) {
         return ContainerHelper.takeItem(getItems(), slot);
+    }
+
+    default ItemStack removeItemWithRemainder(int slot, int count) {
+        ItemStack originalStack = removeItem(slot, count);
+        ItemStackTemplate remainder = originalStack.getCraftingRemainder();
+        if (originalStack.isEmpty()) {
+            setItem(slot, remainder != null ? remainder.create() : ItemStack.EMPTY);
+        }
+        return originalStack;
     }
 
     @Override

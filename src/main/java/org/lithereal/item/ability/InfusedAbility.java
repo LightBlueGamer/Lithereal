@@ -64,7 +64,8 @@ public record InfusedAbility<I extends InfusedItem>(
         PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         AtomicInteger count = getCount(potionContents);
         if (potionContents.potion().filter(potionHolder -> potionHolder.is(ModTags.DISPELS_FIRE)).isPresent() && attacked.isOnFire()) attacked.extinguishFire();
-        if (attacker.level() instanceof ServerLevel serverLevel) potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(serverLevel, mobEffectInstance, attacked, attacker, count.get(), true), 0.1F);
+        float potionDurationScale = itemStack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F);
+        if (attacker.level() instanceof ServerLevel serverLevel) potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget(serverLevel, mobEffectInstance, attacked, attacker, count.get(), true), potionDurationScale);
     }
 
     @Override
@@ -80,6 +81,7 @@ public record InfusedAbility<I extends InfusedItem>(
             PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
             AtomicInteger count = getCount(potionContents);
             if (potionContents.potion().filter(potionHolder -> potionHolder.is(ModTags.DISPELS_FIRE)).isPresent() && entity.isOnFire()) entity.extinguishFire();
+            float potionDurationScale = itemStack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 1F);
             potionContents.forEachEffect((mobEffectInstance) -> {
                 Holder<MobEffect> effect = mobEffectInstance.getEffect();
                 if (effect.value().isInstantenous()) return;
@@ -99,7 +101,7 @@ public record InfusedAbility<I extends InfusedItem>(
                 }
                 if (wasApplied && itemStack.isDamageableItem() && effect.is(ModTags.DEGRADES_LITHERITE_GEAR))
                     itemStack.hurtAndBreak(mobEffectInstance.getAmplifier() + 1, user, EquipmentSlot.MAINHAND);
-            }, 1F);
+            }, potionDurationScale);
         }
         if (item.getLastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
             untilReady.replaceAll((mobEffect, integer) -> integer - 1);
@@ -122,7 +124,8 @@ public record InfusedAbility<I extends InfusedItem>(
                     if (source != null) {
                         Entity attacker = source.getEntity();
                         if (attacker instanceof LivingEntity newTarget) {
-                            potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget((ServerLevel) level, mobEffectInstance, newTarget, user, count.get(), false), 1F);
+                            float potionDurationScale = itemStack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 1F);
+                            potionContents.forEachEffect((mobEffectInstance) -> applyEffectToTarget((ServerLevel) level, mobEffectInstance, newTarget, user, count.get(), false), potionDurationScale);
                         }
                     }
                 }
@@ -130,6 +133,7 @@ public record InfusedAbility<I extends InfusedItem>(
                     if (hasCorrectArmorOn(supportedMaterials, user) && level.getGameTime() % 80 == 0) {
                         boolean multiEffect = count.get() > 1;
                         if (potionContents.potion().filter(potionHolder -> potionHolder.is(ModTags.DISPELS_FIRE)).isPresent() && entity.isOnFire()) entity.extinguishFire();
+                        float potionDurationScale = itemStack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F);
                         potionContents.forEachEffect((mobEffectInstance) -> {
                             Holder<MobEffect> effect = mobEffectInstance.getEffect();
                             boolean effectivelyBeneficial = (effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl) || (user.isInvertedHealAndHarm() && effect.is(ModTags.CAN_BE_INVERTED_HARM))) &&
@@ -146,7 +150,7 @@ public record InfusedAbility<I extends InfusedItem>(
                                 itemStack.hurtAndBreak(mobEffectInstance.getAmplifier(), user, itemStack.has(DataComponents.EQUIPPABLE) ? itemStack.get(DataComponents.EQUIPPABLE).slot() : EquipmentSlot.MAINHAND);
                                 degradationTicker.put(effect, 0);
                             }
-                        }, 0.1F);
+                        }, potionDurationScale);
                     }
                 }
             }

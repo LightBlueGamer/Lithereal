@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "#lithereal:malishroom_stems"
+  ],
+  "result": {
+    "count": 4,
+    "id": "lithereal:malishroom_planks"
+  }
+}

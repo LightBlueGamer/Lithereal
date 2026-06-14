@@ -32,26 +32,16 @@
     },
     "core_percentage": 0.4,
     "core_block": {
-      "fallback": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "lithereal:pure_ether_source"
-        }
-      },
-      "rules": [
-
-      ]
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:pure_ether_source"
+      }
     },
     "outer_block": {
-      "fallback": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "lithereal:ethereal_crystal_block"
-        }
-      },
-      "rules": [
-
-      ]
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "lithereal:ethereal_crystal_block"
+      }
     },
     "attached": {
       "type": "minecraft:simple_state_provider",

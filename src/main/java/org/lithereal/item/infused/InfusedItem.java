@@ -22,7 +22,8 @@ public interface InfusedItem extends AbilityItem {
     default List<MobEffectInstance> transformEffects(ItemStack stack) {
         PotionContents potionContents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         List<MobEffectInstance> newList = Lists.newArrayList();
-        potionContents.forEachEffect((mobEffectInstance) -> newList.add(transformInstance(mobEffectInstance, 1.0F)), 0.1F);
+        float potionDurationScale = stack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F);
+        potionContents.forEachEffect((mobEffectInstance) -> newList.add(transformInstance(mobEffectInstance, 1.0F)), potionDurationScale);
         return newList;
     }
     static MobEffectInstance transformInstance(MobEffectInstance mobEffectInstance, float durationFactor) {

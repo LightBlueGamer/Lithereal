@@ -102,7 +102,7 @@ public class ModEntities {
     }
     
     public static <T extends Entity> RegistrySupplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
-        ResourceKey<EntityType<?>> resourceKey = ResourceKey.create(Registries.ENTITY_TYPE, Lithereal.id(name));
+        ResourceKey<EntityType<?>> resourceKey = Lithereal.key(Registries.ENTITY_TYPE, name);
         return ENTITIES.register(name, () -> builder.build(resourceKey));
     }
 

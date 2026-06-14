@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "lithereal:litherite_crystal"
+  },
+  "pattern": [
+    "BBB",
+    "B B"
+  ],
+  "result": {
+    "id": "lithereal:litherite_helmet"
+  }
+}

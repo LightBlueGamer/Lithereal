@@ -21,6 +21,7 @@
     "ServerPlayerMixin",
     "ShapedRecipeMixin",
     "ShapelessRecipeMixin",
+    "accessor.BlockFamiliesAccessor",
     "accessor.BlockSetTypeAccessor"
   ],
   "injectors": {

@@ -6,6 +6,7 @@ package org.lithereal.block.entity;
 *///?}
 //? neoforge {
 import net.neoforged.neoforge.transfer.item.ItemResource;
+import org.lithereal.neoforge.client.event.ClientEvents;
 import org.lithereal.neoforge.util.ImplementedItemHandler;
 import org.lithereal.neoforge.util.NeoForgeInventory;
 //?}
@@ -58,8 +59,6 @@ import org.lithereal.util.CommonUtils;
 import java.util.Optional;
 //? neoforge {
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static net.neoforged.neoforge.transfer.transaction.Transaction.openRoot;
 //?}
 
 //? fabric {
@@ -226,10 +225,10 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
                 pEntity.maxFuel = 75;
                 pEntity.heatState = HeatState.LIT;
             } else if (hasSolidFuel) {
-                int fuel = pEntity.getBurnDuration(level.fuelValues(), pEntity.getItem(3));
+                int fuel = pEntity.getBurnDuration(level.fuelValues(), pEntity.getItem(0));
                 pEntity.maxFuel = fuel;
                 pEntity.fuelLevel = fuel;
-                pEntity.removeItem(3, 1);
+                pEntity.removeItemWithRemainder(0, 1);
                 pEntity.heatState = HeatState.LIT;
             } else {
                 pEntity.maxFuel = 0;
@@ -239,7 +238,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
             level.setBlockAndUpdate(blockPos, blockState.setValue(FireCrucibleBlock.HEAT_STATE, pEntity.heatState));
         }
 
-        if(hasRecipe(pEntity)) {
+        if(pEntity.heatState.isLit() && hasRecipe(pEntity)) {
             pEntity.progress += pEntity.heatState.heat;
             setChanged(level, blockPos, blockState);
 
@@ -253,9 +252,9 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
     protected static void craftItem(FireCrucibleBlockEntity pEntity) {
         Level level = pEntity.getLevel();
-        SimpleContainer inventory = new SimpleContainer(pEntity.getContainerSize());
-        for (int i = 0; i < pEntity.getContainerSize(); i++) {
-            inventory.setItem(i, pEntity.getItem(i));
+        SimpleContainer inventory = new SimpleContainer(pEntity.getContainerSize() - 1);
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            inventory.setItem(i, pEntity.getItem(i + 1));
         }
 
         ContainerRecipeInput crucibleInput = new ContainerRecipeInput(inventory);
@@ -268,7 +267,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
         ItemStack resultItem = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().assemble(crucibleInput)).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().assemble(smeltingInput)).orElse(ItemStack.EMPTY));
         ItemStack outputItem = resultItem.copy();
-        outputItem.setCount(pEntity.getItem(2).getCount() + outputItem.getCount());
+        outputItem.setCount(pEntity.getItem(3).getCount() + outputItem.getCount());
 
         boolean shouldRemoveSecondary = crucibleRecipe.isPresent() && crucibleRecipe.get().value().secondary().isPresent();
 
@@ -276,9 +275,9 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     }
 
     protected static void craftItem(FireCrucibleBlockEntity entity, ItemStack outputItem, boolean shouldRemoveSecondary) {
-        entity.removeItem(0, 1);
-        if (shouldRemoveSecondary) entity.removeItem(1, 1);
-        entity.setItem(2, outputItem);
+        entity.removeItemWithRemainder(1, 1);
+        if (shouldRemoveSecondary) entity.removeItemWithRemainder(2, 1);
+        entity.setItem(3, outputItem);
 
         entity.resetProgress();
     }
@@ -286,24 +285,41 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     protected static boolean hasRecipe(FireCrucibleBlockEntity entity) {
         Level level = entity.getLevel();
         boolean hasRecipe = false;
-        SimpleContainer inventory = new SimpleContainer(entity.getContainerSize());
-        for (int i = 0; i < entity.getContainerSize(); i++) {
-            inventory.setItem(i, entity.getItem(i));
+        SimpleContainer inventory = new SimpleContainer(entity.getContainerSize() - 1);
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            inventory.setItem(i, entity.getItem(i + 1));
         }
 
         ContainerRecipeInput crucibleInput = new ContainerRecipeInput(inventory);
-        Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe = ((ServerLevel)level).recipeAccess()
-                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), crucibleInput, level);
-
         SingleRecipeInput smeltingInput = new SingleRecipeInput(inventory.getItem(0));
-        Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe = ((ServerLevel)level).recipeAccess()
-                .getRecipeFor(RecipeType.SMELTING, smeltingInput, level);
+        Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe;
+        Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe;
+        if (!(level instanceof ServerLevel serverLevel)) {
+            //? fabric {
+            /*crucibleRecipe = level.recipeAccess().getSynchronizedRecipes()
+                    .getFirstMatch(ModRecipes.BURNING_TYPE.get(), crucibleInput, level);
+            furnaceRecipe = level.recipeAccess().getSynchronizedRecipes()
+                    .getFirstMatch(RecipeType.SMELTING, smeltingInput, level);
+            *///?}
+            //? neoforge {
+            crucibleRecipe = ClientEvents.ClientForgeBusEvents.getRecipes(ModRecipes.BURNING_TYPE.get())
+                    .stream().filter(recipeHolder -> recipeHolder.value().matches(crucibleInput, level)).findFirst();
+            furnaceRecipe = ClientEvents.ClientForgeBusEvents.getRecipes(RecipeType.SMELTING)
+                    .stream().filter(recipeHolder -> recipeHolder.value().matches(smeltingInput, level)).findFirst();
+            //?}
+        } else {
+            crucibleRecipe = serverLevel.recipeAccess()
+                    .getRecipeFor(ModRecipes.BURNING_TYPE.get(), crucibleInput, level);
+
+            furnaceRecipe = serverLevel.recipeAccess()
+                    .getRecipeFor(RecipeType.SMELTING, smeltingInput, level);
+        }
 
         if (crucibleRecipe.isPresent() || furnaceRecipe.isPresent()) {
             ItemStack resultItem = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().assemble(crucibleInput)).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().assemble(smeltingInput)).orElse(ItemStack.EMPTY));
             if (entity.progress == 0)
                 entity.maxProgress = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().maxProgress()).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().cookingTime()).orElse(200));
-            if (canInsertItemInto(2, inventory, resultItem))
+            if (canInsertItemInto(3, inventory, resultItem))
                 hasRecipe = true;
         }
 
@@ -318,7 +334,7 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
     *///?}
 
     protected static boolean hasSolidFuel(FireCrucibleBlockEntity entity, Level level) {
-        ItemStack item = entity.getItem(3);
+        ItemStack item = entity.getItem(0);
         int burnTime = entity.getBurnDuration(level.fuelValues(), item);
         return burnTime > 0;
     }
@@ -367,12 +383,9 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public @NotNull ItemStack removeItem(int slot, int count) {
-        ItemResource resource = itemHandler.getResource(slot);
-        int oldCount = itemHandler.getAmountAsInt(slot);
-        try (var tx = openRoot()) {
-            itemHandler.extract(slot, resource, count, tx);
-        }
-        return resource.toStack(oldCount);
+        ItemStack originalStack = itemHandler.getStacks().get(slot);
+        itemHandler.set(slot, itemHandler.getResourceFrom(originalStack), originalStack.getCount() - count);
+        return originalStack;
     }
 
     @Override

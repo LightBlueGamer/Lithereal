@@ -54,7 +54,7 @@ public class InfusementChamberMenu extends AbstractContainerMenu {
             }
         });
         this.addSlot(new Slot(inventory, 1, 62, 13));
-        this.addSlot(new Slot(inventory, 2, 80, 57));
+        this.addSlot(new CommonResultSlot(inventory, 2, 80, 57));
     }
 
     public boolean isCrafting() {

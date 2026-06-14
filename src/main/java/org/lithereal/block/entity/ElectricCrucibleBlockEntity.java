@@ -5,6 +5,7 @@ package org.lithereal.block.entity;
 *///?}
 //? neoforge {
 import net.neoforged.neoforge.transfer.item.ItemResource;
+import org.lithereal.neoforge.client.event.ClientEvents;
 import org.lithereal.neoforge.util.ImplementedItemHandler;
 import org.lithereal.neoforge.util.NeoForgeInventory;
 //?}
@@ -53,8 +54,6 @@ import org.lithereal.util.ether.IEnergyUserProvider;
 import java.util.Optional;
 //? neoforge {
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static net.neoforged.neoforge.transfer.transaction.Transaction.openRoot;
 //?}
 
 //? fabric {
@@ -221,7 +220,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
             level.setBlockAndUpdate(blockPos, blockState.setValue(FireCrucibleBlock.HEAT_STATE, pEntity.heatState));
         }
 
-        if (hasRecipe(pEntity)) {
+        if (pEntity.heatState.isLit() && hasRecipe(pEntity)) {
             pEntity.progress += pEntity.heatState.heat;
             setChanged(level, blockPos, blockState);
 
@@ -258,8 +257,8 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     }
 
     protected static void craftItem(ElectricCrucibleBlockEntity entity, ItemStack outputItem, boolean shouldRemoveSecondary) {
-        entity.removeItem(0, 1);
-        if (shouldRemoveSecondary) entity.removeItem(1, 1);
+        entity.removeItemWithRemainder(0, 1);
+        if (shouldRemoveSecondary) entity.removeItemWithRemainder(1, 1);
         entity.setItem(2, outputItem);
 
         entity.resetProgress();
@@ -275,12 +274,29 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
         }
 
         ContainerRecipeInput crucibleInput = new ContainerRecipeInput(inventory);
-        Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe = ((ServerLevel)level).recipeAccess()
-                .getRecipeFor(ModRecipes.BURNING_TYPE.get(), crucibleInput, level);
-
         SingleRecipeInput smeltingInput = new SingleRecipeInput(inventory.getItem(0));
-        Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe = ((ServerLevel)level).recipeAccess()
-                .getRecipeFor(RecipeType.SMELTING, smeltingInput, level);
+        Optional<RecipeHolder<FireCrucibleRecipe>> crucibleRecipe;
+        Optional<RecipeHolder<SmeltingRecipe>> furnaceRecipe;
+        if (!(level instanceof ServerLevel serverLevel)) {
+            //? fabric {
+            /*crucibleRecipe = level.recipeAccess().getSynchronizedRecipes()
+                    .getFirstMatch(ModRecipes.BURNING_TYPE.get(), crucibleInput, level);
+            furnaceRecipe = level.recipeAccess().getSynchronizedRecipes()
+                    .getFirstMatch(RecipeType.SMELTING, smeltingInput, level);
+            *///?}
+            //? neoforge {
+            crucibleRecipe = ClientEvents.ClientForgeBusEvents.getRecipes(ModRecipes.BURNING_TYPE.get())
+                    .stream().filter(recipeHolder -> recipeHolder.value().matches(crucibleInput, level)).findFirst();
+            furnaceRecipe = ClientEvents.ClientForgeBusEvents.getRecipes(RecipeType.SMELTING)
+                    .stream().filter(recipeHolder -> recipeHolder.value().matches(smeltingInput, level)).findFirst();
+            //?}
+        } else {
+            crucibleRecipe = serverLevel.recipeAccess()
+                    .getRecipeFor(ModRecipes.BURNING_TYPE.get(), crucibleInput, level);
+
+            furnaceRecipe = serverLevel.recipeAccess()
+                    .getRecipeFor(RecipeType.SMELTING, smeltingInput, level);
+        }
 
         if (crucibleRecipe.isPresent() || furnaceRecipe.isPresent()) {
             ItemStack resultItem = crucibleRecipe.map(fireCrucibleRecipeRecipeHolder -> fireCrucibleRecipeRecipeHolder.value().assemble(crucibleInput)).orElseGet(() -> furnaceRecipe.map(smeltingRecipeRecipeHolder -> smeltingRecipeRecipeHolder.value().assemble(smeltingInput)).orElse(ItemStack.EMPTY));
@@ -363,12 +379,9 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
 
     @Override
     public @NotNull ItemStack removeItem(int slot, int count) {
-        ItemResource resource = itemHandler.getResource(slot);
-        int oldCount = itemHandler.getAmountAsInt(slot);
-        try (var tx = openRoot()) {
-            itemHandler.extract(slot, resource, count, tx);
-        }
-        return resource.toStack(oldCount);
+        ItemStack originalStack = itemHandler.getStacks().get(slot);
+        itemHandler.set(slot, itemHandler.getResourceFrom(originalStack), originalStack.getCount() - count);
+        return originalStack;
     }
 
     @Override

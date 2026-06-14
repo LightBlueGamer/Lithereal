@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "impure_ethereal_crystal_shard",
+  "ingredients": [
+    "lithereal:ethereal_crystal_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "lithereal:impure_ethereal_crystal_shard"
+  }
+}

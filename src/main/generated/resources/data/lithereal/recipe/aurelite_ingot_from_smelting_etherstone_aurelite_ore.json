@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "aurelite_ingot",
+  "ingredient": "lithereal:etherstone_aurelite_ore",
+  "result": {
+    "id": "lithereal:aurelite_ingot"
+  }
+}

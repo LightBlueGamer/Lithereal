@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "lithereal:aurelite_ingot",
+    "B": "lithereal:frozen_litherite_helmet",
+    "C": "lithereal:chryon_crystal"
+  },
+  "pattern": [
+    " A ",
+    "CBC",
+    " A "
+  ],
+  "result": {
+    "id": "lithereal:frostbitten_litherite_helmet"
+  }
+}

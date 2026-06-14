@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "blue_dye",
+  "ingredients": [
+    "lithereal:phantom_rose_ethereal_core"
+  ],
+  "result": {
+    "id": "minecraft:blue_dye"
+  }
+}

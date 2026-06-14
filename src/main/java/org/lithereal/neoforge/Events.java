@@ -4,14 +4,17 @@ package org.lithereal.neoforge;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.entity.phantom.PhantomZombie;
@@ -40,6 +43,11 @@ public class Events {
     public static class ForgeBusEvents {
         public static void register() {
             NeoForge.EVENT_BUS.register(ForgeBusEvents.class);
+        }
+        @SubscribeEvent // on the game event bus
+        public static void datapackSync(OnDatapackSyncEvent event) {
+            // Specify what recipe types to sync to the client
+            event.sendRecipes(ModRecipes.BURNING_TYPE.get(), RecipeType.SMELTING);
         }
         @SubscribeEvent
         public static void onBrewingRecipes(RegisterBrewingRecipesEvent event) {

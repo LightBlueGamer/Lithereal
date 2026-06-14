@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "copalite_ingot",
+  "ingredient": "lithereal:copalite_dust",
+  "result": {
+    "id": "lithereal:copalite_ingot"
+  }
+}

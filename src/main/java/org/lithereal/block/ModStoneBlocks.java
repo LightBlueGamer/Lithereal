@@ -88,7 +88,7 @@ public class ModStoneBlocks {
             resourceKey -> new WallBlock(BlockBehaviour.Properties.ofLegacyCopy(POLISHED_PAILITE.get()).setId(resourceKey).forceSolidOn()));
 
     public static final RegistrySupplier<Block> CHISELED_POLISHED_PAILITE_BRICKS = registerBlock("chiseled_polished_pailite_bricks",
-            resourceKey -> new Block(BlockBehaviour.Properties.ofLegacyCopy(Blocks.CHISELED_STONE_BRICKS).setId(resourceKey).lightLevel(blockState -> 1)));
+            resourceKey -> new RotatedPillarBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.CHISELED_STONE_BRICKS).setId(resourceKey).lightLevel(blockState -> 1)));
 
     public static final RegistrySupplier<Block> POLISHED_PAILITE_BRICKS = registerBlock("polished_pailite_bricks",
             resourceKey -> new Block(BlockBehaviour.Properties.ofLegacyCopy(Blocks.STONE_BRICKS).setId(resourceKey)));

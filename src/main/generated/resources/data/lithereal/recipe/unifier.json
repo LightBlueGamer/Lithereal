@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "lithereal:allian_ingot",
+    "B": "lithereal:boss_essence",
+    "N": "minecraft:nether_star"
+  },
+  "pattern": [
+    "ABA",
+    "ANA",
+    " A "
+  ],
+  "result": {
+    "id": "lithereal:unifier"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "litherite_crystal",
+  "ingredients": [
+    "lithereal:molten_litherite_bucket",
+    "minecraft:water_bucket"
+  ],
+  "result": {
+    "id": "lithereal:litherite_crystal"
+  }
+}

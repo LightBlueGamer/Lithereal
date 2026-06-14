@@ -39,11 +39,9 @@ public class ModItems {
     public static final RegistrySupplier<Item> MOLTEN_LITHERITE_BUCKET = registerItem("molten_litherite_bucket", properties ->
             new Item(properties.craftRemainder(Items.BUCKET).stacksTo(16)));
 
-    public static final RegistrySupplier<Item> LITHER_CHARGE = registerItem("lither_charge", properties ->
-            new LitherChargeItem(properties));
+    public static final RegistrySupplier<Item> LITHER_CHARGE = registerItem("lither_charge", LitherChargeItem::new);
 
-    public static final RegistrySupplier<Item> LITHEREAL_KEY = registerItem("lithereal_key", properties ->
-            new Item(properties));
+    public static final RegistrySupplier<Item> LITHEREAL_KEY = registerItem("lithereal_key", Item::new);
 
     public static final RegistrySupplier<Item> MUSIC_DISC_SPARKLE = registerItem("music_disc_sparkle", properties ->
             new Item(properties.rarity(Rarity.RARE).stacksTo(1).jukeboxPlayable(ModSounds.SPARKLE)));
@@ -60,34 +58,34 @@ public class ModItems {
     public static final RegistrySupplier<Item> ODYSIUM_UPGRADE_SMITHING_TEMPLATE = registerItem("odysium_upgrade_smithing_template",
             ModSmithingTemplates.createOdysiumUpgradeTemplate());
 
-    public static final RegistrySupplier<Item> PHANTOM_OAK_SIGN = registerItem("phantom_oak_sign", properties -> new SignItem(ModTreeBlocks.PHANTOM_OAK_SIGN.get(), ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get(), properties));
+    public static final RegistrySupplier<Item> PHANTOM_OAK_SIGN = registerItem("phantom_oak_sign", properties -> new SignItem(ModTreeBlocks.PHANTOM_OAK_SIGN.get(), ModTreeBlocks.PHANTOM_OAK_WALL_SIGN.get(), properties.useBlockDescriptionPrefix()));
 
-    public static final RegistrySupplier<Item> PHANTOM_OAK_HANGING_SIGN = registerItem("phantom_oak_hanging_sign", properties -> new HangingSignItem(ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get(), properties));
+    public static final RegistrySupplier<Item> PHANTOM_OAK_HANGING_SIGN = registerItem("phantom_oak_hanging_sign", properties -> new HangingSignItem(ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get(), properties.useBlockDescriptionPrefix()));
 
     public static final RegistrySupplier<Item> PHANTOM_OAK_BOAT = registerItem("phantom_oak_boat", properties -> new BoatItem(ModEntities.PHANTOM_OAK_BOAT.get(), properties.stacksTo(1)));
 
     public static final RegistrySupplier<Item> PHANTOM_OAK_CHEST_BOAT = registerItem("phantom_oak_chest_boat", properties -> new BoatItem(ModEntities.PHANTOM_OAK_CHEST_BOAT.get(), properties.stacksTo(1)));
 
-    public static final RegistrySupplier<Item> FORTSHROOM_SIGN = registerItem("fortshroom_sign", properties -> new SignItem(ModTreeBlocks.FORTSHROOM_SIGN.get(), ModTreeBlocks.FORTSHROOM_WALL_SIGN.get(), properties));
+    public static final RegistrySupplier<Item> FORTSHROOM_SIGN = registerItem("fortshroom_sign", properties -> new SignItem(ModTreeBlocks.FORTSHROOM_SIGN.get(), ModTreeBlocks.FORTSHROOM_WALL_SIGN.get(), properties.useBlockDescriptionPrefix()));
 
-    public static final RegistrySupplier<Item> FORTSHROOM_HANGING_SIGN = registerItem("fortshroom_hanging_sign", properties -> new HangingSignItem(ModTreeBlocks.FORTSHROOM_HANGING_SIGN.get(), ModTreeBlocks.FORTSHROOM_WALL_HANGING_SIGN.get(), properties));
+    public static final RegistrySupplier<Item> FORTSHROOM_HANGING_SIGN = registerItem("fortshroom_hanging_sign", properties -> new HangingSignItem(ModTreeBlocks.FORTSHROOM_HANGING_SIGN.get(), ModTreeBlocks.FORTSHROOM_WALL_HANGING_SIGN.get(), properties.useBlockDescriptionPrefix()));
 
     public static final RegistrySupplier<Item> FORTSHROOM_BOAT = registerItem("fortshroom_boat", properties -> new BoatItem(ModEntities.FORTSHROOM_BOAT.get(), properties.stacksTo(1)));
 
     public static final RegistrySupplier<Item> FORTSHROOM_CHEST_BOAT = registerItem("fortshroom_chest_boat", properties -> new BoatItem(ModEntities.FORTSHROOM_CHEST_BOAT.get(), properties.stacksTo(1)));
 
-    public static final RegistrySupplier<Item> MALISHROOM_SIGN = registerItem("malishroom_sign", properties -> new SignItem(ModTreeBlocks.MALISHROOM_SIGN.get(), ModTreeBlocks.MALISHROOM_WALL_SIGN.get(), properties));
+    public static final RegistrySupplier<Item> MALISHROOM_SIGN = registerItem("malishroom_sign", properties -> new SignItem(ModTreeBlocks.MALISHROOM_SIGN.get(), ModTreeBlocks.MALISHROOM_WALL_SIGN.get(), properties.useBlockDescriptionPrefix()));
 
-    public static final RegistrySupplier<Item> MALISHROOM_HANGING_SIGN = registerItem("malishroom_hanging_sign", properties -> new HangingSignItem(ModTreeBlocks.MALISHROOM_HANGING_SIGN.get(), ModTreeBlocks.MALISHROOM_WALL_HANGING_SIGN.get(), properties));
+    public static final RegistrySupplier<Item> MALISHROOM_HANGING_SIGN = registerItem("malishroom_hanging_sign", properties -> new HangingSignItem(ModTreeBlocks.MALISHROOM_HANGING_SIGN.get(), ModTreeBlocks.MALISHROOM_WALL_HANGING_SIGN.get(), properties.useBlockDescriptionPrefix()));
 
     public static final RegistrySupplier<Item> MALISHROOM_BOAT = registerItem("malishroom_boat", properties -> new BoatItem(ModEntities.MALISHROOM_BOAT.get(), properties.stacksTo(1)));
 
     public static final RegistrySupplier<Item> MALISHROOM_CHEST_BOAT = registerItem("malishroom_chest_boat", properties -> new BoatItem(ModEntities.MALISHROOM_CHEST_BOAT.get(), properties.stacksTo(1)));
 
-    public static final RegistrySupplier<Item> LITHER_TORCH = registerItem("lither_torch", properties -> new StandingAndWallBlockItem(ModBlocks.LITHER_TORCH.get(), ModBlocks.LITHER_WALL_TORCH.get(), Direction.DOWN, properties));
+    public static final RegistrySupplier<Item> LITHER_TORCH = registerItem("lither_torch", properties -> new StandingAndWallBlockItem(ModBlocks.LITHER_TORCH.get(), ModBlocks.LITHER_WALL_TORCH.get(), Direction.DOWN, properties.useBlockDescriptionPrefix()));
 
     public static <T extends Item> RegistrySupplier<Item> registerItem(String name, Function<Item.Properties, T> propertiesItemFunction) {
-        ResourceKey<Item> resourceKey = ResourceKey.create(Registries.ITEM, Lithereal.id(name));
+        ResourceKey<Item> resourceKey = Lithereal.key(Registries.ITEM, name);
         return ITEMS.register(name, () -> propertiesItemFunction.apply(new Item.Properties().setId(resourceKey)));
     }
 

@@ -1,0 +1,9 @@
+{
+  "type": "lithereal:burning",
+  "max_progress": 250,
+  "output": {
+    "id": "lithereal:soliumite_ingot"
+  },
+  "primary": "lithereal:hellionite_crystal",
+  "secondary": "lithereal:luminium_crystal"
+}

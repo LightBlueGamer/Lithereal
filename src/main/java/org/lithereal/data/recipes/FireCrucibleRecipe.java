@@ -9,6 +9,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -43,13 +44,6 @@ public record FireCrucibleRecipe(ItemStackTemplate output, Ingredient primary, O
     @Override
     public String group() {
         return "";
-    }
-
-    public @NotNull NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> ret = NonNullList.withSize(2, Ingredient.of());
-        ret.set(0, primary);
-        secondary.ifPresent(ingredient -> ret.set(1, ingredient));
-        return ret;
     }
 
     private boolean hasSecondary(ContainerRecipeInput container) {

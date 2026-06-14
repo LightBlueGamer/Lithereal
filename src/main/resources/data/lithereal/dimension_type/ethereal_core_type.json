@@ -24,11 +24,20 @@
     },
     "minecraft:gameplay/respawn_anchor_works": false,
     "minecraft:visual/ambient_light_color": "#3f473f",
-    "minecraft:visual/fog_color": "#27293a",
-    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/fog_color": "#0A275C",
+    "minecraft:visual/sky_color": "#1659AC",
     "minecraft:visual/sky_light_color": "#c8dffe",
     "minecraft:visual/sky_light_factor": 0.6,
-    "minecraft:visual/block_light_tint": "#94ffa6"
+    "minecraft:visual/block_light_tint": "#94ffa6",
+    "minecraft:visual/water_fog_color": "#180660",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "lithereal:ethereal_core_soul"
+        },
+        "probability": 0.025
+      }
+    ]
   },
   "default_clock": "lithereal:ethereal_core",
   "coordinate_scale": 1,

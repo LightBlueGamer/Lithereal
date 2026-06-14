@@ -15,6 +15,10 @@ import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -22,6 +26,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.event.lifecycle.ClientStartedEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.lithereal.LitherealClient;
 import org.lithereal.block.entity.ModBlockEntities;
 import org.lithereal.client.KeyMapping;
@@ -31,8 +36,11 @@ import org.lithereal.client.model.LitherealArmorModel;
 import org.lithereal.client.particle.*;
 import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
 import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
+import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModArmorItems;
+
+import java.util.*;
 
 public class ClientEvents {
     public static class ClientModBusEvents {
@@ -42,10 +50,6 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             LitherealClient.init();
-        }
-        @SubscribeEvent
-        public static void onClientStarted(ClientStartedEvent event) {
-            LitherealClient.onClientStarted(event.getClient());
         }
         @SubscribeEvent
         public static void onParticleProviderRegister(RegisterParticleProvidersEvent event) {
@@ -133,8 +137,37 @@ public class ClientEvents {
         }
     }
     public static class ClientForgeBusEvents {
+        public static final Map<RecipeType<?>, List<RecipeHolder<?>>> STORED_RECIPES = new HashMap<>();
         public static void register() {
-//            NeoForge.EVENT_BUS.register(ClientForgeBusEvents.class);
+            NeoForge.EVENT_BUS.register(ClientForgeBusEvents.class);
+        }
+        @SubscribeEvent
+        public static void onClientStarted(ClientStartedEvent event) {
+            LitherealClient.onClientStarted(event.getClient());
+        }
+
+        @SubscribeEvent // on the game event bus only on the physical client
+        public static void recipesReceived(RecipesReceivedEvent event) {
+            // First remove the previous recipes
+            STORED_RECIPES.clear();
+
+            // Then store the recipes you want
+            addRecipes(ModRecipes.BURNING_TYPE.get(), event.getRecipeMap().byType(ModRecipes.BURNING_TYPE.get()));
+            addRecipes(RecipeType.SMELTING, event.getRecipeMap().byType(RecipeType.SMELTING));
+        }
+
+        @SubscribeEvent // on the game event bus only on the physical client
+        public static void clientLogOut(ClientPlayerNetworkEvent.LoggingOut event) {
+            // Clear the stored recipes on world log out
+            STORED_RECIPES.clear();
+        }
+
+        public static <I extends RecipeInput, T extends Recipe<I>> void addRecipes(RecipeType<T> recipeType, Collection<RecipeHolder<T>> recipes) {
+            STORED_RECIPES.put(recipeType, new ArrayList<>(recipes));
+        }
+
+        public static <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> getRecipes(RecipeType<T> recipeType) {
+            return STORED_RECIPES.get(recipeType).stream().map(recipeHolder -> (RecipeHolder<T>)recipeHolder).toList();
         }
     }
 }

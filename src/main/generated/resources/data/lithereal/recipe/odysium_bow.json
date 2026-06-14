@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "minecraft:iron_nugget",
+    "O": "lithereal:odysium_ingot",
+    "S": "minecraft:string"
+  },
+  "pattern": [
+    " OI",
+    "O S",
+    " OI"
+  ],
+  "result": {
+    "id": "lithereal:odysium_bow"
+  }
+}

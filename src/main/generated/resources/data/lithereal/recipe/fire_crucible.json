@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:cauldron",
+    "T": "minecraft:terracotta"
+  },
+  "pattern": [
+    "T T",
+    "TCT",
+    "TTT"
+  ],
+  "result": {
+    "id": "lithereal:fire_crucible"
+  }
+}

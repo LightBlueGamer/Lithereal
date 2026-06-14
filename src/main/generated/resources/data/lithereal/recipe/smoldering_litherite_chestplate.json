@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "lithereal:aurelite_ingot",
+    "B": "lithereal:burning_litherite_chestplate",
+    "C": "lithereal:chryon_crystal"
+  },
+  "pattern": [
+    " A ",
+    "CBC",
+    " A "
+  ],
+  "result": {
+    "id": "lithereal:smoldering_litherite_chestplate"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.6,
+  "group": "luminium_crystal",
+  "ingredient": "lithereal:etherstone_luminium_ore",
+  "result": {
+    "id": "lithereal:luminium_crystal"
+  }
+}

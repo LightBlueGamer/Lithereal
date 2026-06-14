@@ -14,7 +14,7 @@ public class ImplementedItemHandler extends ItemStacksResourceHandler {
     }
 
     @Override
-    protected void onContentsChanged(int index, ItemStack previousContents) {
+    public void onContentsChanged(int index, ItemStack previousContents) {
         super.onContentsChanged(index, previousContents);
         representation.setChanged();
     }

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 400,
+  "experience": 1.2,
+  "group": "netherite_fragment",
+  "ingredient": "lithereal:pailite_netherite_ore",
+  "result": {
+    "id": "lithereal:netherite_fragment"
+  }
+}

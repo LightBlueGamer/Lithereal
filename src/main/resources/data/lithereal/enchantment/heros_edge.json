@@ -49,7 +49,7 @@
     "base": 25,
     "per_level_above_first": 75
   },
-  "primary_items": "#minecraft:enchantable/sword",
+  "primary_items": "#minecraft:enchantable/melee_weapon",
   "slots": [
     "mainhand"
   ],
