@@ -45,12 +45,22 @@ public class ModModelProvider extends ModelProvider {
 
     public void registerBlockModels(BlockModelGenerators blockModels) {
         ModBlockFamilies.MOD_BLOCK_FAMILIES.stream().filter(BlockFamily::shouldGenerateModel).forEach(blockFamily -> blockModels.family(blockFamily.getBaseBlock()).generateFor(blockFamily));
+        blockWithItem(ModBlocks.ETHEREAL_DIRT, blockModels);
         blockWithItem(ModBlocks.COARSE_ETHEREAL_DIRT, blockModels);
         blockWithItem(ModBlocks.PHANTOM_GRAVEL, blockModels);
         blockWithItem(ModBlocks.CREATIVE_ETHER_SOURCE, blockModels);
         blockWithItem(ModBlocks.PASSIVE_ETHER_ABSORBER, blockModels);
         blockWithItem(ModBlocks.PURE_ETHER_SOURCE, blockModels);
         blockWithItem(ModBlocks.ETHEREAL_CRYSTAL_BLOCK, blockModels);
+
+        blockWithItem(ModStorageBlocks.LITHERITE_BLOCK, blockModels);
+        blockWithItem(ModStorageBlocks.BURNING_LITHERITE_BLOCK, blockModels);
+        blockWithItem(ModStorageBlocks.FROZEN_LITHERITE_BLOCK, blockModels);
+        blockWithItem(ModStorageBlocks.WITHERING_LITHERITE_BLOCK, blockModels);
+        blockWithTintedItem(ModStorageBlocks.INFUSED_LITHERITE_BLOCK, new Potion(), blockModels);
+        blockWithItem(ModStorageBlocks.CHARGED_LITHERITE_BLOCK, blockModels);
+        blockWithItem(ModStorageBlocks.ODYSIUM_BLOCK, blockModels);
+        blockWithItem(ModPhantomBlocks.PHANTOM_DIAMOND_BLOCK, blockModels);
 
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_PLANKS.get(), blockModels);
         blockModels.createPlantWithDefaultItem(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
@@ -293,6 +303,11 @@ public class ModModelProvider extends ModelProvider {
     public void blockWithItem(Supplier<Block> block, BlockModelGenerators blockModels) {
         blockModels.createTrivialCube(block.get());
         blockModels.registerSimpleItemModel(block.get(), ModelLocationUtils.getModelLocation(block.get()));
+    }
+
+    public void blockWithTintedItem(Supplier<Block> block, ItemTintSource tintSource, BlockModelGenerators blockModels) {
+        blockModels.createTrivialCube(block.get());
+        blockModels.registerSimpleTintedItemModel(block.get(), ModelLocationUtils.getModelLocation(block.get()), tintSource);
     }
 
     public void itemForBlockModel(Block block, BlockModelGenerators blockModels) {

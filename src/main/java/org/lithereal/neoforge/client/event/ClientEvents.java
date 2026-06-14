@@ -158,10 +158,6 @@ public class ClientEvents {
         public static void register() {
             NeoForge.EVENT_BUS.register(ClientForgeBusEvents.class);
         }
-        @SubscribeEvent
-        public static void onClientStarted(ClientStartedEvent event) {
-            LitherealClient.onClientStarted(event.getClient());
-        }
 
         @SubscribeEvent // on the game event bus only on the physical client
         public static void recipesReceived(RecipesReceivedEvent event) {

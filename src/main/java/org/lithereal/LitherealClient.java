@@ -3,6 +3,7 @@ package org.lithereal;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
+import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -37,10 +38,10 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static dev.architectury.platform.Platform.isModLoaded;
-import static net.minecraft.client.model.geom.LayerDefinitions.INNER_ARMOR_DEFORMATION;
-import static net.minecraft.client.model.geom.LayerDefinitions.OUTER_ARMOR_DEFORMATION;
 
 public class LitherealClient {
+    private static final CubeDeformation OUTER_ARMOR_DEFORMATION = new CubeDeformation(1.0F);
+    private static final CubeDeformation INNER_ARMOR_DEFORMATION = new CubeDeformation(0.5F);
     public static final CubeDeformation BABY_OUTER_ARMOR_DEFORMATION = new CubeDeformation(-0.1F, 0.5F, 0.3F);
     public static final CubeDeformation BABY_INNER_ARMOR_DEFORMATION = new CubeDeformation(-0.1F, 0.3F, 0.3F);
     public static final ModelLayerLocation PHANTOM_OAK_BOAT_LAYER = new ModelLayerLocation(
@@ -78,6 +79,7 @@ public class LitherealClient {
         EntityModelLayerRegistry.register(MALISHROOM_CHEST_BOAT_LAYER, BoatModel::createChestBoatModel);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.SIGN.get(), StandingSignRenderer::new);
         BlockEntityRendererRegistry.register((BlockEntityType<SignBlockEntity>) ModBlockEntities.HANGING_SIGN.get(), HangingSignRenderer::new);
+        registerColorHandlers();
         registerItemsToBuildingBlocksTab();
         registerItemsToNaturalTab();
         registerItemsToMaterialsTab();
@@ -85,51 +87,16 @@ public class LitherealClient {
         registerItemsToCombatTab();
     }
 
-    public static void onClientStarted(Minecraft client) {
-        registerColorHandlers(client);
-    }
-
-    private static void registerColorHandlers(Minecraft client) {
-        BlockColors blockColors = client.getBlockColors();
-
-//        ColorHandlerRegistry.registerItemColors(itemColor, ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get().asItem(), ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SWORD.get(), ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), ModToolItems.INFUSED_LITHERITE_PICKAXE.get(), ModToolItems.INFUSED_LITHERITE_AXE.get(), ModToolItems.INFUSED_LITHERITE_HOE.get(), ModToolItems.INFUSED_LITHERITE_HAMMER.get(), ModArmorItems.INFUSED_LITHERITE_HELMET.get(), ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), ModArmorItems.INFUSED_LITHERITE_BOOTS.get());
-        blockColors.register(List.of(ModBlockTintSources.infusedLitherite(blockEntity -> {
+    private static void registerColorHandlers() {
+        ColorHandlerRegistry.registerBlockColors(ModBlockTintSources.infusedLitherite(blockEntity -> {
             if (blockEntity instanceof PotionStorage potionStorage) return potionStorage.getStoredPotion().getColor();
             return -1;
-        }), ModBlockTintSources.BLANK_LAYER), ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get());
-        blockColors.register(List.of(ModBlockTintSources.infusedLitherite(blockEntity -> {
+        }), ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get());
+        ColorHandlerRegistry.registerBlockColors(ModBlockTintSources.infusedLitherite(blockEntity -> {
             if (blockEntity instanceof PotionStorage potionStorage) return potionStorage.getStoredPotion().getColor();
             return -1;
-        }), ModBlockTintSources.BLANK_LAYER), ModBlocks.INFUSEMENT_CHAMBER.get());
-        blockColors.register(List.of(ModBlockTintSources.etherealGrassBlock()), ModBlocks.ETHEREAL_GRASS_BLOCK.get());
-//        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.ETHEREAL_GRASS_BLOCK.get(),
-//                ModTreeBlocks.PHANTOM_OAK_LEAVES.get());
-//        RenderTypeRegistry.register(RenderType.cutout(), ModBlocks.BLUE_FIRE.get(),
-//                ModBlocks.FIRE_CRUCIBLE.get(),
-//                ModBlocks.LITHER_WALL_TORCH.get(),
-//                ModBlocks.LITHER_TORCH.get(),
-//                ModBlocks.LITHER_LANTERN.get(),
-//                ModBlocks.LITHEREAL_VAULT.get(),
-//                ModTreeBlocks.PHANTOM_OAK_DOOR.get(),
-//                ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(),
-//                ModTreeBlocks.PHANTOM_OAK_SAPLING.get(),
-//                ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(),
-//                ModTreeBlocks.MALISHROOM_DOOR.get(),
-//                ModTreeBlocks.MALISHROOM_TRAPDOOR.get(),
-//                ModVegetationBlocks.MALISHROOM.get(),
-//                ModVegetationBlocks.POTTED_MALISHROOM.get(),
-//                ModTreeBlocks.FORTSHROOM_DOOR.get(),
-//                ModTreeBlocks.FORTSHROOM_TRAPDOOR.get(),
-//                ModVegetationBlocks.FORTSHROOM.get(),
-//                ModVegetationBlocks.POTTED_FORTSHROOM.get(),
-//                ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(),
-//                ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(),
-//                ModPhantomBlocks.PHANTOM_ROSE.get(),
-//                ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(),
-//                ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(),
-//                ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(),
-//                ModBlocks.INFUSEMENT_CHAMBER.get());
-//        RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.INFINITY_GLASS.get(), ModBlocks.PURE_ETHER_SOURCE.get(), ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), ModBlocks.LITHERITE_CRYSTAL_BLOCK.get(), ModBlocks.ETHEREAL_CORE_PORTAL.get(), ModBlocks.ETHEREAL_RIFT.get());
+        }), ModBlocks.INFUSEMENT_CHAMBER.get());
+        ColorHandlerRegistry.registerBlockColors(ModBlockTintSources.etherealGrassBlock(), ModBlocks.ETHEREAL_GRASS_BLOCK.get());
     }
 
     private static void registerItemsToBuildingBlocksTab() {

@@ -72,7 +72,6 @@ public class LitherealFabricClient implements ClientModInitializer {
         registerParticleProvider(ModParticles.PORTAL_SPARKLE.get(), FlameParticle.Provider::new);
         registerParticleProvider(ModParticles.PORTAL_EMISSION.get(), PortalParticleProvider::new);
         LitherealClient.init();
-        ClientLifecycleEvents.CLIENT_STARTED.register(LitherealClient::onClientStarted);
 
         KeyMappingHelper.registerKeyMapping(KeyMapping.FREEZE_KEY);
         KeyMappingHelper.registerKeyMapping(KeyMapping.SCORCH_KEY);
