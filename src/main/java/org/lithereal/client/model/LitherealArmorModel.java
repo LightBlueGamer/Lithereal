@@ -34,10 +34,10 @@ public class LitherealArmorModel extends HumanoidModel<HumanoidRenderState> {
 	}
 
 	public static MeshDefinition createBodyLayer(CubeDeformation deformation, float offset) {
-        MeshDefinition meshdefinition = HumanoidModel.createMesh(deformation, offset);
-        PartDefinition partdefinition = meshdefinition.getRoot();
+        MeshDefinition mesh = HumanoidModel.createMesh(deformation, offset);
+        PartDefinition root = mesh.getRoot();
 
-        PartDefinition body = partdefinition.getChild("body");
+        PartDefinition body = root.getChild("body");
 
         body.addOrReplaceChild("attached_1", CubeListBuilder.create()
                         .texOffs(24, 0).mirror().addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 4.0F, deformation.extend(0.125F)),
@@ -47,15 +47,17 @@ public class LitherealArmorModel extends HumanoidModel<HumanoidRenderState> {
                         .texOffs(24, 0).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 4.0F, 4.0F, deformation.extend(0.125F)),
                 PartPose.offsetAndRotation(-3.3218F, 9.8408F + offset, 1.0F, 0.0F, 0.0F, -0.1309F));
 
-        partdefinition.getChild("left_arm").addOrReplaceChild("left_sleeve", CubeListBuilder.create()
-                .mirror().texOffs(48, 0).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, deformation.extend(0.25F)),
+        root.getChild("left_arm").addOrReplaceChild("left_sleeve", CubeListBuilder.create()
+                        .mirror().texOffs(48, 0)
+                        .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, deformation.extend(0.25F)),
                 PartPose.ZERO);
 
-        partdefinition.getChild("right_arm").addOrReplaceChild("right_sleeve", CubeListBuilder.create()
-                        .texOffs(48, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, deformation.extend(0.25F)),
+        root.getChild("right_arm").addOrReplaceChild("right_sleeve", CubeListBuilder.create()
+                        .texOffs(48, 0)
+                        .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, deformation.extend(0.25F)),
                 PartPose.ZERO);
 
-        PartDefinition head = partdefinition.getChild("head");
+        PartDefinition head = root.getChild("head");
 
         head.addOrReplaceChild("horns", CubeListBuilder.create()
                 .texOffs(0, 1).addBox(3.25F, -12.0F, -5.25F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
@@ -68,7 +70,7 @@ public class LitherealArmorModel extends HumanoidModel<HumanoidRenderState> {
 
         head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 
-		return meshdefinition;
+		return mesh;
 	}
 
     private static MeshDefinition createBabyArmorMesh(final CubeDeformation g, final PartPose armOffset) {
@@ -120,18 +122,18 @@ public class LitherealArmorModel extends HumanoidModel<HumanoidRenderState> {
 
         body.addOrReplaceChild("attached_1", CubeListBuilder.create()
                         .texOffs(24, 0).mirror().addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 4.0F, deformation.extend(0.125F)),
-                PartPose.offsetAndRotation(3.0607F, 11.8237F, -1.0F, 0.0F, 0.0F, 0.1309F));
+                PartPose.offsetAndRotation(3.0607F, 11.8237F, -1.0F, 0.0F, 0.0F, 0.1309F).scaled(0.5F));
 
         body.addOrReplaceChild("attached_2", CubeListBuilder.create()
                         .texOffs(24, 0).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 4.0F, 4.0F, deformation.extend(0.125F)),
-                PartPose.offsetAndRotation(-3.3218F, 9.8408F, 1.0F, 0.0F, 0.0F, -0.1309F));
+                PartPose.offsetAndRotation(-3.3218F, 9.8408F, 1.0F, 0.0F, 0.0F, -0.1309F).scaled(0.5F));
 
         partdefinition.getChild("left_arm").addOrReplaceChild("left_sleeve", CubeListBuilder.create()
-                        .mirror().texOffs(48, 0).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, deformation.extend(0.25F)),
+                        .texOffs(30, 17).addBox(-1.0F, 0.0F, -1.53F, 2.0F, 5.0F, 3.0F, deformation.extend(0.25F)),
                 PartPose.ZERO);
 
         partdefinition.getChild("right_arm").addOrReplaceChild("right_sleeve", CubeListBuilder.create()
-                        .texOffs(48, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, deformation.extend(0.25F)),
+                        .texOffs(30, 25).addBox(-1.0F, 0.0F, -1.53F, 2.0F, 5.0F, 3.0F, deformation.extend(0.25F)),
                 PartPose.ZERO);
 
         PartDefinition head = partdefinition.getChild("head");
@@ -143,7 +145,7 @@ public class LitherealArmorModel extends HumanoidModel<HumanoidRenderState> {
                         .texOffs(56, 20).mirror().addBox(-4.25F, -14.0F, -2.25F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(0, 1).mirror().addBox(-5.25F, -12.0F, -5.25F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(56, 24).mirror().addBox(-4.25F, -13.0F, -4.25F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)),
-                PartPose.ZERO);
+                PartPose.ZERO.scaled(0.5F));
 
         return meshdefinition;
     }

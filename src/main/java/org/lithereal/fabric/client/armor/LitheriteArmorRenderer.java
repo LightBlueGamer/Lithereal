@@ -61,35 +61,6 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
         return equipmentSlot == EquipmentSlot.LEGS;
     }
 
-    public static void setPartVisibility(HumanoidModel<?> armorModel, EquipmentSlot slot) {
-        armorModel.head.visible = false;
-        armorModel.hat.visible = false;
-        armorModel.body.visible = false;
-        armorModel.rightArm.visible = false;
-        armorModel.leftArm.visible = false;
-        armorModel.rightLeg.visible = false;
-        armorModel.leftLeg.visible = false;
-        switch(slot) {
-            case HEAD:
-                armorModel.head.visible = true;
-                armorModel.hat.visible = true;
-                break;
-            case CHEST:
-                armorModel.body.visible = true;
-                armorModel.rightArm.visible = true;
-                armorModel.leftArm.visible = true;
-                break;
-            case LEGS:
-                armorModel.body.visible = true;
-                armorModel.rightLeg.visible = true;
-                armorModel.leftLeg.visible = true;
-                break;
-            case FEET:
-                armorModel.rightLeg.visible = true;
-                armorModel.leftLeg.visible = true;
-        }
-    }
-
     private boolean armorHasCorrectEffect(HumanoidRenderState state) {
         AtomicBoolean bl = new AtomicBoolean(false);
         for (ItemStack armorStack : List.of(state.headEquipment, state.chestEquipment, state.legsEquipment, state.feetEquipment)) {
@@ -113,16 +84,15 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
                 usedModel = (state.isBaby ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(equippable.slot());
                 layerType = state.isBaby ? EquipmentClientInfo.LayerType.HUMANOID_BABY : innerModel ? EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS : EquipmentClientInfo.LayerType.HUMANOID;
             } else return;
-            setPartVisibility(usedModel, slot);
             if (!(stack.getItem() instanceof ModArmorItem armorItem)) return;
             ArmorMaterial armorMaterial = armorItem.getArmorMaterial();
-            int c = armorItem instanceof InfusedLitheriteArmorItem ?
-                    stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor() : DyedItemColor.getOrDefault(stack, 0);
+            int c = DyedItemColor.getOrDefault(stack, 0);
             List<EquipmentClientInfo.Layer> layers = this.equipmentAssets.get(armorMaterial.assetId()).getLayers(layerType);
             boolean renderFoil = stack.hasFoil();
             if (layers.isEmpty()) return;
             for (EquipmentClientInfo.Layer layer : layers) {
-                int color = getColorForLayer(layer, c);
+                int color = armorItem instanceof InfusedLitheriteArmorItem ?
+                        stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor() : getColorForLayer(layer, c);
                 if (color != 0) {
                     Identifier layerTexture = this.layerTextureLookup.apply(new LayerTextureKey(layerType, layer));
                     ArmorRenderer.submitTransformCopyingModel(contextModel, state, usedModel, state, true, submitNodeCollector.order(nextOrder++), poseStack, RenderTypes.armorCutoutNoCull(layerTexture), light, OverlayTexture.NO_OVERLAY, color, null, state.outlineColor, null);

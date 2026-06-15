@@ -31,6 +31,7 @@ public class CommonUtils {
     public static boolean hasFullSuitOfArmorOn(LivingEntity livingEntity) {
         boolean hasFullSuitOn = true;
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
+            if (slot.getType() == EquipmentSlot.Type.ANIMAL_ARMOR) continue;
             ItemStack armorStack = livingEntity.getItemBySlot(slot);
             hasFullSuitOn &= !armorStack.isEmpty();
         }
@@ -45,6 +46,7 @@ public class CommonUtils {
     public static boolean hasCorrectArmorOn(List<ArmorMaterial> materials, LivingEntity livingEntity) {
         boolean hasCorrectArmorOn = true;
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
+            if (slot.getType() == EquipmentSlot.Type.ANIMAL_ARMOR) continue;
             ItemStack armorStack = livingEntity.getItemBySlot(slot);
             if(!(armorStack.getItem() instanceof ModArmorItem armorItem)) {
                 return false;
