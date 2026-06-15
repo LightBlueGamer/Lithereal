@@ -28,10 +28,7 @@ import org.jspecify.annotations.NonNull;
 import org.lithereal.Lithereal;
 import org.lithereal.block.*;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
-import org.lithereal.item.ModArmorItems;
-import org.lithereal.item.ModItems;
-import org.lithereal.item.ModRawMaterialItems;
-import org.lithereal.item.ModToolItems;
+import org.lithereal.item.*;
 import org.lithereal.util.ModBlockFamilies;
 
 import java.util.function.Supplier;
@@ -336,6 +333,9 @@ public class ModModelProvider extends ModelProvider {
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get(), itemModels);
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get(), itemModels);
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get(), itemModels);
+
+        basicItem(ModSpawnEggs.PHANTOM_ZOMBIE_SPAWN_EGG.get(), itemModels);
+        basicItem(ModSpawnEggs.PHANTOM_DROWNED_SPAWN_EGG.get(), itemModels);
     }
 
     public void blockWithItem(Supplier<? extends Block> block, BlockModelGenerators blockModels) {

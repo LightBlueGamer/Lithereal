@@ -85,6 +85,7 @@ public class LitherealClient {
         registerItemsToMaterialsTab();
         registerItemsToToolsTab();
         registerItemsToCombatTab();
+        registerItemsToSpawnEggsTab();
     }
 
     private static void registerColorHandlers() {
@@ -467,5 +468,10 @@ public class LitherealClient {
                 ModItems.LITHER_CHARGE);
         if (isModLoaded("combatify"))
             CompatInit.populateCombatTabForCombatify();
+    }
+
+    private static void registerItemsToSpawnEggsTab() {
+        CreativeTabRegistry.append(ModCreativeTabs.SPAWN_EGGS_TAB, ModSpawnEggs.PHANTOM_ZOMBIE_SPAWN_EGG,
+                ModSpawnEggs.PHANTOM_DROWNED_SPAWN_EGG);
     }
 }

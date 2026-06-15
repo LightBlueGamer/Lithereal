@@ -740,6 +740,8 @@
   "item.lithereal.fortshroom_chest_boat": "Fortshroom Boat with Chest",
   "item.lithereal.malishroom_boat": "Malishroom Boat",
   "item.lithereal.malishroom_chest_boat": "Malishroom Boat with Chest",
+  "item.lithereal.phantom_zombie_spawn_egg": "Phantom Zombie Spawn Egg",
+  "item.lithereal.phantom_drowned_spawn_egg": "Phantom Drowned Spawn Egg",
 
   "item.minecraft.potion.effect.unluck": "Potion of Bad Luck",
   "item.minecraft.splash_potion.effect.unluck": "Splash Potion of Bad Luck",
@@ -756,6 +758,7 @@
   "itemGroup.lithereal.materials.tab": "Lithereal Materials",
   "itemGroup.lithereal.tools.tab": "Lithereal Tools",
   "itemGroup.lithereal.combat.tab": "Lithereal Combat",
+  "itemGroup.lithereal.spawn_eggs.tab": "Lithereal Spawn Eggs",
 
   "key.category.lithereal.lithereal": "Lithereal",
   "key.lithereal.freeze_water": "Frost Walker",

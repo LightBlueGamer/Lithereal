@@ -38,6 +38,10 @@ public class ModCreativeTabs {
             CreativeTabRegistry.create(Component.translatable("itemGroup." + Lithereal.MOD_ID + ".combat.tab"),
                     () -> new ItemStack(ModToolItems.ODYSIUM_SWORD.get())));
 
+    public static final RegistrySupplier<CreativeModeTab> SPAWN_EGGS_TAB = TABS.register("spawn_eggs_tab", () ->
+            CreativeTabRegistry.create(Component.translatable("itemGroup." + Lithereal.MOD_ID + ".spawn_eggs.tab"),
+                    () -> new ItemStack(ModSpawnEggs.PHANTOM_ZOMBIE_SPAWN_EGG.get())));
+
     public static void register() {
         TABS.register();
     }

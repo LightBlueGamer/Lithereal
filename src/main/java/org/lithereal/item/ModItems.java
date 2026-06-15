@@ -95,6 +95,7 @@ public class ModItems {
         ModToolItems.register();
         if (isModLoaded("combatify"))
             CompatInit.initCombatify();
+        ModSpawnEggs.register();
         ITEMS.register();
     }
 }
