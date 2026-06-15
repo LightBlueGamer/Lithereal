@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,primary_filled=false,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber",
+      "y": 270
+    },
+    "facing=east,primary_filled=false,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled",
+      "y": 270
+    },
+    "facing=east,primary_filled=true,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber_overlay",
+      "y": 270
+    },
+    "facing=east,primary_filled=true,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled_overlay",
+      "y": 270
+    },
+    "facing=north,primary_filled=false,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber",
+      "y": 180
+    },
+    "facing=north,primary_filled=false,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled",
+      "y": 180
+    },
+    "facing=north,primary_filled=true,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber_overlay",
+      "y": 180
+    },
+    "facing=north,primary_filled=true,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled_overlay",
+      "y": 180
+    },
+    "facing=south,primary_filled=false,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber"
+    },
+    "facing=south,primary_filled=false,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled"
+    },
+    "facing=south,primary_filled=true,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber_overlay"
+    },
+    "facing=south,primary_filled=true,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled_overlay"
+    },
+    "facing=west,primary_filled=false,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber",
+      "y": 90
+    },
+    "facing=west,primary_filled=false,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled",
+      "y": 90
+    },
+    "facing=west,primary_filled=true,secondary_filled=false": {
+      "model": "lithereal:block/infusement_chamber_overlay",
+      "y": 90
+    },
+    "facing=west,primary_filled=true,secondary_filled=true": {
+      "model": "lithereal:block/infusement_chamber_filled_overlay",
+      "y": 90
+    }
+  }
+}

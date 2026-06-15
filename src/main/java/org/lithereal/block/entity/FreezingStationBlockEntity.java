@@ -196,8 +196,8 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 pEntity.maxChill = 75;
                 pEntity.coldness = 1;
             } else if (hasChiller) {
-                pEntity.chillLevel = 400;
-                pEntity.maxChill = 400;
+                pEntity.chillLevel = 4000;
+                pEntity.maxChill = 4000;
                 pEntity.coldness = 1;
                 pEntity.removeItemWithRemainder(0, 1);
             } else {
@@ -206,7 +206,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
                 pEntity.coldness = 0;
             }
         }
-        if (pEntity.coldness > 0 && hasRecipe(pEntity)) {
+        if (hasRecipe(pEntity)) {
             pEntity.progress += pEntity.coldness;
             setChanged(level, blockPos, blockState);
 
@@ -281,7 +281,7 @@ public class FreezingStationBlockEntity extends BlockEntity implements MenuProvi
         if (entity.progress == 0)
             entity.maxProgress = recipe.map(freezingStationRecipeRecipeHolder -> freezingStationRecipeRecipeHolder.value().maxProgress()).orElse(200);
 
-        return getCoolingPower(entity) > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
+        return entity.coldness > 0 && recipe.isPresent() && canInsertAmountIntoOutput(inventory) &&
                 canInsertItemIntoOutput(inventory, recipe.get().value().assemble(freezingInput));
     }
     /**

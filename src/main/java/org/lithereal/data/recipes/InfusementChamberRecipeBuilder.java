@@ -54,6 +54,6 @@ public class InfusementChamberRecipeBuilder implements RecipeBuilder {
     }
 
     public void save(RecipeOutput output, ResourceKey<Recipe<?>> id) {
-        output.accept(id, new InfusementChamberRecipe(this.result, this.secondary, this.primary, this.recipeTime), this.advancementBuilder.build(output, id, this.category));
+        output.accept(id, new InfusementChamberRecipe(this.result, this.primary, this.secondary, this.recipeTime), this.advancementBuilder.build(output, id, this.category));
     }
 }

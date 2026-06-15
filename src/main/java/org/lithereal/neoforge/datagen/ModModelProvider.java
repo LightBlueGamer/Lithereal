@@ -1,22 +1,33 @@
 package org.lithereal.neoforge.datagen;
 
 //? neoforge {
+import com.mojang.math.Quadrant;
+import net.minecraft.client.color.item.Constant;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.color.item.Potion;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.ConditionBuilder;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.NonNull;
 import org.lithereal.Lithereal;
 import org.lithereal.block.*;
+import org.lithereal.block.entity.FireCrucibleBlockEntity;
 import org.lithereal.item.ModArmorItems;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
@@ -26,13 +37,17 @@ import org.lithereal.util.ModBlockFamilies;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import static net.minecraft.client.data.models.BlockModelGenerators.*;
 import static net.minecraft.client.data.models.ItemModelGenerators.BLANK_LAYER;
+import static net.minecraft.client.data.models.model.ModelTemplates.create;
 import static net.minecraft.client.data.models.model.ModelTemplates.createItem;
 
 public class ModModelProvider extends ModelProvider {
     public static final ModelTemplate TWO_LAYERED_HANDHELD_ITEM = createItem("handheld",TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate HANDHELD_WAR_HAMMER_ITEM = createItem("lithereal:handheld_war_hammer", TextureSlot.LAYER0);
     public static final ModelTemplate BRUSH = createItem("brush", TextureSlot.LAYER0);
+    public static final ModelTemplate GLASS_ENCLOSED_TORCH = create("lithereal:template_glass_enclosed_torch", TextureSlot.TORCH);
+    public static final ModelTemplate GLASS_ENCLOSED_WALL_TORCH = create("lithereal:template_glass_enclosed_torch_wall", TextureSlot.TORCH);
     public ModModelProvider(PackOutput output) {
         super(output, Lithereal.MOD_ID);
     }
@@ -45,13 +60,31 @@ public class ModModelProvider extends ModelProvider {
 
     public void registerBlockModels(BlockModelGenerators blockModels) {
         ModBlockFamilies.MOD_BLOCK_FAMILIES.stream().filter(BlockFamily::shouldGenerateModel).forEach(blockFamily -> blockModels.family(blockFamily.getBaseBlock()).generateFor(blockFamily));
+        fireCrucibleBlock(ModBlocks.FIRE_CRUCIBLE.get(), blockModels);
+        electricCrucibleBlock(ModBlocks.ELECTRIC_CRUCIBLE.get(), blockModels);
+        existingBlockWithItem(ModBlocks.FREEZING_STATION, blockModels);
+        infusementChamberBlock(ModBlocks.INFUSEMENT_CHAMBER.get(), blockModels);
         blockWithItem(ModBlocks.ETHEREAL_DIRT, blockModels);
+        grassLikeBlock(ModBlocks.ETHEREAL_GRASS_BLOCK, ModBlocks.ETHEREAL_DIRT, new Constant(8573157), blockModels);
+        blockWithItem(ModBlocks.SCORCHED_NETHERRACK, blockModels);
+        nyliumBlock(ModBlocks.SCORCHED_CRIMSON_NYLIUM.get(), Blocks.CRIMSON_NYLIUM, ModBlocks.SCORCHED_NETHERRACK.get(), blockModels);
+        nyliumBlock(ModBlocks.SCORCHED_WARPED_NYLIUM.get(), Blocks.WARPED_NYLIUM, ModBlocks.SCORCHED_NETHERRACK.get(), blockModels);
         blockWithItem(ModBlocks.COARSE_ETHEREAL_DIRT, blockModels);
         blockWithItem(ModBlocks.PHANTOM_GRAVEL, blockModels);
         blockWithItem(ModBlocks.CREATIVE_ETHER_SOURCE, blockModels);
         blockWithItem(ModBlocks.PASSIVE_ETHER_ABSORBER, blockModels);
         blockWithItem(ModBlocks.PURE_ETHER_SOURCE, blockModels);
+        blockWithItem(ModBlocks.INFINITY_GLASS, blockModels);
+        blockWithItem(ModBlocks.LITHERITE_CRYSTAL_BLOCK, blockModels);
         blockWithItem(ModBlocks.ETHEREAL_CRYSTAL_BLOCK, blockModels);
+        corneredBlock(ModBlocks.PURE_ETHEREAL_CRYSTAL_BLOCK.get(), blockModels);
+        createGlassEnclosedTorch(ModBlocks.LITHER_TORCH.get(), ModBlocks.LITHER_WALL_TORCH.get(), blockModels);
+        blockModels.createLantern(ModBlocks.LITHER_LANTERN.get());
+        createFire(ModBlocks.BLUE_FIRE.get(), blockModels);
+        existingBlockWithFacing(ModBlocks.IMPURE_ETHEREAL_CRYSTAL.get(), blockModels);
+        riftBlock(ModBlocks.ETHEREAL_RIFT.get(), blockModels);
+        riftLikePortalBlock(ModBlocks.ETHEREAL_CORE_PORTAL.get(), ModBlocks.ETHEREAL_RIFT.get(), blockModels);
+        createVault(ModBlocks.LITHEREAL_VAULT.get(), blockModels, false);
 
         blockWithItem(ModStorageBlocks.LITHERITE_BLOCK, blockModels);
         blockWithItem(ModStorageBlocks.BURNING_LITHERITE_BLOCK, blockModels);
@@ -63,7 +96,7 @@ public class ModModelProvider extends ModelProvider {
         blockWithItem(ModPhantomBlocks.PHANTOM_DIAMOND_BLOCK, blockModels);
 
         itemForBlockModel(ModTreeBlocks.PHANTOM_OAK_PLANKS.get(), blockModels);
-        blockModels.createPlantWithDefaultItem(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), ModTreeBlocks.POTTED_PHANTOM_OAK_SAPLING.get(), PlantType.NOT_TINTED);
         logBlock(ModTreeBlocks.PHANTOM_OAK_LOG.get(),  ModTreeBlocks.PHANTOM_OAK_WOOD.get(), blockModels);
         logBlock(ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get(), ModTreeBlocks.STRIPPED_PHANTOM_OAK_WOOD.get(), blockModels);
         blockModels.createHangingSign(ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get(), ModTreeBlocks.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.PHANTOM_OAK_WALL_HANGING_SIGN.get());
@@ -89,8 +122,8 @@ public class ModModelProvider extends ModelProvider {
         itemForBlockModel(ModTreeBlocks.FORTSHROOM_FENCE_GATE.get(), blockModels);
         itemForBlockModel(ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get(), blockModels);
 
-        blockModels.createPlantWithDefaultItem(ModVegetationBlocks.MALISHROOM.get(), ModVegetationBlocks.POTTED_MALISHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createPlantWithDefaultItem(ModVegetationBlocks.FORTSHROOM.get(), ModVegetationBlocks.POTTED_FORTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModVegetationBlocks.MALISHROOM.get(), ModVegetationBlocks.POTTED_MALISHROOM.get(), PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModVegetationBlocks.FORTSHROOM.get(), ModVegetationBlocks.POTTED_FORTSHROOM.get(), PlantType.NOT_TINTED);
 
         itemForBlockModel(ModStoneBlocks.ETHERSTONE.get(), blockModels);
         blockModels.family(ModStoneBlocks.ETHERSTONE.get()).generateFor(new BlockFamily.Builder(ModStoneBlocks.ETHERSTONE.get())
@@ -155,16 +188,21 @@ public class ModModelProvider extends ModelProvider {
 
         blockWithItem(ModPhantomBlocks.PHANTOM_DIAMOND_ORE, blockModels);
         blockWithItem(ModPhantomBlocks.PHANTOM_QUARTZ_ORE, blockModels);
-        blockModels.createPlantWithDefaultItem(ModPhantomBlocks.PHANTOM_ROSE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createPlantWithDefaultItem(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(), ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createPlantWithDefaultItem(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-    }
-
-    private void logBlock(Block log, Block wood, BlockModelGenerators blockModelGenerators) {
-        blockModelGenerators.woodProvider(log).log(log).wood(wood);
+        blockModels.createPlantWithDefaultItem(ModPhantomBlocks.PHANTOM_ROSE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE.get(), PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get(), ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get(), PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get(), ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get(), PlantType.NOT_TINTED);
     }
 
     public void registerItemModels(ItemModelGenerators itemModels) {
+        basicItem(ModItems.BOSS_ESSENCE.get(), itemModels);
+        basicItem(ModItems.AWAKENED_BOSS_ESSENCE.get(), itemModels);
+        basicItem(ModItems.PURE_BOSS_ESSENCE.get(), itemModels);
+        basicItem(ModItems.LITHER_CHARGE.get(), itemModels);
+        basicItem(ModItems.LITHEREAL_KEY.get(), itemModels);
+        basicItem(ModItems.MOLTEN_LITHERITE_BUCKET.get(), itemModels);
+        basicItem(ModItems.MUSIC_DISC_SPARKLE.get(), itemModels);
+        handheldItem(ModItems.MYSTERIOUS_ROD.get(), itemModels);
+        basicItem(ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), itemModels);
         basicItem(ModItems.PHANTOM_OAK_BOAT.get(), itemModels);
         basicItem(ModItems.PHANTOM_OAK_CHEST_BOAT.get(), itemModels);
         basicItem(ModItems.FORTSHROOM_BOAT.get(), itemModels);
@@ -300,14 +338,204 @@ public class ModModelProvider extends ModelProvider {
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get(), itemModels);
     }
 
-    public void blockWithItem(Supplier<Block> block, BlockModelGenerators blockModels) {
+    public void blockWithItem(Supplier<? extends Block> block, BlockModelGenerators blockModels) {
         blockModels.createTrivialCube(block.get());
         blockModels.registerSimpleItemModel(block.get(), ModelLocationUtils.getModelLocation(block.get()));
     }
 
-    public void blockWithTintedItem(Supplier<Block> block, ItemTintSource tintSource, BlockModelGenerators blockModels) {
-        blockModels.createTrivialCube(block.get());
+    public void existingBlockWithItem(Supplier<? extends Block> block, BlockModelGenerators blockModels) {
+        blockModels.createNonTemplateModelBlock(block.get());
+        blockModels.registerSimpleItemModel(block.get(), ModelLocationUtils.getModelLocation(block.get()));
+    }
+
+    public void blockWithTintedItem(Supplier<? extends Block> block, ItemTintSource tintSource, BlockModelGenerators blockModels) {
+        blockModels.createNonTemplateModelBlock(block.get());
         blockModels.registerSimpleTintedItemModel(block.get(), ModelLocationUtils.getModelLocation(block.get()), tintSource);
+    }
+
+    public void nyliumBlock(Block nylium, Block topDonor, Block netherrack, BlockModelGenerators blockModels) {
+        TextureMapping mapping = (new TextureMapping()).put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(netherrack)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(topDonor)).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(nylium, "_side"));
+        blockModels.blockStateOutput.accept(createSimpleBlock(nylium, plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(nylium, mapping, blockModels.modelOutput))));
+        blockModels.registerSimpleItemModel(nylium, ModelLocationUtils.getModelLocation(nylium));
+    }
+
+    public void fireCrucibleBlock(Block block, BlockModelGenerators blockModels) {
+        MultiVariant model = plainVariant(ModelLocationUtils.getModelLocation(block));
+        MultiVariant litModel = plainVariant(ModelLocationUtils.getModelLocation(block, "_lit"));
+        MultiVariant blueLitModel = plainVariant(ModelLocationUtils.getModelLocation(block, "_blue_lit"));
+        MultiVariant litFireModel = variants(plainModel(ModelLocationUtils.getModelLocation(block, "_lit_fire0")),
+                plainModel(ModelLocationUtils.getModelLocation(block, "_lit_fire1")));
+        MultiVariant litBlueFireModel = variants(plainModel(ModelLocationUtils.getModelLocation(block, "_lit_blue_fire0")),
+                plainModel(ModelLocationUtils.getModelLocation(block, "_lit_blue_fire1")));
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+                .with(new ConditionBuilder().term(FireCrucibleBlock.HEAT_STATE, FireCrucibleBlockEntity.HeatState.UNLIT), model)
+                .with(new ConditionBuilder().term(FireCrucibleBlock.HEAT_STATE, FireCrucibleBlockEntity.HeatState.LIT), litModel)
+                .with(new ConditionBuilder().term(FireCrucibleBlock.HEAT_STATE, FireCrucibleBlockEntity.HeatState.BLUE_LIT), blueLitModel)
+                .with(new ConditionBuilder().term(FireCrucibleBlock.HEAT_STATE, FireCrucibleBlockEntity.HeatState.LIT), litFireModel)
+                .with(new ConditionBuilder().term(FireCrucibleBlock.HEAT_STATE, FireCrucibleBlockEntity.HeatState.BLUE_LIT), litBlueFireModel));
+        blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block));
+    }
+
+    public void electricCrucibleBlock(Block block, BlockModelGenerators blockModels) {
+        MultiVariant model = plainVariant(ModelLocationUtils.getModelLocation(block));
+        MultiVariant onModel = plainVariant(ModelLocationUtils.getModelLocation(block, "_on"));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(FireCrucibleBlock.HEAT_STATE)
+                .select(FireCrucibleBlockEntity.HeatState.UNLIT, model)
+                .select(FireCrucibleBlockEntity.HeatState.LIT, onModel)
+                .select(FireCrucibleBlockEntity.HeatState.BLUE_LIT, onModel)));
+        blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block));
+    }
+
+    public void infusementChamberBlock(Block block, BlockModelGenerators blockModels) {
+        MultiVariant model = plainVariant(ModelLocationUtils.getModelLocation(block));
+        MultiVariant filledModel = plainVariant(ModelLocationUtils.getModelLocation(block, "_filled"));
+        MultiVariant overlayModel = plainVariant(ModelLocationUtils.getModelLocation(block, "_overlay"));
+        MultiVariant filledOverlayModel = plainVariant(ModelLocationUtils.getModelLocation(block, "_filled_overlay"));
+        plainVariant(TexturedModel.ORIENTABLE_ONLY_TOP.updateTexture(textureMapping -> {
+            textureMapping.put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_empty"));
+            textureMapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_rest"));
+            textureMapping.put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_vent"));
+        }).createWithSuffix(block, "_inventory", blockModels.modelOutput));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(BlockStateProperties.HORIZONTAL_FACING, InfusementChamberBlock.PRIMARY_FILLED, InfusementChamberBlock.SECONDARY_FILLED)
+                .generate((direction, primaryFilled, secondaryFilled) -> {
+                    MultiVariant usedModel = model;
+                    if (primaryFilled && secondaryFilled) usedModel = filledOverlayModel;
+                    else if (primaryFilled) usedModel = overlayModel;
+                    else if (secondaryFilled) usedModel = filledModel;
+                    return switch (direction) {
+                        case NORTH -> usedModel.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
+                        case WEST -> usedModel.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
+                        case EAST -> usedModel.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
+                        default -> usedModel;
+                    };
+                })));
+        blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block, "_inventory"));
+    }
+
+    public void corneredBlock(Block block, BlockModelGenerators blockModels) {
+        MultiVariant model = plainVariant(TexturedModel.CUBE.create(block, blockModels.modelOutput));
+        MultiVariant cornerModel = plainVariant(TexturedModel.COLUMN.updateTexture(textureMapping -> {
+            textureMapping.put(TextureSlot.END, TextureMapping.getBlockTexture(block, "_corner"));
+            textureMapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block));
+        }).createWithSuffix(block, "_corner", blockModels.modelOutput));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PureEtherealCrystalBlock.CORNER, BlockStateProperties.HORIZONTAL_FACING)
+                .generate((isCorner, direction) -> {
+                    MultiVariant usedModel = isCorner ? cornerModel : model;
+                    return switch (direction) {
+                        case NORTH -> usedModel.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
+                        case WEST -> usedModel.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
+                        case EAST -> usedModel.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
+                        default -> usedModel;
+                    };
+                })));
+        blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block));
+    }
+
+    private void existingBlockWithFacing(Block block, BlockModelGenerators blockModels) {
+        MultiVariant model = plainVariant(ModelLocationUtils.getModelLocation(block));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(BlockStateProperties.FACING)
+                .select(Direction.UP, model)
+                .select(Direction.DOWN, model.with(VariantMutator.X_ROT.withValue(Quadrant.R180)))
+                .select(Direction.EAST, model.with(VariantMutator.X_ROT.withValue(Quadrant.R90).then(VariantMutator.Y_ROT.withValue(Quadrant.R90))))
+                .select(Direction.WEST, model.with(VariantMutator.X_ROT.withValue(Quadrant.R270).then(VariantMutator.Y_ROT.withValue(Quadrant.R90))))
+                .select(Direction.NORTH, model.with(VariantMutator.X_ROT.withValue(Quadrant.R90)))
+                .select(Direction.SOUTH, model.with(VariantMutator.X_ROT.withValue(Quadrant.R270)))));
+        blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block));
+    }
+
+    private void riftBlock(Block rift, BlockModelGenerators blockModels) {
+        Identifier verticalModel = ModelLocationUtils.getModelLocation(rift, "_vertical");
+        MultiVariant riftHorizontal = plainVariant(ModelLocationUtils.getModelLocation(rift, "_horizontal"));
+        MultiVariant riftVertical = plainVariant(verticalModel);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(rift).with(PropertyDispatch.initial(BlockStateProperties.AXIS)
+                .select(Direction.Axis.X, riftVertical.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)))
+                .select(Direction.Axis.Y, riftHorizontal)
+                .select(Direction.Axis.Z, riftVertical)));
+        blockModels.registerSimpleItemModel(rift, verticalModel);
+    }
+
+    private void riftLikePortalBlock(Block portal, Block rift, BlockModelGenerators blockModels) {
+        Identifier horizontalModel = ModelLocationUtils.getModelLocation(rift, "_horizontal");
+        MultiVariant riftHorizontal = plainVariant(horizontalModel);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(portal, riftHorizontal));
+        blockModels.registerSimpleItemModel(portal, horizontalModel);
+    }
+
+    private void logBlock(Block log, Block wood, BlockModelGenerators blockModelGenerators) {
+        blockModelGenerators.woodProvider(log).log(log).wood(wood);
+    }
+
+    public void createFire(Block fire, BlockModelGenerators blockModels) {
+        ConditionBuilder noSides = condition().term(BlockStateProperties.NORTH, false).term(BlockStateProperties.EAST, false).term(BlockStateProperties.SOUTH, false).term(BlockStateProperties.WEST, false).term(BlockStateProperties.UP, false);
+        MultiVariant floorFireModels = blockModels.createFloorFireModels(fire);
+        MultiVariant sideFireModels = blockModels.createSideFireModels(fire);
+        MultiVariant topFireModels = blockModels.createTopFireModels(fire);
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(fire).with(noSides, floorFireModels).with(or(condition().term(BlockStateProperties.NORTH, true), noSides), sideFireModels).with(or(condition().term(BlockStateProperties.EAST, true), noSides), sideFireModels.with(Y_ROT_90)).with(or(condition().term(BlockStateProperties.SOUTH, true), noSides), sideFireModels.with(Y_ROT_180)).with(or(condition().term(BlockStateProperties.WEST, true), noSides), sideFireModels.with(Y_ROT_270)).with(condition().term(BlockStateProperties.UP, true), topFireModels));
+    }
+
+    public void createVault(Block vault, BlockModelGenerators blockModels, boolean isOminous) {
+        TextureMapping inactiveTextures = TextureMapping.vault(vault, "_front_off", "_side_off", "_top", "_bottom");
+        TextureMapping activeTextures = TextureMapping.vault(vault, "_front_on", "_side_on", "_top", "_bottom");
+        TextureMapping unlockingTextures = TextureMapping.vault(vault, "_front_ejecting", "_side_on", "_top", "_bottom");
+        TextureMapping ejectingRewardTextures = TextureMapping.vault(vault, "_front_ejecting", "_side_on", "_top_ejecting", "_bottom");
+        Identifier inactiveModel = ModelTemplates.VAULT.create(vault, inactiveTextures, blockModels.modelOutput);
+        MultiVariant inactive = plainVariant(inactiveModel);
+        MultiVariant active = plainVariant(ModelTemplates.VAULT.createWithSuffix(vault, "_active", activeTextures, blockModels.modelOutput));
+        MultiVariant unlocking = plainVariant(ModelTemplates.VAULT.createWithSuffix(vault, "_unlocking", unlockingTextures, blockModels.modelOutput));
+        MultiVariant ejectingReward = plainVariant(ModelTemplates.VAULT.createWithSuffix(vault, "_ejecting_reward", ejectingRewardTextures, blockModels.modelOutput));
+        blockModels.registerSimpleItemModel(vault, inactiveModel);
+        if (isOminous) {
+            TextureMapping inactiveTexturesOminous = TextureMapping.vault(vault, "_front_off_ominous", "_side_off_ominous", "_top_ominous", "_bottom_ominous");
+            TextureMapping activeTexturesOminous = TextureMapping.vault(vault, "_front_on_ominous", "_side_on_ominous", "_top_ominous", "_bottom_ominous");
+            TextureMapping unlockingTexturesOminous = TextureMapping.vault(vault, "_front_ejecting_ominous", "_side_on_ominous", "_top_ominous", "_bottom_ominous");
+            TextureMapping ejectingRewardTexturesOminous = TextureMapping.vault(vault, "_front_ejecting_ominous", "_side_on_ominous", "_top_ejecting_ominous", "_bottom_ominous");
+            MultiVariant inactiveOminous = plainVariant(ModelTemplates.VAULT.createWithSuffix(vault, "_ominous", inactiveTexturesOminous, blockModels.modelOutput));
+            MultiVariant activeOminous = plainVariant(ModelTemplates.VAULT.createWithSuffix(vault, "_active_ominous", activeTexturesOminous, blockModels.modelOutput));
+            MultiVariant unlockingOminous = plainVariant(ModelTemplates.VAULT.createWithSuffix(vault, "_unlocking_ominous", unlockingTexturesOminous, blockModels.modelOutput));
+            MultiVariant ejectingRewardOminous = plainVariant(ModelTemplates.VAULT.createWithSuffix(vault, "_ejecting_reward_ominous", ejectingRewardTexturesOminous, blockModels.modelOutput));
+            blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(vault).with(PropertyDispatch.initial(VaultBlock.STATE, VaultBlock.OMINOUS).generate((state, ominous) -> {
+                MultiVariant variant;
+                switch (state) {
+                    case INACTIVE -> variant = ominous ? inactiveOminous : inactive;
+                    case ACTIVE -> variant = ominous ? activeOminous : active;
+                    case UNLOCKING -> variant = ominous ? unlockingOminous : unlocking;
+                    case EJECTING -> variant = ominous ? ejectingRewardOminous : ejectingReward;
+                    default -> throw new MatchException(null, null);
+                }
+
+                return variant;
+            })).with(ROTATION_HORIZONTAL_FACING));
+        }
+        else {
+            blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(vault).with(PropertyDispatch.initial(VaultBlock.STATE).generate((state) -> {
+                MultiVariant variant;
+                switch (state) {
+                    case INACTIVE -> variant = inactive;
+                    case ACTIVE -> variant = active;
+                    case UNLOCKING -> variant = unlocking;
+                    case EJECTING -> variant = ejectingReward;
+                    default -> throw new MatchException(null, null);
+                }
+
+                return variant;
+            })).with(ROTATION_HORIZONTAL_FACING));
+        }
+    }
+
+    public void grassLikeBlock(Supplier<? extends Block> grass, Supplier<? extends Block> dirt, ItemTintSource tintSource, BlockModelGenerators blockModels) {
+        Material bottomTexture = TextureMapping.getBlockTexture(dirt.get());
+        TextureMapping snowyMapping = (new TextureMapping()).put(TextureSlot.BOTTOM, bottomTexture).copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE).put(TextureSlot.TOP, TextureMapping.getBlockTexture(grass.get(), "_top")).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(grass.get(), "_snow"));
+        MultiVariant snowyGrass = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(grass.get(), "_snow", snowyMapping, blockModels.modelOutput));
+        Identifier plainGrassModel = ModelLocationUtils.getModelLocation(grass.get());
+        blockModels.createGrassLikeBlock(grass.get(), createRotatedVariants(plainModel(plainGrassModel)), snowyGrass);
+        blockModels.registerSimpleTintedItemModel(grass.get(), plainGrassModel, tintSource);
+    }
+
+    public void createGlassEnclosedTorch(Block ground, Block wall, BlockModelGenerators blockModels) {
+        TextureMapping textures = TextureMapping.torch(ground);
+        blockModels.blockStateOutput.accept(createSimpleBlock(ground, plainVariant(GLASS_ENCLOSED_TORCH.create(ground, textures, blockModels.modelOutput))));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(wall, plainVariant(GLASS_ENCLOSED_WALL_TORCH.create(wall, textures, blockModels.modelOutput))).with(ROTATION_TORCH));
+        blockModels.registerSimpleFlatItemModel(ground.asItem());
     }
 
     public void itemForBlockModel(Block block, BlockModelGenerators blockModels) {

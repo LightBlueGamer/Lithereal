@@ -270,7 +270,7 @@ public class ModRecipeProvider extends RecipeProvider {
         InfusementChamberRecipeBuilder.infusing(RecipeCategory.MISC, Items.POTION, ModItems.MOLTEN_LITHERITE_BUCKET.get(), ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get())
                 .unlockedBy("has_molten_litherite_bucket", has(ModItems.MOLTEN_LITHERITE_BUCKET.get()))
                 .save(this.output);
-        InfusementChamberRecipeBuilder.infusing(RecipeCategory.FOOD, Items.POTION, Items.HONEY_BOTTLE, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get())
+        InfusementChamberRecipeBuilder.infusing(RecipeCategory.FOOD, Items.POTION, Items.HONEY_BOTTLE, Items.HONEY_BOTTLE)
                 .unlockedBy("has_potion", has(Items.POTION))
                 .save(this.output, "honey_bottle_concoction");
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModBlocks.FIRE_CRUCIBLE.get())

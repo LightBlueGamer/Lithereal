@@ -66,6 +66,6 @@ public class FreezingStationRecipeCategory implements IRecipeCategory<FreezingSt
     public void setRecipe(IRecipeLayoutBuilder builder, FreezingStationRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 9, 12).add(recipe.primary());
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 70, 8).add(recipe.output());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 70, 12).add(recipe.output());
     }
 }

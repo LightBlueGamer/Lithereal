@@ -13,13 +13,13 @@ public class FireCrucibleScreen extends AbstractContainerScreen<FireCrucibleMenu
     private static final Identifier TEXTURE =
             Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/fire_crucible_gui.png");
     public static final Identifier INCLUDING_ARROW =
-            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprite/fire_crucible/including_arrow.png");
+            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "fire_crucible/including_arrow");
     public static final Identifier INCLUDING_ARROW_BOTH =
-            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprite/fire_crucible/including_arrow_both.png");
+            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "fire_crucible/including_arrow_both");
     public static final Identifier PROGRESS_NORMAL =
-            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprite/fire_crucible/progress_normal.png");
+            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "fire_crucible/progress_normal");
     public static final Identifier PROGRESS_BLUE_LIT =
-            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "textures/gui/sprite/fire_crucible/progress_blue_lit.png");
+            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID, "fire_crucible/progress_blue_lit");
     public FireCrucibleScreen(FireCrucibleMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_fire_side",
-  "textures": {
-    "fire": "lithereal:block/blue_fire_1"
-  },
-  "render_type": "cutout"
-}

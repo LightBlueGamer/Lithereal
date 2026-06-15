@@ -14,7 +14,7 @@ public class InfusementChamberScreen extends AbstractContainerScreen<InfusementC
     private static final Identifier TEXTURE =
             Identifier.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/infusement_chamber_gui.png");
     private static final Identifier COMBINING_ARROW =
-            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID,"textures/gui/sprites/infusement_chamber/combining_arrow.png");
+            Identifier.fromNamespaceAndPath(Lithereal.MOD_ID,"infusement_chamber/combining_arrow");
     public InfusementChamberScreen(InfusementChamberMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }

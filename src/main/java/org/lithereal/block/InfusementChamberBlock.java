@@ -28,7 +28,6 @@ import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lithereal.block.entity.FreezingStationBlockEntity;
 import org.lithereal.block.entity.InfusementChamberBlockEntity;
 import org.lithereal.block.entity.ModBlockEntities;
 
@@ -123,8 +122,8 @@ public class InfusementChamberBlock extends BaseEntityBlock {
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        if (!level.isClientSide() && level.getBlockEntity(blockPos) instanceof FreezingStationBlockEntity) {
-            MenuProvider screenHandlerFactory = ((FreezingStationBlockEntity) level.getBlockEntity(blockPos));
+        if (!level.isClientSide() && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
+            MenuProvider screenHandlerFactory = ((InfusementChamberBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
                 //? fabric {
@@ -141,8 +140,8 @@ public class InfusementChamberBlock extends BaseEntityBlock {
 
     @Override
     protected @NotNull InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if (!level.isClientSide() && level.getBlockEntity(blockPos) instanceof FreezingStationBlockEntity) {
-            MenuProvider screenHandlerFactory = ((FreezingStationBlockEntity) level.getBlockEntity(blockPos));
+        if (!level.isClientSide() && level.getBlockEntity(blockPos) instanceof InfusementChamberBlockEntity) {
+            MenuProvider screenHandlerFactory = ((InfusementChamberBlockEntity) level.getBlockEntity(blockPos));
 
             if (screenHandlerFactory != null) {
                 //? fabric {
