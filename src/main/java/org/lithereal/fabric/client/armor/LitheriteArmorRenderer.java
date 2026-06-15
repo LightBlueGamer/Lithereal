@@ -95,10 +95,10 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
                         stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor() : getColorForLayer(layer, c);
                 if (color != 0) {
                     Identifier layerTexture = this.layerTextureLookup.apply(new LayerTextureKey(layerType, layer));
-                    ArmorRenderer.submitTransformCopyingModel(contextModel, state, usedModel, state, true, submitNodeCollector.order(nextOrder++), poseStack, RenderTypes.armorCutoutNoCull(layerTexture), light, OverlayTexture.NO_OVERLAY, color, null, state.outlineColor, null);
+                    ArmorRenderer.submitTransformCopyingModel(contextModel, state, usedModel, state, false, submitNodeCollector.order(nextOrder++), poseStack, RenderTypes.armorCutoutNoCull(layerTexture), light, OverlayTexture.NO_OVERLAY, color, null, state.outlineColor, null);
                     if (renderFoil) {
                         ArmorRenderer
-                                .submitTransformCopyingModel(contextModel, state, usedModel, state, true, submitNodeCollector.order(nextOrder++), poseStack, RenderTypes.armorEntityGlint(), light, OverlayTexture.NO_OVERLAY, color, null, state.outlineColor, null);
+                                .submitTransformCopyingModel(contextModel, state, usedModel, state, false, submitNodeCollector.order(nextOrder++), poseStack, RenderTypes.armorEntityGlint(), light, OverlayTexture.NO_OVERLAY, color, null, state.outlineColor, null);
                     }
 
                     renderFoil = false;
@@ -109,7 +109,7 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
             if (trim != null && layerType != EquipmentClientInfo.LayerType.HUMANOID_BABY) {
                 TextureAtlasSprite sprite = this.trimSpriteLookup.apply(new TrimSpriteKey(trim, layerType, armorMaterial.assetId()));
                 RenderType renderType = Sheets.armorTrimsSheet(trim.pattern().value().decal());
-                ArmorRenderer.submitTransformCopyingModel(contextModel, state, usedModel, state, true, submitNodeCollector.order(nextOrder), poseStack, renderType, light, OverlayTexture.NO_OVERLAY, -1, sprite, state.outlineColor, null);
+                ArmorRenderer.submitTransformCopyingModel(contextModel, state, usedModel, state, false, submitNodeCollector.order(nextOrder), poseStack, renderType, light, OverlayTexture.NO_OVERLAY, -1, sprite, state.outlineColor, null);
             }
         }
     }

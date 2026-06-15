@@ -66,7 +66,7 @@ public class LitherealClient {
         EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET.legs(), litherealArmorLayerDefinition::legs);
         EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET.feet(), litherealArmorLayerDefinition::feet);
         ArmorModelSet<LayerDefinition> babyLitherealArmorLayerDefinition = LitherealArmorModel.createBabyArmorMeshSet(BABY_INNER_ARMOR_DEFORMATION, BABY_OUTER_ARMOR_DEFORMATION, PartPose.ZERO)
-                .map(mesh -> LayerDefinition.create(mesh, 64, 32));
+                .map(mesh -> LayerDefinition.create(mesh, 64, 64));
         EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.head(), babyLitherealArmorLayerDefinition::head);
         EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.chest(), babyLitherealArmorLayerDefinition::chest);
         EntityModelLayerRegistry.register(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.legs(), babyLitherealArmorLayerDefinition::legs);

@@ -1,11 +1,13 @@
 package org.lithereal.neoforge.client.event;
 
 //? neoforge {
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.object.boat.BoatModel;
+import net.minecraft.client.particle.FallingLeavesParticle;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
@@ -13,6 +15,7 @@ import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +28,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.event.lifecycle.ClientStartedEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -41,6 +43,7 @@ import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModArmorItems;
+import org.lithereal.neoforge.client.model.TemporaryHumanoidCopyingModel;
 
 import java.util.*;
 
@@ -60,6 +63,7 @@ public class ClientEvents {
         }
         @SubscribeEvent
         public static void onParticleProviderRegister(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(ModParticles.PHANTOM_OAK_LEAVES.get(), FallingLeavesParticle.PaleOakProvider::new);
             event.registerSpriteSet(ModParticles.LITHER_FIRE_FLAME.get(), FlameParticle.Provider::new);
             event.registerSpriteSet(ModParticles.BLUE_FIRE_FLAME.get(), FlameParticle.Provider::new);
             event.registerSpriteSet(ModParticles.SOUL.get(), EtherealSoulProvider::new);
@@ -87,7 +91,7 @@ public class ClientEvents {
             event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET.legs(), litherealArmorLayerDefinition::legs);
             event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET.feet(), litherealArmorLayerDefinition::feet);
             ArmorModelSet<LayerDefinition> babyLitherealArmorLayerDefinition = LitherealArmorModel.createBabyArmorMeshSet(BABY_INNER_ARMOR_DEFORMATION, BABY_OUTER_ARMOR_DEFORMATION, PartPose.ZERO)
-                    .map(mesh -> LayerDefinition.create(mesh, 64, 32));
+                    .map(mesh -> LayerDefinition.create(mesh, 64, 64));
             event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.head(), babyLitherealArmorLayerDefinition::head);
             event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.chest(), babyLitherealArmorLayerDefinition::chest);
             event.registerLayerDefinition(LitherealArmorModel.LITHEREAL_ARMOR_SET_BABY.legs(), babyLitherealArmorLayerDefinition::legs);
@@ -129,13 +133,19 @@ public class ClientEvents {
 
                 @Override
                 public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
-                    return (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot());
+                    if (!(original instanceof HumanoidModel<? extends HumanoidRenderState> humanoidModel)) return original;
+                    return TemporaryHumanoidCopyingModel.create(humanoidModel,
+                            (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot()),
+                            false);
                 }
             }, ModArmorItems.INFUSED_LITHERITE_HELMET, ModArmorItems.INFUSED_LITHERITE_CHESTPLATE, ModArmorItems.INFUSED_LITHERITE_LEGGINGS, ModArmorItems.INFUSED_LITHERITE_BOOTS);
             event.registerItem(new IClientItemExtensions() {
                @Override
                public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
-                   return (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot());
+                   if (!(original instanceof HumanoidModel<? extends HumanoidRenderState> humanoidModel)) return original;
+                   return TemporaryHumanoidCopyingModel.create(humanoidModel,
+                           (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot()),
+                           false);
                }
             }, ModArmorItems.LITHERITE_HELMET, ModArmorItems.LITHERITE_CHESTPLATE, ModArmorItems.LITHERITE_LEGGINGS, ModArmorItems.LITHERITE_BOOTS,
                     ModArmorItems.BURNING_LITHERITE_HELMET, ModArmorItems.BURNING_LITHERITE_CHESTPLATE, ModArmorItems.BURNING_LITHERITE_LEGGINGS, ModArmorItems.BURNING_LITHERITE_BOOTS,

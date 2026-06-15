@@ -62,7 +62,7 @@ public class BetterZombieModel<T extends ZombieRenderState> extends PhantomZombi
     public static LayerDefinition createBabyBodyLayer(final CubeDeformation scale) {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
-        float overlayScale = 0.25F;
+        float overlayScale = 0.15F;
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-2.0F, -2.5F, -1.0F, 4.0F, 5.0F, 2.0F, scale), PartPose.offset(0.0F, 17.5F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create().texOffs(16, 23).addBox(-2.0F, -2.5F, -1.0F, 4.0F, 5.0F, 2.0F, scale.extend(overlayScale)), PartPose.ZERO);
         PartDefinition head = root.addOrReplaceChild(
