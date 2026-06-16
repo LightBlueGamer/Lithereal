@@ -585,10 +585,14 @@ public class ModModelProvider extends ModelProvider {
 
     public void brushItem(Item item, ItemModelGenerators itemModels) {
         itemModels.createFlatItemModel(item, BRUSH);
-        itemModels.createFlatItemModel(item, "_brushing_0", BRUSH_BRUSHING_0);
-        itemModels.createFlatItemModel(item, "_brushing_1", BRUSH_BRUSHING_1);
-        itemModels.createFlatItemModel(item, "_brushing_2", BRUSH_BRUSHING_2);
+        createFlatItemModelWithNameSuffix(item, "_brushing_0", BRUSH_BRUSHING_0, itemModels);
+        createFlatItemModelWithNameSuffix(item, "_brushing_1", BRUSH_BRUSHING_1, itemModels);
+        createFlatItemModelWithNameSuffix(item, "_brushing_2", BRUSH_BRUSHING_2, itemModels);
         itemModels.generateBrush(item);
+    }
+
+    public Identifier createFlatItemModelWithNameSuffix(Item item, String suffix, ModelTemplate template, ItemModelGenerators itemModels) {
+        return template.create(ModelLocationUtils.getModelLocation(item, suffix), TextureMapping.layer0(item), itemModels.modelOutput);
     }
 
     public void bowItem(Item bowItem, ItemModelGenerators itemModels) {
