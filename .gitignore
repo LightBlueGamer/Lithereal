@@ -7,6 +7,8 @@ out/
 .gradle/
 output/
 bin/
+old/
+src/
 
 .classpath
 .project
