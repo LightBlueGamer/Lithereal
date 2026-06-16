@@ -40,7 +40,7 @@ public class RiftSpawner extends Entity {
         RiftType type = RiftType.getRandom(random);
         BlockPos.MutableBlockPos basePos = blockPosition().mutable();
         while (!level.getBlockState(basePos).isAir()) basePos.move(0, 1, 0);
-        type.build(level, axis, basePos.immutable(), Util.getRandom(level.getServer().levelKeys().toArray(ResourceKey[]::new), random), random.nextFloat() > 0.65F);
+        type.build(level, axis, basePos.immutable(), Util.getRandom(DESTINATIONS, random), random.nextFloat() > 0.65F);
         remove(RemovalReason.DISCARDED);
     }
 
@@ -100,72 +100,72 @@ public class RiftSpawner extends Entity {
                     mutable.move(dirUp);
                     setBlockSafe(level, mutable, mutable.immutable(), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                 }
                 case NORMAL -> {
                     mutable.move(dirUp);
                     setBlockSafe(level, mutable, mutable.immutable(), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirDown);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                 }
                 case LARGE -> {
                     mutable.move(dirUp);
                     setBlockSafe(level, mutable, mutable.immutable(), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirDown);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirLeft);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirLeft, 2);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirUp);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                     mutable.move(dirRight);
-                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.getValue()), toSet, yOffset);
+                    setBlockSafe(level, mutable, mutable.immutable().above(yOffset.intValue()), toSet, yOffset);
                 }
             }
-            List<BlockPos> newPosSet = toSet.stream().map(upPos -> upPos.above(yOffset.getValue())).toList();
+            List<BlockPos> newPosSet = toSet.stream().map(upPos -> upPos.above(yOffset.intValue())).toList();
             newPosSet.forEach(blockPos -> {
                 level.setBlockAndUpdate(blockPos, attachedState);
                 setBlockInformation(level, blockPos, newPosSet, destination, hasUniqueDestination);

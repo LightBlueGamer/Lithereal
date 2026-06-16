@@ -36,8 +36,7 @@ public class InfusedLitheriteBlockEntity extends BlockEntity implements PotionSt
     protected void loadAdditional(@NonNull ValueInput valueInput) {
         this.potionDurationScale = valueInput.getFloatOr("potion_duration_scale", 0.1F);
         super.loadAdditional(valueInput);
-        if (valueInput.child("Potion").isPresent())
-            setPotion(valueInput.read("Potion", PotionContents.CODEC).orElse(PotionContents.EMPTY));
+        setPotion(valueInput.read("Potion", PotionContents.CODEC).orElse(PotionContents.EMPTY));
     }
 
     @Override

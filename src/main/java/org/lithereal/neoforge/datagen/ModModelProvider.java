@@ -343,6 +343,7 @@ public class ModModelProvider extends ModelProvider {
 
         basicItem(ModSpawnEggs.PHANTOM_ZOMBIE_SPAWN_EGG.get(), itemModels);
         basicItem(ModSpawnEggs.PHANTOM_DROWNED_SPAWN_EGG.get(), itemModels);
+        basicItem(ModSpawnEggs.POCKET_RIFT.get(), itemModels);
     }
 
     public void blockWithItem(Supplier<? extends Block> block, BlockModelGenerators blockModels) {

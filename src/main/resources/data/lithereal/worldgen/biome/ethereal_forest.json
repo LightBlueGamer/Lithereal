@@ -67,7 +67,14 @@
     "ambient": [],
     "axolotls": [],
     "creature": [],
-    "misc": [],
+    "misc": [
+      {
+        "type": "lithereal:rift_spawner",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 90
+      }
+    ],
     "monster": [
       {
         "type": "lithereal:phantom_zombie",

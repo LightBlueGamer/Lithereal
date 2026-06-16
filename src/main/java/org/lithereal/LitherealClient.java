@@ -474,6 +474,7 @@ public class LitherealClient {
 
     private static void registerItemsToSpawnEggsTab() {
         CreativeTabRegistry.append(ModCreativeTabs.SPAWN_EGGS_TAB, ModSpawnEggs.PHANTOM_ZOMBIE_SPAWN_EGG,
-                ModSpawnEggs.PHANTOM_DROWNED_SPAWN_EGG);
+                ModSpawnEggs.PHANTOM_DROWNED_SPAWN_EGG,
+                ModSpawnEggs.POCKET_RIFT);
     }
 }

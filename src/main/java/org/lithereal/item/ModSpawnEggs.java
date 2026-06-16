@@ -12,6 +12,8 @@ public class ModSpawnEggs {
             new SpawnEggItem(properties.spawnEgg(ModEntities.PHANTOM_ZOMBIE.get())));
     public static final RegistrySupplier<Item> PHANTOM_DROWNED_SPAWN_EGG = registerItem("phantom_drowned_spawn_egg", properties ->
             new SpawnEggItem(properties.spawnEgg(ModEntities.PHANTOM_DROWNED.get())));
+    public static final RegistrySupplier<Item> POCKET_RIFT = registerItem("pocket_rift", properties ->
+            new SpawnEggItem(properties.spawnEgg(ModEntities.RIFT_SPAWNER.get())));
 
     public static void register() {
 

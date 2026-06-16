@@ -85,7 +85,7 @@ public class EtherealRiftBlock extends EtherealCorePortalBlock {
             final boolean[] updated = {false};
             positions.forEach(pos -> {
                 if (pos != blockPos && level.getBlockEntity(pos) instanceof EtherealRiftBlockEntity attachedEntity) {
-                    attachedEntity.getAttached().add(blockPos);
+                    if (attachedEntity.getAttached() != positions) attachedEntity.setAttached(positions);
                     if (!updated[0]) {
                         etherealRiftBlockEntity.copyFrom(attachedEntity);
                         updated[0] = true;
