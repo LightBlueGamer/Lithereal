@@ -70,6 +70,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get());
         dropSelf(ModTreeBlocks.PHANTOM_OAK_FENCE_GATE.get());
         dropSelf(ModTreeBlocks.PHANTOM_OAK_BUTTON.get());
+        dropSelf(ModTreeBlocks.PHANTOM_OAK_SHELF.get());
         add(ModTreeBlocks.PHANTOM_OAK_SLAB.get(), this::createSlabItemTable);
         add(ModTreeBlocks.PHANTOM_OAK_DOOR.get(), this::createDoorTable);
         add(ModTreeBlocks.PHANTOM_OAK_LEAVES.get(), block -> createOakLeavesDrops(block, ModTreeBlocks.PHANTOM_OAK_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
@@ -87,6 +88,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModTreeBlocks.MALISHROOM_TRAPDOOR.get());
         dropSelf(ModTreeBlocks.MALISHROOM_FENCE_GATE.get());
         dropSelf(ModTreeBlocks.MALISHROOM_BUTTON.get());
+        dropSelf(ModTreeBlocks.MALISHROOM_SHELF.get());
         add(ModTreeBlocks.MALISHROOM_SLAB.get(), this::createSlabItemTable);
         add(ModTreeBlocks.MALISHROOM_DOOR.get(), this::createDoorTable);
         dropSelf(ModTreeBlocks.MALISHROOM_BLOCK.get());
@@ -105,6 +107,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModTreeBlocks.FORTSHROOM_TRAPDOOR.get());
         dropSelf(ModTreeBlocks.FORTSHROOM_FENCE_GATE.get());
         dropSelf(ModTreeBlocks.FORTSHROOM_BUTTON.get());
+        dropSelf(ModTreeBlocks.FORTSHROOM_SHELF.get());
         add(ModTreeBlocks.FORTSHROOM_SLAB.get(), this::createSlabItemTable);
         add(ModTreeBlocks.FORTSHROOM_DOOR.get(), this::createDoorTable);
         dropSelf(ModTreeBlocks.FORTSHROOM_BLOCK.get());

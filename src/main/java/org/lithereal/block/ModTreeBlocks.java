@@ -1,7 +1,10 @@
 package org.lithereal.block;
 
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.DoubleHighBlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -41,6 +44,10 @@ public class ModTreeBlocks {
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_BUTTON = registerBlock("phantom_oak_button", resourceKey ->
             new ButtonBlock(PHANTOM_OAK_SET, 30, BlockBehaviour.Properties.ofLegacyCopy(Blocks.OAK_BUTTON).setId(resourceKey).mapColor(MapColor.TERRACOTTA_PURPLE)));
+
+    public static final RegistrySupplier<Block> PHANTOM_OAK_SHELF = registerBlock("phantom_oak_shelf", resourceKey ->
+                    new ShelfBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.OAK_SHELF).setId(resourceKey).mapColor(MapColor.TERRACOTTA_PURPLE)),
+            () -> new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
 
     public static final RegistrySupplier<Block> PHANTOM_OAK_SIGN = registerBlockOnly("phantom_oak_sign", resourceKey ->
             new CustomStandingSignBlock(PHANTOM_OAK_WOOD_TYPE, BlockBehaviour.Properties.ofLegacyCopy(Blocks.OAK_SIGN).setId(resourceKey).mapColor(MapColor.TERRACOTTA_PURPLE)));
@@ -104,6 +111,10 @@ public class ModTreeBlocks {
     public static final RegistrySupplier<Block> FORTSHROOM_BUTTON = registerBlock("fortshroom_button", resourceKey ->
             new ButtonBlock(FORTSHROOM_SET, 30, BlockBehaviour.Properties.ofLegacyCopy(Blocks.CRIMSON_BUTTON).setId(resourceKey).mapColor(MapColor.COLOR_GREEN)));
 
+    public static final RegistrySupplier<Block> FORTSHROOM_SHELF = registerBlock("fortshroom_shelf", resourceKey ->
+                    new ShelfBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.CRIMSON_SHELF).setId(resourceKey).mapColor(MapColor.COLOR_GREEN)),
+            () -> new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
+
     public static final RegistrySupplier<Block> FORTSHROOM_SIGN = registerBlockOnly("fortshroom_sign", resourceKey ->
             new CustomStandingSignBlock(FORTSHROOM_WOOD_TYPE, BlockBehaviour.Properties.ofLegacyCopy(Blocks.CRIMSON_SIGN).setId(resourceKey).mapColor(MapColor.COLOR_GREEN)));
 
@@ -159,6 +170,10 @@ public class ModTreeBlocks {
 
     public static final RegistrySupplier<Block> MALISHROOM_BUTTON = registerBlock("malishroom_button", resourceKey ->
             new ButtonBlock(MALISHROOM_SET, 30, BlockBehaviour.Properties.ofLegacyCopy(Blocks.CRIMSON_BUTTON).setId(resourceKey).mapColor(MapColor.COLOR_PURPLE)));
+
+    public static final RegistrySupplier<Block> MALISHROOM_SHELF = registerBlock("malishroom_shelf", resourceKey ->
+                    new ShelfBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.CRIMSON_SHELF).setId(resourceKey).mapColor(MapColor.COLOR_PURPLE)),
+            () -> new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
 
     public static final RegistrySupplier<Block> MALISHROOM_SIGN = registerBlockOnly("malishroom_sign", resourceKey ->
             new CustomStandingSignBlock(MALISHROOM_WOOD_TYPE, BlockBehaviour.Properties.ofLegacyCopy(Blocks.CRIMSON_SIGN).setId(resourceKey).mapColor(MapColor.COLOR_PURPLE)));

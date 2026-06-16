@@ -12,14 +12,14 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.block.entity.BlockEntityType;import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModStoneBlocks;
-import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.block.ModTreeBlocks;import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.entity.phantom.PhantomZombie;
@@ -91,6 +91,9 @@ public class LitherealFabric implements ModInitializer {
             builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_STURDINESS));
             builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.GLOWSTONE_DUST), Lithereal.asHolder(ModPotions.STRONG_STURDINESS));
         });
+        BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.PHANTOM_OAK_SHELF.get());
+        BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.FORTSHROOM_SHELF.get());
+        BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.MALISHROOM_SHELF.get());
     }
 
     private static LootItem.Builder createEtherstoneEntry(int weight, int min, int max) {

@@ -495,6 +495,7 @@ public class ModRecipeProvider extends RecipeProvider {
         woodenBoat(ModItems.PHANTOM_OAK_BOAT.get(), ModTreeBlocks.PHANTOM_OAK_PLANKS.get());
         chestBoat(ModItems.PHANTOM_OAK_CHEST_BOAT.get(), ModItems.PHANTOM_OAK_BOAT.get());
         hangingSign(ModItems.PHANTOM_OAK_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
+        shelf(ModTreeBlocks.PHANTOM_OAK_SHELF.get(), ModTreeBlocks.STRIPPED_PHANTOM_OAK_LOG.get());
 
         planksFromLog(ModTreeBlocks.FORTSHROOM_PLANKS.get(), ModTags.FORTSHROOM_STEMS, 4);
         woodFromLogs(ModTreeBlocks.FORTSHROOM_HYPHAE.get(), ModTreeBlocks.FORTSHROOM_STEM.get());
@@ -502,6 +503,7 @@ public class ModRecipeProvider extends RecipeProvider {
         woodenBoat(ModItems.FORTSHROOM_BOAT.get(), ModTreeBlocks.FORTSHROOM_PLANKS.get());
         chestBoat(ModItems.FORTSHROOM_CHEST_BOAT.get(), ModItems.FORTSHROOM_BOAT.get());
         hangingSign(ModItems.FORTSHROOM_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
+        shelf(ModTreeBlocks.FORTSHROOM_SHELF.get(), ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
                 RecipeCategory.MISC, ModVegetationBlocks.FORTSHROOM.get(), RecipeCategory.MISC, ModTreeBlocks.FORTSHROOM_BLOCK.get(), "fortshroom_from_block", "fortshroom"
         );
@@ -512,6 +514,7 @@ public class ModRecipeProvider extends RecipeProvider {
         woodenBoat(ModItems.MALISHROOM_BOAT.get(), ModTreeBlocks.MALISHROOM_PLANKS.get());
         chestBoat(ModItems.MALISHROOM_CHEST_BOAT.get(), ModItems.MALISHROOM_BOAT.get());
         hangingSign(ModItems.MALISHROOM_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
+        shelf(ModTreeBlocks.MALISHROOM_SHELF.get(), ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
         nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
                 RecipeCategory.MISC, ModVegetationBlocks.MALISHROOM.get(), RecipeCategory.MISC, ModTreeBlocks.MALISHROOM_BLOCK.get(), "malishroom_from_block", "malishroom"
         );

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_inventory",
+  "textures": {
+    "all": "lithereal:block/malishroom_shelf",
+    "particle": "lithereal:block/stripped_malishroom_stem"
+  }
+}

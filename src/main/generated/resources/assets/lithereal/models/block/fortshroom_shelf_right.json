@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_right",
+  "textures": {
+    "all": "lithereal:block/fortshroom_shelf",
+    "particle": "lithereal:block/stripped_fortshroom_stem"
+  }
+}

@@ -167,6 +167,7 @@ public class LitherealClient {
                 ModTreeBlocks.PHANTOM_OAK_FENCE_GATE.get(),
                 ModTreeBlocks.PHANTOM_OAK_BUTTON.get(),
                 ModTreeBlocks.PHANTOM_OAK_PRESSURE_PLATE.get(),
+                ModTreeBlocks.PHANTOM_OAK_SHELF.get(),
                 ModTreeBlocks.PHANTOM_OAK_DOOR.get(),
                 ModTreeBlocks.PHANTOM_OAK_TRAPDOOR.get(),
                 ModItems.PHANTOM_OAK_SIGN.get(),
@@ -184,6 +185,7 @@ public class LitherealClient {
                 ModTreeBlocks.FORTSHROOM_PRESSURE_PLATE.get(),
                 ModTreeBlocks.FORTSHROOM_DOOR.get(),
                 ModTreeBlocks.FORTSHROOM_TRAPDOOR.get(),
+                ModTreeBlocks.FORTSHROOM_SHELF.get(),
                 ModItems.FORTSHROOM_SIGN.get(),
                 ModItems.FORTSHROOM_HANGING_SIGN.get(),
                 ModTreeBlocks.MALISHROOM_STEM.get(),
@@ -199,6 +201,7 @@ public class LitherealClient {
                 ModTreeBlocks.MALISHROOM_PRESSURE_PLATE.get(),
                 ModTreeBlocks.MALISHROOM_DOOR.get(),
                 ModTreeBlocks.MALISHROOM_TRAPDOOR.get(),
+                ModTreeBlocks.MALISHROOM_SHELF.get(),
                 ModItems.MALISHROOM_SIGN.get(),
                 ModItems.MALISHROOM_HANGING_SIGN.get());
     }

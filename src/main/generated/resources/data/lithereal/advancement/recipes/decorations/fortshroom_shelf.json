@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_fortshroom_stem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:stripped_fortshroom_stem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:fortshroom_shelf"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stripped_fortshroom_stem"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:fortshroom_shelf"
+    ]
+  }
+}

@@ -12,6 +12,7 @@
     "lithereal:phantom_oak_door",
     "lithereal:phantom_oak_sign",
     "lithereal:phantom_oak_hanging_sign",
+    "lithereal:phantom_oak_shelf",
     "#lithereal:fortshroom_stems",
     "lithereal:fortshroom_planks",
     "lithereal:fortshroom_slab",
@@ -24,6 +25,7 @@
     "lithereal:fortshroom_door",
     "lithereal:fortshroom_sign",
     "lithereal:fortshroom_hanging_sign",
+    "lithereal:fortshroom_shelf",
     "#lithereal:malishroom_stems",
     "lithereal:malishroom_planks",
     "lithereal:malishroom_slab",
@@ -35,6 +37,7 @@
     "lithereal:malishroom_button",
     "lithereal:malishroom_door",
     "lithereal:malishroom_sign",
-    "lithereal:malishroom_hanging_sign"
+    "lithereal:malishroom_hanging_sign",
+    "lithereal:malishroom_shelf"
   ]
 }

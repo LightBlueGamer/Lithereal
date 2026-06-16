@@ -5,14 +5,17 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.lithereal.Lithereal;
+import org.lithereal.block.ModTreeBlocks;
 import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.ModEntities;
@@ -38,6 +41,10 @@ public class Events {
         public static void onDefaultAttributesRegistry(EntityAttributeCreationEvent event) {
             event.put(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombie.createAttributes().build());
             event.put(ModEntities.PHANTOM_DROWNED.get(), PhantomDrowned.createAttributes().build());
+        }
+        @SubscribeEvent
+        public static void onBlockEntityTypeAddBlocks(BlockEntityTypeAddBlocksEvent event) {
+            event.modify(BlockEntityType.SHELF, ModTreeBlocks.PHANTOM_OAK_SHELF.get(), ModTreeBlocks.FORTSHROOM_SHELF.get(), ModTreeBlocks.MALISHROOM_SHELF.get());
         }
     }
     public static class ForgeBusEvents {
