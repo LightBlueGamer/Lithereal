@@ -43,6 +43,9 @@ public class ModModelProvider extends ModelProvider {
     public static final ModelTemplate TWO_LAYERED_HANDHELD_ITEM = createItem("handheld",TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate HANDHELD_WAR_HAMMER_ITEM = createItem("lithereal:handheld_war_hammer", TextureSlot.LAYER0);
     public static final ModelTemplate BRUSH = createItem("brush", TextureSlot.LAYER0);
+    public static final ModelTemplate BRUSH_BRUSHING_0 = createItem("brush_brushing_0", TextureSlot.LAYER0);
+    public static final ModelTemplate BRUSH_BRUSHING_1 = createItem("brush_brushing_1", TextureSlot.LAYER0);
+    public static final ModelTemplate BRUSH_BRUSHING_2 = createItem("brush_brushing_2", TextureSlot.LAYER0);
     public static final ModelTemplate GLASS_ENCLOSED_TORCH = create("lithereal:template_glass_enclosed_torch", TextureSlot.TORCH);
     public static final ModelTemplate GLASS_ENCLOSED_WALL_TORCH = create("lithereal:template_glass_enclosed_torch_wall", TextureSlot.TORCH);
     public ModModelProvider(PackOutput output) {
@@ -582,6 +585,9 @@ public class ModModelProvider extends ModelProvider {
 
     public void brushItem(Item item, ItemModelGenerators itemModels) {
         itemModels.createFlatItemModel(item, BRUSH);
+        itemModels.createFlatItemModel(item, "_brushing_0", BRUSH_BRUSHING_0);
+        itemModels.createFlatItemModel(item, "_brushing_1", BRUSH_BRUSHING_1);
+        itemModels.createFlatItemModel(item, "_brushing_2", BRUSH_BRUSHING_2);
         itemModels.generateBrush(item);
     }
 
