@@ -64,51 +64,55 @@ public class WarHammerItem extends Item {
     }
 
     @Override
-    public float getAttackDamageBonus(Entity entity, float f, DamageSource damageSource) {
-        return canSmashAttack(entity) ? f : 0.0F;
+    public float getAttackDamageBonus(Entity entity, float damage, DamageSource damageSource) {
+        return canSmashAttack(entity) ? damage : 0.0F;
     }
 
     private static void knockback(Level level, Player player, Entity entity) {
         level.levelEvent(2013, entity.getOnPos(), 750);
+        Vec3 dir = entity.position().subtract(player.position());
+        double length = dir.length();
+        dir = dir.normalize();
+        dir = new Vec3(dir.x, 0, dir.z).normalize().scale(length);
+        Vec3 finalDir = dir;
         level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(3.5), knockbackPredicate(player, entity)).forEach((livingEntity) -> {
-            Vec3 vec3 = livingEntity.position().subtract(entity.position());
-            double strength = getKnockbackPower(livingEntity, vec3);
-            Vec3 vec32 = vec3.normalize().scale(strength);
+            double strength = getKnockbackPower(livingEntity, finalDir);
+            Vec3 knockback = finalDir.normalize().scale(strength);
             if (strength > 0.0) {
-                livingEntity.push(vec32.x, 0.52499999105, vec32.z);
+                livingEntity.push(knockback.x, 0.35, knockback.z);
+                livingEntity.needsSync = true;
+                livingEntity.hurtMarked = true;
             }
-
         });
     }
 
     private static Predicate<LivingEntity> knockbackPredicate(Player player, Entity entity) {
         return (livingEntity) -> {
-            boolean var10000;
-            boolean bl;
-            boolean bl2;
-            boolean bl3;
+            boolean notMarkerArmorStand;
+            boolean notSpectator;
+            boolean notSameAsAlreadyInvolved;
+            boolean notAlly;
             label44: {
-                bl = !livingEntity.isSpectator();
-                bl2 = livingEntity != player && livingEntity != entity;
-                bl3 = !player.isAlliedTo(livingEntity);
+                notSpectator = !livingEntity.isSpectator();
+                notSameAsAlreadyInvolved = livingEntity != player/* && livingEntity != entity*/;
+                notAlly = !player.isAlliedTo(livingEntity);
                 if (livingEntity instanceof ArmorStand armorStand) {
                     if (armorStand.isMarker()) {
-                        var10000 = false;
+                        notMarkerArmorStand = false;
                         break label44;
                     }
                 }
 
-                var10000 = true;
+                notMarkerArmorStand = true;
             }
 
-            boolean bl4 = var10000;
-            boolean bl5 = entity.distanceToSqr(livingEntity) <= Math.pow(3.5, 2.0);
-            return bl && bl2 && bl3 && bl4 && bl5;
+            boolean isInRange = entity.distanceToSqr(livingEntity) <= Math.pow(3.5, 2.0);
+            return notSpectator && notSameAsAlreadyInvolved && notAlly && notMarkerArmorStand && isInRange;
         };
     }
 
     private static double getKnockbackPower(LivingEntity livingEntity, Vec3 vec3) {
-        return (3.5 - vec3.length()) * 0.52499999105 * 2 * (1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+        return (3.5 - vec3.length()) * 0.625 * 2 * (1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
     }
 
     public static boolean canSmashAttack(Entity entity) {
