@@ -4,8 +4,6 @@ import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -239,6 +237,7 @@ public class LitherealClient {
                 ModBlocks.COARSE_ETHEREAL_DIRT,
                 ModBlocks.ETHEREAL_DIRT,
                 ModBlocks.ETHEREAL_GRASS_BLOCK,
+                ModBlocks.ETHEREAL_FARMLAND,
                 ModBlocks.PHANTOM_GRAVEL,
                 ModTreeBlocks.PHANTOM_OAK_LEAVES,
                 ModTreeBlocks.PHANTOM_OAK_LOG,

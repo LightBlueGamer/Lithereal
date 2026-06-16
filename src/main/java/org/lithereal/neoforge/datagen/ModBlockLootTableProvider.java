@@ -34,6 +34,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     public void generate() {
+        dropOther(ModBlocks.ETHEREAL_FARMLAND.get(), ModBlocks.ETHEREAL_DIRT.get());
         dropSelf(ModBlocks.COARSE_ETHEREAL_DIRT.get());
         this.add(
                 ModBlocks.PHANTOM_GRAVEL.get(),

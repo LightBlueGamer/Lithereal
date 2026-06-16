@@ -1,5 +1,6 @@
 package org.lithereal.block;
 
+import com.google.common.base.Suppliers;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Direction;
@@ -21,7 +22,10 @@ import org.lithereal.client.particle.ModParticles;
 import org.lithereal.item.ModItems;
 import org.lithereal.tags.ModTags;
 import org.lithereal.util.CommonUtils;
+import org.lithereal.util.HoeTillable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -94,6 +98,9 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> ETHEREAL_DIRT = registerBlock("ethereal_dirt",
             resourceKey -> new Block(BlockBehaviour.Properties.ofLegacyCopy(Blocks.DIRT).setId(resourceKey)));
+
+    public static final RegistrySupplier<Block> ETHEREAL_FARMLAND = registerBlock("ethereal_farmland",
+            resourceKey -> new ModFarmlandBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.FARMLAND).setId(resourceKey), ETHEREAL_DIRT.getKey()));
 
     public static final RegistrySupplier<Block> ETHEREAL_GRASS_BLOCK = registerBlock("ethereal_grass_block",
             resourceKey -> new ExtendedGrassBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.GRASS_BLOCK).setId(resourceKey), ETHEREAL_DIRT.getKey()));
@@ -265,7 +272,12 @@ public class ModBlocks {
         );
     }
 
+    public static final List<HoeTillable> HOE_TILLABLES = new ArrayList<>();
+
     public static void register() {
+        HOE_TILLABLES.add(new HoeTillable(ETHEREAL_DIRT, () -> ETHEREAL_FARMLAND.get().defaultBlockState(), HoeTillable::onlyIfAirAbove, HoeTillable.changeIntoState(Suppliers.memoize(() -> ETHEREAL_FARMLAND.get().defaultBlockState()))));
+        HOE_TILLABLES.add(new HoeTillable(ETHEREAL_GRASS_BLOCK, () -> ETHEREAL_FARMLAND.get().defaultBlockState(), HoeTillable::onlyIfAirAbove, HoeTillable.changeIntoState(Suppliers.memoize(() -> ETHEREAL_FARMLAND.get().defaultBlockState()))));
+        HOE_TILLABLES.add(new HoeTillable(COARSE_ETHEREAL_DIRT, () -> ETHEREAL_DIRT.get().defaultBlockState(), HoeTillable::onlyIfAirAbove, HoeTillable.changeIntoState(Suppliers.memoize(() -> ETHEREAL_DIRT.get().defaultBlockState()))));
         ModTreeBlocks.register();
         ModVegetationBlocks.register();
         ModStoneBlocks.register();

@@ -1,5 +1,6 @@
 package org.lithereal;
 
+import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.networking.NetworkManager;
 import dev.architectury.registry.level.entity.SpawnPlacementsRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -30,6 +31,7 @@ import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.item.ModCreativeTabs;
 import org.lithereal.item.ModItems;
+import org.lithereal.util.HoeTillable;
 import org.lithereal.world.feature.ModFeatures;
 import org.lithereal.world.feature.tree.decorator.ModDecorators;
 import org.lithereal.world.feature.tree.foliageplacer.ModFoliagePlacers;
@@ -62,6 +64,7 @@ public class Lithereal {
         ModDecorators.register();
         ModFoliagePlacers.register();
         ModTrunkPlacers.register();
+        LifecycleEvent.SETUP.register(Lithereal::onSetup);
 
         SpawnPlacementsRegistry.register(ModEntities.PHANTOM_ZOMBIE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Monster::checkMonsterSpawnRules);
         SpawnPlacementsRegistry.register(ModEntities.PHANTOM_DROWNED, SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING, PhantomDrowned::checkPhantomDrownedSpawnRules);
@@ -78,6 +81,10 @@ public class Lithereal {
         });
 
         System.out.println(LitherealPlatform.INSTANCE.getConfigDirectory().toAbsolutePath().normalize());
+    }
+
+    public static void onSetup() {
+        ModBlocks.HOE_TILLABLES.forEach(HoeTillable::registerSelf);
     }
 
     public static Identifier id(String path) {

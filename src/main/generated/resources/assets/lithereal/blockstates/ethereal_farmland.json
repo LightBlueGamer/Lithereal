@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "lithereal:block/ethereal_farmland"
+    },
+    "moisture=1": {
+      "model": "lithereal:block/ethereal_farmland"
+    },
+    "moisture=2": {
+      "model": "lithereal:block/ethereal_farmland"
+    },
+    "moisture=3": {
+      "model": "lithereal:block/ethereal_farmland"
+    },
+    "moisture=4": {
+      "model": "lithereal:block/ethereal_farmland"
+    },
+    "moisture=5": {
+      "model": "lithereal:block/ethereal_farmland"
+    },
+    "moisture=6": {
+      "model": "lithereal:block/ethereal_farmland"
+    },
+    "moisture=7": {
+      "model": "lithereal:block/ethereal_farmland_moist"
+    }
+  }
+}

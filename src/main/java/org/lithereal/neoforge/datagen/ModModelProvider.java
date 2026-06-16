@@ -64,6 +64,7 @@ public class ModModelProvider extends ModelProvider {
         electricCrucibleBlock(ModBlocks.ELECTRIC_CRUCIBLE.get(), blockModels);
         existingBlockWithItem(ModBlocks.FREEZING_STATION, blockModels);
         infusementChamberBlock(ModBlocks.INFUSEMENT_CHAMBER.get(), blockModels);
+        createFarmland(ModBlocks.ETHEREAL_FARMLAND.get(), ModBlocks.ETHEREAL_DIRT.get(), blockModels);
         blockWithItem(ModBlocks.ETHEREAL_DIRT, blockModels);
         grassLikeBlock(ModBlocks.ETHEREAL_GRASS_BLOCK, ModBlocks.ETHEREAL_DIRT, new Constant(8573157), blockModels);
         blockWithItem(ModBlocks.SCORCHED_NETHERRACK, blockModels);
@@ -466,6 +467,15 @@ public class ModModelProvider extends ModelProvider {
 
     private void logBlock(Block log, Block wood, BlockModelGenerators blockModelGenerators) {
         blockModelGenerators.woodProvider(log).log(log).wood(wood);
+    }
+
+    private void createFarmland(Block farmland, Block dirt, BlockModelGenerators blockModels) {
+        TextureMapping dryTextures = (new TextureMapping()).put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirt)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(farmland));
+        TextureMapping moistTextures = (new TextureMapping()).put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirt)).put(TextureSlot.TOP, TextureMapping.getBlockTexture(farmland, "_moist"));
+        MultiVariant dryModel = plainVariant(ModelTemplates.FARMLAND.create(farmland, dryTextures, blockModels.modelOutput));
+        MultiVariant moistModel = plainVariant(ModelTemplates.FARMLAND.create(ModelLocationUtils.getModelLocation(farmland, "_moist"), moistTextures, blockModels.modelOutput));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(farmland).with(createEmptyOrFullDispatch(BlockStateProperties.MOISTURE, 7, moistModel, dryModel)));
+        blockModels.registerSimpleItemModel(farmland, ModelLocationUtils.getModelLocation(farmland));
     }
 
     public void createFire(Block fire, BlockModelGenerators blockModels) {
