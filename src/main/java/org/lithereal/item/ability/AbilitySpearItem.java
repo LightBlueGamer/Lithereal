@@ -5,33 +5,37 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.equipment.ArmorType;
 import org.jspecify.annotations.Nullable;
-import org.lithereal.item.base.ModArmorItem;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
-import java.util.function.BiFunction;
 
-public class AbilityArmorItem extends ModArmorItem implements AbilityItem {
+public class AbilitySpearItem extends Item implements AbilityItem {
     final Ability ability;
-
-    public AbilityArmorItem(Ability ability, ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
-        super(armorMaterial, type, properties);
-        this.ability = ability;
-    }
-
-    public AbilityArmorItem(Ability ability, ArmorMaterial armorMaterial, BiFunction<Properties, ArmorMaterial, Properties> toMakeArmor, Properties properties) {
-        super(armorMaterial, toMakeArmor, properties);
+    public AbilitySpearItem(Ability ability, Properties properties) {
+        super(properties);
         this.ability = ability;
     }
 
     @Override
+    public void hurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        getAbility().onAttack(this, itemStack, attacked, attacker);
+        super.hurtEnemy(itemStack, attacked, attacker);
+    }
+
+    @Override
+    public void postHurtEnemy(ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+        getAbility().postAttack(this, itemStack, attacked, attacker);
+        super.postHurtEnemy(itemStack, attacked, attacker);
+    }
+
+    @Override
     public void inventoryTick(ItemStack itemStack, ServerLevel level, Entity owner, @Nullable EquipmentSlot slot) {
-        if (slot != null && slot.isArmor()) getAbility().onArmourTick(this, itemStack, level, owner, slot);
+        getAbility().onItemTick(this, itemStack, level, owner, slot);
         super.inventoryTick(itemStack, level, owner, slot);
     }
 

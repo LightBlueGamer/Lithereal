@@ -2,6 +2,7 @@ package org.lithereal.item.ability;
 
 import dev.architectury.networking.NetworkManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gamerules.GameRules;
@@ -93,8 +95,10 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
                     if (armorType.causesIgnition) attacker.igniteForTicks(100);
                 }
             }
+            Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
+            EquipmentSlot.Type type = equippable == null ? EquipmentSlot.Type.HUMANOID_ARMOR : equippable.slot().getType();
             if (!level.isClientSide()) {
-                if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) {
+                if (hasFullSuitOfArmorOn(user, type) && hasCorrectArmorOn(armorMaterials(), user, type)) {
                     effects.forEach(statusEffect -> addStatusEffect(user, statusEffect));
                     if (user.isOnFire()) {
                         user.extinguishFire();
@@ -104,7 +108,7 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
                         user.clearFreeze();
                 }
             } else {
-                if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) {
+                if (hasFullSuitOfArmorOn(user, type) && hasCorrectArmorOn(armorMaterials(), user, type)) {
                     if (armorType.providesFreeze && KeyMapping.FREEZE_KEY.isDown())
                         NetworkManager.sendToServer(new ServerboundSpecialKeyAbilityPacket(ServerboundSpecialKeyAbilityPacket.SpecialKeyType.FREEZE));
                     if (armorType.providesScorch && KeyMapping.SCORCH_KEY.isDown())
@@ -117,7 +121,9 @@ public record ThermalAbility<I extends AbilityItem>(int extraDamage,
     @Override
     public float getLavaMovementEfficiency(I castedItem, ItemStack itemStack, LivingEntity user, float efficiency) {
         ArmorType armorType = armorType();
-        if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials(), user)) return efficiency + armorType.lavaMovementEfficiency * this.attackAbilityScalar;
+        Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
+        EquipmentSlot.Type type = equippable == null ? EquipmentSlot.Type.HUMANOID_ARMOR : equippable.slot().getType();
+        if (hasFullSuitOfArmorOn(user, type) && hasCorrectArmorOn(armorMaterials(), user, type)) return efficiency + armorType.lavaMovementEfficiency * this.attackAbilityScalar;
         return efficiency;
     }
 

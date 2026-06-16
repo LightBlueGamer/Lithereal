@@ -28,10 +28,10 @@ public class CommonUtils {
     public static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
     }
-    public static boolean hasFullSuitOfArmorOn(LivingEntity livingEntity) {
+    public static boolean hasFullSuitOfArmorOn(LivingEntity livingEntity, EquipmentSlot.Type slotType) {
         boolean hasFullSuitOn = true;
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
-            if (slot.getType() == EquipmentSlot.Type.ANIMAL_ARMOR) continue;
+            if (slot.getType() != slotType) continue;
             ItemStack armorStack = livingEntity.getItemBySlot(slot);
             hasFullSuitOn &= !armorStack.isEmpty();
         }
@@ -39,14 +39,14 @@ public class CommonUtils {
         return hasFullSuitOn;
     }
 
-    public static boolean hasCorrectArmorOn(ArmorMaterial material, LivingEntity livingEntity) {
-        return hasCorrectArmorOn(Collections.singletonList(material), livingEntity);
+    public static boolean hasCorrectArmorOn(ArmorMaterial material, LivingEntity livingEntity, EquipmentSlot.Type slotType) {
+        return hasCorrectArmorOn(Collections.singletonList(material), livingEntity, slotType);
     }
 
-    public static boolean hasCorrectArmorOn(List<ArmorMaterial> materials, LivingEntity livingEntity) {
+    public static boolean hasCorrectArmorOn(List<ArmorMaterial> materials, LivingEntity livingEntity, EquipmentSlot.Type slotType) {
         boolean hasCorrectArmorOn = true;
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
-            if (slot.getType() == EquipmentSlot.Type.ANIMAL_ARMOR) continue;
+            if (slot.getType() != slotType) continue;
             ItemStack armorStack = livingEntity.getItemBySlot(slot);
             if(!(armorStack.getItem() instanceof ModArmorItem armorItem)) {
                 return false;

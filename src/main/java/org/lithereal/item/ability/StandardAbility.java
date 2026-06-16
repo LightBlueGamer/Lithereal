@@ -11,6 +11,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
 import org.lithereal.item.infused.InfusedItem;
@@ -46,7 +47,9 @@ public record StandardAbility<I extends AbilityItem>(List<ArmorMaterial> armorMa
         UUID entityID = entity.getUUID();
         Map<Holder<MobEffect>, Integer> healTicker = Optionull.mapOrElse(item.getHealTicker().get(entityID), Function.identity(), HashMap::new);
         if (entity instanceof LivingEntity user && !level.isClientSide()) {
-            if (hasFullSuitOfArmorOn(user) && hasCorrectArmorOn(armorMaterials, user) && level.getGameTime() % 80 == 0) {
+            Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
+            EquipmentSlot.Type type = equippable == null ? EquipmentSlot.Type.HUMANOID_ARMOR : equippable.slot().getType();
+            if (hasFullSuitOfArmorOn(user, type) && hasCorrectArmorOn(armorMaterials, user, type) && level.getGameTime() % 80 == 0) {
                 boolean multiEffect = passiveEffects.size() > 1;
                 float durationFactor = itemStack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F);
                 passiveEffects.forEach((mobEffectInstance) -> {

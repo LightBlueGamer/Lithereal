@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
@@ -129,8 +130,10 @@ public record InfusedAbility<I extends InfusedItem>(
                         }
                     }
                 }
-                if (hasFullSuitOfArmorOn(user)) {
-                    if (hasCorrectArmorOn(supportedMaterials, user) && level.getGameTime() % 80 == 0) {
+                Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
+                EquipmentSlot.Type type = equippable == null ? EquipmentSlot.Type.HUMANOID_ARMOR : equippable.slot().getType();
+                if (hasFullSuitOfArmorOn(user, type)) {
+                    if (hasCorrectArmorOn(supportedMaterials, user, type) && level.getGameTime() % 80 == 0) {
                         boolean multiEffect = count.get() > 1;
                         if (potionContents.potion().filter(potionHolder -> potionHolder.is(ModTags.DISPELS_FIRE)).isPresent() && entity.isOnFire()) entity.extinguishFire();
                         float potionDurationScale = itemStack.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F);
