@@ -78,6 +78,6 @@ public class AttachedToTrunkDecorator extends TreeDecorator {
 
 	@Override
 	protected TreeDecoratorType<?> type() {
-		return TreeDecoratorType.ATTACHED_TO_LEAVES;
+		return ModDecorators.ATTACHED_TO_TRUNK.get();
 	}
 }

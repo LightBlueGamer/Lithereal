@@ -2,10 +2,256 @@
   "type": "minecraft:simple_block",
   "config": {
     "to_place": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "lithereal:impure_ethereal_crystal"
-      }
-    }
+      "type": "minecraft:rule_based_state_provider",
+      "rules": [
+        {
+          "if_true": {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "lithereal:impure_ethereal_crystal",
+              "Properties": {
+                "facing": "up"
+              }
+            }
+          },
+          "then": {
+            "type": "minecraft:rule_based_state_provider",
+            "fallback": {
+              "state": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "up"
+                }
+              },
+              "type": "minecraft:simple_state_provider"
+            },
+            "rules": [
+              {
+                "if_true": {
+                  "type": "minecraft:matching_fluids",
+                  "fluids": "#minecraft:water"
+                },
+                "then": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "lithereal:impure_ethereal_crystal",
+                    "Properties": {
+                      "facing": "up",
+                      "waterlogged": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "lithereal:impure_ethereal_crystal",
+              "Properties": {
+                "facing": "down"
+              }
+            }
+          },
+          "then": {
+            "type": "minecraft:rule_based_state_provider",
+            "fallback": {
+              "state": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "down"
+                }
+              },
+              "type": "minecraft:simple_state_provider"
+            },
+            "rules": [
+              {
+                "if_true": {
+                  "type": "minecraft:matching_fluids",
+                  "fluids": "#minecraft:water"
+                },
+                "then": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "lithereal:impure_ethereal_crystal",
+                    "Properties": {
+                      "facing": "down",
+                      "waterlogged": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "lithereal:impure_ethereal_crystal",
+              "Properties": {
+                "facing": "north"
+              }
+            }
+          },
+          "then": {
+            "type": "minecraft:rule_based_state_provider",
+            "fallback": {
+              "state": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "north"
+                }
+              },
+              "type": "minecraft:simple_state_provider"
+            },
+            "rules": [
+              {
+                "if_true": {
+                  "type": "minecraft:matching_fluids",
+                  "fluids": "#minecraft:water"
+                },
+                "then": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "lithereal:impure_ethereal_crystal",
+                    "Properties": {
+                      "facing": "north",
+                      "waterlogged": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "lithereal:impure_ethereal_crystal",
+              "Properties": {
+                "facing": "south"
+              }
+            }
+          },
+          "then": {
+            "type": "minecraft:rule_based_state_provider",
+            "fallback": {
+              "state": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "south"
+                }
+              },
+              "type": "minecraft:simple_state_provider"
+            },
+            "rules": [
+              {
+                "if_true": {
+                  "type": "minecraft:matching_fluids",
+                  "fluids": "#minecraft:water"
+                },
+                "then": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "lithereal:impure_ethereal_crystal",
+                    "Properties": {
+                      "facing": "south",
+                      "waterlogged": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "lithereal:impure_ethereal_crystal",
+              "Properties": {
+                "facing": "east"
+              }
+            }
+          },
+          "then": {
+            "type": "minecraft:rule_based_state_provider",
+            "fallback": {
+              "state": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "east"
+                }
+              },
+              "type": "minecraft:simple_state_provider"
+            },
+            "rules": [
+              {
+                "if_true": {
+                  "type": "minecraft:matching_fluids",
+                  "fluids": "#minecraft:water"
+                },
+                "then": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "lithereal:impure_ethereal_crystal",
+                    "Properties": {
+                      "facing": "east",
+                      "waterlogged": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "lithereal:impure_ethereal_crystal",
+              "Properties": {
+                "facing": "west"
+              }
+            }
+          },
+          "then": {
+            "type": "minecraft:rule_based_state_provider",
+            "fallback": {
+              "state": {
+                "Name": "lithereal:impure_ethereal_crystal",
+                "Properties": {
+                  "facing": "west"
+                }
+              },
+              "type": "minecraft:simple_state_provider"
+            },
+            "rules": [
+              {
+                "if_true": {
+                  "type": "minecraft:matching_fluids",
+                  "fluids": "#minecraft:water"
+                },
+                "then": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "lithereal:impure_ethereal_crystal",
+                    "Properties": {
+                      "facing": "west",
+                      "waterlogged": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "schedule_tick": true
   }
 }

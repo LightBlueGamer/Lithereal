@@ -9,50 +9,125 @@
         "exclusion_radius_y": 2,
         "required_empty_blocks": 1,
         "block_provider": {
-          "type": "minecraft:weighted_state_provider",
-          "entries": [
+          "type": "minecraft:rule_based_state_provider",
+          "rules": [
             {
-              "weight": 2,
-              "data": {
-                "Name": "lithereal:impure_ethereal_crystal",
-                "Properties": {
-                  "facing": "down"
+              "if_true": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "north"
+                  }
+                }
+              },
+              "then": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "north"
+                  }
                 }
               }
             },
             {
-              "weight": 1,
-              "data": {
-                "Name": "lithereal:impure_ethereal_crystal",
-                "Properties": {
-                  "facing": "north"
+              "if_true": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "south"
+                  }
+                }
+              },
+              "then": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "south"
+                  }
                 }
               }
             },
             {
-              "weight": 1,
-              "data": {
-                "Name": "lithereal:impure_ethereal_crystal",
-                "Properties": {
-                  "facing": "south"
+              "if_true": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "east"
+                  }
+                }
+              },
+              "then": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "east"
+                  }
                 }
               }
             },
             {
-              "weight": 1,
-              "data": {
-                "Name": "lithereal:impure_ethereal_crystal",
-                "Properties": {
-                  "facing": "east"
+              "if_true": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "west"
+                  }
+                }
+              },
+              "then": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "west"
+                  }
                 }
               }
             },
             {
-              "weight": 1,
-              "data": {
-                "Name": "lithereal:impure_ethereal_crystal",
-                "Properties": {
-                  "facing": "west"
+              "if_true": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "down"
+                  }
+                }
+              },
+              "then": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "down"
+                  }
+                }
+              }
+            },
+            {
+              "if_true": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "up"
+                  }
+                }
+              },
+              "then": {
+                "type": "minecraft:simple_state_provider",
+                "state": {
+                  "Name": "lithereal:impure_ethereal_crystal",
+                  "Properties": {
+                    "facing": "up"
+                  }
                 }
               }
             }
