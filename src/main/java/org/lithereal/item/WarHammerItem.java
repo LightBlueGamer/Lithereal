@@ -81,7 +81,6 @@ public class WarHammerItem extends Item {
             if (strength > 0.0) {
                 livingEntity.push(knockback.x, 0.35, knockback.z);
                 livingEntity.needsSync = true;
-                livingEntity.hurtMarked = true;
             }
         });
     }
@@ -94,7 +93,7 @@ public class WarHammerItem extends Item {
             boolean notAlly;
             label44: {
                 notSpectator = !livingEntity.isSpectator();
-                notSameAsAlreadyInvolved = livingEntity != player/* && livingEntity != entity*/;
+                notSameAsAlreadyInvolved = livingEntity != player;
                 notAlly = !player.isAlliedTo(livingEntity);
                 if (livingEntity instanceof ArmorStand armorStand) {
                     if (armorStand.isMarker()) {
