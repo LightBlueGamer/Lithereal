@@ -44,6 +44,7 @@ public class CommonUtils {
     }
 
     public static boolean hasCorrectArmorOn(List<ResourceKey<EquipmentAsset>> materials, LivingEntity livingEntity, EquipmentSlot.Type slotType) {
+        if (materials.isEmpty()) return true;
         boolean hasCorrectArmorOn = true;
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
             if (slot.getType() != slotType) continue;

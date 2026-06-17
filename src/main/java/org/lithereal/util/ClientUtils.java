@@ -15,6 +15,7 @@ public class ClientUtils {
     }
 
     public static <S extends HumanoidRenderState> boolean hasCorrectArmorOn(List<ResourceKey<EquipmentAsset>> materials, S renderState) {
+        if (materials.isEmpty()) return true;
         Equippable headEquippable;
         Equippable chestEquippable;
         Equippable legsEquippable;
