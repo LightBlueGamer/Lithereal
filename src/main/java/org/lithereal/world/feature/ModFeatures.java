@@ -18,6 +18,8 @@ import java.util.function.Supplier;
 public class ModFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_FORTSHROOM = createConfiguredFeatureKey("huge_fortshroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_MALISHROOM = createConfiguredFeatureKey("huge_malishroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_FORTSHROOM = createConfiguredFeatureKey("mega_fortshroom");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_MALISHROOM = createConfiguredFeatureKey("mega_malishroom");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PHANTOM_OAK = createConfiguredFeatureKey("phantom_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FANCY_PHANTOM_OAK = createConfiguredFeatureKey("fancy_phantom_oak");
