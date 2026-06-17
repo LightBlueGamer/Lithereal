@@ -2,17 +2,15 @@ package org.lithereal.item.infused;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.item.ability.Ability;
-import org.lithereal.item.ability.AbilityPickaxeItem;
 
-public class InfusedLitheritePickaxeItem extends AbilityPickaxeItem implements InfusedItem {
-    public InfusedLitheritePickaxeItem(ToolMaterial toolMaterial, Properties properties) {
-        super(Ability.INFUSED, toolMaterial, properties);
+public class InfusedIngotItem extends Item implements InfusedItem {
+    public InfusedIngotItem(Properties properties) {
+        super(properties);
     }
 
     public @NotNull ItemStack getDefaultInstance() {
@@ -28,6 +26,6 @@ public class InfusedLitheritePickaxeItem extends AbilityPickaxeItem implements I
 
     @Override
     public String getBaseName(ItemStack stack) {
-        return "Litherite Pickaxe";
+        return "Litherite Ingot";
     }
 }

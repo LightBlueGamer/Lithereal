@@ -17,9 +17,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
-import org.lithereal.item.ModArmorMaterials;
-import org.lithereal.item.infused.InfusedLitheriteArmorItem;
+import org.lithereal.item.infused.InfusedArmorItem;
 //?}
+import org.lithereal.util.CommonUtils;
 import org.spongepowered.asm.mixin.Mixin;
 //? neoforge {
 import org.spongepowered.asm.mixin.Unique;
@@ -44,7 +44,7 @@ public abstract class ArmorLayerMixin<S extends HumanoidRenderState, M extends H
 
     @Inject(method = "renderArmorPiece", at = @At(value = "HEAD"), cancellable = true)
     public void renderArmorPiece(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, ItemStack itemStack, EquipmentSlot slot, int lightCoords, S state, CallbackInfo ci) {
-        if(hasFullSuitOfArmorOn(state) && hasCorrectArmorOn(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE), state) && lithereal$armorHasCorrectEffect(state))
+        if(hasFullSuitOfArmorOn(state) && hasCorrectArmorOn(CommonUtils.CROSS_COMPATIBLE_LITHERITE, state) && lithereal$armorHasCorrectEffect(state))
             ci.cancel();
     }
 
@@ -52,7 +52,7 @@ public abstract class ArmorLayerMixin<S extends HumanoidRenderState, M extends H
     private boolean lithereal$armorHasCorrectEffect(S state) {
         AtomicBoolean bl = new AtomicBoolean(false);
         for (ItemStack armorStack : List.of(state.headEquipment, state.chestEquipment, state.legsEquipment, state.feetEquipment)) {
-            if(!(armorStack.getItem() instanceof InfusedLitheriteArmorItem)) return false;
+            if(!(armorStack.getItem() instanceof InfusedArmorItem)) return false;
             armorStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).forEachEffect(mobEffectInstance -> bl.set(bl.get() || mobEffectInstance.getEffect().is(MobEffects.INVISIBILITY)), 1F);
         }
         return bl.get();

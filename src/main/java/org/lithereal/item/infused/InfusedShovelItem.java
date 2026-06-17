@@ -3,16 +3,16 @@ package org.lithereal.item.infused;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ability.Ability;
-import org.lithereal.item.ability.AbilitySwordItem;
 
-public class InfusedLitheriteSwordItem extends AbilitySwordItem implements InfusedItem {
-    public InfusedLitheriteSwordItem(ToolMaterial toolMaterial, Properties properties) {
-        super(Ability.INFUSED, toolMaterial, properties);
+public class InfusedShovelItem extends ShovelItem implements InfusedItem {
+    public InfusedShovelItem(ToolMaterial toolMaterial, Properties properties) {
+        super(toolMaterial, 1.5f, -3f, Ability.INFUSED.createToolComponent(properties));
     }
 
     public @NotNull ItemStack getDefaultInstance() {
@@ -28,6 +28,6 @@ public class InfusedLitheriteSwordItem extends AbilitySwordItem implements Infus
 
     @Override
     public String getBaseName(ItemStack stack) {
-        return "Litherite Sword";
+        return "Litherite Shovel";
     }
 }

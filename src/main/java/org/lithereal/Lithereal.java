@@ -20,6 +20,7 @@ import org.lithereal.client.particle.ModParticles;
 import org.lithereal.core.component.ModComponents;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.phantom.PhantomDrowned;
+import org.lithereal.item.ability.Abilities;
 import org.lithereal.mob_effect.ModMobEffects;
 import org.lithereal.mob_effect.potion.ModPotions;
 import org.lithereal.networking.ClientboundRetributionDeathPacket;
@@ -64,6 +65,7 @@ public class Lithereal {
         ModDecorators.register();
         ModFoliagePlacers.register();
         ModTrunkPlacers.register();
+        Abilities.bootstrap();
         LifecycleEvent.SETUP.register(Lithereal::onSetup);
 
         SpawnPlacementsRegistry.register(ModEntities.PHANTOM_ZOMBIE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Monster::checkMonsterSpawnRules);

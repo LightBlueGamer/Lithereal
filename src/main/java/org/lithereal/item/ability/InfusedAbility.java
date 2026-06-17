@@ -1,8 +1,11 @@
 package org.lithereal.item.ability;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.Optionull;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -13,11 +16,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
+import org.lithereal.Lithereal;
+import org.lithereal.core.component.SpecialAbility;
 import org.lithereal.item.infused.InfusedItem;
 import org.lithereal.tags.ModTags;
 import org.lithereal.util.CommonUtils;
@@ -32,8 +38,10 @@ import java.util.function.Function;
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
 
-public record InfusedAbility<I extends InfusedItem>(
-        List<ArmorMaterial> supportedMaterials) implements IAbility<I> {
+public record InfusedAbility(
+        List<ResourceKey<EquipmentAsset>> supportedMaterials) implements IAbility {
+    public static final Identifier ID = Lithereal.id("infused_ability");
+    public static final MapCodec<InfusedAbility> CODEC = ResourceKey.codec(EquipmentAssets.ROOT_ID).listOf().fieldOf("supported_materials").xmap(InfusedAbility::new, InfusedAbility::supportedMaterials);
     public static void applyEffectToTarget(ServerLevel level, MobEffectInstance mobEffectInstance, LivingEntity target, LivingEntity attacker, int count, boolean swapEffects) {
         Holder<MobEffect> effect = mobEffectInstance.getEffect();
         boolean isBeneficial = effect.value().isBeneficial() || effect.is(ModTags.PSEUDO_BENEFICIAl);
@@ -56,12 +64,7 @@ public record InfusedAbility<I extends InfusedItem>(
     }
 
     @Override
-    public boolean canCast(AbilityItem abilityItem) {
-        return abilityItem instanceof InfusedItem;
-    }
-
-    @Override
-    public void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+    public void onAttack(SpecialAbility ability, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
         PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
         AtomicInteger count = getCount(potionContents);
         if (potionContents.potion().filter(potionHolder -> potionHolder.is(ModTags.DISPELS_FIRE)).isPresent() && attacked.isOnFire()) attacked.extinguishFire();
@@ -70,14 +73,14 @@ public record InfusedAbility<I extends InfusedItem>(
     }
 
     @Override
-    public void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
+    public void postAttack(SpecialAbility ability, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
 
     }
 
     @Override
-    public void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
+    public void onItemTick(SpecialAbility ability, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
         UUID entityID = entity.getUUID();
-        Map<Holder<MobEffect>, Integer> untilReady = Optionull.mapOrElse(item.getUntilReady().get(entityID), Function.identity(), HashMap::new);
+        Map<Holder<MobEffect>, Integer> untilReady = Optionull.mapOrElse(ability.untilReadyMap().get(entityID), Function.identity(), HashMap::new);
         if (entity instanceof LivingEntity user && slot == EquipmentSlot.MAINHAND) {
             PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
             AtomicInteger count = getCount(potionContents);
@@ -104,18 +107,18 @@ public record InfusedAbility<I extends InfusedItem>(
                     itemStack.hurtAndBreak(mobEffectInstance.getAmplifier() + 1, user, EquipmentSlot.MAINHAND);
             }, potionDurationScale);
         }
-        if (item.getLastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
+        if (ability.lastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
             untilReady.replaceAll((mobEffect, integer) -> integer - 1);
-            item.getLastUpdatedMap().put(entityID, entity.tickCount);
+            ability.lastUpdatedMap().put(entityID, entity.tickCount);
         }
-        item.getUntilReady().put(entityID, untilReady);
+        ability.untilReadyMap().put(entityID, untilReady);
     }
 
     @Override
-    public void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
+    public void onArmourTick(SpecialAbility ability, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
         UUID entityID = entity.getUUID();
-        Map<Holder<MobEffect>, Integer> degradationTicker = Optionull.mapOrElse(item.getDegradationTicker().get(entityID), Function.identity(), HashMap::new);
-        Map<Holder<MobEffect>, Integer> healTicker = Optionull.mapOrElse(item.getHealTicker().get(entityID), Function.identity(), HashMap::new);
+        Map<Holder<MobEffect>, Integer> degradationTicker = Optionull.mapOrElse(ability.degradationTickerMap().get(entityID), Function.identity(), HashMap::new);
+        Map<Holder<MobEffect>, Integer> healTicker = Optionull.mapOrElse(ability.healTickerMap().get(entityID), Function.identity(), HashMap::new);
         if (entity instanceof LivingEntity user) {
             if (!level.isClientSide()) {
                 PotionContents potionContents = itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
@@ -158,13 +161,18 @@ public record InfusedAbility<I extends InfusedItem>(
                 }
             }
         }
-        if (item.getLastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
+        if (ability.lastUpdatedMap().getOrDefault(entityID, -1) != entity.tickCount) {
             degradationTicker.replaceAll((mobEffect, integer) -> integer + 1);
             healTicker.replaceAll((mobEffect, integer) -> integer + 1);
-            item.getLastUpdatedMap().put(entityID, entity.tickCount);
+            ability.lastUpdatedMap().put(entityID, entity.tickCount);
         }
-        item.getDegradationTicker().put(entityID, degradationTicker);
-        item.getHealTicker().put(entityID, healTicker);
+        ability.degradationTickerMap().put(entityID, degradationTicker);
+        ability.healTickerMap().put(entityID, healTicker);
+    }
+
+    @Override
+    public MapCodec<? extends IAbility> type() {
+        return CODEC;
     }
 
     private @NotNull AtomicInteger getCount(PotionContents potionContents) {

@@ -10,6 +10,7 @@ import java.util.function.UnaryOperator;
 
 public class ModComponents {
     public static final DeferredRegister<DataComponentType<?>> COMPONENTS = DeferredRegister.create(Lithereal.MOD_ID, Registries.DATA_COMPONENT_TYPE);
+    public static final RegistrySupplier<DataComponentType<SpecialAbility>> SPECIAL_ABILITY = register("special_ability", specialAbilityBuilder -> specialAbilityBuilder.ignoreSwapAnimation().persistent(SpecialAbility.CODEC).networkSynchronized(SpecialAbility.STREAM_CODEC));
     private static <T> RegistrySupplier<DataComponentType<T>> register(String string, UnaryOperator<DataComponentType.Builder<T>> builder) {
         return COMPONENTS.register(string, () -> builder.apply(DataComponentType.builder()).build());
     }

@@ -35,8 +35,9 @@ import net.minecraft.world.item.equipment.trim.ArmorTrim;
 import org.lithereal.client.model.LitherealArmorModel;
 import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.item.base.ModArmorItem;
-import org.lithereal.item.infused.InfusedLitheriteArmorItem;
+import org.lithereal.item.infused.InfusedArmorItem;
 import org.lithereal.tags.ModTags;
+import org.lithereal.util.CommonUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
     private boolean armorHasCorrectEffect(HumanoidRenderState state) {
         AtomicBoolean bl = new AtomicBoolean(false);
         for (ItemStack armorStack : List.of(state.headEquipment, state.chestEquipment, state.legsEquipment, state.feetEquipment)) {
-            if(!(armorStack.getItem() instanceof InfusedLitheriteArmorItem)) return false;
+            if(!(armorStack.getItem() instanceof InfusedArmorItem)) return false;
             armorStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).forEachEffect(mobEffectInstance -> bl.set(bl.get() || mobEffectInstance.getEffect().is(MobEffects.INVISIBILITY)), 1F);
         }
         return bl.get();
@@ -72,7 +73,7 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
 
     @Override
     public void render(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, ItemStack stack, HumanoidRenderState state, EquipmentSlot slot, int light, HumanoidModel<HumanoidRenderState> contextModel) {
-        if (hasFullSuitOfArmorOn(state) && hasCorrectArmorOn(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE), state) && armorHasCorrectEffect(state))
+        if (hasFullSuitOfArmorOn(state) && hasCorrectArmorOn(CommonUtils.CROSS_COMPATIBLE_LITHERITE, state) && armorHasCorrectEffect(state))
             return;
         Equippable equippable = stack.get(DataComponents.EQUIPPABLE);
         if (equippable != null && shouldRender(stack, slot)) {
@@ -91,7 +92,7 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
             boolean renderFoil = stack.hasFoil();
             if (layers.isEmpty()) return;
             for (EquipmentClientInfo.Layer layer : layers) {
-                int color = armorItem instanceof InfusedLitheriteArmorItem ?
+                int color = armorItem instanceof InfusedArmorItem ?
                         stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor() : getColorForLayer(layer, c);
                 if (color != 0) {
                     Identifier layerTexture = this.layerTextureLookup.apply(new LayerTextureKey(layerType, layer));

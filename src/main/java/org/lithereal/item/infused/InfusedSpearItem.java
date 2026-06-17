@@ -2,17 +2,16 @@ package org.lithereal.item.infused;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.item.ability.AbilityHammerItem;
 import org.lithereal.item.ability.Ability;
 
-public class InfusedLitheriteHammerItem extends AbilityHammerItem implements InfusedItem {
-    public InfusedLitheriteHammerItem(ToolMaterial toolMaterial, int damage, float attackSpeed, int weaponLevel, Properties properties) {
-        super(Ability.INFUSED, toolMaterial, damage, attackSpeed, weaponLevel, properties);
+public class InfusedSpearItem extends Item implements InfusedItem {
+    public InfusedSpearItem(Properties properties) {
+        super(Ability.INFUSED.createToolComponent(properties));
     }
 
     public @NotNull ItemStack getDefaultInstance() {
@@ -28,6 +27,6 @@ public class InfusedLitheriteHammerItem extends AbilityHammerItem implements Inf
 
     @Override
     public String getBaseName(ItemStack stack) {
-        return "Litherite Hammer";
+        return "Litherite Spear";
     }
 }

@@ -1,5 +1,6 @@
 package org.lithereal.item.infused;
 
+import net.atlas.combatify.item.LongSwordItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -8,11 +9,10 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ability.Ability;
-import org.lithereal.item.ability.AbilityAxeItem;
 
-public class InfusedLitheriteAxeItem extends AbilityAxeItem implements InfusedItem {
-    public InfusedLitheriteAxeItem(ToolMaterial toolMaterial, Properties properties) {
-        super(Ability.INFUSED, toolMaterial, properties);
+public class InfusedLongSwordItem extends LongSwordItem implements InfusedItem {
+    public InfusedLongSwordItem(ToolMaterial toolMaterial, int weaponLevel, Properties properties) {
+        super(toolMaterial, weaponLevel, Ability.INFUSED.createToolComponent(properties));
     }
 
     public @NotNull ItemStack getDefaultInstance() {
@@ -28,6 +28,6 @@ public class InfusedLitheriteAxeItem extends AbilityAxeItem implements InfusedIt
 
     @Override
     public String getBaseName(ItemStack stack) {
-        return "Litherite Axe";
+        return "Litherite Longsword";
     }
 }

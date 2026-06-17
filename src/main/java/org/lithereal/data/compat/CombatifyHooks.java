@@ -5,10 +5,8 @@ import net.atlas.combatify.item.KnifeItem;
 import net.atlas.combatify.item.LongSwordItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
-import org.lithereal.item.ability.AbilityKnifeItem;
-import org.lithereal.item.ability.AbilityLongSwordItem;
-import org.lithereal.item.infused.InfusedLitheriteKnifeItem;
-import org.lithereal.item.infused.InfusedLitheriteLongSwordItem;
+import org.lithereal.item.infused.InfusedKnifeItem;
+import org.lithereal.item.infused.InfusedLongSwordItem;
 import org.lithereal.item.ability.Ability;
 
 public class CombatifyHooks {
@@ -19,16 +17,16 @@ public class CombatifyHooks {
         return new KnifeItem(toolMaterial, properties);
     }
     public static Item generateAbilityLongsword(Ability ability, ToolMaterial toolMaterial, int weaponLevel, Item.Properties properties) {
-        return new AbilityLongSwordItem(ability, toolMaterial, weaponLevel, properties);
+        return new LongSwordItem(toolMaterial, weaponLevel, ability.createToolComponent(properties));
     }
     public static Item generateAbilityKnife(Ability ability, ToolMaterial toolMaterial, Item.Properties properties) {
-        return new AbilityKnifeItem(ability, toolMaterial, properties);
+        return new KnifeItem(toolMaterial, ability.createToolComponent(properties));
     }
     public static Item generateInfusedLongsword(ToolMaterial toolMaterial, int weaponLevel, Item.Properties properties) {
-        return new InfusedLitheriteLongSwordItem(toolMaterial, weaponLevel, properties);
+        return new InfusedLongSwordItem(toolMaterial, weaponLevel, properties);
     }
     public static Item generateInfusedKnife(ToolMaterial toolMaterial, Item.Properties properties) {
-        return new InfusedLitheriteKnifeItem(toolMaterial, properties);
+        return new InfusedKnifeItem(toolMaterial, properties);
     }
 
     public static float getTierDamageNerf() {

@@ -7,11 +7,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import org.apache.commons.compress.utils.Lists;
-import org.lithereal.item.ability.AbilityItem;
 
 import java.util.List;
 
-public interface InfusedItem extends AbilityItem {
+public interface InfusedItem {
     String getBaseName(ItemStack stack);
     default Component getModifiedName(ItemStack itemStack) {
         ItemStack potion = new ItemStack(Items.POTION);

@@ -3,7 +3,9 @@ package org.lithereal.util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -12,16 +14,18 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import org.lithereal.item.base.ModArmorItem;
+import org.lithereal.item.ModArmorMaterials;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class CommonUtils {
+    public static final List<ResourceKey<EquipmentAsset>> CROSS_COMPATIBLE_LITHERITE = List.of(ModArmorMaterials.SMOLDERING_LITHERITE.assetId(), ModArmorMaterials.FROSTBITTEN_LITHERITE.assetId(), ModArmorMaterials.WITHERING_LITHERITE.assetId(), ModArmorMaterials.INFUSED_LITHERITE.assetId());
     public static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;
     }
@@ -39,19 +43,16 @@ public class CommonUtils {
         return hasFullSuitOn;
     }
 
-    public static boolean hasCorrectArmorOn(ArmorMaterial material, LivingEntity livingEntity, EquipmentSlot.Type slotType) {
-        return hasCorrectArmorOn(Collections.singletonList(material), livingEntity, slotType);
-    }
-
-    public static boolean hasCorrectArmorOn(List<ArmorMaterial> materials, LivingEntity livingEntity, EquipmentSlot.Type slotType) {
+    public static boolean hasCorrectArmorOn(List<ResourceKey<EquipmentAsset>> materials, LivingEntity livingEntity, EquipmentSlot.Type slotType) {
         boolean hasCorrectArmorOn = true;
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
             if (slot.getType() != slotType) continue;
             ItemStack armorStack = livingEntity.getItemBySlot(slot);
-            if(!(armorStack.getItem() instanceof ModArmorItem armorItem)) {
+            Equippable equippable = armorStack.get(DataComponents.EQUIPPABLE);
+            Optional<ResourceKey<EquipmentAsset>> assetId;
+            if(equippable == null || (assetId = equippable.assetId()).isEmpty())
                 return false;
-            }
-            hasCorrectArmorOn &= materials.contains(armorItem.getArmorMaterial());
+            hasCorrectArmorOn &= materials.contains(assetId.get());
         }
 
         return hasCorrectArmorOn;

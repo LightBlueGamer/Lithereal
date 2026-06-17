@@ -18,16 +18,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.lithereal.item.HammerItem;
 import org.lithereal.item.ability.Ability;
-import org.lithereal.item.ability.AbilityHammerItem;
 
 import java.util.List;
 
-public class BurningLitheriteHammerItem extends AbilityHammerItem implements BurningItem {
-    public BurningLitheriteHammerItem(Ability ability, ToolMaterial toolMaterial, int i, float f, int weaponLevel, Properties properties) {
-        super(ability, toolMaterial, i, f, weaponLevel, properties);
+public class BurningHammerItem extends HammerItem implements BurningItem {
+    public BurningHammerItem(Ability ability, ToolMaterial toolMaterial, int i, float f, int weaponLevel, Properties properties) {
+        super(toolMaterial, i, f, weaponLevel, ability.createToolComponent(properties));
     }
-    public BurningLitheriteHammerItem(ToolMaterial toolMaterial, int i, float f, int weaponLevel, Properties properties) {
+    public BurningHammerItem(ToolMaterial toolMaterial, int i, float f, int weaponLevel, Properties properties) {
         this(Ability.BURNING, toolMaterial, i, f, weaponLevel, properties);
     }
 

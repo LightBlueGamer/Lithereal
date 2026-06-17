@@ -4,7 +4,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import org.lithereal.item.infused.InfusedLitheriteItem;
+import org.lithereal.item.infused.InfusedIngotItem;
 
 import static org.lithereal.item.ModItems.registerItem;
 
@@ -21,7 +21,7 @@ public class ModRawMaterialItems {
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_CRYSTAL = registerItem("frozen_litherite_crystal", Item::new);
 
-    public static final RegistrySupplier<Item> INFUSED_LITHERITE_INGOT = registerItem("infused_litherite_ingot", InfusedLitheriteItem::new);
+    public static final RegistrySupplier<Item> INFUSED_LITHERITE_INGOT = registerItem("infused_litherite_ingot", InfusedIngotItem::new);
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_CRYSTAL = registerItem("withering_litherite_crystal", Item::new);
 

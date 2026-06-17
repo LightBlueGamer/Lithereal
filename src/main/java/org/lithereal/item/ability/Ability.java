@@ -2,63 +2,70 @@ package org.lithereal.item.ability;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import org.jspecify.annotations.Nullable;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.ToolMaterial;
 import org.lithereal.Lithereal;
+import org.lithereal.core.component.ModComponents;
+import org.lithereal.core.component.SpecialAbility;
 import org.lithereal.item.ModArmorMaterials;
 import org.lithereal.mob_effect.ModMobEffects;
 
 import java.util.*;
 
+import static org.lithereal.util.CommonUtils.CROSS_COMPATIBLE_LITHERITE;
+
 public enum Ability {
-    BURNING(new ThermalAbility<>(0, 1, ThermalAbility.ArmorType.BURNING,
-            List.of(ModArmorMaterials.BURNING_LITHERITE, ModArmorMaterials.SMOLDERING_LITHERITE),
+    BURNING(new ThermalAbility(0, 1, ThermalAbility.EffectDetails.BURNING,
+            List.of(ModArmorMaterials.BURNING_LITHERITE.assetId(), ModArmorMaterials.SMOLDERING_LITHERITE.assetId()),
             List.of(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0)))),
-    FROZEN(new ThermalAbility<>(0, 1, ThermalAbility.ArmorType.FREEZING,
-            List.of(ModArmorMaterials.FROZEN_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE),
+    FROZEN(new ThermalAbility(0, 1, ThermalAbility.EffectDetails.FREEZING,
+            List.of(ModArmorMaterials.FROZEN_LITHERITE.assetId(), ModArmorMaterials.FROSTBITTEN_LITHERITE.assetId()),
             Collections.emptyList())),
-    SMOLDERING(new ThermalAbility<>(2, 1.5F, ThermalAbility.ArmorType.BURNING,
-            List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE),
+    SMOLDERING(new ThermalAbility(2, 1.5F, ThermalAbility.EffectDetails.BURNING,
+            CROSS_COMPATIBLE_LITHERITE,
             List.of(new MobEffectInstance(Lithereal.asHolder(ModMobEffects.PROTECTED), 200, 0),
                     new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0)))),
-    FROSTBITTEN(new ThermalAbility<>(1, 1.25F, ThermalAbility.ArmorType.FROSTBURN,
-            List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE),
+    FROSTBITTEN(new ThermalAbility(1, 1.25F, ThermalAbility.EffectDetails.FROSTBURN,
+            CROSS_COMPATIBLE_LITHERITE,
             List.of(new MobEffectInstance(Lithereal.asHolder(ModMobEffects.PROTECTED), 200, 0)))),
-    WITHERING(new StandardAbility<>(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE),
+    WITHERING(new StandardAbility(CROSS_COMPATIBLE_LITHERITE,
             Collections.singletonList(new MobEffectInstance(MobEffects.WITHER, 200, 1)),
             Collections.singletonList(new MobEffectInstance(MobEffects.WITHER, 200)))),
-    INFUSED(new InfusedAbility<>(List.of(ModArmorMaterials.SMOLDERING_LITHERITE, ModArmorMaterials.FROSTBITTEN_LITHERITE, ModArmorMaterials.WITHERING_LITHERITE, ModArmorMaterials.INFUSED_LITHERITE))),
-    ODYSIUM(new StandardAbility<>(List.of(ModArmorMaterials.ODYSIUM, ModArmorMaterials.ENHANCED_ODYSIUM),
+    INFUSED(new InfusedAbility(CROSS_COMPATIBLE_LITHERITE)),
+    ODYSIUM(new StandardAbility(List.of(ModArmorMaterials.ODYSIUM.assetId(), ModArmorMaterials.ENHANCED_ODYSIUM.assetId()),
             Collections.emptyList(),
             List.of(new MobEffectInstance(MobEffects.RESISTANCE, 200, 0),
                     new MobEffectInstance(MobEffects.HASTE, 200, 0)))),
-    ENHANCED_ODYSIUM(new StandardAbility<>(Collections.singletonList(ModArmorMaterials.ENHANCED_ODYSIUM),
+    ENHANCED_ODYSIUM(new StandardAbility(Collections.singletonList(ModArmorMaterials.ENHANCED_ODYSIUM.assetId()),
             Collections.singletonList(new MobEffectInstance(Lithereal.asHolder(ModMobEffects.RETRIBUTION), 150)),
             List.of(new MobEffectInstance(MobEffects.RESISTANCE, 200, 1),
                     new MobEffectInstance(MobEffects.HASTE, 200, 0),
                     new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 200, 2))));
-    public final IAbility<?> ability;
-    Ability(IAbility<?> ability) {
+    public final IAbility ability;
+    Ability(IAbility ability) {
         this.ability = ability;
     }
-    public void onAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        ability.onAttackRaw(item, itemStack, attacked, attacker);
+    public Item.Properties createToolComponent(Item.Properties properties) {
+        properties.component(ModComponents.SPECIAL_ABILITY.get(), new SpecialAbility(ability, SpecialAbility.Type.TOOL));
+        return switch (this) {
+            case BURNING -> properties.fireResistant();
+            case SMOLDERING, FROSTBITTEN, ODYSIUM, ENHANCED_ODYSIUM -> properties.fireResistant().rarity(Rarity.UNCOMMON);
+            default -> properties;
+        };
     }
-    public void postAttack(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        ability.postAttackRaw(item, itemStack, attacked, attacker);
+    public Item.Properties createPickaxeComponent(ToolMaterial toolMaterial, Item.Properties properties) {
+        return createToolComponent(properties).pickaxe(toolMaterial, 1, -2.8F);
     }
-    public void onItemTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
-        ability.onItemTickRaw(item, itemStack, level, entity, slot);
+    public Item.Properties createSwordComponent(ToolMaterial toolMaterial, Item.Properties properties) {
+        return createToolComponent(properties).sword(toolMaterial, 3, -2.4f);
     }
-    public void onArmourTick(AbilityItem item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
-        ability.onArmourTickRaw(item, itemStack, level, entity, slot);
+    public Item.Properties createArmorComponent(Item.Properties properties) {
+        properties.component(ModComponents.SPECIAL_ABILITY.get(), new SpecialAbility(ability, SpecialAbility.Type.ARMOR));
+        return switch (this) {
+            case BURNING -> properties.fireResistant();
+            case SMOLDERING, FROSTBITTEN, ODYSIUM, ENHANCED_ODYSIUM -> properties.fireResistant().rarity(Rarity.UNCOMMON);
+            default -> properties;
+        };
     }
-    public float getLavaMovementEfficiency(AbilityItem item, ItemStack itemStack, LivingEntity instance, float efficiency) {
-        return ability.getLavaMovementEfficiencyRaw(item, itemStack, instance, efficiency);
-    }
-
 }

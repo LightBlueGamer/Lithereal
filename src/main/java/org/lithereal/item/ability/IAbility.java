@@ -1,5 +1,6 @@
 package org.lithereal.item.ability;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -8,47 +9,16 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+import org.lithereal.core.component.SpecialAbility;
 
 import java.util.Map;
 
-public interface IAbility<I extends AbilityItem> {
-    default boolean canCast(AbilityItem abilityItem) {
-        return true;
-    }
-    default @Nullable I checkedCast(AbilityItem abilityItem) {
-        if (!canCast(abilityItem)) return null;
-        return (I) abilityItem;
-    }
-    default void onAttackRaw(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        I castedItem = checkedCast(item);
-        if (castedItem == null) return;
-        onAttack(castedItem, itemStack, attacked, attacker);
-    }
-    default void postAttackRaw(AbilityItem item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker) {
-        I castedItem = checkedCast(item);
-        if (castedItem == null) return;
-        postAttack(castedItem, itemStack, attacked, attacker);
-    }
-    default void onItemTickRaw(AbilityItem item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
-        I castedItem = checkedCast(item);
-        if (castedItem == null) return;
-        onItemTick(castedItem, itemStack, level, entity, slot);
-    }
-    default void onArmourTickRaw(AbilityItem item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot) {
-        I castedItem = checkedCast(item);
-        if (castedItem == null) return;
-        onArmourTick(castedItem, itemStack, level, entity, slot);
-    }
-    default float getLavaMovementEfficiencyRaw(AbilityItem item, ItemStack itemStack, LivingEntity user, float efficiency) {
-        I castedItem = checkedCast(item);
-        if (castedItem == null) return efficiency;
-        return getLavaMovementEfficiency(castedItem, itemStack, user, efficiency);
-    }
-    void onAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
-    void postAttack(I item, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
-    void onItemTick(I item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot);
-    void onArmourTick(I item, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot);
-    default float getLavaMovementEfficiency(I castedItem, ItemStack itemStack, LivingEntity user, float efficiency) {
+public interface IAbility {
+    void onAttack(SpecialAbility ability, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
+    void postAttack(SpecialAbility ability, ItemStack itemStack, LivingEntity attacked, LivingEntity attacker);
+    void onItemTick(SpecialAbility ability, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot);
+    void onArmourTick(SpecialAbility ability, ItemStack itemStack, Level level, Entity entity, @Nullable EquipmentSlot slot);
+    default float getLavaMovementEfficiency(SpecialAbility ability, ItemStack itemStack, LivingEntity user, float efficiency) {
         return efficiency;
     }
 
@@ -56,4 +26,6 @@ public interface IAbility<I extends AbilityItem> {
         if (!effectMap.containsKey(effectHolder)) effectMap.put(effectHolder, 0);
         return effectMap.getOrDefault(effectHolder, -1);
     }
+
+    MapCodec<? extends IAbility> type();
 }

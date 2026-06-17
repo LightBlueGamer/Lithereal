@@ -13,11 +13,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.lithereal.item.ability.AbilityItem;
 
 import java.util.List;
 
-public interface BurningItem extends AbilityItem {
+public interface BurningItem {
     default void getDrops(Level level, BlockState blockState, BlockPos blockPos, ItemStack itemStack, LivingEntity livingEntity, BlockEntity blockEntity) {
         if (level instanceof ServerLevel serverLevel) {
             List<ItemStack> origDrops = Block.getDrops(blockState, serverLevel, blockPos, blockEntity, livingEntity, itemStack);

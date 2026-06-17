@@ -9,7 +9,8 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.lithereal.item.ability.AbilityItem;
+import org.lithereal.core.component.ModComponents;
+import org.lithereal.core.component.SpecialAbility;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,8 +29,9 @@ public abstract class LivingEntityMixin extends Entity {
         float scalar = 0;
         for (EquipmentSlot slot : EquipmentSlotGroup.ARMOR) {
             ItemStack armorItem = instance.getItemBySlot(slot);
-            if (armorItem.getItem() instanceof AbilityItem abilityItem)
-                scalar = abilityItem.getAbility().getLavaMovementEfficiency(abilityItem, armorItem, instance, scalar);
+            SpecialAbility specialAbility = armorItem.get(ModComponents.SPECIAL_ABILITY.get());
+            if (specialAbility != null)
+                scalar = specialAbility.getLavaMovementEfficiency(armorItem, instance, scalar);
         }
         if (!this.onGround())
             scalar *= 0.5F;
