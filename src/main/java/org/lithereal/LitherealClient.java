@@ -401,6 +401,7 @@ public class LitherealClient {
         for (Holder<Potion> holder : BuiltInRegistries.POTION.listElements().toList()) {
             List<ItemLike> itemLikes = Arrays.asList(ModToolItems.INFUSED_LITHERITE_SWORD.get(),
                     ModToolItems.INFUSED_LITHERITE_AXE.get(),
+                    ModToolItems.INFUSED_LITHERITE_SPEAR.get(),
                     ModArmorItems.INFUSED_LITHERITE_HELMET.get(),
                     ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(),
                     ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(),
@@ -416,8 +417,8 @@ public class LitherealClient {
                 litherite = CompatInit.populateInfusedForCombatify(litherite, holder);
         }
         CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.LITHERITE_SWORD,
-                ModToolItems.LITHERITE_AXE,
                 ModToolItems.LITHERITE_SPEAR,
+                ModToolItems.LITHERITE_AXE,
                 ModArmorItems.LITHERITE_HELMET,
                 ModArmorItems.LITHERITE_CHESTPLATE,
                 ModArmorItems.LITHERITE_LEGGINGS,
@@ -451,6 +452,7 @@ public class LitherealClient {
                 ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS,
                 ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS,
                 ModToolItems.WITHERING_LITHERITE_SWORD,
+                ModToolItems.WITHERING_LITHERITE_SPEAR,
                 ModToolItems.WITHERING_LITHERITE_AXE,
                 ModArmorItems.WITHERING_LITHERITE_HELMET,
                 ModArmorItems.WITHERING_LITHERITE_CHESTPLATE,
@@ -458,6 +460,7 @@ public class LitherealClient {
                 ModArmorItems.WITHERING_LITHERITE_BOOTS);
         CreativeTabRegistry.appendStack(ModCreativeTabs.COMBAT_TAB, litherite.stream());
         CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.ODYSIUM_SWORD,
+                ModToolItems.ODYSIUM_SPEAR,
                 ModToolItems.ODYSIUM_AXE,
                 ModToolItems.ODYSIUM_BOW,
                 ModArmorItems.ODYSIUM_HELMET,
@@ -465,6 +468,7 @@ public class LitherealClient {
                 ModArmorItems.ODYSIUM_LEGGINGS,
                 ModArmorItems.ODYSIUM_BOOTS,
                 ModToolItems.ENHANCED_ODYSIUM_SWORD,
+                ModToolItems.ENHANCED_ODYSIUM_SPEAR,
                 ModToolItems.ENHANCED_ODYSIUM_AXE,
                 ModToolItems.ENHANCED_ODYSIUM_BOW,
                 ModArmorItems.ENHANCED_ODYSIUM_HELMET,

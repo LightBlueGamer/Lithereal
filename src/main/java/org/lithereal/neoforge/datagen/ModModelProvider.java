@@ -38,11 +38,13 @@ import java.util.stream.Stream;
 
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
 import static net.minecraft.client.data.models.ItemModelGenerators.BLANK_LAYER;
+import static net.minecraft.client.data.models.ItemModelGenerators.createFlatModelDispatch;
 import static net.minecraft.client.data.models.model.ModelTemplates.create;
 import static net.minecraft.client.data.models.model.ModelTemplates.createItem;
 
 public class ModModelProvider extends ModelProvider {
     public static final ModelTemplate TWO_LAYERED_HANDHELD_ITEM = createItem("handheld",TextureSlot.LAYER0, TextureSlot.LAYER1);
+    public static final ModelTemplate TWO_LAYERED_SPEAR_IN_HAND = createItem("spear_in_hand", "_in_hand", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate HANDHELD_WAR_HAMMER_ITEM = createItem("lithereal:handheld_war_hammer", TextureSlot.LAYER0);
     public static final ModelTemplate BRUSH = createItem("brush", TextureSlot.LAYER0);
     public static final ModelTemplate BRUSH_BRUSHING_0 = createItem("brush_brushing_0", TextureSlot.LAYER0);
@@ -289,18 +291,21 @@ public class ModModelProvider extends ModelProvider {
         handheldPotionItem(ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), itemModels);
         handheldPotionItem(ModToolItems.INFUSED_LITHERITE_HOE.get(), itemModels);
         handheldPotionItem(ModToolItems.INFUSED_LITHERITE_HAMMER.get(), itemModels);
+        spearPotionItem(ModToolItems.INFUSED_LITHERITE_SPEAR.get(), itemModels);
         handheldItem(ModToolItems.WITHERING_LITHERITE_SWORD.get(), itemModels);
         handheldItem(ModToolItems.WITHERING_LITHERITE_PICKAXE.get(), itemModels);
         handheldItem(ModToolItems.WITHERING_LITHERITE_AXE.get(), itemModels);
         handheldItem(ModToolItems.WITHERING_LITHERITE_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.WITHERING_LITHERITE_HOE.get(), itemModels);
         handheldItem(ModToolItems.WITHERING_LITHERITE_HAMMER.get(), itemModels);
+        spearItem(ModToolItems.WITHERING_LITHERITE_SPEAR.get(), itemModels);
         handheldItem(ModToolItems.ODYSIUM_SWORD.get(), itemModels);
         handheldItem(ModToolItems.ODYSIUM_PICKAXE.get(), itemModels);
         handheldItem(ModToolItems.ODYSIUM_AXE.get(), itemModels);
         handheldItem(ModToolItems.ODYSIUM_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.ODYSIUM_HOE.get(), itemModels);
         handheldItem(ModToolItems.ODYSIUM_HAMMER.get(), itemModels);
+        spearItem(ModToolItems.ODYSIUM_SPEAR.get(), itemModels);
         bowItem(ModToolItems.ODYSIUM_BOW.get(), itemModels);
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_SWORD.get(), itemModels);
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_PICKAXE.get(), itemModels);
@@ -308,6 +313,7 @@ public class ModModelProvider extends ModelProvider {
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_HOE.get(), itemModels);
         handheldItem(ModToolItems.ENHANCED_ODYSIUM_HAMMER.get(), itemModels);
+        spearItem(ModToolItems.ENHANCED_ODYSIUM_SPEAR.get(), itemModels);
         bowItem(ModToolItems.ENHANCED_ODYSIUM_BOW.get(), itemModels);
 
         itemModels.generateFlatItem(ModToolItems.WAR_HAMMER.get(), HANDHELD_WAR_HAMMER_ITEM);
@@ -624,6 +630,20 @@ public class ModModelProvider extends ModelProvider {
 
     public void spearItem(Item spearItem, ItemModelGenerators itemModels) {
         itemModels.generateSpear(spearItem);
+    }
+
+    public void spearPotionItem(Item spearItem, ItemModelGenerators itemModels) {
+        generateSpearItemWithTintedOverlay(spearItem, new Potion(), itemModels);
+    }
+
+    public void generateSpearItemWithTintedOverlay(Item item, ItemTintSource overlayTint, ItemModelGenerators itemModels) {
+        this.generateSpearItemWithTintedOverlay(item, "_overlay", overlayTint, itemModels);
+    }
+
+    public void generateSpearItemWithTintedOverlay(Item item, String overlaySuffix, ItemTintSource overlayTint, ItemModelGenerators itemModels) {
+        ItemModel.Unbaked flatModel = ItemModelUtils.tintedModel(ModelTemplates.TWO_LAYERED_ITEM.create(item, TextureMapping.layered(TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item, overlaySuffix)), itemModels.modelOutput), BLANK_LAYER, overlayTint);
+        ItemModel.Unbaked inHandModel = ItemModelUtils.tintedModel(TWO_LAYERED_SPEAR_IN_HAND.create(item, TextureMapping.layered(TextureMapping.getItemTexture(item, "_in_hand"), TextureMapping.getItemTexture(item, "_in_hand" + overlaySuffix)), itemModels.modelOutput), BLANK_LAYER, overlayTint);
+        itemModels.itemModelOutput.accept(item, createFlatModelDispatch(flatModel, inHandModel), new ClientItem.Properties(true, false, 1.95F));
     }
 
     @Override

@@ -104,6 +104,7 @@ public class JEILitherealPlugin implements IModPlugin {
         registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_AXE.get(), interpreter);
         registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_HOE.get(), interpreter);
         registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_HAMMER.get(), interpreter);
+        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SPEAR.get(), interpreter);
         registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_HELMET.get(), interpreter);
         registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), interpreter);
         registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), interpreter);

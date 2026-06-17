@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lithereal:item/infused_litherite_spear",
+    "layer1": "lithereal:item/infused_litherite_spear_overlay"
+  }
+}

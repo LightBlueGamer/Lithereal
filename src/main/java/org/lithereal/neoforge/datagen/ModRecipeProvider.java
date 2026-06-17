@@ -489,6 +489,9 @@ public class ModRecipeProvider extends RecipeProvider {
         spearItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_SPEAR.get());
         improvedThermalItem(RecipeCategory.COMBAT, ModToolItems.FROZEN_LITHERITE_SPEAR.get(), ModToolItems.FROSTBITTEN_LITHERITE_SPEAR.get());
         improvedThermalItem(RecipeCategory.COMBAT, ModToolItems.BURNING_LITHERITE_SPEAR.get(), ModToolItems.SMOLDERING_LITHERITE_SPEAR.get());
+        spearItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SPEAR.get());
+        spearItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_SPEAR.get());
+        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_SPEAR, ModToolItems.ODYSIUM_SPEAR.get());
 
         oreDual(List.of(ModOreBlocks.LITHERITE_ORE.get(), ModOreBlocks.DEEPSLATE_LITHERITE_ORE.get(), ModOreBlocks.ETHERSTONE_LITHERITE_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), 1, 200, "litherite_crystal");
         oreDual(List.of(ModOreBlocks.NERITH_ORE.get(), ModOreBlocks.DEEPSLATE_NERITH_ORE.get(), ModOreBlocks.ETHERSTONE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.NERITH_INGOT.get(), 2, 300, "nerith_ingot");
