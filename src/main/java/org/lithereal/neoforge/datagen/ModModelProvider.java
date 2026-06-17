@@ -15,6 +15,8 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.renderer.item.ClientItem;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -251,30 +253,36 @@ public class ModModelProvider extends ModelProvider {
         handheldItem(ModToolItems.LITHERITE_HAMMER.get(), itemModels);
         handheldItem(ModToolItems.LITHERITE_WRENCH.get(), itemModels);
         brushItem(ModToolItems.LITHERITE_BRUSH.get(), itemModels);
+        spearItem(ModToolItems.LITHERITE_SPEAR.get(), itemModels);
+
         handheldItem(ModToolItems.BURNING_LITHERITE_SWORD.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_PICKAXE.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_AXE.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_HOE.get(), itemModels);
         handheldItem(ModToolItems.BURNING_LITHERITE_HAMMER.get(), itemModels);
+        spearItem(ModToolItems.BURNING_LITHERITE_SPEAR.get(), itemModels);
         handheldItem(ModToolItems.FROZEN_LITHERITE_SWORD.get(), itemModels);
         handheldItem(ModToolItems.FROZEN_LITHERITE_PICKAXE.get(), itemModels);
         handheldItem(ModToolItems.FROZEN_LITHERITE_AXE.get(), itemModels);
         handheldItem(ModToolItems.FROZEN_LITHERITE_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.FROZEN_LITHERITE_HOE.get(), itemModels);
         handheldItem(ModToolItems.FROZEN_LITHERITE_HAMMER.get(), itemModels);
+        spearItem(ModToolItems.FROZEN_LITHERITE_SPEAR.get(), itemModels);
         handheldItem(ModToolItems.SMOLDERING_LITHERITE_SWORD.get(), itemModels);
         handheldItem(ModToolItems.SMOLDERING_LITHERITE_PICKAXE.get(), itemModels);
         handheldItem(ModToolItems.SMOLDERING_LITHERITE_AXE.get(), itemModels);
         handheldItem(ModToolItems.SMOLDERING_LITHERITE_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.SMOLDERING_LITHERITE_HOE.get(), itemModels);
         handheldItem(ModToolItems.SMOLDERING_LITHERITE_HAMMER.get(), itemModels);
+        spearItem(ModToolItems.SMOLDERING_LITHERITE_SPEAR.get(), itemModels);
         handheldItem(ModToolItems.FROSTBITTEN_LITHERITE_SWORD.get(), itemModels);
         handheldItem(ModToolItems.FROSTBITTEN_LITHERITE_PICKAXE.get(), itemModels);
         handheldItem(ModToolItems.FROSTBITTEN_LITHERITE_AXE.get(), itemModels);
         handheldItem(ModToolItems.FROSTBITTEN_LITHERITE_SHOVEL.get(), itemModels);
         handheldItem(ModToolItems.FROSTBITTEN_LITHERITE_HOE.get(), itemModels);
         handheldItem(ModToolItems.FROSTBITTEN_LITHERITE_HAMMER.get(), itemModels);
+        spearItem(ModToolItems.FROSTBITTEN_LITHERITE_SPEAR.get(), itemModels);
         handheldPotionItem(ModToolItems.INFUSED_LITHERITE_SWORD.get(), itemModels);
         handheldPotionItem(ModToolItems.INFUSED_LITHERITE_PICKAXE.get(), itemModels);
         handheldPotionItem(ModToolItems.INFUSED_LITHERITE_AXE.get(), itemModels);
@@ -612,6 +620,10 @@ public class ModModelProvider extends ModelProvider {
     public void bowItem(Item bowItem, ItemModelGenerators itemModels) {
         itemModels.createFlatItemModel(bowItem, ModelTemplates.BOW);
         itemModels.generateBow(bowItem);
+    }
+
+    public void spearItem(Item spearItem, ItemModelGenerators itemModels) {
+        itemModels.generateSpear(spearItem);
     }
 
     @Override

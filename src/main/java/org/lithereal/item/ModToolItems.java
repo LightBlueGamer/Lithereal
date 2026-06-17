@@ -188,6 +188,26 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> LITHERITE_WRENCH = registerItem("litherite_wrench", properties ->
             new WrenchItem(properties.stacksTo(1).durability(128)));
 
+    public static final RegistrySupplier<Item> LITHERITE_SPEAR = registerItem("litherite_spear", properties ->
+            new Item(properties.spear(LITHERITE,
+                    1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F)));
+
+    public static final RegistrySupplier<Item> BURNING_LITHERITE_SPEAR = registerItem("burning_litherite_spear", properties ->
+            new AbilitySpearItem(Ability.BURNING, properties.spear(LITHERITE,
+                    1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F)));
+
+    public static final RegistrySupplier<Item> FROZEN_LITHERITE_SPEAR = registerItem("frozen_litherite_spear", properties ->
+            new AbilitySpearItem(FROZEN, properties.spear(LITHERITE,
+                    1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F)));
+
+    public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_SPEAR = registerItem("frostbitten_litherite_spear", properties ->
+            new AbilitySpearItem(FROSTBITTEN, properties.spear(LITHERITE,
+                    1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F)));
+
+    public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_SPEAR = registerItem("smoldering_litherite_spear", properties ->
+            new AbilitySpearItem(SMOLDERING, properties.spear(LITHERITE,
+                    1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F)));
+
     public static void register() {
 
     }
