@@ -85,14 +85,14 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
                 usedModel = (state.isBaby ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(equippable.slot());
                 layerType = state.isBaby ? EquipmentClientInfo.LayerType.HUMANOID_BABY : innerModel ? EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS : EquipmentClientInfo.LayerType.HUMANOID;
             } else return;
-            if (!(stack.getItem() instanceof ModArmorItem armorItem)) return;
-            ArmorMaterial armorMaterial = armorItem.getArmorMaterial();
+            Optional<ResourceKey<EquipmentAsset>> assetId = equippable.assetId();
+            if (assetId.isEmpty()) return;
             int c = DyedItemColor.getOrDefault(stack, 0);
-            List<EquipmentClientInfo.Layer> layers = this.equipmentAssets.get(armorMaterial.assetId()).getLayers(layerType);
+            List<EquipmentClientInfo.Layer> layers = this.equipmentAssets.get(assetId.get()).getLayers(layerType);
             boolean renderFoil = stack.hasFoil();
             if (layers.isEmpty()) return;
             for (EquipmentClientInfo.Layer layer : layers) {
-                int color = armorItem instanceof InfusedArmorItem ?
+                int color = stack.getItem() instanceof InfusedArmorItem ?
                         stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor() : getColorForLayer(layer, c);
                 if (color != 0) {
                     Identifier layerTexture = this.layerTextureLookup.apply(new LayerTextureKey(layerType, layer));
@@ -108,7 +108,7 @@ public class LitheriteArmorRenderer implements ArmorRenderer {
 
             ArmorTrim trim = stack.get(DataComponents.TRIM);
             if (trim != null && layerType != EquipmentClientInfo.LayerType.HUMANOID_BABY) {
-                TextureAtlasSprite sprite = this.trimSpriteLookup.apply(new TrimSpriteKey(trim, layerType, armorMaterial.assetId()));
+                TextureAtlasSprite sprite = this.trimSpriteLookup.apply(new TrimSpriteKey(trim, layerType, assetId.get()));
                 RenderType renderType = Sheets.armorTrimsSheet(trim.pattern().value().decal());
                 ArmorRenderer.submitTransformCopyingModel(contextModel, state, usedModel, state, false, submitNodeCollector.order(nextOrder), poseStack, renderType, light, OverlayTexture.NO_OVERLAY, -1, sprite, state.outlineColor, null);
             }

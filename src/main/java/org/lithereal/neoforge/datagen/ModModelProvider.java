@@ -350,10 +350,14 @@ public class ModModelProvider extends ModelProvider {
         basicItem(ModArmorItems.ODYSIUM_CHESTPLATE.get(), itemModels);
         basicItem(ModArmorItems.ODYSIUM_LEGGINGS.get(), itemModels);
         basicItem(ModArmorItems.ODYSIUM_BOOTS.get(), itemModels);
+        basicItem(ModArmorItems.ODYSIUM_HORSE_ARMOR.get(), itemModels);
+        basicItem(ModArmorItems.ODYSIUM_NAUTILUS_ARMOR.get(), itemModels);
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_HELMET.get(), itemModels);
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get(), itemModels);
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get(), itemModels);
         basicItem(ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get(), itemModels);
+        basicItem(ModArmorItems.ENHANCED_ODYSIUM_HORSE_ARMOR.get(), itemModels);
+        basicItem(ModArmorItems.ENHANCED_ODYSIUM_NAUTILUS_ARMOR.get(), itemModels);
 
         basicItem(ModSpawnEggs.PHANTOM_ZOMBIE_SPAWN_EGG.get(), itemModels);
         basicItem(ModSpawnEggs.PHANTOM_DROWNED_SPAWN_EGG.get(), itemModels);

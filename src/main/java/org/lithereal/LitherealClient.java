@@ -467,6 +467,8 @@ public class LitherealClient {
                 ModArmorItems.ODYSIUM_CHESTPLATE,
                 ModArmorItems.ODYSIUM_LEGGINGS,
                 ModArmorItems.ODYSIUM_BOOTS,
+                ModArmorItems.ODYSIUM_HORSE_ARMOR,
+                ModArmorItems.ODYSIUM_NAUTILUS_ARMOR,
                 ModToolItems.ENHANCED_ODYSIUM_SWORD,
                 ModToolItems.ENHANCED_ODYSIUM_SPEAR,
                 ModToolItems.ENHANCED_ODYSIUM_AXE,
@@ -475,6 +477,8 @@ public class LitherealClient {
                 ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE,
                 ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS,
                 ModArmorItems.ENHANCED_ODYSIUM_BOOTS,
+                ModArmorItems.ENHANCED_ODYSIUM_HORSE_ARMOR,
+                ModArmorItems.ENHANCED_ODYSIUM_NAUTILUS_ARMOR,
                 ModToolItems.WAR_HAMMER,
                 ModItems.LITHER_CHARGE);
         if (isModLoaded("combatify"))

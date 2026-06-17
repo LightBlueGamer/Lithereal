@@ -118,6 +118,18 @@ public class ModArmorItems {
     public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_BOOTS = registerItem("enhanced_odysium_boots", properties ->
             new ModArmorItem(ModArmorMaterials.ENHANCED_ODYSIUM, ArmorType.BOOTS, ENHANCED_ODYSIUM.createArmorComponent(properties)));
 
+    public static final RegistrySupplier<Item> ODYSIUM_HORSE_ARMOR = registerItem("odysium_horse_armor", properties ->
+            new ModArmorItem(ModArmorMaterials.ODYSIUM, Item.Properties::horseArmor, ODYSIUM.createArmorComponent(properties)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_HORSE_ARMOR = registerItem("enhanced_odysium_horse_armor", properties ->
+            new ModArmorItem(ModArmorMaterials.ENHANCED_ODYSIUM, Item.Properties::horseArmor, ENHANCED_ODYSIUM.createArmorComponent(properties)));
+
+    public static final RegistrySupplier<Item> ODYSIUM_NAUTILUS_ARMOR = registerItem("odysium_nautilus_armor", properties ->
+            new ModArmorItem(ModArmorMaterials.ODYSIUM, Item.Properties::nautilusArmor, ODYSIUM.createArmorComponent(properties)));
+
+    public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_NAUTILUS_ARMOR = registerItem("enhanced_odysium_nautilus_armor", properties ->
+            new ModArmorItem(ModArmorMaterials.ENHANCED_ODYSIUM, Item.Properties::nautilusArmor, ENHANCED_ODYSIUM.createArmorComponent(properties)));
+
     public static void register() {
 
     }

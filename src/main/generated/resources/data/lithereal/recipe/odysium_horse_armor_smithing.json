@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "minecraft:netherite_horse_armor",
+  "base": "lithereal:odysium_ingot",
+  "result": {
+    "id": "lithereal:odysium_horse_armor"
+  },
+  "template": "lithereal:odysium_upgrade_smithing_template"
+}
