@@ -15,7 +15,6 @@ import org.lithereal.Lithereal;
 import org.lithereal.tags.ModTags;
 
 import java.util.EnumMap;
-import java.util.function.BiFunction;
 
 public class ModArmorMaterials {
     public static final ArmorMaterial LITHERITE = register("litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
@@ -23,7 +22,7 @@ public class ModArmorMaterials {
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
         map.put(ArmorType.HELMET, 3);
-    }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.LITHERITE_REPAIR_ITEMS);
+    }), 28, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.LITHERITE_REPAIR_ITEMS);
 
     public static final ArmorMaterial BURNING_LITHERITE = register("burning_litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
@@ -72,17 +71,16 @@ public class ModArmorMaterials {
         map.put(ArmorType.LEGGINGS, 7);
         map.put(ArmorType.CHESTPLATE, 9);
         map.put(ArmorType.HELMET, 4);
-    }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.2F, ModTags.ODYSIUM_REPAIR_ITEMS);
+        map.put(ArmorType.BODY, 21);
+    }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.11F, ModTags.ODYSIUM_REPAIR_ITEMS);
 
     public static final ArmorMaterial ENHANCED_ODYSIUM = register("enhanced_odysium", 50, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 4);
         map.put(ArmorType.LEGGINGS, 7);
         map.put(ArmorType.CHESTPLATE, 9);
         map.put(ArmorType.HELMET, 4);
-    }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.2F, ModTags.ODYSIUM_REPAIR_ITEMS);
-
-
-    public static final BiFunction<ArmorType, Integer, Integer> HEALTH_FUNCTION_FOR_TYPE = ArmorType::getDurability;
+        map.put(ArmorType.BODY, 21);
+    }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.0F, 0.11F, ModTags.ODYSIUM_REPAIR_ITEMS);
 
     private static ArmorMaterial register(String name, int durability, EnumMap<ArmorType, Integer> defenseBase, int enchantmentValue, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, TagKey<Item> repairIngredient) {
         return register(durability, defenseBase, enchantmentValue, equipSound, toughness, knockbackResistance, repairIngredient, ResourceKey.create(EquipmentAssets.ROOT_ID, Lithereal.id(name)));
