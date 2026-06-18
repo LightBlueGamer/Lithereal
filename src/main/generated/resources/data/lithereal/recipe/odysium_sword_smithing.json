@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "minecraft:netherite_sword",
-  "base": "lithereal:odysium_ingot",
+  "addition": "lithereal:odysium_ingot",
+  "base": "minecraft:netherite_sword",
   "result": {
     "id": "lithereal:odysium_sword"
   },

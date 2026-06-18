@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_odysium_rod": {
+    "has_heavy_core": {
       "conditions": {
         "items": [
           {
-            "items": "lithereal:mysterious_rod"
+            "items": "minecraft:heavy_core"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_odysium_rod"
+      "has_heavy_core"
     ]
   ],
   "rewards": {

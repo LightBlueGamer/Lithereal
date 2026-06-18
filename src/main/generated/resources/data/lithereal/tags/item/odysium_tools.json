@@ -1,0 +1,20 @@
+{
+  "values": [
+    "lithereal:odysium_sword",
+    "lithereal:enhanced_odysium_sword",
+    "lithereal:odysium_pickaxe",
+    "lithereal:enhanced_odysium_pickaxe",
+    "lithereal:odysium_axe",
+    "lithereal:enhanced_odysium_axe",
+    "lithereal:odysium_shovel",
+    "lithereal:enhanced_odysium_shovel",
+    "lithereal:odysium_hoe",
+    "lithereal:enhanced_odysium_hoe",
+    "lithereal:odysium_hammer",
+    "lithereal:enhanced_odysium_hammer",
+    "lithereal:odysium_spear",
+    "lithereal:enhanced_odysium_spear",
+    "#lithereal:odysium_knives",
+    "#lithereal:odysium_longswords"
+  ]
+}

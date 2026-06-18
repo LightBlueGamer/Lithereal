@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "minecraft:netherite_nautilus_armor",
-  "base": "lithereal:odysium_ingot",
+  "addition": "lithereal:odysium_ingot",
+  "base": "minecraft:netherite_nautilus_armor",
   "result": {
     "id": "lithereal:odysium_nautilus_armor"
   },

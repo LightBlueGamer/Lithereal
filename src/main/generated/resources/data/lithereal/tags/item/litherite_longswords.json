@@ -1,0 +1,32 @@
+{
+  "values": [
+    {
+      "id": "lithereal:litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:burning_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:frozen_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:smoldering_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:frostbitten_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:infused_litherite_longsword",
+      "required": false
+    },
+    {
+      "id": "lithereal:withering_litherite_longsword",
+      "required": false
+    }
+  ]
+}

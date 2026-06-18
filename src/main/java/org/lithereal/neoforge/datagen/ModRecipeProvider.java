@@ -13,13 +13,13 @@ import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import org.lithereal.Lithereal;
 import org.lithereal.block.*;
+import org.lithereal.data.datagen.CustomRecipeProvider;
 import org.lithereal.data.recipes.FireCrucibleRecipeBuilder;
 import org.lithereal.data.recipes.FreezingStationRecipeBuilder;
 import org.lithereal.data.recipes.InfusementChamberRecipeBuilder;
-import org.lithereal.item.ModArmorItems;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
-import org.lithereal.item.ModToolItems;
+import org.lithereal.item.datagen.ItemDataProvider;
 import org.lithereal.tags.ModTags;
 import org.lithereal.util.ModBlockFamilies;
 
@@ -27,29 +27,37 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class ModRecipeProvider extends RecipeProvider {
+public class ModRecipeProvider extends RecipeProvider implements CustomRecipeProvider<ModRecipeProvider> {
     protected ModRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
         super(registries, output);
     }
 
+    @Override
+    public ModRecipeProvider self() {
+        return this;
+    }
 
-    protected void nineBlockStorageRecipesFromBaseModNamespace(RecipeCategory unpackCategory, ItemLike unpacked, RecipeCategory packCategory, ItemLike packed) {
+    @Override
+    public void nineBlockStorageRecipesFromBaseModNamespace(RecipeCategory unpackCategory, ItemLike unpacked, RecipeCategory packCategory, ItemLike packed) {
         nineBlockStorageRecipesFromBaseModNamespace(unpackCategory, unpacked, packCategory, packed, getSimpleRecipeName(packed), null, getSimpleRecipeName(unpacked), null);
     }
 
-    protected void nineBlockStorageRecipesWithCustomPackingFromBaseModNamespace(
+    @Override
+    public void nineBlockStorageRecipesWithCustomPackingFromBaseModNamespace(
             RecipeCategory unpackCategory, ItemLike unpacked, RecipeCategory packCategory, ItemLike packed, String forPacking, String packingGroup
     ) {
         nineBlockStorageRecipesFromBaseModNamespace(unpackCategory, unpacked, packCategory, packed, forPacking, packingGroup, getSimpleRecipeName(unpacked), null);
     }
 
-    protected void nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
+    @Override
+    public void nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
             RecipeCategory unpackCategory, ItemLike unpacked, RecipeCategory packCategory, ItemLike packed, String forUnpacking, String unpackingGroup
     ) {
         nineBlockStorageRecipesFromBaseModNamespace(unpackCategory, unpacked, packCategory, packed, getSimpleRecipeName(packed), null, forUnpacking, unpackingGroup);
     }
 
-    protected void nineBlockStorageRecipesFromBaseModNamespace(
+    @Override
+    public void nineBlockStorageRecipesFromBaseModNamespace(
             RecipeCategory unpackCategory,
             ItemLike unpacked,
             RecipeCategory packCategory,
@@ -74,15 +82,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output, Lithereal.key(Registries.RECIPE, forPacking));
     }
 
-    protected void oreSmeltingFromBaseModNamespace(List<ItemLike> itemsToSmelt, RecipeCategory recipeCategory, CookingBookCategory cookingBookCategory, ItemLike result, float experience, int cookingTime, String group) {
-        oreCookingFromBaseModNamespace(SmeltingRecipe::new, itemsToSmelt, recipeCategory, cookingBookCategory, result, experience, cookingTime, group, "_from_smelting");
-    }
-
-    protected void oreBlastingFromBaseModNamespace(List<ItemLike> itemsToSmelt, RecipeCategory recipeCategory, CookingBookCategory cookingBookCategory, ItemLike result, float experience, int cookingTime, String group) {
-        oreCookingFromBaseModNamespace(BlastingRecipe::new, itemsToSmelt, recipeCategory, cookingBookCategory, result, experience, cookingTime, group, "_from_blasting");
-    }
-
-    protected <T extends AbstractCookingRecipe> void oreCookingFromBaseModNamespace(
+    @Override
+    public <T extends AbstractCookingRecipe> void oreCookingFromBaseModNamespace(
             AbstractCookingRecipe.Factory<T> factory,
             List<ItemLike> itemsToSmelt,
             RecipeCategory recipeCategory,
@@ -101,22 +102,15 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
 
-    public void oreDual(List<ItemLike> itemsToSmelt, RecipeCategory recipeCategory, CookingBookCategory cookingBookCategory, ItemLike result, float experience, int cookingTime, String group) {
-        oreSmeltingFromBaseModNamespace(itemsToSmelt, recipeCategory, cookingBookCategory, result, experience, cookingTime, group);
-        oreBlastingFromBaseModNamespace(itemsToSmelt, recipeCategory, cookingBookCategory, result, experience, cookingTime / 2, group);
-    }
-
-    protected void stonecutterResultFromBaseModNamespace(RecipeCategory category, ItemLike to, ItemLike from) {
-        stonecutterResultFromBaseModNamespace(category, to, from, 1);
-    }
-
-    protected void stonecutterResultFromBaseModNamespace(RecipeCategory category, ItemLike to, ItemLike from, int count) {
+    @Override
+    public void stonecutterResultFromBaseModNamespace(RecipeCategory category, ItemLike to, ItemLike from, int count) {
         SingleItemRecipeBuilder recipeBuilder = SingleItemRecipeBuilder.stonecutting(Ingredient.of(from), category, to, count).unlockedBy(getHasName(from), has(from));
         String convertName = getConversionRecipeName(to, from);
         recipeBuilder.save(this.output, "lithereal:" + convertName + "_stonecutting");
     }
 
-    protected void improvedThermalItem(RecipeCategory recipeCategory, Item base, Item improved) {
+    @Override
+    public void improvedThermalItem(RecipeCategory recipeCategory, Item base, Item improved) {
         ShapedRecipeBuilder.shaped(this.items, recipeCategory, improved, 1)
                 .define('A', ModRawMaterialItems.AURELITE_INGOT.get())
                 .define('B', base)
@@ -128,7 +122,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void swordItem(Item rod, Item baseMaterial, Item sword) {
+    @Override
+    public void swordItem(Item rod, Item baseMaterial, Item sword) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, sword, 1)
                 .define('B', baseMaterial)
                 .define('R', rod)
@@ -139,7 +134,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void spearItem(Item rod, Item baseMaterial, Item spear) {
+    @Override
+    public void spearItem(Item rod, Item baseMaterial, Item spear) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, spear, 1)
                 .define('B', baseMaterial)
                 .define('R', rod)
@@ -150,7 +146,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void pickaxeItem(Item rod, Item baseMaterial, Item pickaxe) {
+    @Override
+    public void pickaxeItem(Item rod, Item baseMaterial, Item pickaxe) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, pickaxe, 1)
                 .define('B', baseMaterial)
                 .define('R', rod)
@@ -161,7 +158,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void axeItem(Item rod, Item baseMaterial, Item axe) {
+    @Override
+    public void axeItem(Item rod, Item baseMaterial, Item axe) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, axe, 1)
                 .define('B', baseMaterial)
                 .define('R', rod)
@@ -172,7 +170,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void shovelItem(Item rod, Item baseMaterial, Item shovel) {
+    @Override
+    public void shovelItem(Item rod, Item baseMaterial, Item shovel) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, shovel, 1)
                 .define('B', baseMaterial)
                 .define('R', rod)
@@ -183,7 +182,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void hoeItem(Item rod, Item baseMaterial, Item hoe) {
+    @Override
+    public void hoeItem(Item rod, Item baseMaterial, Item hoe) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, hoe, 1)
                 .define('B', baseMaterial)
                 .define('R', rod)
@@ -194,7 +194,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void hammerItem(Item rod, Item baseMaterial, Item hammer) {
+    @Override
+    public void hammerItem(Item rod, Item baseMaterial, Item hammer) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, hammer, 1)
                 .define('B', baseMaterial)
                 .define('R', rod)
@@ -205,7 +206,19 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void helmetItem(Item baseMaterial, Item helmet) {
+    @Override
+    public void warHammerItem(Item rod, Item baseMaterial, Item warHammer) {
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, warHammer)
+                .define('#', baseMaterial)
+                .define('O', rod)
+                .pattern("#")
+                .pattern("O")
+                .unlockedBy("has_" + getSimpleRecipeName(baseMaterial), has(baseMaterial))
+                .save(this.output);
+    }
+
+    @Override
+    public void helmetItem(Item baseMaterial, Item helmet) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, helmet, 1)
                 .define('B', baseMaterial)
                 .pattern("BBB")
@@ -214,7 +227,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void chestplateItem(Item baseMaterial, Item chestplate) {
+    @Override
+    public void chestplateItem(Item baseMaterial, Item chestplate) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, chestplate, 1)
                 .define('B', baseMaterial)
                 .pattern("B B")
@@ -224,7 +238,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void leggingsItem(Item baseMaterial, Item leggings) {
+    @Override
+    public void leggingsItem(Item baseMaterial, Item leggings) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, leggings, 1)
                 .define('B', baseMaterial)
                 .pattern("BBB")
@@ -234,7 +249,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void bootsItem(Item baseMaterial, Item boots) {
+    @Override
+    public void bootsItem(Item baseMaterial, Item boots) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, boots, 1)
                 .define('B', baseMaterial)
                 .pattern("B B")
@@ -243,16 +259,68 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    protected void upgradeRecipe(boolean tool, Item template, Item base, Item addition, Item result) {
+    @Override
+    public void bowItem(Item baseMaterial, Item string, Item bow) {
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, bow, 1)
+                .define('#', baseMaterial)
+                .define('S', string)
+                .pattern(" #S")
+                .pattern("# S")
+                .pattern(" #S")
+                .unlockedBy("has_" + getSimpleRecipeName(baseMaterial), has(baseMaterial))
+                .save(this.output);
+    }
+
+    @Override
+    public void bowItem(Item baseMaterial, Item stringAttached, Item string, Item bow) {
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, bow, 1)
+                .define('#', baseMaterial)
+                .define('I', stringAttached)
+                .define('S', string)
+                .pattern(" #I")
+                .pattern("# S")
+                .pattern(" #I")
+                .unlockedBy("has_" + getSimpleRecipeName(baseMaterial), has(baseMaterial))
+                .save(this.output);
+    }
+
+    @Override
+    public void brushItem(Item baseMaterial, Item brush) {
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, brush)
+                .define('#', baseMaterial)
+                .define('I', Tags.Items.RODS_WOODEN)
+                .define('X', Items.FEATHER)
+                .pattern("X")
+                .pattern("#")
+                .pattern("I")
+                .unlockedBy("has_" + getSimpleRecipeName(baseMaterial), has(baseMaterial))
+                .save(this.output);
+    }
+
+    @Override
+    public void wrenchItem(Item baseMaterialA, Item baseMaterialB, Item wrench) {
+        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, wrench)
+                .define('#', baseMaterialA)
+                .define('I', baseMaterialB)
+                .pattern(" II")
+                .pattern(" #I")
+                .pattern("I  ")
+                .unlockedBy("has_" + getSimpleRecipeName(baseMaterialA), has(baseMaterialA))
+                .save(this.output);
+    }
+
+    @Override
+    public void upgradeRecipe(boolean tool, Item template, Item base, Item addition, Item result) {
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(template), Ingredient.of(base), Ingredient.of(addition), tool ? RecipeCategory.TOOLS : RecipeCategory.COMBAT, result)
-                .unlocks("has_" + getSimpleRecipeName(base), has(base))
+                .unlocks("has_" + getSimpleRecipeName(addition), has(addition))
                 .save(this.output, "lithereal:" + getItemName(result) + "_smithing");
     }
 
     @Override
-    protected void buildRecipes() {
+    public void buildRecipes() {
         ModBlockFamilies.MOD_BLOCK_FAMILIES.forEach(blockFamily ->
                 generateRecipes(blockFamily, FeatureFlags.VANILLA_SET));
+        ItemDataProvider.ALL_ITEM_DATA_PROVIDERS.forEach(itemDataProvider -> itemDataProvider.recipeCreator().ifPresent(creator -> creator.accept(this)));
         FireCrucibleRecipeBuilder.noSecondary(RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get())
                 .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
                 .save(this.output);
@@ -310,23 +378,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("ILI")
                 .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, ModToolItems.LITHERITE_BRUSH.get())
-                .define('#', ModRawMaterialItems.LITHERITE_CRYSTAL.get())
-                .define('I', Tags.Items.RODS_WOODEN)
-                .define('X', Items.FEATHER)
-                .pattern("X")
-                .pattern("#")
-                .pattern("I")
-                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
-                .save(this.output);
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, ModToolItems.LITHERITE_WRENCH.get())
-                .define('#', ModRawMaterialItems.LITHERITE_CRYSTAL.get())
-                .define('I', Items.IRON_INGOT)
-                .pattern(" II")
-                .pattern(" #I")
-                .pattern("I  ")
-                .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
-                .save(this.output);
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.BUILDING_BLOCKS, ModItems.LITHER_TORCH.get(), 4)
                 .define('G', Tags.Items.GLASS_BLOCKS_COLORLESS)
                 .define('#', ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get())
@@ -364,15 +415,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("#C#")
                 .unlockedBy("has_charged_litherite_crystal", has(ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get()))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, ModToolItems.ODYSIUM_BOW.get(), 1)
-                .define('O', ModRawMaterialItems.ODYSIUM_INGOT.get())
-                .define('I', Items.IRON_NUGGET)
-                .define('S', Items.STRING)
-                .pattern(" OI")
-                .pattern("O S")
-                .pattern(" OI")
-                .unlockedBy("has_odysium", has(ModRawMaterialItems.ODYSIUM_INGOT.get()))
-                .save(this.output);
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModRawMaterialItems.UNIFIER.get(), 1)
                 .define('A', ModRawMaterialItems.ALLIAN_INGOT.get())
                 .define('N', Items.NETHER_STAR)
@@ -397,103 +439,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_odysium_upgrade_smithing_template", has(ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get()))
                 .save(this.output);
-        ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, ModToolItems.WAR_HAMMER.get())
-                .define('#', Items.HEAVY_CORE)
-                .define('O', ModItems.MYSTERIOUS_ROD.get())
-                .pattern("#")
-                .pattern("O")
-                .unlockedBy("has_odysium_rod", has(ModItems.MYSTERIOUS_ROD.get()))
-                .save(this.output);
-        improvedThermalItem(RecipeCategory.COMBAT, ModToolItems.BURNING_LITHERITE_SWORD.get(), ModToolItems.SMOLDERING_LITHERITE_SWORD.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_PICKAXE.get(), ModToolItems.SMOLDERING_LITHERITE_PICKAXE.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_AXE.get(), ModToolItems.SMOLDERING_LITHERITE_AXE.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_SHOVEL.get(), ModToolItems.SMOLDERING_LITHERITE_SHOVEL.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_HOE.get(), ModToolItems.SMOLDERING_LITHERITE_HOE.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.BURNING_LITHERITE_HAMMER.get(), ModToolItems.SMOLDERING_LITHERITE_HAMMER.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_HELMET.get(), ModArmorItems.SMOLDERING_LITHERITE_HELMET.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_CHESTPLATE.get(), ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_LEGGINGS.get(), ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.BURNING_LITHERITE_BOOTS.get(), ModArmorItems.SMOLDERING_LITHERITE_BOOTS.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModToolItems.FROZEN_LITHERITE_SWORD.get(), ModToolItems.FROSTBITTEN_LITHERITE_SWORD.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_PICKAXE.get(), ModToolItems.FROSTBITTEN_LITHERITE_PICKAXE.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_AXE.get(), ModToolItems.FROSTBITTEN_LITHERITE_AXE.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_SHOVEL.get(), ModToolItems.FROSTBITTEN_LITHERITE_SHOVEL.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_HOE.get(), ModToolItems.FROSTBITTEN_LITHERITE_HOE.get());
-        improvedThermalItem(RecipeCategory.TOOLS, ModToolItems.FROZEN_LITHERITE_HAMMER.get(), ModToolItems.FROSTBITTEN_LITHERITE_HAMMER.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_HELMET.get(), ModArmorItems.FROSTBITTEN_LITHERITE_HELMET.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_CHESTPLATE.get(), ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_LEGGINGS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModArmorItems.FROZEN_LITHERITE_BOOTS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS.get());
-        swordItem(Items.STICK, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_SWORD.get());
-        swordItem(Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_SWORD.get());
-        swordItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_SWORD.get());
-        swordItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SWORD.get());
-        swordItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_SWORD.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_SWORD, ModToolItems.ODYSIUM_SWORD.get());
-        pickaxeItem(Items.STICK, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_PICKAXE.get());
-        pickaxeItem(Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_PICKAXE.get());
-        pickaxeItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_PICKAXE.get());
-        pickaxeItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_PICKAXE.get());
-        pickaxeItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_PICKAXE.get());
-        upgradeRecipe(true, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_PICKAXE, ModToolItems.ODYSIUM_PICKAXE.get());
-        axeItem(Items.STICK, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_AXE.get());
-        axeItem(Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_AXE.get());
-        axeItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_AXE.get());
-        axeItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_AXE.get());
-        axeItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_AXE.get());
-        upgradeRecipe(true, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_AXE, ModToolItems.ODYSIUM_AXE.get());
-        shovelItem(Items.STICK, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_SHOVEL.get());
-        shovelItem(Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_SHOVEL.get());
-        shovelItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_SHOVEL.get());
-        shovelItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SHOVEL.get());
-        shovelItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_SHOVEL.get());
-        upgradeRecipe(true, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_SHOVEL, ModToolItems.ODYSIUM_SHOVEL.get());
-        hoeItem(Items.STICK, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_HOE.get());
-        hoeItem(Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_HOE.get());
-        hoeItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_HOE.get());
-        hoeItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_HOE.get());
-        hoeItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_HOE.get());
-        upgradeRecipe(true, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_HOE, ModToolItems.ODYSIUM_HOE.get());
-        hammerItem(Items.STICK, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_HAMMER.get());
-        hammerItem(Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_HAMMER.get());
-        hammerItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_HAMMER.get());
-        hammerItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_HAMMER.get());
-        hammerItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_HAMMER.get());
-        hammerItem(Items.STICK, ModRawMaterialItems.ODYSIUM_INGOT.get(), ModToolItems.ODYSIUM_HAMMER.get());
-        helmetItem(ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModArmorItems.LITHERITE_HELMET.get());
-        helmetItem(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModArmorItems.BURNING_LITHERITE_HELMET.get());
-        helmetItem(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModArmorItems.FROZEN_LITHERITE_HELMET.get());
-        helmetItem(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModArmorItems.INFUSED_LITHERITE_HELMET.get());
-        helmetItem(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModArmorItems.WITHERING_LITHERITE_HELMET.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_HELMET, ModArmorItems.ODYSIUM_HELMET.get());
-        chestplateItem(ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModArmorItems.LITHERITE_CHESTPLATE.get());
-        chestplateItem(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModArmorItems.BURNING_LITHERITE_CHESTPLATE.get());
-        chestplateItem(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModArmorItems.FROZEN_LITHERITE_CHESTPLATE.get());
-        chestplateItem(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get());
-        chestplateItem(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModArmorItems.WITHERING_LITHERITE_CHESTPLATE.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_CHESTPLATE, ModArmorItems.ODYSIUM_CHESTPLATE.get());
-        leggingsItem(ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModArmorItems.LITHERITE_LEGGINGS.get());
-        leggingsItem(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModArmorItems.BURNING_LITHERITE_LEGGINGS.get());
-        leggingsItem(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModArmorItems.FROZEN_LITHERITE_LEGGINGS.get());
-        leggingsItem(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get());
-        leggingsItem(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModArmorItems.WITHERING_LITHERITE_LEGGINGS.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_LEGGINGS, ModArmorItems.ODYSIUM_LEGGINGS.get());
-        bootsItem(ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModArmorItems.LITHERITE_BOOTS.get());
-        bootsItem(ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModArmorItems.BURNING_LITHERITE_BOOTS.get());
-        bootsItem(ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModArmorItems.FROZEN_LITHERITE_BOOTS.get());
-        bootsItem(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModArmorItems.INFUSED_LITHERITE_BOOTS.get());
-        bootsItem(ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModArmorItems.WITHERING_LITHERITE_BOOTS.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_BOOTS, ModArmorItems.ODYSIUM_BOOTS.get());
-        spearItem(Items.STICK, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModToolItems.LITHERITE_SPEAR.get());
-        spearItem(Items.STICK, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), ModToolItems.BURNING_LITHERITE_SPEAR.get());
-        spearItem(Items.STICK, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), ModToolItems.FROZEN_LITHERITE_SPEAR.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModToolItems.FROZEN_LITHERITE_SPEAR.get(), ModToolItems.FROSTBITTEN_LITHERITE_SPEAR.get());
-        improvedThermalItem(RecipeCategory.COMBAT, ModToolItems.BURNING_LITHERITE_SPEAR.get(), ModToolItems.SMOLDERING_LITHERITE_SPEAR.get());
-        spearItem(Items.STICK, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), ModToolItems.INFUSED_LITHERITE_SPEAR.get());
-        spearItem(Items.STICK, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), ModToolItems.WITHERING_LITHERITE_SPEAR.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_SPEAR, ModToolItems.ODYSIUM_SPEAR.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_HORSE_ARMOR, ModArmorItems.ODYSIUM_HORSE_ARMOR.get());
-        upgradeRecipe(false, ModItems.ODYSIUM_UPGRADE_SMITHING_TEMPLATE.get(), ModRawMaterialItems.ODYSIUM_INGOT.get(), Items.NETHERITE_NAUTILUS_ARMOR, ModArmorItems.ODYSIUM_NAUTILUS_ARMOR.get());
 
         oreDual(List.of(ModOreBlocks.LITHERITE_ORE.get(), ModOreBlocks.DEEPSLATE_LITHERITE_ORE.get(), ModOreBlocks.ETHERSTONE_LITHERITE_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), 1, 200, "litherite_crystal");
         oreDual(List.of(ModOreBlocks.NERITH_ORE.get(), ModOreBlocks.DEEPSLATE_NERITH_ORE.get(), ModOreBlocks.ETHERSTONE_NERITH_ORE.get(), ModRawMaterialItems.RAW_NERITH.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.NERITH_INGOT.get(), 2, 300, "nerith_ingot");
@@ -666,7 +611,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
 
         @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput output) {
+        public RecipeProvider createRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput output) {
             return new ModRecipeProvider(lookupProvider, output);
         }
 

@@ -29,10 +29,14 @@ public class ModTags {
     public static final TagKey<Block> NEEDS_LITHERITE_TOOL = createBlockTag("needs_litherite_tool");
     public static final TagKey<Block> INCORRECT_FOR_ODYSIUM_TOOL = createBlockTag("incorrect_for_odysium_tool");
     public static final TagKey<Block> INCORRECT_FOR_LITHERITE_TOOL = createBlockTag("incorrect_for_litherite_tool");
+    public static final TagKey<Block> PHANTOM_OAK_LOGS_B = createBlockTag("phantom_oak_logs");
+    public static final TagKey<Block> FORTSHROOM_STEMS_B = createBlockTag("fortshroom_stems");
+    public static final TagKey<Block> MALISHROOM_STEMS_B = createBlockTag("malishroom_stems");
     public static TagKey<Block> createBlockTag(String name) {
         return create(name, Registries.BLOCK);
     }
     public static final TagKey<Item> CHILLERS = createItemTag("chillers");
+    public static final TagKey<Item> HAMMERS = createItemTag("hammers");
     public static final TagKey<Item> WAR_HAMMERS = createItemTag("war_hammers");
     public static final TagKey<Item> LITHERITE_REPAIR_ITEMS = createItemTag("litherite_repair_items");
     public static final TagKey<Item> BURNING_LITHERITE_REPAIR_ITEMS = createItemTag("burning_litherite_repair_items");
@@ -40,6 +44,8 @@ public class ModTags {
     public static final TagKey<Item> INFUSED_LITHERITE_REPAIR_ITEMS = createItemTag("infused_litherite_repair_items");
     public static final TagKey<Item> WITHERING_LITHERITE_REPAIR_ITEMS = createItemTag("withering_litherite_repair_items");
     public static final TagKey<Item> ODYSIUM_REPAIR_ITEMS = createItemTag("odysium_repair_items");
+    public static final TagKey<Item> LITHERITE_TOOLS = createItemTag("litherite_tools");
+    public static final TagKey<Item> ODYSIUM_TOOLS = createItemTag("odysium_tools");
     public static final TagKey<Item> LITHERITE_ARMORS = createItemTag("litherite_armors");
     public static final TagKey<Item> ODYSIUM_ARMORS = createItemTag("odysium_armors");
     public static final TagKey<Item> ETHEREAL_CORE_PORTAL_ITEMS = createItemTag("ethereal_realm_portal_items");

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "minecraft:netherite_boots",
-  "base": "lithereal:odysium_ingot",
+  "addition": "lithereal:odysium_ingot",
+  "base": "minecraft:netherite_boots",
   "result": {
     "id": "lithereal:odysium_boots"
   },
