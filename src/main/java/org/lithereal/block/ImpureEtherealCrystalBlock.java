@@ -94,8 +94,9 @@ public class ImpureEtherealCrystalBlock extends Block implements SimpleWaterlogg
 
     @Override
     protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        Direction oppositeDir = blockState.getValue(FACING).getOpposite();
+        Direction facing = blockState.getValue(FACING);
+        Direction oppositeDir = facing.getOpposite();
         BlockPos attachedPos = blockPos.relative(oppositeDir);
-        return levelReader.getBlockState(attachedPos).isFaceSturdy(levelReader, attachedPos, oppositeDir);
+        return levelReader.getBlockState(attachedPos).isFaceSturdy(levelReader, attachedPos, facing);
     }
 }

@@ -26,10 +26,10 @@ import org.lithereal.block.InfusementChamberBlock;
 import org.lithereal.block.PureEtherealCrystalBlock;
 import org.lithereal.block.entity.FireCrucibleBlockEntity;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
-import static net.minecraft.client.data.models.BlockModelGenerators.ROTATION_HORIZONTAL_FACING;
-import static net.minecraft.client.data.models.BlockModelGenerators.ROTATION_TORCH;
+import static net.minecraft.client.data.models.BlockModelGenerators.NOP;
 import static net.minecraft.client.data.models.BlockModelGenerators.Y_ROT_180;
 import static net.minecraft.client.data.models.BlockModelGenerators.Y_ROT_270;
 import static net.minecraft.client.data.models.BlockModelGenerators.Y_ROT_90;
@@ -41,12 +41,20 @@ import static net.minecraft.client.data.models.BlockModelGenerators.or;
 import static net.minecraft.client.data.models.BlockModelGenerators.plainModel;
 import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
 import static net.minecraft.client.data.models.BlockModelGenerators.variants;
-import static net.minecraft.client.data.models.ItemModelGenerators.BLANK_LAYER;
 import static net.minecraft.client.data.models.ItemModelGenerators.createFlatModelDispatch;
-import static net.minecraft.client.data.models.model.ModelTemplates.create;
-import static net.minecraft.client.data.models.model.ModelTemplates.createItem;
 
 public class CommonModelCreators {
+    public static final PropertyDispatch<VariantMutator> ROTATION_TORCH = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
+            .select(Direction.EAST, NOP)
+            .select(Direction.SOUTH, Y_ROT_90)
+            .select(Direction.WEST, Y_ROT_180)
+            .select(Direction.NORTH, Y_ROT_270);
+    public static final PropertyDispatch<VariantMutator> ROTATION_HORIZONTAL_FACING = PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
+            .select(Direction.EAST, Y_ROT_90)
+            .select(Direction.SOUTH, Y_ROT_180)
+            .select(Direction.WEST, Y_ROT_270)
+            .select(Direction.NORTH, NOP);
+    public static final ItemTintSource BLANK_LAYER = ItemModelUtils.constantTint(-1);
     public static final ModelTemplate TWO_LAYERED_HANDHELD_ITEM = createItem("handheld",TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate TWO_LAYERED_SPEAR_IN_HAND = createItem("spear_in_hand", "_in_hand", TextureSlot.LAYER0, TextureSlot.LAYER1);
     public static final ModelTemplate HANDHELD_WAR_HAMMER_ITEM = createItem("lithereal:handheld_war_hammer", TextureSlot.LAYER0);
@@ -340,5 +348,25 @@ public class CommonModelCreators {
         ItemModel.Unbaked flatModel = ItemModelUtils.tintedModel(ModelTemplates.TWO_LAYERED_ITEM.create(item, TextureMapping.layered(TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item, overlaySuffix)), itemModels.modelOutput), BLANK_LAYER, overlayTint);
         ItemModel.Unbaked inHandModel = ItemModelUtils.tintedModel(TWO_LAYERED_SPEAR_IN_HAND.create(item, TextureMapping.layered(TextureMapping.getItemTexture(item, "_in_hand"), TextureMapping.getItemTexture(item, "_in_hand" + overlaySuffix)), itemModels.modelOutput), BLANK_LAYER, overlayTint);
         itemModels.itemModelOutput.accept(item, createFlatModelDispatch(flatModel, inHandModel), new ClientItem.Properties(true, false, 1.95F));
+    }
+
+    public static ModelTemplate create(final TextureSlot... slots) {
+        return new ModelTemplate(Optional.empty(), Optional.empty(), slots);
+    }
+
+    public static ModelTemplate create(final String id, final TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("block/" + id)), Optional.empty(), slots);
+    }
+
+    public static ModelTemplate createItem(final String id, final TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("item/" + id)), Optional.empty(), slots);
+    }
+
+    public static ModelTemplate createItem(final String id, final String suffix, final TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("item/" + id)), Optional.of(suffix), slots);
+    }
+
+    public static ModelTemplate create(final String id, final String suffix, final TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("block/" + id)), Optional.of(suffix), slots);
     }
 }

@@ -8,11 +8,13 @@ import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.ItemLike;
+import org.jspecify.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public interface CustomRecipeProvider<S extends RecipeProvider> {
+    String getSimpleRecipeNameAccess(ItemLike itemLike);
+
     S self();
     void nineBlockStorageRecipesFromBaseModNamespace(RecipeCategory unpackCategory, ItemLike unpacked, RecipeCategory packCategory, ItemLike packed);
 

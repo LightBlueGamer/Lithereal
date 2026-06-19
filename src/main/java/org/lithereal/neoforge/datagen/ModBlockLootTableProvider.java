@@ -116,6 +116,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModVegetationBlocks.MALISHROOM.get());
         dropPottedContents(ModVegetationBlocks.POTTED_FORTSHROOM.get());
         dropSelf(ModVegetationBlocks.FORTSHROOM.get());
+        dropSelf(ModVegetationBlocks.PHANTOM_ROSE.get());
+        dropPottedContents(ModVegetationBlocks.POTTED_PHANTOM_ROSE.get());
+        dropSelf(ModVegetationBlocks.PHANTOM_ICE_FLOWER.get());
+        dropPottedContents(ModVegetationBlocks.POTTED_PHANTOM_ICE_FLOWER.get());
+        dropSelf(ModVegetationBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get());
+        dropPottedContents(ModVegetationBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get());
 
         dropSelf(ModStoneBlocks.ETHERSTONE.get());
         dropSelf(ModStoneBlocks.ETHERSTONE_STAIRS.get());
@@ -192,15 +198,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModOreBlocks.SATURNITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 2));
         add(ModOreBlocks.PAILITE_SATURNITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.SATURNITE_CRYSTAL.get(), 1, 1));
         add(ModOreBlocks.PAILITE_NETHERITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 3, 4));
-
-        add(ModPhantomBlocks.PHANTOM_DIAMOND_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 1));
-        add(ModPhantomBlocks.PHANTOM_QUARTZ_ORE.get(), block -> createMultipleOreDrops(block, Items.QUARTZ, 1, 1));
-        dropSelf(ModPhantomBlocks.PHANTOM_ROSE.get());
-        dropSelf(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get());
-        dropSelf(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get());
-        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ROSE.get());
-        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ICE_FLOWER.get());
-        dropPottedContents(ModPhantomBlocks.POTTED_PHANTOM_ROSE_ETHEREAL_CORE.get());
+        add(ModOreBlocks.PHANTOM_DIAMOND_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 1));
+        add(ModOreBlocks.PHANTOM_QUARTZ_ORE.get(), block -> createMultipleOreDrops(block, Items.QUARTZ, 1, 1));
     }
 
     @Override

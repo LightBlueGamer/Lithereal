@@ -1,0 +1,23 @@
+{
+  "values": [
+    "lithereal:pailite",
+    "lithereal:pailite_pressure_plate",
+    "lithereal:pailite_button",
+    "lithereal:pailite_stairs",
+    "lithereal:pailite_slab",
+    "lithereal:pailite_wall",
+    "lithereal:polished_pailite",
+    "lithereal:polished_pailite_pressure_plate",
+    "lithereal:polished_pailite_button",
+    "lithereal:polished_pailite_stairs",
+    "lithereal:polished_pailite_slab",
+    "lithereal:polished_pailite_wall",
+    "lithereal:chiseled_polished_pailite_bricks",
+    "lithereal:polished_pailite_bricks",
+    "lithereal:polished_pailite_brick_pressure_plate",
+    "lithereal:polished_pailite_brick_button",
+    "lithereal:polished_pailite_brick_stairs",
+    "lithereal:polished_pailite_brick_slab",
+    "lithereal:polished_pailite_brick_wall"
+  ]
+}

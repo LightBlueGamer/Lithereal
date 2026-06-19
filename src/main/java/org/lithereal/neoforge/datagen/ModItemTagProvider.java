@@ -1,11 +1,13 @@
 package org.lithereal.neoforge.datagen;
 
+//? neoforge {
 import com.google.common.collect.Maps;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagBuilder;
 import net.minecraft.tags.TagKey;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagCopyingItemTagProvider;
 import org.lithereal.Lithereal;
+import org.lithereal.data.datagen.ItemLikeDataProvider;
 import org.lithereal.item.datagen.ItemDataProvider;
 import org.lithereal.tags.ModTags;
 
@@ -42,10 +45,10 @@ public class ModItemTagProvider extends BlockTagCopyingItemTagProvider {
         Map<TagKey<Item>, TagAppender<Item, Item>> itemTags = Maps.newHashMap();
         itemTags.computeIfAbsent(ModTags.CHILLERS, this::tag).add(Items.ICE);
         itemTags.computeIfAbsent(ModTags.ETHEREAL_CORE_PORTAL_ITEMS, this::tag).add(Items.DRAGON_BREATH);
-        ItemDataProvider.ALL_ITEM_DATA_PROVIDERS.forEach(itemDataProvider -> itemDataProvider.tagData()
-                .toAddTo()
+        ItemLikeDataProvider.ALL_DATA_PROVIDERS.forEach(itemDataProvider -> itemDataProvider.tagData()
+                .itemTags()
                 .forEach(itemTagKey -> itemTags.computeIfAbsent(itemTagKey, this::tag)
-                        .add(itemDataProvider.item().get())));
+                        .add(itemDataProvider.asItem())));
         itemTags.computeIfAbsent(ModTags.LITHERITE_TOOLS, this::tag).addTags(litheriteKnives, litheriteLongswords);
         itemTags.computeIfAbsent(ModTags.ODYSIUM_TOOLS, this::tag).addTags(odysiumKnives, odysiumLongswords);
         itemTags.computeIfAbsent(ItemDataProvider.cItemTag("tools/mining_tool"), this::tag).addTags(ModTags.HAMMERS);
@@ -57,9 +60,11 @@ public class ModItemTagProvider extends BlockTagCopyingItemTagProvider {
         itemTags.computeIfAbsent(ItemTags.FIRE_ASPECT_ENCHANTABLE, this::tag).addTags(ModTags.WAR_HAMMERS);
         itemTags.computeIfAbsent(ItemTags.WEAPON_ENCHANTABLE, this::tag).addTags(ModTags.WAR_HAMMERS);
         itemTags.computeIfAbsent(ItemTags.BREAKS_DECORATED_POTS, this::tag).addTags(ModTags.WAR_HAMMERS);
+        itemTags.computeIfAbsent(ItemTags.NON_FLAMMABLE_WOOD,  this::tag).addTags(ModTags.PHANTOM_OAK_LOGS, ModTags.FORTSHROOM_STEMS, ModTags.MALISHROOM_STEMS);
         copy(ModTags.PHANTOM_OAK_LOGS_B, ModTags.PHANTOM_OAK_LOGS);
         copy(ModTags.FORTSHROOM_STEMS_B, ModTags.FORTSHROOM_STEMS);
         copy(ModTags.MALISHROOM_STEMS_B, ModTags.MALISHROOM_STEMS);
+        copy(BlockTags.LOGS, ItemTags.LOGS);
     }
 
     protected TagAppender<ResourceKey<Item>, Item> tagForOptionalUse(TagKey<Item> tag) {
@@ -82,3 +87,4 @@ public class ModItemTagProvider extends BlockTagCopyingItemTagProvider {
                 .addOptional(Lithereal.key(Registries.ITEM, "enhanced_odysium" + suffix));
     }
 }
+//?}

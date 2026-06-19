@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import org.lithereal.Lithereal;
 
 public class ModTags {
+
     public static <T> TagKey<T> create(String name, ResourceKey<? extends Registry<T>> registry) {
         return TagKey.create(registry, Lithereal.id(name));
     }
@@ -24,14 +25,19 @@ public class ModTags {
     }
     public static final TagKey<Block> LITHER_CHARGE_REACTS_WITH = createBlockTag("lither_charge_reacts_with");
     public static final TagKey<Block> BLUE_FIRE_BASE_BLOCKS = createBlockTag("blue_fire_base_blocks");
+    public static final TagKey<Block> ETHEREAL_CORE_CARVER_REPLACEABLES = createBlockTag("ethereal_core_carver_replaceables");
     public static final TagKey<Block> ETHERSTONE_ORE_REPLACEABLES = createBlockTag("etherstone_ore_replaceables");
+    public static final TagKey<Block> NEEDS_APEX_TOOL = createBlockTag("needs_apex_tool");
     public static final TagKey<Block> NEEDS_ODYSIUM_TOOL = createBlockTag("needs_odysium_tool");
-    public static final TagKey<Block> NEEDS_LITHERITE_TOOL = createBlockTag("needs_litherite_tool");
     public static final TagKey<Block> INCORRECT_FOR_ODYSIUM_TOOL = createBlockTag("incorrect_for_odysium_tool");
-    public static final TagKey<Block> INCORRECT_FOR_LITHERITE_TOOL = createBlockTag("incorrect_for_litherite_tool");
     public static final TagKey<Block> PHANTOM_OAK_LOGS_B = createBlockTag("phantom_oak_logs");
     public static final TagKey<Block> FORTSHROOM_STEMS_B = createBlockTag("fortshroom_stems");
     public static final TagKey<Block> MALISHROOM_STEMS_B = createBlockTag("malishroom_stems");
+    public static final TagKey<Block> ETHERSTONE = createBlockTag("etherstone");
+    public static final TagKey<Block> PAILITE = createBlockTag("pailite");
+    public static final TagKey<Block> LUMINITE = createBlockTag("luminite");
+    public static final TagKey<Block> VERDONE = createBlockTag("verdone");
+    public static final TagKey<Block> BASE_STONE_ETHEREAL_CORE = createBlockTag("base_stone_ethereal_core");
     public static TagKey<Block> createBlockTag(String name) {
         return create(name, Registries.BLOCK);
     }

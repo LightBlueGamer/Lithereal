@@ -1,6 +1,5 @@
 package org.lithereal.item.datagen;
 
-import com.google.common.collect.ImmutableList;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.core.registries.Registries;
@@ -10,57 +9,21 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import org.lithereal.data.datagen.CustomRecipeProvider;
+import org.lithereal.data.datagen.ItemLikeDataProvider;
 import org.lithereal.tags.ModTags;
 
 import java.util.*;
 import java.util.function.Consumer;
 
-public record ItemDataProvider(RegistrySupplier<? extends Item> item, Optional<Consumer<CustomRecipeProvider<? extends RecipeProvider>>> recipeCreator, Optional<Consumer<ItemModelGenerators>> modelCreator, TagData tagData) {
+public record ItemDataProvider(RegistrySupplier<? extends Item> target, Optional<Consumer<CustomRecipeProvider<? extends RecipeProvider>>> recipeCreator, Optional<Consumer<ItemModelGenerators>> modelCreator, TagData tagData) implements ItemLikeDataProvider<Item> {
     public static final Map<String, TagKey<Item>> CONVENTIONAL_TAG_CACHE = new HashMap<>();
     public static final Map<String, TagKey<Item>> COMBATIFY_TAG_CACHE = new HashMap<>();
-    public static final List<ItemDataProvider> ALL_ITEM_DATA_PROVIDERS = new ArrayList<>();
-    public ItemDataProvider(RegistrySupplier<? extends Item> item, Optional<Consumer<CustomRecipeProvider<? extends RecipeProvider>>> recipeCreator, Optional<Consumer<ItemModelGenerators>> modelCreator, TagData tagData) {
-        this.item = item;
+    public ItemDataProvider(RegistrySupplier<? extends Item> target, Optional<Consumer<CustomRecipeProvider<? extends RecipeProvider>>> recipeCreator, Optional<Consumer<ItemModelGenerators>> modelCreator, TagData tagData) {
+        this.target = target;
         this.recipeCreator = recipeCreator;
         this.modelCreator = modelCreator;
         this.tagData = tagData;
-        ALL_ITEM_DATA_PROVIDERS.add(this);
-    }
-    public record TagData(List<TagKey<Item>> toAddTo) {
-    }
-    public static class TagDataBuilder {
-        private TagType type;
-        private final List<TagKey<Item>> tags;
-        private ImmutableList.Builder<TagKey<Item>> toAddTo;
-        public TagDataBuilder(TagType type) {
-            this.type = type;
-            this.tags = this.type.tags();
-            this.toAddTo = ImmutableList.builder();
-            this.toAddTo.addAll(this.tags);
-        }
-
-        public TagDataBuilder setType(TagType type) {
-            this.type = type;
-            return this;
-        }
-
-        public TagDataBuilder addTag(TagKey<Item> tag) {
-            this.toAddTo.add(tag);
-            return this;
-        }
-
-        @SafeVarargs
-        public final TagDataBuilder addTags(TagKey<Item>... tag) {
-            this.toAddTo.add(tag);
-            return this;
-        }
-
-        public TagData build() {
-            TagData tagData = new TagData(this.toAddTo.build());
-            this.toAddTo = ImmutableList.builder();
-            this.toAddTo.addAll(this.tags);
-            return tagData;
-        }
+        ALL_DATA_PROVIDERS.add(this);
     }
     public static TagKey<Item> cItemTag(String name) {
         if (!CONVENTIONAL_TAG_CACHE.containsKey(name)) CONVENTIONAL_TAG_CACHE.put(name, TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("c", name)));
@@ -70,6 +33,7 @@ public record ItemDataProvider(RegistrySupplier<? extends Item> item, Optional<C
         if (!COMBATIFY_TAG_CACHE.containsKey(name)) COMBATIFY_TAG_CACHE.put(name, TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("combatify", name)));
         return COMBATIFY_TAG_CACHE.get(name);
     }
+
     public enum TagType {
         SWORD,
         SPEAR,

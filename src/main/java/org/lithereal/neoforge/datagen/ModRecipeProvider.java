@@ -14,12 +14,12 @@ import net.neoforged.neoforge.common.Tags;
 import org.lithereal.Lithereal;
 import org.lithereal.block.*;
 import org.lithereal.data.datagen.CustomRecipeProvider;
+import org.lithereal.data.datagen.ItemLikeDataProvider;
 import org.lithereal.data.recipes.FireCrucibleRecipeBuilder;
 import org.lithereal.data.recipes.FreezingStationRecipeBuilder;
 import org.lithereal.data.recipes.InfusementChamberRecipeBuilder;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
-import org.lithereal.item.datagen.ItemDataProvider;
 import org.lithereal.tags.ModTags;
 import org.lithereal.util.ModBlockFamilies;
 
@@ -30,6 +30,11 @@ import java.util.concurrent.CompletableFuture;
 public class ModRecipeProvider extends RecipeProvider implements CustomRecipeProvider<ModRecipeProvider> {
     protected ModRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
         super(registries, output);
+    }
+
+    @Override
+    public String getSimpleRecipeNameAccess(ItemLike itemLike) {
+        return getSimpleRecipeName(itemLike);
     }
 
     @Override
@@ -320,7 +325,7 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     public void buildRecipes() {
         ModBlockFamilies.MOD_BLOCK_FAMILIES.forEach(blockFamily ->
                 generateRecipes(blockFamily, FeatureFlags.VANILLA_SET));
-        ItemDataProvider.ALL_ITEM_DATA_PROVIDERS.forEach(itemDataProvider -> itemDataProvider.recipeCreator().ifPresent(creator -> creator.accept(this)));
+        ItemLikeDataProvider.ALL_DATA_PROVIDERS.forEach(itemDataProvider -> itemDataProvider.recipeCreator().ifPresent(creator -> creator.accept(this)));
         FireCrucibleRecipeBuilder.noSecondary(RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get())
                 .unlockedBy("has_litherite_crystal", has(ModRawMaterialItems.LITHERITE_CRYSTAL.get()))
                 .save(this.output);
@@ -452,8 +457,8 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
         oreDual(List.of(ModOreBlocks.CHRYON_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.CHRYON_CRYSTAL.get(), 1.4F, 200, "chryon_crystal");
         oreDual(List.of(ModOreBlocks.ALLIAN_ORE.get(), ModRawMaterialItems.RAW_ALLIUM.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.ALLIAN_INGOT.get(), 2, 300, "allian_ingot");
         oreDual(List.of(ModOreBlocks.PAILITE_NETHERITE_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.NETHERITE_FRAGMENT.get(), 1.2F, 400, "netherite_fragment");
-        oreDual(List.of(ModPhantomBlocks.PHANTOM_DIAMOND_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 200, "phantom_diamond");
-        oreDual(List.of(ModPhantomBlocks.PHANTOM_QUARTZ_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, Items.QUARTZ, 0.2F, 200, "quartz");
+        oreDual(List.of(ModOreBlocks.PHANTOM_DIAMOND_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, ModRawMaterialItems.PHANTOM_DIAMOND.get(), 1, 200, "phantom_diamond");
+        oreDual(List.of(ModOreBlocks.PHANTOM_QUARTZ_ORE.get()), RecipeCategory.MISC, CookingBookCategory.MISC, Items.QUARTZ, 0.2F, 200, "quartz");
 
         planksFromLog(ModTreeBlocks.PHANTOM_OAK_PLANKS.get(), ModTags.PHANTOM_OAK_LOGS, 4);
         woodFromLogs(ModTreeBlocks.PHANTOM_OAK_WOOD.get(), ModTreeBlocks.PHANTOM_OAK_LOG.get());
@@ -470,9 +475,6 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
         chestBoat(ModItems.FORTSHROOM_CHEST_BOAT.get(), ModItems.FORTSHROOM_BOAT.get());
         hangingSign(ModItems.FORTSHROOM_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
         shelf(ModTreeBlocks.FORTSHROOM_SHELF.get(), ModTreeBlocks.STRIPPED_FORTSHROOM_STEM.get());
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModVegetationBlocks.FORTSHROOM.get(), RecipeCategory.MISC, ModTreeBlocks.FORTSHROOM_BLOCK.get(), "fortshroom_from_block", "fortshroom"
-        );
 
         planksFromLog(ModTreeBlocks.MALISHROOM_PLANKS.get(), ModTags.MALISHROOM_STEMS, 4);
         woodFromLogs(ModTreeBlocks.MALISHROOM_HYPHAE.get(), ModTreeBlocks.MALISHROOM_STEM.get());
@@ -481,36 +483,6 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
         chestBoat(ModItems.MALISHROOM_CHEST_BOAT.get(), ModItems.MALISHROOM_BOAT.get());
         hangingSign(ModItems.MALISHROOM_HANGING_SIGN.get(), ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
         shelf(ModTreeBlocks.MALISHROOM_SHELF.get(), ModTreeBlocks.STRIPPED_MALISHROOM_STEM.get());
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModVegetationBlocks.MALISHROOM.get(), RecipeCategory.MISC, ModTreeBlocks.MALISHROOM_BLOCK.get(), "malishroom_from_block", "malishroom"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.LITHERITE_BLOCK.get(), "litherite_crystal_from_block", "litherite_crystal"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.BURNING_LITHERITE_BLOCK.get(), "burning_litherite_crystal_from_block", "burning_litherite_crystal"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.FROZEN_LITHERITE_BLOCK.get(), "frozen_litherite_crystal_from_block", "frozen_litherite_crystal"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), RecipeCategory.MISC, ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get(), "infused_litherite_ingot_from_block", "infused_litherite_ingot"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.WITHERING_LITHERITE_BLOCK.get(), "withering_litherite_crystal_from_block", "withering_litherite_crystal"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.CHARGED_LITHERITE_CRYSTAL.get(), RecipeCategory.MISC, ModStorageBlocks.CHARGED_LITHERITE_BLOCK.get(), "charged_litherite_crystal_from_block", "charged_litherite_crystal"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.ODYSIUM_INGOT.get(), RecipeCategory.MISC, ModStorageBlocks.ODYSIUM_BLOCK.get(), "odysium_ingot_from_block", "odysium_ingot"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.PHANTOM_DIAMOND.get(), RecipeCategory.MISC, ModPhantomBlocks.PHANTOM_DIAMOND_BLOCK.get(), "phantom_diamond_from_block", "phantom_diamond"
-        );
-        nineBlockStorageRecipesWithCustomUnpackingFromBaseModNamespace(
-                RecipeCategory.MISC, ModRawMaterialItems.IMPURE_ETHEREAL_CRYSTAL_SHARD.get(), RecipeCategory.MISC, ModBlocks.ETHEREAL_CRYSTAL_BLOCK.get(), "impure_ethereal_crystal_shard_from_block", "impure_ethereal_crystal_shard"
-        );
         nineBlockStorageRecipesWithCustomPackingFromBaseModNamespace(
                 RecipeCategory.MISC, ModRawMaterialItems.NETHERITE_NUGGET.get(), RecipeCategory.MISC, Items.NETHERITE_INGOT, "netherite_ingot_from_nuggets", "netherite_ingot"
         );
@@ -524,19 +496,19 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
                 .unlockedBy("has_molten_litherite_bucket", has(ModItems.MOLTEN_LITHERITE_BUCKET.get()))
                 .save(this.output, Lithereal.key(Registries.RECIPE, "litherite_crystal_from_cooling_molten_litherite_bucket"));
         ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, Items.BLUE_DYE, 1)
-                .requires(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get())
+                .requires(ModVegetationBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get())
                 .group("blue_dye")
-                .unlockedBy("has_phantom_rose_ethereal_core", has(ModPhantomBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get()))
+                .unlockedBy("has_phantom_rose_ethereal_core", has(ModVegetationBlocks.PHANTOM_ROSE_ETHEREAL_CORE.get()))
                 .save(this.output, Lithereal.key(Registries.RECIPE, "blue_dye_from_phantom_rose_ethereal_core"));
         ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, Items.LIGHT_BLUE_DYE, 1)
-                .requires(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get())
+                .requires(ModVegetationBlocks.PHANTOM_ICE_FLOWER.get())
                 .group("light_blue_dye")
-                .unlockedBy("has_phantom_ice_flower", has(ModPhantomBlocks.PHANTOM_ICE_FLOWER.get()))
+                .unlockedBy("has_phantom_ice_flower", has(ModVegetationBlocks.PHANTOM_ICE_FLOWER.get()))
                 .save(this.output, Lithereal.key(Registries.RECIPE, "light_blue_dye_from_phantom_ice_flower"));
         ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, Items.RED_DYE, 1)
-                .requires(ModPhantomBlocks.PHANTOM_ROSE.get())
+                .requires(ModVegetationBlocks.PHANTOM_ROSE.get())
                 .group("red_dye")
-                .unlockedBy("has_phantom_rose", has(ModPhantomBlocks.PHANTOM_ROSE.get()))
+                .unlockedBy("has_phantom_rose", has(ModVegetationBlocks.PHANTOM_ROSE.get()))
                 .save(this.output, Lithereal.key(Registries.RECIPE, "red_dye_from_phantom_rose"));
         ShapelessRecipeBuilder.shapeless(this.items, RecipeCategory.MISC, ModRawMaterialItems.ODYSIUM_INGOT.get(), 2)
                 .requires(ModRawMaterialItems.ALLIAN_INGOT.get())

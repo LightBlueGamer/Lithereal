@@ -2,6 +2,7 @@ package org.lithereal.item;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -20,7 +21,7 @@ public class ModArmorItems {
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HELMET = ItemDataTemplates.HELMET.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("burning_litherite_helmet", properties ->
             new ModArmorItem(ModArmorMaterials.BURNING_LITHERITE, ArmorType.HELMET, BURNING.createArmorComponent(properties)), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> FROZEN_LITHERITE_HELMET = ItemDataTemplates.HELMET.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frozen_litherite_helmet", properties ->
+    public static final RegistrySupplier<Item> FROZEN_LITHERITE_HELMET = ItemDataTemplates.HELMET.addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frozen_litherite_helmet", properties ->
             new ModArmorItem(ModArmorMaterials.FROZEN_LITHERITE, ArmorType.HELMET, FROZEN.createArmorComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_HELMET = ItemDataTemplates.HELMET
@@ -30,7 +31,7 @@ public class ModArmorItems {
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_HELMET = ItemDataTemplates.HELMET
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.COMBAT))
-            .addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frostbitten_litherite_helmet", properties ->
+            .addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frostbitten_litherite_helmet", properties ->
                     new ModArmorItem(ModArmorMaterials.FROSTBITTEN_LITHERITE, ArmorType.HELMET, FROSTBITTEN.createArmorComponent(properties)), FROZEN_LITHERITE_HELMET);
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HELMET = ItemDataTemplates.HELMET
@@ -57,7 +58,7 @@ public class ModArmorItems {
     public static final RegistrySupplier<Item> BURNING_LITHERITE_CHESTPLATE = ItemDataTemplates.CHESTPLATE.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("burning_litherite_chestplate", properties ->
             new ModArmorItem(ModArmorMaterials.BURNING_LITHERITE, ArmorType.CHESTPLATE, BURNING.createArmorComponent(properties)), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> FROZEN_LITHERITE_CHESTPLATE = ItemDataTemplates.CHESTPLATE.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frozen_litherite_chestplate", properties ->
+    public static final RegistrySupplier<Item> FROZEN_LITHERITE_CHESTPLATE = ItemDataTemplates.CHESTPLATE.addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frozen_litherite_chestplate", properties ->
             new ModArmorItem(ModArmorMaterials.FROZEN_LITHERITE, ArmorType.CHESTPLATE, FROZEN.createArmorComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_CHESTPLATE = ItemDataTemplates.CHESTPLATE
@@ -67,7 +68,7 @@ public class ModArmorItems {
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_CHESTPLATE = ItemDataTemplates.CHESTPLATE
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.COMBAT))
-            .addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frostbitten_litherite_chestplate", properties ->
+            .addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frostbitten_litherite_chestplate", properties ->
                     new ModArmorItem(ModArmorMaterials.FROSTBITTEN_LITHERITE, ArmorType.CHESTPLATE, FROSTBITTEN.createArmorComponent(properties)), FROZEN_LITHERITE_CHESTPLATE);
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_CHESTPLATE = ItemDataTemplates.CHESTPLATE
@@ -94,7 +95,7 @@ public class ModArmorItems {
     public static final RegistrySupplier<Item> BURNING_LITHERITE_LEGGINGS = ItemDataTemplates.LEGGINGS.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("burning_litherite_leggings", properties ->
             new ModArmorItem(ModArmorMaterials.BURNING_LITHERITE, ArmorType.LEGGINGS, BURNING.createArmorComponent(properties)), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> FROZEN_LITHERITE_LEGGINGS = ItemDataTemplates.LEGGINGS.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frozen_litherite_leggings", properties ->
+    public static final RegistrySupplier<Item> FROZEN_LITHERITE_LEGGINGS = ItemDataTemplates.LEGGINGS.addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frozen_litherite_leggings", properties ->
             new ModArmorItem(ModArmorMaterials.FROZEN_LITHERITE, ArmorType.LEGGINGS, FROZEN.createArmorComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_LEGGINGS = ItemDataTemplates.LEGGINGS
@@ -104,7 +105,7 @@ public class ModArmorItems {
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_LEGGINGS = ItemDataTemplates.LEGGINGS
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.COMBAT))
-            .addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frostbitten_litherite_leggings", properties ->
+            .addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frostbitten_litherite_leggings", properties ->
                     new ModArmorItem(ModArmorMaterials.FROSTBITTEN_LITHERITE, ArmorType.LEGGINGS, FROSTBITTEN.createArmorComponent(properties)), FROZEN_LITHERITE_LEGGINGS);
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_LEGGINGS = ItemDataTemplates.LEGGINGS
@@ -131,7 +132,7 @@ public class ModArmorItems {
     public static final RegistrySupplier<Item> BURNING_LITHERITE_BOOTS = ItemDataTemplates.BOOTS.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("burning_litherite_boots", properties ->
             new ModArmorItem(ModArmorMaterials.BURNING_LITHERITE, ArmorType.BOOTS, BURNING.createArmorComponent(properties)), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> FROZEN_LITHERITE_BOOTS = ItemDataTemplates.BOOTS.addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frozen_litherite_boots", properties ->
+    public static final RegistrySupplier<Item> FROZEN_LITHERITE_BOOTS = ItemDataTemplates.BOOTS.addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frozen_litherite_boots", properties ->
             new ModArmorItem(ModArmorMaterials.FROZEN_LITHERITE, ArmorType.BOOTS, FROZEN.createArmorComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_BOOTS = ItemDataTemplates.BOOTS
@@ -141,7 +142,7 @@ public class ModArmorItems {
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_BOOTS = ItemDataTemplates.BOOTS
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.COMBAT))
-            .addTag(ModTags.LITHERITE_ARMORS).consumeSpecial("frostbitten_litherite_boots", properties ->
+            .addTags(ModTags.LITHERITE_ARMORS, ItemTags.FREEZE_IMMUNE_WEARABLES).consumeSpecial("frostbitten_litherite_boots", properties ->
                     new ModArmorItem(ModArmorMaterials.FROSTBITTEN_LITHERITE, ArmorType.BOOTS, FROSTBITTEN.createArmorComponent(properties)), FROZEN_LITHERITE_BOOTS);
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_BOOTS = ItemDataTemplates.BOOTS

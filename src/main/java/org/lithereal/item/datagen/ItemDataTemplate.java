@@ -8,6 +8,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import org.lithereal.data.datagen.CommonModelCreators;
 import org.lithereal.data.datagen.CustomRecipeProvider;
+import org.lithereal.data.datagen.ItemLikeDataProvider;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -18,7 +19,7 @@ import java.util.function.UnaryOperator;
 import static org.lithereal.item.ModItems.registerItem;
 import static org.lithereal.item.ModItems.registerSpecialItem;
 
-public record ItemDataTemplate(Optional<Function<Supplier<? extends Item>[], Consumer<CustomRecipeProvider<? extends RecipeProvider>>>> recipeCreator, Optional<Function<Supplier<? extends Item>[], Consumer<ItemModelGenerators>>> modelCreator, ItemDataProvider.TagDataBuilder tagData) {
+public record ItemDataTemplate(Optional<Function<Supplier<? extends Item>[], Consumer<CustomRecipeProvider<? extends RecipeProvider>>>> recipeCreator, Optional<Function<Supplier<? extends Item>[], Consumer<ItemModelGenerators>>> modelCreator, ItemLikeDataProvider.TagDataBuilder tagData) {
     public static final Function<Supplier<? extends Item>[], Consumer<ItemModelGenerators>> BASIC_ITEM = args -> itemModels -> CommonModelCreators.basicItem(args[0].get(), itemModels);
     public static final Function<Supplier<? extends Item>[], Consumer<ItemModelGenerators>> INFUSED_BASIC_ITEM_NO_OVERLAY = args -> itemModels -> CommonModelCreators.basicPotionItemNoOverlay(args[0].get(), itemModels);
     public static final Function<Supplier<? extends Item>[], Consumer<ItemModelGenerators>> HANDHELD_ITEM = args -> itemModels -> CommonModelCreators.handheldItem(args[0].get(), itemModels);
