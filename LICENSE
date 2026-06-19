@@ -1,9 +1,64 @@
-This project is licensed under the MIT License.
+Lithereal Mod License
 
-Copyright (c) 2025 murder_spagurder
+Copyright (c) 2026 Atlas
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+1. Definitions
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+   "Mod" refers to the Lithereal mod for Minecraft, including all source code,
+   assets, configuration files, and documentation distributed by the copyright
+   holder.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   "You" refers to any individual or entity receiving a copy of the Mod.
+
+2. Permissions
+
+   You may:
+   - Install and use the Mod in your own Minecraft installations.
+   - Install and use the Mod in your published Minecraft modpacks.
+   - Modify the Mod for personal, non-redistributive use.
+   - Create derivative modifications for private use (e.g., personal testing,
+     single-player, or private server configurations where the Mod is not
+     publicly redistributed).
+
+3. Restrictions
+
+   Without explicit written permission from the copyright holder, you may NOT:
+   - Redistribute, re-upload, or share the Mod (in original or modified form),
+     including on websites, file hosts, mod aggregators, or other platforms.
+   - Sell the Mod or charge for access to it.
+   - Include the Mod in any larger collection, pack, or bundle that is
+     distributed to others.
+   - Remove, alter, or obscure the copyright notice or this license.
+   - Claim ownership of the Mod or imply that you are the original author.
+   - Use the Mod in a way that violates Minecraft’s terms of service or
+     applicable laws.
+
+4. Required Notices
+
+   If you are granted explicit permission to redistribute the Mod (including
+   modified versions):
+   - You must include the full text of this license.
+   - You must retain the original copyright notice:
+     "Copyright (c) 2026 Atlas".
+   - You must clearly state that the Mod is not authored by you and that
+     permission was granted by the copyright holder.
+
+5. No Warranty
+
+   The Mod is provided "as is", without warranty of any kind, express or
+   implied, including but not limited to warranties of merchantability,
+   fitness for a particular purpose, or non-infringement. The copyright holder
+   is not liable for any claims, damages, or other liability arising from the
+   use of the Mod.
+
+6. Termination
+
+   Any violation of this license automatically terminates your rights under
+   this license. You must immediately stop using, distributing, or modifying
+   the Mod and remove any copies in your possession.
+
+7. Contact for Permissions
+
+   Requests for redistribution, re-uploading, or other uses not explicitly
+   permitted above must be approved in writing by the copyright holder.
+   Contact: [inquires.tim@gmail.com](mailto:inquires.tim@gmail.com)
