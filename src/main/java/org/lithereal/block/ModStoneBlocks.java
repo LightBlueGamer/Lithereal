@@ -18,9 +18,16 @@ import org.lithereal.tags.ModTags;
 import static org.lithereal.block.ModBlocks.*;
 
 public class ModStoneBlocks {
+    public static final BlockSetType ETHERSTONE_SET = BlockSetTypeAccessor.callRegister(new BlockSetType("etherstone", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.DEEPSLATE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
     public static final BlockSetType PAILITE_SET = BlockSetTypeAccessor.callRegister(new BlockSetType("pailite", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.STONE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+    public static final BlockSetType LUMINITE_SET = BlockSetTypeAccessor.callRegister(new BlockSetType("luminite", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.STONE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+    public static final BlockSetType VERDONE_SET = BlockSetTypeAccessor.callRegister(new BlockSetType("verdone", true, true, false, BlockSetType.PressurePlateSensitivity.MOBS, SoundType.STONE, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
 
     public static final RegistrySupplier<Block> ETHERSTONE = createStone("etherstone", SoundType.DEEPSLATE, MapColor.COLOR_BLUE, 3.0F, 6.0F, ModTags.ETHERSTONE, ModTags.BASE_STONE_ETHEREAL_CORE);
+
+    public static final RegistrySupplier<Block> ETHERSTONE_PRESSURE_PLATE = createPressurePlate("etherstone_pressure_plate", ModTags.ETHERSTONE, ETHERSTONE_SET, MapColor.COLOR_BLUE);
+
+    public static final RegistrySupplier<Block> ETHERSTONE_BUTTON = createButton("etherstone_button", ModTags.ETHERSTONE, ETHERSTONE_SET, MapColor.COLOR_BLUE);
 
     public static final RegistrySupplier<Block> ETHERSTONE_STAIRS = createStairs("etherstone_stairs", ModTags.ETHERSTONE, ETHERSTONE);
 
@@ -32,6 +39,10 @@ public class ModStoneBlocks {
 
     public static final RegistrySupplier<Block> POLISHED_ETHERSTONE = createStoneVariant("polished_etherstone", ModTags.ETHERSTONE, SoundType.DEEPSLATE, MapColor.COLOR_BLUE, 3.0F, 6.0F);
 
+    public static final RegistrySupplier<Block> POLISHED_ETHERSTONE_PRESSURE_PLATE = createPressurePlate("polished_etherstone_pressure_plate", ModTags.ETHERSTONE, ETHERSTONE_SET, MapColor.COLOR_BLUE);
+
+    public static final RegistrySupplier<Block> POLISHED_ETHERSTONE_BUTTON = createButton("polished_etherstone_button", ModTags.ETHERSTONE, ETHERSTONE_SET, MapColor.COLOR_BLUE);
+
     public static final RegistrySupplier<Block> POLISHED_ETHERSTONE_STAIRS = createStairs("polished_etherstone_stairs", ModTags.ETHERSTONE, POLISHED_ETHERSTONE);
 
     public static final RegistrySupplier<Block> POLISHED_ETHERSTONE_SLAB = createSlab("polished_etherstone_slab", ModTags.ETHERSTONE, POLISHED_ETHERSTONE);
@@ -39,6 +50,10 @@ public class ModStoneBlocks {
     public static final RegistrySupplier<Block> POLISHED_ETHERSTONE_WALL = createWall("polished_etherstone_wall", ModTags.ETHERSTONE, POLISHED_ETHERSTONE);
 
     public static final RegistrySupplier<Block> ETHERSTONE_BRICKS = createStoneVariant("etherstone_bricks", ModTags.ETHERSTONE, SoundType.DEEPSLATE, MapColor.COLOR_BLUE, 3.0F, 6.0F);
+
+    public static final RegistrySupplier<Block> ETHERSTONE_BRICK_PRESSURE_PLATE = createPressurePlate("etherstone_brick_pressure_plate", ModTags.ETHERSTONE, ETHERSTONE_SET, MapColor.COLOR_BLUE);
+
+    public static final RegistrySupplier<Block> ETHERSTONE_BRICK_BUTTON = createButton("etherstone_brick_button", ModTags.ETHERSTONE, ETHERSTONE_SET, MapColor.COLOR_BLUE);
 
     public static final RegistrySupplier<Block> ETHERSTONE_BRICK_STAIRS = createStairs("etherstone_brick_stairs", ModTags.ETHERSTONE, ETHERSTONE_BRICKS);
 
@@ -86,6 +101,10 @@ public class ModStoneBlocks {
 
     public static final RegistrySupplier<Block> LUMINITE = createStone("luminite", SoundType.STONE, MapColor.QUARTZ, 1.5F, 6.0F, ModTags.LUMINITE, ModTags.BASE_STONE_ETHEREAL_CORE);
 
+    public static final RegistrySupplier<Block> LUMINITE_PRESSURE_PLATE = createPressurePlate("luminite_pressure_plate", ModTags.LUMINITE, LUMINITE_SET, MapColor.QUARTZ);
+
+    public static final RegistrySupplier<Block> LUMINITE_BUTTON = createButton("luminite_button", ModTags.LUMINITE, LUMINITE_SET, MapColor.QUARTZ);
+
     public static final RegistrySupplier<Block> LUMINITE_STAIRS = createStairs("luminite_stairs", ModTags.LUMINITE, LUMINITE);
 
     public static final RegistrySupplier<Block> LUMINITE_SLAB = createSlab("luminite_slab", ModTags.LUMINITE, LUMINITE);
@@ -93,6 +112,10 @@ public class ModStoneBlocks {
     public static final RegistrySupplier<Block> LUMINITE_WALL = createWall("luminite_wall", ModTags.LUMINITE, LUMINITE);
 
     public static final RegistrySupplier<Block> POLISHED_LUMINITE = createStoneVariant("polished_luminite", ModTags.LUMINITE, SoundType.STONE, MapColor.QUARTZ, 1.5F, 6.0F);
+
+    public static final RegistrySupplier<Block> POLISHED_LUMINITE_PRESSURE_PLATE = createPressurePlate("polished_luminite_pressure_plate", ModTags.LUMINITE, LUMINITE_SET, MapColor.QUARTZ);
+
+    public static final RegistrySupplier<Block> POLISHED_LUMINITE_BUTTON = createButton("polished_luminite_button", ModTags.LUMINITE, LUMINITE_SET, MapColor.QUARTZ);
 
     public static final RegistrySupplier<Block> POLISHED_LUMINITE_STAIRS = createStairs("polished_luminite_stairs", ModTags.LUMINITE, POLISHED_LUMINITE);
 
@@ -102,6 +125,10 @@ public class ModStoneBlocks {
 
     public static final RegistrySupplier<Block> VERDONE = createStone("verdone", SoundType.STONE, MapColor.COLOR_GREEN, 1.5F, 6.0F, ModTags.VERDONE, ModTags.BASE_STONE_ETHEREAL_CORE);
 
+    public static final RegistrySupplier<Block> VERDONE_PRESSURE_PLATE = createPressurePlate("verdone_pressure_plate", ModTags.VERDONE, VERDONE_SET, MapColor.COLOR_GREEN);
+
+    public static final RegistrySupplier<Block> VERDONE_BUTTON = createButton("verdone_button", ModTags.VERDONE, VERDONE_SET, MapColor.COLOR_GREEN);
+
     public static final RegistrySupplier<Block> VERDONE_STAIRS = createStairs("verdone_stairs", ModTags.VERDONE, VERDONE);
 
     public static final RegistrySupplier<Block> VERDONE_SLAB = createSlab("verdone_slab", ModTags.VERDONE, VERDONE);
@@ -109,6 +136,10 @@ public class ModStoneBlocks {
     public static final RegistrySupplier<Block> VERDONE_WALL = createWall("verdone_wall", ModTags.VERDONE, VERDONE);
 
     public static final RegistrySupplier<Block> POLISHED_VERDONE = createStoneVariant("polished_verdone", ModTags.VERDONE, SoundType.STONE, MapColor.COLOR_GREEN, 1.5F, 6.0F);
+
+    public static final RegistrySupplier<Block> POLISHED_VERDONE_PRESSURE_PLATE = createPressurePlate("polished_verdone_pressure_plate", ModTags.VERDONE, VERDONE_SET, MapColor.COLOR_GREEN);
+
+    public static final RegistrySupplier<Block> POLISHED_VERDONE_BUTTON = createButton("polished_verdone_button", ModTags.VERDONE, VERDONE_SET, MapColor.COLOR_GREEN);
 
     public static final RegistrySupplier<Block> POLISHED_VERDONE_STAIRS = createStairs("polished_verdone_stairs", ModTags.VERDONE, POLISHED_VERDONE);
 

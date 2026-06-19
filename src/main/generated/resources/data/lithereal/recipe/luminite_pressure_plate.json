@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "lithereal:luminite"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "lithereal:luminite_pressure_plate"
+  }
+}

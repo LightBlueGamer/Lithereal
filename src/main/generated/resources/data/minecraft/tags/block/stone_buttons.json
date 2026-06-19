@@ -1,7 +1,14 @@
 {
   "values": [
+    "lithereal:etherstone_button",
+    "lithereal:polished_etherstone_button",
+    "lithereal:etherstone_brick_button",
     "lithereal:pailite_button",
     "lithereal:polished_pailite_button",
-    "lithereal:polished_pailite_brick_button"
+    "lithereal:polished_pailite_brick_button",
+    "lithereal:luminite_button",
+    "lithereal:polished_luminite_button",
+    "lithereal:verdone_button",
+    "lithereal:polished_verdone_button"
   ]
 }

@@ -1,7 +1,14 @@
 {
   "values": [
+    "lithereal:etherstone_pressure_plate",
+    "lithereal:polished_etherstone_pressure_plate",
+    "lithereal:etherstone_brick_pressure_plate",
     "lithereal:pailite_pressure_plate",
     "lithereal:polished_pailite_pressure_plate",
-    "lithereal:polished_pailite_brick_pressure_plate"
+    "lithereal:polished_pailite_brick_pressure_plate",
+    "lithereal:luminite_pressure_plate",
+    "lithereal:polished_luminite_pressure_plate",
+    "lithereal:verdone_pressure_plate",
+    "lithereal:polished_verdone_pressure_plate"
   ]
 }

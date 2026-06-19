@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "lithereal:polished_verdone"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "lithereal:polished_verdone_pressure_plate"
+  }
+}

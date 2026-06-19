@@ -1,10 +1,14 @@
 {
   "values": [
     "lithereal:verdone",
+    "lithereal:verdone_pressure_plate",
+    "lithereal:verdone_button",
     "lithereal:verdone_stairs",
     "lithereal:verdone_slab",
     "lithereal:verdone_wall",
     "lithereal:polished_verdone",
+    "lithereal:polished_verdone_pressure_plate",
+    "lithereal:polished_verdone_button",
     "lithereal:polished_verdone_stairs",
     "lithereal:polished_verdone_slab",
     "lithereal:polished_verdone_wall"

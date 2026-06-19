@@ -77,12 +77,17 @@ public class ModModelProvider extends ModelProvider {
                 .wall(ModStoneBlocks.ETHERSTONE_WALL.get())
                 .stairs(ModStoneBlocks.ETHERSTONE_STAIRS.get())
                 .slab(ModStoneBlocks.ETHERSTONE_SLAB.get())
+                .button(ModStoneBlocks.ETHERSTONE_BUTTON.get())
+                .pressurePlate(ModStoneBlocks.ETHERSTONE_PRESSURE_PLATE.get())
                 .polished(ModStoneBlocks.POLISHED_ETHERSTONE.get())
                 .getFamily());
+        itemForBlockModel(ModStoneBlocks.ETHERSTONE_PRESSURE_PLATE.get(), blockModels);
         blockModels.createAxisAlignedPillarBlock(ModStoneBlocks.CHISELED_ETHERSTONE.get(), TexturedModel.COLUMN);
         itemForBlockModel(ModStoneBlocks.CHISELED_ETHERSTONE.get(), blockModels);
         itemForBlockModel(ModStoneBlocks.POLISHED_ETHERSTONE.get(), blockModels);
+        itemForBlockModel(ModStoneBlocks.POLISHED_ETHERSTONE_PRESSURE_PLATE.get(), blockModels);
         itemForBlockModel(ModStoneBlocks.ETHERSTONE_BRICKS.get(), blockModels);
+        itemForBlockModel(ModStoneBlocks.ETHERSTONE_BRICK_PRESSURE_PLATE.get(), blockModels);
 
         itemForBlockModel(ModStoneBlocks.PAILITE.get(), blockModels);
         itemForBlockModel(ModStoneBlocks.PAILITE_PRESSURE_PLATE.get(), blockModels);
@@ -101,10 +106,14 @@ public class ModModelProvider extends ModelProvider {
         itemForBlockModel(ModStoneBlocks.CHISELED_POLISHED_PAILITE_BRICKS.get(), blockModels);
 
         itemForBlockModel(ModStoneBlocks.VERDONE.get(), blockModels);
+        itemForBlockModel(ModStoneBlocks.VERDONE_PRESSURE_PLATE.get(), blockModels);
         itemForBlockModel(ModStoneBlocks.POLISHED_VERDONE.get(), blockModels);
+        itemForBlockModel(ModStoneBlocks.POLISHED_VERDONE_PRESSURE_PLATE.get(), blockModels);
 
         itemForBlockModel(ModStoneBlocks.LUMINITE.get(), blockModels);
+        itemForBlockModel(ModStoneBlocks.LUMINITE_PRESSURE_PLATE.get(), blockModels);
         itemForBlockModel(ModStoneBlocks.POLISHED_LUMINITE.get(), blockModels);
+        itemForBlockModel(ModStoneBlocks.POLISHED_LUMINITE_PRESSURE_PLATE.get(), blockModels);
     }
 
     public void registerItemModels(ItemModelGenerators itemModels) {

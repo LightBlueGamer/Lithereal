@@ -350,23 +350,23 @@ public class CommonModelCreators {
         itemModels.itemModelOutput.accept(item, createFlatModelDispatch(flatModel, inHandModel), new ClientItem.Properties(true, false, 1.95F));
     }
 
-    public static ModelTemplate create(final TextureSlot... slots) {
+    public static ModelTemplate create(TextureSlot... slots) {
         return new ModelTemplate(Optional.empty(), Optional.empty(), slots);
     }
 
-    public static ModelTemplate create(final String id, final TextureSlot... slots) {
-        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("block/" + id)), Optional.empty(), slots);
+    public static ModelTemplate create(String id, TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(ModelLocationUtils.decorateBlockModelLocation(id)), Optional.empty(), slots);
     }
 
-    public static ModelTemplate createItem(final String id, final TextureSlot... slots) {
-        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("item/" + id)), Optional.empty(), slots);
+    public static ModelTemplate createItem(String id, TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(ModelLocationUtils.decorateItemModelLocation(id)), Optional.empty(), slots);
     }
 
-    public static ModelTemplate createItem(final String id, final String suffix, final TextureSlot... slots) {
-        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("item/" + id)), Optional.of(suffix), slots);
+    public static ModelTemplate createItem(String id, String suffix, TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(ModelLocationUtils.decorateItemModelLocation(id)), Optional.of(suffix), slots);
     }
 
-    public static ModelTemplate create(final String id, final String suffix, final TextureSlot... slots) {
-        return new ModelTemplate(Optional.of(Identifier.withDefaultNamespace("block/" + id)), Optional.of(suffix), slots);
+    public static ModelTemplate create(String id, String suffix, TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(ModelLocationUtils.decorateBlockModelLocation(id)), Optional.of(suffix), slots);
     }
 }

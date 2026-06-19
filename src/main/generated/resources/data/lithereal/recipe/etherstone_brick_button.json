@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "lithereal:etherstone_bricks"
+  ],
+  "result": {
+    "id": "lithereal:etherstone_brick_button"
+  }
+}

@@ -52,6 +52,8 @@ public class ModBlockFamilies {
             .wall(ModStoneBlocks.ETHERSTONE_WALL.get())
             .stairs(ModStoneBlocks.ETHERSTONE_STAIRS.get())
             .slab(ModStoneBlocks.ETHERSTONE_SLAB.get())
+            .button(ModStoneBlocks.ETHERSTONE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.ETHERSTONE_PRESSURE_PLATE.get())
             .polished(ModStoneBlocks.POLISHED_ETHERSTONE.get())
             .chiseled(ModStoneBlocks.CHISELED_ETHERSTONE.get())
             .generateStonecutterRecipe()
@@ -61,6 +63,8 @@ public class ModBlockFamilies {
             .wall(ModStoneBlocks.POLISHED_ETHERSTONE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_ETHERSTONE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get())
+            .button(ModStoneBlocks.POLISHED_ETHERSTONE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.POLISHED_ETHERSTONE_PRESSURE_PLATE.get())
             .polished(ModStoneBlocks.ETHERSTONE_BRICKS.get())
             .generateStonecutterRecipe()
             .getFamily();
@@ -68,6 +72,8 @@ public class ModBlockFamilies {
             .wall(ModStoneBlocks.ETHERSTONE_BRICK_WALL.get())
             .stairs(ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get())
             .slab(ModStoneBlocks.ETHERSTONE_BRICK_SLAB.get())
+            .button(ModStoneBlocks.ETHERSTONE_BRICK_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.ETHERSTONE_BRICK_PRESSURE_PLATE.get())
             .generateStonecutterRecipe()
             .getFamily();
     public static final BlockFamily PAILITE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.PAILITE.get())
@@ -102,6 +108,8 @@ public class ModBlockFamilies {
             .wall(ModStoneBlocks.LUMINITE_WALL.get())
             .stairs(ModStoneBlocks.LUMINITE_STAIRS.get())
             .slab(ModStoneBlocks.LUMINITE_SLAB.get())
+            .button(ModStoneBlocks.LUMINITE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.LUMINITE_PRESSURE_PLATE.get())
             .polished(ModStoneBlocks.POLISHED_LUMINITE.get())
             .generateStonecutterRecipe()
             .getFamily();
@@ -109,12 +117,16 @@ public class ModBlockFamilies {
             .wall(ModStoneBlocks.POLISHED_LUMINITE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_LUMINITE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get())
+            .button(ModStoneBlocks.POLISHED_LUMINITE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.POLISHED_LUMINITE_PRESSURE_PLATE.get())
             .generateStonecutterRecipe()
             .getFamily();
     public static final BlockFamily VERDONE = BlockFamiliesAccessor.callFamilyBuilder(ModStoneBlocks.VERDONE.get())
             .wall(ModStoneBlocks.VERDONE_WALL.get())
             .stairs(ModStoneBlocks.VERDONE_STAIRS.get())
             .slab(ModStoneBlocks.VERDONE_SLAB.get())
+            .button(ModStoneBlocks.VERDONE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.VERDONE_PRESSURE_PLATE.get())
             .polished(ModStoneBlocks.POLISHED_VERDONE.get())
             .generateStonecutterRecipe()
             .getFamily();
@@ -122,6 +134,8 @@ public class ModBlockFamilies {
             .wall(ModStoneBlocks.POLISHED_VERDONE_WALL.get())
             .stairs(ModStoneBlocks.POLISHED_VERDONE_STAIRS.get())
             .slab(ModStoneBlocks.POLISHED_VERDONE_SLAB.get())
+            .button(ModStoneBlocks.POLISHED_VERDONE_BUTTON.get())
+            .pressurePlate(ModStoneBlocks.POLISHED_VERDONE_PRESSURE_PLATE.get())
             .generateStonecutterRecipe()
             .getFamily();
     public static final List<BlockFamily> MOD_BLOCK_FAMILIES = Lists.newArrayList(PHANTOM_OAK_PLANKS,

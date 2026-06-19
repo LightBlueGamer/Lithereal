@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "lithereal:polished_etherstone"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "lithereal:polished_etherstone_pressure_plate"
+  }
+}
