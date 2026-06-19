@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "lithereal:luminite_bricks",
+  "result": {
+    "id": "lithereal:chiseled_luminite_bricks"
+  }
+}

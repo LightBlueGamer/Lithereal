@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "lithereal:verdone_bricks"
+  ],
+  "result": {
+    "id": "lithereal:verdone_brick_button"
+  }
+}

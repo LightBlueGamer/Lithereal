@@ -136,6 +136,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModStoneBlocks.POLISHED_ETHERSTONE_SLAB.get(), this::createSlabItemTable);
         dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE_BUTTON.get());
         dropSelf(ModStoneBlocks.POLISHED_ETHERSTONE_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.CRACKED_ETHERSTONE_BRICKS.get());
         dropSelf(ModStoneBlocks.ETHERSTONE_BRICKS.get());
         dropSelf(ModStoneBlocks.ETHERSTONE_BRICK_STAIRS.get());
         dropSelf(ModStoneBlocks.ETHERSTONE_BRICK_WALL.get());
@@ -173,6 +174,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModStoneBlocks.POLISHED_LUMINITE_SLAB.get(), this::createSlabItemTable);
         dropSelf(ModStoneBlocks.POLISHED_LUMINITE_BUTTON.get());
         dropSelf(ModStoneBlocks.POLISHED_LUMINITE_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.CHISELED_LUMINITE_BRICKS.get());
+        dropSelf(ModStoneBlocks.CRACKED_LUMINITE_BRICKS.get());
+        dropSelf(ModStoneBlocks.LUMINITE_BRICKS.get());
+        dropSelf(ModStoneBlocks.LUMINITE_BRICK_STAIRS.get());
+        dropSelf(ModStoneBlocks.LUMINITE_BRICK_WALL.get());
+        add(ModStoneBlocks.LUMINITE_BRICK_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.LUMINITE_BRICK_BUTTON.get());
+        dropSelf(ModStoneBlocks.LUMINITE_BRICK_PRESSURE_PLATE.get());
         dropSelf(ModStoneBlocks.VERDONE.get());
         dropSelf(ModStoneBlocks.VERDONE_STAIRS.get());
         dropSelf(ModStoneBlocks.VERDONE_WALL.get());
@@ -185,6 +194,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModStoneBlocks.POLISHED_VERDONE_SLAB.get(), this::createSlabItemTable);
         dropSelf(ModStoneBlocks.POLISHED_VERDONE_BUTTON.get());
         dropSelf(ModStoneBlocks.POLISHED_VERDONE_PRESSURE_PLATE.get());
+        dropSelf(ModStoneBlocks.CHISELED_VERDONE_BRICKS.get());
+        dropSelf(ModStoneBlocks.CRACKED_VERDONE_BRICKS.get());
+        dropSelf(ModStoneBlocks.VERDONE_BRICKS.get());
+        dropSelf(ModStoneBlocks.VERDONE_BRICK_STAIRS.get());
+        dropSelf(ModStoneBlocks.VERDONE_BRICK_WALL.get());
+        add(ModStoneBlocks.VERDONE_BRICK_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModStoneBlocks.VERDONE_BRICK_BUTTON.get());
+        dropSelf(ModStoneBlocks.VERDONE_BRICK_PRESSURE_PLATE.get());
 
         add(ModOreBlocks.ALLIAN_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.RAW_ALLIUM.get(), 1, 1));
         add(ModOreBlocks.AURELITE_ORE.get(), block -> createMultipleOreDrops(block, ModRawMaterialItems.AURELITE_DUST.get(), 3, 4));

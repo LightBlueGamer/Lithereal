@@ -8,7 +8,9 @@
     "lithereal:polished_pailite_brick_slab",
     "lithereal:luminite_slab",
     "lithereal:polished_luminite_slab",
+    "lithereal:luminite_brick_slab",
     "lithereal:verdone_slab",
-    "lithereal:polished_verdone_slab"
+    "lithereal:polished_verdone_slab",
+    "lithereal:verdone_brick_slab"
   ]
 }

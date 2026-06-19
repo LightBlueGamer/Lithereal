@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "lithereal:block/luminite_brick_pressure_plate"
+    },
+    "powered=true": {
+      "model": "lithereal:block/luminite_brick_pressure_plate_down"
+    }
+  }
+}

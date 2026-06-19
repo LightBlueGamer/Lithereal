@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "lithereal:block/luminite_bricks",
+    "side": "lithereal:block/luminite_bricks",
+    "top": "lithereal:block/luminite_bricks"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_luminite_brick_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:luminite_brick_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lithereal:chiseled_luminite_bricks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_luminite_brick_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lithereal:chiseled_luminite_bricks"
+    ]
+  }
+}

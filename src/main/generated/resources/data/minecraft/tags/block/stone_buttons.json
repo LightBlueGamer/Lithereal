@@ -8,7 +8,9 @@
     "lithereal:polished_pailite_brick_button",
     "lithereal:luminite_button",
     "lithereal:polished_luminite_button",
+    "lithereal:luminite_brick_button",
     "lithereal:verdone_button",
-    "lithereal:polished_verdone_button"
+    "lithereal:polished_verdone_button",
+    "lithereal:verdone_brick_button"
   ]
 }

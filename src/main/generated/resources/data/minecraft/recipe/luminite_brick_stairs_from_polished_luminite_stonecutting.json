@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "lithereal:polished_luminite",
+  "result": {
+    "id": "lithereal:luminite_brick_stairs"
+  }
+}

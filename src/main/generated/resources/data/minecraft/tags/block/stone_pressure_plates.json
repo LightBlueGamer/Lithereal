@@ -8,7 +8,9 @@
     "lithereal:polished_pailite_brick_pressure_plate",
     "lithereal:luminite_pressure_plate",
     "lithereal:polished_luminite_pressure_plate",
+    "lithereal:luminite_brick_pressure_plate",
     "lithereal:verdone_pressure_plate",
-    "lithereal:polished_verdone_pressure_plate"
+    "lithereal:polished_verdone_pressure_plate",
+    "lithereal:verdone_brick_pressure_plate"
   ]
 }

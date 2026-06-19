@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:chiseled_verdone_bricks_from_verdone_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_verdone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lithereal:verdone_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_verdone_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:chiseled_verdone_bricks_from_verdone_bricks_stonecutting"
+    ]
+  }
+}

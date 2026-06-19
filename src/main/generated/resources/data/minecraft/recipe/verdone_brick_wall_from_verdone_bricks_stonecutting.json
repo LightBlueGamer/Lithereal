@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "lithereal:verdone_bricks",
+  "result": {
+    "id": "lithereal:verdone_brick_wall"
+  }
+}

@@ -11,6 +11,14 @@
     "lithereal:polished_luminite_button",
     "lithereal:polished_luminite_stairs",
     "lithereal:polished_luminite_slab",
-    "lithereal:polished_luminite_wall"
+    "lithereal:polished_luminite_wall",
+    "lithereal:luminite_bricks",
+    "lithereal:cracked_luminite_bricks",
+    "lithereal:chiseled_luminite_bricks",
+    "lithereal:luminite_brick_pressure_plate",
+    "lithereal:luminite_brick_button",
+    "lithereal:luminite_brick_stairs",
+    "lithereal:luminite_brick_slab",
+    "lithereal:luminite_brick_wall"
   ]
 }
