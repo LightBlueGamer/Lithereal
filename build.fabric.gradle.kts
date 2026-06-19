@@ -10,7 +10,7 @@ tasks.named<ProcessResources>("processResources") {
     fun prop(name: String) = project.property(name) as String
 
     val props = HashMap<String, String>().apply {
-        this["version"] = prop("mod.version") + "+" + prop("deps.minecraft")
+        this["version"] = prop("mod.version") + "-" + prop("deps.minecraft")
         this["minecraft"] = prop("mod.mc_dep_fabric")
         this["mod_name"] = prop("mod.name")
         this["mod_description"] = prop("mod.description")
@@ -22,7 +22,7 @@ tasks.named<ProcessResources>("processResources") {
     }
 }
 
-version = "${property("mod.version")}+${property("deps.minecraft")}-fabric"
+version = "${property("mod.version")}.${property("mod.sub_version")}-${property("deps.minecraft")}-fabric"
 base.archivesName = property("mod.id") as String
 
 loom {
