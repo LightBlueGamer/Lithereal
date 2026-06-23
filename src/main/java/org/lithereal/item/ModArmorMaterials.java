@@ -17,49 +17,49 @@ import org.lithereal.tags.ModTags;
 import java.util.EnumMap;
 
 public class ModArmorMaterials {
-    public static final ArmorMaterial LITHERITE = register("litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
+    public static final ArmorMaterial LITHERITE = register("litherite", 34, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
         map.put(ArmorType.HELMET, 3);
     }), 28, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.LITHERITE_REPAIR_ITEMS);
 
-    public static final ArmorMaterial BURNING_LITHERITE = register("burning_litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
+    public static final ArmorMaterial BURNING_LITHERITE = register("burning_litherite", 34, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
         map.put(ArmorType.HELMET, 3);
     }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.BURNING_LITHERITE_REPAIR_ITEMS);
 
-    public static final ArmorMaterial FROZEN_LITHERITE = register("frozen_litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
+    public static final ArmorMaterial FROZEN_LITHERITE = register("frozen_litherite", 34, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
         map.put(ArmorType.HELMET, 3);
     }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.FROZEN_LITHERITE_REPAIR_ITEMS);
 
-    public static final ArmorMaterial SMOLDERING_LITHERITE = register("smoldering_litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
+    public static final ArmorMaterial SMOLDERING_LITHERITE = register("smoldering_litherite", 34, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
         map.put(ArmorType.HELMET, 3);
     }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.BURNING_LITHERITE_REPAIR_ITEMS);
 
-    public static final ArmorMaterial FROSTBITTEN_LITHERITE = register("frostbitten_litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
+    public static final ArmorMaterial FROSTBITTEN_LITHERITE = register("frostbitten_litherite", 34, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
         map.put(ArmorType.HELMET, 3);
     }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.FROZEN_LITHERITE_REPAIR_ITEMS);
 
-    public static final ArmorMaterial INFUSED_LITHERITE = register("infused_litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
+    public static final ArmorMaterial INFUSED_LITHERITE = register("infused_litherite", 34, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
         map.put(ArmorType.HELMET, 3);
     }), 15, SoundEvents.ARMOR_EQUIP_DIAMOND,2.0F, 0F, ModTags.INFUSED_LITHERITE_REPAIR_ITEMS);
 
-    public static final ArmorMaterial WITHERING_LITHERITE = register("withering_litherite", 25, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
+    public static final ArmorMaterial WITHERING_LITHERITE = register("withering_litherite", 34, Util.make(new EnumMap<>(ArmorType.class), (map) -> {
         map.put(ArmorType.BOOTS, 3);
         map.put(ArmorType.LEGGINGS, 6);
         map.put(ArmorType.CHESTPLATE, 8);
