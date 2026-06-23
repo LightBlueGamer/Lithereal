@@ -15,6 +15,7 @@ description = '''
 A mod about mysterious metals and crystals with magical properties.
 '''
 #logoFile = ""
+enumExtensions="META-INF/enumextensions.json"
 
 [[dependencies.lithereal]]
 modId = "neoforge"

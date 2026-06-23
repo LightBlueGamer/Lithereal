@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/client/gui/Gui$HeartType",
+      "name": "LITHEREAL_RETRIBUTED",
+      "constructor": "(Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;Lnet/minecraft/resources/Identifier;)V",
+      "parameters": {
+        "class": "org/lithereal/neoforge/ModEnumParams",
+        "field": "RETRIBUTED_ENUM_PROXY"
+      }
+    }
+  ]
+}

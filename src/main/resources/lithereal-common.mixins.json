@@ -5,6 +5,7 @@
   "minVersion": "0.8",
   "client": [
     "client.ArmorLayerMixin",
+    "client.HeartTypeMixin",
     "client.LocalPlayerMixin"
   ],
   "mixins": [
