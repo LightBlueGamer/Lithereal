@@ -45,7 +45,7 @@ public class ElectricCrucibleScreen extends AbstractContainerScreen<ElectricCruc
     }
 
     private void extractBucketProcessing(int x, int y, GuiGraphicsExtractor guiGraphics) {
-        if(!menu.hasBucket() && menu.isCrafting()) guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, FireCrucibleScreen.INCLUDING_ARROW_BOTH, 8, 11, 0, 0, x + 84, y + 55, 8, 11);
-        else if (menu.isCrafting()) guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, FireCrucibleScreen.INCLUDING_ARROW, 8, 11, 0, 0, x + 84, y + 55, 8, 11);
+        if (!menu.hasBucket() && menu.isCrafting()) guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, FireCrucibleScreen.INCLUDING_ARROW, 8, 11, 0, 0, x + 84, y + 55, 8, 11);
+        else if (menu.isCrafting()) guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, FireCrucibleScreen.INCLUDING_ARROW_BOTH, 8, 11, 0, 0, x + 84, y + 55, 8, 11);
     }
 }
