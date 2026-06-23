@@ -17,8 +17,6 @@ plugins {
     id("dev.kikugie.loom-back-compat") version "0.3"
 }
 
-loomx.loomVersion = "1.16-SNAPSHOT"
-
 stonecutter {
     create(rootProject) {
         fun match(version: String, vararg loaders: String) = loaders
