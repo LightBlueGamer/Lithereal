@@ -430,6 +430,14 @@ public class FireCrucibleBlockEntity extends BlockEntity implements MenuProvider
             return heat > 0;
         }
 
+        public int light() {
+            return switch (this) {
+                case UNLIT -> 0;
+                case LIT -> 8;
+                case BLUE_LIT -> 15;
+            };
+        }
+
         public static HeatState fromHeat(int heat) {
             return VALUES[heat];
         }

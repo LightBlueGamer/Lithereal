@@ -19,7 +19,9 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
+//? fabric {
+/*import net.minecraft.server.level.ServerPlayer;
+ *///?}
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -40,7 +42,9 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
+//? fabric {
+/*import org.jspecify.annotations.NonNull;
+ *///?}
 import org.lithereal.block.FireCrucibleBlock;
 import org.lithereal.client.gui.screens.inventory.ElectricCrucibleMenu;
 import org.lithereal.client.particle.ModParticles;
@@ -48,7 +52,6 @@ import org.lithereal.data.recipes.ContainerRecipeInput;
 import org.lithereal.data.recipes.FireCrucibleRecipe;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.util.ether.EtherEnergyAbsorber;
-import org.lithereal.util.ether.IEnergyUser;
 import org.lithereal.util.ether.IEnergyUserProvider;
 
 import java.util.Optional;
@@ -69,7 +72,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     protected FireCrucibleBlockEntity.HeatState heatState = FireCrucibleBlockEntity.HeatState.UNLIT;
     protected boolean isOn = true;
 
-    private final EtherEnergyAbsorber energyAbsorber = new EtherEnergyAbsorber(100);
+    private final EtherEnergyAbsorber energyAbsorber = new EtherEnergyAbsorber(100, 2, 1);
 
     public ElectricCrucibleBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ELECTRIC_CRUCIBLE_BLOCK_ENTITY.get(), pos, state);
@@ -210,7 +213,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
         }
 
         if (pEntity.isOn()) pEntity.energyAbsorber.tick(pEntity);
-        if (pEntity.energyAbsorber.remainingEnergy == 0 || !pEntity.isOn()) {
+        if (pEntity.energyAbsorber.getChargeLevel() == 0 || !pEntity.isOn()) {
             if (pEntity.heatState.isLit()) {
                 pEntity.heatState = FireCrucibleBlockEntity.HeatState.UNLIT;
                 level.setBlockAndUpdate(blockPos, blockState.setValue(FireCrucibleBlock.HEAT_STATE, pEntity.heatState));
@@ -221,7 +224,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
         }
 
         if (pEntity.heatState.isLit() && hasRecipe(pEntity)) {
-            pEntity.progress += pEntity.heatState.heat;
+            pEntity.progress += pEntity.heatState.heat + (pEntity.energyAbsorber.getChargeLevel() - 1);
             setChanged(level, blockPos, blockState);
 
             if(pEntity.progress >= pEntity.maxProgress)
@@ -315,7 +318,7 @@ public class ElectricCrucibleBlockEntity extends BlockEntity implements MenuProv
     }
 
     @Override
-    public IEnergyUser getEnergyUser() {
+    public EtherEnergyAbsorber getEnergyUser() {
         return energyAbsorber;
     }
 

@@ -101,7 +101,7 @@ public class ModBlocks {
             resourceKey -> new InfiniteEtherSourceBlock(10000, (TagKey<Biome>) null, BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK).setId(resourceKey))));
 
     public static final RegistrySupplier<Block> PASSIVE_ETHER_ABSORBER = BlockDataTemplates.STANDARD.addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).consume(registerBlock("passive_ether_absorber",
-            resourceKey -> new InfiniteEtherSourceBlock(10, ModTags.PROVIDES_ETHER, BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK).setId(resourceKey))));
+            resourceKey -> new InfiniteEtherSourceBlock(25, ModTags.PROVIDES_ETHER, BlockBehaviour.Properties.ofLegacyCopy(Blocks.IRON_BLOCK).setId(resourceKey))));
 
     public static final RegistrySupplier<Block> COARSE_ETHEREAL_DIRT = BlockDataTemplates.STANDARD
             .and(BlockDataProvider.TagType.DIRTLIKE).addTags(BlockTags.DIRT, ModTags.BLUE_FIRE_BASE_BLOCKS).consume(registerBlock("coarse_ethereal_dirt",
@@ -161,12 +161,12 @@ public class ModBlocks {
     public static final RegistrySupplier<ElectricCrucibleBlock> ELECTRIC_CRUCIBLE = BlockDataTemplates.STANDARD
             .copyWithModelOverride(ELECTRIC_CRUCIBLE_BLOCK).addTag(BlockTags.MINEABLE_WITH_PICKAXE).consume(registerBlock("electric_crucible",
             resourceKey -> new ElectricCrucibleBlock(BlockBehaviour.Properties.of().setId(resourceKey).setId(resourceKey)
-                    .strength(4f).requiresCorrectToolForDrops().noOcclusion())));
+                    .strength(4f).requiresCorrectToolForDrops().noOcclusion().lightLevel(state -> state.getValue(FireCrucibleBlock.HEAT_STATE).light()))));
 
     public static final RegistrySupplier<FireCrucibleBlock> FIRE_CRUCIBLE = BlockDataTemplates.STANDARD
             .copyWithModelOverride(FIRE_CRUCIBLE_BLOCK).addTag(BlockTags.MINEABLE_WITH_PICKAXE).consume(registerBlock("fire_crucible",
             resourceKey -> new FireCrucibleBlock(BlockBehaviour.Properties.of().setId(resourceKey).setId(resourceKey)
-                    .strength(4f).requiresCorrectToolForDrops().noOcclusion())));
+                    .strength(4f).requiresCorrectToolForDrops().noOcclusion().lightLevel(state -> state.getValue(FireCrucibleBlock.HEAT_STATE).light()))));
 
     public static final RegistrySupplier<FreezingStationBlock> FREEZING_STATION = BlockDataTemplates.STANDARD
             .copyWithModelOverride(EXISTING_CREATE_STATES).addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL).consume(registerBlock("freezing_station",

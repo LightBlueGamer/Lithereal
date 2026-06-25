@@ -1,6 +1,5 @@
 package org.lithereal.block.entity;
 
-import dev.architectury.hooks.item.ItemStackHooks;
 //? fabric {
 /*import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 *///?}
@@ -21,7 +20,9 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
+//? fabric {
+/*import net.minecraft.server.level.ServerPlayer;
+*///?}
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -39,7 +40,9 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
+//? fabric {
+/*import org.jspecify.annotations.NonNull;
+*///?}
 import org.lithereal.block.InfusementChamberBlock;
 import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberMenu;
@@ -93,10 +96,10 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         return getItem(0);
     }
 
-    private final EtherEnergyAbsorber energyAbsorber = new EtherEnergyAbsorber(100);
+    private final EtherEnergyAbsorber energyAbsorber = new EtherEnergyAbsorber(50, 6, 0);
 
     @Override
-    public IEnergyUser getEnergyUser() {
+    public EtherEnergyAbsorber getEnergyUser() {
         return energyAbsorber;
     }
 
@@ -196,7 +199,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
         }
         this.attachedFrozenBlocks = frozenBlocks;
         this.attachedBurningBlocks = burningBlocks;
-        int attached = getEnergyUser().getConnectionsThatCouldProvideEnergy(this);
+        int attached = this.energyAbsorber.getChargeLevel();
         if (attached == 0) {
             this.power = this.basePower;
             this.successRate = this.baseSuccessRate;
@@ -209,7 +212,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
     public void onSuccess(int remainingEnergy, IEnergyUser.TransferDirection direction) {
         this.power = this.basePower;
         this.successRate = this.baseSuccessRate;
-        int attached = getEnergyUser().getConnectionsThatCouldProvideEnergy(this);
+        int attached = this.energyAbsorber.getChargeLevel();
         this.power += 0.2f * attached;
         this.successRate += 0.2f * attached;
         this.powerState = PowerState.fromSurrounding(new SurroundingBlocks(this.attachedFrozenBlocks, this.attachedBurningBlocks, attached));
@@ -422,7 +425,7 @@ public class InfusementChamberBlockEntity extends BlockEntity implements MenuPro
 
         if (pEntity.baseSuccessRate == -10 || pEntity.basePower == -10) pEntity.setEmpowerments();
 
-        pEntity.getEnergyUser().tick(pEntity);
+        pEntity.energyAbsorber.tick(pEntity);
 
         if (pEntity.getItem(1).isEmpty() && !pEntity.held.isEmpty()) {
             pEntity.setItem(1, pEntity.held);

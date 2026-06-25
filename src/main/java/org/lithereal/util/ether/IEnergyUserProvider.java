@@ -10,14 +10,20 @@ public interface IEnergyUserProvider {
     <B extends BlockEntity & IEnergyUserProvider> B asBlockEntity();
     IEnergyUser getEnergyUser();
     TransferMode getTransferModeForDirection(Direction direction);
+    default float transferPreferenceProgress(IEnergyUser.EnergyRange energyRange) {
+        return getEnergyUser().transferPreferenceProgress(energyRange);
+    }
+    default int transferPreference(IEnergyUser.EnergyRange energyRange) {
+        return getEnergyUser().transferPreference(energyRange);
+    }
     default void onSuccess(int remainingEnergy, IEnergyUser.TransferDirection direction) {
 
     }
     default int requiredEnergy() {
-        return getEnergyUser().getAbsorbRate() == -1 ? 1 : getEnergyUser().getAbsorbRate();
+        return getEnergyUser().getAbsorbRate().min() == -1 ? 1 : getEnergyUser().getAbsorbRate().min();
     }
-    default int choosePresentedRate(IEnergyUserProvider absorber, int requiredRemaining, int requiredForThisConnection, int transferRate) {
-        return getEnergyUser().chooseConnectionRate(absorber, requiredRemaining, requiredForThisConnection, transferRate);
+    default int choosePresentedRate(IEnergyUserProvider absorber, IEnergyUser.EnergyRange requiredRemainingRange, IEnergyUser.EnergyRange requiredForThisConnectionRange, IEnergyUser.EnergyRange connectionTransferRateRange) {
+        return getEnergyUser().chooseConnectionRate(absorber, requiredRemainingRange, requiredForThisConnectionRange, connectionTransferRateRange);
     }
     default void saveEnergy(@NotNull ValueOutput valueOutput) {
         getEnergyUser().save(valueOutput.child("energy_user"));

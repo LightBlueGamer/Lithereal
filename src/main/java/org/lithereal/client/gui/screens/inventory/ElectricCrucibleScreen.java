@@ -41,7 +41,8 @@ public class ElectricCrucibleScreen extends AbstractContainerScreen<ElectricCruc
     }
 
     private void extractHeatSource(int x, int y, GuiGraphicsExtractor guiGraphics) {
-        if (menu.hasEnergySourcesAttached()) guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CommonAssets.CHARGING_BAR, 10, 64, 0, 0, x + 23, y + 11, 10, 64);
+        int chargeProgress = menu.getScaledProgressCharge();
+        if (menu.hasEnergySourcesAttached()) guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CommonAssets.CHARGING_BAR, 10, 64, 0, 64 - chargeProgress, x + 23, y + 11 + 64 - chargeProgress, 10, chargeProgress);
     }
 
     private void extractBucketProcessing(int x, int y, GuiGraphicsExtractor guiGraphics) {

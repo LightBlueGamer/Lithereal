@@ -62,8 +62,16 @@ public class ElectricCrucibleMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
+    public int getScaledProgressCharge() {
+        int progress = this.data.get(4);
+        int maxProgress = this.blockEntity.getEnergyUser().getAbsorbRate().max();
+        int progressArrowSize = 64;
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
     public boolean isOn() {
-        return blockEntity.isOn();
+        return this.data.get(5) != 0;
     }
 
     public boolean hasBucket() {
@@ -71,7 +79,7 @@ public class ElectricCrucibleMenu extends AbstractContainerMenu {
     }
 
     public boolean hasEnergySourcesAttached() {
-        return blockEntity.getEnergyUser().getConnectionsThatCouldProvideEnergy(blockEntity) > 0;
+        return this.blockEntity.getEnergyUser().getChargeLevel() > 0;
     }
     private static final int VANILLA_SLOT_COUNT = 36;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;

@@ -4,6 +4,7 @@ package org.lithereal.fabric;
 /*import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
 import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.Registries;
@@ -12,7 +13,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.entity.BlockEntityType;import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -20,6 +23,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModStoneBlocks;
 import org.lithereal.block.ModTreeBlocks;import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.entity.phantom.PhantomZombie;
@@ -94,6 +98,13 @@ public class LitherealFabric implements ModInitializer {
         BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.PHANTOM_OAK_SHELF.get());
         BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.FORTSHROOM_SHELF.get());
         BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.MALISHROOM_SHELF.get());
+        synchronizeRecipeSerializers(ModRecipes.BURNING_SERIALIZER.get(), ModRecipes.FREEZING_SERIALIZER.get(), ModRecipes.INFUSING_SERIALIZER.get());
+    }
+
+    public static void synchronizeRecipeSerializers(RecipeSerializer<?>... recipeSerializers) {
+        for (RecipeSerializer<?> recipeType : recipeSerializers) {
+            RecipeSynchronization.synchronizeRecipeSerializer(recipeType);
+        }
     }
 
     private static LootItem.Builder createEtherstoneEntry(int weight, int min, int max) {

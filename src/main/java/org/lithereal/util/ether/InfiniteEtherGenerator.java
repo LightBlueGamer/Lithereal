@@ -24,6 +24,11 @@ public class InfiniteEtherGenerator implements IEnergyUser {
     }
 
     @Override
+    public float transferPreferenceProgress(EnergyRange requiredForThisConnection) {
+        return requiredForThisConnection.max() - this.transferRate <= 0 ? 1 : Math.min((requiredForThisConnection.progressOf(this.transferRate)) * 1.2F, 1);
+    }
+
+    @Override
     public boolean canProvideEnergy(BlockEntity pEntity) {
         return this.transferRate + this.storage >= ((IEnergyUserProvider)pEntity).requiredEnergy();
     }
@@ -55,13 +60,13 @@ public class InfiniteEtherGenerator implements IEnergyUser {
     }
 
     @Override
-    public int getTransferRate() {
-        return transferRate;
+    public EnergyRange getTransferRate() {
+        return EnergyRange.of(this.transferRate);
     }
 
     @Override
-    public int getAbsorbRate() {
-        return -1;
+    public EnergyRange getAbsorbRate() {
+        return EnergyRange.of(-1);
     }
 
     @Override
