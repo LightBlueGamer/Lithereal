@@ -30,6 +30,7 @@ import org.lithereal.client.KeyMapping;
 import org.lithereal.core.component.SpecialAbility;
 import org.lithereal.entity.ModDamageTypes;
 import org.lithereal.networking.ServerboundSpecialKeyAbilityPacket;
+import org.lithereal.util.ChillData;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,10 +56,14 @@ public record ThermalAbility(int extraDamage,
         switch (effectDetails().effectType) {
             case FROSTBURN, FREEZE -> {
                 if (attacked.isOnFire()) attacked.extinguishFire();
-                attacked.setTicksFrozen((int) (1000 * attackAbilityScalar()));
+                attacked.setTicksFrozen((int) (200 * attackAbilityScalar()));
+                ChillData.get(attacked).addChill((int) (100 * attackAbilityScalar()), attacked);
             }
             case BURN -> {
-                if (attacked.isFreezing()) attacked.clearFreeze();
+                if (attacked.isFreezing()) {
+                    attacked.clearFreeze();
+                    ChillData.get(attacked).clearChill(attacked);
+                }
                 attacked.setRemainingFireTicks((int) (20000 * attackAbilityScalar()));
             }
         }
@@ -96,12 +101,12 @@ public record ThermalAbility(int extraDamage,
             }
         }
 
-        if (entity.isOnFire() && !(entity instanceof Player)) {
+        if (entity.isOnFire() && !(entity instanceof LivingEntity)) {
             entity.extinguishFire();
             entity.setSharedFlagOnFire(false);
         }
 
-        if (entity.isFreezing() && !(entity instanceof Player))
+        if (entity.isFreezing() && !(entity instanceof LivingEntity))
             entity.clearFreeze();
 
         if (entity instanceof LivingEntity user) {
@@ -109,8 +114,11 @@ public record ThermalAbility(int extraDamage,
                 DamageSource source = user.getLastDamageSource();
                 if (source == null) return;
                 Entity attacker = source.getEntity();
-                if (attacker instanceof LivingEntity) {
-                    if (effectDetails.causesFreeze) attacker.setTicksFrozen(1000);
+                if (attacker instanceof LivingEntity livingAttacker) {
+                    if (effectDetails.causesFreeze) {
+                        attacker.setTicksFrozen(200);
+                        ChillData.get(livingAttacker).addChill(100, livingAttacker);
+                    }
                     if (effectDetails.causesIgnition) attacker.igniteForTicks(100);
                 }
             }
@@ -123,8 +131,11 @@ public record ThermalAbility(int extraDamage,
                         user.extinguishFire();
                         user.setSharedFlagOnFire(false);
                     }
-                    if (user.isFreezing())
+                    if (user.isFreezing() || ChillData.get(user).chill() > 0) {
                         user.clearFreeze();
+                        if (effectDetails().causesFreeze())
+                            ChillData.get(user).clearChill(user);
+                    }
                 }
             } else {
                 if (hasFullSuitOfArmorOn(user, type) && hasCorrectArmorOn(supportedMaterials(), user, type)) {
@@ -142,7 +153,7 @@ public record ThermalAbility(int extraDamage,
         EffectDetails effectDetails = effectDetails();
         Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
         EquipmentSlot.Type type = equippable == null ? EquipmentSlot.Type.HUMANOID_ARMOR : equippable.slot().getType();
-        if (hasFullSuitOfArmorOn(user, type) && hasCorrectArmorOn(supportedMaterials(), user, type)) return efficiency + effectDetails.lavaMovementEfficiency * this.attackAbilityScalar;
+        if (hasFullSuitOfArmorOn(user, type) && hasCorrectArmorOn(supportedMaterials(), user, type)) return efficiency + effectDetails.lavaMovementEfficiency;
         return efficiency;
     }
 
@@ -169,10 +180,10 @@ public record ThermalAbility(int extraDamage,
                                 Codec.BOOL.fieldOf("causes_ignition").forGetter(EffectDetails::causesIgnition),
                                 Codec.BOOL.fieldOf("causes_freeze").forGetter(EffectDetails::causesFreeze))
                         .apply(instance, EffectDetails::new));
-        public static final EffectDetails FROSTBURN = new EffectDetails(EffectType.FROSTBURN, 0.1F, false, false, true, true, true);
+        public static final EffectDetails FROSTBURN = new EffectDetails(EffectType.FROSTBURN, 0.125F, false, false, true, true, true);
         public static final EffectDetails FREEZING = new EffectDetails(EffectType.FREEZE, 0, false, false, true, false, true);
         public static final EffectDetails BURNING = new EffectDetails(EffectType.BURN, 0.2F, true, true, false, true, false);
-
+        public static final EffectDetails SMOLDERING = new EffectDetails(EffectType.BURN, 0.3F, true, true, false, true, false);
     }
 
     public enum EffectType implements StringRepresentable {

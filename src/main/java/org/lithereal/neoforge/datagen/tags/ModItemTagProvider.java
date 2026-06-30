@@ -1,4 +1,4 @@
-package org.lithereal.neoforge.datagen;
+package org.lithereal.neoforge.datagen.tags;
 
 //? neoforge {
 import com.google.common.collect.Maps;

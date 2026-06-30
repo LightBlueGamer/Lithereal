@@ -1,6 +1,5 @@
 {
-  "effects": "hurt",
   "exhaustion": 0.2,
-  "message_id": "holy",
+  "message_id": "holy_item",
   "scaling": "when_caused_by_living_non_player"
 }

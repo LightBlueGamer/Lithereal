@@ -4,14 +4,16 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
 import org.lithereal.item.ability.Ability;
 
 public class InfusedSpearItem extends Item implements InfusedItem {
-    public InfusedSpearItem(Properties properties) {
-        super(Ability.INFUSED.createToolComponent(properties));
+    public InfusedSpearItem(Properties properties, ToolMaterial material, float attackDuration, float damageMultiplier, float delay, float dismountTime, float dismountThreshold, float knockbackTime, float knockbackThreshold, float damageTime, float damageThreshold) {
+        super(Ability.INFUSED.createSpearComponent(properties, material,
+                attackDuration, damageMultiplier, delay, dismountTime, dismountThreshold, knockbackTime, knockbackThreshold, damageTime, damageThreshold));
     }
 
     public @NotNull ItemStack getDefaultInstance() {

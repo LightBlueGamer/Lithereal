@@ -6,6 +6,8 @@
   "client": [
     "client.ArmorLayerMixin",
     "client.HeartTypeMixin",
+    "client.LivingEntityRendererMixin",
+    "client.LivingEntityRenderStateMixin",
     "client.LocalPlayerMixin"
   ],
   "mixins": [

@@ -240,45 +240,45 @@ public class ModToolItems {
                     1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F), ModRawMaterialItems.LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_SPEAR = ItemDataTemplates.SPEAR.addTag(ModTags.LITHERITE_TOOLS).consume("burning_litherite_spear", properties ->
-            BURNING.createToolComponent(properties).spear(LITHERITE,
+            BURNING.createSpearComponent(properties, LITHERITE,
                     1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_SPEAR = ItemDataTemplates.SPEAR.addTag(ModTags.LITHERITE_TOOLS).consume("frozen_litherite_spear", properties ->
-            FROZEN.createToolComponent(properties).spear(LITHERITE,
+            FROZEN.createSpearComponent(properties, LITHERITE,
                     1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_SPEAR = ItemDataTemplates.SPEAR
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.COMBAT))
             .addTag(ModTags.LITHERITE_TOOLS).consume("smoldering_litherite_spear", properties ->
-                    SMOLDERING.createToolComponent(properties).spear(LITHERITE,
+                    SMOLDERING.createSpearComponent(properties, LITHERITE,
                             1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F), BURNING_LITHERITE_SPEAR);
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_SPEAR = ItemDataTemplates.SPEAR
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.COMBAT))
             .addTag(ModTags.LITHERITE_TOOLS).consume("frostbitten_litherite_spear", properties ->
-                    FROSTBITTEN.createToolComponent(properties).spear(LITHERITE,
+                    FROSTBITTEN.createSpearComponent(properties, LITHERITE,
                             1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F), FROZEN_LITHERITE_SPEAR);
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_SPEAR = ItemDataTemplates.SPEAR
             .copyWithModelOverride(ItemDataTemplate.INFUSED_SPEAR_ITEM)
             .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("infused_litherite_spear", properties ->
-                    new InfusedSpearItem(properties.spear(LITHERITE,
-                            1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F)), ModRawMaterialItems.INFUSED_LITHERITE_INGOT);
+                    new InfusedSpearItem(properties, LITHERITE,
+                            1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F), ModRawMaterialItems.INFUSED_LITHERITE_INGOT);
 
     public static final RegistrySupplier<Item> WITHERING_LITHERITE_SPEAR = ItemDataTemplates.SPEAR.addTag(ModTags.LITHERITE_TOOLS).consume("withering_litherite_spear", properties ->
-            WITHERING.createToolComponent(properties).spear(LITHERITE,
+            WITHERING.createSpearComponent(properties, LITHERITE,
                     1.05F, 1.075F, 0.5F, 3.0F, 10.0F, 6.5F, 5.1F, 10.0F, 4.6F), ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> ODYSIUM_SPEAR = ItemDataTemplates.SPEAR
             .copyWithRecipeOverride(ItemDataTemplate.UPGRADE_RECIPE.apply(false))
             .addTag(ModTags.ODYSIUM_TOOLS).consumeWithIngredients("odysium_spear", properties ->
-                    Ability.ODYSIUM.createToolComponent(properties).spear(ODYSIUM,
+                    Ability.ODYSIUM.createSpearComponent(properties, ODYSIUM,
                             1.25F, 1.45F, 0.35F, 2.0F, 8.0F, 5F, 4.6F, 7.5F, 4.1F), ODYSIUM_UPGRADE_SMITHING_TEMPLATE, () -> Items.NETHERITE_SPEAR, ModRawMaterialItems.ODYSIUM_INGOT);
 
     public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_SPEAR = ItemDataTemplates.SPEAR
             .copyWithRecipeOverride(ItemDataTemplate.NONE)
             .addTag(ModTags.ODYSIUM_TOOLS).consume("enhanced_odysium_spear", properties ->
-                    ENHANCED_ODYSIUM.createToolComponent(properties).spear(ODYSIUM,
+                    ENHANCED_ODYSIUM.createSpearComponent(properties, ODYSIUM,
                             1.25F, 1.45F, 0.35F, 2.0F, 8.0F, 5F, 4.6F, 7.5F, 4.1F));
 
     public static final RegistrySupplier<Item> ODYSIUM_BOW = ItemDataTemplates.BOW.consumeSpecialWithIngredients("odysium_bow", properties ->

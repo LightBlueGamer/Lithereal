@@ -2,6 +2,9 @@ package org.lithereal.fabric;
 
 //? fabric {
 /*import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
@@ -22,7 +25,8 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.lithereal.Lithereal;
 import org.lithereal.block.ModStoneBlocks;
-import org.lithereal.block.ModTreeBlocks;import org.lithereal.block.ModVegetationBlocks;
+import org.lithereal.block.ModTreeBlocks;
+import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.entity.phantom.PhantomDrowned;
@@ -32,11 +36,13 @@ import org.lithereal.fabric.data.worldgen.FabricWorldGeneration;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
 import org.lithereal.mob_effect.potion.ModPotions;
+import org.lithereal.util.ChillData;
 
 import java.util.Set;
+import java.util.function.Function;
 
 public class LitherealFabric implements ModInitializer {
-
+    public static final AttachmentType<ChillData> CHILL_DATA_ATTACHMENT_TYPE = AttachmentRegistry.create(Lithereal.id("chilled"), builder -> builder.initializer(() -> ChillData.ZERO).persistent(ChillData.CODEC).syncWith(ChillData.STREAM_CODEC.mapStream(Function.identity()), AttachmentSyncPredicate.all()));
     public static final ResourceKey<LootTable> WITHER_LOOT_TABLE_KEY = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "entities/wither"));
     public static final ResourceKey<LootTable> BASTION_TREASURE_LOOT_TABLE_KEY = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("minecraft", "chests/bastion_treasure"));
 

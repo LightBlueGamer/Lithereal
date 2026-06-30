@@ -1,6 +1,6 @@
 package org.lithereal;
 
-
+import net.minecraft.world.entity.LivingEntity;
 //? fabric  {
 /*import org.lithereal.fabric.FabricLitherealPlatformImpl;
 *///?}
@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import org.lithereal.util.ChillData;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
@@ -29,4 +30,6 @@ public interface LitherealPlatform {
     RotatedPillarBlock strippableLog(Supplier<Block> stripped, BlockBehaviour.Properties properties);
     
     Path getConfigDirectory();
+
+    ChillData getChillData(LivingEntity entity);
 }

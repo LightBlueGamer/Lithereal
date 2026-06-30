@@ -1,6 +1,6 @@
 {
   "effects": "freezing",
-  "exhaustion": 0,
-  "message_id": "frost",
+  "exhaustion": 0.0,
+  "message_id": "freezing_item",
   "scaling": "when_caused_by_living_non_player"
 }

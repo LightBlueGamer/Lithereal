@@ -1,4 +1,4 @@
-package org.lithereal.neoforge.datagen;
+package org.lithereal.neoforge.datagen.loot;
 
 //? neoforge {
 import net.minecraft.core.Holder;
@@ -18,6 +18,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWit
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.commons.lang3.stream.Streams;
+import org.jspecify.annotations.NonNull;
 import org.lithereal.block.ModVegetationBlocks;
 import org.lithereal.entity.ModEntities;
 import org.lithereal.item.ModRawMaterialItems;
@@ -28,7 +29,7 @@ import java.util.stream.Stream;
 
 public class ModEntityLootTableProvider extends EntityLootSubProvider {
     private final List<EntityType<?>> cachedGeneratedEntityTypes = new ArrayList<>();
-    protected ModEntityLootTableProvider(HolderLookup.Provider registries) {
+    public ModEntityLootTableProvider(HolderLookup.Provider registries) {
         super(FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
@@ -85,7 +86,7 @@ public class ModEntityLootTableProvider extends EntityLootSubProvider {
     }
 
     @Override
-    protected Stream<EntityType<?>> getKnownEntityTypes() {
+    protected @NonNull Stream<EntityType<?>> getKnownEntityTypes() {
         if (cachedGeneratedEntityTypes != null) return cachedGeneratedEntityTypes.stream();
         return Streams.of(ModEntities.ENTITIES).map(Holder::value);
     }

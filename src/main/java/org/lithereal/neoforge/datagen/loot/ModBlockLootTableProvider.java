@@ -1,4 +1,4 @@
-package org.lithereal.neoforge.datagen;
+package org.lithereal.neoforge.datagen.loot;
 
 //? neoforge {
 import net.minecraft.core.Holder;
@@ -28,7 +28,7 @@ import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
     private final List<Block> cachedGeneratedBlocks = new ArrayList<>();
-    protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
+    public ModBlockLootTableProvider(HolderLookup.Provider registries) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 

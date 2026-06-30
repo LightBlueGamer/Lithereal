@@ -1,6 +1,7 @@
 package org.lithereal.neoforge;
 
 //? neoforge {
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -9,7 +10,9 @@ import net.neoforged.fml.loading.FMLPaths;
 import org.lithereal.LitherealPlatform;
 import org.lithereal.block.*;
 import org.lithereal.client.gui.screens.inventory.*;
+import org.lithereal.neoforge.util.ModAttachmentTypes;
 import org.lithereal.neoforge.world.block.ForgeStrippableLogBlock;
+import org.lithereal.util.ChillData;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
@@ -24,6 +27,10 @@ public class NeoForgeLitherealPlatformImpl implements LitherealPlatform {
 
     public Path getConfigDirectory() {
         return FMLPaths.CONFIGDIR.get();
+    }
+
+    public ChillData getChillData(LivingEntity entity) {
+        return entity.getData(ModAttachmentTypes.CHILL_DATA_ATTACHMENT_TYPE.get());
     }
 }
 //?}
