@@ -58,7 +58,7 @@ public record ChillData(ChillState chillState, float chillSpeedMod, int chill) {
 
     public void addChill(int chill, LivingEntity entity) {
         if (entity.hasEffect(Lithereal.asHolder(ModMobEffects.FREEZE_RESISTANCE))) return;
-        updateChill(entity, Mth.clamp(this.chillState.add(this.chill, chill), 0, 900));
+        updateChill(entity, Mth.clamp(this.chillState.add(this.chill, chill), 0, 210));
     }
 
     public void updateChill(LivingEntity entity, int chill) {

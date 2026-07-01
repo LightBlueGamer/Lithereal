@@ -8,8 +8,8 @@ import java.util.function.Function;
 
 public enum ChillState {
     NONE(0, 0, 1, _ -> 0F),
-    CHILLED(1, 500, 1, ticks -> Math.max((ticks - 100F) * 0.0005F + 0.1F, 0.1F)),
-    FROZEN(501, Integer.MAX_VALUE, 20, _ -> 1F);
+    CHILLED(1, 180, 1, ticks -> Math.max((ticks - 100F) * 0.0025F + 0.1F, 0.1F)),
+    FROZEN(181, Integer.MAX_VALUE, 1, _ -> 1F);
     public static final Identifier CHILLED_SPEED_MODIFIER = Lithereal.id("chilled_speed_modifier");
     private final int minTicks;
     private final int maxTicks;
@@ -45,11 +45,11 @@ public enum ChillState {
         float r = isNonTinted ? 1 : ARGB.redFloat(color);
         float g = isNonTinted ? 1 : ARGB.greenFloat(color);
         float b = isNonTinted ? 1 : ARGB.blueFloat(color);
-        if (ticks > 500) {
+        if (ticks > 180) {
             r *= 0.25F;
             g *= 0.4F;
         } else {
-            float progress = 1 - ((ticks / 500F) * 0.325F + 0.1F);
+            float progress = 1 - ((ticks / 180F) * 0.325F + 0.1F);
             r *= 0.7F * progress;
             g *= 0.9F * progress;
         }
@@ -66,7 +66,8 @@ public enum ChillState {
 
     public int add(int originalChill, int chill) {
         if (this == FROZEN) return originalChill;
-        else if (this == CHILLED && (originalChill + chill) > 500) return 900;
+        else if (this == CHILLED && (originalChill + (chill / 2)) > 180) return 210;
+        else if (this == CHILLED) return originalChill + (chill / 2);
         return originalChill + chill;
     }
 }

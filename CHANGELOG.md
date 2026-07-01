@@ -1,0 +1,113 @@
+### Changes
+- Burning, Smoldering, Frozen, and Frostbitten Litherite tools, as well as Enhanced Odysium tools, now use custom damage types.
+- Burning and Smoldering Litherite are now affected by fire resistance, fire prot, and natural fire immunity
+- Frozen and Frostbitten Litherite now affect Blazes, Striders, and Magma Cubes for extra damage
+- Frozen and Frostbitten Litherite now provide weaker freeze, in exchange for a new ability, causing chill for 5s and 7.5s upon hit, adding 2.5s and 3.75s if the entity is already chilled
+- Added Chill, a "status effect" which slows down entities while it is active
+- If Chill exceeds 9 seconds in duration with the attack, causes Freeze for 1.5s (immobilizes the affected entity)
+- Added Freeze Resistance Mob Effect, which makes the affected entity immune to Chill/Freeze status, freezing damage, and being frozen by powder snow
+- Added Freeze Resistance Potion, which can be made with a fermented spider eye on Fire Resistance
+- Added Frailness Potion, which can be made with a fermented spider eye on Sturdiness, takes armor instead of giving it
+- Frozen and Frostbitten Litherite armors now provide Freeze Resistance passively
+#### === FROM BETA 8 ===
+- Buffed Litherite Armor durability
+- Electric Crucible and Fire Crucible now emit light while lit
+- Electric Crucible and Infusement Chamber's use of ether is now more intuitive
+- Added custom hearts to the Retribution effect
+- Custom recipe types are now synched to the client on Fabric, fixing issues with Fire Crucible & Electric Crucible, as well as them now appearing in JEI
+#### === FROM BETA 7 ===
+- Added buttons for all existing block sets
+- Added Cracked Etherstone Bricks and Cracked Polished Pailite Bricks
+- Added brick variants for Verdone and Luminite, completing their block sets (including Cracked Verdone/Luminite Bricks)
+#### === FROM BETA 6 ===
+- Port to 26.1
+- Redesigned Ethereal Core + Biome Tweaks
+- Added Ethereal Farmland
+- Added Phantom Oak, Fortshroom, and Malishroom Shelves
+- Added Spears for all equipment sets
+- Item Abilities have been moved into a new Data Component: `lithereal:special_ability`
+    - Fields:
+        - `type`: Either `tool` or `armor`, controls what effects will be triggered for the ability
+        - `ability`: Object with fields:
+            - `type`: One of `lithereal:standard_ability`, `lithereal:infused_ability`, or `lithereal:thermal_ability`, with unique fields for each, too much to get into here.
+- Added Phantom Zombie and Phantom Drowned Spawn Eggs
+- Add Baby models for Phantom Zombie, Phantom Drowned, and custom armor items
+- Add Odysium & Enhanced Odysium Horse & Nautilus Armor
+- Added Pocket Rifts, creates rifts when placed
+- War Hammer is now actually useful-ish
+- Fire Crucible will now only accept fuel in fuel slot, fuel can now be quick moved into the fuel slot, and recipe slots for all recipe containers can no longer be inserted into
+- Reworked Freezing Station, now can be provided with items in `#lithereal:chillers` as "fuel", instead of requiring them in the recipe, working more like Fire Crucible.
+- Added recipe to turn Molten Litherite Bucket back into a Litherite Crystal in the Crafting Table by combining it with water
+- Frozen and Burning Litherite Crystals can be converted back and forth using their opposite stations, but take longer to do than creating them
+- Added Honey Bottle infusing recipe, transmutes the potion effects onto the Honey Bottle
+- Fixed Lithereal Vaults
+- Fixed infused repairing through crafting table
+#### === FROM BETA 5 ===
+- Fixed a bug with structure generation
+#### === FROM BETA 4 ===
+- Retextured Odysium Axe & Enhanced Odysium tools/weapons
+- Retextured Fortshroom, Phantom Rose, Phantom Rose (Ethereal Core), and Phantom Ice Flower
+- Added Coarse Ethereal Dirt and Phantom Gravel
+- Phantom Gravel now generates in all Ethereal Core Biomes
+- Coarse Ethereal Dirt now generates replacing Ethereal Dirt and Ethereal Grass Blocks in patches across Ethereal Megagrowth
+- Added Fortshroom, Malishroom, and Red Malishroom Blocks
+- Added Fortshroom and Malishroom "wood" sets
+- Added Huge Fortshrooms and Huge Malishrooms, produced when bone-mealing Fortshrooms/Malishrooms or generating naturally in the Ethereal Megagrowth
+- Ethereal Core is now permanently dark
+- Added initial structures to Ethereal Core
+#### === FROM BETA 3 ===
+- Fixed server crashes
+#### === FROM BETA 2 ===
+- Infused Litherite Block and Infusement Chamber now use baked models for better performance
+- Fixed success rate being broken on Infusement Chamber
+- Last potion remaining in Infusement Chamber is no longer discarded
+- Burning, Smoldering, and Frostbitten Litherite now all speed up movement through lava
+- Buffed Odysium Bow enchantability
+- Added Netherite Fragments, used to craft Netherite Nuggets, obtainable in the Ethereal Core
+- Added Polished Pailite Bricks, Luminite, Polished Luminite, Verdone, and Polished Verdone
+- Buffed Pailite recipe
+- Burning Litherite's effect can also now be triggered with partial Smoldering Litherite (same with Frostbitten and Frozen)
+- Withering Litherite is now compatible with Smoldering, Frostbitten, and Infused Litherite
+- Fixed crashes caused with Infused Litherite
+- Tags are now used to determine if the effect of a piece of Infused Litherite should be deemed non-beneficial or beneficial if a mob has inverted heal or harm and instant effects which will be delayed to trigger
+- Ticking Infused Litherite now only occurs once per tick and degrading effects will now trigger once for each effect that could degrade it
+- Armor effects now work on non-players
+- Retextured Lithereal Vault and Lithereal Key
+- Fixed several texture errors
+- Added Phantom Caverns to Ethereal Core
+- Fixed ore loot tables
+- Hellionite Ore now generates on NeoForge
+- Buffed making Withering Litherite
+#### === FROM BETA 1 ===
+- Added Ethereal Core, currently creative only, will be added to survival once the first story segment is introduced
+- Redid all armor models, helmets retextured
+- Added Smoldering and Frostbitten Litherite, upgrades to Burning and Frozen Litherite which among being more powerful also work with Infused Litherite
+- Odysium now provides passive resistance and haste, can also work with Enhanced Odysium
+- Enhanced Odysium added, improves passive resistance and also provides passive Hero of the Village
+- Added Odysium Bows
+- Retextured Chiseled Etherstone
+- Added Pailite and Polished Pailite, Ethereal Core stone variants
+- Added Litherite Caves, abundant Litherite crystals here, will be important later on, also generates Etherstone and Pailite
+- Added Phantom Oak, unobtainable in the Overworld as it's native to the Ethereal Core
+- Plenty more decorative and useful blocks in the Ethereal Core, including variants of all custom Overworld ores except Litherite
+- Added Litherite Crystal Blocks, generating in Litherite Caves
+- Added Electric Crucible, an Ether powered version of the Fire Crucible
+- Infusement Chamber now uses ether instead of the static charged litherite blocks for its buffed improvement input
+- Added Creative Ether Source, Passive Ether Absorber, and Pure Ether Sources, the first two acting as direct ether providing blocks, and the Pure Ether Sources should be extractable at a later date
+- Charged Litherite is still unobtainable in Survival
+- Added Retribution mob effect, caused by Hero's Edge and Enhanced Odysium
+- Improved JEI integration
+- Several recipes updated, hammers are craftable (again?)
+- Fire Crucible recipes are now not as assuming that what is produced will fit certain criteria
+- Molten Litherite Buckets are now stackable
+- Fire Crucible is now used to make Soliumite and Elcrum
+- Odysium Rods are now craftable
+- Retextured Lither Lantern and added Lither Torches, will become obtainable again when Charged Litherite does and it becomes possible to enter the Ethereal Realm in survival
+- Lither Torches work under water and provide a greater light area than regular torches
+- Retextured Boss Essence, added Awakened Boss Essence and Pure Boss Essence
+- Retextured War Hammer
+- Added Fortshroom and Malishroom to the Ethereal Core, can be used to brew Luck and Bad Luck potions respectively
+- Reworked Hammer mining speeds, and consolidated the technical backend of Burning items
+- Added prototype implementations of Phantom Zombies and Phantom Drowneds, highly subject to change and new animations
+- All custom ores can be used to make armor trims
+- All Litherite was re-nerfed as it was too strong in the last version
