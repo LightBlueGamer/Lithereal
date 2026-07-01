@@ -8,7 +8,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import org.lithereal.Lithereal;
 import org.lithereal.LitherealPlatform;
+import org.lithereal.mob_effect.ModMobEffects;
 //? fabric {
 /*import org.lithereal.fabric.LitherealFabric;
 *///?}
@@ -47,10 +49,15 @@ public record ChillData(ChillState chillState, float chillSpeedMod, int chill) {
 
     public void tickChill(LivingEntity entity) {
         if (this.chill == 0) return;
+        if (entity.hasEffect(Lithereal.asHolder(ModMobEffects.FREEZE_RESISTANCE))) {
+            updateChill(entity, 0);
+            return;
+        }
         updateChill(entity, Math.max(this.chill - this.chillState.getConsumeRate(), 0));
     }
 
     public void addChill(int chill, LivingEntity entity) {
+        if (entity.hasEffect(Lithereal.asHolder(ModMobEffects.FREEZE_RESISTANCE))) return;
         updateChill(entity, Mth.clamp(this.chillState.add(this.chill, chill), 0, 900));
     }
 

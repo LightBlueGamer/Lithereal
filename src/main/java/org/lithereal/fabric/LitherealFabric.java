@@ -92,6 +92,9 @@ public class LitherealFabric implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntities.PHANTOM_DROWNED.get(), PhantomDrowned.createAttributes());
 
         FabricPotionBrewingBuilder.BUILD.register(builder -> {
+            builder.registerPotionRecipe(Potions.FIRE_RESISTANCE, Ingredient.of(Items.FERMENTED_SPIDER_EYE), Lithereal.asHolder(ModPotions.FREEZE_RESISTANCE));
+            builder.registerPotionRecipe(Potions.LONG_FIRE_RESISTANCE, Ingredient.of(Items.FERMENTED_SPIDER_EYE), Lithereal.asHolder(ModPotions.LONG_FREEZE_RESISTANCE));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.FREEZE_RESISTANCE), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_FREEZE_RESISTANCE));
             builder.registerRecipes(Ingredient.of(ModVegetationBlocks.MALISHROOM.get()), Lithereal.asHolder(ModPotions.UNLUCK));
             builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.UNLUCK), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_UNLUCK));
             builder.registerRecipes(Ingredient.of(ModVegetationBlocks.FORTSHROOM.get()), Potions.LUCK);
@@ -100,6 +103,9 @@ public class LitherealFabric implements ModInitializer {
             builder.registerRecipes(Ingredient.of(ModRawMaterialItems.SATURNITE_CRYSTAL.get()), Lithereal.asHolder(ModPotions.STURDINESS));
             builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_STURDINESS));
             builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.GLOWSTONE_DUST), Lithereal.asHolder(ModPotions.STRONG_STURDINESS));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.STURDINESS), Ingredient.of(Items.FERMENTED_SPIDER_EYE), Lithereal.asHolder(ModPotions.FRAILNESS));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.LONG_STURDINESS), Ingredient.of(Items.FERMENTED_SPIDER_EYE), Lithereal.asHolder(ModPotions.LONG_FRAILNESS));
+            builder.registerPotionRecipe(Lithereal.asHolder(ModPotions.FRAILNESS), Ingredient.of(Items.REDSTONE), Lithereal.asHolder(ModPotions.LONG_FRAILNESS));
         });
         BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.PHANTOM_OAK_SHELF.get());
         BlockEntityType.SHELF.addValidBlock(ModTreeBlocks.FORTSHROOM_SHELF.get());

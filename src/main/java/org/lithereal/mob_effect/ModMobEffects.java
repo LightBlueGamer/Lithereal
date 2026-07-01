@@ -15,6 +15,8 @@ import org.lithereal.Lithereal;
 public class ModMobEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Lithereal.MOD_ID, Registries.MOB_EFFECT);
 
+    public static final RegistrySupplier<MobEffect> FREEZE_RESISTANCE = EFFECTS.register("freeze_resistance", () ->
+            new CustomMobEffect(MobEffectCategory.BENEFICIAL, 0x80E5EF));
     public static final RegistrySupplier<MobEffect> BOSS_POWER = EFFECTS.register("boss_power", () ->
             new CustomMobEffect(MobEffectCategory.BENEFICIAL, 12262171, (mobEffectInstance) -> {
                 int color = 12262171;

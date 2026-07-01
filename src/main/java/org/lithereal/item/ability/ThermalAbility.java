@@ -64,7 +64,7 @@ public record ThermalAbility(int extraDamage,
                     attacked.clearFreeze();
                     ChillData.get(attacked).clearChill(attacked);
                 }
-                attacked.setRemainingFireTicks((int) (20000 * attackAbilityScalar()));
+                attacked.setRemainingFireTicks((int) (100 * attackAbilityScalar()));
             }
         }
     }

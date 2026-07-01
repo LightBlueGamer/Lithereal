@@ -21,12 +21,20 @@ public class ModPotions {
             new Potion("luck", new MobEffectInstance(MobEffects.LUCK, 9000)));
     public static final RegistrySupplier<Potion> STRONG_LUCK = POTIONS.register("strong_luck", () ->
             new Potion("luck", new MobEffectInstance(MobEffects.LUCK, 1800, 1)));
+    public static final RegistrySupplier<Potion> FREEZE_RESISTANCE = POTIONS.register("freeze_resistance", () ->
+            new Potion("freeze_resistance", new MobEffectInstance(Lithereal.asHolder(ModMobEffects.FREEZE_RESISTANCE), 3600)));
+    public static final RegistrySupplier<Potion> LONG_FREEZE_RESISTANCE = POTIONS.register("long_freeze_resistance", () ->
+            new Potion("freeze_resistance", new MobEffectInstance(Lithereal.asHolder(ModMobEffects.FREEZE_RESISTANCE), 9600)));
     public static final RegistrySupplier<Potion> STURDINESS = POTIONS.register("sturdiness", () ->
             new Potion("sturdiness", new MobEffectInstance(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(ModMobEffects.PROTECTED.get()), 3600, 1)));
     public static final RegistrySupplier<Potion> LONG_STURDINESS = POTIONS.register("sturdiness_long", () ->
             new Potion("sturdiness", new MobEffectInstance(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(ModMobEffects.PROTECTED.get()), 6600, 1)));
     public static final RegistrySupplier<Potion> STRONG_STURDINESS = POTIONS.register("strong_sturdiness", () ->
             new Potion("sturdiness", new MobEffectInstance(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(ModMobEffects.PROTECTED.get()), 1800, 2)));
+    public static final RegistrySupplier<Potion> FRAILNESS = POTIONS.register("frailness", () ->
+            new Potion("frailness", new MobEffectInstance(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(ModMobEffects.WEAK_ARMOUR.get()), 2400, 1)));
+    public static final RegistrySupplier<Potion> LONG_FRAILNESS = POTIONS.register("frailness_long", () ->
+            new Potion("frailness", new MobEffectInstance(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(ModMobEffects.WEAK_ARMOUR.get()), 4800, 1)));
 
     public static void register() {
         POTIONS.register();

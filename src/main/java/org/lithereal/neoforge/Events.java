@@ -59,6 +59,9 @@ public class Events {
         @SubscribeEvent
         public static void onBrewingRecipes(RegisterBrewingRecipesEvent event) {
             PotionBrewing.Builder builder = event.getBuilder();
+            builder.addMix(Potions.FIRE_RESISTANCE, Items.FERMENTED_SPIDER_EYE, Lithereal.asHolder(ModPotions.FREEZE_RESISTANCE));
+            builder.addMix(Potions.LONG_FIRE_RESISTANCE, Items.FERMENTED_SPIDER_EYE, Lithereal.asHolder(ModPotions.LONG_FREEZE_RESISTANCE));
+            builder.addMix(Lithereal.asHolder(ModPotions.FREEZE_RESISTANCE), Items.REDSTONE, Lithereal.asHolder(ModPotions.LONG_FREEZE_RESISTANCE));
             builder.addStartMix(ModVegetationBlocks.MALISHROOM.get().asItem(), Lithereal.asHolder(ModPotions.UNLUCK));
             builder.addMix(Lithereal.asHolder(ModPotions.UNLUCK), Items.REDSTONE, Lithereal.asHolder(ModPotions.LONG_UNLUCK));
             builder.addStartMix(ModVegetationBlocks.FORTSHROOM.get().asItem(), Potions.LUCK);
@@ -67,6 +70,9 @@ public class Events {
             builder.addStartMix(ModRawMaterialItems.SATURNITE_CRYSTAL.get(), Lithereal.asHolder(ModPotions.STURDINESS));
             builder.addMix(Lithereal.asHolder(ModPotions.STURDINESS), Items.REDSTONE, Lithereal.asHolder(ModPotions.LONG_STURDINESS));
             builder.addMix(Lithereal.asHolder(ModPotions.STURDINESS), Items.GLOWSTONE_DUST, Lithereal.asHolder(ModPotions.STRONG_STURDINESS));
+            builder.addMix(Lithereal.asHolder(ModPotions.STURDINESS), Items.FERMENTED_SPIDER_EYE, Lithereal.asHolder(ModPotions.FRAILNESS));
+            builder.addMix(Lithereal.asHolder(ModPotions.LONG_STURDINESS), Items.FERMENTED_SPIDER_EYE, Lithereal.asHolder(ModPotions.LONG_FRAILNESS));
+            builder.addMix(Lithereal.asHolder(ModPotions.FRAILNESS), Items.REDSTONE, Lithereal.asHolder(ModPotions.LONG_FRAILNESS));
         }
     }
 }
