@@ -1,5 +1,6 @@
 package org.lithereal.util;
 
+import dev.architectury.platform.Platform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentType;
@@ -12,12 +13,16 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
+import org.lithereal.core.component.ModComponents;
+import org.lithereal.core.component.MultiMiner;
+import org.lithereal.data.compat.ModWeaponType;
 import org.lithereal.item.ModArmorMaterials;
 
 import java.util.List;
@@ -26,6 +31,15 @@ import java.util.function.Consumer;
 
 public class CommonUtils {
     public static final List<ResourceKey<EquipmentAsset>> CROSS_COMPATIBLE_LITHERITE = List.of(ModArmorMaterials.SMOLDERING_LITHERITE.assetId(), ModArmorMaterials.FROSTBITTEN_LITHERITE.assetId(), ModArmorMaterials.WITHERING_LITHERITE.assetId(), ModArmorMaterials.INFUSED_LITHERITE.assetId());
+    public static Item.Properties applyHammerProperties(ToolMaterial toolMaterial, float damage, float speed, int weaponLevel, Item.Properties properties) {
+        properties.pickaxe(toolMaterial, damage, speed);
+        if (Platform.isModLoaded("combatify")) {
+            ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+            ModWeaponType.HAMMER.addCombatAttributes(weaponLevel, toolMaterial, builder);
+            properties.attributes(builder.build());
+        }
+        return properties.component(ModComponents.MULTI_MINER.get(), MultiMiner.HAMMER);
+    }
     public static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;
     }

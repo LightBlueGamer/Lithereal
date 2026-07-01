@@ -1,9 +1,12 @@
 package org.lithereal.item.ability;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Optionull;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -14,7 +17,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
@@ -28,11 +33,9 @@ import org.lithereal.item.infused.InfusedItem;
 import org.lithereal.tags.ModTags;
 import org.lithereal.util.CommonUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
@@ -179,5 +182,20 @@ public record InfusedAbility(
         AtomicInteger count = new AtomicInteger();
         potionContents.forEachEffect((mobEffectInstance) -> count.getAndIncrement(), 1F);
         return count;
+    }
+
+    @Override
+    public void addToTooltip(SpecialAbility ability, Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
+        if (ability.type() == SpecialAbility.Type.TOOL) {
+            consumer.accept(Component.translatable("tooltip.infused_ability.type.tool.0").withStyle(ChatFormatting.DARK_AQUA));
+            consumer.accept(Component.translatable("tooltip.infused_ability.type.tool.1").withStyle(ChatFormatting.DARK_AQUA));
+            consumer.accept(Component.translatable("tooltip.infused_ability.type.tool.2").withStyle(ChatFormatting.DARK_AQUA));
+        }
+        if (ability.type() == SpecialAbility.Type.ARMOR) {
+            consumer.accept(Component.translatable("tooltip.infused_ability.type.armor.0").withStyle(ChatFormatting.DARK_AQUA));
+            consumer.accept(Component.translatable("tooltip.infused_ability.type.armor.1").withStyle(ChatFormatting.DARK_AQUA));
+            consumer.accept(Component.translatable("tooltip.infused_ability.type.armor.2").withStyle(ChatFormatting.DARK_AQUA));
+            consumer.accept(Component.translatable("tooltip.special_ability.type.armor.materials", combineSupportedMaterialsTogether()));
+        }
     }
 }

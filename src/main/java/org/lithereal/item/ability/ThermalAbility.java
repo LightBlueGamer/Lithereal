@@ -4,20 +4,27 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.architectury.networking.NetworkManager;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.StringUtil;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
@@ -34,6 +41,7 @@ import org.lithereal.util.ChillData;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
 import static org.lithereal.util.CommonUtils.hasFullSuitOfArmorOn;
@@ -110,7 +118,7 @@ public record ThermalAbility(int extraDamage,
             entity.clearFreeze();
 
         if (entity instanceof LivingEntity user) {
-            if (user.hurtTime > 0 && !user.level().isClientSide()) {
+            if (user.hurtTime == user.hurtDuration && !user.level().isClientSide()) {
                 DamageSource source = user.getLastDamageSource();
                 if (source == null) return;
                 Entity attacker = source.getEntity();
@@ -158,6 +166,19 @@ public record ThermalAbility(int extraDamage,
     }
 
     @Override
+    public void addToTooltip(SpecialAbility ability, Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
+        if (ability.type() == SpecialAbility.Type.TOOL)
+            this.effectDetails.addToolTooltip(this, tooltipContext, consumer);
+        if (ability.type() == SpecialAbility.Type.ARMOR) {
+            this.effectDetails.addArmorTooltip(tooltipContext, consumer);
+            consumer.accept(Component.translatable("tooltip.standard_ability.type.armor.0").withStyle(ChatFormatting.RED));
+            consumer.accept(Component.translatable("tooltip.standard_ability.type.armor.1").withStyle(ChatFormatting.RED));
+            consumer.accept(Component.translatable("tooltip.special_ability.type.armor.materials", combineSupportedMaterialsTogether()));
+            PotionContents.addPotionTooltip(this.passiveEffects, consumer, dataComponentGetter.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F), tooltipContext.tickRate());
+        }
+    }
+
+    @Override
     public MapCodec<? extends IAbility> type() {
         return CODEC;
     }
@@ -184,6 +205,35 @@ public record ThermalAbility(int extraDamage,
         public static final EffectDetails FREEZING = new EffectDetails(EffectType.FREEZE, 0, false, false, true, false, true);
         public static final EffectDetails BURNING = new EffectDetails(EffectType.BURN, 0.2F, true, true, false, true, false);
         public static final EffectDetails SMOLDERING = new EffectDetails(EffectType.BURN, 0.3F, true, true, false, true, false);
+
+        public void addToolTooltip(ThermalAbility ability, Item.TooltipContext tooltipContext, Consumer<Component> consumer) {
+            switch (this.effectType()) {
+                case BURN -> {
+                    if (ability.extraDamage() > 0) consumer.accept(Component.translatable("tooltip.thermal_ability.type.tool.burn.damage", ability.extraDamage()).withStyle(ChatFormatting.RED));
+                    consumer.accept(Component.translatable("tooltip.thermal_ability.type.tool.burn", Component.literal(StringUtil.formatTickDuration((int) (100 * ability.attackAbilityScalar()), tooltipContext.tickRate()))).withStyle(ChatFormatting.RED));
+                    consumer.accept(Component.translatable("tooltip.thermal_ability.type.tool.burn_negate").withStyle(ChatFormatting.RED));
+                }
+                case FREEZE, FROSTBURN -> {
+                    if (ability.extraDamage() > 0) consumer.accept(Component.translatable("tooltip.thermal_ability.type.tool.freeze.damage", ability.extraDamage()).withStyle(ChatFormatting.BLUE));
+                    consumer.accept(Component.translatable("tooltip.thermal_ability.type.tool.freeze.0", Component.literal(StringUtil.formatTickDuration((int) (200 * ability.attackAbilityScalar()), tooltipContext.tickRate()))).withStyle(ChatFormatting.BLUE));
+                    consumer.accept(Component.translatable("tooltip.thermal_ability.type.tool.freeze.1", Component.literal(StringUtil.formatTickDuration((int) (100 * ability.attackAbilityScalar()), tooltipContext.tickRate()))).withStyle(ChatFormatting.BLUE));
+                    consumer.accept(Component.translatable("tooltip.thermal_ability.type.tool.freeze_negate").withStyle(ChatFormatting.BLUE));
+                }
+            }
+        }
+
+        public void addArmorTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer) {
+            if (this.lavaMovementEfficiency() > 0) consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.lava_movement_efficiency", Component.literal(this.lavaMovementEfficiency() + "").withStyle(ChatFormatting.BLUE)));
+            if (this.emitsHeat()) consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.emits_heat"));
+            if (this.providesScorch()) consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.provides_scorch"));
+            if (this.providesFreeze()) consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.provides_freeze"));
+            if (this.causesIgnition()) consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.causes_ignition", Component.literal(StringUtil.formatTickDuration(100, tooltipContext.tickRate())).withStyle(ChatFormatting.RED)));
+            if (this.causesFreeze()) {
+                consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.causes_freeze.0", Component.literal(StringUtil.formatTickDuration(200, tooltipContext.tickRate())).withStyle(ChatFormatting.BLUE)));
+                consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.causes_freeze.1", Component.literal(StringUtil.formatTickDuration(100, tooltipContext.tickRate())).withStyle(ChatFormatting.BLUE)));
+            }
+            consumer.accept(Component.translatable("tooltip.thermal_ability.type.armor.negate"));
+        }
     }
 
     public enum EffectType implements StringRepresentable {

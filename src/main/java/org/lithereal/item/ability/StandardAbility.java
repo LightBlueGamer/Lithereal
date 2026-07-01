@@ -2,9 +2,12 @@ package org.lithereal.item.ability;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Optionull;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -13,7 +16,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
@@ -25,6 +31,7 @@ import org.lithereal.item.infused.InfusedItem;
 import org.lithereal.tags.ModTags;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static org.lithereal.util.CommonUtils.hasCorrectArmorOn;
@@ -82,6 +89,20 @@ public record StandardAbility(List<ResourceKey<EquipmentAsset>> supportedMateria
             ability.lastUpdatedMap().put(entityID, entity.tickCount);
         }
         ability.healTickerMap().put(entityID, healTicker);
+    }
+
+    @Override
+    public void addToTooltip(SpecialAbility ability, Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
+        if (ability.type() == SpecialAbility.Type.TOOL) {
+            consumer.accept(Component.translatable("tooltip.standard_ability.type.tool.0").withStyle(ChatFormatting.GOLD));
+            PotionContents.addPotionTooltip(this.attackEffects, consumer, 1.0F, tooltipContext.tickRate());
+        }
+        if (ability.type() == SpecialAbility.Type.ARMOR) {
+            consumer.accept(Component.translatable("tooltip.standard_ability.type.armor.0").withStyle(ChatFormatting.GOLD));
+            consumer.accept(Component.translatable("tooltip.standard_ability.type.armor.1").withStyle(ChatFormatting.GOLD));
+            consumer.accept(Component.translatable("tooltip.special_ability.type.armor.materials", combineSupportedMaterialsTogether()));
+            PotionContents.addPotionTooltip(this.passiveEffects, consumer, dataComponentGetter.getOrDefault(DataComponents.POTION_DURATION_SCALE, 0.1F), tooltipContext.tickRate());
+        }
     }
 
     @Override

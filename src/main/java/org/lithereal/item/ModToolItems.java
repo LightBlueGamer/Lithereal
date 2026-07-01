@@ -4,11 +4,11 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.*;
 import org.lithereal.item.ability.*;
-import org.lithereal.item.burning.*;
 import org.lithereal.item.datagen.ItemDataTemplate;
 import org.lithereal.item.datagen.ItemDataTemplates;
 import org.lithereal.item.infused.*;
 import org.lithereal.tags.ModTags;
+import org.lithereal.util.CommonUtils;
 
 import static org.lithereal.item.ModItems.*;
 import static org.lithereal.item.ModItems.ODYSIUM;
@@ -55,16 +55,16 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> LITHERITE_PICKAXE = ItemDataTemplates.PICKAXE.addTag(ModTags.LITHERITE_TOOLS).consume("litherite_pickaxe", properties ->
             properties.pickaxe(LITHERITE, 1, -2.8F), ModRawMaterialItems.LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> BURNING_LITHERITE_PICKAXE = ItemDataTemplates.PICKAXE.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("burning_litherite_pickaxe", properties ->
-            new BurningPickaxeItem(LITHERITE, properties), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
+    public static final RegistrySupplier<Item> BURNING_LITHERITE_PICKAXE = ItemDataTemplates.PICKAXE.addTag(ModTags.LITHERITE_TOOLS).consume("burning_litherite_pickaxe", properties ->
+            BURNING.createPickaxeComponent(LITHERITE, properties), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_PICKAXE = ItemDataTemplates.PICKAXE.addTag(ModTags.LITHERITE_TOOLS).consume("frozen_litherite_pickaxe", properties -> 
             FROZEN.createPickaxeComponent(LITHERITE, properties), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_PICKAXE = ItemDataTemplates.PICKAXE
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
-            .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("smoldering_litherite_pickaxe", properties -> 
-                    new BurningPickaxeItem(SMOLDERING, LITHERITE, properties), BURNING_LITHERITE_PICKAXE);
+            .addTag(ModTags.LITHERITE_TOOLS).consume("smoldering_litherite_pickaxe", properties ->
+                    SMOLDERING.createPickaxeComponent(LITHERITE, properties), BURNING_LITHERITE_PICKAXE);
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_PICKAXE = ItemDataTemplates.PICKAXE
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
@@ -93,15 +93,15 @@ public class ModToolItems {
             new AxeItem(LITHERITE, 5, -3, properties), ModRawMaterialItems.LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_AXE = ItemDataTemplates.AXE.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("burning_litherite_axe", properties ->
-            new BurningAxeItem(LITHERITE, properties), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
+            new AxeItem(LITHERITE, 5, -3, BURNING.createToolComponent(properties)), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_AXE = ItemDataTemplates.AXE.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("frozen_litherite_axe", properties ->
             new AxeItem(LITHERITE, 5, -3, FROZEN.createToolComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_AXE = ItemDataTemplates.AXE
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
-            .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("smoldering_litherite_axe", properties -> 
-                    new BurningAxeItem(SMOLDERING, LITHERITE, properties), BURNING_LITHERITE_AXE);
+            .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("smoldering_litherite_axe", properties ->
+                    new AxeItem(LITHERITE, 5, -3, SMOLDERING.createToolComponent(properties)), BURNING_LITHERITE_AXE);
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_AXE = ItemDataTemplates.AXE
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
@@ -130,7 +130,7 @@ public class ModToolItems {
             new ShovelItem(LITHERITE, 1.5F, -3F, properties), ModRawMaterialItems.LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_SHOVEL = ItemDataTemplates.SHOVEL.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("burning_litherite_shovel", properties ->
-            new BurningShovelItem(LITHERITE, properties), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
+            new ShovelItem(LITHERITE, 1.5F, -3F, BURNING.createToolComponent(properties)), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_SHOVEL = ItemDataTemplates.SHOVEL.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("frozen_litherite_shovel", properties ->
             new ShovelItem(LITHERITE, 1.5F, -3F, FROZEN.createToolComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
@@ -138,7 +138,7 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_SHOVEL = ItemDataTemplates.SHOVEL
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
             .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("smoldering_litherite_shovel", properties ->
-                    new BurningShovelItem(SMOLDERING, LITHERITE, properties), BURNING_LITHERITE_SHOVEL);
+                    new ShovelItem(LITHERITE, 1.5F, -3F, SMOLDERING.createToolComponent(properties)), BURNING_LITHERITE_SHOVEL);
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_SHOVEL = ItemDataTemplates.SHOVEL
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
@@ -167,7 +167,7 @@ public class ModToolItems {
             new HoeItem(LITHERITE, -3, 0, properties), ModRawMaterialItems.LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> BURNING_LITHERITE_HOE = ItemDataTemplates.HOE.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("burning_litherite_hoe", properties ->
-            new BurningHoeItem(LITHERITE, properties), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
+            new HoeItem(LITHERITE, -3, 0, BURNING.createToolComponent(properties)), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> FROZEN_LITHERITE_HOE = ItemDataTemplates.HOE.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("frozen_litherite_hoe", properties ->
             new HoeItem(LITHERITE, -3, 0, FROZEN.createToolComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
@@ -175,7 +175,7 @@ public class ModToolItems {
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_HOE = ItemDataTemplates.HOE
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
             .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("smoldering_litherite_hoe", properties ->
-                    new BurningHoeItem(SMOLDERING, LITHERITE, properties), BURNING_LITHERITE_HOE);
+                    new HoeItem(LITHERITE, -3, 0, SMOLDERING.createToolComponent(properties)), BURNING_LITHERITE_HOE);
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_HOE = ItemDataTemplates.HOE
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
@@ -200,40 +200,40 @@ public class ModToolItems {
             .addTag(ModTags.ODYSIUM_TOOLS).consumeSpecial("enhanced_odysium_hoe", properties ->
                     new HoeItem(ODYSIUM, -5, 0, Ability.ENHANCED_ODYSIUM.createToolComponent(properties)));
 
-    public static final RegistrySupplier<Item> LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("litherite_hammer", properties ->
-            new HammerItem(LITHERITE, 5, -3F, 3, properties), ModRawMaterialItems.LITHERITE_CRYSTAL);
+    public static final RegistrySupplier<Item> LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consume("litherite_hammer", properties ->
+            CommonUtils.applyHammerProperties(LITHERITE, 5, -3F, 3, properties), ModRawMaterialItems.LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> BURNING_LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("burning_litherite_hammer", properties ->
-            new BurningHammerItem(LITHERITE, 5, -3F, 3, properties), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
+    public static final RegistrySupplier<Item> BURNING_LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consume("burning_litherite_hammer", properties ->
+            BURNING.createHammerComponent(LITHERITE, 5, -3F, 3, properties), ModRawMaterialItems.BURNING_LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("frozen_litherite_hammer", properties ->
-            new HammerItem(LITHERITE, 5, -3F, 3, FROZEN.createToolComponent(properties)), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
+    public static final RegistrySupplier<Item> FROZEN_LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consume("frozen_litherite_hammer", properties ->
+            FROZEN.createHammerComponent(LITHERITE, 5, -3F, 3, properties), ModRawMaterialItems.FROZEN_LITHERITE_CRYSTAL);
 
     public static final RegistrySupplier<Item> SMOLDERING_LITHERITE_HAMMER = ItemDataTemplates.HAMMER
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
-            .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("smoldering_litherite_hammer", properties ->
-                    new BurningHammerItem(SMOLDERING, LITHERITE, 5, -3F, 3, properties), BURNING_LITHERITE_HAMMER);
+            .addTag(ModTags.LITHERITE_TOOLS).consume("smoldering_litherite_hammer", properties ->
+                    SMOLDERING.createHammerComponent(LITHERITE, 5, -3F, 3, properties), BURNING_LITHERITE_HAMMER);
 
     public static final RegistrySupplier<Item> FROSTBITTEN_LITHERITE_HAMMER = ItemDataTemplates.HAMMER
             .copyWithRecipeOverride(ItemDataTemplate.IMPROVED_THERMAL_RECIPE.apply(RecipeCategory.TOOLS))
-            .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("frostbitten_litherite_hammer", properties ->
-                    new HammerItem(LITHERITE, 5, -3F, 3, FROSTBITTEN.createToolComponent(properties)), FROZEN_LITHERITE_HAMMER);
+            .addTag(ModTags.LITHERITE_TOOLS).consume("frostbitten_litherite_hammer", properties ->
+                    FROSTBITTEN.createHammerComponent(LITHERITE, 5, -3F, 3, properties), FROZEN_LITHERITE_HAMMER);
 
     public static final RegistrySupplier<Item> INFUSED_LITHERITE_HAMMER = ItemDataTemplates.HAMMER
             .copyWithModelOverride(ItemDataTemplate.INFUSED_HANDHELD_ITEM)
             .addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("infused_litherite_hammer", properties ->
                     new InfusedHammerItem(LITHERITE, 5, -3F, 3, properties), ModRawMaterialItems.INFUSED_LITHERITE_INGOT);
 
-    public static final RegistrySupplier<Item> WITHERING_LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consumeSpecial("withering_litherite_hammer", properties ->
-            new HammerItem(LITHERITE, 5, -3F, 3, WITHERING.createToolComponent(properties)), ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL);
+    public static final RegistrySupplier<Item> WITHERING_LITHERITE_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.LITHERITE_TOOLS).consume("withering_litherite_hammer", properties ->
+            WITHERING.createHammerComponent(LITHERITE, 5, -3F, 3, properties), ModRawMaterialItems.WITHERING_LITHERITE_CRYSTAL);
 
-    public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.ODYSIUM_TOOLS).consumeSpecial("odysium_hammer", properties ->
-            new HammerItem(ODYSIUM, 5, -3F, 5, Ability.ODYSIUM.createToolComponent(properties)), ModRawMaterialItems.ODYSIUM_INGOT);
+    public static final RegistrySupplier<Item> ODYSIUM_HAMMER = ItemDataTemplates.HAMMER.addTag(ModTags.ODYSIUM_TOOLS).consume("odysium_hammer", properties ->
+            Ability.ODYSIUM.createHammerComponent(ODYSIUM, 5, -3F, 5, properties), ModRawMaterialItems.ODYSIUM_INGOT);
 
     public static final RegistrySupplier<Item> ENHANCED_ODYSIUM_HAMMER = ItemDataTemplates.HAMMER
             .copyWithRecipeOverride(ItemDataTemplate.NONE)
-            .addTag(ModTags.ODYSIUM_TOOLS).consumeSpecial("enhanced_odysium_hammer", properties ->
-                    new HammerItem(ODYSIUM, 5, -3F, 5, Ability.ENHANCED_ODYSIUM.createToolComponent(properties)));
+            .addTag(ModTags.ODYSIUM_TOOLS).consume("enhanced_odysium_hammer", properties ->
+                    ENHANCED_ODYSIUM.createHammerComponent(ODYSIUM, 5, -3F, 5, properties));
 
     public static final RegistrySupplier<Item> LITHERITE_SPEAR = ItemDataTemplates.SPEAR.addTag(ModTags.LITHERITE_TOOLS).consume("litherite_spear", properties ->
             properties.spear(LITHERITE,

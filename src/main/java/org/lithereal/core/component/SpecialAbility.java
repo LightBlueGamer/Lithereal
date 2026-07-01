@@ -3,7 +3,9 @@ package org.lithereal.core.component;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
@@ -11,7 +13,10 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -21,13 +26,14 @@ import org.lithereal.item.ability.IAbility;
 import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
+import java.util.function.Consumer;
 
 public record SpecialAbility(IAbility ability,
                              Type type,
                              Map<UUID, Map<Holder<MobEffect>, Integer>> degradationTickerMap,
                              Map<UUID, Map<Holder<MobEffect>, Integer>> healTickerMap,
                              Map<UUID, Map<Holder<MobEffect>, Integer>> untilReadyMap,
-                             Map<UUID, Integer> lastUpdatedMap) {
+                             Map<UUID, Integer> lastUpdatedMap) implements TooltipProvider {
     public static final Codec<SpecialAbility> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(Abilities.CODEC.fieldOf("ability").forGetter(SpecialAbility::ability),
                             Type.CODEC.fieldOf("type").forGetter(SpecialAbility::type))
@@ -57,6 +63,10 @@ public record SpecialAbility(IAbility ability,
     public float getLavaMovementEfficiency(ItemStack itemStack, LivingEntity instance, float efficiency) {
         if (type == Type.TOOL) return efficiency;
         return ability.getLavaMovementEfficiency(this, itemStack, instance, efficiency);
+    }
+
+    public void addToTooltip(final Item.TooltipContext context, final Consumer<Component> consumer, final TooltipFlag flag, final DataComponentGetter components) {
+        ability.addToTooltip(this, context, consumer, flag, components);
     }
 
     public enum Type implements StringRepresentable {

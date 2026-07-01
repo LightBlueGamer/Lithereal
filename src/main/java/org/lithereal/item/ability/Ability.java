@@ -8,6 +8,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ToolMaterial;
 import org.lithereal.Lithereal;
 import org.lithereal.core.component.ModComponents;
+import org.lithereal.core.component.Smelter;
 import org.lithereal.core.component.SpecialAbility;
 import org.lithereal.entity.ModDamageTypes;
 import org.lithereal.item.ModArmorMaterials;
@@ -16,6 +17,7 @@ import org.lithereal.mob_effect.ModMobEffects;
 import java.util.*;
 
 import static org.lithereal.util.CommonUtils.CROSS_COMPATIBLE_LITHERITE;
+import static org.lithereal.util.CommonUtils.applyHammerProperties;
 
 public enum Ability {
     BURNING(new ThermalAbility(0, 1, ThermalAbility.EffectDetails.BURNING,
@@ -52,8 +54,8 @@ public enum Ability {
     public Item.Properties createToolComponent(Item.Properties properties) {
         properties.component(ModComponents.SPECIAL_ABILITY.get(), new SpecialAbility(ability, SpecialAbility.Type.TOOL));
         return switch (this) {
-            case BURNING -> properties.fireResistant().delayedHolderComponent(DataComponents.DAMAGE_TYPE, ModDamageTypes.BURNING_ITEM);
-            case SMOLDERING -> properties.fireResistant().delayedHolderComponent(DataComponents.DAMAGE_TYPE, ModDamageTypes.BURNING_ITEM).rarity(Rarity.UNCOMMON);
+            case BURNING -> properties.fireResistant().component(ModComponents.SMELTER.get(), Smelter.DEFAULT).delayedHolderComponent(DataComponents.DAMAGE_TYPE, ModDamageTypes.BURNING_ITEM);
+            case SMOLDERING -> properties.fireResistant().component(ModComponents.SMELTER.get(), Smelter.DEFAULT).delayedHolderComponent(DataComponents.DAMAGE_TYPE, ModDamageTypes.BURNING_ITEM).rarity(Rarity.UNCOMMON);
             case FROZEN -> properties.delayedHolderComponent(DataComponents.DAMAGE_TYPE, ModDamageTypes.FREEZING_ITEM);
             case FROSTBITTEN -> properties.fireResistant().delayedHolderComponent(DataComponents.DAMAGE_TYPE, ModDamageTypes.FROSTBITTEN_ITEM).rarity(Rarity.UNCOMMON);
             case ODYSIUM -> properties.fireResistant().rarity(Rarity.UNCOMMON);
@@ -80,6 +82,9 @@ public enum Ability {
     }
     public Item.Properties createSwordComponent(ToolMaterial toolMaterial, Item.Properties properties) {
         return createToolComponent(properties).sword(toolMaterial, 3, -2.4f);
+    }
+    public Item.Properties createHammerComponent(ToolMaterial toolMaterial, int damage, float attackSpeed, int weaponLevel, Item.Properties properties) {
+        return applyHammerProperties(toolMaterial, damage, attackSpeed, weaponLevel, createToolComponent(properties));
     }
     public Item.Properties createArmorComponent(Item.Properties properties) {
         properties.component(ModComponents.SPECIAL_ABILITY.get(), new SpecialAbility(ability, SpecialAbility.Type.ARMOR));
