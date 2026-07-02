@@ -21,6 +21,7 @@ import org.lithereal.core.component.ModComponents;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.phantom.PhantomDrowned;
 import org.lithereal.item.ability.Abilities;
+import org.lithereal.item.enchantment.ModEnchantmentEffects;
 import org.lithereal.mob_effect.ModMobEffects;
 import org.lithereal.mob_effect.potion.ModPotions;
 import org.lithereal.networking.ClientboundRetributionDeathPacket;
@@ -57,6 +58,7 @@ public class Lithereal {
         ModPotions.register();
         ModTags.init();
         ModEntities.register();
+        ModEnchantmentEffects.register();
         ModItems.register();
         ModBlockEntities.register();
         ModRecipes.register();

@@ -20,7 +20,7 @@ public class BlockBehaviourMixin {
     @WrapOperation(method = "getDestroyProgress", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getDestroySpeed(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F"))
     public float wrapDestroySpeed(BlockState instance, BlockGetter blockGetter, BlockPos pos, Operation<Float> original, @Local(ordinal = 0, argsOnly = true) Player player) {
         ItemStack miningItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-        MultiMiner multiMiner = miningItem.get(ModComponents.MULTI_MINER);
+        MultiMiner multiMiner = miningItem.get(ModComponents.MULTI_MINER.get());
         if (multiMiner != null)
             return multiMiner.getDestroySpeed(miningItem, instance, player, blockGetter, pos, original::call);
         return original.call(instance, blockGetter, pos);

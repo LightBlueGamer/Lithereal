@@ -21,13 +21,13 @@
         "affected": "victim",
         "effect": {
           "type": "minecraft:apply_mob_effect",
-          "max_amplifier": 2,
+          "max_amplifier": 1,
           "max_duration": {
             "type": "minecraft:linear",
             "base": 2.5,
             "per_level_above_first": 0.833333
           },
-          "min_amplifier": 2,
+          "min_amplifier": 1,
           "min_duration": {
             "type": "minecraft:linear",
             "base": 2.5,

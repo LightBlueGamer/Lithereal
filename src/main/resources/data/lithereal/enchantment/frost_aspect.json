@@ -1,0 +1,43 @@
+{
+  "anvil_cost": 3,
+  "description": {
+    "translate": "enchantment.lithereal.frost_aspect"
+  },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "victim",
+        "effect": {
+          "type": "lithereal:chill",
+          "duration": {
+            "type": "minecraft:linear",
+            "base": 2.5,
+            "per_level_above_first": 0.5
+          }
+        },
+        "enchanted": "attacker",
+        "requirements": {
+          "condition": "minecraft:damage_source_properties",
+          "predicate": {
+            "is_direct": true
+          }
+        }
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 20
+  },
+  "max_level": 4,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 20
+  },
+  "primary_items": "#minecraft:enchantable/melee_weapon",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/fire_aspect",
+  "weight": 3
+}

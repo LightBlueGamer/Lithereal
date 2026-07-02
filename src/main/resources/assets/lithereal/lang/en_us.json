@@ -263,7 +263,10 @@
   "death.attack.holy_spear": "%1$s met their judgement at the hands of a spear",
   "death.attack.holy_spear.player": "%1$s was brought to justice by the spear of %2$s",
 
+  "enchantment.lithereal.frost_aspect": "Frost Aspect",
+  "enchantment.lithereal.frost_aspect.desc": "Inflicts Chill/Freeze onto target for 2 + 0.5/lvl seconds.",
   "enchantment.lithereal.heros_edge": "Hero's Edge",
+  "enchantment.lithereal.heros_edge.desc": "Increases attack damage by 3 and applies Retribution II effect for 2.5 + 0.833/(lvl-1) seconds.",
 
   "entity.lithereal.lither_charge": "Thrown Lither Charge",
   "entity.lithereal.phantom_zombie": "Phantom Zombie",
