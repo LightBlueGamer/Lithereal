@@ -1,0 +1,38 @@
+{
+  "condition": {
+    "type": "compare",
+    "comparison": "less_than_or_equal",
+    "left": {
+      "type": "distance",
+      "distance_type": "dist_manhattan",
+      "from": "target",
+      "to": {
+        "type": "axis_selected",
+        "x_axis": {
+          "x": "target",
+          "y": "center",
+          "z": "center"
+        },
+        "y_axis": {
+          "x": "center",
+          "y": "target",
+          "z": "center"
+        },
+        "z_axis": {
+          "x": "center",
+          "y": "center",
+          "z": "target"
+        }
+      }
+    },
+    "right": {
+      "type": "variable",
+      "var": "radius"
+    }
+  },
+  "display_name": {
+    "fallback": "Diamond Prism",
+    "translate": "miner_shape.lithereal.diamond_prism"
+  },
+  "uses_depth": true
+}

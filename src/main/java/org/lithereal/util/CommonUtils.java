@@ -38,7 +38,7 @@ public class CommonUtils {
             ModWeaponType.HAMMER.addCombatAttributes(weaponLevel, toolMaterial, builder);
             properties.attributes(builder.build());
         }
-        return properties.component(ModComponents.MULTI_MINER.get(), MultiMiner.HAMMER);
+        return properties.delayedComponent(ModComponents.MULTI_MINER.get(), MultiMiner::hammer);
     }
     public static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;

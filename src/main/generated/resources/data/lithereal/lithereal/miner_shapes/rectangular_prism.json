@@ -1,0 +1,8 @@
+{
+  "condition": true,
+  "display_name": {
+    "fallback": "Rectangular Prism",
+    "translate": "miner_shape.lithereal.rectangular_prism"
+  },
+  "uses_depth": true
+}

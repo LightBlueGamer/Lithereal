@@ -3,19 +3,26 @@
 - Added `lithereal:smelter` data component, which makes the loot dropped when mining smelted; takes in a list of items or a tag defining what items cannot be smelted
 - Added `lithereal:multi_miner` data component, allowing an item it is on to mine multiple blocks at once, with the following fields:
   - `shape_configs`: A list or single entry of configurations for shapes to mine out, with format as follows:
-    - `shape`: A shape to mine out, can be one of: 
-      1. `rectangular_prism`
-      2. `cylinder`
-      3. `sphere`
-      4. `octahedron`
-      5. `diamond_prism`
-      6. `cross` (a single cross shape aligned with the direction you are mining it across for length `depth`)
-      7. `tricross` (a cross shape across the 3 axes, centered at the middle of its `radius`)
-      8. `straight` (just a straight line)
+    - `shape`: A shape to mine out, can be any registered miner shape.
     - `radius`: The "radius" of the shape, used by all shapes
     - `depth`: The length prism-like shapes will extend outwards in the view direction
   - `total_speed_factor`: The factor for mining speed which the total of all blocks mined will be multiplied by
   - `min_speed_factor`: Is multiplied by the immediate target block's speed to get the minimum speed for mining the block, if the total speed is less, this will be used
+- Added `lithereal:miner_shapes` datapack registry, defines miner shapes to be used with the `lithereal:multi_miner` component
+  - JSON files for this registry are located in `<namespace>/lithereal/miner_shapes/<path>.json`
+  - These JSON files have the following format:
+    - `display_name`: The component to display inside the tooltip
+    - `condition`: The condition to match blocks inside the bounding box for, full format will be documented later
+    - `uses_depth`: Whether the shape should make use of the depth field on the shape config, this should always match with if you actually utilize depth
+- Added built-in miner shapes:
+  1. `rectangular_prism`
+  2. `cylinder`
+  3. `sphere`
+  4. `octahedron`
+  5. `diamond_prism`
+  6. `cross` (a single cross shape aligned with the direction you are mining it across for length `depth`)
+  7. `tricross` (a cross shape across the 3 axes, centered at the middle of its `radius`)
+  8. `straight` (just a straight line)
 #### === FROM BETA 9 ===
 - Burning, Smoldering, Frozen, and Frostbitten Litherite tools, as well as Enhanced Odysium tools, now use custom damage types.
 - Burning and Smoldering Litherite are now affected by fire resistance, fire prot, and natural fire immunity

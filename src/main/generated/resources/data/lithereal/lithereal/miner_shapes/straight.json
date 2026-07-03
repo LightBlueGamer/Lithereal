@@ -1,0 +1,109 @@
+{
+  "condition": {
+    "type": "axis_selected",
+    "x_axis": {
+      "type": "all_of",
+      "conditions": [
+        {
+          "type": "compare",
+          "comparison": "equal",
+          "left": {
+            "type": "block_pos_value",
+            "axis": "y",
+            "source": "target"
+          },
+          "right": {
+            "type": "block_pos_value",
+            "axis": "y",
+            "source": "center"
+          }
+        },
+        {
+          "type": "compare",
+          "comparison": "equal",
+          "left": {
+            "type": "block_pos_value",
+            "axis": "z",
+            "source": "target"
+          },
+          "right": {
+            "type": "block_pos_value",
+            "axis": "z",
+            "source": "center"
+          }
+        }
+      ]
+    },
+    "y_axis": {
+      "type": "all_of",
+      "conditions": [
+        {
+          "type": "compare",
+          "comparison": "equal",
+          "left": {
+            "type": "block_pos_value",
+            "axis": "x",
+            "source": "target"
+          },
+          "right": {
+            "type": "block_pos_value",
+            "axis": "x",
+            "source": "center"
+          }
+        },
+        {
+          "type": "compare",
+          "comparison": "equal",
+          "left": {
+            "type": "block_pos_value",
+            "axis": "z",
+            "source": "target"
+          },
+          "right": {
+            "type": "block_pos_value",
+            "axis": "z",
+            "source": "center"
+          }
+        }
+      ]
+    },
+    "z_axis": {
+      "type": "all_of",
+      "conditions": [
+        {
+          "type": "compare",
+          "comparison": "equal",
+          "left": {
+            "type": "block_pos_value",
+            "axis": "x",
+            "source": "target"
+          },
+          "right": {
+            "type": "block_pos_value",
+            "axis": "x",
+            "source": "center"
+          }
+        },
+        {
+          "type": "compare",
+          "comparison": "equal",
+          "left": {
+            "type": "block_pos_value",
+            "axis": "y",
+            "source": "target"
+          },
+          "right": {
+            "type": "block_pos_value",
+            "axis": "y",
+            "source": "center"
+          }
+        }
+      ]
+    }
+  },
+  "display_name": {
+    "fallback": "Straight",
+    "translate": "miner_shape.lithereal.straight"
+  },
+  "uses_depth": true
+}

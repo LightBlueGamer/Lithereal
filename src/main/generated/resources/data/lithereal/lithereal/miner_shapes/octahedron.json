@@ -1,0 +1,21 @@
+{
+  "condition": {
+    "type": "compare",
+    "comparison": "less_than_or_equal",
+    "left": {
+      "type": "distance",
+      "distance_type": "dist_manhattan",
+      "from": "target",
+      "to": "center"
+    },
+    "right": {
+      "type": "variable",
+      "var": "radius"
+    }
+  },
+  "display_name": {
+    "fallback": "Octahedron",
+    "translate": "miner_shape.lithereal.octahedron"
+  },
+  "uses_depth": false
+}

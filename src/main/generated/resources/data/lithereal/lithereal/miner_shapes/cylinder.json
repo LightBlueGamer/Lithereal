@@ -1,0 +1,45 @@
+{
+  "condition": {
+    "type": "compare",
+    "comparison": "less_than_or_equal",
+    "left": {
+      "type": "distance",
+      "from": "target",
+      "to": {
+        "type": "axis_selected",
+        "x_axis": {
+          "x": "target",
+          "y": "center",
+          "z": "center"
+        },
+        "y_axis": {
+          "x": "center",
+          "y": "target",
+          "z": "center"
+        },
+        "z_axis": {
+          "x": "center",
+          "y": "center",
+          "z": "target"
+        }
+      }
+    },
+    "right": {
+      "type": "function",
+      "left": {
+        "type": "variable",
+        "var": "radius"
+      },
+      "operation": "mul",
+      "right": {
+        "type": "variable",
+        "var": "radius"
+      }
+    }
+  },
+  "display_name": {
+    "fallback": "Cylinder",
+    "translate": "miner_shape.lithereal.cylinder"
+  },
+  "uses_depth": true
+}

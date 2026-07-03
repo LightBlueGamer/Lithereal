@@ -12,6 +12,7 @@ import org.lithereal.Lithereal;
 import org.lithereal.neoforge.datagen.loot.ModBlockLootTableProvider;
 import org.lithereal.neoforge.datagen.loot.ModEntityLootTableProvider;
 import org.lithereal.neoforge.datagen.registries.ModDamageTypesProvider;
+import org.lithereal.neoforge.datagen.registries.ModMinerShapesProvider;
 import org.lithereal.neoforge.datagen.registries.RegistryEntryProvider;
 import org.lithereal.neoforge.datagen.tags.ModBlockTagProvider;
 import org.lithereal.neoforge.datagen.tags.ModDamageTypeTagsProvider;
@@ -27,7 +28,7 @@ public class DataGenerators {
         event.createProvider((packOutput, lookupProvider) -> new LootTableProvider(packOutput, Collections.emptySet(),
                 List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(ModEntityLootTableProvider::new, LootContextParamSets.ENTITY)), lookupProvider));
         event.createProvider(ModRecipeProvider.Runner::new);
-        event.createDatapackRegistryObjects(entries(new ModDamageTypesProvider()));
+        event.createDatapackRegistryObjects(entries(new ModDamageTypesProvider(), new ModMinerShapesProvider()));
         event.createProvider(ModDamageTypeTagsProvider::new);
         event.createBlockAndItemTags(ModBlockTagProvider::new, ModItemTagProvider::new);
 

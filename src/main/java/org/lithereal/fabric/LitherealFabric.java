@@ -36,6 +36,7 @@ import org.lithereal.fabric.data.worldgen.FabricWorldGeneration;
 import org.lithereal.item.ModItems;
 import org.lithereal.item.ModRawMaterialItems;
 import org.lithereal.mob_effect.potion.ModPotions;
+import org.lithereal.registry.ModRegistries;
 import org.lithereal.util.ChillData;
 
 import java.util.Set;
@@ -86,6 +87,7 @@ public class LitherealFabric implements ModInitializer {
             }
         });
 
+        ModRegistries.register();
         Lithereal.init();
 
         FabricDefaultAttributeRegistry.register(ModEntities.PHANTOM_ZOMBIE.get(), PhantomZombie.createAttributes());
