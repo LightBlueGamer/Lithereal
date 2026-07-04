@@ -21,18 +21,21 @@ import org.lithereal.util.CommonUtils;
 import java.util.*;
 import java.util.function.*;
 
-public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type> tabFlags, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, String prefix, int weaponLevel, boolean infused) {
-    public EquipmentSet(Supplier<? extends Item> baseMaterial, String prefix, int weaponLevel, boolean infused) {
-        this(new HashMap<>(), new ArrayList<>(), Either.left(baseMaterial), prefix, weaponLevel, infused);
+public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type> tabFlags, Map<Type, UnaryOperator<Item.Properties>> propertiesAlterations, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, String prefix, int weaponLevel, boolean infused) {
+    public EquipmentSet(Map<Type, UnaryOperator<Item.Properties>> propertiesAlterations, Supplier<? extends Item> baseMaterial, String prefix, int weaponLevel, boolean infused) {
+        this(new HashMap<>(), new ArrayList<>(), propertiesAlterations, Either.left(baseMaterial), prefix, weaponLevel, infused);
     }
-    public EquipmentSet(TagKey<Item> baseMaterial, String prefix, int weaponLevel, boolean infused) {
-        this(new HashMap<>(), new ArrayList<>(), Either.right(baseMaterial), prefix, weaponLevel, infused);
+
+    public EquipmentSet(Map<Type, UnaryOperator<Item.Properties>> propertiesAlterations, TagKey<Item> baseMaterial, String prefix, int weaponLevel, boolean infused) {
+        this(new HashMap<>(), new ArrayList<>(), propertiesAlterations, Either.right(baseMaterial), prefix, weaponLevel, infused);
     }
-    public static EquipmentSet createVanilla(Map<Type, Supplier<? extends Item>> items, Supplier<? extends Item> baseMaterial, String prefix, int weaponLevel) {
-        return new EquipmentSet(items, new ArrayList<>(), Either.left(baseMaterial), prefix, weaponLevel, false);
+
+    public static EquipmentSet createVanilla(Map<Type, Supplier<? extends Item>> items, Map<Type, UnaryOperator<Item.Properties>> propertiesAlterations, Supplier<? extends Item> baseMaterial, String prefix, int weaponLevel) {
+        return new EquipmentSet(items, new ArrayList<>(), propertiesAlterations, Either.left(baseMaterial), prefix, weaponLevel, false);
     }
-    public static EquipmentSet createVanilla(Map<Type, Supplier<? extends Item>> items, TagKey<Item> baseMaterial, String prefix, int weaponLevel) {
-        return new EquipmentSet(items, new ArrayList<>(), Either.right(baseMaterial), prefix, weaponLevel, false);
+
+    public static EquipmentSet createVanilla(Map<Type, Supplier<? extends Item>> items, Map<Type, UnaryOperator<Item.Properties>> propertiesAlterations, TagKey<Item> baseMaterial, String prefix, int weaponLevel) {
+        return new EquipmentSet(items, new ArrayList<>(), propertiesAlterations, Either.right(baseMaterial), prefix, weaponLevel, false);
     }
 
     public Supplier<? extends Item> get(Type type) {
@@ -57,9 +60,13 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
         registerer.accept(items.get(Type.BOOTS).get().builtInRegistryHolder());
     }
 
+    public Item.Properties applyPropertiesForItem(Type type, @Nullable Ability ability, Function<Ability, Item.Properties> abilityPresent, Supplier<Item.Properties> otherwise) {
+        return propertiesAlterations().getOrDefault(type, UnaryOperator.identity()).apply(Optionull.mapOrElse(ability, abilityPresent, otherwise));
+    }
+
     private void populateArmorItem(Type type, @Nullable Ability ability, ArmorMaterial armorMaterial, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(type, creationFunction.apply(prefix + "_" + type.suffix(), properties ->
-                createArmorItem(armorMaterial, type.armorPropertiesFunction(), Optionull.mapOrDefault(ability, ability1 -> ability1.createArmorComponent(properties), properties))));
+                createArmorItem(armorMaterial, type.armorPropertiesFunction(), applyPropertiesForItem(type, ability, ability1 -> ability1.createArmorComponent(properties), () -> properties))));
     }
 
     private ModArmorItem createArmorItem(ArmorMaterial armorMaterial, BiFunction<Item.Properties, ArmorMaterial, Item.Properties> toMakeArmor, Item.Properties properties) {
@@ -68,7 +75,7 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
 
     private void populateSwordItem(@Nullable Ability ability, ToolMaterial toolMaterial, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(Type.SWORD, creationFunction.apply(prefix + "_sword", properties ->
-                createSwordItem(Optionull.mapOrDefault(ability, ability1 -> ability1.createSwordComponent(toolMaterial, properties), properties.sword(toolMaterial, 3, -2.4F)))));
+                createSwordItem(applyPropertiesForItem(Type.SWORD, ability, ability1 -> ability1.createSwordComponent(toolMaterial, properties), () -> properties.sword(toolMaterial, 3, -2.4F)))));
     }
 
     private Item createSwordItem(Item.Properties properties) {
@@ -77,7 +84,7 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
 
     private void populateSpearItem(@Nullable Ability ability, ToolMaterial toolMaterial, SpearData spearData, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(Type.SPEAR, creationFunction.apply(prefix + "_spear", properties ->
-                createSpearItem(Optionull.mapOrDefault(ability, ability1 -> ability1.createSpearComponent(properties, toolMaterial, spearData), spearData.consume(properties, toolMaterial)))));
+                createSpearItem(applyPropertiesForItem(Type.SPEAR, ability, ability1 -> ability1.createSpearComponent(properties, toolMaterial, spearData), () -> spearData.consume(properties, toolMaterial)))));
     }
 
     private Item createSpearItem(Item.Properties properties) {
@@ -86,7 +93,7 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
 
     private void populateAxeItem(@Nullable Ability ability, ToolMaterial toolMaterial, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(Type.AXE, creationFunction.apply(prefix + "_axe", properties ->
-                createAxeItem(toolMaterial, Optionull.mapOrDefault(ability, ability1 -> ability1.createToolComponent(properties), properties))));
+                createAxeItem(toolMaterial, applyPropertiesForItem(Type.AXE, ability, ability1 -> ability1.createToolComponent(properties), () -> properties))));
     }
 
     private Item createAxeItem(ToolMaterial toolMaterial, Item.Properties properties) {
@@ -95,7 +102,7 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
 
     private void populatePickaxeItem(@Nullable Ability ability, ToolMaterial toolMaterial, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(Type.PICKAXE, creationFunction.apply(prefix + "_pickaxe", properties ->
-                createPickaxeItem(Optionull.mapOrDefault(ability, ability1 -> ability1.createPickaxeComponent(toolMaterial, properties), properties.pickaxe(toolMaterial, 1, -2.8F)))));
+                createPickaxeItem(applyPropertiesForItem(Type.PICKAXE, ability, ability1 -> ability1.createPickaxeComponent(toolMaterial, properties), () -> properties.pickaxe(toolMaterial, 1, -2.8F)))));
     }
 
     private Item createPickaxeItem(Item.Properties properties) {
@@ -104,7 +111,7 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
 
     private void populateShovelItem(@Nullable Ability ability, ToolMaterial toolMaterial, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(Type.SHOVEL, creationFunction.apply(prefix + "_shovel", properties ->
-                createShovelItem(toolMaterial, Optionull.mapOrDefault(ability, ability1 -> ability1.createToolComponent(properties), properties))));
+                createShovelItem(toolMaterial, applyPropertiesForItem(Type.SHOVEL, ability, ability1 -> ability1.createToolComponent(properties), () -> properties))));
     }
 
     private Item createShovelItem(ToolMaterial toolMaterial, Item.Properties properties) {
@@ -113,7 +120,7 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
 
     private void populateHoeItem(@Nullable Ability ability, ToolMaterial toolMaterial, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(Type.HOE, creationFunction.apply(prefix + "_hoe", properties ->
-                createHoeItem(toolMaterial, Optionull.mapOrDefault(ability, ability1 -> ability1.createToolComponent(properties), properties))));
+                createHoeItem(toolMaterial, applyPropertiesForItem(Type.HOE, ability, ability1 -> ability1.createToolComponent(properties), () -> properties))));
     }
 
     private Item createHoeItem(ToolMaterial toolMaterial, Item.Properties properties) {
@@ -122,7 +129,7 @@ public record EquipmentSet(Map<Type, Supplier<? extends Item>> items, List<Type>
 
     private void populateHammerItem(@Nullable Ability ability, ToolMaterial toolMaterial, BiFunction<String, Function<Item.Properties, Item>, RegistrySupplier<? extends Item>> creationFunction) {
         this.put(Type.HAMMER, creationFunction.apply(prefix + "_hammer", properties ->
-                createHammerItem(Optionull.mapOrDefault(ability, ability1 -> ability1.createHammerComponent(toolMaterial, 5, -3F, weaponLevel, properties), CommonUtils.applyHammerProperties(toolMaterial, 5, -3F, weaponLevel, properties)))));
+                createHammerItem(applyPropertiesForItem(Type.AXE, ability, ability1 -> ability1.createHammerComponent(toolMaterial, 5, -3F, weaponLevel, properties), () -> CommonUtils.applyHammerProperties(toolMaterial, 5, -3F, weaponLevel, properties)))));
     }
 
     private Item createHammerItem(Item.Properties properties) {

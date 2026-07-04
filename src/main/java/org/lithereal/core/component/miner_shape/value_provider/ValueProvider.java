@@ -15,12 +15,18 @@ public interface ValueProvider {
     Codec<ValueProvider> CODEC = Codec.either(Constant.CODEC, DISPATCH_CODEC)
             .xmap((either) -> either.map((left) -> left, (right) -> right), (valueProvider) -> valueProvider instanceof Constant constant ? Either.left(constant) : Either.right(valueProvider));
     double extractValue(BlockPos pos, BlockPos centerPos, Direction direction, double radius, int depth);
+    default int roundedValue(BlockPos pos, BlockPos centerPos, Direction direction, double radius, int depth) {
+        return Math.toIntExact(Math.round(extractValue(pos, centerPos, direction, radius, depth)));
+    }
     MapCodec<? extends ValueProvider> type();
     static void bootstrap() {
+        ID_MAPPER.put("axis_selected", AxisSelectedValue.CODEC);
         ID_MAPPER.put("block_pos_value", BlockPosValue.CODEC);
         ID_MAPPER.put("constant", Constant.MAP_CODEC);
+        ID_MAPPER.put("directional", DirectionalValue.CODEC);
         ID_MAPPER.put("distance", Distance.CODEC);
         ID_MAPPER.put("function", MathFunction.CODEC);
+        ID_MAPPER.put("invert", Invert.CODEC);
         ID_MAPPER.put("variable", Variable.CODEC);
     }
 }

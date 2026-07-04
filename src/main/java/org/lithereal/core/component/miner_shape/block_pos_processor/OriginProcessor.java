@@ -41,7 +41,7 @@ public enum OriginProcessor implements StringRepresentable, BlockPosProcessor {
     }
 
     @Override
-    public BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos) {
+    public BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos, double radius, int depth) {
         return choose(pos, centerPos);
     }
 

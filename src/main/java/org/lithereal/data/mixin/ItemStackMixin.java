@@ -1,11 +1,14 @@
 package org.lithereal.data.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentHolder;
 //? fabric {
 /*import net.minecraft.core.component.DataComponentType;
 *///?}
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +20,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 //? fabric {
 /*import net.minecraft.world.item.component.TooltipProvider;
 *///?}
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
@@ -53,6 +57,16 @@ public abstract class ItemStackMixin implements DataComponentHolder {
         MultiMiner multiMiner = get(ModComponents.MULTI_MINER.get());
         if (multiMiner != null)
             multiMiner.triggerOnMine(ItemStack.class.cast(this), level, state, pos, owner);
+    }
+    @WrapMethod(method = "useOn")
+    private InteractionResult onUseOn(UseOnContext context, Operation<InteractionResult> original) {
+        InteractionResult ret = original.call(context);
+        MultiMiner multiMiner = get(ModComponents.MULTI_MINER.get());
+        if (multiMiner != null) {
+            InteractionResult alt = multiMiner.triggerOnUse(ItemStack.class.cast(this), context);
+            if (alt.consumesAction() && !ret.consumesAction()) return alt;
+        }
+        return ret;
     }
     @Inject(method = "hurtEnemy", at = @At("HEAD"))
     private void onHurtEnemy(LivingEntity mob, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {

@@ -27,7 +27,8 @@
     "ShapedRecipeMixin",
     "ShapelessRecipeMixin",
     "accessor.BlockFamiliesAccessor",
-    "accessor.BlockSetTypeAccessor"
+    "accessor.BlockSetTypeAccessor",
+    "accessor.ItemStackAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

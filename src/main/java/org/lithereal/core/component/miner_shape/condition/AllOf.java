@@ -9,6 +9,11 @@ import java.util.List;
 public record AllOf(List<ValidityCondition> conditions) implements ValidityCondition {
     public static final String ID = "all_of";
     public static final MapCodec<AllOf> CODEC = ValidityCondition.CODEC.listOf().xmap(AllOf::new, AllOf::conditions).fieldOf("conditions");
+
+    public AllOf(ValidityCondition conditionA, ValidityCondition conditionB) {
+        this(List.of(conditionA, conditionB));
+    }
+
     @Override
     public boolean isValid(BlockPos pos, BlockPos centerPos, Direction direction, double radius, int depth) {
         for (ValidityCondition condition : conditions) {

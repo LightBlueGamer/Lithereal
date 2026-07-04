@@ -941,6 +941,7 @@
   "tooltip.multi_miner.mining_shape": "§6Mining Shape: [%1$s§6]",
   "tooltip.multi_miner.mining_radius": "§6Radius: [%1$s§6]",
   "tooltip.multi_miner.mining_depth": "§6Depth: [%1$s§6]",
+  "tooltip.multi_miner.triggers_when": "§6Triggers When: [%1$s§6]",
   "tooltip.special_ability.type.armor.materials": "§6Supported Materials: [%1$s§6]",
   "tooltip.thermal_ability.type.tool.burn.damage": "Deals %1$s extra burn damage to the target, bypassing damage cooldown",
   "tooltip.thermal_ability.type.tool.burn": "Ignites the target for %1$s",

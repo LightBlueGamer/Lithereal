@@ -1,6 +1,7 @@
 ### Changes
 - Added hammers for all vanilla tool materials
 - Retextured Odysium Pickaxe, Shovel, Hoe, and Hammer to make them less awkward but more unique
+- Odysium Shovel and Odysium Hoe now have the ability to do multi-block interactions, Shovel can mine or path in its AOE while sneaking, while Hoe can till in a 3x3 area unless sneaking
 - Added tooltips for `lithereal:special_ability` component
 - Added `lithereal:smelter` data component, which makes the loot dropped when mining smelted; takes in a list of items or a tag defining what items cannot be smelted
 - Added `lithereal:multi_miner` data component, allowing an item it is on to mine multiple blocks at once, with the following fields:
@@ -8,8 +9,17 @@
     - `shape`: A shape to mine out, can be any registered miner shape.
     - `radius`: The "radius" of the shape, used by all shapes
     - `depth`: The length prism-like shapes will extend outwards in the view direction
+    - `center_offset`: The offset of the center pos to provide to this shape, takes `x`, `y`, and `z` as value providers
   - `total_speed_factor`: The factor for mining speed which the total of all blocks mined will be multiplied by
   - `min_speed_factor`: Is multiplied by the immediate target block's speed to get the minimum speed for mining the block, if the total speed is less, this will be used
+  - `triggers_if`: List of trigger conditions for this item, controls when it can be triggered
+    - Possible values:
+      1. `primary_action`: Player must NOT be sneaking to trigger this
+      2. `secondary_action`: Player must be sneaking to trigger this
+      3. `is_face_horizontal`: Only triggers when interacting on a horizontal face of the block
+      4. `is_face_vertical`: Only triggers when interacting on a vertical face of the block
+      5. `is_mining`: Only triggers when using left-click functionality on the block
+      6. `is_using`: Only triggers when using right-click functionality on the block
 - Added `lithereal:miner_shapes` datapack registry, defines miner shapes to be used with the `lithereal:multi_miner` component
   - JSON files for this registry are located in `<namespace>/lithereal/miner_shapes/<path>.json`
   - These JSON files have the following format:

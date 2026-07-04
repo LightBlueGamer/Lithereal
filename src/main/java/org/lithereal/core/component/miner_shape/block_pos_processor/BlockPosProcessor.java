@@ -14,7 +14,7 @@ public interface BlockPosProcessor {
             .dispatch(BlockPosProcessor::type, mapCodec -> mapCodec);
     Codec<BlockPosProcessor> CODEC = Codec.either(OriginProcessor.CODEC, DISPATCH_CODEC)
             .xmap((either) -> either.map((left) -> left, (right) -> right), (blockPosProcessor) -> blockPosProcessor instanceof OriginProcessor originProcessor ? Either.left(originProcessor) : Either.right(blockPosProcessor));
-    BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos);
+    BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos, double radius, int depth);
     MapCodec<? extends BlockPosProcessor> type();
     static void bootstrap() {
         ID_MAPPER.put("origin", OriginProcessor.CODEC.fieldOf("source"));

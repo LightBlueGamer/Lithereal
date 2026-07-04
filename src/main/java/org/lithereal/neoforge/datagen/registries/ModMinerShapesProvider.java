@@ -72,7 +72,7 @@ public class ModMinerShapesProvider implements RegistryEntryProvider<MinerShape>
                         true));
         context.register(MinerShapes.TRICROSS,
                 new MinerShape(generate(MinerShapes.TRICROSS),
-                        new AnyOf(List.of(matchingXAxis, matchingYAxis, matchingZAxis)),
+                        new AnyOf(List.of(new AllOf(matchingXAxis, matchingYAxis), new AllOf(matchingXAxis, matchingZAxis), new AllOf(matchingYAxis, matchingZAxis))),
                         true));
         context.register(MinerShapes.STRAIGHT,
                 new MinerShape(generate(MinerShapes.STRAIGHT),

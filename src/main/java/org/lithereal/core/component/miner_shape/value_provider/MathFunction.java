@@ -37,7 +37,10 @@ public record MathFunction(ValueProvider left, Optional<ValueProvider> right, Op
         ARCCOS("acos", false),
         ARCTAN("atan", false),
         MIN("min", true),
-        MAX("max", true);
+        MAX("max", true),
+        ROUND("round", false),
+        FLOOR("floor", false),
+        CEIL("ceil", false);
 
         private final String name;
         private final boolean hasSecondArgument;
@@ -65,6 +68,9 @@ public record MathFunction(ValueProvider left, Optional<ValueProvider> right, Op
                 case ARCTAN -> Math.atan(a);
                 case MIN -> Math.min(a, b);
                 case MAX -> Math.max(a, b);
+                case ROUND -> Math.round(a);
+                case FLOOR -> Math.floor(a);
+                case CEIL -> Math.ceil(a);
             };
         }
 

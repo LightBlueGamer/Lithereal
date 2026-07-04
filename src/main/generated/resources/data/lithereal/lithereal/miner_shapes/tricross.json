@@ -3,46 +3,103 @@
     "type": "any_of",
     "conditions": [
       {
-        "type": "compare",
-        "comparison": "equal",
-        "left": {
-          "type": "block_pos_value",
-          "axis": "x",
-          "source": "target"
-        },
-        "right": {
-          "type": "block_pos_value",
-          "axis": "x",
-          "source": "center"
-        }
+        "type": "all_of",
+        "conditions": [
+          {
+            "type": "compare",
+            "comparison": "equal",
+            "left": {
+              "type": "block_pos_value",
+              "axis": "x",
+              "source": "target"
+            },
+            "right": {
+              "type": "block_pos_value",
+              "axis": "x",
+              "source": "center"
+            }
+          },
+          {
+            "type": "compare",
+            "comparison": "equal",
+            "left": {
+              "type": "block_pos_value",
+              "axis": "y",
+              "source": "target"
+            },
+            "right": {
+              "type": "block_pos_value",
+              "axis": "y",
+              "source": "center"
+            }
+          }
+        ]
       },
       {
-        "type": "compare",
-        "comparison": "equal",
-        "left": {
-          "type": "block_pos_value",
-          "axis": "y",
-          "source": "target"
-        },
-        "right": {
-          "type": "block_pos_value",
-          "axis": "y",
-          "source": "center"
-        }
+        "type": "all_of",
+        "conditions": [
+          {
+            "type": "compare",
+            "comparison": "equal",
+            "left": {
+              "type": "block_pos_value",
+              "axis": "x",
+              "source": "target"
+            },
+            "right": {
+              "type": "block_pos_value",
+              "axis": "x",
+              "source": "center"
+            }
+          },
+          {
+            "type": "compare",
+            "comparison": "equal",
+            "left": {
+              "type": "block_pos_value",
+              "axis": "z",
+              "source": "target"
+            },
+            "right": {
+              "type": "block_pos_value",
+              "axis": "z",
+              "source": "center"
+            }
+          }
+        ]
       },
       {
-        "type": "compare",
-        "comparison": "equal",
-        "left": {
-          "type": "block_pos_value",
-          "axis": "z",
-          "source": "target"
-        },
-        "right": {
-          "type": "block_pos_value",
-          "axis": "z",
-          "source": "center"
-        }
+        "type": "all_of",
+        "conditions": [
+          {
+            "type": "compare",
+            "comparison": "equal",
+            "left": {
+              "type": "block_pos_value",
+              "axis": "y",
+              "source": "target"
+            },
+            "right": {
+              "type": "block_pos_value",
+              "axis": "y",
+              "source": "center"
+            }
+          },
+          {
+            "type": "compare",
+            "comparison": "equal",
+            "left": {
+              "type": "block_pos_value",
+              "axis": "z",
+              "source": "target"
+            },
+            "right": {
+              "type": "block_pos_value",
+              "axis": "z",
+              "source": "center"
+            }
+          }
+        ]
       }
     ]
   },

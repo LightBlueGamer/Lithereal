@@ -11,8 +11,8 @@ public record DirectionalBlockPosProcessor(Map<Direction, DirectBlockPosProcesso
     public static final MapCodec<DirectionalBlockPosProcessor> CODEC = Codec.dispatchedMap(Direction.CODEC, _ -> DirectBlockPosProcessor.CODEC.codec()).xmap(DirectionalBlockPosProcessor::new, DirectionalBlockPosProcessor::byDirection).fieldOf("directions");
 
     @Override
-    public BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos) {
-        return this.byDirection().get(direction).process(direction, pos, centerPos);
+    public BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos, double radius, int depth) {
+        return this.byDirection().get(direction).process(direction, pos, centerPos, radius, depth);
     }
 
     @Override

@@ -6,6 +6,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
@@ -28,6 +29,9 @@ import org.lithereal.item.ModArmorMaterials;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
+
+import static org.lithereal.item.ability.IAbility.snakeCaseToName;
 
 public class CommonUtils {
     public static final List<ResourceKey<EquipmentAsset>> CROSS_COMPATIBLE_LITHERITE = List.of(ModArmorMaterials.SMOLDERING_LITHERITE.assetId(), ModArmorMaterials.FROSTBITTEN_LITHERITE.assetId(), ModArmorMaterials.WITHERING_LITHERITE.assetId(), ModArmorMaterials.INFUSED_LITHERITE.assetId());
@@ -95,5 +99,21 @@ public class CommonUtils {
             tooltipProvider.addToTooltip(tooltipContext, consumer, tooltipFlag, stack);
         }
 
+    }
+
+    public static <T> Component combineListTogether(List<T> tList, Function<T, String> keyGetter, Function<T, String> fallbackIdGetter) {
+        MutableComponent ret = Component.empty();
+        Component[] arr = tList.stream()
+                .map(t ->
+                        Component.translatableWithFallback(keyGetter.apply(t),
+                                snakeCaseToName(fallbackIdGetter.apply(t)))).toArray(Component[]::new);
+        if (arr.length > 0) {
+            for (int i = 0; i < (arr.length - 1); i++) {
+                Component comp = arr[i];
+                ret.append(comp.copy().append(", "));
+            }
+            ret.append(arr[arr.length - 1]);
+        }
+        return ret;
     }
 }

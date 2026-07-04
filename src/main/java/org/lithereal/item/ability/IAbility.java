@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -17,6 +16,7 @@ import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import org.lithereal.core.component.SpecialAbility;
+import org.lithereal.util.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,19 +40,9 @@ public interface IAbility {
     }
 
     default Component combineSupportedMaterialsTogether() {
-        MutableComponent ret = Component.empty();
-        Component[] arr = supportedMaterials().stream()
-                .map(resourceKey ->
-                        Component.translatableWithFallback("equipment_material." + resourceKey.identifier().getNamespace() + "." + resourceKey.identifier().getPath(),
-                                snakeCaseToName(resourceKey.identifier().getPath()))).toArray(Component[]::new);
-        if (arr.length > 0) {
-            for (int i = 0; i < (arr.length - 1); i++) {
-                Component comp = arr[i];
-                ret.append(comp.copy().append(", "));
-            }
-            ret.append(arr[arr.length - 1]);
-        }
-        return ret;
+        return CommonUtils.combineListTogether(supportedMaterials(),
+                resourceKey -> "equipment_material." + resourceKey.identifier().getNamespace() + "." + resourceKey.identifier().getPath(),
+                resourceKey -> resourceKey.identifier().getPath());
     }
 
     static String snakeCaseToName(String input) {

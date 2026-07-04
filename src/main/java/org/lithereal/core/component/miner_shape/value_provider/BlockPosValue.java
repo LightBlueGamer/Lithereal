@@ -13,7 +13,7 @@ public record BlockPosValue(BlockPosProcessor source, Direction.Axis axis) imple
                     .apply(instance, BlockPosValue::new));
     @Override
     public double extractValue(BlockPos pos, BlockPos centerPos, Direction direction, double radius, int depth) {
-        return this.source().process(direction, pos, centerPos).get(this.axis());
+        return this.source().process(direction, pos, centerPos, radius, depth).get(this.axis());
     }
 
     @Override

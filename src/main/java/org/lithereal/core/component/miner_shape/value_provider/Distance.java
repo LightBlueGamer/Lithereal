@@ -17,7 +17,7 @@ public record Distance(BlockPosProcessor from, BlockPosProcessor to, DistanceTyp
                     .apply(instance, Distance::new));
     @Override
     public double extractValue(BlockPos pos, BlockPos centerPos, Direction direction, double radius, int depth) {
-        return this.distanceType.distanceTo(this.from.process(direction, pos, centerPos), this.to.process(direction, pos, centerPos));
+        return this.distanceType.distanceTo(this.from.process(direction, pos, centerPos, radius, depth), this.to.process(direction, pos, centerPos, radius, depth));
     }
 
     @Override

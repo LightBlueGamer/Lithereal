@@ -13,11 +13,11 @@ public record AxisSelectedBlockPosProcessor(DirectBlockPosProcessor xAxis, Direc
                     .apply(instance, AxisSelectedBlockPosProcessor::new));
 
     @Override
-    public BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos) {
+    public BlockPos process(Direction direction, BlockPos pos, BlockPos centerPos, double radius, int depth) {
         return switch (direction.getAxis()) {
-            case X -> this.xAxis().process(direction, pos, centerPos);
-            case Y -> this.yAxis().process(direction, pos, centerPos);
-            case Z -> this.zAxis().process(direction, pos, centerPos);
+            case X -> this.xAxis().process(direction, pos, centerPos, radius, depth);
+            case Y -> this.yAxis().process(direction, pos, centerPos, radius, depth);
+            case Z -> this.zAxis().process(direction, pos, centerPos, radius, depth);
         };
     }
 
