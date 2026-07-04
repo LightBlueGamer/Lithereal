@@ -18,6 +18,7 @@ import java.util.function.Consumer;
 public record ItemDataProvider(RegistrySupplier<? extends Item> target, Optional<Consumer<CustomRecipeProvider<? extends RecipeProvider>>> recipeCreator, Optional<Consumer<ItemModelGenerators>> modelCreator, TagData tagData) implements ItemLikeDataProvider<Item> {
     public static final Map<String, TagKey<Item>> CONVENTIONAL_TAG_CACHE = new HashMap<>();
     public static final Map<String, TagKey<Item>> COMBATIFY_TAG_CACHE = new HashMap<>();
+    public static final Map<String, TagKey<Item>> DEFAULTED_TAG_CACHE = new HashMap<>();
     public ItemDataProvider(RegistrySupplier<? extends Item> target, Optional<Consumer<CustomRecipeProvider<? extends RecipeProvider>>> recipeCreator, Optional<Consumer<ItemModelGenerators>> modelCreator, TagData tagData) {
         this.target = target;
         this.recipeCreator = recipeCreator;
@@ -32,6 +33,10 @@ public record ItemDataProvider(RegistrySupplier<? extends Item> target, Optional
     public static TagKey<Item> combatifyItemTag(String name) {
         if (!COMBATIFY_TAG_CACHE.containsKey(name)) COMBATIFY_TAG_CACHE.put(name, TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("combatify", name)));
         return COMBATIFY_TAG_CACHE.get(name);
+    }
+    public static TagKey<Item> defaultedItemTag(String name) {
+        if (!DEFAULTED_TAG_CACHE.containsKey(name)) DEFAULTED_TAG_CACHE.put(name, TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("defaulted", name)));
+        return DEFAULTED_TAG_CACHE.get(name);
     }
 
     public enum TagType {

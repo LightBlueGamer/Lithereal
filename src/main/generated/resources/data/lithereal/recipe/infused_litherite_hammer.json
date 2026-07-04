@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "B": "lithereal:infused_litherite_ingot",
-    "R": "minecraft:stick"
+    "R": "#c:rods/wooden"
   },
   "pattern": [
     "BBB",

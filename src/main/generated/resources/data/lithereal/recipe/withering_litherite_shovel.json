@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "B": "lithereal:withering_litherite_crystal",
-    "R": "minecraft:stick"
+    "R": "#c:rods/wooden"
   },
   "pattern": [
     "B",

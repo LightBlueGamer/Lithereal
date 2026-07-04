@@ -22,15 +22,14 @@ import org.lithereal.block.ModBlocks;
 import org.lithereal.block.ModStorageBlocks;
 import org.lithereal.client.gui.screens.inventory.ElectricCrucibleScreen;
 import org.lithereal.data.recipes.ModRecipes;
-import org.lithereal.item.ModArmorItems;
 import org.lithereal.data.recipes.FireCrucibleRecipe;
 import org.lithereal.data.recipes.FreezingStationRecipe;
 import org.lithereal.data.recipes.InfusementChamberRecipe;
 import org.lithereal.client.gui.screens.inventory.FireCrucibleScreen;
 import org.lithereal.client.gui.screens.inventory.FreezingStationScreen;
 import org.lithereal.client.gui.screens.inventory.InfusementChamberScreen;
+import org.lithereal.item.ModEquipment;
 import org.lithereal.item.ModRawMaterialItems;
-import org.lithereal.item.ModToolItems;
 import org.lithereal.item.compat.CompatInit;
 
 import java.util.List;
@@ -98,17 +97,7 @@ public class JEILitherealPlugin implements IModPlugin {
         // Register the interpreter for all the items
         registration.registerSubtypeInterpreter(ModStorageBlocks.INFUSED_LITHERITE_BLOCK.get().asItem(), interpreter);
         registration.registerSubtypeInterpreter(ModRawMaterialItems.INFUSED_LITHERITE_INGOT.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SWORD.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SHOVEL.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_PICKAXE.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_AXE.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_HOE.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_HAMMER.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModToolItems.INFUSED_LITHERITE_SPEAR.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_HELMET.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), interpreter);
-        registration.registerSubtypeInterpreter(ModArmorItems.INFUSED_LITHERITE_BOOTS.get(), interpreter);
+        ModEquipment.INFUSED_LITHERITE.items().forEach((_, supplier) -> registration.registerSubtypeInterpreter(supplier.get(), interpreter));
         if (Platform.isModLoaded("combatify"))
             CompatInit.addInfusedSubtypesForCombatify(registration, interpreter);
 

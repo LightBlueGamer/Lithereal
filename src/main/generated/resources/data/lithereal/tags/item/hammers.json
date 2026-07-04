@@ -1,5 +1,12 @@
 {
   "values": [
+    "lithereal:wooden_hammer",
+    "lithereal:stone_hammer",
+    "lithereal:copper_hammer",
+    "lithereal:iron_hammer",
+    "lithereal:golden_hammer",
+    "lithereal:diamond_hammer",
+    "lithereal:netherite_hammer",
     "lithereal:litherite_hammer",
     "lithereal:burning_litherite_hammer",
     "lithereal:frozen_litherite_hammer",

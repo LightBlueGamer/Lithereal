@@ -281,6 +281,13 @@
   "effect.lithereal.protected": "Protected",
   "effect.lithereal.weak_armour": "Weak Armor",
 
+  "item.lithereal.copper_hammer": "Copper Hammer",
+  "item.lithereal.diamond_hammer": "Diamond Hammer",
+  "item.lithereal.golden_hammer": "Golden Hammer",
+  "item.lithereal.iron_hammer": "Iron Hammer",
+  "item.lithereal.netherite_hammer": "Netherite Hammer",
+  "item.lithereal.stone_hammer": "Stone Hammer",
+  "item.lithereal.wooden_hammer": "Wooden Hammer",
   "item.lithereal.burning_litherite_axe": "Burning Litherite Axe",
   "item.lithereal.burning_litherite_boots": "Burning Litherite Boots",
   "item.lithereal.burning_litherite_chestplate": "Burning Litherite Chestplate",

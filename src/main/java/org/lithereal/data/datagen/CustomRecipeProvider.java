@@ -1,7 +1,9 @@
 package org.lithereal.data.datagen;
 
+import com.mojang.datafixers.util.Either;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.BlastingRecipe;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public interface CustomRecipeProvider<S extends RecipeProvider> {
     String getSimpleRecipeNameAccess(ItemLike itemLike);
@@ -68,39 +71,39 @@ public interface CustomRecipeProvider<S extends RecipeProvider> {
 
     void stonecutterResultFromBaseModNamespace(RecipeCategory category, ItemLike to, ItemLike from, int count);
 
-    void improvedThermalItem(RecipeCategory recipeCategory, Item base, Item improved);
+    void improvedThermalItem(RecipeCategory recipeCategory, Either<Supplier<? extends Item>, TagKey<Item>> base, Item improved);
 
-    void swordItem(Item rod, Item baseMaterial, Item sword);
+    void swordItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item sword);
 
-    void spearItem(Item rod, Item baseMaterial, Item spear);
+    void spearItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item spear);
 
-    void pickaxeItem(Item rod, Item baseMaterial, Item pickaxe);
+    void pickaxeItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item pickaxe);
 
-    void axeItem(Item rod, Item baseMaterial, Item axe);
+    void axeItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item axe);
 
-    void shovelItem(Item rod, Item baseMaterial, Item shovel);
+    void shovelItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item shovel);
 
-    void hoeItem(Item rod, Item baseMaterial, Item hoe);
+    void hoeItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item hoe);
 
-    void hammerItem(Item rod, Item baseMaterial, Item hammer);
+    void hammerItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item hammer);
 
-    void warHammerItem(Item rod, Item baseMaterial, Item warHammer);
+    void warHammerItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item warHammer);
 
-    void helmetItem(Item baseMaterial, Item helmet);
+    void helmetItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item helmet);
 
-    void chestplateItem(Item baseMaterial, Item chestplate);
+    void chestplateItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item chestplate);
 
-    void leggingsItem(Item baseMaterial, Item leggings);
+    void leggingsItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item leggings);
 
-    void bootsItem(Item baseMaterial, Item boots);
+    void bootsItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item boots);
 
-    void bowItem(Item baseMaterial, Item string, Item bow);
+    void bowItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Either<Supplier<? extends Item>, TagKey<Item>> string, Item bow);
 
-    void bowItem(Item baseMaterial, Item stringAttached, Item string, Item bow);
+    void bowItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Either<Supplier<? extends Item>, TagKey<Item>> stringAttached, Either<Supplier<? extends Item>, TagKey<Item>> string, Item bow);
 
-    void brushItem(Item baseMaterial, Item brush);
+    void brushItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item brush);
 
-    void wrenchItem(Item baseMaterialA, Item baseMaterialB, Item wrench);
+    void wrenchItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterialA, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterialB, Item wrench);
 
-    void upgradeRecipe(boolean tool, Item template, Item base, Item addition, Item result);
+    void upgradeRecipe(boolean tool, Either<Supplier<? extends Item>, TagKey<Item>> template, Either<Supplier<? extends Item>, TagKey<Item>> base, Either<Supplier<? extends Item>, TagKey<Item>> addition, Item result);
 }

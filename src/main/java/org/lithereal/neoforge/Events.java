@@ -54,7 +54,7 @@ public class Events {
         @SubscribeEvent // on the game event bus
         public static void datapackSync(OnDatapackSyncEvent event) {
             // Specify what recipe types to sync to the client
-            event.sendRecipes(ModRecipes.BURNING_TYPE.get(), ModRecipes.FREEZING_TYPE.get(), ModRecipes.INFUSING_TYPE.get(), RecipeType.SMELTING);
+            event.sendRecipes(ModRecipes.BURNING_TYPE.get(), ModRecipes.FREEZING_TYPE.get(), ModRecipes.INFUSING_TYPE.get(), RecipeType.SMELTING, RecipeType.SMITHING);
         }
         @SubscribeEvent
         public static void onBrewingRecipes(RegisterBrewingRecipesEvent event) {

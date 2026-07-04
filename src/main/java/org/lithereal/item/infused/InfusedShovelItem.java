@@ -8,11 +8,10 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.item.ability.Ability;
 
 public class InfusedShovelItem extends ShovelItem implements InfusedItem {
     public InfusedShovelItem(ToolMaterial toolMaterial, Properties properties) {
-        super(toolMaterial, 1.5f, -3f, Ability.INFUSED.createToolComponent(properties));
+        super(toolMaterial, 1.5f, -3f, properties);
     }
 
     public @NotNull ItemStack getDefaultInstance() {

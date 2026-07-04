@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": "lithereal:odysium_ingot",
-    "R": "minecraft:stick"
+    "B": "#minecraft:copper_tool_materials",
+    "R": "#c:rods/wooden"
   },
   "pattern": [
     "BBB",
@@ -11,6 +11,6 @@
     " R "
   ],
   "result": {
-    "id": "lithereal:odysium_hammer"
+    "id": "lithereal:copper_hammer"
   }
 }

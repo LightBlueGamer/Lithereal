@@ -1,4 +1,5 @@
 ### Changes
+- Added hammers for all vanilla tool materials
 - Added tooltips for `lithereal:special_ability` component.
 - Added `lithereal:smelter` data component, which makes the loot dropped when mining smelted; takes in a list of items or a tag defining what items cannot be smelted
 - Added `lithereal:multi_miner` data component, allowing an item it is on to mine multiple blocks at once, with the following fields:

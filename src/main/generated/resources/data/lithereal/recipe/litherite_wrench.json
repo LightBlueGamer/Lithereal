@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "#": "lithereal:litherite_crystal",
-    "I": "minecraft:iron_ingot"
+    "I": "#minecraft:iron_tool_materials"
   },
   "pattern": [
     " II",

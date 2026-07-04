@@ -5,7 +5,6 @@ package org.lithereal.fabric;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -29,7 +28,7 @@ import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
 import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
 import org.lithereal.fabric.client.armor.LitheriteArmorRenderer;
 import org.lithereal.entity.ModEntities;
-import org.lithereal.item.ModArmorItems;
+import org.lithereal.item.ModEquipment;
 
 import java.util.List;
 
@@ -51,16 +50,16 @@ public class LitherealFabricClient implements ClientModInitializer {
         MenuScreens.register(ModMenuTypes.FIRE_CRUCIBLE_MENU.get(), FireCrucibleScreen::new);
         MenuScreens.register(ModMenuTypes.FREEZING_STATION_MENU.get(), FreezingStationScreen::new);
         MenuScreens.register(ModMenuTypes.INFUSEMENT_CHAMBER_MENU.get(), InfusementChamberScreen::new);
-
-        ArmorRenderer.register(LitheriteArmorRenderer::new, ModArmorItems.LITHERITE_HELMET.get(), ModArmorItems.LITHERITE_CHESTPLATE.get(), ModArmorItems.LITHERITE_LEGGINGS.get(), ModArmorItems.LITHERITE_BOOTS.get(),
-                ModArmorItems.BURNING_LITHERITE_HELMET.get(), ModArmorItems.BURNING_LITHERITE_CHESTPLATE.get(), ModArmorItems.BURNING_LITHERITE_LEGGINGS.get(), ModArmorItems.BURNING_LITHERITE_BOOTS.get(),
-                ModArmorItems.FROZEN_LITHERITE_HELMET.get(), ModArmorItems.FROZEN_LITHERITE_CHESTPLATE.get(), ModArmorItems.FROZEN_LITHERITE_LEGGINGS.get(), ModArmorItems.FROZEN_LITHERITE_BOOTS.get(),
-                ModArmorItems.SMOLDERING_LITHERITE_HELMET.get(), ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE.get(), ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS.get(), ModArmorItems.SMOLDERING_LITHERITE_BOOTS.get(),
-                ModArmorItems.FROSTBITTEN_LITHERITE_HELMET.get(), ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE.get(), ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS.get(), ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS.get(),
-                ModArmorItems.INFUSED_LITHERITE_HELMET.get(), ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(), ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(), ModArmorItems.INFUSED_LITHERITE_BOOTS.get(),
-                ModArmorItems.WITHERING_LITHERITE_HELMET.get(), ModArmorItems.WITHERING_LITHERITE_CHESTPLATE.get(), ModArmorItems.WITHERING_LITHERITE_LEGGINGS.get(), ModArmorItems.WITHERING_LITHERITE_BOOTS.get(),
-                ModArmorItems.ODYSIUM_HELMET.get(), ModArmorItems.ODYSIUM_CHESTPLATE.get(), ModArmorItems.ODYSIUM_LEGGINGS.get(), ModArmorItems.ODYSIUM_BOOTS.get(),
-                ModArmorItems.ENHANCED_ODYSIUM_HELMET.get(), ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE.get(), ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS.get(), ModArmorItems.ENHANCED_ODYSIUM_BOOTS.get());
+        ArmorRenderer.Factory factory = LitheriteArmorRenderer::new;
+        ModEquipment.LITHERITE.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.BURNING_LITHERITE.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.FROZEN_LITHERITE.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.SMOLDERING_LITHERITE.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.FROSTBITTEN_LITHERITE.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.INFUSED_LITHERITE.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.WITHERING_LITHERITE.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.ODYSIUM.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
+        ModEquipment.ENHANCED_ODYSIUM.registerArmorModel(item -> ArmorRenderer.register(factory, item.value()));
 
         registerParticleProvider(ModParticles.PHANTOM_OAK_LEAVES.get(), FallingLeavesParticle.PaleOakProvider::new);
         registerParticleProvider(ModParticles.LITHER_FIRE_FLAME.get(), FlameParticle.Provider::new);

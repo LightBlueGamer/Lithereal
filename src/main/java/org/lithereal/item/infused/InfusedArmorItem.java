@@ -10,7 +10,6 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.item.ability.Ability;
 import org.lithereal.item.base.ModArmorItem;
 
 import java.util.function.BiFunction;
@@ -18,11 +17,11 @@ import java.util.function.Consumer;
 
 public class InfusedArmorItem extends ModArmorItem implements InfusedItem {
     public InfusedArmorItem(ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
-        super(armorMaterial, type, Ability.INFUSED.createArmorComponent(properties).component(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.POTION_CONTENTS, true)));
+        super(armorMaterial, type, properties.component(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.POTION_CONTENTS, true)));
     }
 
     public InfusedArmorItem(ArmorMaterial armorMaterial, BiFunction<Properties, ArmorMaterial, Properties> toMakeArmor, Properties properties) {
-        super(armorMaterial, toMakeArmor, Ability.INFUSED.createArmorComponent(properties).component(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.POTION_CONTENTS, true)));
+        super(armorMaterial, toMakeArmor, properties.component(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.POTION_CONTENTS, true)));
     }
 
     public @NotNull ItemStack getDefaultInstance() {

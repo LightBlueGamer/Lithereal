@@ -32,11 +32,11 @@ public class ModCreativeTabs {
 
     public static final RegistrySupplier<CreativeModeTab> TOOLS_TAB = TABS.register("tools_tab", () ->
             CreativeTabRegistry.create(Component.translatable("itemGroup." + Lithereal.MOD_ID + ".tools.tab"),
-                    () -> new ItemStack(ModToolItems.LITHERITE_PICKAXE.get())));
+                    () -> new ItemStack(ModEquipment.LITHERITE.get(EquipmentSet.Type.PICKAXE).get())));
 
     public static final RegistrySupplier<CreativeModeTab> COMBAT_TAB = TABS.register("combat_tab", () ->
             CreativeTabRegistry.create(Component.translatable("itemGroup." + Lithereal.MOD_ID + ".combat.tab"),
-                    () -> new ItemStack(ModToolItems.ODYSIUM_SWORD.get())));
+                    () -> new ItemStack(ModEquipment.ODYSIUM.get(EquipmentSet.Type.SWORD).get())));
 
     public static final RegistrySupplier<CreativeModeTab> SPAWN_EGGS_TAB = TABS.register("spawn_eggs_tab", () ->
             CreativeTabRegistry.create(Component.translatable("itemGroup." + Lithereal.MOD_ID + ".spawn_eggs.tab"),

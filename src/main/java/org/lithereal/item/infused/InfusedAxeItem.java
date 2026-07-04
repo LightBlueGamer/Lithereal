@@ -8,11 +8,10 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.item.ability.Ability;
 
 public class InfusedAxeItem extends AxeItem implements InfusedItem {
     public InfusedAxeItem(ToolMaterial toolMaterial, Properties properties) {
-        super(toolMaterial, 5, -3, Ability.INFUSED.createToolComponent(properties));
+        super(toolMaterial, 5, -3, properties);
     }
 
     public @NotNull ItemStack getDefaultInstance() {

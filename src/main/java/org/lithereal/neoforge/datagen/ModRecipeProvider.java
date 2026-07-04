@@ -1,10 +1,13 @@
 package org.lithereal.neoforge.datagen;
 
 //? neoforge {
+import com.mojang.datafixers.util.Either;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -26,6 +29,7 @@ import org.lithereal.util.ModBlockFamilies;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class ModRecipeProvider extends RecipeProvider implements CustomRecipeProvider<ModRecipeProvider> {
     protected ModRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
@@ -115,10 +119,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void improvedThermalItem(RecipeCategory recipeCategory, Item base, Item improved) {
+    public void improvedThermalItem(RecipeCategory recipeCategory, Either<Supplier<? extends Item>, TagKey<Item>> base, Item improved) {
         ShapedRecipeBuilder.shaped(this.items, recipeCategory, improved, 1)
                 .define('A', ModRawMaterialItems.AURELITE_INGOT.get())
-                .define('B', base)
+                .define('B', ingredientOf(base))
                 .define('C', ModRawMaterialItems.CHRYON_CRYSTAL.get())
                 .pattern(" A ")
                 .pattern("CBC")
@@ -128,10 +132,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void swordItem(Item rod, Item baseMaterial, Item sword) {
+    public void swordItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item sword) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, sword, 1)
-                .define('B', baseMaterial)
-                .define('R', rod)
+                .define('B', ingredientOf(baseMaterial))
+                .define('R', ingredientOf(rod))
                 .pattern("B")
                 .pattern("B")
                 .pattern("R")
@@ -140,10 +144,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void spearItem(Item rod, Item baseMaterial, Item spear) {
+    public void spearItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item spear) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, spear, 1)
-                .define('B', baseMaterial)
-                .define('R', rod)
+                .define('B', ingredientOf(baseMaterial))
+                .define('R', ingredientOf(rod))
                 .pattern("  B")
                 .pattern(" R ")
                 .pattern("R  ")
@@ -152,10 +156,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void pickaxeItem(Item rod, Item baseMaterial, Item pickaxe) {
+    public void pickaxeItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item pickaxe) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, pickaxe, 1)
-                .define('B', baseMaterial)
-                .define('R', rod)
+                .define('B', ingredientOf(baseMaterial))
+                .define('R', ingredientOf(rod))
                 .pattern("BBB")
                 .pattern(" R ")
                 .pattern(" R ")
@@ -164,10 +168,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void axeItem(Item rod, Item baseMaterial, Item axe) {
+    public void axeItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item axe) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, axe, 1)
-                .define('B', baseMaterial)
-                .define('R', rod)
+                .define('B', ingredientOf(baseMaterial))
+                .define('R', ingredientOf(rod))
                 .pattern("BB")
                 .pattern("BR")
                 .pattern(" R")
@@ -176,10 +180,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void shovelItem(Item rod, Item baseMaterial, Item shovel) {
+    public void shovelItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item shovel) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, shovel, 1)
-                .define('B', baseMaterial)
-                .define('R', rod)
+                .define('B', ingredientOf(baseMaterial))
+                .define('R', ingredientOf(rod))
                 .pattern("B")
                 .pattern("R")
                 .pattern("R")
@@ -188,10 +192,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void hoeItem(Item rod, Item baseMaterial, Item hoe) {
+    public void hoeItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item hoe) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, hoe, 1)
-                .define('B', baseMaterial)
-                .define('R', rod)
+                .define('B', ingredientOf(baseMaterial))
+                .define('R', ingredientOf(rod))
                 .pattern("BB")
                 .pattern(" R")
                 .pattern(" R")
@@ -200,10 +204,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void hammerItem(Item rod, Item baseMaterial, Item hammer) {
+    public void hammerItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item hammer) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, hammer, 1)
-                .define('B', baseMaterial)
-                .define('R', rod)
+                .define('B', ingredientOf(baseMaterial))
+                .define('R', ingredientOf(rod))
                 .pattern("BBB")
                 .pattern("BBB")
                 .pattern(" R ")
@@ -212,10 +216,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void warHammerItem(Item rod, Item baseMaterial, Item warHammer) {
+    public void warHammerItem(Either<Supplier<? extends Item>, TagKey<Item>> rod, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item warHammer) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, warHammer)
-                .define('#', baseMaterial)
-                .define('O', rod)
+                .define('#', ingredientOf(baseMaterial))
+                .define('O', ingredientOf(rod))
                 .pattern("#")
                 .pattern("O")
                 .unlockedBy("has_" + getSimpleRecipeName(baseMaterial), has(baseMaterial))
@@ -223,9 +227,9 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void helmetItem(Item baseMaterial, Item helmet) {
+    public void helmetItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item helmet) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, helmet, 1)
-                .define('B', baseMaterial)
+                .define('B', ingredientOf(baseMaterial))
                 .pattern("BBB")
                 .pattern("B B")
                 .unlockedBy("has_" + getSimpleRecipeName(baseMaterial), has(baseMaterial))
@@ -233,9 +237,9 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void chestplateItem(Item baseMaterial, Item chestplate) {
+    public void chestplateItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item chestplate) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, chestplate, 1)
-                .define('B', baseMaterial)
+                .define('B', ingredientOf(baseMaterial))
                 .pattern("B B")
                 .pattern("BBB")
                 .pattern("BBB")
@@ -244,9 +248,9 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void leggingsItem(Item baseMaterial, Item leggings) {
+    public void leggingsItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item leggings) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, leggings, 1)
-                .define('B', baseMaterial)
+                .define('B', ingredientOf(baseMaterial))
                 .pattern("BBB")
                 .pattern("B B")
                 .pattern("B B")
@@ -255,9 +259,9 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void bootsItem(Item baseMaterial, Item boots) {
+    public void bootsItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item boots) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, boots, 1)
-                .define('B', baseMaterial)
+                .define('B', ingredientOf(baseMaterial))
                 .pattern("B B")
                 .pattern("B B")
                 .unlockedBy("has_" + getSimpleRecipeName(baseMaterial), has(baseMaterial))
@@ -265,10 +269,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void bowItem(Item baseMaterial, Item string, Item bow) {
+    public void bowItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Either<Supplier<? extends Item>, TagKey<Item>> string, Item bow) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, bow, 1)
-                .define('#', baseMaterial)
-                .define('S', string)
+                .define('#', ingredientOf(baseMaterial))
+                .define('S', ingredientOf(string))
                 .pattern(" #S")
                 .pattern("# S")
                 .pattern(" #S")
@@ -277,11 +281,11 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void bowItem(Item baseMaterial, Item stringAttached, Item string, Item bow) {
+    public void bowItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Either<Supplier<? extends Item>, TagKey<Item>> stringAttached, Either<Supplier<? extends Item>, TagKey<Item>> string, Item bow) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.COMBAT, bow, 1)
-                .define('#', baseMaterial)
-                .define('I', stringAttached)
-                .define('S', string)
+                .define('#', ingredientOf(baseMaterial))
+                .define('I', ingredientOf(stringAttached))
+                .define('S', ingredientOf(string))
                 .pattern(" #I")
                 .pattern("# S")
                 .pattern(" #I")
@@ -290,9 +294,9 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void brushItem(Item baseMaterial, Item brush) {
+    public void brushItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterial, Item brush) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, brush)
-                .define('#', baseMaterial)
+                .define('#', ingredientOf(baseMaterial))
                 .define('I', Tags.Items.RODS_WOODEN)
                 .define('X', Items.FEATHER)
                 .pattern("X")
@@ -303,10 +307,10 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void wrenchItem(Item baseMaterialA, Item baseMaterialB, Item wrench) {
+    public void wrenchItem(Either<Supplier<? extends Item>, TagKey<Item>> baseMaterialA, Either<Supplier<? extends Item>, TagKey<Item>> baseMaterialB, Item wrench) {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.TOOLS, wrench)
-                .define('#', baseMaterialA)
-                .define('I', baseMaterialB)
+                .define('#', ingredientOf(baseMaterialA))
+                .define('I', ingredientOf(baseMaterialB))
                 .pattern(" II")
                 .pattern(" #I")
                 .pattern("I  ")
@@ -315,10 +319,22 @@ public class ModRecipeProvider extends RecipeProvider implements CustomRecipePro
     }
 
     @Override
-    public void upgradeRecipe(boolean tool, Item template, Item base, Item addition, Item result) {
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(template), Ingredient.of(base), Ingredient.of(addition), tool ? RecipeCategory.TOOLS : RecipeCategory.COMBAT, result)
+    public void upgradeRecipe(boolean tool, Either<Supplier<? extends Item>, TagKey<Item>> template, Either<Supplier<? extends Item>, TagKey<Item>> base, Either<Supplier<? extends Item>, TagKey<Item>> addition, Item result) {
+        SmithingTransformRecipeBuilder.smithing(ingredientOf(template), ingredientOf(base), ingredientOf(addition), tool ? RecipeCategory.TOOLS : RecipeCategory.COMBAT, result)
                 .unlocks("has_" + getSimpleRecipeName(addition), has(addition))
                 .save(this.output, "lithereal:" + getItemName(result) + "_smithing");
+    }
+
+    private Criterion<?> has(Either<Supplier<? extends Item>, TagKey<Item>> addition) {
+        return addition.map(item -> has(item.get()), this::has);
+    }
+
+    private String getSimpleRecipeName(Either<Supplier<? extends Item>, TagKey<Item>> addition) {
+        return addition.map(item -> getSimpleRecipeName(item.get()), itemTagKey -> itemTagKey.location().getPath());
+    }
+
+    public Ingredient ingredientOf(Either<Supplier<? extends Item>, TagKey<Item>> ingredient) {
+        return ingredient.map(supplier -> Ingredient.of(supplier.get()), itemTagKey -> Ingredient.of(this.items.getOrThrow(itemTagKey)));
     }
 
     @Override

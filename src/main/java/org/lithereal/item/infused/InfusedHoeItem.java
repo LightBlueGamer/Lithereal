@@ -8,11 +8,10 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.item.ability.Ability;
 
 public class InfusedHoeItem extends HoeItem implements InfusedItem {
     public InfusedHoeItem(ToolMaterial toolMaterial, Properties properties) {
-        super(toolMaterial, -toolMaterial.attackDamageBonus(), 0, Ability.INFUSED.createToolComponent(properties));
+        super(toolMaterial, -toolMaterial.attackDamageBonus(), 0, properties);
     }
 
     public @NotNull ItemStack getDefaultInstance() {

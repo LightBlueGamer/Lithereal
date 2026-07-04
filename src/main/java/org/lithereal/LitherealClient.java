@@ -15,7 +15,9 @@ import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ItemLike;
@@ -362,11 +364,11 @@ public class LitherealClient {
     private static void registerItemsToToolsTab() {
         List<Supplier<ItemStack>> litherite = new ArrayList<>();
         for (Holder<Potion> holder : BuiltInRegistries.POTION.listElements().toList()) {
-            List<ItemLike> itemLikes = Arrays.asList(ModToolItems.INFUSED_LITHERITE_SHOVEL.get(),
-                    ModToolItems.INFUSED_LITHERITE_PICKAXE.get(),
-                    ModToolItems.INFUSED_LITHERITE_AXE.get(),
-                    ModToolItems.INFUSED_LITHERITE_HOE.get(),
-                    ModToolItems.INFUSED_LITHERITE_HAMMER.get());
+            List<ItemLike> itemLikes = Arrays.asList(ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.SHOVEL).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.PICKAXE).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.AXE).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.HOE).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.HAMMER).get());
             for (ItemLike itemLike : itemLikes) {
                 litherite.add(() -> {
                     ItemStack current = new ItemStack(itemLike);
@@ -375,50 +377,18 @@ public class LitherealClient {
                 });
             }
         }
-        CreativeTabRegistry.append(ModCreativeTabs.TOOLS_TAB, ModToolItems.LITHERITE_SHOVEL,
-                ModToolItems.LITHERITE_PICKAXE,
-                ModToolItems.LITHERITE_AXE,
-                ModToolItems.LITHERITE_HOE,
-                ModToolItems.LITHERITE_HAMMER,
-                ModToolItems.LITHERITE_BRUSH,
-                ModToolItems.LITHERITE_WRENCH,
-                ModToolItems.BURNING_LITHERITE_SHOVEL,
-                ModToolItems.BURNING_LITHERITE_PICKAXE,
-                ModToolItems.BURNING_LITHERITE_AXE,
-                ModToolItems.BURNING_LITHERITE_HOE,
-                ModToolItems.BURNING_LITHERITE_HAMMER,
-                ModToolItems.SMOLDERING_LITHERITE_SHOVEL,
-                ModToolItems.SMOLDERING_LITHERITE_PICKAXE,
-                ModToolItems.SMOLDERING_LITHERITE_AXE,
-                ModToolItems.SMOLDERING_LITHERITE_HOE,
-                ModToolItems.SMOLDERING_LITHERITE_HAMMER,
-                ModToolItems.FROZEN_LITHERITE_SHOVEL,
-                ModToolItems.FROZEN_LITHERITE_PICKAXE,
-                ModToolItems.FROZEN_LITHERITE_AXE,
-                ModToolItems.FROZEN_LITHERITE_HOE,
-                ModToolItems.FROZEN_LITHERITE_HAMMER,
-                ModToolItems.FROSTBITTEN_LITHERITE_SHOVEL,
-                ModToolItems.FROSTBITTEN_LITHERITE_PICKAXE,
-                ModToolItems.FROSTBITTEN_LITHERITE_AXE,
-                ModToolItems.FROSTBITTEN_LITHERITE_HOE,
-                ModToolItems.FROSTBITTEN_LITHERITE_HAMMER,
-                ModToolItems.WITHERING_LITHERITE_SHOVEL,
-                ModToolItems.WITHERING_LITHERITE_PICKAXE,
-                ModToolItems.WITHERING_LITHERITE_AXE,
-                ModToolItems.WITHERING_LITHERITE_HOE,
-                ModToolItems.WITHERING_LITHERITE_HAMMER);
+        ModEquipment.LITHERITE.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
+        CreativeTabRegistry.append(ModCreativeTabs.TOOLS_TAB, ModToolItems.LITHERITE_BRUSH,
+                ModToolItems.LITHERITE_WRENCH);
+        ModEquipment.BURNING_LITHERITE.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
+        ModEquipment.FROZEN_LITHERITE.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
+        ModEquipment.SMOLDERING_LITHERITE.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
+        ModEquipment.FROSTBITTEN_LITHERITE.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
+        ModEquipment.WITHERING_LITHERITE.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
         CreativeTabRegistry.appendStack(ModCreativeTabs.TOOLS_TAB, litherite.stream());
-        CreativeTabRegistry.append(ModCreativeTabs.TOOLS_TAB, ModToolItems.ODYSIUM_SHOVEL,
-                ModToolItems.ODYSIUM_PICKAXE,
-                ModToolItems.ODYSIUM_AXE,
-                ModToolItems.ODYSIUM_HOE,
-                ModToolItems.ODYSIUM_HAMMER,
-                ModToolItems.ENHANCED_ODYSIUM_SHOVEL,
-                ModToolItems.ENHANCED_ODYSIUM_PICKAXE,
-                ModToolItems.ENHANCED_ODYSIUM_AXE,
-                ModToolItems.ENHANCED_ODYSIUM_HOE,
-                ModToolItems.ENHANCED_ODYSIUM_HAMMER,
-                ModItems.MUSIC_DISC_SPARKLE,
+        ModEquipment.ODYSIUM.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
+        ModEquipment.ENHANCED_ODYSIUM.populateCreativeTab(ModCreativeTabs.TOOLS_TAB, false, true);
+        CreativeTabRegistry.append(ModCreativeTabs.TOOLS_TAB, ModItems.MUSIC_DISC_SPARKLE,
                 ModItems.LITHEREAL_KEY,
                 ModItems.PHANTOM_OAK_BOAT,
                 ModItems.PHANTOM_OAK_CHEST_BOAT,
@@ -426,18 +396,27 @@ public class LitherealClient {
                 ModItems.FORTSHROOM_CHEST_BOAT,
                 ModItems.MALISHROOM_BOAT,
                 ModItems.MALISHROOM_CHEST_BOAT);
+        CreativeTabRegistry.modifyBuiltin(BuiltInRegistries.CREATIVE_MODE_TAB.getValueOrThrow(CreativeModeTabs.TOOLS_AND_UTILITIES), (flags, output, canUseGameMasterBlocks) -> {
+            output.acceptAllAfter(Items.WOODEN_HOE, List.of(ModEquipment.WOODEN.get(EquipmentSet.Type.HAMMER).get().getDefaultInstance()));
+            output.acceptAllAfter(Items.STONE_HOE, List.of(ModEquipment.STONE.get(EquipmentSet.Type.HAMMER).get().getDefaultInstance()));
+            output.acceptAllAfter(Items.COPPER_HOE, List.of(ModEquipment.COPPER.get(EquipmentSet.Type.HAMMER).get().getDefaultInstance()));
+            output.acceptAllAfter(Items.IRON_HOE, List.of(ModEquipment.IRON.get(EquipmentSet.Type.HAMMER).get().getDefaultInstance()));
+            output.acceptAllAfter(Items.GOLDEN_HOE, List.of(ModEquipment.GOLDEN.get(EquipmentSet.Type.HAMMER).get().getDefaultInstance()));
+            output.acceptAllAfter(Items.DIAMOND_HOE, List.of(ModEquipment.DIAMOND.get(EquipmentSet.Type.HAMMER).get().getDefaultInstance()));
+            output.acceptAllAfter(Items.NETHERITE_HOE, List.of(ModEquipment.NETHERITE.get(EquipmentSet.Type.HAMMER).get().getDefaultInstance()));
+        });
     }
 
     private static void registerItemsToCombatTab() {
         List<Supplier<ItemStack>> litherite = new ArrayList<>();
         for (Holder<Potion> holder : BuiltInRegistries.POTION.listElements().toList()) {
-            List<ItemLike> itemLikes = Arrays.asList(ModToolItems.INFUSED_LITHERITE_SWORD.get(),
-                    ModToolItems.INFUSED_LITHERITE_AXE.get(),
-                    ModToolItems.INFUSED_LITHERITE_SPEAR.get(),
-                    ModArmorItems.INFUSED_LITHERITE_HELMET.get(),
-                    ModArmorItems.INFUSED_LITHERITE_CHESTPLATE.get(),
-                    ModArmorItems.INFUSED_LITHERITE_LEGGINGS.get(),
-                    ModArmorItems.INFUSED_LITHERITE_BOOTS.get());
+            List<ItemLike> itemLikes = Arrays.asList(ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.SWORD).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.AXE).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.SPEAR).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.HELMET).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.CHESTPLATE).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.LEGGINGS).get(),
+                    ModEquipment.INFUSED_LITHERITE.get(EquipmentSet.Type.BOOTS).get());
             for (ItemLike itemLike : itemLikes) {
                 litherite.add(() -> {
                     ItemStack current = new ItemStack(itemLike);
@@ -448,70 +427,18 @@ public class LitherealClient {
             if (isModLoaded("combatify"))
                 litherite = CompatInit.populateInfusedForCombatify(litherite, holder);
         }
-        CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.LITHERITE_SWORD,
-                ModToolItems.LITHERITE_SPEAR,
-                ModToolItems.LITHERITE_AXE,
-                ModArmorItems.LITHERITE_HELMET,
-                ModArmorItems.LITHERITE_CHESTPLATE,
-                ModArmorItems.LITHERITE_LEGGINGS,
-                ModArmorItems.LITHERITE_BOOTS,
-                ModToolItems.BURNING_LITHERITE_SWORD,
-                ModToolItems.BURNING_LITHERITE_SPEAR,
-                ModToolItems.BURNING_LITHERITE_AXE,
-                ModArmorItems.BURNING_LITHERITE_HELMET,
-                ModArmorItems.BURNING_LITHERITE_CHESTPLATE,
-                ModArmorItems.BURNING_LITHERITE_LEGGINGS,
-                ModArmorItems.BURNING_LITHERITE_BOOTS,
-                ModToolItems.SMOLDERING_LITHERITE_SWORD,
-                ModToolItems.SMOLDERING_LITHERITE_SPEAR,
-                ModToolItems.SMOLDERING_LITHERITE_AXE,
-                ModArmorItems.SMOLDERING_LITHERITE_HELMET,
-                ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE,
-                ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS,
-                ModArmorItems.SMOLDERING_LITHERITE_BOOTS,
-                ModToolItems.FROZEN_LITHERITE_SWORD,
-                ModToolItems.FROZEN_LITHERITE_SPEAR,
-                ModToolItems.FROZEN_LITHERITE_AXE,
-                ModArmorItems.FROZEN_LITHERITE_HELMET,
-                ModArmorItems.FROZEN_LITHERITE_CHESTPLATE,
-                ModArmorItems.FROZEN_LITHERITE_LEGGINGS,
-                ModArmorItems.FROZEN_LITHERITE_BOOTS,
-                ModToolItems.FROSTBITTEN_LITHERITE_SWORD,
-                ModToolItems.FROSTBITTEN_LITHERITE_SPEAR,
-                ModToolItems.FROSTBITTEN_LITHERITE_AXE,
-                ModArmorItems.FROSTBITTEN_LITHERITE_HELMET,
-                ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE,
-                ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS,
-                ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS,
-                ModToolItems.WITHERING_LITHERITE_SWORD,
-                ModToolItems.WITHERING_LITHERITE_SPEAR,
-                ModToolItems.WITHERING_LITHERITE_AXE,
-                ModArmorItems.WITHERING_LITHERITE_HELMET,
-                ModArmorItems.WITHERING_LITHERITE_CHESTPLATE,
-                ModArmorItems.WITHERING_LITHERITE_LEGGINGS,
-                ModArmorItems.WITHERING_LITHERITE_BOOTS);
+        ModEquipment.LITHERITE.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
+        ModEquipment.BURNING_LITHERITE.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
+        ModEquipment.FROZEN_LITHERITE.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
+        ModEquipment.SMOLDERING_LITHERITE.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
+        ModEquipment.FROSTBITTEN_LITHERITE.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
+        ModEquipment.WITHERING_LITHERITE.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
         CreativeTabRegistry.appendStack(ModCreativeTabs.COMBAT_TAB, litherite.stream());
-        CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.ODYSIUM_SWORD,
-                ModToolItems.ODYSIUM_SPEAR,
-                ModToolItems.ODYSIUM_AXE,
-                ModToolItems.ODYSIUM_BOW,
-                ModArmorItems.ODYSIUM_HELMET,
-                ModArmorItems.ODYSIUM_CHESTPLATE,
-                ModArmorItems.ODYSIUM_LEGGINGS,
-                ModArmorItems.ODYSIUM_BOOTS,
-                ModArmorItems.ODYSIUM_HORSE_ARMOR,
-                ModArmorItems.ODYSIUM_NAUTILUS_ARMOR,
-                ModToolItems.ENHANCED_ODYSIUM_SWORD,
-                ModToolItems.ENHANCED_ODYSIUM_SPEAR,
-                ModToolItems.ENHANCED_ODYSIUM_AXE,
-                ModToolItems.ENHANCED_ODYSIUM_BOW,
-                ModArmorItems.ENHANCED_ODYSIUM_HELMET,
-                ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE,
-                ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS,
-                ModArmorItems.ENHANCED_ODYSIUM_BOOTS,
-                ModArmorItems.ENHANCED_ODYSIUM_HORSE_ARMOR,
-                ModArmorItems.ENHANCED_ODYSIUM_NAUTILUS_ARMOR,
-                ModToolItems.WAR_HAMMER,
+        CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.ODYSIUM_BOW);
+        ModEquipment.ODYSIUM.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
+        CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.ENHANCED_ODYSIUM_BOW);
+        ModEquipment.ENHANCED_ODYSIUM.populateCreativeTab(ModCreativeTabs.COMBAT_TAB, true, false);
+        CreativeTabRegistry.append(ModCreativeTabs.COMBAT_TAB, ModToolItems.WAR_HAMMER,
                 ModItems.LITHER_CHARGE);
         if (isModLoaded("combatify"))
             CompatInit.populateCombatTabForCombatify();

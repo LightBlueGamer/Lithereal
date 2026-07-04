@@ -121,8 +121,8 @@ public class ModItems {
 
     public static void register() {
         ModRawMaterialItems.register();
-        ModArmorItems.register();
         ModToolItems.register();
+        ModEquipment.register();
         if (isModLoaded("combatify"))
             CompatInit.initCombatify();
         ModSpawnEggs.register();

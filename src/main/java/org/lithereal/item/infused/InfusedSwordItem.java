@@ -4,15 +4,13 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import org.jetbrains.annotations.NotNull;
-import org.lithereal.item.ability.Ability;
 
 public class InfusedSwordItem extends Item implements InfusedItem {
-    public InfusedSwordItem(ToolMaterial toolMaterial, Properties properties) {
-        super(Ability.INFUSED.createSwordComponent(toolMaterial, properties));
+    public InfusedSwordItem(Properties properties) {
+        super(properties);
     }
 
     public @NotNull ItemStack getDefaultInstance() {

@@ -42,7 +42,7 @@ import org.lithereal.client.renderer.zombie.PhantomDrownedRenderer;
 import org.lithereal.client.renderer.zombie.PhantomZombieRenderer;
 import org.lithereal.data.recipes.ModRecipes;
 import org.lithereal.entity.ModEntities;
-import org.lithereal.item.ModArmorItems;
+import org.lithereal.item.ModEquipment;
 import org.lithereal.neoforge.client.model.TemporaryHumanoidCopyingModel;
 
 import java.util.*;
@@ -125,7 +125,7 @@ public class ClientEvents {
         }
         @SubscribeEvent
         public static void registerClientExtensionsEvent(RegisterClientExtensionsEvent event) {
-            event.registerItem(new IClientItemExtensions() {
+            IClientItemExtensions infusedModel = new IClientItemExtensions() {
                 @Override
                 public int getArmorLayerTintColor(ItemStack stack, EquipmentClientInfo.Layer layer, int layerIdx, int fallbackColor) {
                     return stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor();
@@ -138,23 +138,25 @@ public class ClientEvents {
                             (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot()),
                             false);
                 }
-            }, ModArmorItems.INFUSED_LITHERITE_HELMET, ModArmorItems.INFUSED_LITHERITE_CHESTPLATE, ModArmorItems.INFUSED_LITHERITE_LEGGINGS, ModArmorItems.INFUSED_LITHERITE_BOOTS);
-            event.registerItem(new IClientItemExtensions() {
-               @Override
-               public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
-                   if (!(original instanceof HumanoidModel<? extends HumanoidRenderState> humanoidModel)) return original;
-                   return TemporaryHumanoidCopyingModel.create(humanoidModel,
-                           (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot()),
-                           false);
-               }
-            }, ModArmorItems.LITHERITE_HELMET, ModArmorItems.LITHERITE_CHESTPLATE, ModArmorItems.LITHERITE_LEGGINGS, ModArmorItems.LITHERITE_BOOTS,
-                    ModArmorItems.BURNING_LITHERITE_HELMET, ModArmorItems.BURNING_LITHERITE_CHESTPLATE, ModArmorItems.BURNING_LITHERITE_LEGGINGS, ModArmorItems.BURNING_LITHERITE_BOOTS,
-                    ModArmorItems.FROZEN_LITHERITE_HELMET, ModArmorItems.FROZEN_LITHERITE_CHESTPLATE, ModArmorItems.FROZEN_LITHERITE_LEGGINGS, ModArmorItems.FROZEN_LITHERITE_BOOTS,
-                    ModArmorItems.SMOLDERING_LITHERITE_HELMET, ModArmorItems.SMOLDERING_LITHERITE_CHESTPLATE, ModArmorItems.SMOLDERING_LITHERITE_LEGGINGS, ModArmorItems.SMOLDERING_LITHERITE_BOOTS,
-                    ModArmorItems.FROSTBITTEN_LITHERITE_HELMET, ModArmorItems.FROSTBITTEN_LITHERITE_CHESTPLATE, ModArmorItems.FROSTBITTEN_LITHERITE_LEGGINGS, ModArmorItems.FROSTBITTEN_LITHERITE_BOOTS,
-                    ModArmorItems.WITHERING_LITHERITE_HELMET, ModArmorItems.WITHERING_LITHERITE_CHESTPLATE, ModArmorItems.WITHERING_LITHERITE_LEGGINGS, ModArmorItems.WITHERING_LITHERITE_BOOTS,
-                    ModArmorItems.ODYSIUM_HELMET, ModArmorItems.ODYSIUM_CHESTPLATE, ModArmorItems.ODYSIUM_LEGGINGS, ModArmorItems.ODYSIUM_BOOTS,
-                    ModArmorItems.ENHANCED_ODYSIUM_HELMET, ModArmorItems.ENHANCED_ODYSIUM_CHESTPLATE, ModArmorItems.ENHANCED_ODYSIUM_LEGGINGS, ModArmorItems.ENHANCED_ODYSIUM_BOOTS);
+            };
+            IClientItemExtensions armorModel = new IClientItemExtensions() {
+                @Override
+                public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
+                    if (!(original instanceof HumanoidModel<? extends HumanoidRenderState> humanoidModel)) return original;
+                    return TemporaryHumanoidCopyingModel.create(humanoidModel,
+                            (layerType == EquipmentClientInfo.LayerType.HUMANOID_BABY ? LitherealArmorModel.BABY_ARMOR_MODEL_SET : LitherealArmorModel.ARMOR_MODEL_SET).get(itemStack.get(DataComponents.EQUIPPABLE).slot()),
+                            false);
+                }
+            };
+            ModEquipment.INFUSED_LITHERITE.registerArmorModel(item -> event.registerItem(infusedModel, item));
+            ModEquipment.LITHERITE.registerArmorModel(item -> event.registerItem(armorModel, item));
+            ModEquipment.BURNING_LITHERITE.registerArmorModel(item -> event.registerItem(armorModel, item));
+            ModEquipment.FROZEN_LITHERITE.registerArmorModel(item -> event.registerItem(armorModel, item));
+            ModEquipment.SMOLDERING_LITHERITE.registerArmorModel(item -> event.registerItem(armorModel, item));
+            ModEquipment.FROSTBITTEN_LITHERITE.registerArmorModel(item -> event.registerItem(armorModel, item));
+            ModEquipment.WITHERING_LITHERITE.registerArmorModel(item -> event.registerItem(armorModel, item));
+            ModEquipment.ODYSIUM.registerArmorModel(item -> event.registerItem(armorModel, item));
+            ModEquipment.ENHANCED_ODYSIUM.registerArmorModel(item -> event.registerItem(armorModel, item));
         }
 
         @SubscribeEvent
@@ -176,7 +178,10 @@ public class ClientEvents {
 
             // Then store the recipes you want
             addRecipes(ModRecipes.BURNING_TYPE.get(), event.getRecipeMap().byType(ModRecipes.BURNING_TYPE.get()));
+            addRecipes(ModRecipes.FREEZING_TYPE.get(), event.getRecipeMap().byType(ModRecipes.FREEZING_TYPE.get()));
+            addRecipes(ModRecipes.INFUSING_TYPE.get(), event.getRecipeMap().byType(ModRecipes.INFUSING_TYPE.get()));
             addRecipes(RecipeType.SMELTING, event.getRecipeMap().byType(RecipeType.SMELTING));
+            addRecipes(RecipeType.SMITHING, event.getRecipeMap().byType(RecipeType.SMITHING));
         }
 
         @SubscribeEvent // on the game event bus only on the physical client
