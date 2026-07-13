@@ -5,7 +5,7 @@ import net.minecraft.world.item.ToolMaterial;
 
 public class DefaultedHooks {
     public static ToolMaterial registerToolMaterial(String name, ToolMaterial toolMaterial) {
-        Defaulted.baseTiers.put(name, toolMaterial);
+        Defaulted.baseMaterials.put(name, toolMaterial);
         return toolMaterial;
     }
 }

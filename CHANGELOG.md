@@ -1,4 +1,6 @@
 ### Changes
+- Updated to Defaulted 1.3.3
+#### === FROM BETA 10 ===
 - Added hammers for all vanilla tool materials
 - Retextured Odysium Pickaxe, Shovel, Hoe, and Hammer to make them less awkward but more unique
 - Odysium Shovel and Odysium Hoe now have the ability to do multi-block interactions, Shovel can mine or path in its AOE while sneaking, while Hoe can till in a 3x3 area unless sneaking
