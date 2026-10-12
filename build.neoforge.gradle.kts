@@ -313,5 +313,7 @@ publishMods {
         accessToken = env.CURSEFORGE_API_KEY.orNull()
         minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
+        client.set(true)
+        server.set(true)
     }
 }
