@@ -1,4 +1,6 @@
 ### Changes
+- Removed the etherstone from global loot modifiers
+#### === FROM BETA 11 ===
 - Updated to Defaulted 1.3.3
 #### === FROM BETA 10 ===
 - Added hammers for all vanilla tool materials
